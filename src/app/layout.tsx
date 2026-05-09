@@ -10,12 +10,27 @@ import '@/styles/tailwind.css'
 import '@/content/integrity'
 
 export const metadata: Metadata = {
+  // Resolves all relative URLs in metadata (canonical, og:url, og:image)
+  // to the production origin. Without it, Next emits localhost URLs in
+  // build output and Google can't resolve canonicals across crawlers.
+  metadataBase: new URL('https://botatoolbox.org'),
   title: {
     template: '%s - BOTA Toolbox',
     default: 'BOTA Toolbox',
   },
   description:
-    'A set of tools for members of the Builders of the Adytum.',
+    'An unofficial set of advanced tools for members of the Builders of the Adytum.',
+  // Open Graph drives rich previews in Discord/Slack/Twitter and is read
+  // by some crawlers. `siteName` distinguishes the brand from per-page
+  // titles in Google's results listings.
+  openGraph: {
+    title: 'BOTA Toolbox',
+    description:
+      'An unofficial set of advanced tools for members of the Builders of the Adytum.',
+    url: 'https://botatoolbox.org',
+    siteName: 'BOTA Toolbox',
+    type: 'website',
+  },
   // iOS "Add to Home Screen" treatment. `capable: true` runs the app in
   // standalone mode (no Safari chrome). `black-translucent` lets the
   // player slides extend under the status bar — the SlidePlayer already
