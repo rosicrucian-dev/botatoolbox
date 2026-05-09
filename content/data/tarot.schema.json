@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "num": {
+        "type": "number"
+      },
+      "name": {
+        "type": "string"
+      },
+      "slug": {
+        "type": "string"
+      },
+      "letter": {
+        "type": "string"
+      },
+      "significance": {
+        "type": "string"
+      },
+      "astrology": {
+        "type": "string"
+      },
+      "color": {
+        "type": "string"
+      },
+      "note": {
+        "type": "string"
+      },
+      "gematria": {
+        "type": "number"
+      },
+      "alchemy": {
+        "type": "string"
+      },
+      "intelligence": {
+        "type": "string"
+      },
+      "power": {
+        "type": "string"
+      },
+      "human": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "num",
+      "name",
+      "slug",
+      "letter",
+      "significance",
+      "astrology",
+      "color",
+      "note",
+      "gematria",
+      "alchemy",
+      "intelligence",
+      "power",
+      "human"
+    ],
+    "additionalProperties": false
+  }
+}

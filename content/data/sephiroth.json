@@ -1,0 +1,21 @@
+[
+  { "slug": "kether",    "hebrewName": "Kether",    "name": "Crown",         "grade": "Ipsissimus 10=1",      "element": "Air",   "mantraSlug": "ahih",          "color": "kether"  },
+  { "slug": "chokmah",   "hebrewName": "Chokmah",   "name": "Wisdom",        "grade": "Magus 9=2",            "element": "Fire",  "mantraSlug": "ih",            "color": "chokmah" },
+  { "slug": "binah",     "hebrewName": "Binah",     "name": "Understanding", "grade": "Magister Templi 8=3",  "element": "Water", "mantraSlug": "alhim",         "color": "binah"   },
+  { "slug": "chesed",    "hebrewName": "Chesed",    "name": "Mercy",         "grade": "Adeptus Exemptus 7=4", "element": "Water", "mantraSlug": "al",            "color": "blue"    },
+  { "slug": "geburah",   "hebrewName": "Geburah",   "name": "Severity",      "grade": "Adeptus Major 6=5",    "element": "Fire",  "mantraSlug": "alhim-gbvr",    "color": "red"     },
+  { "slug": "tiphareth", "hebrewName": "Tiphareth", "name": "Beauty",        "grade": "Adeptus Minor 5=6",    "element": "Air",   "mantraSlug": "alh-vdth",      "color": "yellow"  },
+  { "slug": "netzach",   "hebrewName": "Netzach",   "name": "Victory",       "grade": "Philosophus 4=7",      "element": "Fire",  "mantraSlug": "ihvh-tzbavth",  "color": "green"   },
+  { "slug": "hod",       "hebrewName": "Hod",       "name": "Splendor",      "grade": "Practicus 3=8",        "element": "Water", "mantraSlug": "alhim-tzbavth", "color": "orange"  },
+  { "slug": "yesod",     "hebrewName": "Yesod",     "name": "Foundation",    "grade": "Theoricus 2=9",        "element": "Air",   "mantraSlug": "shdi-al-chi",   "color": "violet"  },
+  {
+    "slug": "malkuth",
+    "hebrewName": "Malkuth",
+    "name": "Kingdom",
+    "grade": "Zelator 1=10",
+    "element": "Earth",
+    "mantraSlug": "adni-mlk",
+    "color": "malkuth",
+    "quadrantColors": { "top": "green", "right": "violet", "bottom": "black", "left": "orange" }
+  }
+]

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string"
+      },
+      "hebrewName": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "grade": {
+        "type": "string"
+      },
+      "element": {
+        "type": "string"
+      },
+      "mantraSlug": {
+        "type": "string"
+      },
+      "color": {
+        "type": "string"
+      },
+      "quadrantColors": {
+        "type": "object",
+        "properties": {
+          "top": {
+            "type": "string"
+          },
+          "right": {
+            "type": "string"
+          },
+          "bottom": {
+            "type": "string"
+          },
+          "left": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "slug",
+      "hebrewName",
+      "name",
+      "grade",
+      "element",
+      "mantraSlug",
+      "color"
+    ],
+    "additionalProperties": false
+  }
+}

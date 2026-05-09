@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+dist
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+.vercel
+
+# Reference scaffolds — kept locally for reuse but not part of this repo
+catalyst-ui-kit/
+tailwind-plus-protocol/

@@ -1,0 +1,14 @@
+[
+  { "slug": "aries",       "name": "Aries",       "symbol": "♈", "letter": "Heh",    "bodyPart": "Head, face",                       "element": "Fire",  "quality": "Cardinal", "rulers": ["mars"],            "exaltedBy": "sun" },
+  { "slug": "taurus",      "name": "Taurus",      "symbol": "♉", "letter": "Vav",    "bodyPart": "Neck, throat",                     "element": "Earth", "quality": "Fixed",    "rulers": ["venus"],           "exaltedBy": "moon" },
+  { "slug": "gemini",      "name": "Gemini",      "symbol": "♊", "letter": "Zain",   "bodyPart": "Lungs, collar-bone, arms, hands",  "element": "Air",   "quality": "Mutable",  "rulers": ["mercury"],         "exaltedBy": null },
+  { "slug": "cancer",      "name": "Cancer",      "symbol": "♋", "letter": "Cheth",  "bodyPart": "Breast, stomach",                  "element": "Water", "quality": "Cardinal", "rulers": ["moon"],            "exaltedBy": "jupiter" },
+  { "slug": "leo",         "name": "Leo",         "symbol": "♌", "letter": "Teth",   "bodyPart": "Sides, back, heart",               "element": "Fire",  "quality": "Fixed",    "rulers": ["sun"],             "exaltedBy": "pluto" },
+  { "slug": "virgo",       "name": "Virgo",       "symbol": "♍", "letter": "Yod",    "bodyPart": "Intestines",                       "element": "Earth", "quality": "Mutable",  "rulers": ["mercury"],         "exaltedBy": "mercury" },
+  { "slug": "libra",       "name": "Libra",       "symbol": "♎", "letter": "Lamed",  "bodyPart": "Kidneys, loins, back",             "element": "Air",   "quality": "Cardinal", "rulers": ["venus"],           "exaltedBy": "saturn" },
+  { "slug": "scorpio",     "name": "Scorpio",     "symbol": "♏", "letter": "Nun",    "bodyPart": "Sex organs",                       "element": "Water", "quality": "Fixed",    "rulers": ["mars", "pluto"],   "exaltedBy": "uranus" },
+  { "slug": "sagittarius", "name": "Sagittarius", "symbol": "♐", "letter": "Samekh", "bodyPart": "Hips, thighs, liver",              "element": "Fire",  "quality": "Mutable",  "rulers": ["jupiter"],         "exaltedBy": null },
+  { "slug": "capricorn",   "name": "Capricorn",   "symbol": "♑", "letter": "Ayin",   "bodyPart": "Knees",                            "element": "Earth", "quality": "Cardinal", "rulers": ["saturn"],          "exaltedBy": "mars" },
+  { "slug": "aquarius",    "name": "Aquarius",    "symbol": "♒", "letter": "Tzaddi", "bodyPart": "Ankles, blood",                    "element": "Air",   "quality": "Fixed",    "rulers": ["saturn", "uranus"],"exaltedBy": null },
+  { "slug": "pisces",      "name": "Pisces",      "symbol": "♓", "letter": "Qoph",   "bodyPart": "Feet",                             "element": "Water", "quality": "Mutable",  "rulers": ["jupiter", "neptune"], "exaltedBy": "venus" }
+]

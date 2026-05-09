@@ -1,0 +1,11 @@
+{
+  "json.schemas": [
+    { "fileMatch": ["content/data/tarot.json"],        "url": "./content/data/tarot.schema.json" },
+    { "fileMatch": ["content/data/words.json"],        "url": "./content/data/words.schema.json" },
+    { "fileMatch": ["content/data/signs.json"],        "url": "./content/data/signs.schema.json" },
+    { "fileMatch": ["content/data/planets.json"],      "url": "./content/data/planets.schema.json" },
+    { "fileMatch": ["content/data/minor-arcana.json"], "url": "./content/data/minor-arcana.schema.json" },
+    { "fileMatch": ["content/data/sephiroth.json"],    "url": "./content/data/sephiroth.schema.json" },
+    { "fileMatch": ["content/data/tree-paths.json"],   "url": "./content/data/tree-paths.schema.json" }
+  ]
+}

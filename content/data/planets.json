@@ -1,0 +1,12 @@
+[
+  { "slug": "saturn",  "name": "Saturn",  "symbol": "♄", "letter": "Tav",    "chakra": "Root Chakra",  "rules": ["capricorn", "aquarius"], "exaltedIn": "libra" },
+  { "slug": "sun",     "name": "Sun",     "symbol": "☉", "letter": "Resh",   "chakra": "Heart",        "rules": ["leo"],                   "exaltedIn": "aries" },
+  { "slug": "mars",    "name": "Mars",    "symbol": "♂", "letter": "Peh",    "chakra": "Below Naval",  "rules": ["aries", "scorpio"],      "exaltedIn": "capricorn" },
+  { "slug": "jupiter", "name": "Jupiter", "symbol": "♃", "letter": "Kaph",   "chakra": "Solar Plexus", "rules": ["sagittarius", "pisces"], "exaltedIn": "cancer" },
+  { "slug": "venus",   "name": "Venus",   "symbol": "♀", "letter": "Daleth", "chakra": "Throat",       "rules": ["taurus", "libra"],       "exaltedIn": "pisces" },
+  { "slug": "moon",    "name": "Moon",    "symbol": "☽", "letter": "Gimel",  "chakra": "Pituitary",    "rules": ["cancer"],                "exaltedIn": "taurus" },
+  { "slug": "mercury", "name": "Mercury", "symbol": "☿", "letter": "Beth",   "chakra": "Pineal",       "rules": ["gemini", "virgo"],       "exaltedIn": "virgo" },
+  { "slug": "uranus",  "name": "Uranus",  "symbol": "♅", "letter": "Aleph",                            "rules": ["aquarius"],              "exaltedIn": "scorpio" },
+  { "slug": "neptune", "name": "Neptune", "symbol": "♆", "letter": "Mem",                              "rules": ["pisces"],                "exaltedIn": "cancer" },
+  { "slug": "pluto",   "name": "Pluto",   "symbol": "♇", "letter": "Shin",                             "rules": ["scorpio"],               "exaltedIn": "leo" }
+]

@@ -1,0 +1,300 @@
+[
+  {
+    "slug": "adni",
+    "name": "ADNI",
+    "english": "Adonai",
+    "letters": [
+      { "letter": "Aleph",  "pronunciation": "ah" },
+      { "letter": "Daleth", "pronunciation": "doh" },
+      { "letter": "Nun",    "pronunciation": "nah" },
+      { "letter": "Yod",    "pronunciation": "ee" }
+    ]
+  },
+  {
+    "slug": "adni-mlk",
+    "name": "ADNI MLK",
+    "english": "Adonai Melekh",
+    "meaning": "Lord (and) King.",
+    "wordSizes": [4, 3],
+    "letters": [
+      { "letter": "Aleph",  "pronunciation": "ah" },
+      { "letter": "Daleth", "pronunciation": "doh" },
+      { "letter": "Nun",    "pronunciation": "nah" },
+      { "letter": "Yod",    "pronunciation": "ee" },
+      { "letter": "Mem",    "pronunciation": "may" },
+      { "letter": "Lamed",  "pronunciation": "yil" },
+      { "letter": "Kaph",   "pronunciation": "lek" }
+    ]
+  },
+  {
+    "slug": "agla",
+    "name": "AGLA",
+    "english": "Agla",
+    "letters": [
+      { "letter": "Aleph", "pronunciation": "ah" },
+      { "letter": "Gimel", "pronunciation": "geh" },
+      { "letter": "Lamed", "pronunciation": "lah" },
+      { "letter": "Aleph", "pronunciation": "ah" }
+    ]
+  },
+  {
+    "slug": "ahih",
+    "name": "AHIH",
+    "english": "Eheyeh",
+    "meaning": "Existence.",
+    "letters": [
+      { "letter": "Aleph", "pronunciation": "e" },
+      { "letter": "Heh",   "pronunciation": "he" },
+      { "letter": "Yod",   "pronunciation": "ye" },
+      { "letter": "Heh",   "pronunciation": "a" }
+    ]
+  },
+  {
+    "slug": "al",
+    "name": "AL",
+    "english": "El",
+    "meaning": "Strength.",
+    "letters": [
+      { "letter": "Aleph", "pronunciation": "ay" },
+      { "letter": "Lamed", "pronunciation": "yil" }
+    ]
+  },
+  {
+    "slug": "alhim",
+    "name": "ALHIM",
+    "english": "Elohim",
+    "meaning": "The Creative Powers.",
+    "letters": [
+      { "letter": "Aleph", "pronunciation": "ay" },
+      { "letter": "Lamed", "pronunciation": "yil" },
+      { "letter": "Heh",   "pronunciation": "oh" },
+      { "letter": "Yod",   "pronunciation": "he" },
+      { "letter": "Mem",   "pronunciation": "eem" }
+    ]
+  },
+  {
+    "slug": "alhim-gbvr",
+    "name": "ALHiM GBVR",
+    "english": "Elohim Gibor",
+    "meaning": "The Force of the Creative Powers.",
+    "wordSizes": [5, 4],
+    "letters": [
+      { "letter": "Aleph", "pronunciation": "ay" },
+      { "letter": "Lamed", "pronunciation": "yil" },
+      { "letter": "Heh",   "pronunciation": "oh" },
+      { "letter": "Yod",   "pronunciation": "he" },
+      { "letter": "Mem",   "pronunciation": "eem" },
+      { "letter": "Gimel", "pronunciation": "gi" },
+      { "letter": "Beth",  "pronunciation": "boo" },
+      { "letter": "Vav",   "pronunciation": "oo" },
+      { "letter": "Resh",  "pronunciation": "or" }
+    ]
+  },
+  {
+    "slug": "alhim-tzbavth",
+    "name": "ALHIM TzBAVTh",
+    "english": "Elohim Tzabaoth",
+    "meaning": "The Creative Powers (manifested in) Hosts (of forms).",
+    "wordSizes": [4, 5],
+    "letters": [
+      { "letter": "Yod",    "pronunciation": "yod" },
+      { "letter": "Heh",    "pronunciation": "hay" },
+      { "letter": "Vav",    "pronunciation": "waw" },
+      { "letter": "Heh",    "pronunciation": "hay" },
+      { "letter": "Tzaddi", "pronunciation": "tsah" },
+      { "letter": "Beth",   "pronunciation": "bah" },
+      { "letter": "Aleph",  "pronunciation": "ah" },
+      { "letter": "Vav",    "pronunciation": "oo" },
+      { "letter": "Tav",    "pronunciation": "oot" }
+    ]
+  },
+  {
+    "slug": "alh-vdth",
+    "name": "ALH VD’Th",
+    "english": "Eloah va-Da’ath",
+    "meaning": "Strength and Knowledge.",
+    "letters": [
+      { "letter": "Aleph",  "pronunciation": "ay" },
+      { "letter": "Lamed",  "pronunciation": "loh" },
+      { "letter": "Heh",    "pronunciation": "ah" },
+      { "letter": "Vav",    "pronunciation": "vah" },
+      { "letter": "Daleth", "pronunciation": "dah" },
+      { "letter": "Ayin",   "pronunciation": "ah" },
+      { "letter": "Tav",    "pronunciation": "th" }
+    ]
+  },
+  {
+    "slug": "amn",
+    "name": "AMN",
+    "english": "Amen",
+    "letters": [
+      { "letter": "Aleph", "pronunciation": "ahm" },
+      { "letter": "Mem",   "pronunciation": "m" },
+      { "letter": "Nun",   "pronunciation": "en" }
+    ]
+  },
+  {
+    "slug": "athh",
+    "name": "AThH",
+    "english": "Ateh",
+    "letters": [
+      { "letter": "Aleph", "pronunciation": "ah" },
+      { "letter": "Tav",   "pronunciation": "tah" },
+      { "letter": "Heh",   "pronunciation": "eh" }
+    ]
+  },
+  {
+    "slug": "avrial",
+    "name": "AVRIAL",
+    "english": "Uriel",
+    "letters": [
+      { "letter": "Aleph", "pronunciation": "au" },
+      { "letter": "Vav",   "pronunciation": "ue" },
+      { "letter": "Resh",  "pronunciation": "ree" },
+      { "letter": "Yod",   "pronunciation": "ee" },
+      { "letter": "Aleph", "pronunciation": "a" },
+      { "letter": "Lamed", "pronunciation": "l" }
+    ]
+  },
+  {
+    "slug": "gbrial",
+    "name": "GBRIAL",
+    "english": "Gabriel",
+    "letters": [
+      { "letter": "Gimel", "pronunciation": "gah" },
+      { "letter": "Beth",  "pronunciation": "bre" },
+      { "letter": "Resh",  "pronunciation": "ee" },
+      { "letter": "Yod",   "pronunciation": "ee" },
+      { "letter": "Aleph", "pronunciation": "a" },
+      { "letter": "Lamed", "pronunciation": "l" }
+    ]
+  },
+  {
+    "slug": "ih",
+    "name": "IH",
+    "english": "Yah",
+    "meaning": "Reality (the short form of IHVH, which means: ‘That which was, that which is, that which will be the only Reality.’)",
+    "letters": [
+      { "letter": "Yod", "pronunciation": "ya" },
+      { "letter": "Heh", "pronunciation": "ah" }
+    ]
+  },
+  {
+    "slug": "ihvh",
+    "name": "IHVH",
+    "english": "YHWH",
+    "letters": [
+      { "letter": "Yod", "pronunciation": "yod" },
+      { "letter": "Heh", "pronunciation": "heh" },
+      { "letter": "Vav", "pronunciation": "wah" },
+      { "letter": "Heh", "pronunciation": "heh" }
+    ]
+  },
+  {
+    "slug": "ihvh-tzbavth",
+    "name": "IHVH TzBAVTh",
+    "english": "YHWH Tzabaoth",
+    "meaning": "Reality (manifested in) Hosts (of forms).",
+    "wordSizes": [4, 5],
+    "letters": [
+      { "letter": "Yod",    "pronunciation": "yod" },
+      { "letter": "Heh",    "pronunciation": "heh" },
+      { "letter": "Vav",    "pronunciation": "wah" },
+      { "letter": "Heh",    "pronunciation": "heh" },
+      { "letter": "Tzaddi", "pronunciation": "tsah" },
+      { "letter": "Beth",   "pronunciation": "bah" },
+      { "letter": "Aleph",  "pronunciation": "ah" },
+      { "letter": "Vav",    "pronunciation": "oo" },
+      { "letter": "Tav",    "pronunciation": "oot" }
+    ]
+  },
+  {
+    "slug": "lovlm",
+    "name": "L'OVLM",
+    "english": "le-Olam",
+    "letters": [
+      { "letter": "Lamed", "pronunciation": "leh" },
+      { "letter": "Ayin",  "pronunciation": "oo" },
+      { "letter": "Vav",   "pronunciation": "ool" },
+      { "letter": "Lamed", "pronunciation": "l" },
+      { "letter": "Mem",   "pronunciation": "ahm" }
+    ]
+  },
+  {
+    "slug": "mikal",
+    "name": "MIKAL",
+    "english": "Michael",
+    "letters": [
+      { "letter": "Mem",   "pronunciation": "me" },
+      { "letter": "Yod",   "pronunciation": "ee" },
+      { "letter": "Kaph",  "pronunciation": "kah" },
+      { "letter": "Aleph", "pronunciation": "a" },
+      { "letter": "Lamed", "pronunciation": "l" }
+    ]
+  },
+  {
+    "slug": "mlkvth",
+    "name": "MLKVTh",
+    "english": "Malkuth",
+    "letters": [
+      { "letter": "Mem",   "pronunciation": "me" },
+      { "letter": "Lamed", "pronunciation": "el" },
+      { "letter": "Kaph",  "pronunciation": "koo" },
+      { "letter": "Vav",   "pronunciation": "oo" },
+      { "letter": "Tav",   "pronunciation": "th" }
+    ]
+  },
+  {
+    "slug": "rpal",
+    "name": "RPAL",
+    "english": "Raphael",
+    "letters": [
+      { "letter": "Resh",  "pronunciation": "rah" },
+      { "letter": "Peh",   "pronunciation": "pha" },
+      { "letter": "Aleph", "pronunciation": "a" },
+      { "letter": "Lamed", "pronunciation": "l" }
+    ]
+  },
+  {
+    "slug": "shdi-al-chi",
+    "name": "ShDI AL ChI",
+    "english": "Shaddai El Chai",
+    "meaning": "Almighty Strength of Life.",
+    "wordSizes": [3, 2, 2],
+    "letters": [
+      { "letter": "Shin",   "pronunciation": "shah" },
+      { "letter": "Daleth", "pronunciation": "dah" },
+      { "letter": "Yod",    "pronunciation": "ee" },
+      { "letter": "Aleph",  "pronunciation": "ay" },
+      { "letter": "Lamed",  "pronunciation": "yil" },
+      { "letter": "Cheth",  "pronunciation": "cha" },
+      { "letter": "Yod",    "pronunciation": "yee" }
+    ]
+  },
+  {
+    "slug": "vgbvrh",
+    "name": "VGBVRH",
+    "english": "ve-Geburah",
+    "letters": [
+      { "letter": "Vav",   "pronunciation": "vey" },
+      { "letter": "Gimel", "pronunciation": "gi" },
+      { "letter": "Beth",  "pronunciation": "boo" },
+      { "letter": "Vav",   "pronunciation": "oo" },
+      { "letter": "Resh",  "pronunciation": "or" },
+      { "letter": "Heh",   "pronunciation": "ah" }
+    ]
+  },
+  {
+    "slug": "vgdvlh",
+    "name": "VGDVLH",
+    "english": "ve-Gedulah",
+    "letters": [
+      { "letter": "Vav",    "pronunciation": "vey" },
+      { "letter": "Gimel",  "pronunciation": "gi" },
+      { "letter": "Daleth", "pronunciation": "doo" },
+      { "letter": "Vav",    "pronunciation": "oo" },
+      { "letter": "Lamed",  "pronunciation": "la" },
+      { "letter": "Heh",    "pronunciation": "ah" }
+    ]
+  }
+]

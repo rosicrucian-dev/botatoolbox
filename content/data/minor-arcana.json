@@ -1,0 +1,62 @@
+[
+  {
+    "suit": "Wands",
+    "cards": [
+      { "num": "Ace", "keyword": "Initiative" },
+      { "num": "2",   "keyword": "Dominion" },
+      { "num": "3",   "keyword": "Established Strength" },
+      { "num": "4",   "keyword": "Perfected Work" },
+      { "num": "5",   "keyword": "Competition" },
+      { "num": "6",   "keyword": "Victory" },
+      { "num": "7",   "keyword": "Valor" },
+      { "num": "8",   "keyword": "Swiftness" },
+      { "num": "9",   "keyword": "Preparedness" },
+      { "num": "10",  "keyword": "Fullness of Power" }
+    ]
+  },
+  {
+    "suit": "Cups",
+    "cards": [
+      { "num": "Ace", "keyword": "Desire Force" },
+      { "num": "2",   "keyword": "Response to Environment" },
+      { "num": "3",   "keyword": "Enjoyment" },
+      { "num": "4",   "keyword": "Surfeit" },
+      { "num": "5",   "keyword": "Defeated Desire" },
+      { "num": "6",   "keyword": "Betterment" },
+      { "num": "7",   "keyword": "Illusion" },
+      { "num": "8",   "keyword": "Instability" },
+      { "num": "9",   "keyword": "Desire Fulfilled" },
+      { "num": "10",  "keyword": "Excess" }
+    ]
+  },
+  {
+    "suit": "Swords",
+    "cards": [
+      { "num": "Ace", "keyword": "Activity" },
+      { "num": "2",   "keyword": "Indecision" },
+      { "num": "3",   "keyword": "Sorrow" },
+      { "num": "4",   "keyword": "Rest" },
+      { "num": "5",   "keyword": "Defeat" },
+      { "num": "6",   "keyword": "Patience" },
+      { "num": "7",   "keyword": "Instability" },
+      { "num": "8",   "keyword": "Mediocrity" },
+      { "num": "9",   "keyword": "Worry" },
+      { "num": "10",  "keyword": "Destruction" }
+    ]
+  },
+  {
+    "suit": "Pentacles",
+    "cards": [
+      { "num": "Ace", "keyword": "Materiality" },
+      { "num": "2",   "keyword": "Fluctuation" },
+      { "num": "3",   "keyword": "Constructiveness" },
+      { "num": "4",   "keyword": "Management" },
+      { "num": "5",   "keyword": "Uncertainty" },
+      { "num": "6",   "keyword": "Prosperity" },
+      { "num": "7",   "keyword": "Loss" },
+      { "num": "8",   "keyword": "Prudence" },
+      { "num": "9",   "keyword": "Harvest" },
+      { "num": "10",  "keyword": "Wealth" }
+    ]
+  }
+]

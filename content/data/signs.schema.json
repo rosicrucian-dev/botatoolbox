@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string",
+        "description": "URL slug (lowercase sign name)."
+      },
+      "name": {
+        "type": "string"
+      },
+      "symbol": {
+        "type": "string",
+        "description": "Unicode astrological glyph (e.g. ♈)."
+      },
+      "letter": {
+        "type": "string",
+        "description": "Hebrew letter attributed to this sign."
+      },
+      "bodyPart": {
+        "type": "string",
+        "description": "Body region governed by this sign."
+      },
+      "element": {
+        "type": "string",
+        "enum": [
+          "Fire",
+          "Earth",
+          "Air",
+          "Water"
+        ]
+      },
+      "quality": {
+        "type": "string",
+        "enum": [
+          "Cardinal",
+          "Fixed",
+          "Mutable"
+        ]
+      },
+      "rulers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Planet slugs that rule this sign — traditional first, modern co-ruler second."
+      },
+      "exaltedBy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Planet slug exalted in this sign, or null if none."
+      }
+    },
+    "required": [
+      "slug",
+      "name",
+      "symbol",
+      "letter",
+      "bodyPart",
+      "element",
+      "quality",
+      "rulers",
+      "exaltedBy"
+    ],
+    "additionalProperties": false
+  }
+}
