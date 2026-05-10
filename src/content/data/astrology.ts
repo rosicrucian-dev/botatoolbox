@@ -10,8 +10,12 @@ import { cardByAstrology } from './tarot'
 interface CardJoin {
   cardSlug: string
   cardName: string
+  cardNum: number
   alchemy: string
   color: string
+  // The musical note attributed to this sign/planet — inherited from
+  // its tarot card. Drives meditation-player tone playback.
+  note: string
 }
 
 function joinTarot(name: string): CardJoin {
@@ -20,8 +24,10 @@ function joinTarot(name: string): CardJoin {
   return {
     cardSlug: card.slug,
     cardName: card.name,
+    cardNum: card.num,
     alchemy: card.alchemy,
     color: card.color,
+    note: card.note,
   }
 }
 

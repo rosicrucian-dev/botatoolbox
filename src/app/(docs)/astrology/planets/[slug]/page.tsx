@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { type Metadata } from 'next'
 
 import { DefinitionList } from '@/components/DefinitionList'
+import { PlayLink } from '@/components/PlayLink'
 import { planets, planetBySlug, signBySlug } from '@/content/data/astrology'
 
 export function generateStaticParams() {
@@ -35,9 +36,14 @@ export default async function PlanetPage({
 
   return (
     <article className="space-y-6">
-      <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
-        {planet.name}
-      </h1>
+      <div className="flex items-center justify-between gap-4">
+        <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
+          {planet.name}
+        </h1>
+        <PlayLink href={`/astrology/planets/${planet.slug}/focus`}>
+          Focus ▶
+        </PlayLink>
+      </div>
 
       <DefinitionList
         rows={[
