@@ -7,7 +7,8 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "gen:schemas": "node --experimental-strip-types scripts/gen-schemas.ts"
+    "gen:schemas": "node --experimental-strip-types scripts/gen-schemas.ts",
+    "optimize:tarot": "node --experimental-strip-types scripts/optimize-tarot.ts"
   },
   "browserslist": "Chrome >= 111, Firefox >= 128, Safari >= 16.4, iOS >= 16.4, Edge >= 111, not dead",
   "dependencies": {

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { type Metadata } from 'next'
 
-import { cards, cardImage } from '@/content/data/tarot'
+import { cards, thumbImage } from '@/content/data/tarot'
 
 export const metadata: Metadata = {
   title: 'Tableau',
@@ -17,10 +17,10 @@ function CardLink({ card }: { card: (typeof cards)[number] }) {
       className="block transition hover:-translate-y-0.5 hover:opacity-90"
     >
       <img
-        src={cardImage(card)}
+        src={thumbImage(card)}
         alt={`${card.num}. ${card.name}`}
-        width={724}
-        height={1200}
+        width={362}
+        height={600}
         loading="lazy"
         className="w-full rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
       />

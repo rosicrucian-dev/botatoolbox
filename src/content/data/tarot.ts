@@ -30,3 +30,9 @@ export const cardByAstrology = Object.fromEntries(
 export function cardImage(card: Pick<TarotCard, 'num' | 'slug'>): string {
   return `/tarot/${card.num}-${card.slug}.jpg`
 }
+
+// Half-size variant for the tableau (22 cards in a grid). Same JPEG,
+// resized to 362px wide by scripts/optimize-tarot.ts.
+export function thumbImage(card: Pick<TarotCard, 'num' | 'slug'>): string {
+  return `/tarot/thumbs/${card.num}-${card.slug}.jpg`
+}

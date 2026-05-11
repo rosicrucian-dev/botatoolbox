@@ -21,7 +21,7 @@ const sections: Array<{ title: string; links: Array<LinkItem> }> = [
     ],
   },
   {
-    title: 'Community',
+    title: 'Rosicrucian Community',
     links: [
       {
         name: 'Discord — Symposium of the Rose',
