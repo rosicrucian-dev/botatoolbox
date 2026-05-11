@@ -8,3 +8,7 @@ dist
 !.env.example
 *.log
 .vercel
+
+# tailwind
+/catalyst-ui-kit
+/tailwind-plus-protocol
