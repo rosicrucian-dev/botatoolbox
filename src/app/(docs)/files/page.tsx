@@ -24,7 +24,7 @@ export default function Files() {
               .map((f) => (
                 <li key={f.slug}>
                   <Link
-                    href={`/resources/files/${f.slug}`}
+                    href={`/files/${f.slug}`}
                     className="-mx-2 block rounded-sm px-2 py-4 text-zinc-900 transition hover:bg-zinc-50 dark:text-zinc-100 dark:hover:bg-zinc-800/50"
                   >
                     {f.name}

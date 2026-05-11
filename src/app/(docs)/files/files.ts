@@ -1,6 +1,6 @@
-// Hardcoded list of downloadable files shown under /resources/files.
+// Hardcoded list of downloadable files shown under /files.
 // Grouped by section on the index page; each entry has a viewer route at
-// /resources/files/<slug>. Add new entries here as needed.
+// /files/<slug>. Add new entries here as needed.
 
 export interface FileEntry {
   slug: string

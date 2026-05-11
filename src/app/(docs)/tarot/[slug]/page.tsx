@@ -6,6 +6,7 @@ import { Button } from '@/components/Button'
 import { DefinitionList } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PlayLink } from '@/components/PlayLink'
+import { planetBySlug, signBySlug } from '@/content/data/astrology'
 import { cards, cardImage } from '@/content/data/tarot'
 
 const FIELD_ORDER: Array<{
@@ -85,10 +86,35 @@ export default async function TarotCardPage({
           </div>
 
           <DefinitionList
-            rows={FIELD_ORDER.map(({ label, key }) => ({
-              label,
-              value: String(card[key]),
-            }))}
+            rows={FIELD_ORDER.map(({ label, key }) => {
+              const raw = String(card[key])
+              // The Astrology cell links to the corresponding planet or
+              // sign detail page. Slug is just the lowercased name —
+              // every card's astrology resolves to either a planet or
+              // sign (enforced by integrity.ts at boot).
+              if (key === 'astrology') {
+                const astroSlug = card.astrology.toLowerCase()
+                const href = planetBySlug[astroSlug]
+                  ? `/astrology/planets/${astroSlug}`
+                  : signBySlug[astroSlug]
+                    ? `/astrology/signs/${astroSlug}`
+                    : null
+                if (href) {
+                  return {
+                    label,
+                    value: (
+                      <Link
+                        href={href}
+                        className="text-zinc-900 underline-offset-2 hover:underline dark:text-zinc-100"
+                      >
+                        {raw}
+                      </Link>
+                    ),
+                  }
+                }
+              }
+              return { label, value: raw }
+            })}
           />
         </div>
 

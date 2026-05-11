@@ -71,7 +71,7 @@ export function GematriaClient() {
         </h1>
         {playableCount > 0 && (
           <Link
-            href={`/resources/gematria/play?seq=${encodeURIComponent(word)}`}
+            href={`/gematria/play?seq=${encodeURIComponent(word)}`}
             onClick={() => ensureAudioContext()}
             className="inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-emerald-500 px-3 text-sm font-medium whitespace-nowrap text-white transition hover:bg-emerald-400"
           >

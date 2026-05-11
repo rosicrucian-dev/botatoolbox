@@ -19,7 +19,7 @@ export default function GematriaPlayPage() {
   const seqParam = sp.get('seq') ?? ''
   // Round-trip the sequence back to the docs page on close so the user
   // doesn't lose what they typed.
-  const backHref = `/resources/gematria${
+  const backHref = `/gematria${
     seqParam ? `?seq=${encodeURIComponent(seqParam)}` : ''
   }`
 

@@ -101,13 +101,13 @@ export const navigation: Array<NavGroup> = [
     links: [
       {
         title: 'Gematria',
-        href: '/resources/gematria',
+        href: '/gematria',
         description:
           'A Hebrew letter calculator. Tap letters to spell a word; the gematria total updates and the corresponding tarot trumps appear above.',
       },
       {
         title: 'Keyboard',
-        href: '/tools/keyboard',
+        href: '/keyboard',
         description:
           'A 12-key chromatic keyboard, one key per simple letter. Press and hold to sustain the tone.',
       },
@@ -124,7 +124,7 @@ export const navigation: Array<NavGroup> = [
       },
       {
         title: 'Tattvas',
-        href: '/resources/tattvas',
+        href: '/tattvas',
         description:
           'The five elements as drawn in the Golden Dawn tradition, in 25 nested combinations. Click any to open it full screen.',
       },
@@ -141,12 +141,12 @@ export const navigation: Array<NavGroup> = [
     links: [
       {
         title: 'Files',
-        href: '/resources/files',
+        href: '/files',
         description: 'Downloadable wallpapers and other supporting files.',
       },
       {
         title: 'Links',
-        href: '/resources/links',
+        href: '/links',
         description: 'Outside resources from the BOTA community.',
       },
       {
