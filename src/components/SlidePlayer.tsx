@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 
 import { PlayerHeader } from '@/components/PlayerHeader'
 
+// True once any SlidePlayer instance has finished priming this session.
+// See the `primed` state inside the component for why this is module-level.
+let sessionPrimed = false
+
 function ArrowIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" {...props}>
@@ -74,15 +78,49 @@ export function SlidePlayer<S extends Slide>({
   // forces a black bg on iOS (in tailwind.css) only matches `:not([data-primed])`,
   // so first paint is black on iOS — letting the toolbar lock to black —
   // and the slide bg appears once primed. Desktop never sees the override.
-  const [primed, setPrimed] = useState(false)
+  //
+  // `sessionPrimed` is module-level so the prime-once-per-session model
+  // survives SlidePlayer remounts. Without this, Astrology Focus (which
+  // uses router.replace between slides) re-fires the black flash every
+  // time the URL slug changes — visible noise on each next/prev tap.
+  // The iOS toolbar tint is already locked from the first prime; nothing
+  // else needs re-priming.
+  const [primed, setPrimed] = useState(sessionPrimed)
   useEffect(() => {
+    if (sessionPrimed) return
     let raf2: number | undefined
     const raf1 = requestAnimationFrame(() => {
-      raf2 = requestAnimationFrame(() => setPrimed(true))
+      raf2 = requestAnimationFrame(() => {
+        setPrimed(true)
+        sessionPrimed = true
+      })
     })
     return () => {
       cancelAnimationFrame(raf1)
       if (raf2) cancelAnimationFrame(raf2)
+    }
+  }, [])
+
+  // iOS standalone-mode bugfix. When the user navigates from a scrolled
+  // docs page into a player, iOS PWAs sometimes anchor `position: fixed`
+  // elements to the *scrolled* document position instead of the viewport.
+  // Symptom: the player renders shifted upward by the previous scroll
+  // amount — top chrome clipped, a black band exposed at the bottom,
+  // and the body is non-scrollable so the user can't recover. Safari
+  // proper handles this correctly which is why it's standalone-only.
+  //
+  // Two parts to the fix:
+  //   1. Reset the body to scroll-top so "fixed top-0" actually means
+  //      viewport-top.
+  //   2. Lock body overflow while the player is mounted so iOS keeps
+  //      the viewport stable (and so the user can't induce the same
+  //      offset by scrolling behind the player).
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prevOverflow
     }
   }, [])
 

@@ -27,6 +27,18 @@ export default function CubeOfSpaceExpandPage() {
     }
   }, [])
 
+  // iOS standalone PWA bugfix: ensure body scroll is reset and locked so
+  // this full-screen `fixed` overlay isn't offset by the prior page's
+  // scroll position. See SlidePlayer for the full diagnosis.
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prevOverflow
+    }
+  }, [])
+
   // Esc closes (matching every other player's contract).
   useEffect(() => {
     function onKey(e: KeyboardEvent) {

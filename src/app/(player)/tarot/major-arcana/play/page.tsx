@@ -15,6 +15,7 @@ import { usePlayerIndex } from '@/lib/usePlayerIndex'
 const cardData = cards.map((c) => {
   const meta = getLetterMeta(c.letter)
   return {
+    slug: c.slug,
     label: c.name,
     glyph: meta.glyph,
     cardImage: cardImage(c),
@@ -53,7 +54,14 @@ export default function MajorArcanaPlayPage() {
       slides={slides}
       idx={idx}
       onIdxChange={handleIdxChange}
-      onClose={() => router.push('/tarot/major-arcana')}
+      // Close → current card's detail page. Matches the Astrology
+      // Focus pattern: "close lands you on the thing you were just
+      // meditating on", regardless of whether you entered from the list
+      // or from a different card's detail.
+      onClose={() => {
+        if (current) router.push(`/tarot/${current.slug}`)
+        else router.push('/tarot/major-arcana')
+      }}
       extraHeaderItem={
         current?.note ? <SoundButton onClick={playCurrent} /> : null
       }
