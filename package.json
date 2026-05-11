@@ -9,7 +9,7 @@
     "lint": "eslint",
     "gen:schemas": "node --experimental-strip-types scripts/gen-schemas.ts"
   },
-  "browserslist": "defaults, not ie <= 11",
+  "browserslist": "Chrome >= 111, Firefox >= 128, Safari >= 16.4, iOS >= 16.4, Edge >= 111, not dead",
   "dependencies": {
     "@algolia/autocomplete-core": "^1.19.2",
     "@headlessui/react": "^2.2.6",

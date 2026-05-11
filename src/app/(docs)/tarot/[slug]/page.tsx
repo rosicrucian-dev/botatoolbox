@@ -122,8 +122,8 @@ export default async function TarotCardPage({
           <img
             src={cardImage(card)}
             alt={`${card.num}. ${card.name}`}
-            width={400}
-            height={680}
+            width={724}
+            height={1200}
             className="w-full rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
           />
         </div>

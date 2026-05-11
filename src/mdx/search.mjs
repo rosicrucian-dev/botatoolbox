@@ -163,12 +163,58 @@ export default function Search(nextConfig = {}) {
               sections: [[`${s.hebrewName} — ${s.name}`, null, []]],
             }))
 
+            // Astrology sign + planet detail pages. Content includes the
+            // Hebrew letter, body part / chakra, element / quality, and
+            // rulership slugs so queries like "Mars" surface both Mars
+            // (the planet) and Aries / Scorpio (the signs Mars rules).
+            let signs = JSON.parse(
+              fs.readFileSync(path.join(contentDataDir, 'signs.json'), 'utf8'),
+            )
+            let signData = signs.map((s) => ({
+              url: `/astrology/signs/${s.slug}/`,
+              sections: [
+                [
+                  s.name,
+                  null,
+                  [
+                    s.letter,
+                    s.bodyPart,
+                    s.element,
+                    s.quality,
+                    ...(s.rulers ?? []),
+                    s.exaltedBy,
+                  ].filter(Boolean),
+                ],
+              ],
+            }))
+
+            let planets = JSON.parse(
+              fs.readFileSync(path.join(contentDataDir, 'planets.json'), 'utf8'),
+            )
+            let planetData = planets.map((p) => ({
+              url: `/astrology/planets/${p.slug}/`,
+              sections: [
+                [
+                  p.name,
+                  null,
+                  [
+                    p.letter,
+                    p.chakra,
+                    ...(p.rules ?? []),
+                    p.exaltedIn,
+                  ].filter(Boolean),
+                ],
+              ],
+            }))
+
             let data = [
               ...mdxData,
               ...staticPages,
               ...cardData,
               ...wordData,
               ...sephData,
+              ...signData,
+              ...planetData,
             ]
 
             // When this file is imported within the application
@@ -192,12 +238,20 @@ export default function Search(nextConfig = {}) {
 
               let data = ${JSON.stringify(data)}
 
+              // Title-only indexing. The composed content arrays (letter,
+              // color, astrology rulers, etc.) per entry are kept in the
+              // source data above for potential future use, but NOT fed
+              // to FlexSearch — including them produced too many
+              // tangential hits (e.g. "Saturn" surfacing The World,
+              // Capricorn, Libra via cross-reference fields). Searching
+              // by title keeps results focused on the thing the user
+              // typed.
               for (let { url, sections } of data) {
-                for (let [title, hash, content] of sections) {
+                for (let [title, hash] of sections) {
                   sectionIndex.add({
                     url: url + (hash ? ('#' + hash) : ''),
                     title,
-                    content: [title, ...content].join('\\n'),
+                    content: title,
                     pageTitle: hash ? sections[0][0] : undefined,
                   })
                 }

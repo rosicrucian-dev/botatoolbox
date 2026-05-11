@@ -19,8 +19,8 @@ function CardLink({ card }: { card: (typeof cards)[number] }) {
       <img
         src={cardImage(card)}
         alt={`${card.num}. ${card.name}`}
-        width={400}
-        height={680}
+        width={724}
+        height={1200}
         loading="lazy"
         className="w-full rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
       />

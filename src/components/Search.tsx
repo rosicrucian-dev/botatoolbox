@@ -1,95 +1,26 @@
 'use client'
 
-import {
-  createAutocomplete,
-  type AutocompleteApi,
-  type AutocompleteCollection,
-  type AutocompleteState,
-} from '@algolia/autocomplete-core'
-import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import clsx from 'clsx'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import {
-  Fragment,
-  Suspense,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from 'react'
-import Highlighter from 'react-highlight-words'
+import dynamic from 'next/dynamic'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { navigation } from '@/components/Navigation'
-import { type Result } from '@/mdx/search.mjs'
 import { useMobileNavigationStore } from './MobileNavigation'
 
-type EmptyObject = Record<string, never>
+// SearchDialog (Algolia autocomplete + Headless UI Dialog + result
+// highlighter) is the heaviest chunk in the app aside from Three.js.
+// Lazy-load it via next/dynamic so it isn't in the initial bundle on
+// every page — only loads on the first time the user opens search.
+// Saves ~60-80 KiB on the homepage.
+// ssr: false because the dialog has no SSR contribution (it's hidden
+// until interaction); skipping SSR also keeps the static-export HTML
+// from including dialog markup it can't use.
+const SearchDialog = dynamic(() => import('./SearchDialog'), {
+  ssr: false,
+  loading: () => null,
+})
 
-type Autocomplete = AutocompleteApi<
-  Result,
-  React.SyntheticEvent,
-  React.MouseEvent,
-  React.KeyboardEvent
->
-
-function useAutocomplete({ onNavigate }: { onNavigate: () => void }) {
-  let id = useId()
-  let router = useRouter()
-  let [autocompleteState, setAutocompleteState] = useState<
-    AutocompleteState<Result> | EmptyObject
-  >({})
-
-  function navigate({ itemUrl }: { itemUrl?: string }) {
-    if (itemUrl) {
-      router.push(itemUrl)
-    }
-
-    onNavigate()
-  }
-
-  let [autocomplete] = useState<Autocomplete>(() =>
-    createAutocomplete<
-      Result,
-      React.SyntheticEvent,
-      React.MouseEvent,
-      React.KeyboardEvent
-    >({
-      id,
-      placeholder: 'Find something...',
-      defaultActiveItemId: 0,
-      onStateChange({ state }) {
-        setAutocompleteState(state)
-      },
-      shouldPanelOpen({ state }) {
-        return state.query !== ''
-      },
-      navigator: {
-        navigate,
-      },
-      getSources({ query }) {
-        return import('@/mdx/search.mjs').then(({ search }) => {
-          return [
-            {
-              sourceId: 'documentation',
-              getItems() {
-                return search(query, { limit: 5 })
-              },
-              getItemUrl({ item }) {
-                return item.url
-              },
-              onSelect: navigate,
-            },
-          ]
-        })
-      },
-    }),
-  )
-
-  return { autocomplete, autocompleteState }
-}
-
+// Inlined here (rather than re-imported from SearchDialog) so the trigger
+// button doesn't pull in the dialog chunk. Tiny SVG — duplicate cost is
+// nothing compared to the bundle savings.
 function SearchIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" {...props}>
@@ -102,316 +33,24 @@ function SearchIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-function NoResultsIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" {...props}>
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12.01 12a4.237 4.237 0 0 0 1.24-3c0-.62-.132-1.207-.37-1.738M12.01 12A4.237 4.237 0 0 1 9 13.25c-.635 0-1.237-.14-1.777-.388M12.01 12l3.24 3.25m-3.715-9.661a4.25 4.25 0 0 0-5.975 5.908M4.5 15.5l11-11"
-      />
-    </svg>
-  )
-}
+function useSearchProps() {
+  let buttonRef = useRef<React.ElementRef<'button'>>(null)
+  let [open, setOpen] = useState(false)
 
-function LoadingIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  let id = useId()
-
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" {...props}>
-      <circle cx="10" cy="10" r="5.5" strokeLinejoin="round" />
-      <path
-        stroke={`url(#${id})`}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.5 10a5.5 5.5 0 1 0-5.5 5.5"
-      />
-      <defs>
-        <linearGradient
-          id={id}
-          x1="13"
-          x2="9.5"
-          y1="9"
-          y2="15"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="currentColor" />
-          <stop offset="1" stopColor="currentColor" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-    </svg>
-  )
-}
-
-function HighlightQuery({ text, query }: { text: string; query: string }) {
-  return (
-    <Highlighter
-      highlightClassName="underline bg-transparent text-emerald-500"
-      searchWords={[query]}
-      autoEscape={true}
-      textToHighlight={text}
-    />
-  )
-}
-
-function SearchResult({
-  result,
-  resultIndex,
-  autocomplete,
-  collection,
-  query,
-}: {
-  result: Result
-  resultIndex: number
-  autocomplete: Autocomplete
-  collection: AutocompleteCollection<Result>
-  query: string
-}) {
-  let id = useId()
-
-  let sectionTitle = navigation.find((section) =>
-    section.links.find((link) => link.href === result.url.split('#')[0]),
-  )?.title
-  let hierarchy = [sectionTitle, result.pageTitle].filter(
-    (x): x is string => typeof x === 'string',
-  )
-
-  return (
-    <li
-      className={clsx(
-        'group block cursor-default px-4 py-3 aria-selected:bg-zinc-50 dark:aria-selected:bg-zinc-800/50',
-        resultIndex > 0 && 'border-t border-zinc-100 dark:border-zinc-800',
-      )}
-      aria-labelledby={`${id}-hierarchy ${id}-title`}
-      {...autocomplete.getItemProps({
-        item: result,
-        source: collection.source,
-      })}
-    >
-      <div
-        id={`${id}-title`}
-        aria-hidden="true"
-        className="text-sm font-medium text-zinc-900 group-aria-selected:text-emerald-500 dark:text-white"
-      >
-        <HighlightQuery text={result.title} query={query} />
-      </div>
-      {hierarchy.length > 0 && (
-        <div
-          id={`${id}-hierarchy`}
-          aria-hidden="true"
-          className="mt-1 truncate text-2xs whitespace-nowrap text-zinc-500"
-        >
-          {hierarchy.map((item, itemIndex, items) => (
-            <Fragment key={itemIndex}>
-              <HighlightQuery text={item} query={query} />
-              <span
-                className={
-                  itemIndex === items.length - 1
-                    ? 'sr-only'
-                    : 'mx-2 text-zinc-300 dark:text-zinc-700'
-                }
-              >
-                /
-              </span>
-            </Fragment>
-          ))}
-        </div>
-      )}
-    </li>
-  )
-}
-
-function SearchResults({
-  autocomplete,
-  query,
-  collection,
-}: {
-  autocomplete: Autocomplete
-  query: string
-  collection: AutocompleteCollection<Result>
-}) {
-  if (collection.items.length === 0) {
-    return (
-      <div className="p-6 text-center">
-        <NoResultsIcon className="mx-auto h-5 w-5 stroke-zinc-900 dark:stroke-zinc-600" />
-        <p className="mt-2 text-xs text-zinc-700 dark:text-zinc-400">
-          Nothing found for{' '}
-          <strong className="font-semibold wrap-break-word text-zinc-900 dark:text-white">
-            &lsquo;{query}&rsquo;
-          </strong>
-          . Please try again.
-        </p>
-      </div>
-    )
-  }
-
-  return (
-    <ul {...autocomplete.getListProps()}>
-      {collection.items.map((result, resultIndex) => (
-        <SearchResult
-          key={result.url}
-          result={result}
-          resultIndex={resultIndex}
-          autocomplete={autocomplete}
-          collection={collection}
-          query={query}
-        />
-      ))}
-    </ul>
-  )
-}
-
-const SearchInput = forwardRef<
-  React.ElementRef<'input'>,
-  {
-    autocomplete: Autocomplete
-    autocompleteState: AutocompleteState<Result> | EmptyObject
-    onClose: () => void
-  }
->(function SearchInput({ autocomplete, autocompleteState, onClose }, inputRef) {
-  let inputProps = autocomplete.getInputProps({ inputElement: null })
-
-  return (
-    <div className="group relative flex h-12">
-      <SearchIcon className="pointer-events-none absolute top-0 left-3 h-full w-5 stroke-zinc-500" />
-      <input
-        ref={inputRef}
-        data-autofocus
-        className={clsx(
-          'flex-auto appearance-none bg-transparent pl-10 text-zinc-900 outline-hidden placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
-          autocompleteState.status === 'stalled' ? 'pr-11' : 'pr-4',
-        )}
-        {...inputProps}
-        onKeyDown={(event) => {
-          if (
-            event.key === 'Escape' &&
-            !autocompleteState.isOpen &&
-            autocompleteState.query === ''
-          ) {
-            // In Safari, closing the dialog with the escape key can sometimes cause the scroll position to jump to the
-            // bottom of the page. This is a workaround for that until we can figure out a proper fix in Headless UI.
-            if (document.activeElement instanceof HTMLElement) {
-              document.activeElement.blur()
-            }
-
-            onClose()
-          } else {
-            inputProps.onKeyDown(event)
-          }
-        }}
-      />
-      {autocompleteState.status === 'stalled' && (
-        <div className="absolute inset-y-0 right-3 flex items-center">
-          <LoadingIcon className="h-5 w-5 animate-spin stroke-zinc-200 text-zinc-900 dark:stroke-zinc-800 dark:text-emerald-400" />
-        </div>
-      )}
-    </div>
-  )
-})
-
-function SearchDialog({
-  open,
-  setOpen,
-  className,
-  onNavigate = () => {},
-}: {
-  open: boolean
-  setOpen: (open: boolean) => void
-  className?: string
-  onNavigate?: () => void
-}) {
-  let formRef = useRef<React.ElementRef<'form'>>(null)
-  let panelRef = useRef<React.ElementRef<'div'>>(null)
-  let inputRef = useRef<React.ElementRef<typeof SearchInput>>(null)
-  let { autocomplete, autocompleteState } = useAutocomplete({
-    onNavigate() {
-      onNavigate()
-      setOpen(false)
-    },
-  })
-  let pathname = usePathname()
-  let searchParams = useSearchParams()
-
+  // Cmd/Ctrl-K shortcut lives here (always-loaded shell) rather than
+  // inside SearchDialog, so it works before the user has triggered the
+  // dialog's first lazy load.
   useEffect(() => {
-    setOpen(false)
-  }, [pathname, searchParams, setOpen])
-
-  useEffect(() => {
-    if (open) {
-      return
-    }
-
+    if (open) return
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault()
         setOpen(true)
       }
     }
-
     window.addEventListener('keydown', onKeyDown)
-
-    return () => {
-      window.removeEventListener('keydown', onKeyDown)
-    }
-  }, [open, setOpen])
-
-  return (
-    <Dialog
-      open={open}
-      onClose={() => {
-        setOpen(false)
-        autocomplete.setQuery('')
-      }}
-      className={clsx('fixed inset-0 z-50', className)}
-    >
-      <DialogBackdrop
-        transition
-        className="fixed inset-0 bg-zinc-400/25 backdrop-blur-xs data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-black/40"
-      />
-
-      <div className="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
-        <DialogPanel
-          transition
-          className="mx-auto transform-gpu overflow-hidden rounded-lg bg-zinc-50 shadow-xl ring-1 ring-zinc-900/7.5 data-closed:scale-95 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:max-w-xl dark:bg-zinc-900 dark:ring-zinc-800"
-        >
-          <div {...autocomplete.getRootProps({})}>
-            <form
-              ref={formRef}
-              {...autocomplete.getFormProps({
-                // eslint-disable-next-line react-hooks/refs
-                inputElement: inputRef.current,
-              })}
-            >
-              <SearchInput
-                ref={inputRef}
-                autocomplete={autocomplete}
-                autocompleteState={autocompleteState}
-                onClose={() => setOpen(false)}
-              />
-              <div
-                ref={panelRef}
-                className="border-t border-zinc-200 bg-white empty:hidden dark:border-zinc-100/5 dark:bg-white/2.5"
-                {...autocomplete.getPanelProps({})}
-              >
-                {autocompleteState.isOpen && (
-                  <SearchResults
-                    autocomplete={autocomplete}
-                    query={autocompleteState.query}
-                    collection={autocompleteState.collections[0]}
-                  />
-                )}
-              </div>
-            </form>
-          </div>
-        </DialogPanel>
-      </div>
-    </Dialog>
-  )
-}
-
-function useSearchProps() {
-  let buttonRef = useRef<React.ElementRef<'button'>>(null)
-  let [open, setOpen] = useState(false)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [open])
 
   return {
     buttonProps: {
@@ -461,9 +100,7 @@ export function Search() {
           <kbd className="font-sans">K</kbd>
         </kbd>
       </button>
-      <Suspense fallback={null}>
-        <SearchDialog className="hidden lg:block" {...dialogProps} />
-      </Suspense>
+      <SearchDialog className="hidden lg:block" {...dialogProps} />
     </div>
   )
 }
@@ -483,9 +120,7 @@ export function MobileSearch() {
         <span className="absolute size-12 pointer-fine:hidden" />
         <SearchIcon className="h-5 w-5 stroke-zinc-900 dark:stroke-white" />
       </button>
-      <Suspense fallback={null}>
-        <SearchDialog onNavigate={close} {...dialogProps} />
-      </Suspense>
+      <SearchDialog onNavigate={close} {...dialogProps} />
     </div>
   )
 }

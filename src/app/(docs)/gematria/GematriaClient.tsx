@@ -106,6 +106,8 @@ export function GematriaClient() {
                 <img
                   src={cardImage(card)}
                   alt={card.name}
+                  width={724}
+                  height={1200}
                   loading="lazy"
                   className="h-16 w-auto rounded-sm shadow-sm ring-1 ring-zinc-200 md:h-28 dark:ring-zinc-700"
                 />
