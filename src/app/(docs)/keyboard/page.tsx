@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 
 import { Keyboard } from '@/components/Keyboard'
+import { KeyboardLayout } from '@/components/KeyboardLayout'
 
 export const metadata: Metadata = {
   title: 'Keyboard',
@@ -8,11 +9,8 @@ export const metadata: Metadata = {
 
 export default function KeyboardPage() {
   return (
-    <article className="space-y-6">
-      <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
-        Keyboard
-      </h1>
+    <KeyboardLayout tab="piano">
       <Keyboard />
-    </article>
+    </KeyboardLayout>
   )
 }

@@ -31,6 +31,7 @@ const staticRoutes = [
   '/texts/emerald-tablet-hermes',
   '/texts/pattern-trestleboard',
   '/keyboard',
+  '/keyboard/tableau',
   '/tree-of-life',
   '/words-of-power',
 ]
