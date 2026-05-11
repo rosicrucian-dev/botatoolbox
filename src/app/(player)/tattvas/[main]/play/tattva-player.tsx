@@ -54,7 +54,7 @@ export function TattvaPlayer({ main }: { main: TattvaKind }) {
             {mainTattva.english}
           </div>
           <div className="mt-2 text-2xl opacity-70 md:text-3xl">
-            of {tattvaByKind[slide.sub].english}
+            {tattvaByKind[slide.sub].english}
           </div>
         </div>
       )}

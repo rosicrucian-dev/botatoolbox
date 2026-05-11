@@ -35,11 +35,7 @@ export default function Tattvas() {
             getHref={(r) => `/tattvas/${main.kind}/play?idx=${r.idx}`}
             primeAudio
             rowClassName="-mx-2 flex items-center justify-between gap-4 rounded-sm px-2 py-3 text-sm font-medium text-zinc-900 transition hover:bg-zinc-50 dark:text-zinc-100 dark:hover:bg-zinc-800/50"
-            renderRow={(r) => (
-              <>
-                {main.english} of {tattvaByKind[r.sub].english}
-              </>
-            )}
+            renderRow={(r) => <>{tattvaByKind[r.sub].english}</>}
           />
         </section>
       ))}
