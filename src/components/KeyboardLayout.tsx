@@ -1,3 +1,4 @@
+import { Children, Fragment, type ReactNode } from 'react'
 import Link from 'next/link'
 
 // Title row + tab links shared by /keyboard, /keyboard/piano, and
@@ -8,7 +9,7 @@ export function KeyboardLayout({
   children,
 }: {
   tab: 'piano' | 'tableau'
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <article className="space-y-6">
@@ -16,35 +17,54 @@ export function KeyboardLayout({
         <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
           Keyboard
         </h1>
-        <div className="flex gap-1">
-          <TabLink href="/keyboard/tableau" active={tab === 'tableau'}>
+        <Tabs>
+          <Tab href="/keyboard/tableau" active={tab === 'tableau'}>
             Tableau
-          </TabLink>
-          <TabLink href="/keyboard/piano" active={tab === 'piano'}>
+          </Tab>
+          <Tab href="/keyboard/piano" active={tab === 'piano'}>
             Piano
-          </TabLink>
-        </div>
+          </Tab>
+        </Tabs>
       </div>
       {children}
     </article>
   )
 }
 
-function TabLink({
+// Segmented-control container. Dividers are explicit sibling elements
+// (not `divide-x` border-left) so they sit on the page background rather
+// than on top of the active tab's tinted fill — keeps the inner divider
+// at the same visual weight as the outer ring regardless of which tab
+// is active.
+function Tabs({ children }: { children: ReactNode }) {
+  const tabs = Children.toArray(children)
+  return (
+    <div className="inline-flex h-9 overflow-hidden rounded-md ring-1 ring-current/20">
+      {tabs.map((tab, i) => (
+        <Fragment key={i}>
+          {i > 0 && <span aria-hidden="true" className="w-px bg-current/20" />}
+          {tab}
+        </Fragment>
+      ))}
+    </div>
+  )
+}
+
+function Tab({
   href,
   active,
   children,
 }: {
   href: string
   active: boolean
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <Link
       href={href}
       aria-current={active ? 'page' : undefined}
       className={
-        'inline-flex h-9 shrink-0 items-center justify-center rounded-md px-3 text-sm font-medium whitespace-nowrap ring-1 ring-current/20 transition ' +
+        'inline-flex h-full items-center justify-center px-3 text-sm font-medium whitespace-nowrap transition ' +
         (active ? 'bg-current/15' : 'hover:bg-current/10')
       }
     >
