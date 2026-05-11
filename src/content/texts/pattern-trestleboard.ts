@@ -2,11 +2,7 @@
 // numbered list item becomes a statement; the line's prefix label is
 // preserved verbatim so the docs page can show what the source shows.
 
-// @types/mdx claims `*.md` as an MDX component; webpack's asset/source
-// rule (scoped to /content/ in next.config.mjs) actually loads it as a
-// raw string. The cast bridges that gap.
-import sourceModule from '@content/texts/pattern-trestleboard.md'
-const source: string = sourceModule as unknown as string
+import source from '@content/texts/pattern-trestleboard.md?raw'
 
 export interface Statement {
   label: string

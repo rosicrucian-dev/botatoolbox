@@ -19,18 +19,9 @@ const nextConfig = {
   images: { unoptimized: true },
   trailingSlash: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-  outputFileTracingIncludes: {
-    '/**/*': ['./src/app/**/*.mdx'],
-  },
-  // Content .md files are user-editable (rituals, texts) — load them as
-  // raw strings so wrappers in src/data/ can parse them. Scoped to the
-  // top-level /content/ directory so future MDX usage in routes isn't
-  // affected. Wrappers cast the import to string at the call site
-  // (@types/mdx ambient-types .md as an MDX component).
   webpack(config) {
     config.module.rules.push({
-      test: /\.md$/,
-      include: /[\\/]content[\\/]/,
+      resourceQuery: /^\?raw$/,
       type: 'asset/source',
     })
     return config

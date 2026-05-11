@@ -5,11 +5,7 @@
 // preserved verbatim (so what's in the file is what gets rendered). Word-
 // of-power links use standard Markdown: [Display](/words-of-power/id).
 
-// @types/mdx claims `*.md` as an MDX component; webpack's asset/source
-// rule (scoped to /content/ in next.config.mjs) actually loads it as a
-// raw string. The cast bridges that gap.
-import sourceModule from '@content/rituals/lrp.md'
-const source: string = sourceModule as unknown as string
+import source from '@content/rituals/lrp.md?raw'
 
 export interface InstructionRef {
   ref: string

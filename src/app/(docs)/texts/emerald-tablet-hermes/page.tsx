@@ -4,11 +4,7 @@ import remarkHtml from 'remark-html'
 
 import { Prose } from '@/components/Prose'
 
-// @types/mdx claims `*.md` as an MDX component; webpack's asset/source
-// rule (scoped to /content/ in next.config.mjs) actually loads it as a
-// raw string. The cast bridges that gap.
-import sourceModule from '@content/texts/emerald-tablet-hermes.md'
-const source: string = sourceModule as unknown as string
+import source from '@content/texts/emerald-tablet-hermes.md?raw'
 
 export const metadata: Metadata = {
   title: 'The Emerald Tablet of Hermes',
