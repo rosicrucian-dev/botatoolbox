@@ -13,17 +13,40 @@ const WATER_OUTLINE = 2
 // Resolved at module load via the palette so the value is centralized.
 const WATER_LIT = getColor('white') ?? '#FFFFFF'
 
+// Crescent geometry — single source of truth for both the dark-arc path
+// and the water sub-tattva slot, so the slot stays in sync if these are
+// tuned. See `crescentDarkPath` for what `*_FROM_TOP` mean.
+const WATER_HORNS_FROM_TOP = 0.4
+const WATER_DIP_FROM_TOP = 0.65
+// Vertical breathing room above and below the water sub-symbol within
+// the lit band, as a fraction of the outer circle's diameter.
+const WATER_SUB_PADDING = 0.05
+
+// The water sub-tattva sits in the lit area below the inner arc's dip.
+// Vertically centered between (dip + padding) and (bottom − padding);
+// radius is half that band's height.
+function waterSubSlot(cx: number, cy: number, r: number) {
+  const diameter = 2 * r
+  const dipY = cy - r + diameter * WATER_DIP_FROM_TOP
+  const bottomY = cy + r
+  const pad = diameter * WATER_SUB_PADDING
+  const subTop = dipY + pad
+  const subBot = bottomY - pad
+  return {
+    cx,
+    cy: (subTop + subBot) / 2,
+    r: (subBot - subTop) / 2,
+  }
+}
+
 // For each main tattva, where the sub-tattva centers and how big it can
 // be. Slot radius is the half-extent of the sub's bounding box; sub
 // shapes scale to fit inside this.
 const SLOTS: Record<TattvaKind, { cx: number; cy: number; r: number }> = {
   // Center of square's interior.
   earth: { cx: 100, cy: 100, r: 25 },
-  // Inside the lit (lower) crescent of the moon. cy=163 nudges slightly
-  // above the geometric midpoint (164) to compensate for the inner arc
-  // being flatter than the outer circle, which makes the upper gap read
-  // larger than the lower at equal numeric distance.
-  water: { cx: 100, cy: 163.5, r: 14 },
+  // Lit lower band of the moon; derived from the crescent geometry above.
+  water: waterSubSlot(100, 100, 80),
   // Triangle centroid is at y = (top + 2*base)/3 = (25 + 2*170)/3 ≈ 122.
   fire: { cx: 100, cy: 125, r: 25 },
   // Center of circle.
@@ -48,42 +71,46 @@ function vesicaPath(cx: number, cy: number, h: number, w: number): string {
 
 // Builds the SVG path for the *dark* portion of a crescent moon —
 // "moon-shaped," not a half-disc. Outer circle is (cx, cy, r). Two free
-// parameters control the look:
-//   hornFrac: how far below center the horns sit (0 = at equator, 1 = at
-//             the very bottom). 0.4 reads as a clear "moon" shape.
-//   dipFrac:  how far below center the dark region's bottom-most point
-//             dips. Must be > hornFrac. 0.6 gives a gentle curve.
-// The inner-arc circle is *much* larger than the outer (its center sits
-// above the canvas) so the boundary reads as a shallow lunar terminator
-// rather than a tight semicircle.
+// parameters control the look, both measured as fractions from the top
+// of the outer circle (0 = top, 0.5 = equator, 1 = bottom):
+//   hornsFromTop: y-position of the cusps where the inner arc meets the
+//                 outer circle.
+//   dipFromTop:   y-position of the lowest point of the inner arc.
+// Constraint: dipFromTop > hornsFromTop (the dip sits below the horns).
+// Defaults of 0.25 and 0.5 put the cusps a quarter way down and the
+// deepest curve at the equator — a balanced upper crescent.
 function crescentDarkPath(
   cx: number,
   cy: number,
   r: number,
-  hornFrac = 0,
-  dipFrac = 0.6,
+  hornsFromTop = 0.4,
+  dipFromTop = 0.65,
 ): string {
-  const hornY = cy + r * hornFrac
-  const dipY = cy + r * dipFrac
+  const top = cy - r
+  const hornY = top + 2 * r * hornsFromTop
+  const dipY = top + 2 * r * dipFromTop
   // Horizontal half-width of the outer circle at the horn altitude.
   const dy = hornY - cy
   const dx = Math.sqrt(r * r - dy * dy)
   const leftX = cx - dx
   const rightX = cx + dx
-  // The inner arc passes through both horns and the bottom dip. By
-  // symmetry its center is on the vertical line through cx; solve for
-  // its y from the equal-radius condition between (horn) and (dip).
+  // The inner arc passes through both horns and the dip. By symmetry
+  // its center is on the vertical line through cx; solve for its y
+  // from the equal-radius condition between (horn) and (dip).
   const innerCy =
     (dipY * dipY - hornY * hornY - dx * dx) / (2 * (dipY - hornY))
   const innerR = dipY - innerCy
   // Both arcs traverse clockwise (sweep=1):
-  //   - Outer: lower-left horn → up over the top → lower-right horn
-  //     (large arc, since the chord is below the center).
-  //   - Inner: lower-right horn → through the dip → lower-left horn
-  //     (small arc; the inner circle's center is far above the canvas).
+  //   - Outer: left horn → up over the top → right horn. When horns
+  //     sit below the equator the chord is below center and "over the
+  //     top" is the LARGE arc; when horns sit above (the typical case
+  //     for these defaults) it's the SMALL arc.
+  //   - Inner: right horn → through the dip → left horn. Always the
+  //     small arc; the inner circle's center sits well above the dip.
+  const outerLargeArc = hornY >= cy ? 1 : 0
   return [
     `M ${leftX} ${hornY}`,
-    `A ${r} ${r} 0 1 1 ${rightX} ${hornY}`,
+    `A ${r} ${r} 0 ${outerLargeArc} 1 ${rightX} ${hornY}`,
     `A ${innerR} ${innerR} 0 0 1 ${leftX} ${hornY}`,
     'Z',
   ].join(' ')
@@ -139,7 +166,16 @@ function Macro({ kind }: { kind: TattvaKind }) {
       return (
         <>
           <circle cx={100} cy={100} r={80} fill={WATER_LIT} />
-          <path d={crescentDarkPath(100, 100, 80)} fill={stroke} />
+          <path
+            d={crescentDarkPath(
+              100,
+              100,
+              80,
+              WATER_HORNS_FROM_TOP,
+              WATER_DIP_FROM_TOP,
+            )}
+            fill={stroke}
+          />
           <circle
             cx={100}
             cy={100}
@@ -217,7 +253,16 @@ function SubSymbol({
       return (
         <>
           <circle cx={cx} cy={cy} r={r} fill={WATER_LIT} />
-          <path d={crescentDarkPath(cx, cy, r)} fill={fill} />
+          <path
+            d={crescentDarkPath(
+              cx,
+              cy,
+              r,
+              WATER_HORNS_FROM_TOP,
+              WATER_DIP_FROM_TOP,
+            )}
+            fill={fill}
+          />
           <circle
             cx={cx}
             cy={cy}
