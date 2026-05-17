@@ -25,6 +25,42 @@
       "color": {
         "type": "string"
       },
+      "situationOnTree": {
+        "type": "string"
+      },
+      "briaticColors": {
+        "type": "string"
+      },
+      "astrological": {
+        "type": "string"
+      },
+      "gods": {
+        "type": "string"
+      },
+      "magicalImage": {
+        "type": "string"
+      },
+      "symbols": {
+        "type": "string"
+      },
+      "tarotMinors": {
+        "type": "string"
+      },
+      "microcosm": {
+        "type": "string"
+      },
+      "bodyCorrespondence": {
+        "type": "string"
+      },
+      "perfumes": {
+        "type": "string"
+      },
+      "stones": {
+        "type": "string"
+      },
+      "animals": {
+        "type": "string"
+      },
       "quadrantColors": {
         "type": "object",
         "properties": {

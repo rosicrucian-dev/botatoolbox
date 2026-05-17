@@ -150,6 +150,12 @@ export const navigation: Array<NavGroup> = [
         description: 'Outside resources from the BOTA community.',
       },
       {
+        title: 'Ann Davies Radio',
+        href: '/ann-davies-radio',
+        description:
+          'Streaming radio of Ann Davies lectures, embedded from BOTA NZ.',
+      },
+      {
         title: 'About',
         href: '/about',
         description: 'Who built this and why.',

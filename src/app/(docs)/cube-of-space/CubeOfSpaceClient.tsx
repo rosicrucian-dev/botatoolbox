@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import Link from 'next/link'
 
+import { CompassToggle } from '@/components/CompassToggle'
 import { CubeCanvas } from '@/components/CubeCanvas'
 import { FlowToggle } from '@/components/FlowToggle'
 
 export function CubeOfSpaceClient() {
   const [flow, setFlow] = useState(false)
+  const [compass, setCompass] = useState(false)
   return (
     <article className="space-y-6">
       <div className="flex items-center justify-between gap-4">
@@ -15,6 +17,7 @@ export function CubeOfSpaceClient() {
           Cube of Space
         </h1>
         <div className="flex items-center gap-2 text-zinc-900 dark:text-white">
+          <CompassToggle pressed={compass} onPressedChange={setCompass} />
           <FlowToggle pressed={flow} onPressedChange={setFlow} />
           <Link
             href="/cube-of-space/expand"
@@ -25,7 +28,7 @@ export function CubeOfSpaceClient() {
         </div>
       </div>
       <div className="h-[calc(100svh-12rem)] w-full">
-        <CubeCanvas flow={flow} />
+        <CubeCanvas flow={flow} compass={compass} />
       </div>
     </article>
   )

@@ -1,8 +1,14 @@
-import { paths } from '@/content/data'
+import { paths, SEPHIROTH_DESCENT_SLUGS } from '@/content/data'
 import { getColor } from '@/lib/colors'
 import { sephiroth, TREE_VIEWBOX } from '@/lib/tree-layout'
 
 const sephBySlug = Object.fromEntries(sephiroth.map((s) => [s.slug, s]))
+// Descent index per slug (0 = Kether, 9 = Malkuth). `filledThrough` is
+// expressed in descent units, so we can't rely on `sephiroth` array
+// position — the source JSON orders entries Malkuth-first.
+const descentIndexBySlug = Object.fromEntries(
+  SEPHIROTH_DESCENT_SLUGS.map((slug, i) => [slug, i]),
+) as Record<string, number>
 const RADIUS = 32
 // Half-width of the "column" between the two parallel rails.
 const PATH_HALF_WIDTH = 8
@@ -72,9 +78,10 @@ export function ProgressiveTree({
         })}
       </g>
       <g>
-        {sephiroth.map((s, i) => {
-          const filled = i <= filledThrough
-          const isActive = i === filledThrough && !!strokeColor
+        {sephiroth.map((s) => {
+          const descentIdx = descentIndexBySlug[s.slug] ?? -1
+          const filled = descentIdx >= 0 && descentIdx <= filledThrough
+          const isActive = descentIdx === filledThrough && !!strokeColor
           const sw = isActive ? 8 : 1.5
           if (filled && s.quadrantColors) {
             const d = RADIUS / Math.sqrt(2)

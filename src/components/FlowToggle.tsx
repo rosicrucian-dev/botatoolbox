@@ -1,9 +1,8 @@
 'use client'
 
-// Pressable secondary toggle. Uses current-color rings/hovers so it
-// matches the other player-header chips (SoundButton, Close) and adapts
-// to whatever bg/text color the parent provides. Off = thin outline,
-// On = subtle fill (same ring color, distinct fill).
+import { HeaderChip } from '@/components/HeaderChip'
+
+// Toggle for the cube-of-space scene's animated edge flow particles.
 export function FlowToggle({
   pressed,
   onPressedChange,
@@ -12,16 +11,8 @@ export function FlowToggle({
   onPressedChange: (next: boolean) => void
 }) {
   return (
-    <button
-      type="button"
-      aria-pressed={pressed}
-      onClick={() => onPressedChange(!pressed)}
-      className={
-        'inline-flex h-9 shrink-0 items-center justify-center rounded-md px-3 text-sm font-medium whitespace-nowrap ring-1 ring-current/20 transition ' +
-        (pressed ? 'bg-current/15' : 'hover:bg-current/10')
-      }
-    >
+    <HeaderChip pressed={pressed} onClick={() => onPressedChange(!pressed)}>
       Flow
-    </button>
+    </HeaderChip>
   )
 }

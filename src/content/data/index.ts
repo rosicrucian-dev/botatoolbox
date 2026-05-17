@@ -70,3 +70,25 @@ export const words: ReadonlyArray<Word> = z
 export const wordBySlug = Object.fromEntries(
   words.map((w) => [w.slug, w]),
 ) as Record<string, Word>
+
+// Sephiroth in tree-descent order (Kether → Malkuth). The JSON array
+// itself follows the source-PDF order (Malkuth-first), so consumers
+// that need descent semantics — the Pattern on the Trestleboard player,
+// ProgressiveTree's `filledThrough` index — use this list instead of
+// relying on array position.
+export const SEPHIROTH_DESCENT_SLUGS = [
+  'kether',
+  'chokmah',
+  'binah',
+  'chesed',
+  'geburah',
+  'tiphareth',
+  'netzach',
+  'hod',
+  'yesod',
+  'malkuth',
+] as const
+
+export const sephirahBySlug = Object.fromEntries(
+  sephiroth.map((s) => [s.slug, s]),
+) as Record<string, Sephirah>

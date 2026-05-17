@@ -14,10 +14,6 @@ const sections: Array<{ title: string; links: Array<LinkItem> }> = [
     title: 'Official',
     links: [
       { name: 'Builders of the Adytum', href: 'https://bota.org' },
-      {
-        name: 'Ann Davies Radio',
-        href: 'https://botanz.airtime.pro/embed/player?stream=auto&skin=2',
-      },
     ],
   },
   {

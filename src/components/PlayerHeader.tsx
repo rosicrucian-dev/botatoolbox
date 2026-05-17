@@ -1,5 +1,7 @@
 'use client'
 
+import { HeaderChip } from '@/components/HeaderChip'
+
 // Shared chrome header for full-bleed player views: SlidePlayer (meditation
 // slides) and the Cube of Space expand view. Title on the left, optional
 // `extraHeaderItem` slot (e.g. SoundButton, FlowToggle) and a chip-styled
@@ -19,19 +21,14 @@ export function PlayerHeader({
       <span className="truncate font-semibold">{title}</span>
       <div className="flex items-center gap-2">
         {extraHeaderItem}
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close"
-          className="relative inline-flex h-9 shrink-0 items-center justify-center rounded-md px-3 text-sm ring-1 ring-current/20 transition hover:bg-current/10"
-        >
+        <HeaderChip onClick={onClose} ariaLabel="Close">
           {/* Expanded touch target on coarse-pointer (touch) devices —
               same trick the template's Header buttons use. */}
           <span className="absolute size-12 pointer-fine:hidden" />
           <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
             <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
           </svg>
-        </button>
+        </HeaderChip>
       </div>
     </header>
   )

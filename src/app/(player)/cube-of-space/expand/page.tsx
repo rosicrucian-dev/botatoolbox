@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { CompassToggle } from '@/components/CompassToggle'
 import { CubeCanvas } from '@/components/CubeCanvas'
 import { FlowToggle } from '@/components/FlowToggle'
 import { PlayerHeader } from '@/components/PlayerHeader'
@@ -10,6 +11,7 @@ import { PlayerHeader } from '@/components/PlayerHeader'
 export default function CubeOfSpaceExpandPage() {
   const router = useRouter()
   const [flow, setFlow] = useState(false)
+  const [compass, setCompass] = useState(false)
 
   // Match SlidePlayer's iOS chrome trick: render BLACK on first paint so
   // iOS Safari samples black for the toolbar tint, then mark `data-primed`
@@ -71,11 +73,14 @@ export default function CubeOfSpaceExpandPage() {
         title="Cube of Space"
         onClose={() => router.push('/cube-of-space')}
         extraHeaderItem={
-          <FlowToggle pressed={flow} onPressedChange={setFlow} />
+          <>
+            <CompassToggle pressed={compass} onPressedChange={setCompass} />
+            <FlowToggle pressed={flow} onPressedChange={setFlow} />
+          </>
         }
       />
       <div className="flex-1">
-        <CubeCanvas flow={flow} />
+        <CubeCanvas flow={flow} compass={compass} />
       </div>
     </div>
   )

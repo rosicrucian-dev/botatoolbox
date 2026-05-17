@@ -3,9 +3,11 @@
 import { useMemo, useRef } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+
+import { CompassControls } from '@/components/CompassControls'
 import { Shape, TextureLoader, type Mesh, type Texture } from 'three'
 
-import { cardBySlug, cardImage } from '@/content/data/tarot'
+import { cardBySlug, thumbImage } from '@/content/data/tarot'
 import { getColor } from '@/lib/colors'
 
 const HALF = 2
@@ -309,7 +311,7 @@ function EdgeHalf({
 
 function Face({ face }: { face: FaceDef }) {
   const card = cardBySlug[face.cardSlug]
-  const texture = useLoader(TextureLoader, cardImage(card)) as Texture
+  const texture = useLoader(TextureLoader, thumbImage(card)) as Texture
   const wallColor = getColor(card.color) ?? 'white'
 
   return (
@@ -330,7 +332,7 @@ function Face({ face }: { face: FaceDef }) {
               <meshBasicMaterial color={edgeColor} toneMapped={false} />
             </mesh>
             <EdgeHalf
-              imageSrc={cardImage(edgeCard)}
+              imageSrc={thumbImage(edgeCard)}
               size={half.size}
               position={half.position}
               rotation={half.rotation}
@@ -422,23 +424,43 @@ function Cube({ flow = false }: { flow?: boolean }) {
 // Renders the BOTA Cube of Space — a camera-inside-the-cube three.js scene
 // where each face is a tarot card with mitered colored borders and
 // half-card wraparounds at the edges. The container's size is left to the
-// caller; pass any sized div around it. `flow` enables animated particles
-// along each edge in the canonical direction.
-export function CubeCanvas({ flow = false }: { flow?: boolean }) {
+// caller; pass any sized div around it.
+//   `flow`    — animated particles along each edge in the canonical direction.
+//   `compass` — drive camera rotation from the device's gyroscope/compass
+//               instead of touch/drag. World +X is east, so the east face
+//               of the cube ends up actually facing east. Permission must
+//               be obtained from a user gesture (see CompassToggle).
+export function CubeCanvas({
+  flow = false,
+  compass = false,
+}: {
+  flow?: boolean
+  compass?: boolean
+}) {
   return (
     <Canvas
       camera={{ position: [-0.001, 0, 0], fov: 90, near: 0.001, far: 10 }}
-      gl={{ antialias: true }}
+      // Cap DPR at 2: full-DPR on Retina iPhones (×3) made the
+      // framebuffer ~2.25× larger than necessary for this scene.
+      dpr={[1, 2]}
+      // antialias disabled on purpose. MSAA on a full-screen retina
+      // canvas is a known iOS Safari Context-Lost trigger. Tarot card
+      // edges already have hard color borders, so jagginess is minimal.
+      gl={{ antialias: false }}
     >
       <Cube flow={flow} />
-      <OrbitControls
-        target={[0, 0, 0]}
-        enableZoom={false}
-        enablePan={false}
-        minDistance={0.001}
-        maxDistance={0.001}
-        rotateSpeed={-0.4}
-      />
+      {compass ? (
+        <CompassControls />
+      ) : (
+        <OrbitControls
+          target={[0, 0, 0]}
+          enableZoom={false}
+          enablePan={false}
+          minDistance={0.001}
+          maxDistance={0.001}
+          rotateSpeed={-0.4}
+        />
+      )}
     </Canvas>
   )
 }

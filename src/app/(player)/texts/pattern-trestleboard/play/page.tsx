@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { sephiroth } from '@/content/data'
+import { sephirahBySlug, SEPHIROTH_DESCENT_SLUGS } from '@/content/data'
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { ProgressiveTree } from '@/components/ProgressiveTree'
 import { getColor, textColorFor, type ThemeId } from '@/lib/colors'
@@ -12,9 +12,12 @@ import { statements } from '@/content/texts/pattern-trestleboard'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 
 function buildSlides(theme: ThemeId) {
+  // Statement N+1 pairs with the Nth sephirah in tree-descent order
+  // (statement 1 = intro, statement 2 = Kether, …, statement 11 = Malkuth).
   return statements.map((s, i) => {
     const sephIdx = i - 1
-    const sephirah = sephIdx >= 0 ? sephiroth[sephIdx] : null
+    const slug = sephIdx >= 0 ? SEPHIROTH_DESCENT_SLUGS[sephIdx] : null
+    const sephirah = slug ? sephirahBySlug[slug] : null
     const bgHex = sephirah
       ? (getColor(sephirah.color, theme) ?? null)
       : null

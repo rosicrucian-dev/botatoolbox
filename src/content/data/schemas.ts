@@ -121,6 +121,18 @@ export const SephirahSchema = z.object({
   element: z.string(),
   mantraSlug: z.string(),
   color: z.string(),
+  situationOnTree: z.string().optional(),
+  briaticColors: z.string().optional(),
+  astrological: z.string().optional(),
+  gods: z.string().optional(),
+  magicalImage: z.string().optional(),
+  symbols: z.string().optional(),
+  tarotMinors: z.string().optional(),
+  microcosm: z.string().optional(),
+  bodyCorrespondence: z.string().optional(),
+  perfumes: z.string().optional(),
+  stones: z.string().optional(),
+  animals: z.string().optional(),
   quadrantColors: QuadrantColors.optional(),
 })
 
