@@ -200,10 +200,13 @@ export function RandomPullClient() {
                   <img
                     src={minorImage(found.card)}
                     alt={`${found.card.num} of ${found.card.suit}`}
-                    width={270}
-                    height={466}
                     loading="lazy"
-                    className="h-auto w-full rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700"
+                    // CSS aspect-ratio forces the box to the major
+                    // proportion. `object-fill` stretches the minor
+                    // pixels to fill it — content is preserved
+                    // (nothing cropped) at the cost of ~4% vertical
+                    // compression.
+                    className="aspect-[724/1200] w-full rounded-md object-fill ring-1 ring-zinc-200 dark:ring-zinc-700"
                   />
                 </Link>
               )
