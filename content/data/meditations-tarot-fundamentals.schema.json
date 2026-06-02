@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "day": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 28
+      },
+      "cards": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Tarot card slugs (see tarot.json)."
+      },
+      "paragraph": {
+        "type": "string"
+      },
+      "affirmation": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "day",
+      "cards",
+      "paragraph",
+      "affirmation"
+    ],
+    "additionalProperties": false
+  }
+}

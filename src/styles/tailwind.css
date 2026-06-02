@@ -1,0 +1,139 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@config '../../typography.ts';
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /*
+   * Override the template's accent palette (originally Tailwind emerald)
+   * with a scale anchored at Apple's system blue (#0088FF). Class names
+   * stay as `*-emerald-*` everywhere they were written by the template;
+   * they just render as blue now. Buttons, sidebar active indicator,
+   * link colors, search highlights, etc. all pick this up automatically.
+   */
+  --color-emerald-50: #ebf5ff;
+  --color-emerald-100: #d6ebff;
+  --color-emerald-200: #addaff;
+  --color-emerald-300: #7dc1ff;
+  --color-emerald-400: #3fa5ff;
+  --color-emerald-500: #0088ff;
+  --color-emerald-600: #006ee0;
+  --color-emerald-700: #0058b3;
+  --color-emerald-800: #00457a;
+  --color-emerald-900: #00305c;
+  --color-emerald-950: #001a33;
+
+  --text-2xs: 0.75rem;
+  --text-2xs--line-height: 1.25rem;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 1;
+  --text-9xl: 8rem;
+  --text-9xl--line-height: 1;
+
+  --shadow-glow: 0 0 4px rgb(0 0 0 / 0.1);
+
+  --container-lg: 33rem;
+  --container-2xl: 40rem;
+  --container-3xl: 50rem;
+  --container-5xl: 66rem;
+
+  /*
+   * Box / four-fold breath — 4s inhale, 4s hold full, 4s exhale, 4s
+   * hold empty. Total cycle 16s; the Planets countdown is 64s so the
+   * visual ends exactly on the start of a new breath. Linear timing
+   * so the transitions feel like even, paced breath rather than eased
+   * ramps.
+   */
+  --animate-breathe: breathe 16s linear infinite;
+  @keyframes breathe {
+    0% {
+      transform: scale(0.4);
+      opacity: 0.2;
+    }
+    25% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    75% {
+      transform: scale(0.4);
+      opacity: 0.2;
+    }
+    100% {
+      transform: scale(0.4);
+      opacity: 0.2;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    /*
+     * Tells the user agent we render both schemes ourselves. Without
+     * this, iOS Safari may apply its own auto-dark treatment on top of
+     * light-mode pages — inverting black SVG fills to white and lifting
+     * saturated colors. Pairs with `colorScheme: 'light dark'` in the
+     * Viewport metadata in app/layout.tsx; either alone might be enough,
+     * both together make sure the signal is honored across UA versions.
+     */
+    color-scheme: light dark;
+
+    --shiki-color-text: var(--color-white);
+    --shiki-token-constant: var(--color-emerald-300);
+    --shiki-token-string: var(--color-emerald-300);
+    --shiki-token-comment: var(--color-zinc-500);
+    --shiki-token-keyword: var(--color-sky-300);
+    --shiki-token-parameter: var(--color-pink-300);
+    --shiki-token-function: var(--color-violet-300);
+    --shiki-token-string-expression: var(--color-emerald-300);
+    --shiki-token-punctuation: var(--color-zinc-200);
+  }
+
+  [inert] ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+ * iOS Safari samples the bg of fixed/sticky elements at first paint and
+ * locks the browser chrome (URL bar, dynamic island) to that color for the
+ * session. We deliberately render the slide player BLACK on first paint so
+ * the toolbars lock to black — predictable, OLED-friendly, consistent
+ * across slide color changes. After two animation frames, JS sets
+ * data-primed on the player so the slide's own bg renders.
+ *
+ * @supports (-webkit-touch-callout: none) is iOS-only — desktop browsers
+ * don't support that property, so the override never fires there. No flash
+ * on desktop.
+ */
+@supports (-webkit-touch-callout: none) {
+  .player-shell:not([data-primed]) {
+    background: black !important;
+    color: white !important;
+  }
+}

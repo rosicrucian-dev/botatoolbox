@@ -1,0 +1,18 @@
+node_modules
+.next
+.next-verify
+out
+.vscode
+tarot-originals
+dist
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+.vercel
+
+# tailwind
+/catalyst-ui-kit
+/tailwind-plus-protocol
+certificates

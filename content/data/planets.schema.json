@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string",
+        "description": "URL slug (lowercase planet name)."
+      },
+      "name": {
+        "type": "string"
+      },
+      "symbol": {
+        "type": "string",
+        "description": "Unicode astrological glyph (e.g. ☉)."
+      },
+      "letter": {
+        "type": "string",
+        "description": "Hebrew letter attributed to this planet."
+      },
+      "chakra": {
+        "description": "Chakra meditated upon for this planet. Modern planets (Uranus/Neptune/Pluto) omit this.",
+        "type": "string"
+      },
+      "rules": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Sign slugs ruled by this planet."
+      },
+      "exaltedIn": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Sign slug where this planet is exalted, or null if none."
+      }
+    },
+    "required": [
+      "slug",
+      "name",
+      "symbol",
+      "letter",
+      "rules",
+      "exaltedIn"
+    ],
+    "additionalProperties": false
+  }
+}
