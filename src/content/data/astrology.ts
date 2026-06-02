@@ -39,10 +39,34 @@ export const signs: ReadonlyArray<Sign> = baseSigns.map((s) => ({
   ...joinTarot(s.name),
 }))
 
-export const planets: ReadonlyArray<Planet> = basePlanets.map((p) => ({
-  ...p,
-  ...joinTarot(p.name),
-}))
+// Traditional educational order for the astrology views: luminaries
+// first (Sun, Moon — most important in any chart), then the rest by
+// distance from the Sun. Modern triple appended at the end. This is the
+// order BOTA literature and most learning materials present them in.
+//
+// `planets.json` itself stays in chakra-meditation order (root → crown)
+// because the healing-pages player iterates it directly. The astrology
+// pages and planet detail page prev/next consume the sorted view below.
+const ASTROLOGY_PLANET_ORDER = [
+  'sun',
+  'moon',
+  'mercury',
+  'venus',
+  'mars',
+  'jupiter',
+  'saturn',
+  'uranus',
+  'neptune',
+  'pluto',
+] as const
+
+export const planets: ReadonlyArray<Planet> = [...basePlanets]
+  .map((p) => ({ ...p, ...joinTarot(p.name) }))
+  .sort(
+    (a, b) =>
+      ASTROLOGY_PLANET_ORDER.indexOf(a.slug as never) -
+      ASTROLOGY_PLANET_ORDER.indexOf(b.slug as never),
+  )
 
 export const signBySlug = Object.fromEntries(
   signs.map((s) => [s.slug, s]),
