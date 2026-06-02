@@ -125,7 +125,7 @@ function minorArcanaKeywordsQuiz(opts: {
         alt: label,
         attribution: {
           text: 'Josh Yates',
-          href: 'https://cosmicrepository.z13.web.core.windows.net',
+          href: 'https://joshyates.me/',
         },
       },
       answer: card.keyword,

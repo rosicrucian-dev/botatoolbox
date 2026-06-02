@@ -71,7 +71,7 @@ export default async function MinorCardPage({
           <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
             Image provided by&nbsp;
             <Link
-              href="https://cosmicrepository.z13.web.core.windows.net"
+              href="https://joshyates.me/"
               target="_blank"
               rel="noopener noreferrer"
               className="underline underline-offset-2 hover:text-zinc-700 dark:hover:text-zinc-300"

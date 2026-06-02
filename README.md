@@ -2,7 +2,7 @@
 
 BOTA Toolbox is a project of [Rosicrucian Developers](https://github.com/rosicrucian-dev). For questions, contact [Jonathan](mailto:jonathan@rosicrucian.dev). You can open an issue or help contribute on [GitHub](https://github.com/rosicrucian-dev/botatoolbox).
 
-The material used for this website is gathered using publicly available information from <a href="https://bota.org">Builders of the Adytum</a>, <a href="https://lvx.org">Fraternity of the Hidden Light</a>, and other sources. Colors were specifically chosen using FLO's sequence of color cards from [Color Aid](https://coloraid.com). The minor arcana images are colored and provided with permission by <a href="https://cosmicrepository.z13.web.core.windows.net">Josh Yates</a>.
+The material used for this website is gathered using publicly available information from <a href="https://bota.org">Builders of the Adytum</a>, <a href="https://lvx.org">Fraternity of the Hidden Light</a>, and other sources. Colors were specifically chosen using FLO's sequence of color cards from [Color Aid](https://coloraid.com). The minor arcana images are colored and provided with permission by <a href="https://joshyates.me/">Josh Yates</a>.
 
 Join the [Symposium of the Rose](https://discord.gg/hKWWH6ukdV) on Discord to discuss this and other Rosicrucian related projects.
 

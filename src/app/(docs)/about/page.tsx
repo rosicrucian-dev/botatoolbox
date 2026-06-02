@@ -27,7 +27,7 @@ export default function About() {
           Adytum</a>, <a href="https://lvx.org">Fraternity of the Hidden Light</a>,
           and other sources. Colors were specifically chosen using FLO&rsquo;s
           sequence of color cards from{' '}
-          <a href="https://coloraid.com">Color Aid</a>. The minor arcana images are colored and provided with permission by <a href="https://cosmicrepository.z13.web.core.windows.net">Josh Yates</a>. 
+          <a href="https://coloraid.com">Color Aid</a>. The minor arcana images are colored and provided with permission by <a href="https://joshyates.me/">Josh Yates</a>. 
         </p>
         <p>
           Join the{' '}
