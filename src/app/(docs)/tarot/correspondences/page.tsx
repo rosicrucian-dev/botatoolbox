@@ -17,7 +17,6 @@ const COLUMNS: Array<{
   { label: 'Color', value: (c) => c.color },
   { label: 'Note', value: (c) => c.note },
   { label: 'Letter', value: (c) => c.letter },
-  { label: 'Path', value: (c) => c.path },
   {
     label: 'Significance',
     // "Front of Head (Face)" is shortened to just "Front of Head" in
@@ -29,6 +28,7 @@ const COLUMNS: Array<{
         : c.significance,
   },
   { label: 'Gematria', value: (c) => c.gematria },
+  { label: 'Path', value: (c) => c.path },
   { label: 'Astrology', value: (c) => c.astrology },
   { label: 'Alchemy', value: (c) => c.alchemy },
   // "Intelligence" inside every value collapses to "I" to save column
