@@ -167,7 +167,7 @@ export function RandomPullClient() {
 
       {pulled.length === 0 ? (
         <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
-          Use the Pull button above to add a card.
+          <br/>Use the Pull button above to add a card.
         </p>
       ) : (
         <>
