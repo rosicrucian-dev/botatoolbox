@@ -161,7 +161,7 @@ const faces: Array<FaceDef> = [
   },
   {
     id: 'west',
-    cardSlug: 'wheel-of-fortune',
+    cardSlug: 'the-wheel-of-fortune',
     position: [-HALF, 0, 0],
     rotation: [0, Math.PI / 2, 0],
     borders: { top: 'T-W', bottom: 'B-W', right: 'SW', left: 'NW' },
