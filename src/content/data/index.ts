@@ -74,6 +74,8 @@ export interface MinorEntry {
   suit: string
   num: string
   keyword: string
+  sign?: string
+  dates?: string
   meaning?: MinorMeaning
 }
 
@@ -83,6 +85,8 @@ export const minorCards: ReadonlyArray<MinorEntry> = suits.flatMap((s) =>
     suit: s.suit,
     num: c.num,
     keyword: c.keyword,
+    sign: c.sign,
+    dates: c.dates,
     meaning: c.meaning,
   })),
 )

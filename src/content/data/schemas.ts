@@ -101,6 +101,15 @@ export const PlanetSchema = z.object({
 export const MinorCardSchema = z.object({
   num: z.string(),
   keyword: z.string(),
+  // Zodiac sign(s) attributed to this card. Number cards (2-10) sit on
+  // a single decanate so they list one sign; aces and pages span their
+  // element's full season-quarter (3 signs); kings/queens/knights span
+  // a 30-day band straddling two adjacent signs.
+  sign: z.string().optional(),
+  // Date range covered by this card. Same format as `sign`: number
+  // cards get a ~10-day decanate slice, aces/pages get the whole
+  // season-quarter, courts get a 30-day band.
+  dates: z.string().optional(),
   // Divinatory meaning, OCR'd from Paul Foster Case's 1967 Oracle of
   // Tarot. Three parts: a general intro paragraph plus the well- and
   // ill-dignified readings. Court cards (Page/Knight/Queen/King) don't

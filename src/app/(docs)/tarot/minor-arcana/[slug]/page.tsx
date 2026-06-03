@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { type Metadata } from 'next'
 
-import { DefinitionList } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PrevNextNav } from '@/components/PrevNextNav'
 import { SecretSection } from '@/components/SecretSection'
 import { minorBySlug, minorCards, minorImage } from '@/content/data'
+import { MinorAttributes } from './MinorAttributes'
 
 export function generateStaticParams() {
   return minorCards.map((c) => ({ slug: c.slug }))
@@ -51,9 +51,11 @@ export default async function MinorCardPage({
             {card.num} of {card.suit}
           </h1>
 
-          {card.keyword && (
-            <DefinitionList rows={[{ label: 'Keyword', value: card.keyword }]} />
-          )}
+          <MinorAttributes
+            keyword={card.keyword}
+            sign={card.sign}
+            dates={card.dates}
+          />
           {card.meaning && (
             <SecretSection>
               <section className="space-y-3 pt-2">

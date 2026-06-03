@@ -18,6 +18,12 @@
             "keyword": {
               "type": "string"
             },
+            "sign": {
+              "type": "string"
+            },
+            "dates": {
+              "type": "string"
+            },
             "meaning": {
               "type": "object",
               "properties": {
