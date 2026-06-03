@@ -16,7 +16,12 @@ export function TreeOfLifeClient() {
   return (
     <article className="space-y-6">
       <div className="flex items-center justify-between gap-4">
-        <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
+        {/* On mobile, hide the title when Flow is on so the
+            Descend/Ascend tabs + Flow + Expand chips have room to fit
+            without squishing. Desktop has the space — always show. */}
+        <h1
+          className={`text-3xl font-semibold tracking-tight dark:text-white ${flow ? 'hidden md:block' : ''}`}
+        >
           Tree of Life
         </h1>
         <div className="flex items-center gap-2 text-zinc-900 dark:text-white">
