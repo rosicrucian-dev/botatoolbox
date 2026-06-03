@@ -104,6 +104,10 @@ export function TreeOfLifeSvg({
                       flowDirection === 'ascend'
                         ? [b.cx, b.cy, a.cx, a.cy]
                         : [a.cx, a.cy, b.cx, b.cy]
+                    // Yellow paths (Fool / Magician / Strength) have
+                    // poor contrast under translucent white — flip to
+                    // translucent black so the dots are still visible.
+                    const dotFill = card.color === 'Yellow' ? 'black' : 'white'
                     return Array.from({ length: FLOW_COUNT }, (_, j) => {
                       // Negative begin offsets the start so particles
                       // appear pre-staggered along the path on first
@@ -114,7 +118,7 @@ export function TreeOfLifeSvg({
                         <circle
                           key={j}
                           r={FLOW_SIZE}
-                          fill="white"
+                          fill={dotFill}
                           opacity={FLOW_OPACITY}
                           className="pointer-events-none"
                         >
