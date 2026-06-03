@@ -15,6 +15,7 @@ export const TarotCardSchema = z.object({
   name: z.string(),
   slug: z.string(),
   letter: z.string(),
+  english: z.string(),
   // Path on the Tree of Life (11–32 — paths 1–10 are the sephiroth).
   // Always equals `num + 11` since the trumps proceed in the same order
   // as the connecting paths, but stored explicitly so consumers can read
@@ -100,6 +101,18 @@ export const PlanetSchema = z.object({
 export const MinorCardSchema = z.object({
   num: z.string(),
   keyword: z.string(),
+  // Divinatory meaning, OCR'd from Paul Foster Case's 1967 Oracle of
+  // Tarot. Three parts: a general intro paragraph plus the well- and
+  // ill-dignified readings. Court cards (Page/Knight/Queen/King) don't
+  // have a meaning in the source, so it's optional. The OCR isn't
+  // perfect — quality varies card to card; expect to hand-clean.
+  meaning: z
+    .object({
+      intro: z.string(),
+      wellDignified: z.string(),
+      illDignified: z.string(),
+    })
+    .optional(),
 })
 
 export const MinorSuitSchema = z.object({

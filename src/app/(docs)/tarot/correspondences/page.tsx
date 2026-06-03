@@ -17,6 +17,7 @@ const COLUMNS: Array<{
   { label: 'Color', value: (c) => c.color },
   { label: 'Note', value: (c) => c.note },
   { label: 'Letter', value: (c) => c.letter },
+  { label: 'English', value: (c) => c.english },
   {
     label: 'Significance',
     // "Front of Head (Face)" is shortened to just "Front of Head" in

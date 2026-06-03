@@ -63,11 +63,18 @@ export const suits: ReadonlyArray<MinorSuit> = z
 // Slug pattern: `<num-lower>-<suit-lower>`, e.g. "ace-cups" or
 // "2-cups". Matches what scripts/optimize-tarot.ts writes to
 // public/tarot/minor/. Lookup by slug is the same pattern majors use.
+export interface MinorMeaning {
+  intro: string
+  wellDignified: string
+  illDignified: string
+}
+
 export interface MinorEntry {
   slug: string
   suit: string
   num: string
   keyword: string
+  meaning?: MinorMeaning
 }
 
 export const minorCards: ReadonlyArray<MinorEntry> = suits.flatMap((s) =>
@@ -76,6 +83,7 @@ export const minorCards: ReadonlyArray<MinorEntry> = suits.flatMap((s) =>
     suit: s.suit,
     num: c.num,
     keyword: c.keyword,
+    meaning: c.meaning,
   })),
 )
 

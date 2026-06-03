@@ -5,6 +5,7 @@ import { type Metadata } from 'next'
 import { Button } from '@/components/Button'
 import { DefinitionList } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
+import { SecretSection } from '@/components/SecretSection'
 import { minorBySlug, minorCards, minorImage } from '@/content/data'
 
 export function generateStaticParams() {
@@ -52,6 +53,36 @@ export default async function MinorCardPage({
 
           {card.keyword && (
             <DefinitionList rows={[{ label: 'Keyword', value: card.keyword }]} />
+          )}
+          {card.meaning && (
+            <SecretSection>
+              <section className="space-y-3 pt-2">
+                <h2 className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  Meaning
+                </h2>
+                {card.meaning.intro && (
+                  <p className="text-sm leading-relaxed text-zinc-900 dark:text-zinc-100">
+                    {card.meaning.intro}
+                  </p>
+                )}
+                {card.meaning.wellDignified && (
+                  <p className="text-sm leading-relaxed text-zinc-900 dark:text-zinc-100">
+                    <span className="font-semibold">Well-Dignified:</span>{' '}
+                    {card.meaning.wellDignified}
+                  </p>
+                )}
+                {card.meaning.illDignified && (
+                  <p className="text-sm leading-relaxed text-zinc-900 dark:text-zinc-100">
+                    <span className="font-semibold">Ill-Dignified:</span>{' '}
+                    {card.meaning.illDignified}
+                  </p>
+                )}
+                <p className="pt-1 text-xs italic text-zinc-500 dark:text-zinc-400">
+                  Warning: This text was extracted with a script and may be
+                  inaccurate until manually validated.
+                </p>
+              </section>
+            </SecretSection>
           )}
         </div>
 

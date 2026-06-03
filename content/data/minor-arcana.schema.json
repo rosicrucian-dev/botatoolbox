@@ -17,6 +17,26 @@
             },
             "keyword": {
               "type": "string"
+            },
+            "meaning": {
+              "type": "object",
+              "properties": {
+                "intro": {
+                  "type": "string"
+                },
+                "wellDignified": {
+                  "type": "string"
+                },
+                "illDignified": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "intro",
+                "wellDignified",
+                "illDignified"
+              ],
+              "additionalProperties": false
             }
           },
           "required": [

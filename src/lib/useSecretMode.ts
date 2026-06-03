@@ -48,7 +48,7 @@ export function useSecretMode() {
   }, [])
 
   const unlock = useCallback((password: string): boolean => {
-    if (password !== PASSWORD) return false
+    if (password.trim().toLowerCase() !== PASSWORD) return false
     try {
       localStorage.setItem(STORAGE_KEY, '1')
     } catch {}

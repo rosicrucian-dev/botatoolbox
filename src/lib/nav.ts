@@ -20,6 +20,12 @@ export const navigation: Array<NavGroup> = [
     title: 'Tarot',
     links: [
       {
+        title: 'Correspondences',
+        href: '/tarot/correspondences',
+        description:
+          'Every major arcana attribution side-by-side in a single table.',
+      },
+      {
         title: 'Tableau',
         href: '/tarot/tableau',
         description:
@@ -36,12 +42,6 @@ export const navigation: Array<NavGroup> = [
         href: '/tarot/minor-arcana',
         description:
           'Keywords for the 40 numbered cards across Wands, Cups, Swords, and Pentacles.',
-      },
-      {
-        title: 'Correspondences',
-        href: '/tarot/correspondences',
-        description:
-          'Every major arcana attribution side-by-side in a single table.',
       },
     ],
   },
@@ -94,10 +94,10 @@ export const navigation: Array<NavGroup> = [
     title: 'Texts',
     links: [
       {
-        title: 'The Pattern on the Trestleboard',
-        href: '/texts/pattern-trestleboard',
+        title: 'Adoration to the Lord of the Universe',
+        href: '/texts/adoration-lord-universe',
         description:
-          'BOTA’s eleven-statement meditation tracing the descent of Spirit from Kether to Malkuth.',
+          'A four-line invocation traditionally used to open and close ritual work.',
       },
       {
         title: 'The Emerald Tablet of Hermes',
@@ -106,10 +106,10 @@ export const navigation: Array<NavGroup> = [
           'The foundational hermetic text on the One Thing — short, dense, and famously enigmatic.',
       },
       {
-        title: 'Adoration to the Lord of the Universe',
-        href: '/texts/adoration-lord-universe',
+        title: 'The Pattern on the Trestleboard',
+        href: '/texts/pattern-trestleboard',
         description:
-          'A four-line invocation traditionally used to open and close ritual work.',
+          'BOTA’s eleven-statement meditation tracing the descent of Spirit from Kether to Malkuth.',
       },
     ],
   },
@@ -129,16 +129,16 @@ export const navigation: Array<NavGroup> = [
           'A 12-key chromatic keyboard, one key per simple letter. Press and hold to sustain the tone.',
       },
       {
-        title: 'Random Pull',
-        href: '/random-pull',
-        description:
-          'Draw random cards from the major arcana — one at a time, as many as you like.',
-      },
-      {
         title: 'Quiz',
         href: '/quiz',
         description:
           'Self-test on the tarot attributions — intelligence, significance, astrology, and more.',
+      },
+      {
+        title: 'Random Pull',
+        href: '/random-pull',
+        description:
+          'Draw random cards from the major arcana — one at a time, as many as you like.',
       },
     ],
   },
@@ -181,6 +181,17 @@ export const navigation: Array<NavGroup> = [
     title: 'Resources',
     links: [
       {
+        title: 'About',
+        href: '/about',
+        description: 'Who built this and why.',
+      },
+      {
+        title: 'Ann Davies Radio',
+        href: '/ann-davies-radio',
+        description:
+          'Streaming radio of Ann Davies lectures, embedded from BOTA NZ.',
+      },
+      {
         title: 'Files',
         href: '/files',
         description: 'Downloadable wallpapers and other supporting files.',
@@ -191,20 +202,9 @@ export const navigation: Array<NavGroup> = [
         description: 'Outside resources from the BOTA community.',
       },
       {
-        title: 'Ann Davies Radio',
-        href: '/ann-davies-radio',
-        description:
-          'Streaming radio of Ann Davies lectures, embedded from BOTA NZ.',
-      },
-      {
         title: 'Members Only',
         href: '/members-only',
         description: 'Enter a password to unlock members only content.',
-      },
-      {
-        title: 'About',
-        href: '/about',
-        description: 'Who built this and why.',
       },
     ],
   },

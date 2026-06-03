@@ -16,6 +16,9 @@
       "letter": {
         "type": "string"
       },
+      "english": {
+        "type": "string"
+      },
       "path": {
         "type": "integer",
         "minimum": 11,
@@ -54,6 +57,7 @@
       "name",
       "slug",
       "letter",
+      "english",
       "path",
       "significance",
       "astrology",

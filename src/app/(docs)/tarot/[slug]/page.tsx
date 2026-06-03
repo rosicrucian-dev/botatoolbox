@@ -17,6 +17,7 @@ const FIELD_ORDER: Array<{
   { label: 'Color', key: 'color' },
   { label: 'Note', key: 'note' },
   { label: 'Letter', key: 'letter' },
+  { label: 'English', key: 'english' },
   { label: 'Path', key: 'path' },
   { label: 'Letter Significance', key: 'significance' },
   { label: 'Gematria', key: 'gematria' },
