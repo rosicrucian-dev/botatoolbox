@@ -16,23 +16,6 @@ const sections: Array<{ title: string; links: Array<LinkItem> }> = [
       { name: 'Builders of the Adytum', href: 'https://bota.org' },
     ],
   },
-  {
-    title: 'Rosicrucian Community',
-    links: [
-      {
-        name: 'Discord — Symposium of the Rose',
-        href: 'https://discord.gg/hKWWH6ukdV',
-      },
-      {
-        name: 'Reddit — Rosicrucian',
-        href: 'https://reddit.com/r/rosicrucian',
-      },
-      {
-        name: 'Facebook — Rosicrucian Tradition',
-        href: 'https://www.facebook.com/groups/serapis',
-      },
-    ],
-  },
 ]
 
 export default function Links() {
