@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { type Metadata } from 'next'
 
+import { DefinitionList, type DefinitionRow } from '@/components/DefinitionList'
+import { KeyboardNav } from '@/components/KeyboardNav'
 import { sephiroth, sephirahBySlug, SEPHIROTH_DESCENT_SLUGS, words } from '@/content/data'
 
 export function generateStaticParams() {
@@ -16,30 +18,6 @@ export async function generateMetadata({
   const { slug } = await params
   const sephirah = sephirahBySlug[slug]
   return { title: sephirah?.hebrewName ?? 'Sephirah' }
-}
-
-// One attribution row: label above, value below. Empty values render
-// nothing so optional fields drop out cleanly.
-function DataRow({
-  label,
-  value,
-}: {
-  label: string
-  value: string | null | undefined
-}) {
-  if (!value) return null
-  return (
-    <li>
-      <div className="flex flex-col gap-2 px-0 py-4">
-        <span className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-          {label}
-        </span>
-        <span className="text-sm text-zinc-900 dark:text-zinc-100">
-          {value}
-        </span>
-      </div>
-    </li>
-  )
 }
 
 export default async function SephirahPage({
@@ -65,38 +43,37 @@ export default async function SephirahPage({
       : null
   const prev = prevSlug ? sephirahBySlug[prevSlug] : null
   const next = nextSlug ? sephirahBySlug[nextSlug] : null
+  const prevHref = prev ? `/tree-of-life/${prev.slug}` : undefined
+  const nextHref = next ? `/tree-of-life/${next.slug}` : undefined
+
+  const rows: Array<DefinitionRow> = []
+  rows.push({ label: 'English', value: sephirah.name })
+  rows.push({
+    label: 'Name of God',
+    value: mantra ? (
+      <Link
+        href={`/words-of-power/${mantra.slug}`}
+        className="text-zinc-900 underline-offset-2 hover:underline dark:text-zinc-100"
+      >
+        {mantra.name}
+      </Link>
+    ) : (
+      '—'
+    ),
+  })
+  if (sephirah.element) rows.push({ label: 'Element', value: sephirah.element })
+  if (sephirah.briaticColors)
+    rows.push({ label: 'Color', value: sephirah.briaticColors })
+  if (sephirah.grade) rows.push({ label: 'Grade', value: sephirah.grade })
 
   return (
     <article className="space-y-6">
+      <KeyboardNav prevHref={prevHref} nextHref={nextHref} />
       <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
         {sephirah.hebrewName}
       </h1>
 
-      <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-        <DataRow label="English" value={sephirah.name} />
-        <li>
-          <div className="flex flex-col gap-2 px-0 py-4">
-            <span className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-              Name of God
-            </span>
-            {mantra ? (
-              <Link
-                href={`/words-of-power/${mantra.slug}`}
-                className="text-sm font-medium text-zinc-900 transition hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-400"
-              >
-                {mantra.name}
-              </Link>
-            ) : (
-              <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                —
-              </span>
-            )}
-          </div>
-        </li>
-        <DataRow label="Element" value={sephirah.element} />
-        <DataRow label="Color" value={sephirah.briaticColors} />
-        <DataRow label="Grade" value={sephirah.grade} />
-      </ul>
+      <DefinitionList rows={rows} />
 
       <nav
         aria-label="Sephirah navigation"

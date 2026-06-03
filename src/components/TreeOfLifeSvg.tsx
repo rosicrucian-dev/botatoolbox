@@ -61,6 +61,10 @@ export function TreeOfLifeSvg({
           if (angle < -90) angle += 180
           let imgRot = angle - 90
           if (imgRot < -90) imgRot += 180
+          // Horizontal paths (Empress / Strength / Tower) default to
+          // top-points-left, which reads backwards. Flip to
+          // top-points-right.
+          if (a.cy === b.cy) imgRot = -imgRot
           return (
             <Link key={path.slug} href={`/tarot/${path.slug}`}>
               <g className="group cursor-pointer">
