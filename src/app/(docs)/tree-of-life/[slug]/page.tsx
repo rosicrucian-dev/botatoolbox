@@ -5,7 +5,13 @@ import { type Metadata } from 'next'
 import { DefinitionList, type DefinitionRow } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PrevNextNav } from '@/components/PrevNextNav'
-import { sephiroth, sephirahBySlug, SEPHIROTH_DESCENT_SLUGS, words } from '@/content/data'
+import {
+  gradeBySephirahSlug,
+  sephiroth,
+  sephirahBySlug,
+  SEPHIROTH_DESCENT_SLUGS,
+  words,
+} from '@/content/data'
 
 export function generateStaticParams() {
   return sephiroth.map((s) => ({ slug: s.slug }))
@@ -47,8 +53,58 @@ export default async function SephirahPage({
   const prevHref = prev ? `/tree-of-life/${prev.slug}` : undefined
   const nextHref = next ? `/tree-of-life/${next.slug}` : undefined
 
+  const grade = gradeBySephirahSlug[sephirah.slug]
+
+  // Row order: Name → Intelligence → Grade → Name of God → Element → Color.
+  // Name + Intelligence reuse the same `<english>, <hebrew> (<roman>)`
+  // formatting as the Grade detail page.
   const rows: Array<DefinitionRow> = []
-  rows.push({ label: 'English', value: sephirah.name })
+  rows.push({
+    label: 'Name',
+    value: (
+      <span>
+        {sephirah.name}, <em className="italic">{sephirah.hebrewName}</em>
+        {sephirah.hebrewRoman && (
+          <span className="ml-1 text-zinc-500 dark:text-zinc-400">
+            ({sephirah.hebrewRoman})
+          </span>
+        )}
+      </span>
+    ),
+  })
+  if (grade?.intelligenceName) {
+    rows.push({
+      label: 'Intelligence',
+      value: (
+        <span>
+          {grade.intelligenceName}
+          {grade.intelligenceHebrew && (
+            <>
+              , <em className="italic">{grade.intelligenceHebrew}</em>
+            </>
+          )}
+          {grade.intelligenceRoman && (
+            <span className="ml-1 text-zinc-500 dark:text-zinc-400">
+              ({grade.intelligenceRoman})
+            </span>
+          )}
+        </span>
+      ),
+    })
+  }
+  if (grade) {
+    rows.push({
+      label: 'Grade',
+      value: (
+        <Link
+          href={`/grades/${grade.slug}`}
+          className="text-zinc-900 underline-offset-2 hover:underline dark:text-zinc-100"
+        >
+          {grade.name} {grade.gradeNumber}
+        </Link>
+      ),
+    })
+  }
   rows.push({
     label: 'Name of God',
     value: mantra ? (
@@ -65,7 +121,6 @@ export default async function SephirahPage({
   if (sephirah.element) rows.push({ label: 'Element', value: sephirah.element })
   if (sephirah.briaticColors)
     rows.push({ label: 'Color', value: sephirah.briaticColors })
-  if (sephirah.grade) rows.push({ label: 'Grade', value: sephirah.grade })
 
   return (
     <article className="space-y-6">

@@ -22,9 +22,6 @@
       "name": {
         "type": "string"
       },
-      "grade": {
-        "type": "string"
-      },
       "element": {
         "type": "string"
       },
@@ -99,7 +96,6 @@
       "slug",
       "hebrewName",
       "name",
-      "grade",
       "element",
       "mantraSlug",
       "color"

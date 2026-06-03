@@ -13,8 +13,7 @@
         "type": "string"
       },
       "slug": {
-        "type": "string",
-        "description": "Matches the major arcana slug in tarot.json."
+        "type": "string"
       },
       "paragraphs": {
         "type": "array",
@@ -23,8 +22,7 @@
         }
       },
       "affirmation": {
-        "type": "string",
-        "description": "Closing AFFIRMATION block. Empty when the source section has none."
+        "type": "string"
       }
     },
     "required": [

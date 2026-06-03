@@ -6,6 +6,7 @@
 import { signs as baseSigns, planets as basePlanets } from '.'
 import type { HealingSign, HealingPlanet } from '.'
 import { cardByAstrology } from './tarot'
+import { byKey } from './helpers'
 
 interface CardJoin {
   cardSlug: string
@@ -68,10 +69,5 @@ export const planets: ReadonlyArray<Planet> = [...basePlanets]
       ASTROLOGY_PLANET_ORDER.indexOf(b.slug as never),
   )
 
-export const signBySlug = Object.fromEntries(
-  signs.map((s) => [s.slug, s]),
-) as Record<string, Sign>
-
-export const planetBySlug = Object.fromEntries(
-  planets.map((p) => [p.slug, p]),
-) as Record<string, Planet>
+export const signBySlug = byKey(signs, 'slug', 'sign.slug')
+export const planetBySlug = byKey(planets, 'slug', 'planet.slug')

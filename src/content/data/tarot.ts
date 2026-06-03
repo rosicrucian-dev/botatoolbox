@@ -6,6 +6,7 @@ import { z } from 'zod'
 
 import data from '@content/data/tarot.json'
 import { TarotCardSchema } from './schemas'
+import { byKey } from './helpers'
 
 export type TarotCard = z.infer<typeof TarotCardSchema>
 
@@ -13,17 +14,13 @@ export const cards: ReadonlyArray<TarotCard> = z
   .array(TarotCardSchema)
   .parse(data)
 
-export const cardBySlug = Object.fromEntries(
-  cards.map((c) => [c.slug, c]),
-) as Record<string, TarotCard>
-
-export const cardByLetter = Object.fromEntries(
-  cards.map((c) => [c.letter, c]),
-) as Record<string, TarotCard>
-
-export const cardByAstrology = Object.fromEntries(
-  cards.map((c) => [c.astrology.toLowerCase(), c]),
-) as Record<string, TarotCard>
+export const cardBySlug = byKey(cards, 'slug', 'card.slug')
+export const cardByLetter = byKey(cards, 'letter', 'card.letter')
+// Astrology lookup is case-insensitive — keys are lowercased so callers
+// can pass mixed-case names from JSON without normalizing first.
+export const cardByAstrology: Record<string, TarotCard> = Object.freeze(
+  Object.fromEntries(cards.map((c) => [c.astrology.toLowerCase(), c])),
+)
 
 // Image URL for a card — derived from num + slug. The file lives at
 // /public/tarot/major/<num>-<slug>.jpg. Paralleled by `minorImage` in

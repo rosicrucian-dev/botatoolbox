@@ -22,6 +22,8 @@ import {
   SephirahSchema,
   TreePathSchema,
   MeditationDaySchema,
+  SupersensoryMeditationSchema,
+  GradeSchema,
 } from '../src/content/data/schemas.ts'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -39,6 +41,11 @@ const targets = [
     file: 'meditations-tarot-fundamentals',
     schema: z.array(MeditationDaySchema),
   },
+  {
+    file: 'meditations-supersensory-powers',
+    schema: z.array(SupersensoryMeditationSchema),
+  },
+  { file: 'grades', schema: z.array(GradeSchema) },
 ]
 
 for (const { file, schema } of targets) {

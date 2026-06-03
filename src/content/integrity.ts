@@ -8,11 +8,16 @@
 // Add a new check here whenever you add a field that names a record in
 // another data file.
 
-import { sephiroth, paths, wordBySlug } from './data'
-import { cards } from './data/tarot'
+import { grades, sephiroth, paths, wordBySlug } from './data'
+import { cards, cardByLetter } from './data/tarot'
 import { planets, signs } from './data/astrology'
-import { tarotFundamentalsDays, isRestDay } from './data/meditations'
+import {
+  tarotFundamentalsDays,
+  isRestDay,
+  supersensoryMeditations,
+} from './data/meditations'
 import { sections as ritualSections } from './rituals/lrp'
+import { romanToLetters } from '@/lib/hebrew'
 
 function fail(msg: string): never {
   throw new Error(`Data integrity error: ${msg}`)
@@ -116,4 +121,61 @@ for (const p of planets) {
       `planet "${p.slug}".exaltedIn = "${p.exaltedIn}" but no sign has that slug`,
     )
   }
+}
+
+// --- grades.sephirah → sephirah slug
+const sephirahSlugs = new Set(sephiroth.map((s) => s.slug))
+for (const g of grades) {
+  if (g.sephirah !== null) {
+    expect(
+      sephirahSlugs.has(g.sephirah),
+      `grade "${g.slug}".sephirah = "${g.sephirah}" has no matching sephirah`,
+    )
+  }
+}
+
+// --- grade.intelligenceRoman + sephirah.hebrewRoman → must parse to
+// letters that exist in tarot.json. Catches a typo'd capitalization
+// (e.g. "ShPo" instead of "ShPO") that would silently drop a letter
+// from the rendered key strip.
+function expectLettersParse(label: string, roman: string) {
+  const parsed = romanToLetters(roman)
+  // Stripped chars: every alpha char in roman should be consumed.
+  const expected = roman.replace(/[^A-Za-z]/g, '').length
+  const consumed = parsed.reduce((n, name) => {
+    if (name === 'Cheth' || name === 'Shin' || name === 'Tav' || name === 'Tzaddi') {
+      // Two-char codes: Ch, Sh, Th, Tz
+      return n + 2
+    }
+    return n + 1
+  }, 0)
+  expect(
+    consumed === expected,
+    `${label}: romanization "${roman}" has unknown letter(s) — parsed ${consumed}/${expected} chars`,
+  )
+  for (const letter of parsed) {
+    expect(
+      cardByLetter[letter] !== undefined,
+      `${label}: letter "${letter}" (from "${roman}") has no matching tarot card`,
+    )
+  }
+}
+for (const g of grades) {
+  if (g.intelligenceRoman) {
+    expectLettersParse(`grade "${g.slug}".intelligenceRoman`, g.intelligenceRoman)
+  }
+}
+for (const s of sephiroth) {
+  if (s.hebrewRoman) {
+    expectLettersParse(`sephirah "${s.slug}".hebrewRoman`, s.hebrewRoman)
+  }
+}
+
+// --- supersensory meditation slug → tarot card slug (caught the
+// hanged-man bug after the fact; bake it in so it can't recur).
+for (const m of supersensoryMeditations) {
+  expect(
+    cardSlugs.has(m.slug),
+    `supersensory meditation "${m.slug}" doesn't match any major arcana slug`,
+  )
 }

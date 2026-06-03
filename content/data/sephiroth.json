@@ -3,15 +3,7 @@
     "slug": "malkuth",
     "hebrewName": "Malkuth",
     "hebrewRoman": "MLKVTh",
-    "hebrewLetters": [
-      "Mem",
-      "Lamed",
-      "Kaph",
-      "Vav",
-      "Tav"
-    ],
     "name": "Kingdom",
-    "grade": "Zelator 1=10",
     "element": "Earth",
     "mantraSlug": "adni-mlk",
     "color": "malkuth",
@@ -38,14 +30,7 @@
     "slug": "yesod",
     "hebrewName": "Yesod",
     "hebrewRoman": "ISVD",
-    "hebrewLetters": [
-      "Yod",
-      "Samekh",
-      "Vav",
-      "Daleth"
-    ],
     "name": "Foundation",
-    "grade": "Theoricus 2=9",
     "element": "Air",
     "mantraSlug": "shdi-al-chi",
     "color": "violet",
@@ -66,13 +51,7 @@
     "slug": "hod",
     "hebrewName": "Hod",
     "hebrewRoman": "HVD",
-    "hebrewLetters": [
-      "Heh",
-      "Vav",
-      "Daleth"
-    ],
     "name": "Splendor",
-    "grade": "Practicus 3=8",
     "element": "Water",
     "mantraSlug": "alhim-tzbavth",
     "color": "orange",
@@ -93,13 +72,7 @@
     "slug": "netzach",
     "hebrewName": "Netzach",
     "hebrewRoman": "NTzCh",
-    "hebrewLetters": [
-      "Nun",
-      "Tzaddi",
-      "Cheth"
-    ],
     "name": "Victory",
-    "grade": "Philosophus 4=7",
     "element": "Fire",
     "mantraSlug": "ihvh-tzbavth",
     "color": "green",
@@ -120,15 +93,7 @@
     "slug": "tiphareth",
     "hebrewName": "Tiphareth",
     "hebrewRoman": "ThPARTh",
-    "hebrewLetters": [
-      "Tav",
-      "Peh",
-      "Aleph",
-      "Resh",
-      "Tav"
-    ],
     "name": "Beauty",
-    "grade": "Lesser Adept 5=6",
     "element": "Air",
     "mantraSlug": "alh-vdth",
     "color": "yellow",
@@ -149,15 +114,7 @@
     "slug": "geburah",
     "hebrewName": "Geburah",
     "hebrewRoman": "GBVRH",
-    "hebrewLetters": [
-      "Gimel",
-      "Beth",
-      "Vav",
-      "Resh",
-      "Heh"
-    ],
     "name": "Severity",
-    "grade": "Greater Adept 6=5",
     "element": "Fire",
     "mantraSlug": "alhim-gbvr",
     "color": "red",
@@ -178,13 +135,7 @@
     "slug": "chesed",
     "hebrewName": "Chesed",
     "hebrewRoman": "ChSD",
-    "hebrewLetters": [
-      "Cheth",
-      "Samekh",
-      "Daleth"
-    ],
     "name": "Mercy",
-    "grade": "Adeptus Exemptus 7=4",
     "element": "Water",
     "mantraSlug": "al",
     "color": "blue",
@@ -205,14 +156,7 @@
     "slug": "binah",
     "hebrewName": "Binah",
     "hebrewRoman": "BINH",
-    "hebrewLetters": [
-      "Beth",
-      "Yod",
-      "Nun",
-      "Heh"
-    ],
     "name": "Understanding",
-    "grade": "Magister Templi 8=3",
     "element": "Water",
     "mantraSlug": "alhim",
     "color": "binah",
@@ -233,14 +177,7 @@
     "slug": "chokmah",
     "hebrewName": "Chokmah",
     "hebrewRoman": "ChKMH",
-    "hebrewLetters": [
-      "Cheth",
-      "Kaph",
-      "Mem",
-      "Heh"
-    ],
     "name": "Wisdom",
-    "grade": "Magus 9=2",
     "element": "Fire",
     "mantraSlug": "ih",
     "color": "chokmah",
@@ -261,13 +198,7 @@
     "slug": "kether",
     "hebrewName": "Kether",
     "hebrewRoman": "KThR",
-    "hebrewLetters": [
-      "Kaph",
-      "Tav",
-      "Resh"
-    ],
     "name": "Crown",
-    "grade": "Ipsissimus 10=1",
     "element": "Air",
     "mantraSlug": "ahih",
     "color": "kether",

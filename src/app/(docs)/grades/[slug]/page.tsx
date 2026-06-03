@@ -81,9 +81,27 @@ export default async function GradePage({
 
   const seph = grade.sephirah ? sephirahBySlug[grade.sephirah] : null
 
+  // Row order: Sephirah → Intelligence → Grade. Sephirah/Intelligence
+  // share the "<english>, <hebrew> (<roman>)" format below.
   const rows: Array<DefinitionRow> = []
-  rows.push({ label: 'Grade', value: grade.gradeNumber })
-  // Intelligence above Sephirah (table order matches the strips below).
+  if (seph) {
+    rows.push({
+      label: 'Sephirah',
+      value: (
+        <Link
+          href={`/tree-of-life/${seph.slug}`}
+          className="text-zinc-900 underline-offset-2 hover:underline dark:text-zinc-100"
+        >
+          {seph.name}, <em className="italic">{seph.hebrewName}</em>
+          {seph.hebrewRoman && (
+            <span className="ml-1 text-zinc-500 dark:text-zinc-400">
+              ({seph.hebrewRoman})
+            </span>
+          )}
+        </Link>
+      ),
+    })
+  }
   if (grade.intelligenceName) {
     rows.push({
       label: 'Intelligence',
@@ -104,27 +122,7 @@ export default async function GradePage({
       ),
     })
   }
-  if (seph) {
-    rows.push({
-      label: 'Sephirah',
-      value: (
-        <span>
-          {seph.name},{' '}
-          <Link
-            href={`/tree-of-life/${seph.slug}`}
-            className="italic text-zinc-900 underline-offset-2 hover:underline dark:text-zinc-100"
-          >
-            {seph.hebrewName}
-          </Link>
-          {seph.hebrewRoman && (
-            <span className="ml-1 text-zinc-500 dark:text-zinc-400">
-              ({seph.hebrewRoman})
-            </span>
-          )}
-        </span>
-      ),
-    })
-  }
+  rows.push({ label: 'Grade', value: grade.gradeNumber })
 
   return (
     <article className="space-y-6">
@@ -135,16 +133,16 @@ export default async function GradePage({
 
       <DefinitionList rows={rows} />
 
+      {seph?.hebrewRoman && (
+        <KeyStrip
+          subtitle={seph.name}
+          letters={romanToLetters(seph.hebrewRoman)}
+        />
+      )}
       {grade.intelligenceName && grade.intelligenceRoman && (
         <KeyStrip
           subtitle={grade.intelligenceName}
           letters={romanToLetters(grade.intelligenceRoman)}
-        />
-      )}
-      {seph?.hebrewLetters && seph.hebrewLetters.length > 0 && (
-        <KeyStrip
-          subtitle={seph.name}
-          letters={seph.hebrewLetters}
         />
       )}
 

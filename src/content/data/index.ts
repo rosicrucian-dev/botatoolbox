@@ -1,12 +1,17 @@
-// Top-level data exports — content files that are pure attribution
-// tables with at most a single lookup map. Files with non-trivial logic
-// keep their own modules:
+// Top-level data exports. Each domain has its own typed module that
+// validates its JSON via Zod and exposes lookup maps; this index is the
+// re-export hub so consumers can pull anything from
+// `@/content/data` without knowing which module owns what.
 //
-//   - tarot.ts        — three lookup maps + cardImage()
-//   - tattvas.ts      — tattvaByKind + SUB_ORDER
-//   - astrology.ts    — hand-coded rulership/exaltation, joins tarot
+//   - tarot.ts        — major arcana + cardImage()/thumbImage()
+//   - minor-arcana.ts — minor arcana flat list + minorImage variants
+//   - grades.ts       — Golden Dawn grade ladder + sephirah lookup
+//   - astrology.ts    — signs + planets joined with their tarot card
+//   - meditations.ts  — Tarot Fundamentals + Supersensory Powers
+//   - tattvas.ts      — element-pair attributions
 //   - rituals/*.ts    — Markdown parsers
 //   - texts/*.ts      — Markdown parsers
+//   - helpers.ts      — byKey<T>() and other shared utilities
 //
 // All schemas live in ./schemas.ts; cross-file integrity in ./integrity.ts.
 
@@ -15,34 +20,32 @@ import { z } from 'zod'
 import sephirothData from '@content/data/sephiroth.json'
 import signsData from '@content/data/signs.json'
 import planetsData from '@content/data/planets.json'
-import minorArcanaData from '@content/data/minor-arcana.json'
 import treePathsData from '@content/data/tree-paths.json'
 import wordsData from '@content/data/words.json'
-import gradesData from '@content/data/grades.json'
 
 import {
   SephirahSchema,
   SignSchema,
   PlanetSchema,
-  MinorSuitSchema,
-  MinorCardSchema,
   TreePathSchema,
   WordSchema,
   WordLetterSchema,
-  GradeSchema,
 } from './schemas'
+import { byKey } from './helpers'
+
+// ---- domain modules: re-export so consumers can import from
+// `@/content/data` even when the data lives in a peer module.
+export * from './grades'
+export * from './minor-arcana'
 
 // ---- types
 
 export type Sephirah = z.infer<typeof SephirahSchema>
 export type HealingSign = z.infer<typeof SignSchema>
 export type HealingPlanet = z.infer<typeof PlanetSchema>
-export type MinorCard = z.infer<typeof MinorCardSchema>
-export type MinorSuit = z.infer<typeof MinorSuitSchema>
 export type TreePath = z.infer<typeof TreePathSchema>
 export type Word = z.infer<typeof WordSchema>
 export type WordLetter = z.infer<typeof WordLetterSchema>
-export type Grade = z.infer<typeof GradeSchema>
 
 // ---- data
 
@@ -58,66 +61,6 @@ export const planets: ReadonlyArray<HealingPlanet> = z
   .array(PlanetSchema)
   .parse(planetsData)
 
-export const suits: ReadonlyArray<MinorSuit> = z
-  .array(MinorSuitSchema)
-  .parse(minorArcanaData)
-
-export const grades: ReadonlyArray<Grade> = z
-  .array(GradeSchema)
-  .parse(gradesData)
-
-// Flat list of every minor card with its suit + URL slug + image paths.
-// Slug pattern: `<num-lower>-<suit-lower>`, e.g. "ace-cups" or
-// "2-cups". Matches what scripts/optimize-tarot.ts writes to
-// public/tarot/minor/. Lookup by slug is the same pattern majors use.
-export interface MinorMeaning {
-  intro: string
-  wellDignified: string
-  illDignified: string
-}
-
-export interface MinorEntry {
-  slug: string
-  suit: string
-  num: string
-  keyword: string
-  sign?: string
-  dates?: string
-  meaning?: MinorMeaning
-}
-
-export const minorCards: ReadonlyArray<MinorEntry> = suits.flatMap((s) =>
-  s.cards.map((c) => ({
-    slug: `${c.num.toLowerCase()}-${s.suit.toLowerCase()}`,
-    suit: s.suit,
-    num: c.num,
-    keyword: c.keyword,
-    sign: c.sign,
-    dates: c.dates,
-    meaning: c.meaning,
-  })),
-)
-
-export const minorBySlug = Object.fromEntries(
-  minorCards.map((m) => [m.slug, m]),
-) as Record<string, MinorEntry>
-
-// Default minor image is the colored set (third-party, downloaded into
-// public/tarot/minor-colored/). Use `minorImageBW` explicitly when you
-// want the official B&W version — currently the detail page does that
-// since its caption references the storebota.org source.
-export function minorImage(card: Pick<MinorEntry, 'slug'>): string {
-  return `/tarot/minor-colored/${card.slug}.jpg`
-}
-
-export function minorImageBW(card: Pick<MinorEntry, 'slug'>): string {
-  return `/tarot/minor/${card.slug}.jpg`
-}
-
-export function minorThumbImage(card: Pick<MinorEntry, 'slug'>): string {
-  return `/tarot/minor/thumbs/${card.slug}.jpg`
-}
-
 export const paths: ReadonlyArray<TreePath> = z
   .array(TreePathSchema)
   .parse(treePathsData)
@@ -126,9 +69,7 @@ export const words: ReadonlyArray<Word> = z
   .array(WordSchema)
   .parse(wordsData)
 
-export const wordBySlug = Object.fromEntries(
-  words.map((w) => [w.slug, w]),
-) as Record<string, Word>
+export const wordBySlug = byKey(words, 'slug', 'word.slug')
 
 // Sephiroth in tree-descent order (Kether → Malkuth). The JSON array
 // itself follows the source-PDF order (Malkuth-first), so consumers
@@ -148,6 +89,4 @@ export const SEPHIROTH_DESCENT_SLUGS = [
   'malkuth',
 ] as const
 
-export const sephirahBySlug = Object.fromEntries(
-  sephiroth.map((s) => [s.slug, s]),
-) as Record<string, Sephirah>
+export const sephirahBySlug = byKey(sephiroth, 'slug', 'sephirah.slug')

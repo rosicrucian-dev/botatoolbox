@@ -26,8 +26,13 @@ export default function GradesPage() {
               <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
                 {g.name}
               </span>
-              <span className="text-zinc-400" aria-hidden>
-                →
+              <span className="flex items-center gap-3">
+                <span className="text-sm text-zinc-500 tabular-nums dark:text-zinc-400">
+                  {g.gradeNumber}
+                </span>
+                <span className="text-zinc-400" aria-hidden>
+                  →
+                </span>
               </span>
             </Link>
           </li>

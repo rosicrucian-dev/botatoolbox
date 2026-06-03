@@ -140,16 +140,12 @@ const QuadrantColors = z.object({
 export const SephirahSchema = z.object({
   slug: z.string(),
   hebrewName: z.string(),
-  // BOTA-style transliteration of the Hebrew letters in `hebrewName`,
-  // e.g. "MLKVTh" for Malkuth (Mem-Lamed-Kaph-Vav-Tav). Shown in
-  // parentheses on the Grades page alongside the sephirah name.
+  // BOTA-style letter romanization of `hebrewName`, e.g. "MLKVTh" for
+  // Malkuth (Mem-Lamed-Kaph-Vav-Tav). The list of Hebrew letters
+  // spelling the name is derived from this via romanToLetters() at
+  // render time — same convention as Grade.intelligenceRoman.
   hebrewRoman: z.string().optional(),
-  // Ordered list of Hebrew letter names spelling the sephirah's Hebrew
-  // name. Used to render the corresponding tarot keys on the Grades
-  // detail page (each letter ↔ one major arcana via tarot.json).
-  hebrewLetters: z.array(z.string()).optional(),
   name: z.string(),
-  grade: z.string(),
   element: z.string(),
   mantraSlug: z.string(),
   color: z.string(),
