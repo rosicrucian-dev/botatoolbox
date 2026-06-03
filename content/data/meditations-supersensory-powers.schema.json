@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "num": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 21
+      },
+      "name": {
+        "type": "string"
+      },
+      "slug": {
+        "type": "string",
+        "description": "Matches the major arcana slug in tarot.json."
+      },
+      "paragraphs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "affirmation": {
+        "type": "string",
+        "description": "Closing AFFIRMATION block. Empty when the source section has none."
+      }
+    },
+    "required": [
+      "num",
+      "name",
+      "slug",
+      "paragraphs",
+      "affirmation"
+    ],
+    "additionalProperties": false
+  }
+}

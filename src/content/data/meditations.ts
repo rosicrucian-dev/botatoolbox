@@ -5,13 +5,31 @@
 import { z } from 'zod'
 
 import data from '@content/data/meditations-tarot-fundamentals.json'
-import { MeditationDaySchema } from './schemas'
+import dspData from '@content/data/meditations-supersensory-powers.json'
+import {
+  MeditationDaySchema,
+  SupersensoryMeditationSchema,
+} from './schemas'
 
 export type MeditationDay = z.infer<typeof MeditationDaySchema>
 
 export const tarotFundamentalsDays: ReadonlyArray<MeditationDay> = z
   .array(MeditationDaySchema)
   .parse(data)
+
+export type SupersensoryMeditation = z.infer<
+  typeof SupersensoryMeditationSchema
+>
+
+export const supersensoryMeditations: ReadonlyArray<SupersensoryMeditation> = z
+  .array(SupersensoryMeditationSchema)
+  .parse(dspData)
+
+export function supersensoryBySlug(
+  slug: string,
+): SupersensoryMeditation | undefined {
+  return supersensoryMeditations.find((m) => m.slug === slug)
+}
 
 export function isRestDay(day: number): boolean {
   return day % 7 === 0

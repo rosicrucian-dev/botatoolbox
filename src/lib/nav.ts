@@ -175,6 +175,12 @@ export const navigation: Array<NavGroup> = [
         description:
           'A 28-day cycle of daily tarot meditations, with rest days every seventh.',
       },
+      {
+        title: 'Developing Supersensory Powers',
+        href: '/meditations/supersensory-powers',
+        description:
+          'One meditation per major arcana key, drawn from Ann Davies’ Esoteric Extension of Tarot.',
+      },
     ],
   },
   {

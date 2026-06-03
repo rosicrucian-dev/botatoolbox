@@ -170,3 +170,17 @@ export const MeditationDaySchema = z.object({
   paragraph: z.string(),
   affirmation: z.string(),
 })
+
+// ---------- meditations-supersensory-powers.json ----------
+//
+// One meditation per major arcana key, extracted from Ann Davies'
+// "Esoteric Extension of Tarot to Develop Supersensory Powers". Body
+// text is split into paragraphs; affirmation is the closing AFFIRMATION
+// block (may be empty for keys whose source section ends without one).
+export const SupersensoryMeditationSchema = z.object({
+  num: z.number().int().min(0).max(21),
+  name: z.string(),
+  slug: z.string(),
+  paragraphs: z.array(z.string()),
+  affirmation: z.string(),
+})
