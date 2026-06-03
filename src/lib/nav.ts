@@ -9,11 +9,10 @@ export interface NavGroup {
   title: string
   links: Array<NavLink>
   // When set, the group is hidden from the sidebar and home TOC unless
-  // the page is being viewed in the corresponding display mode.
-  // 'standalone' = only shown when launched from an installed PWA /
-  // Home Screen install. The page itself is still routable by direct
-  // URL — this is discoverability, not access control.
-  gated?: 'standalone'
+  // the user has unlocked secret mode via /members-only. The gated
+  // routes themselves redirect to /members-only if visited directly
+  // (see src/app/(docs)/meditations/layout.tsx).
+  gated?: 'secret'
 }
 
 export const navigation: Array<NavGroup> = [
@@ -168,7 +167,7 @@ export const navigation: Array<NavGroup> = [
   },
   {
     title: 'Meditations',
-    gated: 'standalone',
+    gated: 'secret',
     links: [
       {
         title: 'Tarot Fundamentals',
@@ -196,6 +195,11 @@ export const navigation: Array<NavGroup> = [
         href: '/ann-davies-radio',
         description:
           'Streaming radio of Ann Davies lectures, embedded from BOTA NZ.',
+      },
+      {
+        title: 'Members Only',
+        href: '/members-only',
+        description: 'Enter a password to unlock members only content.',
       },
       {
         title: 'About',

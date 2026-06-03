@@ -10,7 +10,7 @@ import { useIsInsideMobileNavigation } from '@/components/MobileNavigation'
 import { useSectionStore } from '@/components/SectionProvider'
 import { navigation, type NavGroup } from '@/lib/nav'
 import { remToPx } from '@/lib/remToPx'
-import { useStandaloneDisplay } from '@/lib/useStandaloneDisplay'
+import { useSecretMode } from '@/lib/useSecretMode'
 import { CloseButton } from '@headlessui/react'
 
 export { navigation }
@@ -212,9 +212,9 @@ function NavigationGroup({
 }
 
 export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {
-  const standalone = useStandaloneDisplay()
+  const { unlocked } = useSecretMode()
   const visible = navigation.filter(
-    (group) => group.gated !== 'standalone' || standalone,
+    (group) => group.gated !== 'secret' || unlocked,
   )
   return (
     <nav {...props}>

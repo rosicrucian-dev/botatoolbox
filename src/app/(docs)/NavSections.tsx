@@ -3,15 +3,15 @@
 import Link from 'next/link'
 
 import { navigation, type NavGroup } from '@/lib/nav'
-import { useStandaloneDisplay } from '@/lib/useStandaloneDisplay'
+import { useSecretMode } from '@/lib/useSecretMode'
 
 // Home-page table of contents. Lives as a client component so it can
-// filter out display-mode-gated groups (e.g. Meditations) using
-// useStandaloneDisplay.
+// filter out secret-mode-gated groups (e.g. Meditations) based on
+// useSecretMode's localStorage-backed state.
 export function NavSections() {
-  const standalone = useStandaloneDisplay()
+  const { unlocked } = useSecretMode()
   const visible = navigation.filter(
-    (group) => group.gated !== 'standalone' || standalone,
+    (group) => group.gated !== 'secret' || unlocked,
   )
   return (
     <>
