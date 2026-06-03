@@ -13,10 +13,33 @@ const sephBySlug: Record<string, PlacedSephirah> = Object.fromEntries(
   sephiroth.map((s) => [s.slug, s]),
 )
 
+// ---- Flow animation knobs (mirror CubeCanvas where it makes sense) ----
+// Per-path particle count, duration (seconds) for one traversal, radius
+// in viewBox units, and base opacity. Each path renders FLOW_COUNT
+// circles with `begin` offsets to space them out evenly along the path.
+const FLOW_COUNT = 3
+const FLOW_DURATION = 5
+// Path colored lane is strokeWidth=16, so radius 8 fills it edge-to-edge.
+const FLOW_SIZE = 8
+const FLOW_OPACITY = 0.5
+
+export type FlowDirection = 'descend' | 'ascend'
+
 // The full Tree of Life — 22 paths (each linked to a tarot major) + 10
 // sephiroth (each linked to its detail page). Container sets the size;
 // SVG uses preserveAspectRatio="xMidYMid meet" so it scales to fit.
-export function TreeOfLifeSvg({ className }: { className?: string }) {
+// `flow=true` adds animated translucent dots traveling each path.
+// `flowDirection` picks between the lightning descent (from→to as
+// stored in tree-paths.json, default) and the path of return (to→from).
+export function TreeOfLifeSvg({
+  className,
+  flow = false,
+  flowDirection = 'descend',
+}: {
+  className?: string
+  flow?: boolean
+  flowDirection?: FlowDirection
+}) {
   return (
     <svg
       viewBox={TREE_VIEWBOX}
@@ -67,6 +90,50 @@ export function TreeOfLifeSvg({ className }: { className?: string }) {
                   strokeWidth={16}
                   className="opacity-0 transition-opacity duration-150 group-hover:opacity-50"
                 />
+                {flow &&
+                  (() => {
+                    // Pick endpoints based on direction. Descend (default)
+                    // runs the from→to direction stored in
+                    // tree-paths.json — the lightning descent. Ascend
+                    // reverses to the path of return.
+                    const [fromX, fromY, toX, toY] =
+                      flowDirection === 'ascend'
+                        ? [b.cx, b.cy, a.cx, a.cy]
+                        : [a.cx, a.cy, b.cx, b.cy]
+                    return Array.from({ length: FLOW_COUNT }, (_, j) => {
+                      // Negative begin offsets the start so particles
+                      // appear pre-staggered along the path on first
+                      // paint — same trick as CubeCanvas' phase.
+                      const begin = `${-(j * FLOW_DURATION) / FLOW_COUNT}s`
+                      const dur = `${FLOW_DURATION}s`
+                      return (
+                        <circle
+                          key={j}
+                          r={FLOW_SIZE}
+                          fill="white"
+                          opacity={FLOW_OPACITY}
+                          className="pointer-events-none"
+                        >
+                          <animate
+                            attributeName="cx"
+                            from={fromX}
+                            to={toX}
+                            dur={dur}
+                            begin={begin}
+                            repeatCount="indefinite"
+                          />
+                          <animate
+                            attributeName="cy"
+                            from={fromY}
+                            to={toY}
+                            dur={dur}
+                            begin={begin}
+                            repeatCount="indefinite"
+                          />
+                        </circle>
+                      )
+                    })
+                  })()}
                 <image
                   href={thumbImage(card)}
                   x={mx - 16.5}

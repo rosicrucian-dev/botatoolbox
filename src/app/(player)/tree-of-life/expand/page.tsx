@@ -3,11 +3,18 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { FlowToggle } from '@/components/FlowToggle'
 import { PlayerHeader } from '@/components/PlayerHeader'
-import { TreeOfLifeSvg } from '@/components/TreeOfLifeSvg'
+import { Tab, Tabs } from '@/components/Tabs'
+import {
+  TreeOfLifeSvg,
+  type FlowDirection,
+} from '@/components/TreeOfLifeSvg'
 
 export default function TreeOfLifeExpandPage() {
   const router = useRouter()
+  const [flow, setFlow] = useState(false)
+  const [direction, setDirection] = useState<FlowDirection>('descend')
 
   // iOS chrome trick: render BLACK on first paint so iOS Safari samples
   // black for the toolbar tint, then mark `data-primed` after two RAFs to
@@ -55,6 +62,27 @@ export default function TreeOfLifeExpandPage() {
       <PlayerHeader
         title="Tree of Life"
         onClose={() => router.push('/tree-of-life')}
+        extraHeaderItem={
+          <>
+            {flow && (
+              <Tabs>
+                <Tab
+                  active={direction === 'descend'}
+                  onClick={() => setDirection('descend')}
+                >
+                  Descend
+                </Tab>
+                <Tab
+                  active={direction === 'ascend'}
+                  onClick={() => setDirection('ascend')}
+                >
+                  Ascend
+                </Tab>
+              </Tabs>
+            )}
+            <FlowToggle pressed={flow} onPressedChange={setFlow} />
+          </>
+        }
       />
       {/* Tree fills the area below the header. SVG width:height aspect is
           400:680 (~0.59), so at full container width on a wide screen the
@@ -62,7 +90,11 @@ export default function TreeOfLifeExpandPage() {
           user scroll. Tiny horizontal padding so the tree doesn't kiss the
           edges. */}
       <div className="flex-1 overflow-y-auto px-2 pb-4 sm:px-4">
-        <TreeOfLifeSvg className="mx-auto block w-full" />
+        <TreeOfLifeSvg
+          className="mx-auto block w-full"
+          flow={flow}
+          flowDirection={direction}
+        />
       </div>
     </div>
   )

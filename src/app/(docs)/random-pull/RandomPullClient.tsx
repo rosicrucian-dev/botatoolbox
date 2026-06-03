@@ -1,17 +1,11 @@
 'use client'
 
-import {
-  Children,
-  Fragment,
-  useCallback,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { HeaderChip } from '@/components/HeaderChip'
+import { Tab, Tabs } from '@/components/Tabs'
 import { cardBySlug, cards, cardImage } from '@/content/data/tarot'
 import { minorBySlug, minorCards, minorImage } from '@/content/data'
 
@@ -228,42 +222,3 @@ export function RandomPullClient() {
   )
 }
 
-// Segmented-control container — same visual treatment as
-// KeyboardLayout's Tabs.
-function Tabs({ children }: { children: ReactNode }) {
-  const tabs = Children.toArray(children)
-  return (
-    <div className="inline-flex h-9 overflow-hidden rounded-md ring-1 ring-current/20">
-      {tabs.map((tab, i) => (
-        <Fragment key={i}>
-          {i > 0 && <span aria-hidden="true" className="w-px bg-current/20" />}
-          {tab}
-        </Fragment>
-      ))}
-    </div>
-  )
-}
-
-function Tab({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean
-  onClick: () => void
-  children: ReactNode
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={
-        'inline-flex h-full items-center justify-center px-3 text-sm font-medium whitespace-nowrap transition ' +
-        (active ? 'bg-current/15' : 'hover:bg-current/10')
-      }
-    >
-      {children}
-    </button>
-  )
-}
