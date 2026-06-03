@@ -96,20 +96,18 @@ export const navigation: Array<NavGroup> = [
       {
         title: 'Adoration to the Lord of the Universe',
         href: '/texts/adoration-lord-universe',
-        description:
-          'A four-line invocation traditionally used to open and close ritual work.',
+      },
+      {
+        title: 'Aquarian Doxology',
+        href: '/texts/aquarian-doxology',
       },
       {
         title: 'The Emerald Tablet of Hermes',
         href: '/texts/emerald-tablet-hermes',
-        description:
-          'The foundational hermetic text on the One Thing — short, dense, and famously enigmatic.',
       },
       {
         title: 'The Pattern on the Trestleboard',
         href: '/texts/pattern-trestleboard',
-        description:
-          'BOTA’s eleven-statement meditation tracing the descent of Spirit from Kether to Malkuth.',
       },
     ],
   },
