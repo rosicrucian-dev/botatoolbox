@@ -114,7 +114,7 @@
       },
       {
         "num": "Page",
-        "keyword": "",
+        "keyword": "Earth of Fire",
         "sign": "Aries, Taurus, Gemini",
         "dates": "March 21 – June 21",
         "meaning": {
@@ -125,7 +125,7 @@
       },
       {
         "num": "Knight",
-        "keyword": "",
+        "keyword": "Air of Fire",
         "sign": "Scorpio, Sagittarius",
         "dates": "November 12 – December 11",
         "meaning": {
@@ -136,7 +136,7 @@
       },
       {
         "num": "Queen",
-        "keyword": "",
+        "keyword": "Water of Fire",
         "sign": "Cancer, Leo",
         "dates": "July 13 – August 12",
         "meaning": {
@@ -147,7 +147,7 @@
       },
       {
         "num": "King",
-        "keyword": "",
+        "keyword": "Fire of Fire",
         "sign": "Pisces, Aries",
         "dates": "March 11 – April 9",
         "meaning": {
@@ -273,7 +273,7 @@
       },
       {
         "num": "Page",
-        "keyword": "",
+        "keyword": "Earth of Water",
         "sign": "Cancer, Leo, Virgo",
         "dates": "June 22 – September 22",
         "meaning": {
@@ -284,7 +284,7 @@
       },
       {
         "num": "Knight",
-        "keyword": "",
+        "keyword": "Air of Water",
         "sign": "Aquarius, Pisces",
         "dates": "February 9 – March 10",
         "meaning": {
@@ -295,7 +295,7 @@
       },
       {
         "num": "Queen",
-        "keyword": "",
+        "keyword": "Water of Water",
         "sign": "Libra, Scorpio",
         "dates": "October 13 – November 11",
         "meaning": {
@@ -306,7 +306,7 @@
       },
       {
         "num": "King",
-        "keyword": "",
+        "keyword": "Fire of Water",
         "sign": "Gemini, Cancer",
         "dates": "June 11 – July 12",
         "meaning": {
@@ -432,7 +432,7 @@
       },
       {
         "num": "Page",
-        "keyword": "",
+        "keyword": "Earth of Air",
         "sign": "Libra, Scorpio, Sagittarius",
         "dates": "September 23 – December 21",
         "meaning": {
@@ -443,7 +443,7 @@
       },
       {
         "num": "Knight",
-        "keyword": "",
+        "keyword": "Air of Air",
         "sign": "Taurus, Gemini",
         "dates": "May 11 – June 10",
         "meaning": {
@@ -454,7 +454,7 @@
       },
       {
         "num": "Queen",
-        "keyword": "",
+        "keyword": "Water of Air",
         "sign": "Capricorn, Aquarius",
         "dates": "January 10 – February 8",
         "meaning": {
@@ -465,7 +465,7 @@
       },
       {
         "num": "King",
-        "keyword": "",
+        "keyword": "Fire of Air",
         "sign": "Virgo, Libra",
         "dates": "September 13 – October 12",
         "meaning": {
@@ -591,7 +591,7 @@
       },
       {
         "num": "Page",
-        "keyword": "",
+        "keyword": "Earth of Earth",
         "sign": "Capricorn, Aquarius, Pisces",
         "dates": "December 22 – March 20",
         "meaning": {
@@ -602,7 +602,7 @@
       },
       {
         "num": "Knight",
-        "keyword": "",
+        "keyword": "Air of Earth",
         "sign": "Leo, Virgo",
         "dates": "August 13 – September 12",
         "meaning": {
@@ -613,7 +613,7 @@
       },
       {
         "num": "Queen",
-        "keyword": "",
+        "keyword": "Water of Earth",
         "sign": "Aries, Taurus",
         "dates": "April 10 – May 10",
         "meaning": {
@@ -624,7 +624,7 @@
       },
       {
         "num": "King",
-        "keyword": "",
+        "keyword": "Fire of Earth",
         "sign": "Sagittarius, Capricorn",
         "dates": "December 12 – January 9",
         "meaning": {
