@@ -140,6 +140,14 @@ const QuadrantColors = z.object({
 export const SephirahSchema = z.object({
   slug: z.string(),
   hebrewName: z.string(),
+  // BOTA-style transliteration of the Hebrew letters in `hebrewName`,
+  // e.g. "MLKVTh" for Malkuth (Mem-Lamed-Kaph-Vav-Tav). Shown in
+  // parentheses on the Grades page alongside the sephirah name.
+  hebrewRoman: z.string().optional(),
+  // Ordered list of Hebrew letter names spelling the sephirah's Hebrew
+  // name. Used to render the corresponding tarot keys on the Grades
+  // detail page (each letter ↔ one major arcana via tarot.json).
+  hebrewLetters: z.array(z.string()).optional(),
   name: z.string(),
   grade: z.string(),
   element: z.string(),
@@ -192,4 +200,27 @@ export const SupersensoryMeditationSchema = z.object({
   slug: z.string(),
   paragraphs: z.array(z.string()),
   affirmation: z.string(),
+})
+
+// ---------- grades.json ----------
+//
+// The Golden Dawn grade ladder. Neophyte (0=0) sits outside the Tree of
+// Life; the other ten grades each map to one sephirah. Each non-neophyte
+// grade carries a Qabalistic "intelligence" name whose Hebrew letters
+// spell out a path of tarot keys (looked up via tarot.json letter).
+export const GradeSchema = z.object({
+  slug: z.string(),
+  name: z.string(),
+  gradeNumber: z.string(),
+  sephirah: z.string().nullable(),
+  // English meaning of the intelligence (e.g. "Resplendent").
+  intelligenceName: z.string().nullable(),
+  // Phonetic transliteration of the Hebrew word for the intelligence
+  // (e.g. "Mitnotzetz") — same role as `Sephirah.hebrewName`.
+  intelligenceHebrew: z.string().nullable().optional(),
+  // BOTA-style letter romanization of the Hebrew word (e.g. "MThNVTzO").
+  // The list of Hebrew letters spelling the intelligence is derived
+  // from this string at runtime via romanToLetters() — no need to keep
+  // a separate `letters` array in sync.
+  intelligenceRoman: z.string().nullable(),
 })

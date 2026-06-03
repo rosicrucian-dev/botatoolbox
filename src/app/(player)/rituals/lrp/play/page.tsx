@@ -34,12 +34,43 @@ interface LRPSlide {
   textColor?: string | null
   autoAdvance: boolean
   wordIds?: Array<string>
+  // Visualization cue tied to the archangel being intoned — persists on
+  // the setup slide AND across every syllable slide of that name.
+  visualization?: string
+}
+
+// Visualization text shown beneath the instruction whenever an
+// archangel's name is being intoned. Keyed by the word-of-power slug
+// used in lrp.md.
+const ANGEL_VISUALIZATION: Record<string, string> = {
+  rpal:   'Raphael is robed in yellow, hair moving in the wind—a sensation of a cooling breeze from the East. Bathe your aura with a yellow breeze.',
+  gbrial: 'Gabriel is robed in blue, with a stream or sea at its feet. Bathe your aura in a blue, purifying sea of compassion.',
+  mikal:  'Michael is robed in red, standing on parched Earth or desert. Radiates heat. Bathe your aura in a red consecratine fire and glow with the fire of life.',
+  avrial: 'Auriel is robed in citrine, olive, russet and black (an overall impression is a dark robe). Stands in a rich wheat-field. Bathe your aura with the colors and love of Nature.',
+}
+
+// Background color for the archangel's setup slide — element
+// associations from the Watchtowers. Auriel uses Malkuth's mixed
+// citrine/olive/russet/black ("malkuth" palette key) which matches the
+// Pattern on the Trestleboard final-statement slide.
+const ANGEL_COLOR: Record<string, string> = {
+  rpal:   'yellow',
+  gbrial: 'blue',
+  mikal:  'red',
+  avrial: 'malkuth',
 }
 
 function lineToSlides(
   line: { text: string; wordIds: ReadonlyArray<string> },
   section: string,
 ): Array<LRPSlide> {
+  // If any of the line's word-ids matches an archangel, carry that
+  // visualization through the setup slide and every syllable; also tint
+  // the setup slide with the archangel's element color.
+  const angelId = line.wordIds.find((id) => id in ANGEL_VISUALIZATION)
+  const visualization = angelId ? ANGEL_VISUALIZATION[angelId] : undefined
+  const setupColor = angelId ? ANGEL_COLOR[angelId] : undefined
+
   const setup: LRPSlide = {
     section,
     instruction: line.text,
@@ -48,6 +79,8 @@ function lineToSlides(
     note: undefined,
     autoAdvance: false,
     wordIds: [...line.wordIds],
+    visualization,
+    color: setupColor,
   }
   if (line.wordIds.length === 0) return [setup]
 
@@ -64,6 +97,7 @@ function lineToSlides(
         note: l.note,
         color: l.color,
         autoAdvance: true,
+        visualization,
       })
     }
   }
@@ -131,6 +165,11 @@ export default function LesserPentagramPlayPage() {
           <div className="text-xl leading-relaxed md:text-2xl">
             {slide.instruction}
           </div>
+          {slide.visualization && (
+            <div className="pt-2 text-sm leading-relaxed opacity-60">
+              {slide.visualization}
+            </div>
+          )}
           <div
             className={`pt-2 text-sm italic ${slide.autoAdvance ? 'invisible' : 'opacity-60'}`}
             aria-hidden={slide.autoAdvance}

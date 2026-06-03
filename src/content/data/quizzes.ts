@@ -185,6 +185,39 @@ function hebrewLettersQuiz(): Quiz {
   }
 }
 
+// Sepher Yetzirah classification of the 22 Hebrew letters:
+//   3 Mother letters (elemental): Aleph, Mem, Shin
+//   7 Double letters (planetary):  Beth, Gimel, Daleth, Kaph, Peh, Resh, Tav
+//   12 Single letters (zodiacal):  every other letter
+function hebrewLetterType(letter: string): 'Mother' | 'Double' | 'Single' {
+  if (['Aleph', 'Mem', 'Shin'].includes(letter)) return 'Mother'
+  if (['Beth', 'Gimel', 'Daleth', 'Kaph', 'Peh', 'Resh', 'Tav'].includes(letter))
+    return 'Double'
+  return 'Single'
+}
+
+function hebrewTypeQuiz(): Quiz {
+  const items: ReadonlyArray<QuizItem> = cards.map((c) => ({
+    key: c.slug,
+    label: c.name,
+    display: {
+      kind: 'glyph',
+      glyph: getLetterMeta(c.letter).glyph,
+      alt: c.letter,
+      style: 'hebrew',
+    },
+    answer: hebrewLetterType(c.letter),
+  }))
+  return {
+    slug: 'type',
+    title: 'Type',
+    fieldLabel: 'Type',
+    categorySlug: 'hebrew',
+    items,
+    answerOptions: ['Mother', 'Double', 'Single'],
+  }
+}
+
 function hebrewGematriaQuiz(): Quiz {
   const items: ReadonlyArray<QuizItem> = cards.map((c) => ({
     key: c.slug,
@@ -312,6 +345,7 @@ export const quizzes: ReadonlyArray<Quiz> = [
   }),
   hebrewLettersQuiz(),
   hebrewGematriaQuiz(),
+  hebrewTypeQuiz(),
   minorArcanaKeywordsQuiz({
     slug: 'wand-keywords',
     title: 'Wand Keywords',

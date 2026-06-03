@@ -30,6 +30,66 @@ export const letters: Record<string, LetterMeta> = {
   Tav: { glyph: 'ת', sofit: null },
 }
 
+// BOTA romanization → letter name. Two-char codes (Ch / Sh / Th / Tz)
+// take priority over the single-char codes that share their first
+// letter. Yod is "I" per the tarot.json english field.
+const ROMAN_TWO: Record<string, string> = {
+  Ch: 'Cheth',
+  Sh: 'Shin',
+  Th: 'Tav',
+  Tz: 'Tzaddi',
+}
+const ROMAN_ONE: Record<string, string> = {
+  A: 'Aleph',
+  B: 'Beth',
+  G: 'Gimel',
+  D: 'Daleth',
+  H: 'Heh',
+  V: 'Vav',
+  Z: 'Zain',
+  T: 'Teth',
+  I: 'Yod',
+  K: 'Kaph',
+  L: 'Lamed',
+  M: 'Mem',
+  N: 'Nun',
+  S: 'Samekh',
+  O: 'Ayin',
+  P: 'Peh',
+  Q: 'Qoph',
+  R: 'Resh',
+}
+
+// Parse a BOTA-romanized Hebrew word like "MThNVTzO" or "ShPO NBDL"
+// into the ordered list of letter names ["Mem","Tav",...]. Skips
+// whitespace and hyphens, so multi-word romans work too. Unknown
+// characters are silently dropped — callers that need strict parsing
+// should validate up front.
+export function romanToLetters(roman: string): string[] {
+  const out: string[] = []
+  let i = 0
+  while (i < roman.length) {
+    const c = roman[i]
+    if (c === ' ' || c === '-') {
+      i++
+      continue
+    }
+    const two = roman.slice(i, i + 2)
+    if (ROMAN_TWO[two]) {
+      out.push(ROMAN_TWO[two])
+      i += 2
+      continue
+    }
+    if (ROMAN_ONE[c]) {
+      out.push(ROMAN_ONE[c])
+      i++
+      continue
+    }
+    i++
+  }
+  return out
+}
+
 // Looks up a Hebrew letter's glyph + sofit. Returns a fallback for
 // unknown letter names instead of undefined so callers don't need to
 // cast. All data files now store letter names without diacritics, so a

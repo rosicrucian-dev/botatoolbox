@@ -18,6 +18,7 @@ import planetsData from '@content/data/planets.json'
 import minorArcanaData from '@content/data/minor-arcana.json'
 import treePathsData from '@content/data/tree-paths.json'
 import wordsData from '@content/data/words.json'
+import gradesData from '@content/data/grades.json'
 
 import {
   SephirahSchema,
@@ -28,6 +29,7 @@ import {
   TreePathSchema,
   WordSchema,
   WordLetterSchema,
+  GradeSchema,
 } from './schemas'
 
 // ---- types
@@ -40,6 +42,7 @@ export type MinorSuit = z.infer<typeof MinorSuitSchema>
 export type TreePath = z.infer<typeof TreePathSchema>
 export type Word = z.infer<typeof WordSchema>
 export type WordLetter = z.infer<typeof WordLetterSchema>
+export type Grade = z.infer<typeof GradeSchema>
 
 // ---- data
 
@@ -58,6 +61,10 @@ export const planets: ReadonlyArray<HealingPlanet> = z
 export const suits: ReadonlyArray<MinorSuit> = z
   .array(MinorSuitSchema)
   .parse(minorArcanaData)
+
+export const grades: ReadonlyArray<Grade> = z
+  .array(GradeSchema)
+  .parse(gradesData)
 
 // Flat list of every minor card with its suit + URL slug + image paths.
 // Slug pattern: `<num-lower>-<suit-lower>`, e.g. "ace-cups" or

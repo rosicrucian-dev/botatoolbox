@@ -141,29 +141,6 @@ export const navigation: Array<NavGroup> = [
     ],
   },
   {
-    title: 'Reference',
-    links: [
-      {
-        title: 'Astrology',
-        href: '/astrology',
-        description:
-          'The ten planets and twelve signs, each linked to its tarot trump. Cross-references show rulership and exaltation.',
-      },
-      {
-        title: 'Tattvas',
-        href: '/tattvas',
-        description:
-          'The five elements as drawn in the Golden Dawn tradition, in 25 nested combinations. Click any to open it full screen.',
-      },
-      {
-        title: 'Words of Power',
-        href: '/words-of-power',
-        description:
-          'Hebrew divine names for vibration practice, each with letter-by-letter pronunciation and tones.',
-      },
-    ],
-  },
-  {
     title: 'Meditations',
     gated: 'secret',
     links: [
@@ -178,6 +155,35 @@ export const navigation: Array<NavGroup> = [
         href: '/meditations/supersensory-powers',
         description:
           'One meditation per major arcana key, drawn from Ann Davies’ Esoteric Extension of Tarot.',
+      },
+    ],
+  },
+  {
+    title: 'Reference',
+    links: [
+      {
+        title: 'Astrology',
+        href: '/astrology',
+        description:
+          'The ten planets and twelve signs, each linked to its tarot trump. Cross-references show rulership and exaltation.',
+      },
+      {
+        title: 'Grades',
+        href: '/grades',
+        description:
+          'The Golden Dawn grade ladder — each grade tied to a sephirah and a Qabalistic intelligence whose Hebrew letters point to tarot keys.',
+      },
+      {
+        title: 'Tattvas',
+        href: '/tattvas',
+        description:
+          'The five elements as drawn in the Golden Dawn tradition, in 25 nested combinations. Click any to open it full screen.',
+      },
+      {
+        title: 'Words of Power',
+        href: '/words-of-power',
+        description:
+          'Hebrew divine names for vibration practice, each with letter-by-letter pronunciation and tones.',
       },
     ],
   },
