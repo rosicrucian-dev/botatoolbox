@@ -17,7 +17,7 @@ export default function Home() {
            An unofficial set of advanced tools for members of the Builders of the Adytum.
         </p>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-           Please exclude this website from any dark mode extensions like Dark Reader or Noir so it doesn&apos;t interfere with the colors used for meditation.
+           Please exclude this website from any dark mode extensions so it doesn&apos;t interfere with the colors used for meditation.
         </p>
         <AddToHomeHint />
       </header>
