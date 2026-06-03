@@ -336,6 +336,12 @@ export const quizzes: ReadonlyArray<Quiz> = [
     slug: 'all-keywords',
     title: 'All Keywords',
   }),
+  signFieldQuiz({
+    slug: 'symbols',
+    title: 'Symbols',
+    fieldLabel: 'Sign',
+    answer: (s) => s.name,
+  }),
   signQuiz({
     slug: 'rulers',
     title: 'Rulers',
