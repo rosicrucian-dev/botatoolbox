@@ -269,8 +269,23 @@ function ItemDisplay({ item }: { item: QuizItem }) {
     )
   }
   if (item.display.kind === 'glyph') {
-    // Sizing + grayscale match AstrologyFocusPlayer's right-side glyph
-    // rendering so signs look the same here as in focus mode.
+    // Hebrew letter style — larger, serif, rtl. Matches the
+    // major-arcana focus-mode rendering exactly.
+    if (item.display.style === 'hebrew') {
+      return (
+        <div
+          className="text-center font-serif text-[min(22vh,55vw)] leading-none md:text-[min(40vh,80vw)]"
+          dir="rtl"
+          lang="he"
+          aria-label={item.display.alt}
+        >
+          {item.display.glyph}
+        </div>
+      )
+    }
+    // Default 'sign' style — sizing + grayscale match
+    // AstrologyFocusPlayer's glyph rendering so zodiac emoji look the
+    // same here as in focus mode.
     return (
       <div
         className="text-center text-[min(15vh,35vw)] leading-tight grayscale md:text-[min(22vh,40vw)]"

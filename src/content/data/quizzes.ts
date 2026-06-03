@@ -11,6 +11,7 @@
 import { cards, cardImage, type TarotCard } from './tarot'
 import { minorCards, minorImage } from './index'
 import { signs, planets, planetBySlug } from './astrology'
+import { getLetterMeta } from '@/lib/hebrew'
 
 // Discriminated union for the left side of the player.
 //   - `image` — tarot card image (majors). Optional `attribution`
@@ -27,7 +28,16 @@ export type QuizDisplay =
       attribution?: { text: string; href: string }
     }
   | { kind: 'text'; text: string }
-  | { kind: 'glyph'; glyph: string; alt: string }
+  | {
+      kind: 'glyph'
+      glyph: string
+      alt: string
+      // Visual treatment. Defaults to 'sign' which applies the
+      // grayscale filter used by the astrology zodiac-emoji glyphs.
+      // 'hebrew' renders larger in font-serif with rtl direction —
+      // matches the major-arcana focus mode's Hebrew letter display.
+      style?: 'sign' | 'hebrew'
+    }
 
 export interface QuizItem {
   key: string
@@ -64,13 +74,21 @@ export const quizCategories: ReadonlyArray<QuizCategory> = [
   { slug: 'major-arcana', label: 'Major Arcana' },
   { slug: 'minor-arcana', label: 'Minor Arcana' },
   { slug: 'signs', label: 'Signs' },
+  { slug: 'hebrew', label: 'Hebrew' },
 ]
 
 // ---------- builders ----------
 
-function dedupSort(values: Iterable<string>): ReadonlyArray<string> {
-  return Array.from(new Set(values)).sort()
+function dedupSort(
+  values: Iterable<string>,
+  cmp?: (a: string, b: string) => number,
+): ReadonlyArray<string> {
+  return Array.from(new Set(values)).sort(cmp)
 }
+
+// Numeric comparator for gematria-style answer pools — otherwise the
+// dropdown would sort "100" before "2" lexicographically.
+const byNumber = (a: string, b: string) => Number(a) - Number(b)
 
 // Quiz over the 22 majors, testing one string-valued field on TarotCard.
 // Left side shows the card image.
@@ -138,6 +156,54 @@ function minorArcanaKeywordsQuiz(opts: {
     categorySlug: 'minor-arcana',
     items,
     answerOptions: dedupSort(items.map((i) => i.answer)),
+  }
+}
+
+// Quizzes over the 22 Hebrew letter attributions. Left side shows the
+// letter glyph (large, serif, rtl — same treatment as major-arcana
+// focus mode). Right side asks for the romanized letter name (Letters)
+// or its gematria value (Gematria).
+function hebrewLettersQuiz(): Quiz {
+  const items: ReadonlyArray<QuizItem> = cards.map((c) => ({
+    key: c.slug,
+    label: c.name,
+    display: {
+      kind: 'glyph',
+      glyph: getLetterMeta(c.letter).glyph,
+      alt: c.letter,
+      style: 'hebrew',
+    },
+    answer: c.letter,
+  }))
+  return {
+    slug: 'letters',
+    title: 'Letters',
+    fieldLabel: 'Letter',
+    categorySlug: 'hebrew',
+    items,
+    answerOptions: dedupSort(items.map((i) => i.answer)),
+  }
+}
+
+function hebrewGematriaQuiz(): Quiz {
+  const items: ReadonlyArray<QuizItem> = cards.map((c) => ({
+    key: c.slug,
+    label: c.name,
+    display: {
+      kind: 'glyph',
+      glyph: getLetterMeta(c.letter).glyph,
+      alt: c.letter,
+      style: 'hebrew',
+    },
+    answer: String(c.gematria),
+  }))
+  return {
+    slug: 'gematria',
+    title: 'Gematria',
+    fieldLabel: 'Gematria',
+    categorySlug: 'hebrew',
+    items,
+    answerOptions: dedupSort(items.map((i) => i.answer), byNumber),
   }
 }
 
@@ -244,6 +310,8 @@ export const quizzes: ReadonlyArray<Quiz> = [
     title: 'Human Faculty and Opposites',
     field: 'human',
   }),
+  hebrewLettersQuiz(),
+  hebrewGematriaQuiz(),
   minorArcanaKeywordsQuiz({
     slug: 'wand-keywords',
     title: 'Wand Keywords',
