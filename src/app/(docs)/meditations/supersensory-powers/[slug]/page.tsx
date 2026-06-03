@@ -56,12 +56,14 @@ export default async function SupersensoryDetailPage({
 
       {card && (
         <div className="flex justify-center">
+          {/* Same 30% width as Tarot Fundamentals so card sizing
+              matches across all meditation views. */}
           <img
             src={cardImage(card)}
             alt={`${card.num}. ${card.name}`}
             width={362}
             height={600}
-            className="w-40 rounded-md shadow-sm ring-1 ring-zinc-200 sm:w-48 md:w-56 dark:ring-zinc-800"
+            className="block w-[30%] rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
           />
         </div>
       )}

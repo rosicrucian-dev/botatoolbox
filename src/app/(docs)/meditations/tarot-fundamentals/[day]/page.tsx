@@ -47,7 +47,9 @@ export default async function TarotFundamentalsDayPage({
         Day {entry.day}
       </h1>
 
-      <div className="flex flex-wrap items-start justify-center gap-4">
+      {/* 30% × 3 cards + 5% × 2 gaps = 100% of article width — matches
+          Random Pull so three cards fit on one line on any size screen. */}
+      <div className="flex flex-wrap items-start justify-center gap-x-[5%] gap-y-2 md:gap-y-4">
         {entry.cards.map((slug) => {
           const card = cardBySlug[slug]
           if (!card) return null
@@ -58,7 +60,7 @@ export default async function TarotFundamentalsDayPage({
               alt={`${card.num}. ${card.name}`}
               width={362}
               height={600}
-              className="w-40 rounded-md shadow-sm ring-1 ring-zinc-200 sm:w-48 md:w-56 dark:ring-zinc-800"
+              className="block w-[30%] rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
             />
           )
         })}

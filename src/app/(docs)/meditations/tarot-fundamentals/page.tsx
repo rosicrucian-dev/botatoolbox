@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { type Metadata } from 'next'
 
-import { IndexLabel } from '@/components/IndexLabel'
 import {
   isRestDay,
   tarotFundamentalsDays,
@@ -24,11 +23,8 @@ export default function TarotFundamentalsIndex() {
         {tarotFundamentalsDays.map((d) => {
           const rest = isRestDay(d.day)
           const label = (
-            <span className="flex items-baseline gap-3">
-              <IndexLabel>{d.day}</IndexLabel>
-              <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                Day {d.day}
-              </span>
+            <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              Day {d.day}
             </span>
           )
           if (rest) {

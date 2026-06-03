@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { type Metadata } from 'next'
 
-import { IndexLabel } from '@/components/IndexLabel'
 import { supersensoryMeditations } from '@/content/data/meditations'
 
 export const metadata: Metadata = {
@@ -24,11 +23,8 @@ export default function SupersensoryIndex() {
               href={`/meditations/supersensory-powers/${m.slug}`}
               className={`${ROW} hover:bg-zinc-50 dark:hover:bg-zinc-800/50`}
             >
-              <span className="flex items-baseline gap-3">
-                <IndexLabel>{m.num}</IndexLabel>
-                <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                  {m.name}
-                </span>
+              <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                {m.name}
               </span>
               <span className="text-zinc-400" aria-hidden>
                 →
