@@ -24,7 +24,9 @@ export function TreeOfLifeClient() {
         >
           Tree of Life
         </h1>
-        <div className="flex items-center gap-2 text-zinc-900 dark:text-white">
+        {/* ml-auto keeps the chips right-aligned even when the h1
+            collapses out on mobile under Flow=on. */}
+        <div className="ml-auto flex items-center gap-2 text-zinc-900 dark:text-white">
           {flow && (
             <Tabs>
               <Tab
