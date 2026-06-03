@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { type Metadata } from 'next'
 
-import { Button } from '@/components/Button'
 import { DefinitionList } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
+import { PrevNextNav } from '@/components/PrevNextNav'
 import { SecretSection } from '@/components/SecretSection'
 import { minorBySlug, minorCards, minorImage } from '@/content/data'
 
@@ -114,44 +114,10 @@ export default async function MinorCardPage({
         </div>
       </div>
 
-      <nav className="flex">
-        <div className="flex flex-col items-start gap-3">
-          <Button
-            href={`/tarot/minor-arcana/${prev.slug}`}
-            aria-label={`Previous: ${prev.num} of ${prev.suit}`}
-            variant="secondary"
-            arrow="left"
-          >
-            Previous
-          </Button>
-          <Link
-            href={`/tarot/minor-arcana/${prev.slug}`}
-            tabIndex={-1}
-            aria-hidden="true"
-            className="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
-          >
-            {prev.num} of {prev.suit}
-          </Link>
-        </div>
-        <div className="ml-auto flex flex-col items-end gap-3">
-          <Button
-            href={`/tarot/minor-arcana/${next.slug}`}
-            aria-label={`Next: ${next.num} of ${next.suit}`}
-            variant="secondary"
-            arrow="right"
-          >
-            Next
-          </Button>
-          <Link
-            href={`/tarot/minor-arcana/${next.slug}`}
-            tabIndex={-1}
-            aria-hidden="true"
-            className="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
-          >
-            {next.num} of {next.suit}
-          </Link>
-        </div>
-      </nav>
+      <PrevNextNav
+        prev={{ href: `/tarot/minor-arcana/${prev.slug}`, label: `${prev.num} of ${prev.suit}` }}
+        next={{ href: `/tarot/minor-arcana/${next.slug}`, label: `${next.num} of ${next.suit}` }}
+      />
     </article>
   )
 }

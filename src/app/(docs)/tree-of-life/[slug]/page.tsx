@@ -4,6 +4,7 @@ import { type Metadata } from 'next'
 
 import { DefinitionList, type DefinitionRow } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
+import { PrevNextNav } from '@/components/PrevNextNav'
 import { sephiroth, sephirahBySlug, SEPHIROTH_DESCENT_SLUGS, words } from '@/content/data'
 
 export function generateStaticParams() {
@@ -75,41 +76,11 @@ export default async function SephirahPage({
 
       <DefinitionList rows={rows} />
 
-      <nav
-        aria-label="Sephirah navigation"
-        className="flex items-center justify-between gap-4 border-t border-zinc-200 pt-6 dark:border-zinc-800"
-      >
-        {prev ? (
-          <Link
-            href={`/tree-of-life/${prev.slug}`}
-            className="group flex flex-col items-start gap-1 text-sm transition hover:text-zinc-600 dark:hover:text-zinc-400"
-          >
-            <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
-              ← Previous
-            </span>
-            <span className="font-medium text-zinc-900 dark:text-zinc-100">
-              {prev.name}
-            </span>
-          </Link>
-        ) : (
-          <span />
-        )}
-        {next ? (
-          <Link
-            href={`/tree-of-life/${next.slug}`}
-            className="group flex flex-col items-end gap-1 text-sm transition hover:text-zinc-600 dark:hover:text-zinc-400"
-          >
-            <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
-              Next →
-            </span>
-            <span className="font-medium text-zinc-900 dark:text-zinc-100">
-              {next.name}
-            </span>
-          </Link>
-        ) : (
-          <span />
-        )}
-      </nav>
+      <PrevNextNav
+        ariaLabel="Sephirah navigation"
+        prev={prev ? { href: `/tree-of-life/${prev.slug}`, label: prev.name } : undefined}
+        next={next ? { href: `/tree-of-life/${next.slug}`, label: next.name } : undefined}
+      />
     </article>
   )
 }

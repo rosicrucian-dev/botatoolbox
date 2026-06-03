@@ -8,19 +8,6 @@ import { PlayerHeader } from '@/components/PlayerHeader'
 // See the `primed` state inside the component for why this is module-level.
 let sessionPrimed = false
 
-function ArrowIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" {...props}>
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
-      />
-    </svg>
-  )
-}
-
 export interface Slide {
   bgColor?: string | null
   textColor?: string | null
@@ -221,49 +208,52 @@ export function SlidePlayer<S extends Slide>({
           </div>
 
           <div className="mx-auto w-full max-w-6xl">
-            <nav className="flex">
+            {/* Text-link prev/next, same shape as PrevNextNav but
+                button-based (SlidePlayer drives idx by callback, not
+                routing) and current-color so it adapts to the slide's
+                background. */}
+            <nav
+              aria-label="Slide navigation"
+              className="flex items-center justify-between gap-4 border-t border-current/15 pt-6"
+            >
               {idx > 0 ? (
-                <div className="flex flex-col items-start gap-3">
-                  <button
-                    type="button"
-                    onClick={() => onIdxChange(idx - 1)}
-                    aria-label={`Previous${slides[idx - 1].label ? `: ${slides[idx - 1].label}` : ''}`}
-                    className="inline-flex items-center justify-center gap-0.5 overflow-hidden rounded-full bg-current/10 px-3 py-1 text-sm font-medium ring-1 ring-current/10 ring-inset transition hover:bg-current/15"
-                  >
-                    <ArrowIcon className="-ml-1 mt-0.5 h-5 w-5 rotate-180" />
-                    <span>Previous</span>
-                  </button>
+                <button
+                  type="button"
+                  onClick={() => onIdxChange(idx - 1)}
+                  aria-label={`Previous${slides[idx - 1].label ? `: ${slides[idx - 1].label}` : ''}`}
+                  className="group flex flex-col items-start gap-1 text-sm transition hover:opacity-70"
+                >
+                  <span className="text-xs font-medium opacity-70">
+                    ← Previous
+                  </span>
                   {slides[idx - 1].label && (
-                    <span
-                      aria-hidden="true"
-                      className="text-base font-semibold"
-                    >
+                    <span className="font-medium">
                       {slides[idx - 1].label}
                     </span>
                   )}
-                </div>
-              ) : null}
+                </button>
+              ) : (
+                <span />
+              )}
               {idx < slides.length - 1 ? (
-                <div className="ml-auto flex flex-col items-end gap-3">
-                  <button
-                    type="button"
-                    onClick={() => onIdxChange(idx + 1)}
-                    aria-label={`Next${slides[idx + 1].label ? `: ${slides[idx + 1].label}` : ''}`}
-                    className="inline-flex items-center justify-center gap-0.5 overflow-hidden rounded-full bg-current/10 px-3 py-1 text-sm font-medium ring-1 ring-current/10 ring-inset transition hover:bg-current/15"
-                  >
-                    <span>Next</span>
-                    <ArrowIcon className="-mr-1 mt-0.5 h-5 w-5" />
-                  </button>
+                <button
+                  type="button"
+                  onClick={() => onIdxChange(idx + 1)}
+                  aria-label={`Next${slides[idx + 1].label ? `: ${slides[idx + 1].label}` : ''}`}
+                  className="group flex flex-col items-end gap-1 text-sm transition hover:opacity-70"
+                >
+                  <span className="text-xs font-medium opacity-70">
+                    Next →
+                  </span>
                   {slides[idx + 1].label && (
-                    <span
-                      aria-hidden="true"
-                      className="text-base font-semibold"
-                    >
+                    <span className="font-medium">
                       {slides[idx + 1].label}
                     </span>
                   )}
-                </div>
-              ) : null}
+                </button>
+              ) : (
+                <span />
+              )}
             </nav>
           </div>
         </div>

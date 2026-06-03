@@ -1,9 +1,8 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { type Metadata } from 'next'
 
-import { Button } from '@/components/Button'
 import { KeyboardNav } from '@/components/KeyboardNav'
+import { PrevNextNav } from '@/components/PrevNextNav'
 import {
   dayBySlug,
   isRestDay,
@@ -77,48 +76,10 @@ export default async function TarotFundamentalsDayPage({
         </p>
       )}
 
-      <nav className="flex">
-        {prevHref && prev !== undefined && (
-          <div className="flex flex-col items-start gap-3">
-            <Button
-              href={prevHref}
-              aria-label={`Previous: Day ${prev}`}
-              variant="secondary"
-              arrow="left"
-            >
-              Previous
-            </Button>
-            <Link
-              href={prevHref}
-              tabIndex={-1}
-              aria-hidden="true"
-              className="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
-            >
-              Day {prev}
-            </Link>
-          </div>
-        )}
-        {nextHref && next !== undefined && (
-          <div className="ml-auto flex flex-col items-end gap-3">
-            <Button
-              href={nextHref}
-              aria-label={`Next: Day ${next}`}
-              variant="secondary"
-              arrow="right"
-            >
-              Next
-            </Button>
-            <Link
-              href={nextHref}
-              tabIndex={-1}
-              aria-hidden="true"
-              className="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
-            >
-              Day {next}
-            </Link>
-          </div>
-        )}
-      </nav>
+      <PrevNextNav
+        prev={prevHref && prev !== undefined ? { href: prevHref, label: `Day ${prev}` } : undefined}
+        next={nextHref && next !== undefined ? { href: nextHref, label: `Day ${next}` } : undefined}
+      />
     </article>
   )
 }

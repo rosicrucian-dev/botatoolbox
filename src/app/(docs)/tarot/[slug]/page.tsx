@@ -2,10 +2,10 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { type Metadata } from 'next'
 
-import { Button } from '@/components/Button'
 import { DefinitionList } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PlayLink } from '@/components/PlayLink'
+import { PrevNextNav } from '@/components/PrevNextNav'
 import { planetBySlug, signBySlug } from '@/content/data/astrology'
 import { paths, sephirahBySlug } from '@/content/data'
 import { cards, cardImage } from '@/content/data/tarot'
@@ -184,44 +184,10 @@ export default async function TarotCardPage({
         </div>
       </div>
 
-      <nav className="flex">
-        <div className="flex flex-col items-start gap-3">
-          <Button
-            href={`/tarot/${prev.slug}`}
-            aria-label={`Previous: ${prev.num}. ${prev.name}`}
-            variant="secondary"
-            arrow="left"
-          >
-            Previous
-          </Button>
-          <Link
-            href={`/tarot/${prev.slug}`}
-            tabIndex={-1}
-            aria-hidden="true"
-            className="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
-          >
-            {prev.num}. {prev.name}
-          </Link>
-        </div>
-        <div className="ml-auto flex flex-col items-end gap-3">
-          <Button
-            href={`/tarot/${next.slug}`}
-            aria-label={`Next: ${next.num}. ${next.name}`}
-            variant="secondary"
-            arrow="right"
-          >
-            Next
-          </Button>
-          <Link
-            href={`/tarot/${next.slug}`}
-            tabIndex={-1}
-            aria-hidden="true"
-            className="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
-          >
-            {next.num}. {next.name}
-          </Link>
-        </div>
-      </nav>
+      <PrevNextNav
+        prev={{ href: `/tarot/${prev.slug}`, label: `${prev.num}. ${prev.name}` }}
+        next={{ href: `/tarot/${next.slug}`, label: `${next.num}. ${next.name}` }}
+      />
     </article>
   )
 }

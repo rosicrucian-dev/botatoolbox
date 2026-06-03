@@ -2,10 +2,10 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { type Metadata } from 'next'
 
-import { Button } from '@/components/Button'
 import { DefinitionList } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PlayLink } from '@/components/PlayLink'
+import { PrevNextNav } from '@/components/PrevNextNav'
 import { planets, planetBySlug, signBySlug } from '@/content/data/astrology'
 
 export function generateStaticParams() {
@@ -82,44 +82,10 @@ export default async function PlanetPage({
         ]}
       />
 
-      <nav className="flex">
-        <div className="flex flex-col items-start gap-3">
-          <Button
-            href={`/astrology/planets/${prev.slug}`}
-            aria-label={`Previous: ${prev.name}`}
-            variant="secondary"
-            arrow="left"
-          >
-            Previous
-          </Button>
-          <Link
-            href={`/astrology/planets/${prev.slug}`}
-            tabIndex={-1}
-            aria-hidden="true"
-            className="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
-          >
-            {prev.name}
-          </Link>
-        </div>
-        <div className="ml-auto flex flex-col items-end gap-3">
-          <Button
-            href={`/astrology/planets/${next.slug}`}
-            aria-label={`Next: ${next.name}`}
-            variant="secondary"
-            arrow="right"
-          >
-            Next
-          </Button>
-          <Link
-            href={`/astrology/planets/${next.slug}`}
-            tabIndex={-1}
-            aria-hidden="true"
-            className="text-base font-semibold text-zinc-900 transition hover:text-zinc-600 dark:text-white dark:hover:text-zinc-300"
-          >
-            {next.name}
-          </Link>
-        </div>
-      </nav>
+      <PrevNextNav
+        prev={{ href: `/astrology/planets/${prev.slug}`, label: prev.name }}
+        next={{ href: `/astrology/planets/${next.slug}`, label: next.name }}
+      />
     </article>
   )
 }
