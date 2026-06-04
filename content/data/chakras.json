@@ -30,15 +30,15 @@
     "chakra": "Throat center"
   },
   {
-    "planet": "mercury",
-    "angel": "Raphael",
-    "metal": "Quicksilver",
-    "chakra": "Cerebrum and pineal body"
-  },
-  {
     "planet": "moon",
     "angel": "Gabriel",
     "metal": "Silver",
     "chakra": "Pituitary gland"
+  },
+  {
+    "planet": "mercury",
+    "angel": "Raphael",
+    "metal": "Quicksilver",
+    "chakra": "Cerebrum and pineal body"
   }
 ]
