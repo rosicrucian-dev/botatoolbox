@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "planet": {
+        "type": "string"
+      },
+      "angel": {
+        "type": "string"
+      },
+      "metal": {
+        "type": "string"
+      },
+      "chakra": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "planet",
+      "angel",
+      "metal",
+      "chakra"
+    ],
+    "additionalProperties": false
+  }
+}

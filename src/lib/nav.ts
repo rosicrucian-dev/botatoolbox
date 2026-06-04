@@ -168,6 +168,12 @@ export const navigation: Array<NavGroup> = [
           'The ten planets and twelve signs, each linked to its tarot trump. Cross-references show rulership and exaltation.',
       },
       {
+        title: 'Chakras',
+        href: '/chakras',
+        description:
+          'Seven planetary chakras with their presiding archangel, alchemical metal, and bodily center.',
+      },
+      {
         title: 'Grades',
         href: '/grades',
         description:

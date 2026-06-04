@@ -24,6 +24,7 @@ import {
   MeditationDaySchema,
   SupersensoryMeditationSchema,
   GradeSchema,
+  ChakraSchema,
 } from '../src/content/data/schemas.ts'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -46,6 +47,7 @@ const targets = [
     schema: z.array(SupersensoryMeditationSchema),
   },
   { file: 'grades', schema: z.array(GradeSchema) },
+  { file: 'chakras', schema: z.array(ChakraSchema) },
 ]
 
 for (const { file, schema } of targets) {

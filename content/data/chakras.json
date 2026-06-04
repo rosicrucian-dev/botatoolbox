@@ -1,0 +1,44 @@
+[
+  {
+    "planet": "saturn",
+    "angel": "Tsaphkiel",
+    "metal": "Lead",
+    "chakra": "Center at base of spine"
+  },
+  {
+    "planet": "mars",
+    "angel": "Kamael",
+    "metal": "Iron",
+    "chakra": "Center below navel"
+  },
+  {
+    "planet": "jupiter",
+    "angel": "Tzadkiel",
+    "metal": "Tin",
+    "chakra": "Solar plexus"
+  },
+  {
+    "planet": "sun",
+    "angel": "Michael",
+    "metal": "Gold",
+    "chakra": "Heart center"
+  },
+  {
+    "planet": "venus",
+    "angel": "Anael",
+    "metal": "Copper",
+    "chakra": "Throat center"
+  },
+  {
+    "planet": "mercury",
+    "angel": "Raphael",
+    "metal": "Quicksilver",
+    "chakra": "Cerebrum and pineal body"
+  },
+  {
+    "planet": "moon",
+    "angel": "Gabriel",
+    "metal": "Silver",
+    "chakra": "Pituitary gland"
+  }
+]

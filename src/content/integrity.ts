@@ -8,7 +8,7 @@
 // Add a new check here whenever you add a field that names a record in
 // another data file.
 
-import { grades, sephiroth, paths, wordBySlug } from './data'
+import { chakras, grades, sephiroth, paths, wordBySlug } from './data'
 import { cards, cardByLetter } from './data/tarot'
 import { planets, signs } from './data/astrology'
 import {
@@ -177,5 +177,13 @@ for (const m of supersensoryMeditations) {
   expect(
     cardSlugs.has(m.slug),
     `supersensory meditation "${m.slug}" doesn't match any major arcana slug`,
+  )
+}
+
+// --- chakra.planet → planet slug
+for (const c of chakras) {
+  expect(
+    planetSlugs.has(c.planet),
+    `chakra row angel="${c.angel}" planet="${c.planet}" has no matching planet`,
   )
 }

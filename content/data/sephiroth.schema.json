@@ -13,12 +13,6 @@
       "hebrewRoman": {
         "type": "string"
       },
-      "hebrewLetters": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
-      },
       "name": {
         "type": "string"
       },

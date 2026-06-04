@@ -204,6 +204,19 @@ export const SupersensoryMeditationSchema = z.object({
 // Life; the other ten grades each map to one sephirah. Each non-neophyte
 // grade carries a Qabalistic "intelligence" name whose Hebrew letters
 // spell out a path of tarot keys (looked up via tarot.json letter).
+// ---------- chakras.json ----------
+//
+// Seven planetary chakras — each entry pairs a planet (by slug from
+// planets.json), its presiding archangel, the alchemical metal, and
+// the body center it governs. Stored in chakra order (root → crown)
+// matching planets.json.
+export const ChakraSchema = z.object({
+  planet: z.string(),
+  angel: z.string(),
+  metal: z.string(),
+  chakra: z.string(),
+})
+
 export const GradeSchema = z.object({
   slug: z.string(),
   name: z.string(),
