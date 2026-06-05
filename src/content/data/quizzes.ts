@@ -457,6 +457,17 @@ export const quizzes: ReadonlyArray<Quiz> = [
     answer: (s) => s.quality,
   }),
   signFieldQuiz({
+    slug: 'opposites',
+    title: 'Opposites',
+    fieldLabel: 'Opposite',
+    // Zodiac opposites — signs[i] and signs[i+6] are 180° apart, so
+    // the lookup wraps cleanly with mod 12.
+    answer: (s) => {
+      const i = signs.findIndex((x) => x.slug === s.slug)
+      return signs[(i + 6) % signs.length].name
+    },
+  }),
+  signFieldQuiz({
     slug: 'alchemy-element',
     title: 'Alchemy - Element',
     fieldLabel: 'Element',
