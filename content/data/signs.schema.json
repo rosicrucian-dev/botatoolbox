@@ -35,6 +35,9 @@
           "Mutable"
         ]
       },
+      "alchemicalStage": {
+        "type": "string"
+      },
       "rulers": {
         "type": "array",
         "items": {
@@ -62,6 +65,7 @@
       "letter",
       "bodyPart",
       "quality",
+      "alchemicalStage",
       "rulers",
       "exaltedBy"
     ],

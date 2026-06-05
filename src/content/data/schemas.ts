@@ -68,6 +68,9 @@ export const SignSchema = z.object({
   letter: z.string().describe('Hebrew letter attributed to this sign.'),
   bodyPart: z.string().describe('Body region governed by this sign.'),
   quality: z.enum(['Cardinal', 'Fixed', 'Mutable']),
+  // Twelve-stage Magnum Opus: each sign owns one alchemical operation
+  // in zodiac order — Calcination (Aries) → Projection (Pisces).
+  alchemicalStage: z.string(),
   rulers: z
     .array(z.string())
     .describe('Planet slug(s) that rule this sign.'),

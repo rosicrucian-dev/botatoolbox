@@ -52,6 +52,7 @@ export default async function MinorCardPage({
           </h1>
 
           <MinorAttributes
+            num={card.num}
             keyword={card.keyword}
             sign={card.sign}
             dates={card.dates}

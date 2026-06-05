@@ -181,8 +181,8 @@ function hebrewLettersQuiz(): Quiz {
     answer: c.letter,
   }))
   return {
-    slug: 'letters',
-    title: 'Letters',
+    slug: 'letter',
+    title: 'Letter',
     fieldLabel: 'Letter',
     categorySlug: 'hebrew',
     items,
@@ -426,20 +426,20 @@ export const quizzes: ReadonlyArray<Quiz> = [
     title: 'All Keywords',
   }),
   signFieldQuiz({
-    slug: 'symbols',
-    title: 'Symbols',
+    slug: 'symbol',
+    title: 'Symbol',
     fieldLabel: 'Sign',
     answer: (s) => s.name,
   }),
   signQuiz({
-    slug: 'rulers',
-    title: 'Rulers',
+    slug: 'ruler',
+    title: 'Ruler',
     fieldLabel: 'Ruler',
     answerSlugs: (s) => s.rulers,
   }),
   signQuiz({
-    slug: 'exaltations',
-    title: 'Exaltations',
+    slug: 'exaltation',
+    title: 'Exaltation',
     fieldLabel: 'Exaltation',
     // Returning null skips signs with no exaltation.
     answerSlugs: (s) => (s.exaltedBy ? [s.exaltedBy] : null),
@@ -457,10 +457,16 @@ export const quizzes: ReadonlyArray<Quiz> = [
     answer: (s) => s.quality,
   }),
   signFieldQuiz({
-    slug: 'alchemy',
-    title: 'Alchemy',
-    fieldLabel: 'Alchemy',
+    slug: 'alchemy-element',
+    title: 'Alchemy - Element',
+    fieldLabel: 'Element',
     answer: (s) => s.alchemy,
+  }),
+  signFieldQuiz({
+    slug: 'alchemy-stage',
+    title: 'Alchemy - Stage',
+    fieldLabel: 'Stage',
+    answer: (s) => s.alchemicalStage,
   }),
   numerologyQuiz(),
 ]

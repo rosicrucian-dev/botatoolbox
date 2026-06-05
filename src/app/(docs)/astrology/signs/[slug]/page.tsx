@@ -80,7 +80,10 @@ export default async function SignPage({
           { label: 'Symbol', value: sign.symbol },
           { label: 'Body', value: sign.bodyPart },
           { label: 'Quality', value: sign.quality },
-          { label: 'Alchemy', value: sign.alchemy },
+          {
+            label: 'Alchemy',
+            value: `${sign.alchemy} — ${sign.alchemicalStage}`,
+          },
           { label: 'Color', value: sign.color },
         ]}
       />

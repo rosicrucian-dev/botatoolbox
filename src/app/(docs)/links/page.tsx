@@ -14,6 +14,10 @@ const sections: Array<{ title: string; links: Array<LinkItem> }> = [
     title: 'Official',
     links: [
       { name: 'Builders of the Adytum', href: 'https://bota.org' },
+      {
+        name: 'An Esoteric Qabalistic Service',
+        href: 'https://www.youtube.com/watch?v=S8YnSAd6UFk&list=PLX7ZN2l0whae__9ofuZE5vQqrgvJfJP2X',
+      },
     ],
   },
 ]

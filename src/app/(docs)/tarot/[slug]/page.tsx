@@ -143,6 +143,19 @@ export default async function TarotCardPage({
                   value: raw,
                 }
               }
+              // For sign-attributed cards, append the sign's alchemical
+              // stage to the Alchemy row — e.g. "Fiery — Calcination"
+              // for the Emperor. Planet-attributed cards (Magician,
+              // High Priestess, …) show just the alchemy attribute.
+              if (key === 'alchemy') {
+                const sign = signBySlug[card.astrology.toLowerCase()]
+                if (sign) {
+                  return {
+                    label,
+                    value: `${raw} — ${sign.alchemicalStage}`,
+                  }
+                }
+              }
               // The Astrology cell links to the corresponding planet or
               // sign detail page. Slug is just the lowercased name —
               // every card's astrology resolves to either a planet or
