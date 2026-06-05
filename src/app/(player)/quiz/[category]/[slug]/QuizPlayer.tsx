@@ -283,6 +283,18 @@ function ItemDisplay({ item }: { item: QuizItem }) {
         </div>
       )
     }
+    // 'plain' — oversized non-glyph characters (digits, etc.) with no
+    // grayscale filter or special font.
+    if (item.display.style === 'plain') {
+      return (
+        <div
+          className="text-center text-[min(15vh,35vw)] leading-none font-semibold md:text-[min(22vh,40vw)]"
+          aria-label={item.display.alt}
+        >
+          {item.display.glyph}
+        </div>
+      )
+    }
     // Default 'sign' style — sizing + grayscale match
     // AstrologyFocusPlayer's glyph rendering so zodiac emoji look the
     // same here as in focus mode.

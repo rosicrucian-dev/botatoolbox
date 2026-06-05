@@ -13,7 +13,7 @@ export function generateStaticParams() {
 const items: ReadonlyArray<FocusItem> = planets.map((p) => ({
   slug: p.slug,
   name: p.name,
-  symbol: p.symbol,
+  glyph: p.glyph,
   cardSlug: p.cardSlug,
   cardNum: p.cardNum,
   cardName: p.cardName,

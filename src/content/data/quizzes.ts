@@ -11,6 +11,7 @@
 import { cards, cardImage, type TarotCard } from './tarot'
 import { minorCards, minorImage } from './index'
 import { signs, planets, planetBySlug } from './astrology'
+import { numerology } from './numerology'
 import { getLetterMeta } from '@/lib/hebrew'
 
 // Discriminated union for the left side of the player.
@@ -36,7 +37,10 @@ export type QuizDisplay =
       // grayscale filter used by the astrology zodiac-emoji glyphs.
       // 'hebrew' renders larger in font-serif with rtl direction —
       // matches the major-arcana focus mode's Hebrew letter display.
-      style?: 'sign' | 'hebrew'
+      // 'plain' is for non-glyph oversized characters (e.g. digits) —
+      // same sizing as 'sign' but without the grayscale filter or
+      // serif font.
+      style?: 'sign' | 'hebrew' | 'plain'
     }
 
 export interface QuizItem {
@@ -75,6 +79,7 @@ export const quizCategories: ReadonlyArray<QuizCategory> = [
   { slug: 'minor-arcana', label: 'Minor Arcana' },
   { slug: 'signs', label: 'Signs' },
   { slug: 'hebrew', label: 'Hebrew' },
+  { slug: 'miscellaneous', label: 'Miscellaneous' },
 ]
 
 // ---------- builders ----------
@@ -218,6 +223,55 @@ function hebrewTypeQuiz(): Quiz {
   }
 }
 
+// 22 Hebrew letters on the left; the answer is the BOTA English
+// transliteration code (A, B, G, …, Tz, Sh, Th) stored on each tarot
+// card's `english` field.
+function hebrewTransliterationQuiz(): Quiz {
+  const items: ReadonlyArray<QuizItem> = cards.map((c) => ({
+    key: c.slug,
+    label: c.name,
+    display: {
+      kind: 'glyph',
+      glyph: getLetterMeta(c.letter).glyph,
+      alt: c.letter,
+      style: 'hebrew',
+    },
+    answer: c.english,
+  }))
+  return {
+    slug: 'transliteration',
+    title: 'Transliteration',
+    fieldLabel: 'Transliteration',
+    categorySlug: 'hebrew',
+    items,
+    answerOptions: dedupSort(items.map((i) => i.answer)),
+  }
+}
+
+// Digit 0–9 on the left; the answer is the BOTA single-digit
+// numerological keyword (No-Thing, Beginning, …).
+function numerologyQuiz(): Quiz {
+  const items: ReadonlyArray<QuizItem> = numerology.map((n) => ({
+    key: String(n.num),
+    label: String(n.num),
+    display: {
+      kind: 'glyph',
+      glyph: String(n.num),
+      alt: String(n.num),
+      style: 'plain',
+    },
+    answer: n.meaning,
+  }))
+  return {
+    slug: 'numerology',
+    title: 'Numerology',
+    fieldLabel: 'Meaning',
+    categorySlug: 'miscellaneous',
+    items,
+    answerOptions: dedupSort(items.map((i) => i.answer)),
+  }
+}
+
 function hebrewGematriaQuiz(): Quiz {
   const items: ReadonlyArray<QuizItem> = cards.map((c) => ({
     key: c.slug,
@@ -252,7 +306,7 @@ function signFieldQuiz(opts: {
   const items: ReadonlyArray<QuizItem> = signs.map((sign) => ({
     key: sign.slug,
     label: sign.name,
-    display: { kind: 'glyph', glyph: sign.symbol, alt: sign.name },
+    display: { kind: 'glyph', glyph: sign.glyph, alt: sign.name },
     answer: opts.answer(sign),
   }))
   return {
@@ -283,7 +337,7 @@ function signQuiz(opts: {
       {
         key: sign.slug,
         label: sign.name,
-        display: { kind: 'glyph', glyph: sign.symbol, alt: sign.name },
+        display: { kind: 'glyph', glyph: sign.glyph, alt: sign.name },
         answer: planetBySlug[canonicalSlug].name,
         alsoAccepted:
           alts.length > 0
@@ -344,6 +398,7 @@ export const quizzes: ReadonlyArray<Quiz> = [
     field: 'human',
   }),
   hebrewLettersQuiz(),
+  hebrewTransliterationQuiz(),
   hebrewGematriaQuiz(),
   hebrewTypeQuiz(),
   minorArcanaKeywordsQuiz({
@@ -407,6 +462,7 @@ export const quizzes: ReadonlyArray<Quiz> = [
     fieldLabel: 'Alchemy',
     answer: (s) => s.alchemy,
   }),
+  numerologyQuiz(),
 ]
 
 export function quizBySlug(

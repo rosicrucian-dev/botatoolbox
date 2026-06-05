@@ -77,6 +77,7 @@ export default async function SignPage({
             label: 'Exaltation',
             value: exalts ? <PlanetLink planet={exalts} /> : <Empty />,
           },
+          { label: 'Symbol', value: sign.symbol },
           { label: 'Body', value: sign.bodyPart },
           { label: 'Quality', value: sign.quality },
           { label: 'Alchemy', value: sign.alchemy },

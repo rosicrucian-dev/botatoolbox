@@ -16,7 +16,7 @@ import { SoundButton } from '@/components/SoundButton'
 export interface FocusItem {
   slug: string
   name: string
-  symbol: string
+  glyph: string
   cardSlug: string
   cardNum: number
   cardName: string
@@ -121,7 +121,7 @@ export function AstrologyFocusPlayer({
           className="text-center text-[min(15vh,35vw)] leading-tight grayscale md:text-[min(22vh,40vw)]"
           aria-label={slide.label ?? undefined}
         >
-          {slide.symbol}
+          {slide.glyph}
         </div>
       )}
     />

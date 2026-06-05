@@ -38,6 +38,7 @@ import { byKey } from './helpers'
 export * from './grades'
 export * from './minor-arcana'
 export * from './chakras'
+export * from './numerology'
 
 // ---- types
 

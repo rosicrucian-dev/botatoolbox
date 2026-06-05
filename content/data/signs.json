@@ -1,14 +1,158 @@
 [
-  { "slug": "aries",       "name": "Aries",       "symbol": "♈", "letter": "Heh",    "bodyPart": "Head, face",                       "quality": "Cardinal", "rulers": ["mars"],     "exaltedBy": "sun" },
-  { "slug": "taurus",      "name": "Taurus",      "symbol": "♉", "letter": "Vav",    "bodyPart": "Neck, throat",                     "quality": "Fixed",    "rulers": ["venus"],    "exaltedBy": "moon" },
-  { "slug": "gemini",      "name": "Gemini",      "symbol": "♊", "letter": "Zain",   "bodyPart": "Lungs, collar-bone, arms, hands",  "quality": "Mutable",  "rulers": ["mercury"],  "exaltedBy": null },
-  { "slug": "cancer",      "name": "Cancer",      "symbol": "♋", "letter": "Cheth",  "bodyPart": "Breast, stomach",                  "quality": "Cardinal", "rulers": ["moon"],     "exaltedBy": "jupiter" },
-  { "slug": "leo",         "name": "Leo",         "symbol": "♌", "letter": "Teth",   "bodyPart": "Sides, back, heart",               "quality": "Fixed",    "rulers": ["sun"],      "exaltedBy": null },
-  { "slug": "virgo",       "name": "Virgo",       "symbol": "♍", "letter": "Yod",    "bodyPart": "Intestines",                       "quality": "Mutable",  "rulers": ["mercury"],  "exaltedBy": "mercury" },
-  { "slug": "libra",       "name": "Libra",       "symbol": "♎", "letter": "Lamed",  "bodyPart": "Kidneys, loins, back",             "quality": "Cardinal", "rulers": ["venus"],    "exaltedBy": "saturn" },
-  { "slug": "scorpio",     "name": "Scorpio",     "symbol": "♏", "letter": "Nun",    "bodyPart": "Sex organs",                       "quality": "Fixed",    "rulers": ["mars"],     "exaltedBy": null },
-  { "slug": "sagittarius", "name": "Sagittarius", "symbol": "♐", "letter": "Samekh", "bodyPart": "Hips, thighs, liver",              "quality": "Mutable",  "rulers": ["jupiter"],  "exaltedBy": null },
-  { "slug": "capricorn",   "name": "Capricorn",   "symbol": "♑", "letter": "Ayin",   "bodyPart": "Knees",                            "quality": "Cardinal", "rulers": ["saturn"],   "exaltedBy": "mars" },
-  { "slug": "aquarius",    "name": "Aquarius",    "symbol": "♒", "letter": "Tzaddi", "bodyPart": "Ankles, blood",                    "quality": "Fixed",    "rulers": ["uranus"],   "exaltedBy": null },
-  { "slug": "pisces",      "name": "Pisces",      "symbol": "♓", "letter": "Qoph",   "bodyPart": "Feet",                             "quality": "Mutable",  "rulers": ["neptune"],  "exaltedBy": "venus" }
+  {
+    "slug": "aries",
+    "name": "Aries",
+    "glyph": "♈",
+    "symbol": "Ram",
+    "letter": "Heh",
+    "bodyPart": "Head, face",
+    "quality": "Cardinal",
+    "rulers": [
+      "mars"
+    ],
+    "exaltedBy": "sun"
+  },
+  {
+    "slug": "taurus",
+    "name": "Taurus",
+    "glyph": "♉",
+    "symbol": "Ox",
+    "letter": "Vav",
+    "bodyPart": "Neck, throat",
+    "quality": "Fixed",
+    "rulers": [
+      "venus"
+    ],
+    "exaltedBy": "moon"
+  },
+  {
+    "slug": "gemini",
+    "name": "Gemini",
+    "glyph": "♊",
+    "symbol": "Twins",
+    "letter": "Zain",
+    "bodyPart": "Lungs, collar-bone, arms, hands",
+    "quality": "Mutable",
+    "rulers": [
+      "mercury"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "cancer",
+    "name": "Cancer",
+    "glyph": "♋",
+    "symbol": "Crab",
+    "letter": "Cheth",
+    "bodyPart": "Breast, stomach",
+    "quality": "Cardinal",
+    "rulers": [
+      "moon"
+    ],
+    "exaltedBy": "jupiter"
+  },
+  {
+    "slug": "leo",
+    "name": "Leo",
+    "glyph": "♌",
+    "symbol": "Lion",
+    "letter": "Teth",
+    "bodyPart": "Sides, back, heart",
+    "quality": "Fixed",
+    "rulers": [
+      "sun"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "virgo",
+    "name": "Virgo",
+    "glyph": "♍",
+    "symbol": "Virgin",
+    "letter": "Yod",
+    "bodyPart": "Intestines",
+    "quality": "Mutable",
+    "rulers": [
+      "mercury"
+    ],
+    "exaltedBy": "mercury"
+  },
+  {
+    "slug": "libra",
+    "name": "Libra",
+    "glyph": "♎",
+    "symbol": "Balance",
+    "letter": "Lamed",
+    "bodyPart": "Kidneys, loins, back",
+    "quality": "Cardinal",
+    "rulers": [
+      "venus"
+    ],
+    "exaltedBy": "saturn"
+  },
+  {
+    "slug": "scorpio",
+    "name": "Scorpio",
+    "glyph": "♏",
+    "symbol": "Scorpion",
+    "letter": "Nun",
+    "bodyPart": "Sex organs",
+    "quality": "Fixed",
+    "rulers": [
+      "mars"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "sagittarius",
+    "name": "Sagittarius",
+    "glyph": "♐",
+    "symbol": "Archer",
+    "letter": "Samekh",
+    "bodyPart": "Hips, thighs, liver",
+    "quality": "Mutable",
+    "rulers": [
+      "jupiter"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "capricorn",
+    "name": "Capricorn",
+    "glyph": "♑",
+    "symbol": "Goat",
+    "letter": "Ayin",
+    "bodyPart": "Knees",
+    "quality": "Cardinal",
+    "rulers": [
+      "saturn"
+    ],
+    "exaltedBy": "mars"
+  },
+  {
+    "slug": "aquarius",
+    "name": "Aquarius",
+    "glyph": "♒",
+    "symbol": "Waterbearer",
+    "letter": "Tzaddi",
+    "bodyPart": "Ankles, blood",
+    "quality": "Fixed",
+    "rulers": [
+      "uranus"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "pisces",
+    "name": "Pisces",
+    "glyph": "♓",
+    "symbol": "Fishes",
+    "letter": "Qoph",
+    "bodyPart": "Feet",
+    "quality": "Mutable",
+    "rulers": [
+      "neptune"
+    ],
+    "exaltedBy": "venus"
+  }
 ]

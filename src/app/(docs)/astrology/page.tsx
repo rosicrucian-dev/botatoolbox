@@ -7,6 +7,19 @@ export const metadata: Metadata = {
   title: 'Astrology',
 }
 
+function renderSignRow(s: (typeof signs)[number]) {
+  return (
+    <>
+      <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+        {s.name}
+      </div>
+      <span className="text-2xl leading-none text-zinc-900 dark:text-zinc-100">
+        {s.glyph}
+      </span>
+    </>
+  )
+}
+
 export default function Astrology() {
   return (
     <article className="space-y-8">
@@ -28,7 +41,7 @@ export default function Astrology() {
                 {p.name}
               </div>
               <span className="inline-block w-7 text-center text-2xl leading-none text-zinc-900 dark:text-zinc-100">
-                {p.symbol}
+                {p.glyph}
               </span>
             </>
           )}
@@ -39,21 +52,23 @@ export default function Astrology() {
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
           Signs
         </h2>
-        <DataList
-          items={signs}
-          getKey={(s) => s.slug}
-          getHref={(s) => `/astrology/signs/${s.slug}`}
-          renderRow={(s) => (
-            <>
-              <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                {s.name}
-              </div>
-              <span className="text-2xl leading-none text-zinc-900 dark:text-zinc-100">
-                {s.symbol}
-              </span>
-            </>
-          )}
-        />
+        {/* Two columns × 6 rows so each row pairs a sign with its
+            zodiac opposite — Aries/Libra, Taurus/Scorpio, etc. (The
+            zodiac wraps cleanly: signs[i] is opposite signs[i+6].) */}
+        <div className="grid grid-cols-2 gap-x-6">
+          <DataList
+            items={signs.slice(0, 6)}
+            getKey={(s) => s.slug}
+            getHref={(s) => `/astrology/signs/${s.slug}`}
+            renderRow={renderSignRow}
+          />
+          <DataList
+            items={signs.slice(6)}
+            getKey={(s) => s.slug}
+            getHref={(s) => `/astrology/signs/${s.slug}`}
+            renderRow={renderSignRow}
+          />
+        </div>
       </section>
     </article>
   )

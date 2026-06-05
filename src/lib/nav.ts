@@ -180,6 +180,12 @@ export const navigation: Array<NavGroup> = [
           'The Golden Dawn grade ladder — each grade tied to a sephirah and a Qabalistic intelligence whose Hebrew letters point to tarot keys.',
       },
       {
+        title: 'Numerology',
+        href: '/numerology',
+        description:
+          'The BOTA single-digit numerological keywords — 0 through 9.',
+      },
+      {
         title: 'Tattvas',
         href: '/tattvas',
         description:

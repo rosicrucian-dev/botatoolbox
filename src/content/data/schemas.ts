@@ -61,7 +61,10 @@ export const WordSchema = z.object({
 export const SignSchema = z.object({
   slug: z.string().describe('URL slug (lowercase sign name).'),
   name: z.string(),
-  symbol: z.string().describe('Unicode astrological glyph (e.g. ♈).'),
+  glyph: z.string().describe('Unicode astrological glyph (e.g. ♈).'),
+  symbol: z
+    .string()
+    .describe('Iconic figure of the sign — Ram, Ox, Twins, etc.'),
   letter: z.string().describe('Hebrew letter attributed to this sign.'),
   bodyPart: z.string().describe('Body region governed by this sign.'),
   quality: z.enum(['Cardinal', 'Fixed', 'Mutable']),
@@ -82,7 +85,7 @@ export const SignSchema = z.object({
 export const PlanetSchema = z.object({
   slug: z.string().describe('URL slug (lowercase planet name).'),
   name: z.string(),
-  symbol: z.string().describe('Unicode astrological glyph (e.g. ☉).'),
+  glyph: z.string().describe('Unicode astrological glyph (e.g. ☉).'),
   letter: z.string().describe('Hebrew letter attributed to this planet.'),
   chakra: z
     .string()
@@ -204,6 +207,16 @@ export const SupersensoryMeditationSchema = z.object({
 // Life; the other ten grades each map to one sephirah. Each non-neophyte
 // grade carries a Qabalistic "intelligence" name whose Hebrew letters
 // spell out a path of tarot keys (looked up via tarot.json letter).
+// ---------- numerology.json ----------
+//
+// The ten BOTA single-digit numerological meanings. Each digit (0-9)
+// gets one keyword; multi-digit numbers reduce to a single digit by
+// summation. Pure attribution table — no foreign keys.
+export const NumerologySchema = z.object({
+  num: z.number().int().min(0).max(9),
+  meaning: z.string(),
+})
+
 // ---------- chakras.json ----------
 //
 // Seven planetary chakras — each entry pairs a planet (by slug from

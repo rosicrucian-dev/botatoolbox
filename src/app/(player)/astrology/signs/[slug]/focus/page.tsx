@@ -13,7 +13,7 @@ export function generateStaticParams() {
 const items: ReadonlyArray<FocusItem> = signs.map((s) => ({
   slug: s.slug,
   name: s.name,
-  symbol: s.symbol,
+  glyph: s.glyph,
   cardSlug: s.cardSlug,
   cardNum: s.cardNum,
   cardName: s.cardName,

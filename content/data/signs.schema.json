@@ -11,9 +11,13 @@
       "name": {
         "type": "string"
       },
-      "symbol": {
+      "glyph": {
         "type": "string",
         "description": "Unicode astrological glyph (e.g. ♈)."
+      },
+      "symbol": {
+        "type": "string",
+        "description": "Iconic figure of the sign — Ram, Ox, Twins, etc."
       },
       "letter": {
         "type": "string",
@@ -53,6 +57,7 @@
     "required": [
       "slug",
       "name",
+      "glyph",
       "symbol",
       "letter",
       "bodyPart",
