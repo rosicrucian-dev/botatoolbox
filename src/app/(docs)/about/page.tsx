@@ -21,6 +21,9 @@ export default function About() {
           issue or help contribute on{' '}
           <a href="https://github.com/rosicrucian-dev/botatoolbox">GitHub</a>.
         </p>
+        {/* <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+          For an optimal experience, exclude this website from any dark mode extensions in your browser so it doesn&apos;t interfere with the colors used for meditation.
+        </p> */}
         <p>
           The material used for this website is gathered using publicly
           available information from <a href="https://bota.org">Builders of the
@@ -35,7 +38,7 @@ export default function About() {
           Discord to discuss this and other Rosicrucian related projects.
         </p>
         <p>
-          To support this project, you can keep Jonathan caffeinated with <a href="https://buymeacoffee.com/rosicruciandev">Buy Me a Coffee</a>. Thank you!️&nbsp;🌹
+          To support this project, you can keep Jonathan caffeinated with <a href="https://buymeacoffee.com/rosicruciandev">Buy Me a Coffee</a>. I am always looking to improve and expand this website. Thank you!️ 🌹
         </p>
       </Prose>
     </article>

@@ -1,5 +1,6 @@
 import { AddToHomeHint } from './AddToHomeHint'
 import { NavSections } from './NavSections'
+import { Prose } from '@/components/Prose'
 
 // No `metadata.title` here — falls back to layout's `default: 'BOTA
 // Toolbox'`, which skips the `'%s - BOTA Toolbox'` template wrapping
@@ -9,27 +10,27 @@ import { NavSections } from './NavSections'
 export default function Home() {
   return (
     <article className="space-y-14">
+      {/* The hero block — title, lead subtitle, and any short
+          paragraphs of supporting copy — lives inside one <header>.
+          Prose handles its own internal paragraph rhythm and the
+          subtitle's `.lead` class gives it the muted hero-subtitle
+          treatment. Keeping everything in <header> means the article's
+          space-y-14 only fires between hero ↔ NavSections, not
+          between title ↔ Prose. */}
       <header>
         <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-white">
           BOTA Toolbox
         </h1>
-        <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-           An unofficial set of advanced tools for members of the Builders of the Adytum.
-        </p>
-        {/* <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-           Please exclude this website from any dark mode extensions so it doesn&apos;t interfere with the colors used for meditation.
-        </p> */}
-        <AddToHomeHint />
-        <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-          You can support this project with{' '}
-          <a
-            href="https://buymeacoffee.com/rosicruciandev"
-            className="font-medium text-emerald-600 underline underline-offset-2 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300"
-          >
-            Buy Me a Coffee
-          </a>
-          .🌹
-        </p>
+        <Prose className="mt-2">
+          <p className="lead">
+            An unofficial set of advanced tools for members of the Builders of the Adytum.
+          </p>
+          <p>
+            You can support this project with{' '}
+            <a href="https://buymeacoffee.com/rosicruciandev">Buy Me a Coffee</a>
+            . Thank you! 🌹
+          </p>
+        </Prose>
       </header>
       <NavSections />
     </article>
