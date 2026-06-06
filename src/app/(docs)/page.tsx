@@ -16,12 +16,21 @@ export default function Home() {
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">
            An unofficial set of advanced tools for members of the Builders of the Adytum.
         </p>
-        <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+        {/* <p className="mt-2 text-zinc-600 dark:text-zinc-400">
            Please exclude this website from any dark mode extensions so it doesn&apos;t interfere with the colors used for meditation.
-        </p>
+        </p> */}
         <AddToHomeHint />
+        <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+          You can support this project with{' '}
+          <a
+            href="https://buymeacoffee.com/rosicruciandev"
+            className="font-medium text-emerald-600 underline underline-offset-2 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300"
+          >
+            Buy Me a Coffee
+          </a>
+          .🌹
+        </p>
       </header>
-
       <NavSections />
     </article>
   )

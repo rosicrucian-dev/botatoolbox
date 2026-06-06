@@ -34,6 +34,9 @@ export default function About() {
           <a href="https://discord.gg/hKWWH6ukdV">Symposium of the Rose</a> on
           Discord to discuss this and other Rosicrucian related projects.
         </p>
+        <p>
+          To support this project, you can keep Jonathan caffeinated with <a href="https://buymeacoffee.com/rosicruciandev">Buy Me a Coffee</a>. Thank you!️&nbsp;🌹
+        </p>
       </Prose>
     </article>
   )
