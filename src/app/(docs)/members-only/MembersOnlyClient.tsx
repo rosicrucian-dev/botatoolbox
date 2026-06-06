@@ -47,7 +47,7 @@ export function MembersOnlyClient() {
       ) : (
         <form onSubmit={onSubmit} className="space-y-4">
           <p className="text-zinc-700 dark:text-zinc-300">
-            Enter the password to unlock members only content.
+            Some content is restricted to members of the Builders of the Adytum. Enter the password to unlock all available content.
           </p>
           <input
             type="password"
