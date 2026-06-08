@@ -25,11 +25,11 @@ export default function Home() {
           <p className="lead">
             An unofficial set of advanced tools for members of the Builders of the Adytum.
           </p>
-          <p>
+          {/* <p>
             You can support this project with{' '}
             <a href="https://buymeacoffee.com/rosicruciandev">Buy Me a Coffee</a>
             . Thank you! 🌹
-          </p>
+          </p> */}
         </Prose>
       </header>
       <NavSections />
