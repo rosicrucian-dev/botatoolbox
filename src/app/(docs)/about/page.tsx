@@ -29,7 +29,7 @@ export default function About() {
           available information from <a href="https://bota.org">Builders of the
           Adytum</a>, <a href="https://lvx.org">Fraternity of the Hidden Light</a>,
           and other sources. Colors were specifically chosen using FLO&rsquo;s
-          sequence of color cards from{' '}
+          sequence of <a href="https://lvx.org/product/color-cards/">color cards</a> from{' '}
           <a href="https://coloraid.com">Color Aid</a>. The minor arcana images are colored and provided with permission by <a href="https://joshyates.me/">Josh Yates</a>. 
         </p>
         <p>

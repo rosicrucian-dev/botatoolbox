@@ -20,6 +20,12 @@ export interface FileEntry {
   downloads?: ReadonlyArray<FileDownload>
   // `direct` entries are listed as a plain download link (no viewer page).
   direct?: boolean
+  // When set, the viewer shows the tarot tableau spread (from this image set)
+  // as the preview instead of a single <img src>.
+  tableau?: 'major' | 'major-alt'
+  // Set false to drop the rounded corners on the viewer preview image (e.g. for
+  // full-bleed art where rounding clips the corners).
+  rounded?: boolean
 }
 
 const BOOKS_SECTION = 'Books - Early Writings Curriculum'
@@ -41,26 +47,42 @@ export const files: ReadonlyArray<FileEntry> = [
     name: 'Tarot Images',
     src: '/files/Tarot Images.zip',
     section: 'Downloads',
-    direct: true,
+    tableau: 'major',
+    downloads: [{ label: 'Download ZIP', src: '/files/Tarot Images.zip' }],
   },
   {
     slug: 'tarot-alt-images',
     name: 'Tarot Alt Images',
     src: '/files/Tarot Alt Images.zip',
     section: 'Downloads',
-    direct: true,
+    tableau: 'major-alt',
+    downloads: [{ label: 'Download ZIP', src: '/files/Tarot Alt Images.zip' }],
+  },
+  {
+    slug: 'tree-of-life',
+    name: 'Tree of Life',
+    src: '/files/tree-of-life.jpg',
+    section: 'Downloads',
+  },
+  {
+    slug: 'tree-of-life-chakras',
+    name: 'Tree of Life with Chakras',
+    src: '/files/tree-of-life-chakras.jpg',
+    section: 'Downloads',
   },
   {
     slug: 'wallpaper',
     name: 'Wallpaper',
     src: '/files/wallpaper.jpg',
     section: 'Downloads',
+    rounded: false,
   },
   {
     slug: 'wallpaper-alt',
     name: 'Wallpaper Alt',
     src: '/files/wallpaper-alt.jpg',
     section: 'Downloads',
+    rounded: false,
   },
   {
     slug: 'occult-fundamentals',
@@ -96,6 +118,12 @@ export const files: ReadonlyArray<FileEntry> = [
     src: '/files/5. Hermetic Alchemy.pdf',
     section: BOOKS_SECTION,
     direct: true,
+  },
+  {
+    slug: 'lesser-ritual-of-the-pentagram',
+    name: 'Lesser Ritual of the Pentagram',
+    src: '/files/lrp.jpg',
+    section: 'Historical',
   },
 ]
 

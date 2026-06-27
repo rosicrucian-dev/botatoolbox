@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { type Metadata } from 'next'
 
+import { TarotTableau } from '@/components/TarotTableau'
 import { fileBySlug, files } from '../files'
 
 export function generateStaticParams() {
@@ -39,7 +40,7 @@ export default async function FileViewer({
         </h1>
         <div className="flex flex-wrap gap-2">
           {downloads.map((d) => (
-            <a key={d.src} href={d.src} download className={btn}>
+            <a key={d.src} href={encodeURI(d.src)} download className={btn}>
               {d.label}
             </a>
           ))}
@@ -50,11 +51,15 @@ export default async function FileViewer({
           {file.description}
         </p>
       )}
-      <img
-        src={file.src}
-        alt={file.name}
-        className="w-full rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
-      />
+      {file.tableau ? (
+        <TarotTableau variant={file.tableau} rounded={false} />
+      ) : (
+        <img
+          src={file.src}
+          alt={file.name}
+          className={`w-full shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800${file.rounded === false ? '' : ' rounded-lg'}`}
+        />
+      )}
     </article>
   )
 }

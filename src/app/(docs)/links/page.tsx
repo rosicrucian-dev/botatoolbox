@@ -18,6 +18,10 @@ const sections: Array<{ title: string; links: Array<LinkItem> }> = [
         name: 'An Esoteric Qabalistic Service',
         href: 'https://www.youtube.com/watch?v=S8YnSAd6UFk&list=PLX7ZN2l0whae__9ofuZE5vQqrgvJfJP2X',
       },
+      {
+        name: 'Ann Davies Classes',
+        href: 'https://www.youtube.com/@BuildersOfTheAdytum/playlists',
+      },
     ],
   },
 ]
