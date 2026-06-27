@@ -153,9 +153,9 @@ const rotationFacing = (side: Side, netDir: string) =>
 // NET BUILDER — unfold the cube into a Latin cross from a root face placed at
 // the centre with a chosen rotation. Each neighbour is rotated so the shared
 // edge faces back across the fold, which keeps every edge-wrap registered.
-// `above` (Magician) is always the centre; rootRot 270 stands the Magician
-// upright (its art points to its east edge, so Empress unfolds onto the top
-// square and the other faces follow from the cube's geometry).
+// The root is the centre face; its opposite face unfolds to the far end of the
+// long arm. rootRot 270 stands an above/below-type card (cardRotZ -90°) upright
+// in the centre; the other faces follow from the cube's geometry.
 // ---------------------------------------------------------------------------
 const CROSS_CELLS = new Set(['1,1', '1,0', '1,2', '1,3', '0,1', '2,1'])
 
@@ -187,7 +187,7 @@ function buildLayout(rootId: string, rootRot: number): Placement[] {
   return [...placed.values()]
 }
 
-const layout = buildLayout('above', 270)
+const layout = buildLayout('below', 270)
 
 // ---------------------------------------------------------------------------
 // SIDE / TAB TOPOLOGY — work out which edges fold and which need glue flaps.
@@ -227,14 +227,14 @@ for (const p of layout) {
   }
 }
 // Pin which face carries the glue flap for every edge so all flaps sit on the
-// cross's vertical spine (Empress/east on top, Wheel/west, High Priestess/below
-// at the bottom) and the two arms (Sun/north, Tower/south) stay flap-free. Each
-// edge can only go to one of the two faces it joins, so every assignment below
-// names a spine face. (T-E/T-W/T-N/T-S and B-W are internal folds, not flaps.)
+// cross's vertical spine (Empress/east on top, Wheel/west, Magician/above at the
+// bottom) and the two arms (Tower/south, Sun/north) stay flap-free. Each edge
+// can only go to one of the two faces it joins, so every assignment below names
+// a spine face. (B-E/B-W/B-N/B-S and T-W are internal folds, not flaps.)
 const TAB_OVERRIDE: Record<string, string> = {
   NE: 'east', SE: 'east', // Empress (top square)
   NW: 'west', SW: 'west', // Wheel (middle square)
-  'B-N': 'below', 'B-S': 'below', 'B-E': 'below', // High Priestess (bottom square)
+  'T-N': 'above', 'T-S': 'above', 'T-E': 'above', // Magician (bottom square)
 }
 
 // pair perimeter sides by edge, assign one flap per pair, load-balanced by cell
@@ -436,13 +436,11 @@ function renderChrome(): string {
   const instr = [
     '1. Print at 100%.',
     '2. Cut the dark lines.',
-    '3. Fold the pale lines.',
+    '3. Fold the white lines.',
     '4. Glue flaps to edges.',
   ]
   const lines: string[] = []
-  lines.push(`<text x="${tl.x}" y="${tl.y + 6}" ${serif} font-size="8" letter-spacing="0.5" fill="#111">THE CUBE</text>`)
-  lines.push(`<text x="${tl.x}" y="${tl.y + 14.5}" ${serif} font-size="8" letter-spacing="0.5" fill="#111">OF SPACE</text>`)
-  lines.push(`<line x1="${tl.x}" y1="${tl.y + 18}" x2="${tl.x + 40}" y2="${tl.y + 18}" stroke="#111" stroke-width="0.3"/>`)
+  lines.push(`<text x="${tl.x}" y="${tl.y + 6}" ${serif} font-size="4" letter-spacing="0.5" fill="#111">CUBE OF SPACE</text>`)
   instr.forEach((t, i) =>
     lines.push(`<text x="${tl.x}" y="${tl.y + 24 + i * 4.3}" ${sans} font-size="3.2" fill="#222">${t}</text>`),
   )
