@@ -33,7 +33,7 @@ const BOOKS_SECTION = 'Books - Early Writings Curriculum'
 export const files: ReadonlyArray<FileEntry> = [
   {
     slug: 'cube-of-space',
-    name: 'Printable Cube of Space PDF',
+    name: 'Printable Cube of Space',
     src: '/files/cube-of-space-net-preview.jpg',
     section: 'Downloads',
     description: '',
@@ -123,6 +123,12 @@ export const files: ReadonlyArray<FileEntry> = [
     slug: 'lesser-ritual-of-the-pentagram',
     name: 'Lesser Ritual of the Pentagram',
     src: '/files/lrp.jpg',
+    section: 'Historical',
+  },
+  {
+    slug: 'tarot-back',
+    name: 'Tarot Back Image',
+    src: '/files/tarot-back.jpg',
     section: 'Historical',
   },
 ]

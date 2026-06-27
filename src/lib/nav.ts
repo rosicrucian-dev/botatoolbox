@@ -101,6 +101,9 @@ export const navigation: Array<NavGroup> = [
         title: 'Aquarian Doxology',
         href: '/texts/aquarian-doxology',
       },
+      // Chaldean Oracles (/texts/chaldean-oracles) is intentionally hidden from
+      // the nav + table of contents; the page still exists and is reachable by
+      // direct URL.
       {
         title: 'The Emerald Tablet of Hermes',
         href: '/texts/emerald-tablet-hermes',
