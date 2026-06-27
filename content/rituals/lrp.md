@@ -8,10 +8,10 @@ v. Clasping the hands upon the breast, say [le-Olahm](/words-of-power/lovlm), [A
 
 ## Formulation of the Pentagrams
 
-vi. Turning to the East, make a Pentagram (that of Earth). Say [IHVH](/words-of-power/ihvh).
-vii. Turning to the South, the same, but say [ADNI](/words-of-power/adni).
-viii. Turning to the West, the same, but say [AHIH](/words-of-power/ahih).
-ix. Turning to the North, the same, but say [AGLA](/words-of-power/agla).
+vi. Turning to the East, make a Pentagram (that of Earth). Say [Yod-Heh-Waw-Heh](/words-of-power/ihvh).
+vii. Turning to the South, the same, but say [Adonai](/words-of-power/adni).
+viii. Turning to the West, the same, but say [Eheyeh](/words-of-power/ahih).
+ix. Turning to the North, the same, but say [Ateh Gebur Le-Olahm Adonai](/words-of-power/athh-gbvr-lovlm-adni) (AGLA).
 x. Extending the arms in the form of a Cross, say:
 xi. Before me [Raphael](/words-of-power/rpal);
 xii. Behind me [Gabriel](/words-of-power/gbrial);

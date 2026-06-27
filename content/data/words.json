@@ -27,14 +27,28 @@
     ]
   },
   {
-    "slug": "agla",
-    "name": "AGLA",
-    "english": "Agla",
+    "slug": "athh-gbvr-lovlm-adni",
+    "name": "AThH GBVR L'OVLM ADNI",
+    "english": "Ateh Gebur Le-Olahm Adonai",
+    "meaning": "Thou art mighty forever, O Lord — the name AGLA spelled in full.",
+    "wordSizes": [3, 4, 5, 4],
     "letters": [
-      { "letter": "Aleph", "pronunciation": "ah" },
-      { "letter": "Gimel", "pronunciation": "geh" },
-      { "letter": "Lamed", "pronunciation": "lah" },
-      { "letter": "Aleph", "pronunciation": "ah" }
+      { "letter": "Aleph",  "pronunciation": "ah" },
+      { "letter": "Tav",    "pronunciation": "tah" },
+      { "letter": "Heh",    "pronunciation": "eh" },
+      { "letter": "Gimel",  "pronunciation": "ge" },
+      { "letter": "Beth",   "pronunciation": "boo" },
+      { "letter": "Vav",    "pronunciation": "oo" },
+      { "letter": "Resh",   "pronunciation": "oor" },
+      { "letter": "Lamed",  "pronunciation": "leh" },
+      { "letter": "Ayin",   "pronunciation": "oh" },
+      { "letter": "Vav",    "pronunciation": "ool" },
+      { "letter": "Lamed",  "pronunciation": "l" },
+      { "letter": "Mem",    "pronunciation": "ahm" },
+      { "letter": "Aleph",  "pronunciation": "ah" },
+      { "letter": "Daleth", "pronunciation": "doh" },
+      { "letter": "Nun",    "pronunciation": "nah" },
+      { "letter": "Yod",    "pronunciation": "ee" }
     ]
   },
   {
