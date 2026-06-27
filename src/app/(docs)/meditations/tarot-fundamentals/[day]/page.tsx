@@ -48,7 +48,7 @@ export default async function TarotFundamentalsDayPage({
       </h1>
 
       {/* 30% × 3 cards + 5% × 2 gaps = 100% of article width — matches
-          Table Draw so three cards fit on one line on any size screen. */}
+          Open Draw so three cards fit on one line on any size screen. */}
       <div className="flex flex-wrap items-start justify-center gap-x-[5%] gap-y-2 md:gap-y-4">
         {entry.cards.map((slug) => {
           const card = cardBySlug[slug]

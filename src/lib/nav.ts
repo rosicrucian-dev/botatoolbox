@@ -40,16 +40,16 @@ export const navigation: Array<NavGroup> = [
           'Keywords for the 40 numbered cards across Wands, Cups, Swords, and Pentacles.',
       },
       {
+        title: 'Open Draw',
+        href: '/tarot/open-draw',
+        description:
+          'Draw cards from the full deck onto a tabletop — drag, arrange, and lay out spreads.',
+      },
+      {
         title: 'Tableau',
         href: '/tarot/tableau',
         description:
           'The major arcana arranged in BOTA’s standard tableau pattern.',
-      },
-      {
-        title: 'Table Draw',
-        href: '/tarot/table-draw',
-        description:
-          'Draw cards from the full deck onto a tabletop — drag, arrange, and lay out spreads.',
       },
     ],
   },

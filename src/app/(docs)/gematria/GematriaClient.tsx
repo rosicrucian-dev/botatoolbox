@@ -57,7 +57,7 @@ export function GematriaClient() {
   // its meaning below the tarot.
   const dictWord = useMemo(() => wordForSpelling(total, word), [total, word])
 
-  // Tarot cards are pinned to ⅑ width (matching Table Draw's gap scheme)
+  // Tarot cards are pinned to ⅑ width (matching Open Draw's gap scheme)
   // so nine cards exactly fill the row: 9 × width + 8 × gap = 100%. Anything
   // shorter is centered; a tenth card wraps. The gap is set inline below from
   // the same constant so width and gap can't drift.

@@ -152,7 +152,7 @@ type DragState = {
   y: number
 }
 
-// The full 78-card deck. Table Draw always uses the whole deck.
+// The full 78-card deck. Open Draw always uses the whole deck.
 const FULL_DECK = [...cards.map((c) => c.slug), ...minorCards.map((c) => c.slug)]
 
 function shuffle(input: Array<string>): Array<string> {
@@ -258,7 +258,7 @@ function CardFace({ slug }: { slug: string }) {
   )
 }
 
-export function TableDrawClient({
+export function OpenDrawClient({
   variant = 'inline',
 }: {
   variant?: 'inline' | 'expand'
@@ -362,7 +362,7 @@ export function TableDrawClient({
   }, [placed])
 
   // Full-screen (expand) chrome: a body-scroll lock and Esc-to-close. Unlike
-  // the dark slide players, Table Draw expand is theme-colored (it's just a
+  // the dark slide players, Open Draw expand is theme-colored (it's just a
   // full-bleed version of the docs page), so there's no black toolbar-tint
   // prime. All no-ops in the inline variant.
   useEffect(() => {
@@ -389,7 +389,7 @@ export function TableDrawClient({
       if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return
       if (e.key === 'Escape') {
         const qs = serialize(placedRef.current)
-        router.push(qs ? `/tarot/table-draw?cards=${qs}` : '/tarot/table-draw')
+        router.push(qs ? `/tarot/open-draw?cards=${qs}` : '/tarot/open-draw')
       }
     }
     window.addEventListener('keydown', onKey)
@@ -629,14 +629,14 @@ export function TableDrawClient({
   // (and returns) with the same cards in the same places.
   const cardsParam = serialize(placed)
   const expandHref = cardsParam
-    ? `/tarot/table-draw/expand?cards=${cardsParam}`
-    : '/tarot/table-draw/expand'
+    ? `/tarot/open-draw/expand?cards=${cardsParam}`
+    : '/tarot/open-draw/expand'
   const closeHref = cardsParam
-    ? `/tarot/table-draw?cards=${cardsParam}`
-    : '/tarot/table-draw'
+    ? `/tarot/open-draw?cards=${cardsParam}`
+    : '/tarot/open-draw'
 
-  // Zoom + Clear — shared between the inline header row and the expand header.
-  // Clear sits to the LEFT of the zoom buttons: since the control group is
+  // Zoom + Shuffle — shared between the inline header row and the expand header.
+  // Shuffle sits to the LEFT of the zoom buttons: since the control group is
   // right-anchored, it grows leftward when it appears and never nudges the
   // zoom (or Expand) buttons.
   const controls = (
@@ -648,7 +648,7 @@ export function TableDrawClient({
             onClick={reshuffle}
             className="inline-flex h-full items-center justify-center px-3 text-sm font-medium whitespace-nowrap transition hover:bg-current/10"
           >
-            Clear
+            Shuffle
           </button>
         </Tabs>
       )}
@@ -730,9 +730,7 @@ export function TableDrawClient({
               className="aspect-[724/1200] w-full rounded-md object-cover shadow-xl"
             />
           ) : (
-            <span className="flex aspect-[724/1200] w-full items-center justify-center rounded-md border-2 border-dashed border-zinc-300 text-center text-xs font-medium text-zinc-400 dark:border-zinc-600 dark:text-zinc-500">
-              Reshuffle
-            </span>
+            <span className="block aspect-[724/1200] w-full rounded-md border-2 border-dashed border-zinc-300 dark:border-zinc-600" />
           )}
         </button>
 
@@ -815,10 +813,14 @@ export function TableDrawClient({
 
       </div>
 
-      {placed.length === 0 && (
-        <p className="pointer-events-none absolute inset-x-0 bottom-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
-          Drag a card off the deck — drop it anywhere.
-        </p>
+      {placed.length === 0 && !drag && (
+        // Centered within the lower half of the content area. Hidden as soon as
+        // a drag starts so it doesn't paint over the first card being drawn.
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 bottom-0 flex items-center justify-center px-6">
+          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
+            Take a deep breath, set an intention, and draw card.
+          </p>
+        </div>
       )}
       </div>
   )
@@ -835,7 +837,7 @@ export function TableDrawClient({
       >
         {/* Themed header, matching the docs header (color + bottom divider). */}
         <header className="relative flex h-14 shrink-0 items-center justify-between gap-4 bg-white px-4 sm:px-6 lg:px-8 dark:bg-zinc-900">
-          <span className="truncate text-base font-semibold">Table Draw</span>
+          <span className="truncate text-base font-semibold">Open Draw</span>
           <div className="flex items-center gap-3">
             {controls}
             <button
@@ -861,7 +863,7 @@ export function TableDrawClient({
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
           <span className="md:hidden">Draw</span>
-          <span className="hidden md:inline">Table Draw</span>
+          <span className="hidden md:inline">Open Draw</span>
         </h1>
         <div className="flex flex-wrap items-center gap-3 text-zinc-900 dark:text-white">
           {controls}
