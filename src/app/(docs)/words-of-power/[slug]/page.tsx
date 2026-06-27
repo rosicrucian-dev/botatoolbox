@@ -37,9 +37,19 @@ export default async function WordOfPowerPage({
         <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
           {word.name}
         </h1>
-        <PlayLink href={`/words-of-power/${word.slug}/play?autoplay=1`}>
-          Practice ▶
-        </PlayLink>
+        <div className="flex shrink-0 items-center gap-2">
+          {word.slug === 'ahih' && (
+            <a
+              href="/files/ad-ahih.m4a"
+              className="shrink-0 rounded-md bg-zinc-900 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+            >
+              AD Recording
+            </a>
+          )}
+          <PlayLink href={`/words-of-power/${word.slug}/play?autoplay=1`}>
+            Practice ▶
+          </PlayLink>
+        </div>
       </div>
 
       {word.english && (
