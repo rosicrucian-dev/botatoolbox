@@ -37,9 +37,29 @@ export const files: ReadonlyArray<FileEntry> = [
     ],
   },
   {
+    slug: 'tarot-images',
+    name: 'Tarot Images',
+    src: '/files/Tarot Images.zip',
+    section: 'Downloads',
+    direct: true,
+  },
+  {
+    slug: 'tarot-alt-images',
+    name: 'Tarot Alt Images',
+    src: '/files/Tarot Alt Images.zip',
+    section: 'Downloads',
+    direct: true,
+  },
+  {
     slug: 'wallpaper',
     name: 'Wallpaper',
     src: '/files/wallpaper.jpg',
+    section: 'Downloads',
+  },
+  {
+    slug: 'wallpaper-alt',
+    name: 'Wallpaper Alt',
+    src: '/files/wallpaper-alt.jpg',
     section: 'Downloads',
   },
   {
