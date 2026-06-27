@@ -335,17 +335,26 @@ export function OpenDrawClient({
     setPile(shuffle(FULL_DECK.filter((s) => !have.has(s))))
   }, [])
 
-  // Mirror placed → URL (replace, so no history entry per move).
+  // Mirror placed → URL via history.replaceState (NOT the Next router). The
+  // router path re-suspends/re-mounts this client in a static export, and
+  // clearing all params is unreliable there — which let a stale URL resurrect
+  // cleared cards. replaceState just updates the address bar: no navigation, no
+  // remount, and `placed` stays the single source of truth (the URL is only
+  // read on initial mount). Current value comes from window.location, since
+  // useSearchParams won't reflect a replaceState write.
   useEffect(() => {
     const next = serialize(placed)
-    const current = sp.get('cards') ?? ''
-    if (next === current) return
-    const params = new URLSearchParams(sp.toString())
+    const params = new URLSearchParams(window.location.search)
+    if ((params.get('cards') ?? '') === next) return
     if (next) params.set('cards', next)
     else params.delete('cards')
     const qs = params.toString()
-    router.replace(qs ? `?${qs}` : '?', { scroll: false })
-  }, [placed, router, sp])
+    window.history.replaceState(
+      null,
+      '',
+      qs ? `?${qs}` : window.location.pathname,
+    )
+  }, [placed])
 
   // Flip freshly-dropped cards face-up a beat after they land, so the
   // face-down frame paints first and the CSS flip actually animates.
