@@ -29,6 +29,7 @@ const staticRoutes = [
   '/tarot/major-arcana',
   '/tarot/minor-arcana',
   '/tarot/tableau',
+  '/tarot/table-draw',
   '/keyboard',
   '/keyboard/tableau',
   '/tree-of-life',
