@@ -441,8 +441,9 @@ function renderChrome(): string {
   ]
   const lines: string[] = []
   lines.push(`<text x="${tl.x}" y="${tl.y + 6}" ${serif} font-size="4" letter-spacing="0.5" fill="#111">CUBE OF SPACE</text>`)
+  lines.push(`<line x1="${tl.x}" y1="${tl.y + 10}" x2="${tl.x + 40}" y2="${tl.y + 10}" stroke="#111" stroke-width="0.3"/>`)
   instr.forEach((t, i) =>
-    lines.push(`<text x="${tl.x}" y="${tl.y + 24 + i * 4.3}" ${sans} font-size="3.2" fill="#222">${t}</text>`),
+    lines.push(`<text x="${tl.x}" y="${tl.y + 16 + i * 4.3}" ${sans} font-size="3.2" fill="#222">${t}</text>`),
   )
   return lines.join('')
 }
