@@ -30,7 +30,9 @@ export default function MinorArcana() {
                   <li key={card.num}>
                     <Link href={`/tarot/minor-arcana/${slug}`} className={ROW}>
                       <span className="flex items-baseline gap-3">
-                        <IndexLabel>{card.num}</IndexLabel>
+                        <IndexLabel widthClassName="w-16 md:w-20">
+                          {card.num}
+                        </IndexLabel>
                         <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
                           {card.keyword}
                         </span>

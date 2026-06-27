@@ -41,15 +41,15 @@ export default function WordsOfPower() {
                   {w.english || 'placeholder'}
                 </div>
               </div>
-              <div className="text-right">
+              <div className="min-w-0 text-right">
                 <div
-                  className="font-serif text-3xl text-zinc-900 dark:text-zinc-100"
+                  className="font-serif text-3xl break-words text-zinc-900 dark:text-zinc-100"
                   dir="rtl"
                   lang="he"
                 >
                   {hebrew}
                 </div>
-                <div className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+                <div className="mt-1 text-sm break-words text-zinc-500 dark:text-zinc-400">
                   {pron}
                 </div>
               </div>

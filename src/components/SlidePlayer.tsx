@@ -158,8 +158,13 @@ export function SlidePlayer<S extends Slide>({
     hasText ? '' : 'text-zinc-900 dark:text-zinc-100',
   ].join(' ')
 
+  // Pin the shell to all four viewport edges rather than measuring a
+  // `height: 100svh`. `inset: 0` lets the browser hold the height as a
+  // constraint (top + bottom pinned), which sidesteps iOS standalone's
+  // flaky small-viewport-height math — a stale `svh` was rendering the
+  // shell shorter than the screen, exposing a black band at the bottom.
+  // Identical result on desktop, so it isn't gated to mobile.
   const safeAreaStyle: React.CSSProperties = {
-    height: '100svh',
     paddingTop: 'env(safe-area-inset-top)',
     paddingBottom: 'env(safe-area-inset-bottom)',
   }
@@ -167,7 +172,7 @@ export function SlidePlayer<S extends Slide>({
   return (
     <div
       data-primed={primed ? '' : undefined}
-      className={`player-shell fixed inset-x-0 top-0 z-50 flex flex-col transition-colors duration-200 ${fallbackClasses}`}
+      className={`player-shell fixed inset-0 z-50 flex flex-col transition-colors duration-200 ${fallbackClasses}`}
       style={{ ...safeAreaStyle, ...inlineStyle }}
     >
       <PlayerHeader

@@ -28,7 +28,7 @@ export interface FileEntry {
   rounded?: boolean
 }
 
-const BOOKS_SECTION = 'Books - Early Writings Curriculum'
+const BOOKS_SECTION = 'Early Writings Curriculum'
 
 export const files: ReadonlyArray<FileEntry> = [
   {
