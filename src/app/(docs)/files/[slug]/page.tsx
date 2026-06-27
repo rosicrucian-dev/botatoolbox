@@ -26,20 +26,29 @@ export default async function FileViewer({
   const file = fileBySlug[slug]
   if (!file) notFound()
 
+  const downloads = file.downloads ?? [{ label: 'Download', src: file.src }]
+  const btn =
+    'inline-flex items-center justify-center rounded-md bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300'
+
   return (
     <article className="space-y-6">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
           {file.name}
         </h1>
-        <a
-          href={file.src}
-          download
-          className="inline-flex items-center justify-center rounded-md bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
-        >
-          Download
-        </a>
+        <div className="flex flex-wrap gap-2">
+          {downloads.map((d) => (
+            <a key={d.src} href={d.src} download className={btn}>
+              {d.label}
+            </a>
+          ))}
+        </div>
       </div>
+      {file.description && (
+        <p className="max-w-2xl text-zinc-600 dark:text-zinc-400">
+          {file.description}
+        </p>
+      )}
       <img
         src={file.src}
         alt={file.name}

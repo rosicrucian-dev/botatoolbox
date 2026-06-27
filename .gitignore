@@ -16,3 +16,5 @@ dist
 /catalyst-ui-kit
 /tailwind-plus-protocol
 certificates
+# Cube-of-space PDF generator intermediates
+.cube-pdf-tmp/
