@@ -23,7 +23,7 @@ export default function Home() {
         </h1>
         <Prose className="mt-2">
           <p className="lead">
-            An unofficial set of advanced tools for members of the Builders of the Adytum.
+            An unofficial set of advanced tools for members of the <a href="https://bota.org">Builders of the Adytum</a>.
           </p>
           {/* <p>
             You can support this project with{' '}

@@ -4,7 +4,8 @@ import { type Metadata } from 'next'
 import { fileBySlug, files } from '../files'
 
 export function generateStaticParams() {
-  return files.map((f) => ({ slug: f.slug }))
+  // `direct` entries are plain download links with no viewer page.
+  return files.filter((f) => !f.direct).map((f) => ({ slug: f.slug }))
 }
 
 export async function generateMetadata({
@@ -24,7 +25,7 @@ export default async function FileViewer({
 }) {
   const { slug } = await params
   const file = fileBySlug[slug]
-  if (!file) notFound()
+  if (!file || file.direct) notFound()
 
   const downloads = file.downloads ?? [{ label: 'Download', src: file.src }]
   const btn =
