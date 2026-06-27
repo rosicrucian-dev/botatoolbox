@@ -21,7 +21,6 @@ export default function ChakrasPage() {
             <thead>
               <tr>
                 <Th>Planet</Th>
-                <Th>Angel</Th>
                 <Th>Metal</Th>
                 <Th>Chakra</Th>
               </tr>
@@ -43,7 +42,6 @@ export default function ChakrasPage() {
                         c.planet
                       )}
                     </Td>
-                    <Td>{c.angel}</Td>
                     <Td>{c.metal}</Td>
                     <Td>{c.chakra}</Td>
                   </tr>

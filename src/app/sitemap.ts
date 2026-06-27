@@ -22,6 +22,7 @@ const staticRoutes = [
   '/healing/signs',
   '/files',
   '/gematria',
+  '/gematria/dictionary',
   '/links',
   '/tattvas',
   '/rituals/lrp',

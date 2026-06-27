@@ -43,6 +43,12 @@ export const navigation: Array<NavGroup> = [
         description:
           'Keywords for the 40 numbered cards across Wands, Cups, Swords, and Pentacles.',
       },
+      {
+        title: 'Random Pull',
+        href: '/tarot/random-pull',
+        description:
+          'Draw random cards from the major arcana — one at a time, as many as you like.',
+      },
     ],
   },
   {
@@ -115,14 +121,25 @@ export const navigation: Array<NavGroup> = [
     ],
   },
   {
-    title: 'Tools',
+    title: 'Gematria',
     links: [
       {
-        title: 'Gematria',
+        title: 'Calculator',
         href: '/gematria',
         description:
           'A Hebrew letter calculator. Tap letters to spell a word; the gematria total updates and the corresponding tarot trumps appear above.',
       },
+      {
+        title: 'Dictionary',
+        href: '/gematria/dictionary',
+        description:
+          'Enter a number to see the Hebrew words and phrases that share that gematria value.',
+      },
+    ],
+  },
+  {
+    title: 'Utilities',
+    links: [
       {
         title: 'Keyboard',
         href: '/keyboard',
@@ -136,10 +153,10 @@ export const navigation: Array<NavGroup> = [
           'Self-test on the tarot attributions — intelligence, significance, astrology, and more.',
       },
       {
-        title: 'Random Pull',
-        href: '/random-pull',
+        title: 'Radio',
+        href: '/ann-davies-radio',
         description:
-          'Draw random cards from the major arcana — one at a time, as many as you like.',
+          'Streaming radio of Ann Davies lectures, embedded from BOTA NZ.',
       },
     ],
   },
@@ -209,12 +226,6 @@ export const navigation: Array<NavGroup> = [
         title: 'About',
         href: '/about',
         description: 'Who built this and why.',
-      },
-      {
-        title: 'Ann Davies Radio',
-        href: '/ann-davies-radio',
-        description:
-          'Streaming radio of Ann Davies lectures, embedded from BOTA NZ.',
       },
       {
         title: 'Files',

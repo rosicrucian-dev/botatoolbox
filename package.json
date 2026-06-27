@@ -10,7 +10,8 @@
     "lint": "eslint",
     "gen:schemas": "node --experimental-strip-types scripts/gen-schemas.ts",
     "optimize:tarot": "node --experimental-strip-types scripts/optimize-tarot.ts",
-    "gen:cube-pdf": "node --experimental-strip-types scripts/generate-cube-pdf.ts"
+    "gen:cube-pdf": "node --experimental-strip-types scripts/generate-cube-pdf.ts",
+    "gen:gematria-words": "node --experimental-strip-types scripts/build-gematria-words.ts"
   },
   "browserslist": "Chrome >= 111, Firefox >= 128, Safari >= 16.4, iOS >= 16.4, Edge >= 111, not dead",
   "dependencies": {

@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { cardImage } from '@/content/data/tarot'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
+import { wordForSpelling } from '@/lib/gematria-words'
 
 // Keyboard layout — visual order matches the BOTA gematria calculator.
 // Aleph alone on top; three rows of seven; the five sofit (final) forms
@@ -52,6 +53,9 @@ export function GematriaClient() {
     () => seq.filter((g) => cardByGlyph[g]).length,
     [seq],
   )
+  // If the exact word the user built is in the gematria dictionary, surface
+  // its meaning below the tarot.
+  const dictWord = useMemo(() => wordForSpelling(total, word), [total, word])
 
   function press(glyph: string) {
     setSeq((s) => [...s, glyph])
@@ -80,55 +84,30 @@ export function GematriaClient() {
         )}
       </div>
 
-      {/* Tarot row — flows right-to-left to match Hebrew reading order.
-          flex-wrap lets long words spill onto a second / third row. When
-          empty, shows a centered prompt instead. */}
-      <div
-        dir={seq.length === 0 ? 'ltr' : 'rtl'}
-        className={`flex min-h-20 flex-wrap justify-center gap-1.5 md:min-h-32 md:gap-2 ${
-          seq.length === 0 ? 'items-center' : 'items-end'
-        }`}
-      >
-        {seq.length === 0 ? (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            Use the keyboard below to build a word.
-          </p>
-        ) : (
-          seq.map((glyph, i) => {
-            const card = cardByGlyph[glyph]
-            if (!card) return null
-            return (
-              <Link
-                key={i}
-                href={`/tarot/${card.slug}`}
-                className="block transition hover:opacity-80"
-              >
-                <img
-                  src={cardImage(card)}
-                  alt={card.name}
-                  width={724}
-                  height={1200}
-                  loading="lazy"
-                  className="h-16 w-auto rounded-sm shadow-sm ring-1 ring-zinc-200 md:h-28 dark:ring-zinc-700"
-                />
-              </Link>
-            )
-          })
-        )}
-      </div>
-
       {/* Number + Hebrew word display. 3-track grid puts the divider on
           the auto-sized middle track so it sits at the visual center;
           the two 1fr tracks give number and word equal halves. */}
       <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-6 rounded-2xl bg-zinc-50 px-6 py-6 ring-1 ring-zinc-900/5 md:gap-10 md:py-8 dark:bg-zinc-800/40 dark:ring-white/10">
-        <div className="justify-self-end text-4xl font-medium tabular-nums text-zinc-900 md:text-6xl dark:text-white">
-          {total}
+        <div className="text-center text-4xl font-medium tabular-nums text-zinc-900 md:text-6xl dark:text-white">
+          {/* The total links into the dictionary for that value. Capped at
+              4 digits — the dictionary's own input ceiling — so the linked
+              number isn't silently truncated there. */}
+          {total > 0 && total <= 9999 ? (
+            <Link
+              href={`/gematria/dictionary?n=${total}`}
+              className="underline-offset-4 transition hover:underline"
+            >
+              {total}
+            </Link>
+          ) : (
+            total
+          )}
         </div>
         <div className="h-12 w-px bg-zinc-300 md:h-16 dark:bg-zinc-600" />
         <div
           dir="rtl"
           lang="he"
-          className="font-serif text-4xl text-zinc-900 wrap-anywhere md:text-6xl dark:text-white"
+          className="text-center font-serif text-4xl text-zinc-900 wrap-anywhere md:text-6xl dark:text-white"
         >
           {word || ' '}
         </div>
@@ -172,6 +151,65 @@ export function GematriaClient() {
         <ActionKey onClick={backspace}>Backspace</ActionKey>
         <ActionKey onClick={clear}>Clear</ActionKey>
       </div>
+
+      {/* Tarot row — flows right-to-left to match Hebrew reading order.
+          flex-wrap lets long words spill onto a second / third row. When
+          empty, shows a centered prompt instead. */}
+      <div
+        dir={seq.length === 0 ? 'ltr' : 'rtl'}
+        className={`flex min-h-20 flex-wrap justify-center gap-1.5 md:min-h-32 md:gap-2 ${
+          seq.length === 0 ? 'items-center' : 'items-end'
+        }`}
+      >
+        {seq.length === 0 ? (
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+            Use the keyboard above to build a word.
+          </p>
+        ) : (
+          seq.map((glyph, i) => {
+            const card = cardByGlyph[glyph]
+            if (!card) return null
+            return (
+              <Link
+                key={i}
+                href={`/tarot/${card.slug}`}
+                className="block transition hover:opacity-80"
+              >
+                <img
+                  src={cardImage(card)}
+                  alt={card.name}
+                  width={724}
+                  height={1200}
+                  loading="lazy"
+                  className="h-16 w-auto rounded-sm shadow-sm ring-1 ring-zinc-200 md:h-28 dark:ring-zinc-700"
+                />
+              </Link>
+            )
+          })
+        )}
+      </div>
+
+      {/* Meaning of the built word, when it's in the gematria dictionary. */}
+      {dictWord && (dictWord.crowley || dictWord.strongs) && (
+        <div className="space-y-1 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
+          {dictWord.crowley && (
+            <p className="text-zinc-700 dark:text-zinc-300">
+              <span className="font-medium text-zinc-400 dark:text-zinc-500">
+                Crowley{' '}
+              </span>
+              {dictWord.crowley}
+            </p>
+          )}
+          {dictWord.strongs && (
+            <p className="text-zinc-700 dark:text-zinc-300">
+              <span className="font-medium text-zinc-400 dark:text-zinc-500">
+                Strong&rsquo;s{' '}
+              </span>
+              {dictWord.strongs}
+            </p>
+          )}
+        </div>
+      )}
     </article>
   )
 }
