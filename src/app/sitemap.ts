@@ -1,7 +1,7 @@
 import { type MetadataRoute } from 'next'
 
 import { signs, planets } from '@/content/data/astrology'
-import { sephiroth, words } from '@/content/data'
+import { sephiroth, words, visibleTexts } from '@/content/data'
 import { cards } from '@/content/data/tarot'
 
 // Required by `output: 'export'` for metadata routes — emits a static
@@ -29,8 +29,6 @@ const staticRoutes = [
   '/tarot/major-arcana',
   '/tarot/minor-arcana',
   '/tarot/tableau',
-  '/texts/emerald-tablet-hermes',
-  '/texts/pattern-trestleboard',
   '/keyboard',
   '/keyboard/tableau',
   '/tree-of-life',
@@ -50,6 +48,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...words.map((w) => ({
       url: `${SITE}/words-of-power/${w.slug}`,
+      lastModified,
+    })),
+    ...visibleTexts.map((t) => ({
+      url: `${SITE}/texts/${t.slug}`,
       lastModified,
     })),
     ...sephiroth.map((s) => ({

@@ -1,3 +1,5 @@
+import { visibleTexts } from '@/content/data/texts'
+
 export interface NavLink {
   title: string
   href: string
@@ -97,28 +99,14 @@ export const navigation: Array<NavGroup> = [
     ],
   },
   {
+    // Generated from content/data/texts.json (order + titles live there).
+    // Hidden texts — e.g. Chaldean Oracles — are excluded via visibleTexts
+    // but stay reachable by direct URL.
     title: 'Texts',
-    links: [
-      {
-        title: 'Adoration to the Lord of the Universe',
-        href: '/texts/adoration-lord-universe',
-      },
-      {
-        title: 'Aquarian Doxology',
-        href: '/texts/aquarian-doxology',
-      },
-      // Chaldean Oracles (/texts/chaldean-oracles) is intentionally hidden from
-      // the nav + table of contents; the page still exists and is reachable by
-      // direct URL.
-      {
-        title: 'The Emerald Tablet of Hermes',
-        href: '/texts/emerald-tablet-hermes',
-      },
-      {
-        title: 'The Pattern on the Trestleboard',
-        href: '/texts/pattern-trestleboard',
-      },
-    ],
+    links: visibleTexts.map((t) => ({
+      title: t.title,
+      href: `/texts/${t.slug}`,
+    })),
   },
   {
     title: 'Gematria',

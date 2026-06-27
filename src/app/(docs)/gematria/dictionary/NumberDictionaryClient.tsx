@@ -3,11 +3,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { wordsForNumber } from '@/lib/gematria-words'
-import {
-  theosophicExtension,
-  theosophicReduction,
-} from '@/lib/gematria-numbers'
+import { wordsForNumber } from '@/content/data'
+import { theosophicExtension, theosophicReduction } from '@/lib/gematria'
 
 const MAX_DIGITS = 4
 // A derived value is clickable only up to this ceiling — the same as what

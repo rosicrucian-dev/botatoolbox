@@ -21,7 +21,9 @@ export default function MajorArcana() {
         renderRow={(c) => (
           <>
             <span className="flex items-baseline gap-3">
-              <IndexLabel>{c.num}</IndexLabel>
+              {/* Match the Minor Arcana page's wider first column for
+                  consistency across the two list pages. */}
+              <IndexLabel widthClassName="w-16 md:w-20">{c.num}</IndexLabel>
               <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
                 {c.name}
               </span>

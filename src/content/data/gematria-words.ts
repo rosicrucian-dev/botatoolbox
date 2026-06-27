@@ -1,31 +1,23 @@
-// Typed accessor over the generated gematria dictionary
-// (`content/data/gematria-words.json`, built by
-// `scripts/build-gematria-words.ts` from Sepher Sephiroth).
+// Gematria dictionary — a value-indexed map of Hebrew words/phrases
+// (Sepher Sephiroth + Strong's). GENERATED: the JSON is built by
+// `scripts/build-gematria-words.ts`; edit the sources under
+// `scripts/vendor/`, not the JSON. See content/data/generated/README.md.
 //
-// The JSON is value-indexed: keys are gematria totals (as strings),
-// values list the Hebrew words/phrases summing to that total under this
-// app's scheme. Importing it here, behind a small lookup, keeps the big
-// inferred literal type out of the page and gives callers a clean shape.
+// Unlike the other data modules this one does NOT `.parse()` at runtime —
+// the file is large and ships to the client, so it's validated once at
+// build time (inside the generator) instead. Types come from the Zod
+// schema so they stay in sync regardless.
 
-import data from '@content/data/gematria-words.json'
+import { z } from 'zod'
 
-export interface GematriaWord {
-  hebrew: string
-  // BOTA romanization (parseable by romanToLetters); unused in the v1 UI
-  // but kept for future linking into the calculator.
-  roman: string
-  // Crowley's Sepher Sephiroth gloss (may be a bare citation or empty).
-  crowley: string
-  // Strong's definition for the same spelling, when one exists.
-  strongs?: string
-}
+import data from '@content/data/generated/gematria-words.json'
+import {
+  GematriaWordSchema,
+  GematriaNumberEntrySchema,
+} from './schemas'
 
-export interface GematriaNumberEntry {
-  // The number's own Qabalistic note ("the Mystic Number of Chokmah",
-  // etc.). Present for some numbers; not shown in the v1 UI.
-  significance?: string
-  words: Array<GematriaWord>
-}
+export type GematriaWord = z.infer<typeof GematriaWordSchema>
+export type GematriaNumberEntry = z.infer<typeof GematriaNumberEntrySchema>
 
 const dict = data as unknown as Record<string, GematriaNumberEntry>
 

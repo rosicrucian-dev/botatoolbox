@@ -11,7 +11,7 @@ This particular JSON serialization was produced by the
 [alanwillms/sepher-sephiroth](https://github.com/alanwillms/sepher-sephiroth)
 parser. We vendor it only as a **build input** — `scripts/build-gematria-words.ts`
 transforms it into our own derived dataset at
-`content/data/gematria-words.json` (recomputing every value with this
+`content/data/generated/gematria-words.json` (recomputing every value with this
 app's gematria scheme, re-bucketing, and cleaning the Hebrew). The shipped
 artifact is the derived file, not this source.
 

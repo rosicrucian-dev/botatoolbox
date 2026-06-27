@@ -23,3 +23,23 @@ for (const [name, meta] of Object.entries(hebrewLetters)) {
 }
 
 valueByGlyph[' '] = 0
+
+// --- Number-only transforms (the dictionary's "Numbers" cards) ---
+// Pure math on a value; no word needed.
+
+// The Nth triangular number, 1 + 2 + … + n (theosophic extension).
+export function theosophicExtension(n: number): number {
+  return (n * (n + 1)) / 2
+}
+
+// Successive digit-sums down to a single figure (theosophic reduction /
+// digital root).
+export function theosophicReduction(n: number): number {
+  let cur = n
+  while (cur > 9) {
+    cur = String(cur)
+      .split('')
+      .reduce((sum, d) => sum + Number(d), 0)
+  }
+  return cur
+}

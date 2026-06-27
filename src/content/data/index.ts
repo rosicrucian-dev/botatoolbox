@@ -39,6 +39,8 @@ export * from './grades'
 export * from './minor-arcana'
 export * from './chakras'
 export * from './numerology'
+export * from './gematria-words'
+export * from './texts'
 
 // ---- types
 

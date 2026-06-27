@@ -70,6 +70,45 @@ function resolveSlug(slug: string): ResolvedCard | null {
   return null
 }
 
+// Compact URL codec for ?pulled=. Majors are their key number (0–21);
+// minors are rank + suit letter (Ace→A, Page→P, Knight→N, Queen→Q,
+// King→K; Wands→W, Cups→C, Swords→S, Pentacles→P) — e.g. AW, 2W, PP, 10S.
+// The suit is always the trailing letter, so the split is unambiguous;
+// a bare number is always a major.
+const SUIT_LETTER: Record<string, string> = {
+  Wands: 'W', Cups: 'C', Swords: 'S', Pentacles: 'P',
+}
+const LETTER_SUIT: Record<string, string> = {
+  W: 'Wands', C: 'Cups', S: 'Swords', P: 'Pentacles',
+}
+const RANK_ABBR: Record<string, string> = {
+  Ace: 'A', Page: 'P', Knight: 'N', Queen: 'Q', King: 'K',
+}
+const ABBR_RANK: Record<string, string> = {
+  A: 'Ace', P: 'Page', N: 'Knight', Q: 'Queen', K: 'King',
+}
+
+function encodeCard(slug: string): string {
+  const found = resolveSlug(slug)
+  if (!found) return ''
+  if (found.kind === 'major') return String(found.card.num)
+  const rank = RANK_ABBR[found.card.num] ?? found.card.num
+  return rank + (SUIT_LETTER[found.card.suit] ?? '')
+}
+
+function decodeCard(token: string): string | null {
+  if (/^\d+$/.test(token)) {
+    const card = cards.find((c) => c.num === Number(token))
+    return card ? card.slug : null
+  }
+  const suit = LETTER_SUIT[token.slice(-1)]
+  const rankAbbr = token.slice(0, -1)
+  if (!suit || !rankAbbr) return null
+  const rank = ABBR_RANK[rankAbbr] ?? rankAbbr
+  const slug = `${rank.toLowerCase()}-${suit.toLowerCase()}`
+  return minorBySlug[slug] ? slug : null
+}
+
 export function RandomPullClient() {
   const router = useRouter()
   const sp = useSearchParams()
@@ -83,12 +122,17 @@ export function RandomPullClient() {
   // from a card detail page restores the previous pull state.
   const initialPulled = sp.get('pulled') ?? ''
   const [pulled, setPulled] = useState<Array<string>>(() =>
-    initialPulled ? initialPulled.split(',').filter(Boolean) : [],
+    initialPulled
+      ? initialPulled
+          .split(',')
+          .map(decodeCard)
+          .filter((s): s is string => s !== null)
+      : [],
   )
 
   // Mirror state → URL via router.replace (no history entry per pull).
   useEffect(() => {
-    const next = pulled.join(',')
+    const next = pulled.map(encodeCard).join(',')
     const current = sp.get('pulled') ?? ''
     if (next === current) return
     const params = new URLSearchParams(sp.toString())
@@ -107,6 +151,12 @@ export function RandomPullClient() {
     : cards.map((c) => c.slug)
   const remaining = deck.filter((s) => !pulledSet.has(s))
   const exhausted = remaining.length === 0
+
+  // Cards shrink to fit one row as more are pulled: ⅓ width for 1–3, ¼ for
+  // 4, … down to 1∕9 at nine. A tenth wraps to the next row (cols clamps at
+  // 9). Width subtracts the 5% inter-card gaps so `cols` cards fill 100%.
+  const cols = Math.min(Math.max(pulled.length, 3), 9)
+  const cardWidth = `${(100 - (cols - 1) * 5) / cols}%`
 
   function pull() {
     if (remaining.length === 0) return
@@ -165,7 +215,8 @@ export function RandomPullClient() {
         </p>
       ) : (
         <>
-          {/* 30% × 3 cards + 5% × 2 gaps = 100% of article width. */}
+          {/* Card width is set per-render (see `cardWidth`) so 1–9 cards
+              share a row; the 5% column gaps match the width math. */}
           <div className="flex flex-wrap justify-center gap-x-[5%] gap-y-2 md:gap-y-4">
             {pulled.map((slug, i) => {
               const found = resolveSlug(slug)
@@ -174,7 +225,8 @@ export function RandomPullClient() {
                 <Link
                   key={i}
                   href={`/tarot/${found.card.slug}`}
-                  className="block w-[30%] transition hover:opacity-80"
+                  style={{ width: cardWidth }}
+                  className="block transition hover:opacity-80"
                 >
                   <img
                     src={cardImage(found.card)}
@@ -189,7 +241,8 @@ export function RandomPullClient() {
                 <Link
                   key={i}
                   href={`/tarot/minor-arcana/${found.card.slug}`}
-                  className="block w-[30%] transition hover:opacity-80"
+                  style={{ width: cardWidth }}
+                  className="block transition hover:opacity-80"
                 >
                   <img
                     src={minorImage(found.card)}

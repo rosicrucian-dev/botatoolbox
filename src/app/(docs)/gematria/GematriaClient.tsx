@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { cardImage } from '@/content/data/tarot'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
-import { wordForSpelling } from '@/lib/gematria-words'
+import { wordForSpelling } from '@/content/data'
 
 // Keyboard layout — visual order matches the BOTA gematria calculator.
 // Aleph alone on top; three rows of seven; the five sofit (final) forms

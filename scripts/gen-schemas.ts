@@ -26,6 +26,7 @@ import {
   GradeSchema,
   ChakraSchema,
   NumerologySchema,
+  TextSchema,
 } from '../src/content/data/schemas.ts'
 
 const here = dirname(fileURLToPath(import.meta.url))
@@ -50,6 +51,7 @@ const targets = [
   { file: 'grades', schema: z.array(GradeSchema) },
   { file: 'chakras', schema: z.array(ChakraSchema) },
   { file: 'numerology', schema: z.array(NumerologySchema) },
+  { file: 'texts', schema: z.array(TextSchema) },
 ]
 
 for (const { file, schema } of targets) {
