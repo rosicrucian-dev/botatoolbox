@@ -27,7 +27,10 @@ export default function Files() {
               .map((f) => (
                 <li key={f.slug}>
                   {f.direct ? (
-                    <a href={encodeURI(f.src)} download className={itemClass}>
+                    // No `download` attr: navigate to the PDF so the browser
+                    // renders it inline for viewing. The user can still save
+                    // it from the browser's PDF viewer if they want.
+                    <a href={encodeURI(f.src)} className={itemClass}>
                       {f.name}
                     </a>
                   ) : (
