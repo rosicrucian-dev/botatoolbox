@@ -57,6 +57,13 @@ export function GematriaClient() {
   // its meaning below the tarot.
   const dictWord = useMemo(() => wordForSpelling(total, word), [total, word])
 
+  // Tarot cards are pinned to ⅑ width (matching Random Pull's gap scheme)
+  // so nine cards exactly fill the row: 9 × width + 8 × gap = 100%. Anything
+  // shorter is centered; a tenth card wraps. The gap is set inline below from
+  // the same constant so width and gap can't drift.
+  const TAROT_GAP_PCT = 3
+  const tarotWidth = `${(100 - 8 * TAROT_GAP_PCT) / 9}%`
+
   function press(glyph: string) {
     setSeq((s) => [...s, glyph])
   }
@@ -157,8 +164,9 @@ export function GematriaClient() {
           empty, shows a centered prompt instead. */}
       <div
         dir={seq.length === 0 ? 'ltr' : 'rtl'}
-        className={`flex min-h-20 flex-wrap justify-center gap-1.5 md:min-h-32 md:gap-2 ${
-          seq.length === 0 ? 'items-center' : 'items-end'
+        style={{ columnGap: `${TAROT_GAP_PCT}%` }}
+        className={`flex flex-wrap justify-center gap-y-2 md:gap-y-4 ${
+          seq.length === 0 ? 'min-h-20 items-center md:min-h-32' : 'items-end'
         }`}
       >
         {seq.length === 0 ? (
@@ -173,6 +181,7 @@ export function GematriaClient() {
               <Link
                 key={i}
                 href={`/tarot/${card.slug}`}
+                style={{ width: tarotWidth }}
                 className="block transition hover:opacity-80"
               >
                 <img
@@ -181,7 +190,7 @@ export function GematriaClient() {
                   width={724}
                   height={1200}
                   loading="lazy"
-                  className="h-16 w-auto rounded-sm shadow-sm ring-1 ring-zinc-200 md:h-28 dark:ring-zinc-700"
+                  className="h-auto w-full rounded-sm shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700"
                 />
               </Link>
             )

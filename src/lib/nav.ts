@@ -28,12 +28,6 @@ export const navigation: Array<NavGroup> = [
           'Every major arcana attribution side-by-side in a single table.',
       },
       {
-        title: 'Tableau',
-        href: '/tarot/tableau',
-        description:
-          'The major arcana arranged in BOTA’s standard tableau pattern.',
-      },
-      {
         title: 'Major Arcana',
         href: '/tarot/major-arcana',
         description:
@@ -50,6 +44,12 @@ export const navigation: Array<NavGroup> = [
         href: '/tarot/random-pull',
         description:
           'Draw random cards from the major arcana — one at a time, as many as you like.',
+      },
+      {
+        title: 'Tableau',
+        href: '/tarot/tableau',
+        description:
+          'The major arcana arranged in BOTA’s standard tableau pattern.',
       },
     ],
   },

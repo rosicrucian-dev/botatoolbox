@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { HeaderChip } from '@/components/HeaderChip'
 import { Tab, Tabs } from '@/components/Tabs'
 import { cardBySlug, cards, cardImage } from '@/content/data/tarot'
 import { minorBySlug, minorCards, minorImage } from '@/content/data'
@@ -154,9 +153,11 @@ export function RandomPullClient() {
 
   // Cards shrink to fit one row as more are pulled: ⅓ width for 1–3, ¼ for
   // 4, … down to 1∕9 at nine. A tenth wraps to the next row (cols clamps at
-  // 9). Width subtracts the 5% inter-card gaps so `cols` cards fill 100%.
+  // 9). Width subtracts the inter-card gaps so `cols` cards fill 100%; the
+  // gap is set inline below from the same constant so the two can't drift.
+  const COLUMN_GAP_PCT = 3
   const cols = Math.min(Math.max(pulled.length, 3), 9)
-  const cardWidth = `${(100 - (cols - 1) * 5) / cols}%`
+  const cardWidth = `${(100 - (cols - 1) * COLUMN_GAP_PCT) / cols}%`
 
   function pull() {
     if (remaining.length === 0) return
@@ -192,12 +193,14 @@ export function RandomPullClient() {
               Right
             </Tab>
           </Tabs>
-          <HeaderChip
-            pressed={includeMinor}
-            onClick={() => setIncludeMinor(!includeMinor)}
-          >
-            Minor
-          </HeaderChip>
+          <Tabs>
+            <Tab active={!includeMinor} onClick={() => setIncludeMinor(false)}>
+              Trumps
+            </Tab>
+            <Tab active={includeMinor} onClick={() => setIncludeMinor(true)}>
+              Full Deck
+            </Tab>
+          </Tabs>
           <button
             type="button"
             onClick={pull}
@@ -216,8 +219,11 @@ export function RandomPullClient() {
       ) : (
         <>
           {/* Card width is set per-render (see `cardWidth`) so 1–9 cards
-              share a row; the 5% column gaps match the width math. */}
-          <div className="flex flex-wrap justify-center gap-x-[5%] gap-y-2 md:gap-y-4">
+              share a row; the column gap matches the width math. */}
+          <div
+            className="flex flex-wrap justify-center gap-y-2 md:gap-y-4"
+            style={{ columnGap: `${COLUMN_GAP_PCT}%` }}
+          >
             {pulled.map((slug, i) => {
               const found = resolveSlug(slug)
               if (!found) return null
