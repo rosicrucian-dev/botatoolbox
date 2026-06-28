@@ -12,7 +12,7 @@ export default function Tableau() {
       <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
         Tableau
       </h1>
-      <TarotTableau variant="major" linked />
+      <TarotTableau variant="major" link="card" />
     </article>
   )
 }
