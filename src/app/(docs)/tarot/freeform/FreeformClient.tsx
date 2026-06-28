@@ -152,7 +152,7 @@ type DragState = {
   y: number
 }
 
-// The full 78-card deck. Open Draw always uses the whole deck.
+// The full 78-card deck. Freeform always uses the whole deck.
 const FULL_DECK = [...cards.map((c) => c.slug), ...minorCards.map((c) => c.slug)]
 
 function shuffle(input: Array<string>): Array<string> {
@@ -258,7 +258,7 @@ function CardFace({ slug }: { slug: string }) {
   )
 }
 
-export function OpenDrawClient({
+export function FreeformClient({
   variant = 'inline',
 }: {
   variant?: 'inline' | 'expand'
@@ -371,7 +371,7 @@ export function OpenDrawClient({
   }, [placed])
 
   // Full-screen (expand) chrome: a body-scroll lock and Esc-to-close. Unlike
-  // the dark slide players, Open Draw expand is theme-colored (it's just a
+  // the dark slide players, Freeform expand is theme-colored (it's just a
   // full-bleed version of the docs page), so there's no black toolbar-tint
   // prime. All no-ops in the inline variant.
   useEffect(() => {
@@ -398,7 +398,7 @@ export function OpenDrawClient({
       if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return
       if (e.key === 'Escape') {
         const qs = serialize(placedRef.current)
-        router.push(qs ? `/tarot/open-draw?cards=${qs}` : '/tarot/open-draw')
+        router.push(qs ? `/tarot/freeform?cards=${qs}` : '/tarot/freeform')
       }
     }
     window.addEventListener('keydown', onKey)
@@ -638,11 +638,11 @@ export function OpenDrawClient({
   // (and returns) with the same cards in the same places.
   const cardsParam = serialize(placed)
   const expandHref = cardsParam
-    ? `/tarot/open-draw/expand?cards=${cardsParam}`
-    : '/tarot/open-draw/expand'
+    ? `/tarot/freeform/expand?cards=${cardsParam}`
+    : '/tarot/freeform/expand'
   const closeHref = cardsParam
-    ? `/tarot/open-draw?cards=${cardsParam}`
-    : '/tarot/open-draw'
+    ? `/tarot/freeform?cards=${cardsParam}`
+    : '/tarot/freeform'
 
   // Zoom + Shuffle — shared between the inline header row and the expand header.
   // Shuffle sits to the LEFT of the zoom buttons: since the control group is
@@ -846,7 +846,7 @@ export function OpenDrawClient({
       >
         {/* Themed header, matching the docs header (color + bottom divider). */}
         <header className="relative flex h-14 shrink-0 items-center justify-between gap-4 bg-white px-4 sm:px-6 lg:px-8 dark:bg-zinc-900">
-          <span className="truncate text-base font-semibold">Open Draw</span>
+          <span className="truncate text-base font-semibold">Freeform</span>
           <div className="flex items-center gap-3">
             {controls}
             <button
@@ -871,8 +871,7 @@ export function OpenDrawClient({
     <article className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
-          <span className="md:hidden">Draw</span>
-          <span className="hidden md:inline">Open Draw</span>
+          Freeform
         </h1>
         <div className="flex flex-wrap items-center gap-3 text-zinc-900 dark:text-white">
           {controls}

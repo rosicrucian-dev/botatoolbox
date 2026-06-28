@@ -2,7 +2,7 @@
 
 import { Children, Fragment, type ReactNode } from 'react'
 
-// Segmented-control container — extracted from OpenDrawClient so
+// Segmented-control container — extracted from FreeformClient so
 // other views (Tree-of-Life flow direction, etc.) can reuse the
 // same look. Adapts to current-color so it picks up the surrounding
 // theme without explicit dark-mode classes.

@@ -1,18 +1,18 @@
 import { type Metadata } from 'next'
 import { Suspense } from 'react'
 
-import { OpenDrawClient } from './OpenDrawClient'
+import { FreeformClient } from './FreeformClient'
 
 export const metadata: Metadata = {
-  title: 'Open Draw',
+  title: 'Freeform',
 }
 
-// useSearchParams (inside OpenDrawClient for ?cards= URL state) needs a
+// useSearchParams (inside FreeformClient for ?cards= URL state) needs a
 // Suspense boundary above it during static export.
-export default function OpenDrawPage() {
+export default function FreeformPage() {
   return (
     <Suspense>
-      <OpenDrawClient />
+      <FreeformClient />
     </Suspense>
   )
 }

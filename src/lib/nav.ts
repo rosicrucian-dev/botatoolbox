@@ -28,6 +28,12 @@ export const navigation: Array<NavGroup> = [
           'Every major arcana attribution side-by-side in a single table.',
       },
       {
+        title: 'Freeform',
+        href: '/tarot/freeform',
+        description:
+          'Draw cards from the full deck onto a tabletop — drag, arrange, and lay out spreads.',
+      },
+      {
         title: 'Major Arcana',
         href: '/tarot/major-arcana',
         description:
@@ -38,12 +44,6 @@ export const navigation: Array<NavGroup> = [
         href: '/tarot/minor-arcana',
         description:
           'Keywords for the 40 numbered cards across Wands, Cups, Swords, and Pentacles.',
-      },
-      {
-        title: 'Open Draw',
-        href: '/tarot/open-draw',
-        description:
-          'Draw cards from the full deck onto a tabletop — drag, arrange, and lay out spreads.',
       },
       {
         title: 'Tableau',
