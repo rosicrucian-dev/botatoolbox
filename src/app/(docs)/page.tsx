@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { AddToHomeHint } from './AddToHomeHint'
 import { NavSections } from './NavSections'
 import { Prose } from '@/components/Prose'
@@ -23,7 +25,7 @@ export default function Home() {
         </h1>
         <Prose className="mt-2">
           <p className="lead">
-            An unofficial set of advanced tools for members of the <a href="https://bota.org">Builders of the Adytum</a>.
+            An unofficial set of advanced tools for members of the <a href="https://bota.org">Builders of the Adytum</a>. For more information see <Link href="/about">About</Link>.
           </p>
           {/* <p>
             You can support this project with{' '}
