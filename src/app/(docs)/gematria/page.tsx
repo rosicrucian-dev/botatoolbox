@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { GematriaClient } from './GematriaClient'
 
 export const metadata: Metadata = {
-  title: 'Gematria',
+  title: 'Calculator',
 }
 
 // useSearchParams (used inside GematriaClient for ?seq= sync) needs a

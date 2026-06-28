@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { NumberDictionaryClient } from './NumberDictionaryClient'
 
 export const metadata: Metadata = {
-  title: 'Gematria Dictionary',
+  title: 'Dictionary',
 }
 
 // useSearchParams (used inside the client for ?n= sync) needs a Suspense

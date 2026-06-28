@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import { Tabs } from '@/components/Tabs'
 import { cardBySlug, cards, thumbImage } from '@/content/data/tarot'
@@ -11,6 +11,11 @@ import { minorBySlug, minorCards, minorImage } from '@/content/data'
 // Optimized card-back used for the deck top and the face-down side of the
 // flip (see public/tarot/back.jpg — a thumbnail of public/files/tarot-back.jpg).
 const BACK_IMAGE = '/tarot/back.jpg'
+
+// The spread lives only in localStorage — no URL state, so nothing touches
+// browser history. Reloads and the Expand/Close route hop both restore from
+// here; Expand/Close navigate to plain, constant URLs.
+const SPREAD_KEY = 'freeform:spread'
 
 // The deck sits pinned at top-center; cards are drawn off it and dropped
 // anywhere on the tabletop. DECK_Y is its distance from the top edge (%).
@@ -195,8 +200,9 @@ function toWorld(
   return { x: (lx / rect.width) * 100, y: (ly / rect.height) * 100 }
 }
 
-// ?cards=12@33,40;AW@50,55 — token@x,y per card, ordered bottom-to-top so the
-// stacking restores. Positions are rounded percentages.
+// Compact spread codec (stored in localStorage): `12@33,40;AW@50,55` — one
+// token@x,y per card, ordered bottom-to-top so stacking restores. Positions are
+// rounded percentages.
 function serialize(placed: Array<Placed>): string {
   return [...placed]
     .filter((p) => !p.removing)
@@ -264,7 +270,6 @@ export function FreeformClient({
   variant?: 'inline' | 'expand'
 } = {}) {
   const router = useRouter()
-  const sp = useSearchParams()
   const baseWPct = useBaseWidthPct()
   const [zoom, setZoom] = useState(1)
   const [tableW, setTableW] = useState(0)
@@ -276,12 +281,10 @@ export function FreeformClient({
     tableW > 0 ? baseWPct * (Math.min(tableW, REF_MAX_PX) / tableW) : baseWPct
   const deckXPct = (100 - cardWPct) / 2
 
-  // Placed cards restore from ?cards= so a shared/bookmarked spread reopens
-  // exactly. The draw pile is filled client-side (shuffled) by the effect
-  // below — it's never rendered face-up, so there's no hydration mismatch.
-  const [placed, setPlaced] = useState<Array<Placed>>(() =>
-    parse(sp.get('cards') ?? ''),
-  )
+  // The spread is local-only: it starts empty for SSR/hydration, then the mount
+  // effect restores the last spread from localStorage. The draw pile is filled
+  // client-side (shuffled) by that same effect.
+  const [placed, setPlaced] = useState<Array<Placed>>([])
   const [pile, setPile] = useState<Array<string>>([])
   const [drag, setDrag] = useState<DragState | null>(null)
   // Pan offset (screen px) of the whole content layer. Dragging the empty
@@ -293,7 +296,6 @@ export function FreeformClient({
   // Refs mirror state so the window-level pointer listeners (bound once) always
   // read current values without re-binding on every move.
   const dragRef = useRef<DragState | null>(null)
-  const placedRef = useRef(placed)
   const pileRef = useRef(pile)
   const cardWRef = useRef(cardWPct)
   const zoomRef = useRef(zoom)
@@ -310,7 +312,6 @@ export function FreeformClient({
   // trailing click so a drag-to-rearrange doesn't also follow the card's link.
   const movedRef = useRef(false)
   dragRef.current = drag
-  placedRef.current = placed
   pileRef.current = pile
   cardWRef.current = cardWPct
   zoomRef.current = zoom
@@ -328,32 +329,33 @@ export function FreeformClient({
     return () => ro.disconnect()
   }, [])
 
-  // Shuffle the draw pile once on mount, minus whatever's already on the table
-  // (restored from the URL). Never rendered face-up, so no hydration mismatch.
+  // On mount: restore the last spread from localStorage (this is how reloads
+  // and the Expand/Close route hop both carry state), then shuffle the rest of
+  // the deck into the pile. Doing both here keeps pile and table in sync —
+  // restored cards never reappear in the draw pile.
   useEffect(() => {
-    const have = new Set(placedRef.current.map((p) => p.slug))
+    let initial: Array<Placed> = []
+    try {
+      const stored = localStorage.getItem(SPREAD_KEY)
+      const restored = stored ? parse(stored) : []
+      if (restored.length) {
+        initial = restored
+        topZ.current = restored.length
+        setPlaced(restored)
+      }
+    } catch {}
+    const have = new Set(initial.map((p) => p.slug))
     setPile(shuffle(FULL_DECK.filter((s) => !have.has(s))))
   }, [])
 
-  // Mirror placed → URL via history.replaceState (NOT the Next router). The
-  // router path re-suspends/re-mounts this client in a static export, and
-  // clearing all params is unreliable there — which let a stale URL resurrect
-  // cleared cards. replaceState just updates the address bar: no navigation, no
-  // remount, and `placed` stays the single source of truth (the URL is only
-  // read on initial mount). Current value comes from window.location, since
-  // useSearchParams won't reflect a replaceState write.
+  // The spread's single source of truth: persist it to localStorage on every
+  // change. No URL involvement, so nothing touches browser history.
   useEffect(() => {
-    const next = serialize(placed)
-    const params = new URLSearchParams(window.location.search)
-    if ((params.get('cards') ?? '') === next) return
-    if (next) params.set('cards', next)
-    else params.delete('cards')
-    const qs = params.toString()
-    window.history.replaceState(
-      null,
-      '',
-      qs ? `?${qs}` : window.location.pathname,
-    )
+    try {
+      const s = serialize(placed)
+      if (s) localStorage.setItem(SPREAD_KEY, s)
+      else localStorage.removeItem(SPREAD_KEY)
+    } catch {}
   }, [placed])
 
   // Flip freshly-dropped cards face-up a beat after they land, so the
@@ -396,10 +398,7 @@ export function FreeformClient({
       )
         return
       if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return
-      if (e.key === 'Escape') {
-        const qs = serialize(placedRef.current)
-        router.push(qs ? `/tarot/freeform?cards=${qs}` : '/tarot/freeform')
-      }
+      if (e.key === 'Escape') router.push('/tarot/freeform')
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -634,15 +633,11 @@ export function FreeformClient({
   const zoomBtn =
     'inline-flex h-full items-center justify-center px-3 transition hover:bg-current/10 disabled:opacity-40 disabled:hover:bg-transparent'
 
-  // Carry the current spread through the expand/close navigation so it opens
-  // (and returns) with the same cards in the same places.
-  const cardsParam = serialize(placed)
-  const expandHref = cardsParam
-    ? `/tarot/freeform/expand?cards=${cardsParam}`
-    : '/tarot/freeform/expand'
-  const closeHref = cardsParam
-    ? `/tarot/freeform?cards=${cardsParam}`
-    : '/tarot/freeform'
+  // Expand/Close are plain, constant URLs — the spread crosses the route
+  // boundary via localStorage, so the only history entries are these two fixed
+  // paths (the browser dedupes them).
+  const expandHref = '/tarot/freeform/expand'
+  const closeHref = '/tarot/freeform'
 
   // Zoom + Shuffle — shared between the inline header row and the expand header.
   // Shuffle sits to the LEFT of the zoom buttons: since the control group is
@@ -691,7 +686,7 @@ export function FreeformClient({
   // The tabletop. Cards are absolutely positioned by percentage; the deck is
   // pinned top-center. overflow-hidden clips any card hung past an edge (≥40%
   // always stays visible, so it's grabbable). Inline it's a bordered card;
-  // expanded it fills the player shell on black.
+  // expanded it fills the themed full-screen shell.
   const board = (
     <div
       ref={tableRef}

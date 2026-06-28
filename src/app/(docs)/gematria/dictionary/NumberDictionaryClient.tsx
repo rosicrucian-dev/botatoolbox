@@ -56,7 +56,7 @@ export function NumberDictionaryClient() {
   return (
     <article className="space-y-6">
       <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
-        Gematria Dictionary
+        Dictionary
       </h1>
 
       {/* Number display. */}
