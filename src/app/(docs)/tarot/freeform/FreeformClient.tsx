@@ -27,6 +27,12 @@ const DECK_Y = 1
 const DECK_Z = 9000
 const DRAG_Z = 100000
 
+// On touch, the fingertip hides the small deck, so taps meant as a draw often
+// land just outside it and start a background pan instead. Treat a touch within
+// this many px of the deck's edges as a draw. Mouse is precise (and shows a
+// cursor) so this never applies to it.
+const DECK_TOUCH_BUFFER_PX = 28
+
 // Inline, the tabletop lives in the docs content column (max-w-3xl ≈ 768px).
 // Card pixel size is `baseWPct` of that width, capped here so the wider Expand
 // view keeps the SAME pixel size — the extra width becomes room to spread out,
@@ -38,6 +44,10 @@ const REF_MAX_PX = 768
 const ZOOM_MIN = 0.6
 const ZOOM_MAX = 1.8
 const ZOOM_STEP = 0.2
+
+// Card art is 724×1200; this ratio derives a card's height from its width and
+// is used throughout the geometry (deck box, drop clamping, overlap test).
+const CARD_ASPECT = 1200 / 724
 
 function ZoomInIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -90,10 +100,11 @@ function resolveSlug(slug: string): ResolvedCard | null {
   return null
 }
 
-// Compact URL codec. Majors are their key number (0–21); minors are rank +
-// suit letter (Ace→A, Page→P, Knight→N, Queen→Q, King→K; Wands→W, Cups→C,
-// Swords→S, Pentacles→P) — e.g. AW, 2W, PP, 10S. The suit is always the
-// trailing letter, so the split is unambiguous; a bare number is a major.
+// Compact card codec (used by the spread serializer below). Majors are their
+// key number (0–21); minors are rank + suit letter (Ace→A, Page→P, Knight→N,
+// Queen→Q, King→K; Wands→W, Cups→C, Swords→S, Pentacles→P) — e.g. AW, 2W, PP,
+// 10S. The suit is always the trailing letter, so the split is unambiguous; a
+// bare number is a major.
 const SUIT_LETTER: Record<string, string> = {
   Wands: 'W', Cups: 'C', Swords: 'S', Pentacles: 'P',
 }
@@ -200,6 +211,29 @@ function toWorld(
   return { x: (lx / rect.width) * 100, y: (ly / rect.height) * 100 }
 }
 
+// The deck's box in the board's own pixel space, under a given pan+zoom. W/H are
+// the board's pixel size, z the zoom, w the card width (% of board). The single
+// source of truth for where the deck is on screen — used by pan clamping, the
+// touch buffer, and the hint-hiding test, so they can never drift apart.
+// (transform-origin is top-center, matching the content layer's `scale`.)
+function deckScreenBox(
+  W: number,
+  H: number,
+  z: number,
+  w: number,
+  pan: { x: number; y: number },
+) {
+  const ox = ZOOM_ORIGIN_X * W
+  const leftLocal = ((100 - w) / 2 / 100) * W // deck left px @ zoom 1
+  const width = z * (w / 100) * W
+  return {
+    left: ox + z * (leftLocal - ox) + pan.x,
+    top: z * (DECK_Y / 100) * H + pan.y,
+    width,
+    height: width * CARD_ASPECT,
+  }
+}
+
 // Compact spread codec (stored in localStorage): `12@33,40;AW@50,55` — one
 // token@x,y per card, ordered bottom-to-top so stacking restores. Positions are
 // rounded percentages.
@@ -273,6 +307,7 @@ export function FreeformClient({
   const baseWPct = useBaseWidthPct()
   const [zoom, setZoom] = useState(1)
   const [tableW, setTableW] = useState(0)
+  const [tableH, setTableH] = useState(0)
   // Card width as a % of the current table, but sized from the capped reference
   // width so cards are the same pixel size inline and in Expand (the wider
   // Expand table just yields a smaller %, i.e. more room). Zoom is applied
@@ -290,6 +325,12 @@ export function FreeformClient({
   // Pan offset (screen px) of the whole content layer. Dragging the empty
   // background moves it, clamped so the deck never leaves the view.
   const [pan, setPan] = useState({ x: 0, y: 0 })
+
+  // The hint lives in the lower half of the board. Once the space is panned far
+  // enough down that the deck descends past the board's vertical midline, the
+  // deck would overlap the hint — so hide it.
+  const deckBox = deckScreenBox(tableW, tableH, zoom, cardWPct, pan)
+  const deckInLowerHalf = tableH > 0 && deckBox.top + deckBox.height > tableH / 2
 
   const tableRef = useRef<HTMLDivElement | null>(null)
   const topZ = useRef(placed.length)
@@ -322,7 +363,10 @@ export function FreeformClient({
   useEffect(() => {
     const el = tableRef.current
     if (!el) return
-    const update = () => setTableW(el.clientWidth)
+    const update = () => {
+      setTableW(el.clientWidth)
+      setTableH(el.clientHeight)
+    }
     update()
     const ro = new ResizeObserver(update)
     ro.observe(el)
@@ -409,7 +453,7 @@ export function FreeformClient({
   // less → it's placed where dropped, tucked under the deck.
   const mostlyOnDeck = useCallback((x: number, y: number, rect: DOMRect) => {
     const w = cardWRef.current
-    const hPct = (((w / 100) * rect.width * (1200 / 724)) / rect.height) * 100
+    const hPct = (((w / 100) * rect.width * CARD_ASPECT) / rect.height) * 100
     const dx = (100 - w) / 2
     const iw = Math.max(0, Math.min(x + w, dx + w) - Math.max(x, dx))
     const ih = Math.max(0, Math.min(y + hPct, DECK_Y + hPct) - Math.max(y, DECK_Y))
@@ -429,7 +473,7 @@ export function FreeformClient({
     const H = rect.height
     const ox = ZOOM_ORIGIN_X * W
     const wScreen = z * (w / 100) * W
-    const hScreen = wScreen * (1200 / 724)
+    const hScreen = wScreen * CARD_ASPECT
     // Screen-space bounds for the card's top-left to keep ≥40% on-screen.
     const toWorldX = (sx: number) => ((ox + (sx - ox - pan.x) / z) / W) * 100
     const toWorldY = (sy: number) => (((sy - pan.y) / z) / H) * 100
@@ -447,19 +491,12 @@ export function FreeformClient({
   // of the space. Computes the deck's screen box under the current pan+zoom and
   // limits pan to keep that box inside the tabletop.
   const clampPan = useCallback((nx: number, ny: number, rect: DOMRect) => {
-    const z = zoomRef.current
-    const w = cardWRef.current
-    const ox = ZOOM_ORIGIN_X * rect.width
-    const leftLocal = (((100 - w) / 2 / 100) * rect.width) // deck left px @ zoom 1
-    const topLocal = (DECK_Y / 100) * rect.height
-    const wLocal = (w / 100) * rect.width
-    const hLocal = wLocal * (1200 / 724)
-    const baseSx = ox + z * (leftLocal - ox) // deck left screen px @ pan 0
-    const baseSy = z * topLocal
-    const minX = -baseSx
-    const maxX = rect.width - z * wLocal - baseSx
-    const minY = -baseSy
-    const maxY = rect.height - z * hLocal - baseSy
+    // Deck box at pan 0; pan is bounded so the box stays inside the board.
+    const box = deckScreenBox(rect.width, rect.height, zoomRef.current, cardWRef.current, { x: 0, y: 0 })
+    const minX = -box.left
+    const maxX = rect.width - box.width - box.left
+    const minY = -box.top
+    const maxY = rect.height - box.height - box.top
     return {
       x: Math.min(Math.max(nx, Math.min(minX, maxX)), Math.max(minX, maxX)),
       y: Math.min(Math.max(ny, Math.min(minY, maxY)), Math.max(minY, maxY)),
@@ -597,9 +634,36 @@ export function FreeformClient({
     })
   }
 
+  // Is a screen point within the deck's box, grown by the touch buffer? Uses the
+  // same deck-screen-box math as clampPan (transform-origin top-center).
+  function nearDeck(clientX: number, clientY: number) {
+    const rect = tableRef.current?.getBoundingClientRect()
+    if (!rect) return false
+    const box = deckScreenBox(rect.width, rect.height, zoomRef.current, cardWRef.current, panRef.current)
+    // box is board-relative; shift into client coords and grow by the buffer.
+    const left = rect.left + box.left
+    const top = rect.top + box.top
+    const b = DECK_TOUCH_BUFFER_PX
+    return (
+      clientX >= left - b &&
+      clientX <= left + box.width + b &&
+      clientY >= top - b &&
+      clientY <= top + box.height + b
+    )
+  }
+
   // Pan starts only on the bare background; card/deck pointerdowns stop
-  // propagation so they don't also begin a pan.
+  // propagation so they don't also begin a pan. On touch, a near-miss around the
+  // deck is treated as a draw rather than a pan (see DECK_TOUCH_BUFFER_PX).
   function startPan(e: React.PointerEvent) {
+    if (
+      e.pointerType !== 'mouse' &&
+      pileRef.current.length > 0 &&
+      nearDeck(e.clientX, e.clientY)
+    ) {
+      beginDrag(e, pileRef.current[0], true, deckXPct, DECK_Y)
+      return
+    }
     panGestureRef.current = {
       pointerId: e.pointerId,
       startClientX: e.clientX,
@@ -816,9 +880,10 @@ export function FreeformClient({
 
       </div>
 
-      {placed.length === 0 && !drag && (
+      {placed.length === 0 && !drag && !deckInLowerHalf && (
         // Centered within the lower half of the content area. Hidden as soon as
-        // a drag starts so it doesn't paint over the first card being drawn.
+        // a drag starts so it doesn't paint over the first card being drawn, and
+        // when the deck has been panned down into the lower half (would overlap).
         <div className="pointer-events-none absolute inset-x-0 top-1/2 bottom-0 flex items-center justify-center px-6">
           <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
             Take a deep breath, set an intention, and pull a card by dragging from the top of the deck.
