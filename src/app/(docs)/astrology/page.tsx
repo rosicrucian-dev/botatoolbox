@@ -29,27 +29,6 @@ export default function Astrology() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-          Planets
-        </h2>
-        <DataList
-          items={planets}
-          getKey={(p) => p.slug}
-          getHref={(p) => `/astrology/planets/${p.slug}`}
-          renderRow={(p) => (
-            <>
-              <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                {p.name}
-              </div>
-              <span className="inline-block w-7 text-center text-2xl leading-none text-zinc-900 dark:text-zinc-100">
-                {p.glyph}
-              </span>
-            </>
-          )}
-        />
-      </section>
-
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
           Signs
         </h2>
         {/* Two columns × 6 rows so each row pairs a sign with its
@@ -69,6 +48,27 @@ export default function Astrology() {
             renderRow={renderSignRow}
           />
         </div>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+          Planets
+        </h2>
+        <DataList
+          items={planets}
+          getKey={(p) => p.slug}
+          getHref={(p) => `/astrology/planets/${p.slug}`}
+          renderRow={(p) => (
+            <>
+              <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                {p.name}
+              </div>
+              <span className="inline-block w-7 text-center text-2xl leading-none text-zinc-900 dark:text-zinc-100">
+                {p.glyph}
+              </span>
+            </>
+          )}
+        />
       </section>
     </article>
   )

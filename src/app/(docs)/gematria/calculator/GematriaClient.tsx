@@ -8,6 +8,7 @@ import { cardImage } from '@/content/data/tarot'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
 import { wordForSpelling } from '@/content/data'
+import { GematriaSources } from '@/components/GematriaSources'
 
 // Keyboard layout — visual order matches the BOTA gematria calculator.
 // Aleph alone on top; three rows of seven; the five sofit (final) forms
@@ -224,6 +225,8 @@ export function GematriaClient() {
           )}
         </div>
       )}
+
+      {dictWord && (dictWord.crowley || dictWord.strongs) && <GematriaSources />}
     </article>
   )
 }

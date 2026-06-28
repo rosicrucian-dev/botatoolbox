@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import { wordsForNumber } from '@/content/data'
 import { theosophicExtension, theosophicReduction } from '@/lib/gematria'
+import { GematriaSources } from '@/components/GematriaSources'
 
 const MAX_DIGITS = 4
 // A derived value is clickable only up to this ceiling — the same as what
@@ -104,6 +105,8 @@ export function NumberDictionaryClient() {
 
       {/* The Hebrew words for the current number. */}
       <Results number={number} entry={entry} hasInput={!!digits} />
+
+      {entry && entry.words.length > 0 && <GematriaSources />}
     </article>
   )
 }
