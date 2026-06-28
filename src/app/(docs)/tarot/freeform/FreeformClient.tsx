@@ -694,9 +694,8 @@ export function FreeformClient({
       className={
         variant === 'expand'
           ? 'relative h-full w-full cursor-grab touch-none overflow-hidden bg-zinc-50 dark:bg-zinc-800/40'
-          : 'relative w-full cursor-grab touch-none overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800/40'
+          : 'relative h-[calc(100svh-12rem)] w-full cursor-grab touch-none overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800/40'
       }
-      style={variant === 'expand' ? undefined : { height: 'min(72vh, 40rem)' }}
     >
       {/* Content layer — pan translates it (drag the bare background); zoom
           scales sizes and spacing together, anchored at the deck (top-center).
