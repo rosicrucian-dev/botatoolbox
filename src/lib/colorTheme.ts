@@ -21,7 +21,11 @@ const useColorThemeStore = create<ColorThemeStore>((set) => ({
   setColorTheme: (colorTheme) => {
     set({ colorTheme })
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, colorTheme)
+      try {
+        window.localStorage.setItem(STORAGE_KEY, colorTheme)
+      } catch {
+        // Private browsing / storage disabled — fail silently.
+      }
     }
   },
 }))
@@ -36,9 +40,13 @@ export function useColorTheme() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    const saved = window.localStorage.getItem(STORAGE_KEY)
-    if (saved && isValidTheme(saved) && saved !== colorTheme) {
-      useColorThemeStore.setState({ colorTheme: saved })
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY)
+      if (saved && isValidTheme(saved) && saved !== colorTheme) {
+        useColorThemeStore.setState({ colorTheme: saved })
+      }
+    } catch {
+      // Private browsing / storage disabled — keep the default theme.
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

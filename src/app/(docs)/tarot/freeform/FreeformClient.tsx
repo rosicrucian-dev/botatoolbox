@@ -507,7 +507,7 @@ export function FreeformClient({
   // be left stranded off-screen by zooming.
   useEffect(() => {
     const rect = tableRef.current?.getBoundingClientRect()
-    if (!rect) return
+    if (!rect || !rect.width || !rect.height) return
     setPan((p) => clampPan(p.x, p.y, rect))
   }, [zoom, clampPan])
 
@@ -519,7 +519,7 @@ export function FreeformClient({
       const pg = panGestureRef.current
       if (pg && e.pointerId === pg.pointerId) {
         const rect = tableRef.current?.getBoundingClientRect()
-        if (!rect) return
+        if (!rect || !rect.width || !rect.height) return
         const nx = pg.startPanX + (e.clientX - pg.startClientX)
         const ny = pg.startPanY + (e.clientY - pg.startClientY)
         setPan(clampPan(nx, ny, rect))
@@ -528,7 +528,7 @@ export function FreeformClient({
       const d = dragRef.current
       if (!d || e.pointerId !== d.pointerId) return
       const rect = tableRef.current?.getBoundingClientRect()
-      if (!rect) return
+      if (!rect || !rect.width || !rect.height) return
       if (
         Math.hypot(e.clientX - d.startClientX, e.clientY - d.startClientY) > 6
       ) {
@@ -547,7 +547,10 @@ export function FreeformClient({
       }
       const d = dragRef.current
       if (!d || e.pointerId !== d.pointerId) return
-      const rect = tableRef.current?.getBoundingClientRect()
+      const measured = tableRef.current?.getBoundingClientRect()
+      // Treat a zero-size rect (not yet laid out) as missing — the null-checks
+      // below then fall back to the raw drop coords instead of dividing by 0.
+      const rect = measured && measured.width && measured.height ? measured : null
       // Dropped mostly on the deck → put the card back. A fresh draw is simply
       // not placed (it's still on top of the deck); a card already on the table
       // is removed and shuffled back into the pile.
@@ -617,7 +620,7 @@ export function FreeformClient({
     startY: number,
   ) {
     const rect = tableRef.current?.getBoundingClientRect()
-    if (!rect) return
+    if (!rect || !rect.width || !rect.height) return
     const pan = panRef.current
     const p = toWorld(e.clientX, e.clientY, rect, zoomRef.current, pan.x, pan.y)
     movedRef.current = false
@@ -638,7 +641,7 @@ export function FreeformClient({
   // same deck-screen-box math as clampPan (transform-origin top-center).
   function nearDeck(clientX: number, clientY: number) {
     const rect = tableRef.current?.getBoundingClientRect()
-    if (!rect) return false
+    if (!rect || !rect.width || !rect.height) return false
     const box = deckScreenBox(rect.width, rect.height, zoomRef.current, cardWRef.current, panRef.current)
     // box is board-relative; shift into client coords and grow by the buffer.
     const left = rect.left + box.left

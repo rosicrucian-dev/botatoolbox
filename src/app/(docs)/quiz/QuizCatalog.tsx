@@ -24,8 +24,12 @@ function usePersistedToggle(key: string, defaultValue: boolean) {
   const [value, setValue] = useState(defaultValue)
 
   useEffect(() => {
-    const stored = localStorage.getItem(key)
-    if (stored !== null) setValue(stored === '1')
+    try {
+      const stored = localStorage.getItem(key)
+      if (stored !== null) setValue(stored === '1')
+    } catch {
+      // Private browsing / storage disabled — keep the default.
+    }
   }, [key])
 
   const setPersistedValue = useCallback(

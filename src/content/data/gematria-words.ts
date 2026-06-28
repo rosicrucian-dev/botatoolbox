@@ -37,10 +37,17 @@ const DICT_URL = '/data/gematria-words.json'
 let cache: Promise<GematriaDict> | null = null
 export function fetchGematriaDict(): Promise<GematriaDict> {
   if (!cache) {
-    cache = fetch(DICT_URL).then((r) => {
-      if (!r.ok) throw new Error(`gematria dictionary: HTTP ${r.status}`)
-      return r.json() as Promise<GematriaDict>
-    })
+    cache = fetch(DICT_URL)
+      .then((r) => {
+        if (!r.ok) throw new Error(`gematria dictionary: HTTP ${r.status}`)
+        return r.json() as Promise<GematriaDict>
+      })
+      .catch((err) => {
+        // Don't cache a failure — clear it so a later call (e.g. a remount)
+        // retries instead of being stuck on the rejected promise forever.
+        cache = null
+        throw err
+      })
   }
   return cache
 }
