@@ -693,8 +693,8 @@ export function FreeformClient({
       onPointerDown={startPan}
       className={
         variant === 'expand'
-          ? 'relative h-full w-full cursor-grab touch-none overflow-hidden bg-zinc-50 dark:bg-zinc-900/40'
-          : 'relative w-full cursor-grab touch-none overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/40'
+          ? 'relative h-full w-full cursor-grab touch-none overflow-hidden bg-zinc-50 dark:bg-zinc-800/40'
+          : 'relative w-full cursor-grab touch-none overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800/40'
       }
       style={variant === 'expand' ? undefined : { height: 'min(72vh, 40rem)' }}
     >
@@ -840,7 +840,7 @@ export function FreeformClient({
         }}
       >
         {/* Themed header, matching the docs header (color + bottom divider). */}
-        <header className="relative flex h-14 shrink-0 items-center justify-between gap-4 bg-white px-4 sm:px-6 lg:px-8 dark:bg-zinc-900">
+        <header className="relative z-10 flex h-14 shrink-0 items-center justify-between gap-4 bg-white px-4 sm:px-6 lg:px-8 dark:bg-zinc-900">
           <span className="truncate text-base font-semibold">Freeform</span>
           <div className="flex items-center gap-3">
             {controls}
