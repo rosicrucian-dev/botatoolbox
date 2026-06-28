@@ -28,7 +28,7 @@ export default function MinorArcana() {
                 const slug = `${card.num.toLowerCase()}-${suit.suit.toLowerCase()}`
                 return (
                   <li key={card.num}>
-                    <Link href={`/tarot/minor-arcana/${slug}`} className={ROW}>
+                    <Link href={`/tarot/${slug}`} className={ROW}>
                       <span className="flex items-baseline gap-3">
                         <IndexLabel widthClassName="w-16 md:w-20">
                           {card.num}

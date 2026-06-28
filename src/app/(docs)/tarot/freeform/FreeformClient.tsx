@@ -814,11 +814,7 @@ export function FreeformClient({
           return (
             <Link
               key={p.slug}
-              href={
-                resolveSlug(p.slug)?.kind === 'minor'
-                  ? `/tarot/minor-arcana/${p.slug}`
-                  : `/tarot/${p.slug}`
-              }
+              href={`/tarot/${p.slug}`}
               draggable={false}
               onPointerDown={(e) => startCardDrag(e, p)}
               onClick={(e) => {

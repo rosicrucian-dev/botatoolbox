@@ -16,6 +16,14 @@ export const cards: ReadonlyArray<TarotCard> = z
 
 export const cardBySlug = byKey(cards, 'slug', 'card.slug')
 export const cardByLetter = byKey(cards, 'letter', 'card.letter')
+
+// Resolve a route [slug] to a major card — accepts either the named slug
+// ('the-magician') or the numeric alias ('1'). Used by the /tarot/[slug] pages,
+// which serve a card under both forms.
+export function cardBySlugOrNum(slug: string): TarotCard | undefined {
+  if (/^\d+$/.test(slug)) return cards.find((c) => c.num === Number(slug))
+  return cardBySlug[slug]
+}
 // Astrology lookup is case-insensitive — keys are lowercased so callers
 // can pass mixed-case names from JSON without normalizing first.
 export const cardByAstrology: Record<string, TarotCard> = Object.freeze(

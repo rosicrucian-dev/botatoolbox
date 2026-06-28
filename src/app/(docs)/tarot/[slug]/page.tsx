@@ -1,52 +1,18 @@
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import { type Metadata } from 'next'
 
-import { DefinitionList } from '@/components/DefinitionList'
-import { KeyboardNav } from '@/components/KeyboardNav'
-import { PlayLink } from '@/components/PlayLink'
-import { PrevNextNav } from '@/components/PrevNextNav'
-import { planetBySlug, signBySlug } from '@/content/data/astrology'
-import { paths, sephirahBySlug } from '@/content/data'
-import { cards, cardImage } from '@/content/data/tarot'
-
-const FIELD_ORDER: Array<{
-  label: string
-  key: keyof (typeof cards)[number]
-}> = [
-  { label: 'Color', key: 'color' },
-  { label: 'Note', key: 'note' },
-  { label: 'Letter', key: 'letter' },
-  { label: 'English', key: 'english' },
-  { label: 'Path', key: 'path' },
-  { label: 'Letter Significance', key: 'significance' },
-  { label: 'Gematria', key: 'gematria' },
-  { label: 'Astrology', key: 'astrology' },
-  { label: 'Alchemy', key: 'alchemy' },
-  { label: 'Intelligence', key: 'intelligence' },
-  { label: 'Power', key: 'power' },
-  // Label for `human` is resolved per-card in the render below:
-  // 'Opposites' on planet cards, 'Human Faculty' on sign cards.
-  { label: 'Human Faculty', key: 'human' },
-]
-
-// Resolve a [slug] segment to a card. Accepts either the named slug
-// ('fool', 'high-priestess') or the card number ('0', '1', ..., '21').
-function findCard(slug: string) {
-  if (/^\d+$/.test(slug)) {
-    const n = Number(slug)
-    return cards.find((c) => c.num === n)
-  }
-  return cards.find((c) => c.slug === slug)
-}
+import { cards, cardBySlugOrNum } from '@/content/data/tarot'
+import { minorBySlug } from '@/content/data'
+import { MajorCard } from './MajorCard'
+import { MinorCard } from './MinorCard'
 
 export function generateStaticParams() {
-  // Pre-render every card under both routes: the named slug and the
-  // numeric alias. Two entries per card → 44 static pages total.
-  return cards.flatMap((card) => [
-    { slug: card.slug },
-    { slug: String(card.num) },
-  ])
+  // Both halves of the deck share /tarot/<slug>. Major cards are also reachable
+  // by numeric alias (two entries each); minor cards by their <num>-<suit> slug.
+  return [
+    ...cards.flatMap((card) => [{ slug: card.slug }, { slug: String(card.num) }]),
+    ...Object.keys(minorBySlug).map((slug) => ({ slug })),
+  ]
 }
 
 export async function generateMetadata({
@@ -55,152 +21,23 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const card = findCard(slug)
-  return { title: card?.name ?? 'Card' }
+  const major = cardBySlugOrNum(slug)
+  if (major) return { title: major.name }
+  const minor = minorBySlug[slug]
+  return { title: minor ? `${minor.num} of ${minor.suit}` : 'Card' }
 }
 
+// One route for the whole deck. The slug resolves to a major card (named or
+// numeric) or a minor card; each renders its own detail layout.
 export default async function TarotCardPage({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const card = findCard(slug)
-  if (!card) notFound()
-
-  const prev = cards.find(
-    (c) => c.num === (card.num + cards.length - 1) % cards.length,
-  )!
-  const next = cards.find((c) => c.num === (card.num + 1) % cards.length)!
-
-  return (
-    <article className="space-y-6">
-      <KeyboardNav
-        prevHref={`/tarot/${prev.slug}`}
-        nextHref={`/tarot/${next.slug}`}
-      />
-      <div className="flex flex-col gap-8 md:flex-row md:items-start">
-        <div className="flex-1 space-y-4">
-          <div className="flex items-center justify-between gap-4">
-            <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
-              {card.name}
-            </h1>
-            <PlayLink href={`/tarot/major-arcana/play?idx=${card.num}`}>
-              Focus ▶
-            </PlayLink>
-          </div>
-
-          <DefinitionList
-            rows={FIELD_ORDER.map(({ label, key }) => {
-              const raw = String(card[key])
-              // `path` row appends the from→to sephiroth in parens.
-              // Direction comes from tree-paths.json (top-to-bottom
-              // descent order). Each sephirah name links to its detail
-              // page using the same underline styling as the astrology
-              // link above.
-              if (key === 'path') {
-                const p = paths.find((tp) => tp.slug === card.slug)
-                if (p) {
-                  const from = sephirahBySlug[p.from]
-                  const to = sephirahBySlug[p.to]
-                  if (from && to) {
-                    const linkCls =
-                      'text-zinc-900 underline-offset-2 hover:underline dark:text-zinc-100'
-                    return {
-                      label,
-                      value: (
-                        <>
-                          {raw} (
-                          <Link
-                            href={`/tree-of-life/${from.slug}`}
-                            className={linkCls}
-                          >
-                            {from.hebrewName}
-                          </Link>
-                          {' → '}
-                          <Link
-                            href={`/tree-of-life/${to.slug}`}
-                            className={linkCls}
-                          >
-                            {to.hebrewName}
-                          </Link>
-                          )
-                        </>
-                      ),
-                    }
-                  }
-                }
-                return { label, value: raw }
-              }
-              // `human` row gets a different label depending on whether
-              // this card is attributed to a planet ("Opposites") or a
-              // sign ("Human Faculty").
-              if (key === 'human') {
-                const isPlanetCard =
-                  planetBySlug[card.astrology.toLowerCase()] !== undefined
-                return {
-                  label: isPlanetCard ? 'Opposites' : 'Human Faculty',
-                  value: raw,
-                }
-              }
-              // For sign-attributed cards, append the sign's alchemical
-              // stage to the Alchemy row — e.g. "Fiery — Calcination"
-              // for the Emperor. Planet-attributed cards (Magician,
-              // High Priestess, …) show just the alchemy attribute.
-              if (key === 'alchemy') {
-                const sign = signBySlug[card.astrology.toLowerCase()]
-                if (sign) {
-                  return {
-                    label,
-                    value: `${raw} — ${sign.alchemicalStage}`,
-                  }
-                }
-              }
-              // The Astrology cell links to the corresponding planet or
-              // sign detail page. Slug is just the lowercased name —
-              // every card's astrology resolves to either a planet or
-              // sign (enforced by integrity.ts at boot).
-              if (key === 'astrology') {
-                const astroSlug = card.astrology.toLowerCase()
-                const href = planetBySlug[astroSlug]
-                  ? `/astrology/planets/${astroSlug}`
-                  : signBySlug[astroSlug]
-                    ? `/astrology/signs/${astroSlug}`
-                    : null
-                if (href) {
-                  return {
-                    label,
-                    value: (
-                      <Link
-                        href={href}
-                        className="text-zinc-900 underline-offset-2 hover:underline dark:text-zinc-100"
-                      >
-                        {raw}
-                      </Link>
-                    ),
-                  }
-                }
-              }
-              return { label, value: raw }
-            })}
-          />
-        </div>
-
-        <div className="md:w-2/5 md:max-w-sm">
-          <img
-            src={cardImage(card)}
-            alt={`${card.num}. ${card.name}`}
-            width={724}
-            height={1200}
-            className="w-full rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
-          />
-        </div>
-      </div>
-
-      <PrevNextNav
-        prev={{ href: `/tarot/${prev.slug}`, label: `${prev.num}. ${prev.name}` }}
-        next={{ href: `/tarot/${next.slug}`, label: `${next.num}. ${next.name}` }}
-      />
-    </article>
-  )
+  const major = cardBySlugOrNum(slug)
+  if (major) return <MajorCard card={major} />
+  const minor = minorBySlug[slug]
+  if (minor) return <MinorCard card={minor} />
+  notFound()
 }

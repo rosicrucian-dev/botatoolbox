@@ -1,7 +1,7 @@
 import { type MetadataRoute } from 'next'
 
 import { signs, planets } from '@/content/data/astrology'
-import { sephiroth, words, visibleTexts } from '@/content/data'
+import { sephiroth, words, visibleTexts, minorCards } from '@/content/data'
 import { cards } from '@/content/data/tarot'
 
 // Required by `output: 'export'` for metadata routes — emits a static
@@ -50,6 +50,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
     })),
     ...cards.map((c) => ({
+      url: `${SITE}/tarot/${c.slug}`,
+      lastModified,
+    })),
+    ...minorCards.map((c) => ({
       url: `${SITE}/tarot/${c.slug}`,
       lastModified,
     })),
