@@ -821,7 +821,7 @@ export function FreeformClient({
         // a drag starts so it doesn't paint over the first card being drawn.
         <div className="pointer-events-none absolute inset-x-0 top-1/2 bottom-0 flex items-center justify-center px-6">
           <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
-            Take a deep breath, set an intention, and draw card.
+            Take a deep breath, set an intention, and pull a card by dragging from the top of the deck.
           </p>
         </div>
       )}
