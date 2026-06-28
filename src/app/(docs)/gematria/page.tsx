@@ -1,19 +1,27 @@
-import { type Metadata } from 'next'
-import { Suspense } from 'react'
+'use client'
 
-import { GematriaClient } from './GematriaClient'
+import { Suspense, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-export const metadata: Metadata = {
-  title: 'Calculator',
+// The calculator moved to /gematria/calculator. Keep this old path alive as a
+// client-side redirect (static export has no server redirects) so bookmarks —
+// and the player's older ?seq= back-links — still land on the calculator.
+function GematriaRedirect() {
+  const router = useRouter()
+  const sp = useSearchParams()
+
+  useEffect(() => {
+    const qs = sp.toString()
+    router.replace(`/gematria/calculator${qs ? `?${qs}` : ''}`)
+  }, [router, sp])
+
+  return null
 }
 
-// useSearchParams (used inside GematriaClient for ?seq= sync) needs a
-// Suspense boundary above it for the static export. Page is a server
-// component just to host metadata + Suspense.
-export default function GematriaPage() {
+export default function GematriaIndexPage() {
   return (
     <Suspense>
-      <GematriaClient />
+      <GematriaRedirect />
     </Suspense>
   )
 }

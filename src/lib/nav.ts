@@ -116,7 +116,7 @@ const groups: Array<NavGroup> = [
     links: [
       {
         title: 'Calculator',
-        href: '/gematria',
+        href: '/gematria/calculator',
         description:
           'A Hebrew letter calculator. Tap letters to spell a word; the gematria total updates and the corresponding tarot trumps appear above.',
       },

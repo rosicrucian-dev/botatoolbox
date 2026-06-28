@@ -21,7 +21,7 @@ const staticRoutes = [
   '/healing/planets',
   '/healing/signs',
   '/files',
-  '/gematria',
+  '/gematria/calculator',
   '/gematria/dictionary',
   '/links',
   '/tattvas',
