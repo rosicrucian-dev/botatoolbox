@@ -200,23 +200,27 @@ export function GematriaClient() {
 
       {/* Meaning of the built word, when it's in the gematria dictionary. */}
       {dictWord && (dictWord.crowley || dictWord.strongs) && (
-        <div className="space-y-1 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
+        <div className="space-y-2 border-t border-zinc-200 pt-4 dark:border-zinc-800">
           {dictWord.crowley && (
-            <p className="text-zinc-700 dark:text-zinc-300">
-              <span className="font-medium text-zinc-400 dark:text-zinc-500">
-                Crowley{' '}
-              </span>
-              {dictWord.crowley}
-            </p>
+            <div>
+              <div className="text-xs font-medium tracking-wide text-zinc-400 uppercase dark:text-zinc-500">
+                Crowley
+              </div>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                {dictWord.crowley}
+              </p>
+            </div>
           )}
           {dictWord.strongs && (
-            <p className="text-zinc-700 dark:text-zinc-300">
-              <span className="font-medium text-zinc-400 dark:text-zinc-500">
-                Strong&rsquo;s{' '}
-              </span>
+            <div>
+              <div className="text-xs font-medium tracking-wide text-zinc-400 uppercase dark:text-zinc-500">
+                Strong&rsquo;s
+              </div>
               {/* Capitalize the first letter to match Crowley's style. */}
-              {dictWord.strongs.replace(/\p{L}/u, (c) => c.toUpperCase())}
-            </p>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                {dictWord.strongs.replace(/\p{L}/u, (c) => c.toUpperCase())}
+              </p>
+            </div>
           )}
         </div>
       )}
