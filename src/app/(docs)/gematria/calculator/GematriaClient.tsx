@@ -1,13 +1,15 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
 
 import { cardImage } from '@/content/data/tarot'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
 import { wordForSpelling } from '@/content/data'
+import { useGematriaDict } from '@/lib/useGematriaDict'
+import { useQueryParamState } from '@/lib/useQueryParamState'
+import { GematriaMeaning } from '@/components/GematriaMeaning'
 import { GematriaSources } from '@/components/GematriaSources'
 
 // Keyboard layout — visual order matches the BOTA gematria calculator.
@@ -22,28 +24,14 @@ const ROW_MAIN: Array<Array<string>> = [
 const ROW_SOFITS = ['ך', 'ם', 'ן', 'ף', 'ץ']
 
 export function GematriaClient() {
-  const router = useRouter()
-  const sp = useSearchParams()
-
-  // The user's sequence is mirrored to ?seq=... so it survives a refresh
-  // and a back-navigation from the meditation player. URL is the single
-  // source of truth; useState seeds from it on mount.
-  const initialSeq = sp.get('seq') ?? ''
-  const [seq, setSeq] = useState<Array<string>>(() => Array.from(initialSeq))
-
-  // Push every state change back to the URL via replace (no history
-  // entry per keypress). Player navigation can then read ?seq= to know
-  // what to play.
-  useEffect(() => {
-    const next = seq.join('')
-    const current = sp.get('seq') ?? ''
-    if (next === current) return
-    const params = new URLSearchParams(sp.toString())
-    if (next) params.set('seq', next)
-    else params.delete('seq')
-    const qs = params.toString()
-    router.replace(qs ? `?${qs}` : '?', { scroll: false })
-  }, [seq, router, sp])
+  // The user's sequence (one glyph per char) is mirrored to ?seq=… so it
+  // survives a refresh and a back-navigation from the meditation player, which
+  // reads ?seq= to know what to play.
+  const [seq, setSeq] = useQueryParamState(
+    'seq',
+    (raw) => Array.from(raw),
+    (s) => s.join(''),
+  )
 
   const total = useMemo(
     () => seq.reduce((sum, g) => sum + (valueByGlyph[g] ?? 0), 0),
@@ -56,7 +44,11 @@ export function GematriaClient() {
   )
   // If the exact word the user built is in the gematria dictionary, surface
   // its meaning below the tarot.
-  const dictWord = useMemo(() => wordForSpelling(total, word), [total, word])
+  const dict = useGematriaDict()
+  const dictWord = useMemo(
+    () => (dict ? wordForSpelling(dict, total, word) : undefined),
+    [dict, total, word],
+  )
 
   // Tarot cards are pinned to ⅑ width (matching Freeform's gap scheme)
   // so nine cards exactly fill the row: 9 × width + 8 × gap = 100%. Anything
@@ -200,33 +192,15 @@ export function GematriaClient() {
       </div>
 
       {/* Meaning of the built word, when it's in the gematria dictionary. */}
-      {dictWord && (dictWord.crowley || dictWord.strongs) && (
-        <div className="space-y-2 border-t border-zinc-200 pt-4 dark:border-zinc-800">
-          {dictWord.crowley && (
-            <div>
-              <div className="text-xs font-medium tracking-wide text-zinc-400 uppercase dark:text-zinc-500">
-                Crowley
-              </div>
-              <p className="text-sm text-zinc-700 dark:text-zinc-300">
-                {dictWord.crowley}
-              </p>
-            </div>
-          )}
-          {dictWord.strongs && (
-            <div>
-              <div className="text-xs font-medium tracking-wide text-zinc-400 uppercase dark:text-zinc-500">
-                Strong&rsquo;s
-              </div>
-              {/* Capitalize the first letter to match Crowley's style. */}
-              <p className="text-sm text-zinc-700 dark:text-zinc-300">
-                {dictWord.strongs.replace(/\p{L}/u, (c) => c.toUpperCase())}
-              </p>
-            </div>
-          )}
+      {dictWord && (dictWord.crowley || dictWord.strongs?.length) && (
+        <div className="border-t border-zinc-200 pt-4 dark:border-zinc-800">
+          <GematriaMeaning word={dictWord} />
         </div>
       )}
 
-      {dictWord && (dictWord.crowley || dictWord.strongs) && <GematriaSources />}
+      {dictWord && (dictWord.crowley || dictWord.strongs?.length) && (
+        <GematriaSources />
+      )}
     </article>
   )
 }

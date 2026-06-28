@@ -4,10 +4,14 @@ Files in this folder are **produced by build scripts**, not written by
 hand. Editing them directly will be overwritten the next time the
 generator runs. To change this data, edit the *source* and regenerate.
 
-| File                  | Generator                            | Source                                                                 |
-| --------------------- | ------------------------------------ | ---------------------------------------------------------------------- |
-| `gematria-words.json` | `npm run gen:gematria-words`         | `scripts/vendor/sepher-sephiroth.source.json` + `strongs-hebrew.source.json` |
+| File (output path)                  | Generator                    | Source                                                                 |
+| ----------------------------------- | ---------------------------- | ---------------------------------------------------------------------- |
+| `public/data/gematria-words.json`   | `npm run gen:gematria-words` | `scripts/vendor/sepher-sephiroth.source.json` + `strongs-hebrew.source.json` |
 
 Each generated file still has a Zod schema in
 `src/content/data/schemas.ts`; the generator validates its output against
 that schema before writing, so a malformed build fails loudly.
+
+> Note: the gematria dictionary is large, so it's generated into `public/`
+> and **fetched on demand** (not bundled). See
+> `src/content/data/gematria-words.ts`.

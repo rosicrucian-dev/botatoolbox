@@ -55,10 +55,11 @@ Some data is **built**, not hand-written — it lives in
 `content/data/generated/` and comes from a `npm run gen:*` script (sources
 under `scripts/vendor/`). Don't edit it; edit the source and regenerate.
 It still gets a Zod schema in `schemas.ts`, but a large generated file
-(e.g. `gematria-words.json`, which ships to the client) is validated
-**once in the generator** rather than `.parse()`'d at runtime — the data
-module casts and infers its types from the schema. See
-`content/data/generated/README.md`.
+(e.g. `gematria-words.json`) is validated **once in the generator** rather
+than `.parse()`'d at runtime — the data module casts and infers its types
+from the schema. That file is especially large, so it's generated into
+`public/` and **fetched on demand** (via `fetchGematriaDict`) instead of
+bundled. See `content/data/generated/README.md`.
 
 ## Prose texts
 

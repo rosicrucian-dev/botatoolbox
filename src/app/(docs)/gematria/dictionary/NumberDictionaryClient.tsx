@@ -1,10 +1,16 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useMemo } from 'react'
 
-import { wordsForNumber } from '@/content/data'
+import {
+  wordsForNumber,
+  type GematriaWord,
+  type GematriaOther,
+} from '@/content/data'
 import { theosophicExtension, theosophicReduction } from '@/lib/gematria'
+import { useGematriaDict } from '@/lib/useGematriaDict'
+import { useQueryParamState } from '@/lib/useQueryParamState'
+import { GematriaMeaning } from '@/components/GematriaMeaning'
 import { GematriaSources } from '@/components/GematriaSources'
 
 const MAX_DIGITS = 4
@@ -22,27 +28,17 @@ function normalize(raw: string): string {
 const DIGITS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 export function NumberDictionaryClient() {
-  const router = useRouter()
-  const sp = useSearchParams()
-
-  // Mirror the typed number to ?n=… so it survives refresh / back-nav and
-  // is shareable. URL is the source of truth; seed state from it on mount.
-  const [digits, setDigits] = useState<string>(() =>
-    normalize(sp.get('n') ?? ''),
-  )
-
-  useEffect(() => {
-    const current = sp.get('n') ?? ''
-    if (digits === current) return
-    const params = new URLSearchParams(sp.toString())
-    if (digits) params.set('n', digits)
-    else params.delete('n')
-    const qs = params.toString()
-    router.replace(qs ? `?${qs}` : '?', { scroll: false })
-  }, [digits, router, sp])
+  // Mirror the typed number to ?n=… so it survives refresh / back-nav and is
+  // shareable. `normalize` keeps the param clean (digits only, no leading
+  // zeros, capped length).
+  const [digits, setDigits] = useQueryParamState('n', normalize, (s) => s)
 
   const number = digits ? parseInt(digits, 10) : 0
-  const entry = useMemo(() => wordsForNumber(number), [number])
+  const dict = useGematriaDict()
+  const entry = useMemo(
+    () => (dict ? wordsForNumber(dict, number) : undefined),
+    [dict, number],
+  )
 
   function press(d: string) {
     setDigits((cur) => normalize(cur + d))
@@ -104,9 +100,16 @@ export function NumberDictionaryClient() {
       )}
 
       {/* The Hebrew words for the current number. */}
-      <Results number={number} entry={entry} hasInput={!!digits} />
+      <Results
+        number={number}
+        entry={entry}
+        hasInput={!!digits}
+        loading={!dict}
+      />
 
-      {entry && entry.words.length > 0 && <GematriaSources />}
+      {entry && (entry.words.length > 0 || (entry.other?.length ?? 0) > 0) && (
+        <GematriaSources />
+      )}
     </article>
   )
 }
@@ -142,14 +145,36 @@ function Stat({
   )
 }
 
+// A single word row: meaning(s) on the left, the Hebrew word on the right.
+function WordRow({ word }: { word: GematriaWord | GematriaOther }) {
+  return (
+    <li className="flex justify-between gap-6 py-4">
+      {/* Left: Crowley's gloss (when present) + every Strong's sense. */}
+      <div className="min-w-0 flex-1">
+        <GematriaMeaning word={word} />
+      </div>
+      {/* Right: the Hebrew word, aligned with the first source line. */}
+      <span
+        dir="rtl"
+        lang="he"
+        className="shrink-0 font-serif text-2xl leading-none text-zinc-900 md:text-3xl dark:text-white"
+      >
+        {word.hebrew}
+      </span>
+    </li>
+  )
+}
+
 function Results({
   number,
   entry,
   hasInput,
+  loading,
 }: {
   number: number
   entry: ReturnType<typeof wordsForNumber>
   hasInput: boolean
+  loading: boolean
 }) {
   if (!hasInput) {
     return (
@@ -159,7 +184,15 @@ function Results({
     )
   }
 
-  if (!entry || entry.words.length === 0) {
+  if (loading) {
+    return (
+      <p className="py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
+        Looking up&hellip;
+      </p>
+    )
+  }
+
+  if (!entry) {
     return (
       <p className="py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
         No words found for {number}.
@@ -168,65 +201,34 @@ function Results({
   }
 
   const { words } = entry
+  const other = entry.other ?? []
   return (
     <div>
-      <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-        {words.map((w, i) => (
-          <li key={i} className="flex justify-between gap-6 py-4">
-            {/* Left: stacked source blocks (Crowley first, then Strong's).
-                Each appears only when that source has something to say. */}
-            <div className="min-w-0 flex-1 space-y-2">
-              {w.crowley && <Source label="Crowley" def={w.crowley} />}
-              {w.strongs && (
-                <Source label="Strong's" def={w.strongs} capitalize />
-              )}
-              {!w.strongs && !w.crowley && (
-                <p className="text-sm text-zinc-400 italic dark:text-zinc-500">
-                  No definition.
-                </p>
-              )}
-            </div>
-            {/* Right: the Hebrew word, aligned with the first source line. */}
-            <span
-              dir="rtl"
-              lang="he"
-              className="shrink-0 font-serif text-2xl leading-none text-zinc-900 md:text-3xl dark:text-white"
-            >
-              {w.hebrew}
-            </span>
-          </li>
-        ))}
-      </ul>
+      {words.length > 0 && (
+        <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
+          {words.map((w, i) => (
+            <WordRow key={i} word={w} />
+          ))}
+        </ul>
+      )}
+      {/* Every other Hebrew Bible word at this value, beyond Crowley's
+          curated set — collapsed so his selection stays primary. */}
+      {other.length > 0 && (
+        <details className="mt-2 border-t border-zinc-200 pt-2 dark:border-zinc-800">
+          <summary className="cursor-pointer py-2 text-sm font-medium text-zinc-500 transition hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200">
+            Show Strong&rsquo;s-only words ({other.length})
+          </summary>
+          <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
+            {other.map((o, i) => (
+              <WordRow key={i} word={o} />
+            ))}
+          </ul>
+        </details>
+      )}
     </div>
   )
 }
 
-function Source({
-  label,
-  def,
-  capitalize = false,
-}: {
-  label: string
-  def: string
-  capitalize?: boolean
-}) {
-  return (
-    <div>
-      <div className="text-xs font-medium tracking-wide text-zinc-400 uppercase dark:text-zinc-500">
-        {label}
-      </div>
-      {/* Strong's glosses are lower-case in the source; first-letter:uppercase
-          matches Crowley's capitalized style without mutating the data. */}
-      <p
-        className={`text-sm text-zinc-700 dark:text-zinc-300 ${
-          capitalize ? 'first-letter:uppercase' : ''
-        }`}
-      >
-        {def}
-      </p>
-    </div>
-  )
-}
 
 function NumKey({
   digit,

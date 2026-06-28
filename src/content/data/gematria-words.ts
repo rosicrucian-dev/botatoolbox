@@ -1,58 +1,73 @@
 // Gematria dictionary — a value-indexed map of Hebrew words/phrases
-// (Sepher Sephiroth + Strong's). GENERATED: the JSON is built by
-// `scripts/build-gematria-words.ts`; edit the sources under
-// `scripts/vendor/`, not the JSON. See content/data/generated/README.md.
+// (Sepher Sephiroth + the full Hebrew Bible via Strong's). GENERATED: the JSON
+// is built by `scripts/build-gematria-words.ts` from the sources under
+// `scripts/vendor/` — edit those, not the JSON.
 //
-// Unlike the other data modules this one does NOT `.parse()` at runtime —
-// the file is large and ships to the client, so it's validated once at
-// build time (inside the generator) instead. Types come from the Zod
-// schema so they stay in sync regardless.
+// It is NOT bundled. The file is large (every value carries Crowley's curated
+// words plus every other Strong's word at that value), so it ships as a static
+// file in /public and is FETCHED ON DEMAND, then cached for the page session.
+// This keeps the gematria pages' initial JS small. Validated once at build time
+// (inside the generator); cast — not re-parsed — here.
 
 import { z } from 'zod'
 
-import data from '@content/data/generated/gematria-words.json'
+import { skeleton } from '@/lib/hebrew-letters'
 import {
+  GematriaStrongsSchema,
   GematriaWordSchema,
+  GematriaOtherSchema,
   GematriaNumberEntrySchema,
 } from './schemas'
 
+export type GematriaStrongs = z.infer<typeof GematriaStrongsSchema>
 export type GematriaWord = z.infer<typeof GematriaWordSchema>
+export type GematriaOther = z.infer<typeof GematriaOtherSchema>
 export type GematriaNumberEntry = z.infer<typeof GematriaNumberEntrySchema>
+export type GematriaDict = Record<string, GematriaNumberEntry>
 
-const dict = data as unknown as Record<string, GematriaNumberEntry>
+// A meaning-bearing row, whether it's a curated Crowley word (has a gloss) or a
+// Strong's-only "other" word (no gloss). Shared with <GematriaMeaning>.
+export type GematriaMeaningLike = {
+  crowley?: string
+  strongs?: Array<GematriaStrongs>
+}
 
-// Words summing to `n`, or undefined if the dictionary has no entry.
-export function wordsForNumber(n: number): GematriaNumberEntry | undefined {
+// Fetch the dictionary once and cache the promise for the page session.
+const DICT_URL = '/data/gematria-words.json'
+let cache: Promise<GematriaDict> | null = null
+export function fetchGematriaDict(): Promise<GematriaDict> {
+  if (!cache) {
+    cache = fetch(DICT_URL).then((r) => {
+      if (!r.ok) throw new Error(`gematria dictionary: HTTP ${r.status}`)
+      return r.json() as Promise<GematriaDict>
+    })
+  }
+  return cache
+}
+
+// The entry (Crowley words + other words) summing to `n`, or undefined.
+export function wordsForNumber(
+  dict: GematriaDict,
+  n: number,
+): GematriaNumberEntry | undefined {
   if (!Number.isInteger(n) || n <= 0) return undefined
   return dict[String(n)]
 }
 
-const FINAL_TO_BASE: Record<string, string> = {
-  ך: 'כ', ם: 'מ', ן: 'נ', ף: 'פ', ץ: 'צ',
-}
-
-// Consonantal skeleton: final forms folded to base, non-letters dropped.
-// Lets a typed spelling (sofit forms, spaces) match the dictionary's
-// base-form entries.
-function skeleton(s: string): string {
-  let out = ''
-  for (const ch of s) {
-    const base = FINAL_TO_BASE[ch] ?? ch
-    if (base >= 'א' && base <= 'ת') out += base
-  }
-  return out
-}
-
-// The dictionary entry for a specific spelling at a known value, if the
-// dictionary happens to contain that exact word. Used by the calculator
-// to show the meaning of the word the user just built.
+// The meaning for a specific spelling at a known value, if the dictionary
+// contains that exact word — checking Crowley's words first, then the other
+// (Strong's-only) words. Used by the calculator to gloss the built word.
 export function wordForSpelling(
+  dict: GematriaDict,
   value: number,
   hebrew: string,
-): GematriaWord | undefined {
-  const entry = wordsForNumber(value)
+): GematriaMeaningLike | undefined {
+  const entry = wordsForNumber(dict, value)
   if (!entry) return undefined
   const target = skeleton(hebrew)
   if (!target) return undefined
-  return entry.words.find((w) => skeleton(w.hebrew) === target)
+  return (
+    entry.words.find((w) => skeleton(w.hebrew) === target) ??
+    entry.other?.find((o) => skeleton(o.hebrew) === target)
+  )
 }

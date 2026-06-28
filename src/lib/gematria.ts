@@ -7,22 +7,19 @@
 
 import { cardByLetter, type TarotCard } from '@/content/data/tarot'
 import { letters as hebrewLetters } from '@/lib/hebrew'
+import { LETTER_VALUE } from '@/lib/hebrew-letters'
 
-export const valueByGlyph: Record<string, number> = {}
+// Letter values come from the shared core (LETTER_VALUE) — the same table the
+// dictionary generator uses — so a built word's total always matches the
+// dictionary's buckets. The tarot card is looked up separately for the glyph.
+export const valueByGlyph: Record<string, number> = { ...LETTER_VALUE, ' ': 0 }
 export const cardByGlyph: Record<string, TarotCard | undefined> = {}
 
 for (const [name, meta] of Object.entries(hebrewLetters)) {
   const card = cardByLetter[name]
-  const value = card?.gematria ?? 0
-  valueByGlyph[meta.glyph] = value
   cardByGlyph[meta.glyph] = card
-  if (meta.sofit) {
-    valueByGlyph[meta.sofit] = value
-    cardByGlyph[meta.sofit] = card
-  }
+  if (meta.sofit) cardByGlyph[meta.sofit] = card
 }
-
-valueByGlyph[' '] = 0
 
 // --- Number-only transforms (the dictionary's "Numbers" cards) ---
 // Pure math on a value; no word needed.
