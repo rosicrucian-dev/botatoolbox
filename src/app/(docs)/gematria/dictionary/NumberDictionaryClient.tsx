@@ -174,7 +174,9 @@ function Results({
                 Each appears only when that source has something to say. */}
             <div className="min-w-0 flex-1 space-y-2">
               {w.crowley && <Source label="Crowley" def={w.crowley} />}
-              {w.strongs && <Source label="Strong's" def={w.strongs} />}
+              {w.strongs && (
+                <Source label="Strong's" def={w.strongs} capitalize />
+              )}
               {!w.strongs && !w.crowley && (
                 <p className="text-sm text-zinc-400 italic dark:text-zinc-500">
                   No definition.
@@ -196,13 +198,29 @@ function Results({
   )
 }
 
-function Source({ label, def }: { label: string; def: string }) {
+function Source({
+  label,
+  def,
+  capitalize = false,
+}: {
+  label: string
+  def: string
+  capitalize?: boolean
+}) {
   return (
     <div>
       <div className="text-xs font-medium tracking-wide text-zinc-400 uppercase dark:text-zinc-500">
         {label}
       </div>
-      <p className="text-sm text-zinc-700 dark:text-zinc-300">{def}</p>
+      {/* Strong's glosses are lower-case in the source; first-letter:uppercase
+          matches Crowley's capitalized style without mutating the data. */}
+      <p
+        className={`text-sm text-zinc-700 dark:text-zinc-300 ${
+          capitalize ? 'first-letter:uppercase' : ''
+        }`}
+      >
+        {def}
+      </p>
     </div>
   )
 }

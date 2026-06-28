@@ -214,7 +214,8 @@ export function GematriaClient() {
               <span className="font-medium text-zinc-400 dark:text-zinc-500">
                 Strong&rsquo;s{' '}
               </span>
-              {dictWord.strongs}
+              {/* Capitalize the first letter to match Crowley's style. */}
+              {dictWord.strongs.replace(/\p{L}/u, (c) => c.toUpperCase())}
             </p>
           )}
         </div>

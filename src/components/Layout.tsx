@@ -36,7 +36,12 @@ export function Layout({
             <Navigation className="hidden lg:mt-10 lg:block" />
           </div>
         </motion.header>
-        <div className="relative flex h-full flex-col px-4 pt-14 sm:px-6 lg:px-8">
+        <div
+          className="relative flex h-full flex-col px-4 sm:px-6 lg:px-8"
+          // Clear the fixed header, which is taller in a standalone PWA by the
+          // top safe-area inset (0 in a normal browser). Matches Header.tsx.
+          style={{ paddingTop: 'calc(3.5rem + env(safe-area-inset-top))' }}
+        >
           <main className="mx-auto w-full max-w-2xl flex-auto pt-6 pb-10 lg:mx-[calc(50%-min(50%,var(--container-lg)))] lg:max-w-3xl">
             {children}
           </main>

@@ -30,7 +30,7 @@ export const Header = forwardRef<
       ref={ref}
       className={clsx(
         className,
-        'fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between gap-12 px-4 transition sm:px-6 lg:left-72 lg:z-30 lg:px-8 xl:left-80',
+        'fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-12 px-4 transition sm:px-6 lg:left-72 lg:z-30 lg:px-8 xl:left-80',
         !isInsideMobileNavigation &&
           'backdrop-blur-xs lg:left-72 xl:left-80 dark:backdrop-blur-sm',
         isInsideMobileNavigation
@@ -41,6 +41,12 @@ export const Header = forwardRef<
         {
           '--bg-opacity-light': bgOpacityLight,
           '--bg-opacity-dark': bgOpacityDark,
+          // In an iOS standalone PWA the status-bar style is black-translucent,
+          // so content extends under the dynamic island. Grow the bar by the
+          // top safe-area inset and pad its content below the island. This is
+          // 0 in a normal browser, so it only affects "Open as web app".
+          height: 'calc(3.5rem + env(safe-area-inset-top))',
+          paddingTop: 'env(safe-area-inset-top)',
         } as React.CSSProperties
       }
     >
