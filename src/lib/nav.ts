@@ -17,7 +17,10 @@ export interface NavGroup {
   gated?: 'secret'
 }
 
-export const navigation: Array<NavGroup> = [
+// Category groups are kept here in any convenient order; the export sorts them
+// alphabetically by title so the sidebar nav and home TOC stay in order as
+// groups are added or renamed. Links within a group keep their authored order.
+const groups: Array<NavGroup> = [
   {
     title: 'Tarot',
     links: [
@@ -140,12 +143,6 @@ export const navigation: Array<NavGroup> = [
         description:
           'Self-test on the tarot attributions — intelligence, significance, astrology, and more.',
       },
-      {
-        title: 'Radio',
-        href: '/ann-davies-radio',
-        description:
-          'Streaming radio of Ann Davies lectures, embedded from BOTA NZ.',
-      },
     ],
   },
   {
@@ -211,11 +208,6 @@ export const navigation: Array<NavGroup> = [
     title: 'Resources',
     links: [
       {
-        title: 'About',
-        href: '/about',
-        description: 'Who built this and why.',
-      },
-      {
         title: 'Files',
         href: '/files',
         description: 'Downloadable wallpapers and other supporting files.',
@@ -226,6 +218,22 @@ export const navigation: Array<NavGroup> = [
         description: 'Outside resources from the BOTA community.',
       },
       {
+        title: 'Radio',
+        href: '/ann-davies-radio',
+        description:
+          'Streaming radio of Ann Davies lectures, embedded from BOTA NZ.',
+      },
+    ],
+  },
+  {
+    title: 'Website',
+    links: [
+      {
+        title: 'About',
+        href: '/about',
+        description: 'Who built this and why.',
+      },
+      {
         title: 'Members Only',
         href: '/members-only',
         description: 'Enter a password to unlock members only content.',
@@ -233,3 +241,7 @@ export const navigation: Array<NavGroup> = [
     ],
   },
 ]
+
+export const navigation: Array<NavGroup> = [...groups].sort((a, b) =>
+  a.title.localeCompare(b.title),
+)
