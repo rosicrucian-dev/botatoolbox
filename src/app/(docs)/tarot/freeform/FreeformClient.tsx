@@ -871,7 +871,8 @@ export function FreeformClient({
     <article className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
-          Freeform
+          <span className="md:hidden"></span>
+          <span className="hidden md:inline">Freeform</span>
         </h1>
         <div className="flex flex-wrap items-center gap-3 text-zinc-900 dark:text-white">
           {controls}
