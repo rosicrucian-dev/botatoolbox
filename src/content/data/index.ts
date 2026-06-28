@@ -40,6 +40,7 @@ export * from './minor-arcana'
 export * from './chakras'
 export * from './numerology'
 export * from './gematria-words'
+export * from './gematria-sources'
 export * from './texts'
 
 // ---- types

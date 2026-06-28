@@ -6,10 +6,12 @@ import Link from 'next/link'
 import { cardImage } from '@/content/data/tarot'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
-import { wordForSpelling } from '@/content/data'
+import { wordMatchesForSpelling, wordsForNumber } from '@/content/data'
+import { GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
 import { useGematriaDict } from '@/lib/useGematriaDict'
 import { useQueryParamState } from '@/lib/useQueryParamState'
-import { GematriaMeaning } from '@/components/GematriaMeaning'
+import { GematriaNoteSection } from '@/components/GematriaNoteSection'
+import { GematriaWordSection } from '@/components/GematriaWordSection'
 import { GematriaSources } from '@/components/GematriaSources'
 
 // Keyboard layout — visual order matches the BOTA gematria calculator.
@@ -42,12 +44,21 @@ export function GematriaClient() {
     () => seq.filter((g) => cardByGlyph[g]).length,
     [seq],
   )
-  // If the exact word the user built is in the gematria dictionary, surface
-  // its meaning below the tarot.
+  // What the dictionary holds for the running total. Paul Case's notes are
+  // number-keyed (shown for the total regardless of the exact spelling); the
+  // Crowley/Strong's matches are for the exact word the user built.
   const dict = useGematriaDict()
-  const dictWord = useMemo(
-    () => (dict ? wordForSpelling(dict, total, word) : undefined),
+  const notes = useMemo(
+    () => (dict ? wordsForNumber(dict, total)?.notes : undefined),
+    [dict, total],
+  )
+  const matches = useMemo(
+    () => (dict ? wordMatchesForSpelling(dict, total, word) : {}),
     [dict, total, word],
+  )
+  // The sources, in registry order, that have something to show for this word.
+  const sections = GEMATRIA_SOURCES.filter((s) =>
+    s.kind === 'note' ? !!notes?.[s.id] : !!matches[s.id]?.length,
   )
 
   // Tarot cards are pinned to ⅑ width (matching Freeform's gap scheme)
@@ -191,15 +202,29 @@ export function GematriaClient() {
         )}
       </div>
 
-      {/* Meaning of the built word, when it's in the gematria dictionary. */}
-      {dictWord && (dictWord.crowley || dictWord.strongs?.length) && (
-        <div className="border-t border-zinc-200 pt-4 dark:border-zinc-800">
-          <GematriaMeaning word={dictWord} />
-        </div>
-      )}
-
-      {dictWord && (dictWord.crowley || dictWord.strongs?.length) && (
-        <GematriaSources />
+      {/* Each source's take on the built word, in registry order: Paul Case's
+          number-keyed notes first, then the matching Crowley / Strong's word. */}
+      {sections.length > 0 && (
+        <>
+          <div className="space-y-6 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+            {sections.map((source) =>
+              source.kind === 'note' ? (
+                <GematriaNoteSection
+                  key={source.id}
+                  label={source.label}
+                  text={notes![source.id]!}
+                />
+              ) : (
+                <GematriaWordSection
+                  key={source.id}
+                  label={source.label}
+                  words={matches[source.id]!}
+                />
+              ),
+            )}
+          </div>
+          <GematriaSources />
+        </>
       )}
     </article>
   )

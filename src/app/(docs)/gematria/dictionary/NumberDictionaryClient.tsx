@@ -2,15 +2,13 @@
 
 import { useMemo } from 'react'
 
-import {
-  wordsForNumber,
-  type GematriaWord,
-  type GematriaOther,
-} from '@/content/data'
+import { wordsForNumber, type GematriaNumberEntry } from '@/content/data'
+import { GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
 import { theosophicExtension, theosophicReduction } from '@/lib/gematria'
 import { useGematriaDict } from '@/lib/useGematriaDict'
 import { useQueryParamState } from '@/lib/useQueryParamState'
-import { GematriaMeaning } from '@/components/GematriaMeaning'
+import { GematriaNoteSection } from '@/components/GematriaNoteSection'
+import { GematriaWordSection } from '@/components/GematriaWordSection'
 import { GematriaSources } from '@/components/GematriaSources'
 
 const MAX_DIGITS = 4
@@ -107,11 +105,18 @@ export function NumberDictionaryClient() {
         loading={!dict}
       />
 
-      {entry && (entry.words.length > 0 || (entry.other?.length ?? 0) > 0) && (
-        <GematriaSources />
-      )}
+      {entry && entryHasContent(entry) && <GematriaSources />}
     </article>
   )
+}
+
+// Whether a number entry has anything to show from any source.
+function entryHasContent(entry: GematriaNumberEntry): boolean {
+  if (entry.significance) return true
+  if (entry.notes && Object.keys(entry.notes).length > 0) return true
+  if (entry.words && Object.values(entry.words).some((w) => w.length > 0))
+    return true
+  return false
 }
 
 function Stat({
@@ -145,26 +150,6 @@ function Stat({
   )
 }
 
-// A single word row: meaning(s) on the left, the Hebrew word on the right.
-function WordRow({ word }: { word: GematriaWord | GematriaOther }) {
-  return (
-    <li className="flex justify-between gap-6 py-4">
-      {/* Left: Crowley's gloss (when present) + every Strong's sense. */}
-      <div className="min-w-0 flex-1">
-        <GematriaMeaning word={word} />
-      </div>
-      {/* Right: the Hebrew word, aligned with the first source line. */}
-      <span
-        dir="rtl"
-        lang="he"
-        className="shrink-0 font-serif text-2xl leading-none text-zinc-900 md:text-3xl dark:text-white"
-      >
-        {word.hebrew}
-      </span>
-    </li>
-  )
-}
-
 function Results({
   number,
   entry,
@@ -192,7 +177,7 @@ function Results({
     )
   }
 
-  if (!entry) {
+  if (!entry || !entryHasContent(entry)) {
     return (
       <p className="py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
         No words found for {number}.
@@ -200,31 +185,35 @@ function Results({
     )
   }
 
-  const { words } = entry
-  const other = entry.other ?? []
+  // Each source's take on this number, in registry order: Paul Case notes
+  // first (number-keyed prose), then Crowley and Strong's word lists. Nothing
+  // is merged — every source is listed on its own.
   return (
-    <div>
-      {words.length > 0 && (
-        <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {words.map((w, i) => (
-            <WordRow key={i} word={w} />
-          ))}
-        </ul>
-      )}
-      {/* Every other Hebrew Bible word at this value, beyond Crowley's
-          curated set — collapsed so his selection stays primary. */}
-      {other.length > 0 && (
-        <details className="mt-2 border-t border-zinc-200 pt-2 dark:border-zinc-800">
-          <summary className="cursor-pointer py-2 text-sm font-medium text-zinc-500 transition hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200">
-            Show Strong&rsquo;s-only words ({other.length})
-          </summary>
-          <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-            {other.map((o, i) => (
-              <WordRow key={i} word={o} />
-            ))}
-          </ul>
-        </details>
-      )}
+    <div className="space-y-6">
+      {GEMATRIA_SOURCES.map((source) => {
+        if (source.kind === 'note') {
+          const text = entry.notes?.[source.id]
+          return text ? (
+            <GematriaNoteSection
+              key={source.id}
+              label={source.label}
+              text={text}
+            />
+          ) : null
+        }
+        const words = entry.words?.[source.id] ?? []
+        // The number's own Sepher Sephiroth note is Crowley-sourced, so it
+        // leads the Crowley section as its first row.
+        const note = source.id === 'crowley' ? entry.significance : undefined
+        return words.length > 0 || note ? (
+          <GematriaWordSection
+            key={source.id}
+            label={source.label}
+            words={words}
+            note={note}
+          />
+        ) : null
+      })}
     </div>
   )
 }

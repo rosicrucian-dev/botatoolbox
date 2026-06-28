@@ -1,36 +1,27 @@
-// Gematria dictionary — a value-indexed map of Hebrew words/phrases
-// (Sepher Sephiroth + the full Hebrew Bible via Strong's). GENERATED: the JSON
-// is built by `scripts/build-gematria-words.ts` from the sources under
-// `scripts/vendor/` — edit those, not the JSON.
+// Gematria dictionary — a value-indexed map of every source's take on each
+// number, listed BY SOURCE (nothing merged). GENERATED: the JSON is built by
+// `scripts/build-gematria-words.ts` from the vendored sources under
+// `scripts/vendor/` — edit those, not the JSON. The source registry (order,
+// labels, kinds) lives in `./gematria-sources`.
 //
 // It is NOT bundled. The file is large (every value carries Crowley's curated
-// words plus every other Strong's word at that value), so it ships as a static
-// file in /public and is FETCHED ON DEMAND, then cached for the page session.
-// This keeps the gematria pages' initial JS small. Validated once at build time
-// (inside the generator); cast — not re-parsed — here.
+// words plus every Strong's word at that value plus the Paul Case notes), so it
+// ships as a static file in /public and is FETCHED ON DEMAND, then cached for
+// the page session. Validated once at build time (inside the generator); cast —
+// not re-parsed — here.
 
 import { z } from 'zod'
 
 import { skeleton } from '@/lib/hebrew-letters'
+import { type GematriaSourceId } from './gematria-sources'
 import {
-  GematriaStrongsSchema,
   GematriaWordSchema,
-  GematriaOtherSchema,
   GematriaNumberEntrySchema,
 } from './schemas'
 
-export type GematriaStrongs = z.infer<typeof GematriaStrongsSchema>
 export type GematriaWord = z.infer<typeof GematriaWordSchema>
-export type GematriaOther = z.infer<typeof GematriaOtherSchema>
 export type GematriaNumberEntry = z.infer<typeof GematriaNumberEntrySchema>
 export type GematriaDict = Record<string, GematriaNumberEntry>
-
-// A meaning-bearing row, whether it's a curated Crowley word (has a gloss) or a
-// Strong's-only "other" word (no gloss). Shared with <GematriaMeaning>.
-export type GematriaMeaningLike = {
-  crowley?: string
-  strongs?: Array<GematriaStrongs>
-}
 
 // Fetch the dictionary once and cache the promise for the page session.
 const DICT_URL = '/data/gematria-words.json'
@@ -52,7 +43,7 @@ export function fetchGematriaDict(): Promise<GematriaDict> {
   return cache
 }
 
-// The entry (Crowley words + other words) summing to `n`, or undefined.
+// The entry (all sources' content) for `n`, or undefined.
 export function wordsForNumber(
   dict: GematriaDict,
   n: number,
@@ -61,20 +52,22 @@ export function wordsForNumber(
   return dict[String(n)]
 }
 
-// The meaning for a specific spelling at a known value, if the dictionary
-// contains that exact word — checking Crowley's words first, then the other
-// (Strong's-only) words. Used by the calculator to gloss the built word.
-export function wordForSpelling(
+// For a specific spelling built on the calculator: the matching word rows from
+// each word-keyed source that shares that consonantal spelling, keyed by source
+// id. One spelling can match several Strong's homographs, so each source maps
+// to a LIST. Lets the calculator reuse the dictionary's per-source rendering.
+export function wordMatchesForSpelling(
   dict: GematriaDict,
   value: number,
   hebrew: string,
-): GematriaMeaningLike | undefined {
+): Partial<Record<GematriaSourceId, Array<GematriaWord>>> {
   const entry = wordsForNumber(dict, value)
-  if (!entry) return undefined
   const target = skeleton(hebrew)
-  if (!target) return undefined
-  return (
-    entry.words.find((w) => skeleton(w.hebrew) === target) ??
-    entry.other?.find((o) => skeleton(o.hebrew) === target)
-  )
+  if (!entry?.words || !target) return {}
+  const out: Partial<Record<GematriaSourceId, Array<GematriaWord>>> = {}
+  for (const [id, words] of Object.entries(entry.words)) {
+    const matches = words.filter((w) => skeleton(w.hebrew) === target)
+    if (matches.length) out[id as GematriaSourceId] = matches
+  }
+  return out
 }

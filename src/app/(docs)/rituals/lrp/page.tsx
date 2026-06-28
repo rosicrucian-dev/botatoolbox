@@ -55,10 +55,22 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 export default function LesserPentagram() {
   return (
     <article className="space-y-6">
-      <div className="flex items-center justify-between gap-4">
-        <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
-          The Lesser Ritual of the Pentagram
-        </h1>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
+            The Lesser Ritual of the Pentagram
+          </h1>
+          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+            See the{' '}
+            <Link
+              href="/files/lesser-ritual-of-the-pentagram"
+              className="font-medium text-zinc-700 underline decoration-zinc-300 underline-offset-2 transition hover:decoration-zinc-700 dark:text-zinc-300 dark:decoration-zinc-700 dark:hover:decoration-zinc-300"
+            >
+              music sheet
+            </Link>{' '}
+            for reference.
+          </p>
+        </div>
         <PlayLink href="/rituals/lrp/play">Start LRP ▶</PlayLink>
       </div>
 
