@@ -7,7 +7,7 @@ import { cardImage } from '@/content/data/tarot'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
 import { wordMatchesForSpelling, wordsForNumber } from '@/content/data'
-import { GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
+import { VISIBLE_GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
 import { useGematriaDict } from '@/lib/useGematriaDict'
 import { useQueryParamState } from '@/lib/useQueryParamState'
 import { GematriaNoteSection } from '@/components/GematriaNoteSection'
@@ -57,7 +57,7 @@ export function GematriaClient() {
     [dict, total, word],
   )
   // The sources, in registry order, that have something to show for this word.
-  const sections = GEMATRIA_SOURCES.filter((s) =>
+  const sections = VISIBLE_GEMATRIA_SOURCES.filter((s) =>
     s.kind === 'note' ? !!notes?.[s.id] : !!matches[s.id]?.length,
   )
 
@@ -213,12 +213,14 @@ export function GematriaClient() {
                   key={source.id}
                   label={source.label}
                   text={notes![source.id]!}
+                  number={total}
                 />
               ) : (
                 <GematriaWordSection
                   key={source.id}
                   label={source.label}
                   words={matches[source.id]!}
+                  number={total}
                 />
               ),
             )}

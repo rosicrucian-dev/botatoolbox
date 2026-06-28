@@ -23,6 +23,7 @@ import { dirname, join } from 'node:path'
 import { GematriaWordsSchema } from '../src/content/data/schemas.ts'
 import {
   GEMATRIA_SOURCES,
+  gematriaNoteUrl,
   type GematriaSourceId,
 } from '../src/content/data/gematria-sources.ts'
 import {
@@ -110,7 +111,13 @@ function setNote(value: number, id: GematriaSourceId, text: string) {
 }
 
 // ── Number-keyed 'note' sources (Paul Case) ────────────────────────────────
+// Note text is already clean from its own build script (build-paul-case*.ts)
+// and may contain paragraph breaks we must preserve — so it is NOT run through
+// clean() (which collapses whitespace). Small sources fold into the core dict;
+// 'external' ones (the multi-MB notebook) are written to their own file and
+// fetched lazily, merged client-side.
 let noteCount = 0
+const externalNotes: Record<string, Record<string, string>> = {}
 for (const src of GEMATRIA_SOURCES) {
   if (src.kind !== 'note') continue
   const file = NOTE_FILES[src.id]
@@ -124,11 +131,14 @@ for (const src of GEMATRIA_SOURCES) {
   }
   for (const [num, text] of Object.entries(data)) {
     const value = Number(num)
-    const t = clean(text)
-    if (Number.isInteger(value) && value > 0 && t) {
+    const t = (text ?? '').trim()
+    if (!(Number.isInteger(value) && value > 0 && t)) continue
+    if (src.external) {
+      ;(externalNotes[src.id] ??= {})[value] = t
+    } else {
       setNote(value, src.id, t)
-      noteCount++
     }
+    noteCount++
   }
 }
 
@@ -236,11 +246,22 @@ GematriaWordsSchema.parse(out)
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n')
 
+// External 'note' sources → their own minified static files, fetched lazily.
+const externalLog: Array<string> = []
+for (const id of Object.keys(externalNotes)) {
+  const outPath = join(ROOT, 'public' + gematriaNoteUrl(id as GematriaSourceId))
+  writeFileSync(outPath, JSON.stringify(externalNotes[id]) + '\n')
+  externalLog.push(
+    `  ${id} (external): ${Object.keys(externalNotes[id]).length} entries → ${outPath.replace(ROOT + '/', '')}`,
+  )
+}
+
 console.log(
   `Wrote ${Object.keys(out).length} numbers → ${OUT.replace(ROOT + '/', '')}\n` +
     `  Notes (Paul Case): ${noteCount} entries across ${
       GEMATRIA_SOURCES.filter((s) => s.kind === 'note').length
     } sources\n` +
+    (externalLog.length ? externalLog.join('\n') + '\n' : '') +
     `  Crowley: ${crowleyWords} words\n` +
     `  Strong's: ${strongsWords} words across ${strongsByValue.size} values\n` +
     `  skipped ${skipped} Crowley source words with no usable Hebrew`,

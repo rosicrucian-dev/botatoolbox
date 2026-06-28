@@ -30,15 +30,39 @@ export interface GematriaSource {
   id: GematriaSourceId
   label: string
   kind: GematriaSourceKind
+  // 'note' sources whose text is too large to ship inside the core dictionary
+  // are written to their own static file (public/data/gematria-note-<id>.json)
+  // and fetched lazily, merged into the dictionary client-side once they load.
+  external?: boolean
+  // Kept in the data pipeline but not shown on the gematria pages (and not
+  // fetched). Used to park a source whose presentation isn't ready yet.
+  hidden?: boolean
 }
 
 export const GEMATRIA_SOURCES: ReadonlyArray<GematriaSource> = [
   {
     id: 'case-fundamentals',
-    label: 'Paul Case — Occult Fundamentals',
+    label: 'Paul Case',
     kind: 'note',
   },
-  { id: 'case-notebook', label: 'Paul Case — Gematria Notebook', kind: 'note' },
+  {
+    id: 'case-notebook',
+    label: 'Paul Case — Gematria Notebook',
+    kind: 'note',
+    external: true,
+    // Hidden for now — the notebook text isn't well formatted yet. Data is
+    // still generated; flip this off to re-enable on the pages.
+    hidden: true,
+  },
   { id: 'crowley', label: 'Crowley', kind: 'words' },
   { id: 'strongs', label: "Strong's", kind: 'words' },
 ]
+
+// The sources actually shown on the gematria pages, in order.
+export const VISIBLE_GEMATRIA_SOURCES: ReadonlyArray<GematriaSource> =
+  GEMATRIA_SOURCES.filter((s) => !s.hidden)
+
+// The static-file URL for an external 'note' source.
+export function gematriaNoteUrl(id: GematriaSourceId): string {
+  return `/data/gematria-note-${id}.json`
+}

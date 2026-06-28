@@ -1,17 +1,11 @@
 import { type GematriaWord } from '@/content/data/gematria-words'
+import { GematriaNumberRow } from './GematriaNumberRow'
+import { SourceTitle, SubSection } from './GematriaHeadings'
 
 // Definitions are lower-case in some sources (Strong's); capitalize the first
 // letter so they read consistently, without mutating the data.
 function capitalize(s: string): string {
   return s.replace(/\p{L}/u, (c) => c.toUpperCase())
-}
-
-function SourceLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="text-xs font-semibold tracking-wide text-zinc-900 uppercase dark:text-white">
-      {children}
-    </div>
-  )
 }
 
 // One word row: the gloss (with a muted reference id when the source has one)
@@ -50,33 +44,39 @@ function WordRow({ word }: { word: GematriaWord }) {
   )
 }
 
-// A word-keyed source section: a label and the list of words at this value from
-// that one source (Crowley, Strong's). Used by both the Dictionary (full list)
-// and the Calculator (the single matching built word). An optional `note` is a
-// number-level remark from that source (the Crowley/Sepher Sephiroth
-// significance) shown as the first row, above the words.
+// A word-keyed source section (Crowley, Strong's): the source title, then up to
+// two sub-sections — a "Number N" group for that source's per-number remark
+// (the Crowley/Sepher Sephiroth significance, when present) and a "Words" group
+// for the Hebrew words at this value. Used by both the Dictionary (full list)
+// and the Calculator (the single matching built word).
 export function GematriaWordSection({
   label,
   words,
+  number,
   note,
 }: {
   label: string
   words: ReadonlyArray<GematriaWord>
+  number: number
   note?: string
 }) {
   return (
     <section>
-      <SourceLabel>{label}</SourceLabel>
-      <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
+      <SourceTitle>{label}</SourceTitle>
+      <div className="mt-3 space-y-4">
         {note && (
-          <li className="py-4 text-sm text-zinc-500 italic dark:text-zinc-400">
-            {note}
-          </li>
+          <SubSection title={`Number ${number}`}>
+            <GematriaNumberRow text={note} />
+          </SubSection>
         )}
-        {words.map((w, i) => (
-          <WordRow key={i} word={w} />
-        ))}
-      </ul>
+        {words.length > 0 && (
+          <SubSection title="Words">
+            {words.map((w, i) => (
+              <WordRow key={i} word={w} />
+            ))}
+          </SubSection>
+        )}
+      </div>
     </section>
   )
 }

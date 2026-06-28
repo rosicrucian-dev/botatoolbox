@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 
 import { wordsForNumber, type GematriaNumberEntry } from '@/content/data'
-import { GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
+import { VISIBLE_GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
 import { theosophicExtension, theosophicReduction } from '@/lib/gematria'
 import { useGematriaDict } from '@/lib/useGematriaDict'
 import { useQueryParamState } from '@/lib/useQueryParamState'
@@ -190,7 +190,7 @@ function Results({
   // is merged — every source is listed on its own.
   return (
     <div className="space-y-6">
-      {GEMATRIA_SOURCES.map((source) => {
+      {VISIBLE_GEMATRIA_SOURCES.map((source) => {
         if (source.kind === 'note') {
           const text = entry.notes?.[source.id]
           return text ? (
@@ -198,6 +198,7 @@ function Results({
               key={source.id}
               label={source.label}
               text={text}
+              number={number}
             />
           ) : null
         }
@@ -210,6 +211,7 @@ function Results({
             key={source.id}
             label={source.label}
             words={words}
+            number={number}
             note={note}
           />
         ) : null

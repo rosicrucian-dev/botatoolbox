@@ -1,22 +1,26 @@
-// A number-keyed 'note' source: a source label and its prose entry for the
-// current number (no Hebrew headword). Paul Case's dictionaries render this way,
-// above the word-keyed sources. Mirrors the label + prose treatment of the
-// word sections so every source reads consistently.
+import { GematriaNumberRow } from './GematriaNumberRow'
+import { SourceTitle, SubSection } from './GematriaHeadings'
+
+// A number-keyed 'note' source (Paul Case's dictionaries): the source title,
+// then a "Number N" sub-section holding the prose for this number. Long entries
+// (the Gematria Notebook) collapse behind "Show more".
 export function GematriaNoteSection({
   label,
   text,
+  number,
 }: {
   label: string
   text: string
+  number: number
 }) {
   return (
     <section>
-      <div className="text-xs font-semibold tracking-wide text-zinc-900 uppercase dark:text-white">
-        {label}
+      <SourceTitle>{label}</SourceTitle>
+      <div className="mt-3">
+        <SubSection title={`Number ${number}`}>
+          <GematriaNumberRow text={text} collapsible />
+        </SubSection>
       </div>
-      <p className="mt-1 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-        {text}
-      </p>
     </section>
   )
 }

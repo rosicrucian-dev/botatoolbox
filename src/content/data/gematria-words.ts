@@ -13,7 +13,11 @@
 import { z } from 'zod'
 
 import { skeleton } from '@/lib/hebrew-letters'
-import { type GematriaSourceId } from './gematria-sources'
+import {
+  GEMATRIA_SOURCES,
+  gematriaNoteUrl,
+  type GematriaSourceId,
+} from './gematria-sources'
 import {
   GematriaWordSchema,
   GematriaNumberEntrySchema,
@@ -41,6 +45,55 @@ export function fetchGematriaDict(): Promise<GematriaDict> {
       })
   }
   return cache
+}
+
+// External 'note' sources (e.g. the multi-MB Gematria Notebook) ship as their
+// own files. Fetch each once and cache. Returns { number → text } for one id.
+const noteCache = new Map<GematriaSourceId, Promise<Record<string, string>>>()
+function fetchExternalNote(
+  id: GematriaSourceId,
+): Promise<Record<string, string>> {
+  let p = noteCache.get(id)
+  if (!p) {
+    p = fetch(gematriaNoteUrl(id))
+      .then((r) => {
+        if (!r.ok) throw new Error(`gematria note ${id}: HTTP ${r.status}`)
+        return r.json() as Promise<Record<string, string>>
+      })
+      .catch((err) => {
+        noteCache.delete(id) // don't cache failure — allow a later retry
+        throw err
+      })
+    noteCache.set(id, p)
+  }
+  return p
+}
+
+// Fetch every external 'note' source and merge it INTO the dict (mutating each
+// number's `notes`, creating entries for notebook-only numbers). Resolves to
+// the same dict so callers can re-render once the lazy notes have landed. Used
+// by useGematriaDict after the core dict is already showing.
+export async function mergeExternalNotes(
+  dict: GematriaDict,
+): Promise<GematriaDict> {
+  const external = GEMATRIA_SOURCES.filter(
+    (s) => s.kind === 'note' && s.external && !s.hidden,
+  )
+  await Promise.all(
+    external.map(async (src) => {
+      let byNumber: Record<string, string>
+      try {
+        byNumber = await fetchExternalNote(src.id)
+      } catch {
+        return // a missing/failed note file just means that section is absent
+      }
+      for (const [num, text] of Object.entries(byNumber)) {
+        const entry = (dict[num] ??= {})
+        ;(entry.notes ??= {})[src.id] = text
+      }
+    }),
+  )
+  return dict
 }
 
 // The entry (all sources' content) for `n`, or undefined.
