@@ -1,5 +1,9 @@
 'use client'
 
+import {
+  MagnifyingGlassMinusIcon,
+  MagnifyingGlassPlusIcon,
+} from '@heroicons/react/24/outline'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -52,27 +56,6 @@ const ZOOM_STEP = 0.2
 // Card art is 724×1200; this ratio derives a card's height from its width and
 // is used throughout the geometry (deck box, drop clamping, overlap test).
 const CARD_ASPECT = 1200 / 724
-
-function ZoomInIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" strokeWidth={1.5} aria-hidden="true" {...props}>
-      <circle cx="8.75" cy="8.75" r="5.25" />
-      <path
-        strokeLinecap="round"
-        d="m12.6 12.6 4 4M8.75 6.5v4.5M6.5 8.75h4.5"
-      />
-    </svg>
-  )
-}
-
-function ZoomOutIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" strokeWidth={1.5} aria-hidden="true" {...props}>
-      <circle cx="8.75" cy="8.75" r="5.25" />
-      <path strokeLinecap="round" d="m12.6 12.6 4 4M6.5 8.75h4.5" />
-    </svg>
-  )
-}
 
 // Cards are sized as a fraction of the tabletop so a spread looks the same on
 // any screen. Phones get wider cards (fewer fit, but each is tappable); on
@@ -747,7 +730,7 @@ export function FreeformClient({
           }
           className={zoomBtn}
         >
-          <ZoomOutIcon className="h-5 w-5 stroke-current" />
+          <MagnifyingGlassMinusIcon className="h-5 w-5" />
         </button>
         <button
           type="button"
@@ -758,7 +741,7 @@ export function FreeformClient({
           }
           className={zoomBtn}
         >
-          <ZoomInIcon className="h-5 w-5 stroke-current" />
+          <MagnifyingGlassPlusIcon className="h-5 w-5" />
         </button>
       </Tabs>
     </>

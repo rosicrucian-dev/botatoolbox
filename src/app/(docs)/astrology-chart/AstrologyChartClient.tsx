@@ -1,12 +1,15 @@
 'use client'
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
+import {
+  ArrowUturnLeftIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from '@heroicons/react/16/solid'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
 import { AspectsTable } from '@/components/AspectsTable'
 import { AstrologyTable } from '@/components/AstrologyTable'
 import { AstrologyWheel } from '@/components/AstrologyWheel'
-import { Button } from '@/components/catalyst/button'
 import { computeAspects } from '@/lib/astro/aspects'
 import { getEngine } from '@/lib/astro/engine'
 import { DESKTOP_RINGS, MOBILE_RINGS } from '@/lib/astro/layout'
@@ -15,8 +18,11 @@ import type { Chart } from '@/lib/astro/types'
 // Flat field styling for the date/time inputs, matching the StepButton border.
 // Bespoke (not Catalyst's `Input`) so they have no shadow/depth and read
 // consistently with the ‹/› buttons. `scheme-dark` themes the native picker.
+// py-[5px] gives the same 36px height as the size-9 buttons (24px line + 10px
+// padding + 2px border) while keeping the native date/time text vertically
+// centred — a fixed h-9 top-aligns it instead.
 const fieldClasses =
-  'block rounded-lg border border-zinc-950/10 bg-transparent px-3 py-1.5 text-sm/6 text-zinc-950 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-500 dark:scheme-dark dark:border-white/15 dark:text-white'
+  'block rounded-lg border border-zinc-950/10 bg-transparent px-3 py-[5px] text-sm/6 text-zinc-950 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-500 dark:scheme-dark dark:border-white/15 dark:text-white'
 
 // Square icon button matching the Catalyst `outline` look. Bespoke because
 // Catalyst's Button uses asymmetric padding that can't be made square cleanly,
@@ -118,11 +124,14 @@ export function AstrologyChartClient() {
         <h1 className="hidden text-3xl font-semibold tracking-tight sm:block dark:text-white">
           Chart
         </h1>
-        <div className="ml-auto flex items-center gap-2">
+        {/* Mobile: fill the row — chevrons/Now stay fixed, the date/time
+            fields flex to share the rest (and squish when Now appears).
+            Desktop: fixed widths, right-aligned. */}
+        <div className="ml-auto flex w-full items-center gap-2 sm:w-auto">
           {pinned && (
-            <Button outline onClick={() => setPinned(false)}>
-              Now
-            </Button>
+            <StepButton label="Return to now" onClick={() => setPinned(false)}>
+              <ArrowUturnLeftIcon className="size-5" />
+            </StepButton>
           )}
           <StepButton label="Previous day" onClick={() => stepDay(-1)}>
             <ChevronLeftIcon className="size-5" />
@@ -132,14 +141,14 @@ export function AstrologyChartClient() {
             aria-label="Chart date"
             value={instant ? toDateInputValue(instant) : ''}
             onChange={(e) => handleDateChange(e.target.value)}
-            className={`w-36 ${fieldClasses}`}
+            className={`min-w-0 flex-1 sm:w-36 sm:flex-none ${fieldClasses}`}
           />
           <input
             type="time"
             aria-label="Chart time"
             value={instant ? toTimeInputValue(instant) : ''}
             onChange={(e) => handleTimeChange(e.target.value)}
-            className={`w-28 ${fieldClasses}`}
+            className={`min-w-0 flex-1 sm:w-28 sm:flex-none ${fieldClasses}`}
           />
           <StepButton label="Next day" onClick={() => stepDay(1)}>
             <ChevronRightIcon className="size-5" />
