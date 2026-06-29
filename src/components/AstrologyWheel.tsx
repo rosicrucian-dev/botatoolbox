@@ -32,6 +32,52 @@ const ASPECT_STROKE: Record<AspectNature, string> = {
   neutral: '',
 }
 
+// The outer planets are octaves that inherit the same tarot colours as inner
+// planets (Uranus≈Mercury yellow, Neptune≈Moon blue, Pluto≈Mars red). Lighten
+// their discs toward white so they're distinguishable on the wheel.
+const OUTER_PLANETS = new Set<BodySlug>(['uranus', 'neptune', 'pluto'])
+const OUTER_LIGHTEN = 0.35 // fraction toward white (0 = unchanged, 1 = white)
+
+// Glyphs sit slightly low under dominant-baseline:central (their typographic
+// centre is below their visual centre), so nudge them up by a fraction of the
+// glyph size. Scales with the glyph, so it's consistent across ring profiles.
+const PLANET_GLYPH_RISE = 0.08
+
+// Disc stacking by mean apparent speed (Chaldean order): slow outer planets at
+// the bottom, the fast Moon on top. SVG has no z-index, so we render in this
+// order — lowest rank first (drawn first = underneath). A fixed rank (not the
+// live speed) keeps stacking stable when a planet stations.
+const SPEED_RANK: Record<BodySlug, number> = {
+  pluto: 0,
+  neptune: 1,
+  uranus: 2,
+  saturn: 3,
+  jupiter: 4,
+  mars: 5,
+  sun: 6,
+  venus: 7,
+  mercury: 8,
+  moon: 9,
+}
+
+/** Mix a hex colour toward white by `amount` (0–1). Non-hex input is returned as-is. */
+function lighten(hex: string, amount: number): string {
+  const match = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(hex.trim())
+  if (!match) return hex
+  let h = match[1]
+  if (h.length === 3)
+    h = h
+      .split('')
+      .map((c) => c + c)
+      .join('')
+  const channel = (i: number) => parseInt(h.slice(i, i + 2), 16)
+  const mix = (c: number) =>
+    Math.round(c + (255 - c) * amount)
+      .toString(16)
+      .padStart(2, '0')
+  return `#${mix(channel(0))}${mix(channel(2))}${mix(channel(4))}`
+}
+
 export function AstrologyWheel({
   chart,
   aspects = [],
@@ -126,17 +172,24 @@ export function AstrologyWheel({
         )
       })}
 
-      {/* Planets only appear once the client has computed the chart. */}
-      {chart?.bodies.map((body) => {
+      {/* Planets only appear once the client has computed the chart. Drawn
+          slowest-first so faster planets stack on top at conjunctions. */}
+      {chart?.bodies
+        .slice()
+        .sort((a, b) => SPEED_RANK[a.slug] - SPEED_RANK[b.slug])
+        .map((body) => {
         const p = angleToPoint(body.longitude, m.planetMid)
         const planet = planetBySlug[body.slug]
-        const fill = getColor(planet.color, colorPalette) ?? '#888'
+        const base = getColor(planet.color, colorPalette) ?? '#888'
+        const fill = OUTER_PLANETS.has(body.slug)
+          ? lighten(base, OUTER_LIGHTEN)
+          : base
         return (
           <g key={body.slug}>
             <circle cx={p.x} cy={p.y} r={m.planetRadius} fill={fill} />
             <text
               x={p.x}
-              y={p.y}
+              y={p.y - m.planetGlyphSize * PLANET_GLYPH_RISE}
               fontSize={m.planetGlyphSize}
               textAnchor="middle"
               dominantBaseline="central"
