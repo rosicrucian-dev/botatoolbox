@@ -22,7 +22,7 @@ import type { Chart } from '@/lib/astro/types'
 // padding + 2px border) while keeping the native date/time text vertically
 // centred — a fixed h-9 top-aligns it instead.
 const fieldClasses =
-  'block rounded-lg border border-zinc-950/10 bg-transparent px-3 py-[5px] text-sm/6 text-zinc-950 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-500 dark:scheme-dark dark:border-white/15 dark:text-white'
+  'block rounded-lg border border-zinc-950/10 bg-transparent px-3 py-[5px] text-center text-sm/6 text-zinc-950 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-500 dark:scheme-dark dark:border-white/15 dark:text-white'
 
 // Square icon button matching the Catalyst `outline` look. Bespoke because
 // Catalyst's Button uses asymmetric padding that can't be made square cleanly,
