@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 
+import { Button } from '@/components/catalyst/button'
 import { CubeCanvas } from '@/components/CubeCanvas'
 import { FlowToggle } from '@/components/FlowToggle'
 
@@ -16,12 +16,9 @@ export function CubeOfSpaceClient() {
         </h1>
         <div className="flex items-center gap-2 text-zinc-900 dark:text-white">
           <FlowToggle pressed={flow} onPressedChange={setFlow} />
-          <Link
-            href="/cube-of-space/expand"
-            className="inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-emerald-500 px-3 text-sm font-medium whitespace-nowrap text-white transition hover:bg-emerald-400"
-          >
+          <Button href="/cube-of-space/expand" color="emerald">
             Expand ⤢
-          </Link>
+          </Button>
         </div>
       </div>
       <div className="h-[calc(100svh-12rem)] w-full">

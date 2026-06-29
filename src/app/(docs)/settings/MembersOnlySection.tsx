@@ -2,6 +2,9 @@
 
 import { useState, type FormEvent } from 'react'
 
+import { Button } from '@/components/catalyst/button'
+import { ErrorMessage, Field, Label } from '@/components/catalyst/fieldset'
+import { Input } from '@/components/catalyst/input'
 import { useSecretMode } from '@/lib/useSecretMode'
 
 // Password-gated unlock for the Members Only area, surfaced as a section on
@@ -31,13 +34,9 @@ export function MembersOnlySection() {
         {unlocked && (
           // Debug-only escape hatch so the maintainer can re-test the
           // locked state without clearing localStorage by hand.
-          <button
-            type="button"
-            onClick={lock}
-            className="inline-flex h-9 shrink-0 items-center justify-center rounded-md px-3 text-sm font-medium ring-1 ring-zinc-900/10 transition hover:bg-zinc-100 dark:text-white dark:ring-white/15 dark:hover:bg-zinc-800"
-          >
+          <Button type="button" outline onClick={lock}>
             Lock
-          </button>
+          </Button>
         )}
       </div>
 
@@ -53,29 +52,21 @@ export function MembersOnlySection() {
             Some content is restricted to members of the Builders of the Adytum.
             Enter the password to unlock all available content.
           </p>
-          <input
-            type="password"
-            autoComplete="off"
-            value={input}
-            onChange={(e) => {
-              setInput(e.target.value)
-              if (error) setError(false)
-            }}
-            aria-invalid={error || undefined}
-            aria-label="Password"
-            className="block w-full max-w-sm rounded-md border border-zinc-300 bg-white px-3 py-2 text-base text-zinc-900 placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 aria-invalid:border-red-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500"
-          />
-          {error && (
-            <p className="text-sm italic text-red-600 dark:text-red-400">
-              Incorrect password.
-            </p>
-          )}
-          <button
-            type="submit"
-            className="inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-emerald-500 px-3 text-sm font-medium whitespace-nowrap text-white transition hover:bg-emerald-400"
-          >
-            Unlock
-          </button>
+          <Field className="max-w-sm">
+            <Label>Password</Label>
+            <Input
+              type="password"
+              autoComplete="off"
+              value={input}
+              invalid={error || undefined}
+              onChange={(e) => {
+                setInput(e.target.value)
+                if (error) setError(false)
+              }}
+            />
+            {error && <ErrorMessage>Incorrect password.</ErrorMessage>}
+          </Field>
+          <Button type="submit">Unlock</Button>
         </form>
       )}
     </section>

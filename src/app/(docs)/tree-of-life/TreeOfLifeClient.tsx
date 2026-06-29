@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 
+import { Button } from '@/components/catalyst/button'
 import { FlowToggle } from '@/components/FlowToggle'
 import { Tab, Tabs } from '@/components/Tabs'
 import {
@@ -44,12 +44,9 @@ export function TreeOfLifeClient() {
             </Tabs>
           )}
           <FlowToggle pressed={flow} onPressedChange={setFlow} />
-          <Link
-            href="/tree-of-life/expand"
-            className="inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-emerald-500 px-3 text-sm font-medium whitespace-nowrap text-white transition hover:bg-emerald-400"
-          >
+          <Button href="/tree-of-life/expand" color="emerald">
             Expand ⤢
-          </Link>
+          </Button>
         </div>
       </div>
       <div className="h-[calc(100svh-12rem)] w-full">

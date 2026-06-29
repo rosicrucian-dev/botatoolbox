@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import { Button } from '@/components/catalyst/button'
 import { Tabs } from '@/components/Tabs'
 import { MajorImage, MinorImage } from '@/components/CardImage'
 import { cardBySlug, cards } from '@/content/data/tarot'
@@ -955,13 +956,9 @@ export function FreeformClient({
         </h1>
         <div className="flex flex-wrap items-center gap-3 text-zinc-900 dark:text-white">
           {controls}
-          <Link
-            href={expandHref}
-            aria-label="Expand"
-            className="inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-emerald-500 px-3 text-sm font-medium whitespace-nowrap text-white transition hover:bg-emerald-400"
-          >
+          <Button href={expandHref} color="emerald" aria-label="Expand">
             Expand ⤢
-          </Link>
+          </Button>
         </div>
       </div>
       {board}

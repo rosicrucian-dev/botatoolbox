@@ -2,6 +2,13 @@ import { type Metadata } from 'next'
 
 import { PlayLink } from '@/components/PlayLink'
 import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/catalyst/table'
+import {
   tattvas,
   tattvaByKind,
   SUB_ORDER,
@@ -24,53 +31,53 @@ export default function Tattvas() {
         Tattvas
       </h1>
 
-      {/* One table: a column per main tattva, a row per sub tattva. Each cell
-          links to that main's player at the sub's index (e.g. Water column,
-          Fire row → Fire of Water). Names are short single words, so all five
-          columns fit even on a phone; the wrapper scrolls if they don't. */}
-      <div className="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full px-4 sm:px-6 lg:px-8">
-          <table className="min-w-full border-separate border-spacing-0 text-sm">
-            <thead>
-              <tr>
-                {tattvas.map((main) => (
-                  <Th key={main.kind}>{main.english}</Th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {SUB_ROWS.map((r) => (
-                <tr key={r.sub}>
-                  {tattvas.map((main) => (
-                    <td
-                      key={main.kind}
-                      className="border-b border-zinc-200 dark:border-zinc-800"
+      {/* A column per main tattva, a row per sub. Each cell links to that main's
+          player at the sub's index (e.g. Water column, Fire row → Fire of
+          Water). Built on Catalyst's <Table> for consistent styling, but the
+          body cells are raw <td> + a full-cell PlayLink (Catalyst's TableCell
+          can't host a padding-filling link, and these cells double as the
+          audio-priming nav targets). */}
+      <Table className="[--gutter:1rem] sm:[--gutter:1.5rem] lg:[--gutter:2rem]">
+        <TableHead>
+          <TableRow>
+            {tattvas.map((main) => (
+              <TableHeader key={main.kind}>{main.english}</TableHeader>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {SUB_ROWS.map((r) => (
+            <TableRow key={r.sub}>
+              {tattvas.map((main, colIdx) => {
+                // Match Catalyst's <TableHeader> edge padding so the body
+                // cells line up under their headers. Catalyst hugs the
+                // first/last cells to the table's padded edge
+                // (first:pl-(--gutter), then sm:first:pl-1); middle cells are
+                // plain px-4. Mirror that on the full-cell PlayLink.
+                const edge =
+                  colIdx === 0
+                    ? 'pl-(--gutter) pr-4 sm:pl-1'
+                    : colIdx === tattvas.length - 1
+                      ? 'pl-4 pr-(--gutter) sm:pr-1'
+                      : 'px-4'
+                return (
+                  <td
+                    key={main.kind}
+                    className="border-b border-zinc-950/5 dark:border-white/5"
+                  >
+                    <PlayLink
+                      href={`/tattvas/${main.kind}/play?idx=${r.idx}`}
+                      className={`block ${edge} py-4 font-medium whitespace-nowrap text-zinc-950 transition hover:bg-zinc-950/2.5 dark:text-white dark:hover:bg-white/2.5`}
                     >
-                      <PlayLink
-                        href={`/tattvas/${main.kind}/play?idx=${r.idx}`}
-                        className="block rounded-sm px-3 py-3 font-medium whitespace-nowrap text-zinc-900 transition hover:bg-zinc-50 dark:text-zinc-100 dark:hover:bg-zinc-800/50"
-                      >
-                        {tattvaByKind[r.sub].english}
-                      </PlayLink>
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                      {tattvaByKind[r.sub].english}
+                    </PlayLink>
+                  </td>
+                )
+              })}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </article>
-  )
-}
-
-function Th({ children }: { children: React.ReactNode }) {
-  return (
-    <th
-      scope="col"
-      className="border-b border-zinc-200 px-3 py-3 text-left font-semibold whitespace-nowrap text-zinc-700 dark:border-zinc-800 dark:text-zinc-300"
-    >
-      {children}
-    </th>
   )
 }

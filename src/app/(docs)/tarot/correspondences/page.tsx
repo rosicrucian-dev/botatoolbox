@@ -2,6 +2,14 @@ import Link from 'next/link'
 import { type Metadata } from 'next'
 
 import { cards, type TarotCard } from '@/content/data/tarot'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/catalyst/table'
 
 export const metadata: Metadata = {
   title: 'Correspondences',
@@ -39,6 +47,11 @@ const COLUMNS: Array<{
   { label: 'Human / Opposite', value: (c) => c.human },
 ]
 
+// Pins the Key column to the left edge so the card name stays visible while
+// scrolling through attributes — same trick spreadsheets use. text-xs keeps
+// the 13-column table dense (overrides Catalyst's default text-sm).
+const STICKY = 'sticky left-0 z-10 bg-white text-xs dark:bg-zinc-900'
+
 export default function CorrespondencesPage() {
   return (
     <article className="space-y-6">
@@ -51,83 +64,37 @@ export default function CorrespondencesPage() {
         </p>
       </header>
 
-      {/* Table is wider than the article column. Wrapping in
-          overflow-x-auto lets it scroll horizontally on its own without
-          forcing horizontal scroll on the whole page. */}
-      <div className="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full px-4 sm:px-6 lg:px-8">
-          <table className="min-w-full border-separate border-spacing-0 text-xs">
-            <thead>
-              <tr>
-                <Th sticky>Key</Th>
-                {COLUMNS.map((col) => (
-                  <Th key={col.label}>{col.label}</Th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {cards.map((card) => (
-                <tr key={card.slug}>
-                  <Td sticky>
-                    <Link
-                      href={`/tarot/${card.slug}`}
-                      className="font-medium text-zinc-900 underline-offset-2 hover:underline dark:text-zinc-100"
-                    >
-                      {card.name}
-                    </Link>
-                  </Td>
-                  {COLUMNS.map((col) => (
-                    <Td key={col.label}>{col.value(card)}</Td>
-                  ))}
-                </tr>
+      <Table className="[--gutter:1rem] sm:[--gutter:1.5rem] lg:[--gutter:2rem]">
+        <TableHead>
+          <TableRow>
+            <TableHeader className={STICKY}>Key</TableHeader>
+            {COLUMNS.map((col) => (
+              <TableHeader key={col.label} className="text-xs">
+                {col.label}
+              </TableHeader>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {cards.map((card) => (
+            <TableRow key={card.slug}>
+              <TableCell className={`${STICKY} align-top`}>
+                <Link
+                  href={`/tarot/${card.slug}`}
+                  className="font-medium text-zinc-900 underline-offset-2 hover:underline dark:text-white"
+                >
+                  {card.name}
+                </Link>
+              </TableCell>
+              {COLUMNS.map((col) => (
+                <TableCell key={col.label} className="align-top text-xs">
+                  {col.value(card)}
+                </TableCell>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </article>
-  )
-}
-
-// Shared cell styling. `sticky` pins the Key column to the left edge so
-// the card name stays visible while horizontally scrolling through
-// attributes — same trick spreadsheets use.
-const CELL =
-  'border-b border-zinc-200 px-2 py-2 align-top whitespace-nowrap dark:border-zinc-800'
-
-function Th({
-  sticky = false,
-  children,
-}: {
-  sticky?: boolean
-  children: React.ReactNode
-}) {
-  return (
-    <th
-      scope="col"
-      className={`${CELL} text-left font-semibold text-zinc-700 dark:text-zinc-300 ${
-        sticky ? 'sticky left-0 z-10 bg-white dark:bg-zinc-900' : ''
-      }`}
-    >
-      {children}
-    </th>
-  )
-}
-
-function Td({
-  sticky = false,
-  children,
-}: {
-  sticky?: boolean
-  children: React.ReactNode
-}) {
-  return (
-    <td
-      className={`${CELL} text-zinc-900 dark:text-zinc-100 ${
-        sticky ? 'sticky left-0 z-10 bg-white dark:bg-zinc-900' : ''
-      }`}
-    >
-      {children}
-    </td>
   )
 }

@@ -132,6 +132,12 @@ const groups: Array<NavGroup> = [
     title: 'Utilities',
     links: [
       {
+        title: 'Astrology Chart',
+        href: '/astrology-chart',
+        description:
+          'The current positions of the ten bodies on a tropical zodiac wheel, computed live for the present moment.',
+      },
+      {
         title: 'Keyboard',
         href: '/keyboard',
         description:

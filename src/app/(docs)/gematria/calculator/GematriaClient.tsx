@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import Link from 'next/link'
 
+import { Button } from '@/components/catalyst/button'
 import { MajorImage } from '@/components/CardImage'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
@@ -85,13 +86,13 @@ export function GematriaClient() {
           Calculator
         </h1>
         {playableCount > 0 && (
-          <Link
+          <Button
             href={`/gematria/play?seq=${encodeURIComponent(word)}`}
+            color="emerald"
             onClick={() => ensureAudioContext()}
-            className="inline-flex h-9 shrink-0 items-center justify-center rounded-md bg-emerald-500 px-3 text-sm font-medium whitespace-nowrap text-white transition hover:bg-emerald-400"
           >
             Play ▶
-          </Link>
+          </Button>
         )}
       </div>
 
