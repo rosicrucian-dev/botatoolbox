@@ -43,7 +43,7 @@ export function AspectsTable({ aspects }: { aspects: Aspect[] }) {
       <Table>
         <TableHead>
           <TableRow>
-            <TableHeader className="w-1/3">Pair</TableHeader>
+            <TableHeader className="w-1/3">Planets</TableHeader>
             <TableHeader className="w-1/3">Aspect</TableHeader>
             <TableHeader className="w-1/3 text-right">Orb</TableHeader>
           </TableRow>
