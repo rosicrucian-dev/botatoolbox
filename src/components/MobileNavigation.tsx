@@ -7,7 +7,14 @@ import {
   TransitionChild,
 } from '@headlessui/react'
 import { motion } from 'framer-motion'
-import { Suspense, createContext, useContext } from 'react'
+import {
+  Suspense,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
+import { createPortal } from 'react-dom'
 import { create } from 'zustand'
 
 import { Header } from '@/components/Header'
@@ -39,6 +46,48 @@ function XIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
       <path d="m1.5 1 7 7M8.5 1l-7 7" />
     </svg>
   )
+}
+
+// Floating, thumb-reachable nav toggle pinned to the bottom-right, above the
+// iOS home indicator via the safe-area inset. ~56px (size-14) is Apple's
+// comfortable touch-target size; the translucent blur + hairline ring match the
+// iOS "Liquid Glass" floating-control look.
+const NAV_FAB_CLASS =
+  'fixed right-[calc(env(safe-area-inset-right)+1.25rem)] bottom-[calc(env(safe-area-inset-bottom)+1.25rem)] z-[60] flex size-14 items-center justify-center rounded-full bg-white/75 text-zinc-900 shadow-lg shadow-zinc-900/20 ring-1 ring-zinc-900/10 backdrop-blur-md transition active:scale-95 lg:hidden dark:bg-zinc-800/75 dark:text-white dark:shadow-black/40 dark:ring-white/10'
+
+function NavFab({
+  open,
+  onClick,
+}: {
+  open: boolean
+  onClick: () => void
+}) {
+  const Icon = open ? XIcon : MenuIcon
+  return (
+    <button
+      type="button"
+      className={NAV_FAB_CLASS}
+      aria-label="Toggle navigation"
+      aria-expanded={open}
+      onClick={onClick}
+    >
+      <Icon className="w-4 stroke-current" />
+    </button>
+  )
+}
+
+// The closed-state floating trigger. Portaled to <body> so `position: fixed`
+// resolves against the viewport — rendered inside the page Header it would be
+// trapped by that bar's backdrop-filter containing block and land at the
+// top-right of the header instead of the bottom-right of the screen. While the
+// nav is open the in-dialog FAB (inside DialogPanel) takes over, so this one
+// unmounts to avoid the modal's inert layer swallowing its clicks.
+function PortalNavFab() {
+  const { isOpen, open } = useMobileNavigationStore()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  if (!mounted || isOpen) return null
+  return createPortal(<NavFab open={false} onClick={open} />, document.body)
 }
 
 const IsInsideMobileNavigationContext = createContext(false)
@@ -78,6 +127,11 @@ function MobileNavigationDialog({
             <Navigation />
           </motion.div>
         </TransitionChild>
+
+        {/* The open-state floating toggle. Lives inside the panel so it sits
+            above the slide-over (z) and stays interactive under the modal's
+            inert layer — tap to close. */}
+        <NavFab open={isOpen} onClick={close} />
       </DialogPanel>
     </Dialog>
   )
@@ -106,26 +160,23 @@ export function MobileNavigation() {
 
   return (
     <IsInsideMobileNavigationContext.Provider value={true}>
+      {/* Top-left header toggle — always present as the reliable backup. */}
       <button
         type="button"
-        // Floating, thumb-reachable nav toggle pinned to the bottom-right,
-        // above the iOS home indicator via the safe-area inset. It renders both
-        // at page level (to open) and again inside the open dialog (to close) —
-        // the in-dialog copy stacks above the slide-over panel, so one control
-        // both opens and closes the nav. ~56px (size-14) is Apple's comfortable
-        // touch-target size; the translucent blur + hairline ring match the
-        // iOS "Liquid Glass" floating-control look.
-        className="fixed right-[calc(env(safe-area-inset-right)+1.25rem)] bottom-[calc(env(safe-area-inset-bottom)+1.25rem)] z-50 flex size-14 items-center justify-center rounded-full bg-white/75 text-zinc-900 shadow-lg shadow-zinc-900/20 ring-1 ring-zinc-900/10 backdrop-blur-md transition active:scale-95 dark:bg-zinc-800/75 dark:text-white dark:shadow-black/40 dark:ring-white/10"
+        className="relative flex size-6 items-center justify-center rounded-md transition hover:bg-zinc-900/5 dark:hover:bg-white/5"
         aria-label="Toggle navigation"
-        aria-expanded={isOpen}
         onClick={toggle}
       >
-        <ToggleIcon className="w-4 stroke-current" />
+        <span className="absolute size-12 pointer-fine:hidden" />
+        <ToggleIcon className="w-2.5 stroke-zinc-900 dark:stroke-white" />
       </button>
       {!isInsideMobileNavigation && (
-        <Suspense fallback={null}>
-          <MobileNavigationDialog isOpen={isOpen} close={close} />
-        </Suspense>
+        <>
+          <PortalNavFab />
+          <Suspense fallback={null}>
+            <MobileNavigationDialog isOpen={isOpen} close={close} />
+          </Suspense>
+        </>
       )}
     </IsInsideMobileNavigationContext.Provider>
   )
