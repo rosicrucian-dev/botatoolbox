@@ -108,12 +108,19 @@ export function MobileNavigation() {
     <IsInsideMobileNavigationContext.Provider value={true}>
       <button
         type="button"
-        className="relative flex size-6 items-center justify-center rounded-md transition hover:bg-zinc-900/5 dark:hover:bg-white/5"
+        // Floating, thumb-reachable nav toggle pinned to the bottom-right,
+        // above the iOS home indicator via the safe-area inset. It renders both
+        // at page level (to open) and again inside the open dialog (to close) —
+        // the in-dialog copy stacks above the slide-over panel, so one control
+        // both opens and closes the nav. ~56px (size-14) is Apple's comfortable
+        // touch-target size; the translucent blur + hairline ring match the
+        // iOS "Liquid Glass" floating-control look.
+        className="fixed right-[calc(env(safe-area-inset-right)+1.25rem)] bottom-[calc(env(safe-area-inset-bottom)+1.25rem)] z-50 flex size-14 items-center justify-center rounded-full bg-white/75 text-zinc-900 shadow-lg shadow-zinc-900/20 ring-1 ring-zinc-900/10 backdrop-blur-md transition active:scale-95 dark:bg-zinc-800/75 dark:text-white dark:shadow-black/40 dark:ring-white/10"
         aria-label="Toggle navigation"
+        aria-expanded={isOpen}
         onClick={toggle}
       >
-        <span className="absolute size-12 pointer-fine:hidden" />
-        <ToggleIcon className="w-2.5 stroke-zinc-900 dark:stroke-white" />
+        <ToggleIcon className="w-4 stroke-current" />
       </button>
       {!isInsideMobileNavigation && (
         <Suspense fallback={null}>
