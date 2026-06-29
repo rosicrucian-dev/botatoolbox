@@ -8,6 +8,8 @@ import { Tabs } from '@/components/Tabs'
 import { MajorImage, MinorImage } from '@/components/CardImage'
 import { cardBySlug, cards } from '@/content/data/tarot'
 import { minorBySlug, minorCards } from '@/content/data'
+import { majorAspectRatio, minorAspectRatio } from '@/content/data/tarot-styles'
+import { useTarotStyle } from '@/lib/tarotStyle'
 
 // Optimized card-back used for the deck top and the face-down side of the
 // flip (see public/tarot/back.jpg — a thumbnail of public/files/tarot-back.jpg).
@@ -271,8 +273,14 @@ function parse(str: string): Array<Placed> {
 // One card's face, sized to fill its absolutely-positioned wrapper. Majors use
 // the 362w thumbnail (~⅓ the bytes of the full image); minors use the colored
 // set, which is already thumbnail-sized (~270w), so it has no separate thumb.
-// Minors are stretched to the major proportion (see the minor-arcana note).
+//
+// Each card is shown at its art's *own* canonical ratio (from the active major
+// / minor style) rather than a single forced proportion — so nothing is clipped
+// or stretched, no matter which style is active or whether it's a major or a
+// minor. The face drives the card's box; the face-down side is `inset-0` (see
+// the placed-card render), so the back simply fills whatever box the face sets.
 function CardFace({ slug }: { slug: string }) {
+  const { majorStyle, minorStyle } = useTarotStyle()
   const found = resolveSlug(slug)
   if (!found) return null
   if (found.kind === 'major') {
@@ -281,10 +289,9 @@ function CardFace({ slug }: { slug: string }) {
         card={found.card}
         thumb
         alt={found.card.name}
-        width={724}
-        height={1200}
         draggable={false}
-        className="aspect-[724/1200] w-full object-cover shadow-lg"
+        style={{ aspectRatio: majorAspectRatio(majorStyle) }}
+        className="w-full object-cover shadow-lg"
       />
     )
   }
@@ -293,9 +300,8 @@ function CardFace({ slug }: { slug: string }) {
       card={found.card}
       alt={`${found.card.num} of ${found.card.suit}`}
       draggable={false}
-      // CSS aspect-ratio forces the major proportion; object-fill stretches
-      // the minor pixels to fill it (nothing cropped) at ~4% vertical squash.
-      className="aspect-[724/1200] w-full object-fill shadow-lg"
+      style={{ aspectRatio: minorAspectRatio(minorStyle) }}
+      className="w-full object-cover shadow-lg"
     />
   )
 }
@@ -306,6 +312,11 @@ export function FreeformClient({
   variant?: 'inline' | 'expand'
 } = {}) {
   const router = useRouter()
+  // The active major ratio shapes the generic card slots (deck pile,
+  // placeholder, in-flight draw) — placed cards take each card's own ratio
+  // via CardFace.
+  const { majorStyle } = useTarotStyle()
+  const deckAspect = majorAspectRatio(majorStyle)
   const baseWPct = useBaseWidthPct()
   const [zoom, setZoom] = useState(1)
   const [tableW, setTableW] = useState(0)
@@ -799,10 +810,14 @@ export function FreeformClient({
               src={BACK_IMAGE}
               alt=""
               draggable={false}
-              className="aspect-[724/1200] w-full object-cover shadow-xl"
+              style={{ aspectRatio: deckAspect }}
+              className="w-full object-cover shadow-xl"
             />
           ) : (
-            <span className="block aspect-[724/1200] w-full border-2 border-dashed border-zinc-300 dark:border-zinc-600" />
+            <span
+              style={{ aspectRatio: deckAspect }}
+              className="block w-full border-2 border-dashed border-zinc-300 dark:border-zinc-600"
+            />
           )}
         </button>
 
@@ -848,7 +863,10 @@ export function FreeformClient({
                   src={BACK_IMAGE}
                   alt=""
                   draggable={false}
-                  className="absolute inset-0 aspect-[724/1200] w-full object-cover shadow-lg"
+                  // inset-0 fills the face's box, so the back always matches
+                  // whatever ratio the face (CardFace) set — keeps the flip
+                  // consistent across styles and major/minor.
+                  className="absolute inset-0 h-full w-full object-cover shadow-lg"
                   style={{
                     backfaceVisibility: 'hidden',
                     transform: 'rotateY(180deg)',
@@ -874,7 +892,8 @@ export function FreeformClient({
               src={BACK_IMAGE}
               alt=""
               draggable={false}
-              className="aspect-[724/1200] w-full object-cover shadow-2xl"
+              style={{ aspectRatio: deckAspect }}
+              className="w-full object-cover shadow-2xl"
             />
           </div>
         )}

@@ -1,7 +1,8 @@
 // The selectable tarot art styles, per arcana. This registry is the single
 // source of truth: it drives the Settings dropdowns, the image helpers (which
-// directory a card image lives in), and the Files downloads. Adding a style is
-// a one-line edit here plus dropping its image directory under
+// directory a card image lives in), the Files downloads, and the canonical
+// aspect ratio each style's art is displayed at. Adding a style is a one-line
+// edit here plus dropping its image directory under
 // public/tarot/<arcana>/<id>/.
 //
 // Directory layout:
@@ -15,18 +16,25 @@
 export interface TarotStyle {
   id: string
   label: string
-  // Major thumbnails differ slightly in crop height between styles; carried
-  // here so the tableau reserves the right space. Minor styles omit it.
-  thumbHeight?: number
+  // Canonical art aspect ratio, expressed as CSS width / height. Every card of
+  // a style shares it so cards line up wherever they're shown together — grids,
+  // the tableau, and the freeform table. The art is authored/normalized to this
+  // ratio (Traditional is a native 724×1200; Modern is normalized to
+  // 1400×2436; Josh Yates minors are a native 270×466).
+  aspectRatio: number
 }
 
+// Width of the rendered card thumbnail, in px. Used to derive thumb heights
+// from each style's aspect ratio (matches THUMB_WIDTH in scripts/optimize-tarot).
+const THUMB_WIDTH = 362
+
 export const MAJOR_STYLES: ReadonlyArray<TarotStyle> = [
-  { id: 'traditional', label: 'Traditional', thumbHeight: 600 },
-  { id: 'modern', label: 'Modern', thumbHeight: 635 },
+  { id: 'traditional', label: 'Traditional', aspectRatio: 724 / 1200 },
+  { id: 'modern', label: 'Modern', aspectRatio: 1400 / 2436 },
 ]
 
 export const MINOR_STYLES: ReadonlyArray<TarotStyle> = [
-  { id: 'josh-yates', label: 'Josh Yates' },
+  { id: 'josh-yates', label: 'Josh Yates', aspectRatio: 270 / 466 },
 ]
 
 // Default major style shown to users with no saved preference (and baked into
@@ -44,6 +52,20 @@ export function isMajorStyle(id: string): boolean {
 export function isMinorStyle(id: string): boolean {
   return MINOR_STYLES.some((s) => s.id === id)
 }
+
+// Canonical aspect ratio (CSS width / height) for a major / minor style. Used
+// to size card frames consistently — grids, the tableau, and the freeform
+// table. Falls back to the first registered style for an unknown id.
+export function majorAspectRatio(id: string): number {
+  return MAJOR_STYLES.find((s) => s.id === id)?.aspectRatio ?? MAJOR_STYLES[0].aspectRatio
+}
+export function minorAspectRatio(id: string): number {
+  return MINOR_STYLES.find((s) => s.id === id)?.aspectRatio ?? MINOR_STYLES[0].aspectRatio
+}
+
+// Rendered thumbnail height (px) at THUMB_WIDTH for a major style — the tableau
+// uses it to reserve layout space. Derived from the style's aspect ratio so
+// there's one source of truth.
 export function majorThumbHeight(id: string): number {
-  return MAJOR_STYLES.find((s) => s.id === id)?.thumbHeight ?? 600
+  return Math.round(THUMB_WIDTH / majorAspectRatio(id))
 }
