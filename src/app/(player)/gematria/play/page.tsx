@@ -10,7 +10,7 @@ import { useAutoAdvance } from '@/lib/useAutoAdvance'
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { CHANT_BEAT_SECONDS } from '@/lib/chant'
 import { getColor, textColorFor } from '@/lib/colors'
-import { useColorTheme } from '@/lib/colorTheme'
+import { useColorPalette } from '@/lib/colorPalette'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 
 export default function GematriaPlayPage() {
@@ -31,7 +31,7 @@ export default function GematriaPlayPage() {
     [seqParam],
   )
 
-  const { colorTheme: theme } = useColorTheme()
+  const { colorPalette: theme } = useColorPalette()
   const slides = useMemo(
     () =>
       seq.map((glyph) => {

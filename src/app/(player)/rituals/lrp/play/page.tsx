@@ -14,8 +14,8 @@ import { useAutoAdvance } from '@/lib/useAutoAdvance'
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { SoundButton } from '@/components/SoundButton'
 import { CHANT_BEAT_SECONDS } from '@/lib/chant'
-import { getColor, textColorFor, type ThemeId } from '@/lib/colors'
-import { useColorTheme } from '@/lib/colorTheme'
+import { getColor, textColorFor, type ColorPaletteId } from '@/lib/colors'
+import { useColorPalette } from '@/lib/colorPalette'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 import { sections } from '@/content/rituals/lrp'
 
@@ -108,7 +108,7 @@ const slideTemplate: Array<LRPSlide> = sections.flatMap((section) =>
   section.lines.flatMap((line) => lineToSlides(line, section.title)),
 )
 
-function buildSlides(theme: ThemeId): Array<LRPSlide> {
+function buildSlides(theme: ColorPaletteId): Array<LRPSlide> {
   return slideTemplate.map((s) => ({
     ...s,
     bgColor: s.color ? getColor(s.color, theme) : null,
@@ -119,7 +119,7 @@ function buildSlides(theme: ThemeId): Array<LRPSlide> {
 export default function LesserPentagramPlayPage() {
   const router = useRouter()
 
-  const { colorTheme: theme } = useColorTheme()
+  const { colorPalette: theme } = useColorPalette()
   const slides = useMemo(() => buildSlides(theme), [theme])
   const { idx, setIdx, handleIdxChange } = usePlayerIndex({
     slidesLength: slides.length,

@@ -11,7 +11,7 @@ import { MajorImage } from '@/components/CardImage'
 import { SoundButton } from '@/components/SoundButton'
 import { CHANT_BEAT_SECONDS } from '@/lib/chant'
 import { getColor, textColorFor } from '@/lib/colors'
-import { useColorTheme } from '@/lib/colorTheme'
+import { useColorPalette } from '@/lib/colorPalette'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 
 export function WordOfPowerPlayer({ raw }: { raw: RawWord }) {
@@ -20,7 +20,7 @@ export function WordOfPowerPlayer({ raw }: { raw: RawWord }) {
   const autoplay = searchParams.get('autoplay') === '1'
 
   const word = expandWord(raw)
-  const { colorTheme: theme } = useColorTheme()
+  const { colorPalette: theme } = useColorPalette()
   const slides = useMemo(
     () =>
       word.letters.map((l) => ({

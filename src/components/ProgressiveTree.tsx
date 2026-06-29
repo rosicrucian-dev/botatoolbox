@@ -1,5 +1,9 @@
 import { paths, SEPHIROTH_DESCENT_SLUGS } from '@/content/data'
-import { getColor } from '@/lib/colors'
+import {
+  getColor,
+  DEFAULT_COLOR_PALETTE,
+  type ColorPaletteId,
+} from '@/lib/colors'
 import { sephiroth, TREE_VIEWBOX } from '@/lib/tree-layout'
 
 const sephBySlug = Object.fromEntries(sephiroth.map((s) => [s.slug, s]))
@@ -20,9 +24,11 @@ const PATH_HALF_WIDTH = 8
 export function ProgressiveTree({
   filledThrough = -1,
   strokeColor,
+  palette = DEFAULT_COLOR_PALETTE,
 }: {
   filledThrough?: number
   strokeColor?: string | null
+  palette?: ColorPaletteId
 }) {
   const strokeProps = strokeColor
     ? { stroke: strokeColor }
@@ -90,19 +96,19 @@ export function ProgressiveTree({
               <g key={s.slug}>
                 <path
                   d={`M ${s.cx},${s.cy} L ${s.cx - d},${s.cy - d} A ${RADIUS},${RADIUS} 0 0,1 ${s.cx + d},${s.cy - d} Z`}
-                  fill={getColor(q.top) ?? '#888'}
+                  fill={getColor(q.top, palette) ?? '#888'}
                 />
                 <path
                   d={`M ${s.cx},${s.cy} L ${s.cx + d},${s.cy - d} A ${RADIUS},${RADIUS} 0 0,1 ${s.cx + d},${s.cy + d} Z`}
-                  fill={getColor(q.right) ?? '#888'}
+                  fill={getColor(q.right, palette) ?? '#888'}
                 />
                 <path
                   d={`M ${s.cx},${s.cy} L ${s.cx + d},${s.cy + d} A ${RADIUS},${RADIUS} 0 0,1 ${s.cx - d},${s.cy + d} Z`}
-                  fill={getColor(q.bottom) ?? '#888'}
+                  fill={getColor(q.bottom, palette) ?? '#888'}
                 />
                 <path
                   d={`M ${s.cx},${s.cy} L ${s.cx - d},${s.cy + d} A ${RADIUS},${RADIUS} 0 0,1 ${s.cx - d},${s.cy - d} Z`}
-                  fill={getColor(q.left) ?? '#888'}
+                  fill={getColor(q.left, palette) ?? '#888'}
                 />
                 <circle
                   cx={s.cx}
@@ -121,7 +127,7 @@ export function ProgressiveTree({
               cx={s.cx}
               cy={s.cy}
               r={RADIUS}
-              fill={filled ? (getColor(s.color) ?? '#888') : 'transparent'}
+              fill={filled ? (getColor(s.color, palette) ?? '#888') : 'transparent'}
               strokeWidth={sw}
               {...strokeProps}
             />

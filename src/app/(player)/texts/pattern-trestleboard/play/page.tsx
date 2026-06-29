@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation'
 import { sephirahBySlug, SEPHIROTH_DESCENT_SLUGS } from '@/content/data'
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { ProgressiveTree } from '@/components/ProgressiveTree'
-import { getColor, textColorFor, type ThemeId } from '@/lib/colors'
-import { useColorTheme } from '@/lib/colorTheme'
+import { getColor, textColorFor, type ColorPaletteId } from '@/lib/colors'
+import { useColorPalette } from '@/lib/colorPalette'
 import { statements } from '@/content/texts/pattern-trestleboard'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 
-function buildSlides(theme: ThemeId) {
+function buildSlides(theme: ColorPaletteId) {
   // Statement N+1 pairs with the Nth sephirah in tree-descent order
   // (statement 1 = intro, statement 2 = Kether, …, statement 11 = Malkuth).
   return statements.map((s, i) => {
@@ -33,7 +33,7 @@ function buildSlides(theme: ThemeId) {
 
 export default function TrestleboardPlayPage() {
   const router = useRouter()
-  const { colorTheme: theme } = useColorTheme()
+  const { colorPalette: theme } = useColorPalette()
   const slides = useMemo(() => buildSlides(theme), [theme])
   const { idx, handleIdxChange } = usePlayerIndex({
     slidesLength: slides.length,
@@ -51,6 +51,7 @@ export default function TrestleboardPlayPage() {
           <ProgressiveTree
             filledThrough={slide.filledThrough}
             strokeColor={slide.textColor}
+            palette={theme}
           />
         </div>
       )}

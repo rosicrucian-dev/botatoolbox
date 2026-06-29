@@ -1,12 +1,13 @@
-// Color theme system. A "theme" is a 16-entry palette: the 12-color
+// Color palette system. A "palette" is a 16-entry set: the 12-color
 // wheel (one per Hebrew letter / tarot path) plus 4 sephirah-specific
 // colors (kether, chokmah, binah, malkuth) for the top of the tree and
-// the bottom (kingdom/earth).
+// the bottom (kingdom/earth). Selectable palettes are registered in
+// COLOR_PALETTES below.
 //
 // Convention used everywhere in the app:
 //   - Data files store the color NAME (e.g. 'yellow', 'malkuth').
-//   - Components resolve name → hex at render time via getColor(name, theme).
-//   - The active theme lives in `useTheme` (src/lib/theme.ts).
+//   - Components resolve name → hex at render time via getColor(name, palette).
+//   - The active palette lives in `useColorPalette` (src/lib/colorPalette.ts).
 
 export type ColorName =
   | 'red'
@@ -26,20 +27,31 @@ export type ColorName =
   | 'binah'
   | 'malkuth'
 
-export type ThemeId = 'fhl' | 'apple'
+export type ColorPaletteId = 'flo' | 'apple'
 
-export const THEME_IDS: Array<ThemeId> = ['fhl', 'apple']
-
-export const THEME_LABELS: Record<ThemeId, string> = {
-  fhl: 'Fraternity of the Hidden Light',
-  apple: 'Apple',
+export interface ColorPalette {
+  id: ColorPaletteId
+  label: string
 }
 
-// Single source of truth for the default theme. Used by:
-//   - useTheme() store as the initial value
-//   - getColor / getFlashColor / flashOf as their default `theme` arg
-//   - the `colors` backward-compat alias
-export const DEFAULT_THEME: ThemeId = 'fhl'
+// Registry — the single source of truth for the selectable color palettes. It
+// drives the Settings "Colors" dropdown and palette validation, mirroring
+// MAJOR_STYLES / MINOR_STYLES in content/data/tarot-styles.ts: adding a palette
+// is a one-line edit here plus its hex table in `palettes` below. 'flo' is the
+// Fraternity of the Hidden Light spectrum — the traditional BOTA colors.
+export const COLOR_PALETTES: ReadonlyArray<ColorPalette> = [
+  { id: 'flo', label: 'FLO' },
+  { id: 'apple', label: 'Apple' },
+]
+
+// Single source of truth for the default palette — the useColorPalette() store's
+// initial value and the default `palette` arg of getColor / getFlashColor /
+// flashOf.
+export const DEFAULT_COLOR_PALETTE: ColorPaletteId = 'flo'
+
+export function isColorPalette(id: string): id is ColorPaletteId {
+  return COLOR_PALETTES.some((p) => p.id === id)
+}
 
 // Apple system colors (iOS). Used as anchors for the apple theme; the
 // 12-wheel midpoints between adjacent anchors are blended at module load.
@@ -112,8 +124,8 @@ const staticColors: Record<string, string> = {
   'tattva-text-dark': '#1F1F1F',
 }
 
-const themes: Record<ThemeId, Record<ColorName, string>> = {
-  fhl: {
+const palettes: Record<ColorPaletteId, Record<ColorName, string>> = {
+  flo: {
     red: '#AC2721',
     'red-orange': '#B92D1C',
     orange: '#E65C29',
@@ -137,22 +149,17 @@ const themes: Record<ThemeId, Record<ColorName, string>> = {
   apple: buildAppleTheme(),
 }
 
-// Backward-compat alias: code that wants raw hex without caring about
-// theme gets the default theme's palette. New code should call getColor()
-// with an explicit theme instead.
-export const colors = themes[DEFAULT_THEME]
-
 export function getColor(
   name?: string | null,
-  theme: ThemeId = DEFAULT_THEME,
+  palette: ColorPaletteId = DEFAULT_COLOR_PALETTE,
 ): string | undefined {
   if (!name) return undefined
   const lower = name.toLowerCase()
-  const palette = themes[theme]
-  if (!palette) return undefined
-  // Theme palette first, then the theme-invariant static registry (used
+  const table = palettes[palette]
+  if (!table) return undefined
+  // Palette colors first, then the palette-invariant static registry (used
   // for feature-specific colors like tattva backgrounds).
-  return palette[lower as ColorName] ?? staticColors[lower]
+  return table[lower as ColorName] ?? staticColors[lower]
 }
 
 // Wheel order — only the 12-color wheel; the 4 sephirah colors don't
@@ -176,13 +183,13 @@ const wheel = [
 // foreground colors over a colored bg.
 export function getFlashColor(
   name?: string | null,
-  theme: ThemeId = DEFAULT_THEME,
+  palette: ColorPaletteId = DEFAULT_COLOR_PALETTE,
 ): string | undefined {
   if (!name) return undefined
   const idx = wheel.indexOf(name.toLowerCase() as (typeof wheel)[number])
   if (idx === -1) return undefined
   const flashName = wheel[(idx + 6) % wheel.length]
-  return themes[theme]?.[flashName]
+  return palettes[palette]?.[flashName]
 }
 
 function hexToRgb(hex: string): [number, number, number] {
@@ -243,18 +250,18 @@ export function textColorFor(colorName?: string | null): string | null {
 // Special-cases white ↔ black for the kether/binah literals.
 export function flashOf(
   color?: string | null,
-  theme: ThemeId = DEFAULT_THEME,
+  palette: ColorPaletteId = DEFAULT_COLOR_PALETTE,
 ): string | undefined {
   if (!color) return undefined
   if (color === 'white' || color === '#FFFFFF') return 'black'
   if (color === 'black' || color === '#000000') return 'white'
-  const palette = themes[theme]
-  if (!palette) return undefined
+  const table = palettes[palette]
+  if (!table) return undefined
   const lower = color.toLowerCase()
-  if (palette[lower as ColorName]) return getFlashColor(lower, theme)
-  const entry = Object.entries(palette).find(
+  if (table[lower as ColorName]) return getFlashColor(lower, palette)
+  const entry = Object.entries(table).find(
     ([, hex]) => hex.toLowerCase() === lower,
   )
-  if (entry) return getFlashColor(entry[0], theme)
+  if (entry) return getFlashColor(entry[0], palette)
   return undefined
 }

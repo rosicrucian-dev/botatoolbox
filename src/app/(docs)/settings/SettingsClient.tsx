@@ -2,26 +2,24 @@
 
 import { Field, Label } from '@/components/catalyst/fieldset'
 import { Listbox, ListboxLabel, ListboxOption } from '@/components/catalyst/listbox'
-import {
-  MAJOR_STYLES,
-  MINOR_STYLES,
-  type TarotStyle,
-} from '@/content/data/tarot-styles'
+import { MAJOR_STYLES, MINOR_STYLES } from '@/content/data/tarot-styles'
+import { COLOR_PALETTES, type ColorPaletteId } from '@/lib/colors'
+import { useColorPalette } from '@/lib/colorPalette'
 import { useTarotStyle } from '@/lib/tarotStyle'
 
 import { MembersOnlySection } from './MembersOnlySection'
 
-// A single labelled Catalyst Listbox bound to one art-style preference. Options
-// come straight from the registry, so adding a style there adds it here with no
-// further wiring.
-function StyleField({
+// A single labelled Catalyst Listbox bound to one preference. Options are any
+// `{ id, label }` list — the style and palette registries both fit — so adding
+// an entry to a registry adds it here with no further wiring.
+function SelectField({
   label,
-  styles,
+  options,
   value,
   onChange,
 }: {
   label: string
-  styles: ReadonlyArray<TarotStyle>
+  options: ReadonlyArray<{ id: string; label: string }>
   value: string
   onChange: (id: string) => void
 }) {
@@ -29,9 +27,9 @@ function StyleField({
     <Field>
       <Label>{label}</Label>
       <Listbox value={value} onChange={onChange} aria-label={label}>
-        {styles.map((s) => (
-          <ListboxOption key={s.id} value={s.id}>
-            <ListboxLabel>{s.label}</ListboxLabel>
+        {options.map((o) => (
+          <ListboxOption key={o.id} value={o.id}>
+            <ListboxLabel>{o.label}</ListboxLabel>
           </ListboxOption>
         ))}
       </Listbox>
@@ -42,25 +40,32 @@ function StyleField({
 export function SettingsClient() {
   const { majorStyle, minorStyle, setMajorStyle, setMinorStyle } =
     useTarotStyle()
+  const { colorPalette, setColorPalette } = useColorPalette()
 
   return (
     <div className="space-y-10">
       <section className="space-y-6">
         <h2 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">
-          Tarot Image Style
+          Style
         </h2>
         <div className="grid max-w-2xl gap-6 sm:grid-cols-2">
-          <StyleField
+          <SelectField
             label="Major Arcana"
-            styles={MAJOR_STYLES}
+            options={MAJOR_STYLES}
             value={majorStyle}
             onChange={setMajorStyle}
           />
-          <StyleField
+          <SelectField
             label="Minor Arcana"
-            styles={MINOR_STYLES}
+            options={MINOR_STYLES}
             value={minorStyle}
             onChange={setMinorStyle}
+          />
+          <SelectField
+            label="Colors"
+            options={COLOR_PALETTES}
+            value={colorPalette}
+            onChange={(id) => setColorPalette(id as ColorPaletteId)}
           />
         </div>
       </section>

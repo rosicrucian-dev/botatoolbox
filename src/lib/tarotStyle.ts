@@ -11,7 +11,7 @@ import {
 } from '@/content/data/tarot-styles'
 
 // Two independent, login-free preferences — the chosen art style for each
-// arcana — persisted to localStorage. Mirrors src/lib/colorTheme.ts: the store
+// arcana — persisted to localStorage. Mirrors src/lib/colorPalette.ts: the store
 // starts at the defaults (so SSR/static-export render is stable) and hydrates
 // from localStorage on mount, switching to the saved choice on the client.
 

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { paths } from '@/content/data'
 import { cardBySlug, thumbImage } from '@/content/data/tarot'
 import { getColor, textColorFor } from '@/lib/colors'
+import { useColorPalette } from '@/lib/colorPalette'
 import { useTarotStyle } from '@/lib/tarotStyle'
 import {
   sephiroth,
@@ -44,6 +45,7 @@ export function TreeOfLifeSvg({
   flowDirection?: FlowDirection
 }) {
   const { majorStyle } = useTarotStyle()
+  const { colorPalette } = useColorPalette()
   return (
     <svg
       viewBox={TREE_VIEWBOX}
@@ -86,7 +88,7 @@ export function TreeOfLifeSvg({
                   y1={a.cy}
                   x2={b.cx}
                   y2={b.cy}
-                  stroke={getColor(card.color) ?? 'white'}
+                  stroke={getColor(card.color, colorPalette) ?? 'white'}
                   strokeWidth={16}
                 />
                 <line
@@ -176,19 +178,19 @@ export function TreeOfLifeSvg({
                   <>
                     <path
                       d={`M ${s.cx},${s.cy} L ${s.cx - d},${s.cy - d} A ${r},${r} 0 0,1 ${s.cx + d},${s.cy - d} Z`}
-                      fill={getColor(s.quadrantColors.top) ?? '#888'}
+                      fill={getColor(s.quadrantColors.top, colorPalette) ?? '#888'}
                     />
                     <path
                       d={`M ${s.cx},${s.cy} L ${s.cx + d},${s.cy - d} A ${r},${r} 0 0,1 ${s.cx + d},${s.cy + d} Z`}
-                      fill={getColor(s.quadrantColors.right) ?? '#888'}
+                      fill={getColor(s.quadrantColors.right, colorPalette) ?? '#888'}
                     />
                     <path
                       d={`M ${s.cx},${s.cy} L ${s.cx + d},${s.cy + d} A ${r},${r} 0 0,1 ${s.cx - d},${s.cy + d} Z`}
-                      fill={getColor(s.quadrantColors.bottom) ?? '#888'}
+                      fill={getColor(s.quadrantColors.bottom, colorPalette) ?? '#888'}
                     />
                     <path
                       d={`M ${s.cx},${s.cy} L ${s.cx - d},${s.cy + d} A ${r},${r} 0 0,1 ${s.cx - d},${s.cy - d} Z`}
-                      fill={getColor(s.quadrantColors.left) ?? '#888'}
+                      fill={getColor(s.quadrantColors.left, colorPalette) ?? '#888'}
                     />
                     <circle
                       cx={s.cx}
@@ -204,7 +206,7 @@ export function TreeOfLifeSvg({
                     cx={s.cx}
                     cy={s.cy}
                     r={r}
-                    fill={getColor(s.color) ?? '#888'}
+                    fill={getColor(s.color, colorPalette) ?? '#888'}
                     strokeWidth={1.5}
                     className="stroke-black dark:stroke-white"
                   />

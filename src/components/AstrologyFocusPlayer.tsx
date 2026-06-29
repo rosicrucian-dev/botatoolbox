@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation'
 
 import { MajorImage } from '@/components/CardImage'
 import { ensureAudioContext } from '@/lib/audioContext'
-import { getColor, textColorFor, type ThemeId } from '@/lib/colors'
-import { useColorTheme } from '@/lib/colorTheme'
+import { getColor, textColorFor, type ColorPaletteId } from '@/lib/colors'
+import { useColorPalette } from '@/lib/colorPalette'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { SoundButton } from '@/components/SoundButton'
@@ -46,7 +46,7 @@ export function AstrologyFocusPlayer({
   const detailHrefForSlug = (s: string) => `/astrology/${kind}/${s}`
 
   const router = useRouter()
-  const { colorTheme: theme } = useColorTheme()
+  const { colorPalette: theme } = useColorPalette()
 
   const slides = useMemo(
     () => items.map((i) => buildSlide(i, theme)),
@@ -128,7 +128,7 @@ export function AstrologyFocusPlayer({
   )
 }
 
-function buildSlide(item: FocusItem, theme: ThemeId) {
+function buildSlide(item: FocusItem, theme: ColorPaletteId) {
   return {
     ...item,
     label: item.name,

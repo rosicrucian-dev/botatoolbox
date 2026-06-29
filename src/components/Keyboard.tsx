@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 import { keys, type Key } from '@/lib/keyboard'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { noteToFrequency, playTone, type ActiveTone } from '@/lib/audio'
-import { useColorTheme } from '@/lib/colorTheme'
-import { getColor, type ThemeId } from '@/lib/colors'
+import { useColorPalette } from '@/lib/colorPalette'
+import { getColor, type ColorPaletteId } from '@/lib/colors'
 
 // Black keys overlay the white-key boundaries. The five black notes
 // (C#, D#, F#, G#, A#) sit at boundaries 1/7, 2/7, 4/7, 5/7, 6/7 of
@@ -27,7 +27,7 @@ const BLACK_KEY_LEFT: Record<string, number> = {
 const TONE_DURATION = 30
 
 export function Keyboard() {
-  const { colorTheme } = useColorTheme()
+  const { colorPalette } = useColorPalette()
   const activeRef = useRef<ActiveTone | null>(null)
   const [pressed, setPressed] = useState<string | null>(null)
 
@@ -67,7 +67,7 @@ export function Keyboard() {
           <KeyButton
             key={k.note}
             keyData={k}
-            theme={colorTheme}
+            theme={colorPalette}
             pressed={pressed === k.note}
             isWhite
             onStart={() => startTone(k.note)}
@@ -88,7 +88,7 @@ export function Keyboard() {
         >
           <KeyButton
             keyData={k}
-            theme={colorTheme}
+            theme={colorPalette}
             pressed={pressed === k.note}
             isWhite={false}
             onStart={() => startTone(k.note)}
@@ -109,7 +109,7 @@ function KeyButton({
   onStop,
 }: {
   keyData: Key
-  theme: ThemeId
+  theme: ColorPaletteId
   pressed: boolean
   isWhite: boolean
   onStart: () => void

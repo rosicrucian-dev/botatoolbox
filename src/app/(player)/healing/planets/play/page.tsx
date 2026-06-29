@@ -14,8 +14,8 @@ import { useToneOnIdx } from '@/lib/useToneOnIdx'
 import { useAutoAdvance } from '@/lib/useAutoAdvance'
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { SoundButton } from '@/components/SoundButton'
-import { getColor, textColorFor, type ThemeId } from '@/lib/colors'
-import { useColorTheme } from '@/lib/colorTheme'
+import { getColor, textColorFor, type ColorPaletteId } from '@/lib/colors'
+import { useColorPalette } from '@/lib/colorPalette'
 
 // Healing meditation only covers the 7 classical planets — the modern
 // triples (Uranus/Neptune/Pluto) have no chakra attribution.
@@ -50,7 +50,7 @@ const STOP_DURATION = 64
 const TONE_AT_START = true
 const TONE_AT_IAO = true
 
-function buildSlides(theme: ThemeId, withTimer: boolean) {
+function buildSlides(theme: ColorPaletteId, withTimer: boolean) {
   const expanded = planetData.map((p) => ({
     ...p,
     bgColor: getColor(p.color, theme),
@@ -78,7 +78,7 @@ export default function PlanetsPlayPage() {
   const searchParams = useSearchParams()
   const idxParam = Number(searchParams.get('idx') ?? '0')
   const withTimer = idxParam === 0
-  const { colorTheme: theme } = useColorTheme()
+  const { colorPalette: theme } = useColorPalette()
   const slides = useMemo(
     () => buildSlides(theme, withTimer),
     [theme, withTimer],

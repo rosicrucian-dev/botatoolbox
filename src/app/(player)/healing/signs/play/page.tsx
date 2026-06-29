@@ -10,8 +10,8 @@ import { getLetterMeta } from '@/lib/hebrew'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { SoundButton } from '@/components/SoundButton'
-import { getColor, textColorFor, type ThemeId } from '@/lib/colors'
-import { useColorTheme } from '@/lib/colorTheme'
+import { getColor, textColorFor, type ColorPaletteId } from '@/lib/colors'
+import { useColorPalette } from '@/lib/colorPalette'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 
 const signData = signs.map((s) => {
@@ -29,7 +29,7 @@ const signData = signs.map((s) => {
   }
 })
 
-function buildSlides(theme: ThemeId) {
+function buildSlides(theme: ColorPaletteId) {
   return signData.map((s) => ({
     ...s,
     bgColor: getColor(s.color, theme),
@@ -39,7 +39,7 @@ function buildSlides(theme: ThemeId) {
 
 export default function SignsPlayPage() {
   const router = useRouter()
-  const { colorTheme: theme } = useColorTheme()
+  const { colorPalette: theme } = useColorPalette()
   const slides = useMemo(() => buildSlides(theme), [theme])
   const { idx, handleIdxChange } = usePlayerIndex({
     slidesLength: slides.length,
