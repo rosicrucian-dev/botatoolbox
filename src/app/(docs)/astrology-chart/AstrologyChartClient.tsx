@@ -132,7 +132,7 @@ export function AstrologyChartClient() {
             aria-label="Chart date"
             value={instant ? toDateInputValue(instant) : ''}
             onChange={(e) => handleDateChange(e.target.value)}
-            className={`w-40 ${fieldClasses}`}
+            className={`w-36 ${fieldClasses}`}
           />
           <input
             type="time"
