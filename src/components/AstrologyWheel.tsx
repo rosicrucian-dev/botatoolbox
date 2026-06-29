@@ -12,23 +12,16 @@ import { getColor, textColorFor } from '@/lib/colors'
 import {
   angleToPoint,
   annularSectorPath,
-  ASPECT_LINE_WIDTH,
   ASTRO_VIEWBOX,
-  PLANET_GLYPH_SIZE,
-  PLANET_INNER,
-  PLANET_MID,
-  PLANET_RADIUS,
-  RING,
+  CENTER,
+  DESKTOP_RINGS,
+  ringMetrics,
   SEGMENT_BOUNDARIES,
   SEGMENT_CENTERS,
-  ZODIAC_GLYPH_SIZE,
-  ZODIAC_INNER,
-  ZODIAC_MID,
-  ZODIAC_OUTER,
+  type RingProfile,
 } from '@/lib/astro/layout'
 import type { Aspect, AspectNature } from '@/lib/astro/aspects'
 import type { BodySlug, Chart } from '@/lib/astro/types'
-import { CENTER } from '@/lib/astro/layout'
 import { SIGN_SLUGS } from '@/lib/astro/types'
 
 // Aspect nature → line colour. 'neutral' (conjunction) is intentionally empty:
@@ -42,13 +35,16 @@ const ASPECT_STROKE: Record<AspectNature, string> = {
 export function AstrologyWheel({
   chart,
   aspects = [],
+  profile = DESKTOP_RINGS,
 }: {
   chart: Chart | null
   aspects?: Aspect[]
+  profile?: RingProfile
 }) {
   // Respects the user's colour palette (FLO / Apple) from Settings; planets
   // render in their attributed BOTA colour (Mercury yellow, Venus green, …).
   const { colorPalette } = useColorPalette()
+  const m = ringMetrics(profile)
 
   // Longitude per body, for placing aspect-line endpoints.
   const lonBySlug: Partial<Record<BodySlug, number>> = {}
@@ -72,21 +68,21 @@ export function AstrologyWheel({
         return (
           <path
             key={`seg-${SIGN_SLUGS[i]}`}
-            d={annularSectorPath(lon, lon + 30, ZODIAC_INNER, ZODIAC_OUTER)}
+            d={annularSectorPath(lon, lon + 30, m.zodiacInner, m.zodiacOuter)}
             fill={getColor(sign.color, colorPalette) ?? '#888'}
           />
         )
       })}
 
       {SEGMENT_CENTERS.map((lon, i) => {
-        const p = angleToPoint(lon, ZODIAC_MID)
+        const p = angleToPoint(lon, m.zodiacMid)
         const sign = signBySlug[SIGN_SLUGS[i]]
         return (
           <text
             key={`sign-${SIGN_SLUGS[i]}`}
             x={p.x}
             y={p.y}
-            fontSize={ZODIAC_GLYPH_SIZE}
+            fontSize={m.zodiacGlyphSize}
             textAnchor="middle"
             dominantBaseline="central"
             fill={textColorFor(sign.color) ?? 'white'}
@@ -103,10 +99,10 @@ export function AstrologyWheel({
       <circle
         cx={CENTER.x}
         cy={CENTER.y}
-        r={PLANET_MID}
+        r={m.planetMid}
         fill="none"
         className="stroke-zinc-200 dark:stroke-zinc-800"
-        strokeWidth={RING.planetWidth}
+        strokeWidth={m.planetWidth}
       />
 
       {/* ── Aspect lines across the empty centre, under the discs ── */}
@@ -115,8 +111,8 @@ export function AstrologyWheel({
         const la = lonBySlug[asp.a]
         const lb = lonBySlug[asp.b]
         if (!stroke || la === undefined || lb === undefined) return null
-        const p1 = angleToPoint(la, PLANET_INNER)
-        const p2 = angleToPoint(lb, PLANET_INNER)
+        const p1 = angleToPoint(la, m.planetInner)
+        const p2 = angleToPoint(lb, m.planetInner)
         return (
           <line
             key={`asp-${asp.a}-${asp.b}`}
@@ -125,23 +121,23 @@ export function AstrologyWheel({
             x2={p2.x}
             y2={p2.y}
             className={stroke}
-            strokeWidth={ASPECT_LINE_WIDTH}
+            strokeWidth={m.aspectLineWidth}
           />
         )
       })}
 
       {/* Planets only appear once the client has computed the chart. */}
       {chart?.bodies.map((body) => {
-        const p = angleToPoint(body.longitude, PLANET_MID)
+        const p = angleToPoint(body.longitude, m.planetMid)
         const planet = planetBySlug[body.slug]
         const fill = getColor(planet.color, colorPalette) ?? '#888'
         return (
           <g key={body.slug}>
-            <circle cx={p.x} cy={p.y} r={PLANET_RADIUS} fill={fill} />
+            <circle cx={p.x} cy={p.y} r={m.planetRadius} fill={fill} />
             <text
               x={p.x}
               y={p.y}
-              fontSize={PLANET_GLYPH_SIZE}
+              fontSize={m.planetGlyphSize}
               textAnchor="middle"
               dominantBaseline="central"
               fill={textColorFor(planet.color) ?? 'white'}

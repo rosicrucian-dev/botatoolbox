@@ -1,58 +1,99 @@
 // Geometry for the two-ring chart wheel. Pure functions over a fixed viewBox
 // so the renderer stays declarative and every tunable lives in one place.
-// Mirrors the `*-layout.ts` convention (cf. tree-layout.ts): one exported
-// viewBox constant plus the coordinate maths, shared by the renderer.
+// Mirrors the `*-layout.ts` convention (cf. tree-layout.ts).
+//
+// The viewBox, centre, orientation, and angle maths are screen-size
+// independent. The *ring proportions* are not: because the SVG scales
+// uniformly, a phone renders the same proportions at ~half the pixels, which
+// reads as thin/small. So ring widths and glyph sizes come from a `RingProfile`
+// — a chunkier MOBILE_RINGS profile keeps the wheel legible on small screens
+// while DESKTOP_RINGS preserves the roomier desktop look.
 //
 //   ┌─ ASTRO_VIEWBOX (1000×1000) ─┐
-//   │   outer ring: 12 zodiac     │  ZODIAC_INNER..ZODIAC_OUTER
-//   │   ─── gap ───               │
-//   │   inner ring: planet circles│  PLANET_INNER..PLANET_OUTER
+//   │   outer ring: 12 zodiac     │
+//   │   inner ring: planet discs  │
 //   │   (empty centre)            │
 //   └─────────────────────────────┘
 
 export const ASTRO_VIEWBOX = '0 0 1000 1000'
 export const CENTER = { x: 500, y: 500 } as const
 
-// Tunable band geometry. These are the knobs to nudge while eyeballing the
-// wheel in the dev server — ring thicknesses, the space between them, and how
-// far each planet disc is inset from its band. The planet disc radius derives
-// from `planetWidth`/`planetPadding`, so planets rescale automatically when
-// you retune the inner band.
-export const RING = {
-  outerEdge: 492, // outermost radius (just inside the 1000×1000 box)
-  zodiacWidth: 82, // thickness of the outer (zodiac) band — matches planet band
-  gap: 0, // bands share a border (no space between them)
-  planetWidth: 82, // thickness of the inner (planet) band — matches zodiac band
-  planetPadding: 7, // inset of each planet disc from its band edges
-} as const
+// A set of ring-band sizes, in viewBox units. The knobs to nudge while
+// eyeballing the wheel. `planetWidth`/`planetPadding` drive the planet disc
+// size, so discs rescale automatically when you retune a band.
+export interface RingProfile {
+  outerEdge: number // outermost radius (just inside the 1000×1000 box)
+  zodiacWidth: number // thickness of the outer (zodiac) band
+  gap: number // space between the two bands
+  planetWidth: number // thickness of the inner (planet) band
+  planetPadding: number // inset of each planet disc from its band edges
+  zodiacGlyphSize: number // sign glyph font size
+  aspectLineWidth: number // aspect line stroke width
+}
 
-// Derived radii (outer → inner).
-export const ZODIAC_OUTER = RING.outerEdge
-export const ZODIAC_INNER = ZODIAC_OUTER - RING.zodiacWidth
-export const PLANET_OUTER = ZODIAC_INNER - RING.gap
-export const PLANET_INNER = PLANET_OUTER - RING.planetWidth
+// Desktop — the roomier proportions.
+export const DESKTOP_RINGS: RingProfile = {
+  outerEdge: 492,
+  zodiacWidth: 82,
+  gap: 0,
+  planetWidth: 82,
+  planetPadding: 7,
+  zodiacGlyphSize: 42,
+  aspectLineWidth: 4,
+}
 
-// Mid-radii: where glyphs / discs are centred within their band.
-export const ZODIAC_MID = (ZODIAC_OUTER + ZODIAC_INNER) / 2
-export const PLANET_MID = (PLANET_OUTER + PLANET_INNER) / 2
+// Mobile — thicker bands, bigger discs, smaller hollow centre, so the wheel
+// stays legible at phone size.
+export const MOBILE_RINGS: RingProfile = {
+  outerEdge: 496,
+  zodiacWidth: 104,
+  gap: 0,
+  planetWidth: 108,
+  planetPadding: 6,
+  zodiacGlyphSize: 52,
+  aspectLineWidth: 5,
+}
 
-// Radius of a planet disc — half the band minus a little padding.
-export const PLANET_RADIUS = RING.planetWidth / 2 - RING.planetPadding
+export interface RingMetrics {
+  zodiacOuter: number
+  zodiacInner: number
+  planetOuter: number
+  planetInner: number
+  zodiacMid: number
+  planetMid: number
+  planetWidth: number
+  planetRadius: number
+  zodiacGlyphSize: number
+  planetGlyphSize: number
+  aspectLineWidth: number
+}
 
-// Glyph sizes in viewBox units. Astro glyphs render as colour emoji on Apple
-// platforms and read large, so these are deliberately modest (the app applies
-// `grayscale` to tame them, cf. AstrologyFocusPlayer). Both are tunable.
-export const ZODIAC_GLYPH_SIZE = 42
-export const PLANET_GLYPH_SIZE = Math.round(PLANET_RADIUS * 1.05)
+/** Derive concrete radii and sizes (outer → inner) from a ring profile. */
+export function ringMetrics(p: RingProfile): RingMetrics {
+  const zodiacOuter = p.outerEdge
+  const zodiacInner = zodiacOuter - p.zodiacWidth
+  const planetOuter = zodiacInner - p.gap
+  const planetInner = planetOuter - p.planetWidth
+  const planetRadius = p.planetWidth / 2 - p.planetPadding
+  return {
+    zodiacOuter,
+    zodiacInner,
+    planetOuter,
+    planetInner,
+    zodiacMid: (zodiacOuter + zodiacInner) / 2,
+    planetMid: (planetOuter + planetInner) / 2,
+    planetWidth: p.planetWidth,
+    planetRadius,
+    zodiacGlyphSize: p.zodiacGlyphSize,
+    // Astro glyphs read large; modest sizing relative to the disc. Tunable.
+    planetGlyphSize: Math.round(planetRadius * 1.05),
+    aspectLineWidth: p.aspectLineWidth,
+  }
+}
 
-// Aspect lines are drawn across the empty centre, ending at the planet band's
-// inner edge (`PLANET_INNER`). Width is tunable here.
-export const ASPECT_LINE_WIDTH = 4
-
-// Orientation knobs. `ARIES_AT` is the screen angle (degrees) where 0° Aries
-// sits: 180 = the 9 o'clock position (left), the conventional chart anchor.
-// `DIRECTION` = +1 advances the zodiac counterclockwise on screen, as in a
-// standard wheel.
+// Orientation knobs (screen-size independent). `ARIES_AT` is the screen angle
+// (degrees) where 0° Aries sits: 180 = 9 o'clock (left), the conventional
+// anchor. `DIRECTION` = +1 advances the zodiac counterclockwise on screen.
 export const ARIES_AT = 180
 export const DIRECTION = 1
 

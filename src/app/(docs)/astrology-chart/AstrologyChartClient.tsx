@@ -7,10 +7,16 @@ import { AspectsTable } from '@/components/AspectsTable'
 import { AstrologyTable } from '@/components/AstrologyTable'
 import { AstrologyWheel } from '@/components/AstrologyWheel'
 import { Button } from '@/components/catalyst/button'
-import { Input } from '@/components/catalyst/input'
 import { computeAspects } from '@/lib/astro/aspects'
 import { getEngine } from '@/lib/astro/engine'
+import { DESKTOP_RINGS, MOBILE_RINGS } from '@/lib/astro/layout'
 import type { Chart } from '@/lib/astro/types'
+
+// Flat field styling for the date/time inputs, matching the StepButton border.
+// Bespoke (not Catalyst's `Input`) so they have no shadow/depth and read
+// consistently with the ‹/› buttons. `scheme-dark` themes the native picker.
+const fieldClasses =
+  'block rounded-lg border border-zinc-950/10 bg-transparent px-3 py-1.5 text-sm/6 text-zinc-950 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-500 dark:scheme-dark dark:border-white/15 dark:text-white'
 
 // Square icon button matching the Catalyst `outline` look. Bespoke because
 // Catalyst's Button uses asymmetric padding that can't be made square cleanly,
@@ -36,12 +42,16 @@ function StepButton({
   )
 }
 
+const pad = (n: number) => String(n).padStart(2, '0')
+
 /** Local yyyy-mm-dd string for a date input's value. */
 function toDateInputValue(d: Date): string {
-  const y = d.getFullYear()
-  const m = String(d.getMonth() + 1).padStart(2, '0')
-  const day = String(d.getDate()).padStart(2, '0')
-  return `${y}-${m}-${day}`
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
+}
+
+/** Local hh:mm string for a time input's value. */
+function toTimeInputValue(d: Date): string {
+  return `${pad(d.getHours())}:${pad(d.getMinutes())}`
 }
 
 export function AstrologyChartClient() {
@@ -78,14 +88,23 @@ export function AstrologyChartClient() {
   function handleDateChange(value: string) {
     if (!value) return
     const [y, m, d] = value.split('-').map(Number)
-    // Keep the current time-of-day so the fast-moving Moon stays reasonable.
     const next = new Date(instant ?? new Date())
-    next.setFullYear(y, m - 1, d)
+    next.setFullYear(y, m - 1, d) // keep the chosen time-of-day
     setPinned(true)
     setInstant(next)
   }
 
-  // Step the chart one day backward (−1) or forward (+1), keeping time-of-day.
+  function handleTimeChange(value: string) {
+    if (!value) return
+    const [h, mi] = value.split(':').map(Number)
+    const next = new Date(instant ?? new Date())
+    next.setHours(h, mi, 0, 0) // keep the chosen date
+    setPinned(true)
+    setInstant(next)
+  }
+
+  // Step the chart one day backward (−1) or forward (+1), preserving the chosen
+  // time-of-day so you can hold a time and scan across days.
   function stepDay(delta: number) {
     const next = new Date(instant ?? new Date())
     next.setDate(next.getDate() + delta)
@@ -97,7 +116,7 @@ export function AstrologyChartClient() {
     <article className="space-y-6">
       <div className="flex items-center justify-between gap-4">
         <h1 className="hidden text-3xl font-semibold tracking-tight sm:block dark:text-white">
-          Astrology Chart
+          Chart
         </h1>
         <div className="ml-auto flex items-center gap-2">
           {pinned && (
@@ -108,14 +127,20 @@ export function AstrologyChartClient() {
           <StepButton label="Previous day" onClick={() => stepDay(-1)}>
             <ChevronLeftIcon className="size-5" />
           </StepButton>
-          <div className="w-44">
-            <Input
-              type="date"
-              aria-label="Chart date"
-              value={instant ? toDateInputValue(instant) : ''}
-              onChange={(e) => handleDateChange(e.target.value)}
-            />
-          </div>
+          <input
+            type="date"
+            aria-label="Chart date"
+            value={instant ? toDateInputValue(instant) : ''}
+            onChange={(e) => handleDateChange(e.target.value)}
+            className={`w-40 ${fieldClasses}`}
+          />
+          <input
+            type="time"
+            aria-label="Chart time"
+            value={instant ? toTimeInputValue(instant) : ''}
+            onChange={(e) => handleTimeChange(e.target.value)}
+            className={`w-28 ${fieldClasses}`}
+          />
           <StepButton label="Next day" onClick={() => stepDay(1)}>
             <ChevronRightIcon className="size-5" />
           </StepButton>
@@ -123,7 +148,18 @@ export function AstrologyChartClient() {
 
       </div>
       <div className="mx-auto aspect-square w-full max-w-[min(100%,calc(100svh-12rem))]">
-        <AstrologyWheel chart={chart} aspects={aspects} />
+        {/* Chunkier ring geometry on phones, roomier on desktop — same SVG,
+            different profile, toggled by breakpoint (no JS, no flicker). */}
+        <div className="h-full w-full sm:hidden">
+          <AstrologyWheel chart={chart} aspects={aspects} profile={MOBILE_RINGS} />
+        </div>
+        <div className="hidden h-full w-full sm:block">
+          <AstrologyWheel
+            chart={chart}
+            aspects={aspects}
+            profile={DESKTOP_RINGS}
+          />
+        </div>
       </div>
       <AstrologyTable chart={chart} />
       <AspectsTable aspects={aspects} />
