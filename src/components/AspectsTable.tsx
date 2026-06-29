@@ -45,7 +45,7 @@ export function AspectsTable({ aspects }: { aspects: Aspect[] }) {
           <TableRow>
             <TableHeader className="w-1/3">Pair</TableHeader>
             <TableHeader className="w-1/3">Aspect</TableHeader>
-            <TableHeader className="w-1/3">Orb</TableHeader>
+            <TableHeader className="w-1/3 text-right">Orb</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -57,7 +57,7 @@ export function AspectsTable({ aspects }: { aspects: Aspect[] }) {
                 {planetBySlug[asp.b].name}
               </TableCell>
               <TableCell className="capitalize">{asp.type}</TableCell>
-              <TableCell className="tabular-nums">
+              <TableCell className="text-right tabular-nums">
                 {formatOrb(asp.orb)}{' '}
                 <span className="text-zinc-500 dark:text-zinc-400">
                   {asp.applying ? 'A' : 'S'}

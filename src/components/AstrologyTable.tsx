@@ -36,7 +36,7 @@ export function AstrologyTable({ chart }: { chart: Chart | null }) {
           <TableRow>
             <TableHeader className="w-1/3">Planet</TableHeader>
             <TableHeader className="w-1/3">Sign</TableHeader>
-            <TableHeader className="w-1/3">Position</TableHeader>
+            <TableHeader className="w-1/3 text-right">Position</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -46,7 +46,7 @@ export function AstrologyTable({ chart }: { chart: Chart | null }) {
                 {planetBySlug[body.slug].name}
               </TableCell>
               <TableCell>{signBySlug[body.sign].name}</TableCell>
-              <TableCell className="tabular-nums">
+              <TableCell className="text-right tabular-nums">
                 {formatPosition(body.degreeInSign)}
                 {body.retrograde && (
                   <span className="text-zinc-500 dark:text-zinc-400"> ℞</span>

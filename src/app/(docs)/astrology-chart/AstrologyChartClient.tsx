@@ -31,17 +31,19 @@ function StepButton({
   label,
   onClick,
   children,
+  className = '',
 }: {
   label: string
   onClick: () => void
   children: ReactNode
+  className?: string
 }) {
   return (
     <button
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="inline-flex size-9 cursor-default items-center justify-center rounded-lg border border-zinc-950/10 text-zinc-500 hover:bg-zinc-950/2.5 hover:text-zinc-700 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-500 dark:border-white/15 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-zinc-200"
+      className={`inline-flex size-9 cursor-default items-center justify-center rounded-lg border border-zinc-950/10 text-zinc-500 hover:bg-zinc-950/2.5 hover:text-zinc-700 focus:outline-2 focus:-outline-offset-1 focus:outline-blue-500 dark:border-white/15 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-zinc-200 ${className}`}
     >
       {children}
     </button>
@@ -128,8 +130,15 @@ export function AstrologyChartClient() {
             fields flex to share the rest (and squish when Now appears).
             Desktop: fixed widths, right-aligned. */}
         <div className="ml-auto flex w-full items-center gap-2 sm:w-auto">
+          {/* On mobile, Now sits between the time field and the › chevron
+              (order-1, with the chevron bumped to order-2) so the ‹ and ›
+              stay pinned to the screen edges. Desktop keeps DOM order. */}
           {pinned && (
-            <StepButton label="Return to now" onClick={() => setPinned(false)}>
+            <StepButton
+              label="Return to now"
+              onClick={() => setPinned(false)}
+              className="order-1 sm:order-none"
+            >
               <ArrowUturnLeftIcon className="size-5" />
             </StepButton>
           )}
@@ -150,7 +159,11 @@ export function AstrologyChartClient() {
             onChange={(e) => handleTimeChange(e.target.value)}
             className={`min-w-0 flex-1 sm:w-28 sm:flex-none ${fieldClasses}`}
           />
-          <StepButton label="Next day" onClick={() => stepDay(1)}>
+          <StepButton
+            label="Next day"
+            onClick={() => stepDay(1)}
+            className="order-2 sm:order-none"
+          >
             <ChevronRightIcon className="size-5" />
           </StepButton>
         </div>
