@@ -2,8 +2,9 @@ import Link from 'next/link'
 
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PrevNextNav } from '@/components/PrevNextNav'
+import { MinorImage } from '@/components/CardImage'
 import { SecretSection } from '@/components/SecretSection'
-import { minorCards, minorImage, type MinorEntry } from '@/content/data'
+import { minorCards, type MinorEntry } from '@/content/data'
 import { MinorAttributes } from './MinorAttributes'
 
 // The minor-arcana card detail. Served at /tarot/<slug> alongside the major
@@ -68,8 +69,8 @@ export function MinorCard({ card }: { card: MinorEntry }) {
             href={`/tarot/${card.slug}/image`}
             className="block transition hover:opacity-90"
           >
-            <img
-              src={minorImage(card)}
+            <MinorImage
+              card={card}
               alt={`${card.num} of ${card.suit}`}
               // Intrinsic dimensions of the colored minor JPEGs
               // (270×466). With `w-full`, the browser computes the
@@ -78,7 +79,7 @@ export function MinorCard({ card }: { card: MinorEntry }) {
               // when navigating prev/next.
               width={270}
               height={466}
-              className="w-full rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
+              className="w-full shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
             />
           </Link>
           <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">

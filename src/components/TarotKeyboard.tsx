@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-import { cards, thumbImage } from '@/content/data/tarot'
+import { cards } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { noteToFrequency, playTone, type ActiveTone } from '@/lib/audio'
 
@@ -106,13 +107,14 @@ function CardButton({
         pressed ? 'brightness-90' : 'hover:opacity-90'
       }`}
     >
-      <img
-        src={thumbImage(card)}
+      <MajorImage
+        card={card}
+        thumb
         alt={`${card.num}. ${card.name}`}
         width={362}
         height={600}
         loading="lazy"
-        className="w-full rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
+        className="w-full shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
       />
     </button>
   )

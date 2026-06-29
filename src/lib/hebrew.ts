@@ -1,4 +1,4 @@
-import { cardByLetter, cardImage } from '@/content/data/tarot'
+import { cardByLetter } from '@/content/data/tarot'
 
 interface LetterMeta {
   glyph: string
@@ -120,7 +120,6 @@ export interface ExpandedLetter {
   cardSlug?: string
   cardName?: string
   cardNum?: number
-  cardImage?: string
 }
 
 export interface ExpandedWord {
@@ -171,7 +170,6 @@ export function expandWord(word: RawWord): ExpandedWord {
       cardSlug: card?.slug,
       cardName: card?.name,
       cardNum: card?.num,
-      cardImage: card ? cardImage(card) : undefined,
     }
   })
   return { ...word, letters: expanded }

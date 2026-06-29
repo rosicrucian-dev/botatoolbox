@@ -9,7 +9,7 @@ import { useCallback, useEffect, useState } from 'react'
 // here to keep accidental visitors out, nothing more.
 //
 // State lives in localStorage. A custom event syncs every mounted
-// useSecretMode() hook so unlocking on /members-only immediately
+// useSecretMode() hook so unlocking via the Settings page immediately
 // updates the sidebar and home TOC without a page reload.
 
 const STORAGE_KEY = 'secret-mode:unlocked'

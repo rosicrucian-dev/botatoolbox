@@ -1,12 +1,16 @@
+'use client'
+
 import Link from 'next/link'
 
-import { cards, type TarotCard } from '@/content/data/tarot'
+import { cards, thumbImage, cardImage, type TarotCard } from '@/content/data/tarot'
+import { majorThumbHeight } from '@/content/data/tarot-styles'
+import { useTarotStyle } from '@/lib/tarotStyle'
 
 // The 22 majors laid out as a tableau: the Fool centered on its own top row,
 // then keys 1–21 filling a 7-wide grid. Used by /tarot/tableau (cards link to
-// their detail pages) and as the preview on the Tarot Images / Tarot Alt Images
-// download pages (cards link straight to the full-resolution image file).
-type Variant = 'major' | 'major-alt'
+// their detail pages, in the user's chosen Major style) and as the preview on
+// the Traditional / Modern download pages (which pin an explicit `style` so
+// the preview always matches the file being downloaded).
 
 // How each card behaves when clicked:
 //   'none'  — static image (no link)
@@ -15,38 +19,34 @@ type Variant = 'major' | 'major-alt'
 //             it can be viewed full-size and downloaded. Not an app route.
 type LinkMode = 'none' | 'card' | 'image'
 
-// `major` thumbs are 362×600; the alternate deck is a slightly taller crop.
-const THUMB_HEIGHT: Record<Variant, number> = { major: 600, 'major-alt': 635 }
-
-const thumbUrl = (variant: Variant, c: Pick<TarotCard, 'num' | 'slug'>) =>
-  `/tarot/${variant}/thumbs/${c.num}-${c.slug}.jpg`
-
-// Full-resolution image (same folder as the thumbs, minus /thumbs/).
-const fullUrl = (variant: Variant, c: Pick<TarotCard, 'num' | 'slug'>) =>
-  `/tarot/${variant}/${c.num}-${c.slug}.jpg`
-
 const fool = cards.find((c) => c.num === 0)!
 const keys = cards.filter((c) => c.num !== 0)
 
 export function TarotTableau({
-  variant = 'major',
+  style,
   link = 'none',
   rounded = true,
 }: {
-  variant?: Variant
+  // Pin a specific major style (the download previews). Omit to follow the
+  // user's chosen Major style.
+  style?: string
   link?: LinkMode
   rounded?: boolean
 }) {
+  const { majorStyle } = useTarotStyle()
+  const effective = style ?? majorStyle
+
   const imgClass = `w-full ${rounded ? 'rounded-md ' : ''}shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800`
   const linkClass = 'block transition hover:-translate-y-0.5 hover:opacity-90'
 
   const card = (c: TarotCard) => {
     const img = (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
-        src={thumbUrl(variant, c)}
+        src={thumbImage(c, effective)}
         alt={`${c.num}. ${c.name}`}
         width={362}
-        height={THUMB_HEIGHT[variant]}
+        height={majorThumbHeight(effective)}
         loading="lazy"
         className={imgClass}
       />
@@ -61,7 +61,7 @@ export function TarotTableau({
     if (link === 'image') {
       return (
         <a
-          href={fullUrl(variant, c)}
+          href={cardImage(c, effective)}
           target="_blank"
           rel="noopener noreferrer"
           title={`Open full-size image — ${c.num}. ${c.name}`}

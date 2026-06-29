@@ -37,6 +37,7 @@ import { byKey } from './helpers'
 // `@/content/data` even when the data lives in a peer module.
 export * from './grades'
 export * from './minor-arcana'
+export * from './tarot-styles'
 export * from './chakras'
 export * from './numerology'
 export * from './gematria-words'

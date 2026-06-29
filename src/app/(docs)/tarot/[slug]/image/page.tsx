@@ -4,8 +4,9 @@ import { type Metadata } from 'next'
 
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PrevNextNav } from '@/components/PrevNextNav'
-import { cards, cardBySlugOrNum, cardImage } from '@/content/data/tarot'
-import { minorBySlug, minorCards, minorImage } from '@/content/data'
+import { MajorImage, MinorImage } from '@/components/CardImage'
+import { cards, cardBySlugOrNum } from '@/content/data/tarot'
+import { minorBySlug, minorCards } from '@/content/data'
 
 export function generateStaticParams() {
   // Same slug space as the parent card page (major named + numeric, minor).
@@ -42,10 +43,12 @@ export default async function TarotCardImagePage({
   if (!major && !minor) notFound()
 
   let title: string
-  let src: string
-  let dims: { width: number; height: number }
+  let image: React.ReactNode
   let prev: { href: string; label: string }
   let next: { href: string; label: string }
+
+  const imgClass =
+    'w-full shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800'
 
   if (major) {
     const p = cards.find(
@@ -53,8 +56,15 @@ export default async function TarotCardImagePage({
     )!
     const n = cards.find((c) => c.num === (major.num + 1) % cards.length)!
     title = major.name
-    src = cardImage(major)
-    dims = { width: 724, height: 1200 }
+    image = (
+      <MajorImage
+        card={major}
+        alt={title}
+        width={724}
+        height={1200}
+        className={imgClass}
+      />
+    )
     prev = { href: `/tarot/${p.slug}/image`, label: `${p.num}. ${p.name}` }
     next = { href: `/tarot/${n.slug}/image`, label: `${n.num}. ${n.name}` }
   } else {
@@ -62,8 +72,15 @@ export default async function TarotCardImagePage({
     const p = minorCards[(i - 1 + minorCards.length) % minorCards.length]
     const n = minorCards[(i + 1) % minorCards.length]
     title = `${minor!.num} of ${minor!.suit}`
-    src = minorImage(minor!)
-    dims = { width: 270, height: 466 }
+    image = (
+      <MinorImage
+        card={minor!}
+        alt={title}
+        width={270}
+        height={466}
+        className={imgClass}
+      />
+    )
     prev = { href: `/tarot/${p.slug}/image`, label: `${p.num} of ${p.suit}` }
     next = { href: `/tarot/${n.slug}/image`, label: `${n.num} of ${n.suit}` }
   }
@@ -95,13 +112,7 @@ export default async function TarotCardImagePage({
           </svg>
         </Link>
       </div>
-      <img
-        src={src}
-        alt={title}
-        width={dims.width}
-        height={dims.height}
-        className="w-full rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
-      />
+      {image}
       <PrevNextNav prev={prev} next={next} />
     </article>
   )

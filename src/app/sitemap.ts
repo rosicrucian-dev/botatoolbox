@@ -29,6 +29,7 @@ const staticRoutes = [
   '/links',
   '/numerology',
   '/quiz',
+  '/settings',
   '/tattvas',
   '/rituals/lrp',
   '/tarot/correspondences',

@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import Link from 'next/link'
 
-import { cardImage } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
 import { wordMatchesForSpelling, wordsForNumber } from '@/content/data'
@@ -188,13 +188,13 @@ export function GematriaClient() {
                 style={{ width: tarotWidth }}
                 className="block transition hover:opacity-80"
               >
-                <img
-                  src={cardImage(card)}
+                <MajorImage
+                  card={card}
                   alt={card.name}
                   width={724}
                   height={1200}
                   loading="lazy"
-                  className="h-auto w-full rounded-sm shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700"
+                  className="h-auto w-full shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700"
                 />
               </Link>
             )

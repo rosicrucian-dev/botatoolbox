@@ -4,9 +4,10 @@ import { DefinitionList } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PlayLink } from '@/components/PlayLink'
 import { PrevNextNav } from '@/components/PrevNextNav'
+import { MajorImage } from '@/components/CardImage'
 import { planetBySlug, signBySlug } from '@/content/data/astrology'
 import { paths, sephirahBySlug } from '@/content/data'
-import { cards, cardImage, type TarotCard } from '@/content/data/tarot'
+import { cards, type TarotCard } from '@/content/data/tarot'
 
 const FIELD_ORDER: Array<{
   label: string
@@ -145,12 +146,12 @@ export function MajorCard({ card }: { card: TarotCard }) {
             href={`/tarot/${card.slug}/image`}
             className="block transition hover:opacity-90"
           >
-            <img
-              src={cardImage(card)}
+            <MajorImage
+              card={card}
               alt={`${card.num}. ${card.name}`}
               width={724}
               height={1200}
-              className="w-full rounded-lg shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
+              className="w-full shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
             />
           </Link>
         </div>

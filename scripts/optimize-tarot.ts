@@ -19,15 +19,6 @@ const FULL_QUALITY = 85
 const THUMB_QUALITY = 85
 const THUMB_WIDTH = 362
 
-// Cap for the full-size minor outputs. The originals come in mixed
-// resolutions (most at 482×780, a handful at 1607×2599); resizing the
-// fulls to a common 482px width normalizes every card to roughly the
-// same byte count and same on-screen resolution. `withoutEnlargement`
-// in sharp keeps the already-small files at their native size — we
-// only ever downscale, never upsample. Majors are left at native size
-// since they were captured at a uniform resolution to begin with.
-const MINOR_FULL_WIDTH = 482
-
 // Higher quality for the colored set — sources are already low-res
 // (270×466) and JPEG artifacts get more visible at lower resolutions
 // because each compression block covers a bigger fraction of the
@@ -37,22 +28,15 @@ const MINOR_FULL_WIDTH = 482
 const MINOR_COLORED_QUALITY = 92
 
 // ---- majors --------------------------------------------------------
+// The `major` originals are the "Traditional" art style. Other major styles
+// (e.g. Modern) are managed outside this pipeline.
 // Originals: tarot-originals/major/<num>-<slug>.jpg
-// Outputs:   public/tarot/major/<num>-<slug>.jpg
-//          + public/tarot/major/thumbs/<num>-<slug>.jpg
+// Outputs:   public/tarot/major/traditional/<num>-<slug>.jpg
+//          + public/tarot/major/traditional/thumbs/<num>-<slug>.jpg
 const MAJOR_SRC = path.join(ROOT, 'tarot-originals/major')
-const MAJOR_OUT_FULL = path.join(ROOT, 'public/tarot/major')
-const MAJOR_OUT_THUMBS = path.join(ROOT, 'public/tarot/major/thumbs')
+const MAJOR_OUT_FULL = path.join(ROOT, 'public/tarot/major/traditional')
+const MAJOR_OUT_THUMBS = path.join(ROOT, 'public/tarot/major/traditional/thumbs')
 
-// ---- minors --------------------------------------------------------
-// Originals: tarot-originals/minor/<Suit>/<slug>.jpg where slug is
-// already in our target format: "<num>-<suit-lower>" with num one of
-// "ace" | "2" | … | "10" | "page" | "knight" | "queen" | "king".
-//
-// Outputs: public/tarot/minor/<slug>.jpg + public/tarot/minor/thumbs/<slug>.jpg
-const MINOR_SRC = path.join(ROOT, 'tarot-originals/minor')
-const MINOR_OUT_FULL = path.join(ROOT, 'public/tarot/minor')
-const MINOR_OUT_THUMBS = path.join(ROOT, 'public/tarot/minor/thumbs')
 const SUITS = ['wands', 'cups', 'swords', 'pentacles']
 
 function minorSlugFromOriginal(filename: string): string | null {
@@ -122,51 +106,6 @@ async function optimizeMajors() {
   summarize('majors', totalSrc, totalFull, totalThumb)
 }
 
-async function optimizeMinors() {
-  await fs.mkdir(MINOR_OUT_FULL, { recursive: true })
-  await fs.mkdir(MINOR_OUT_THUMBS, { recursive: true })
-
-  console.log('\n=== Minor Arcana (Ace–10 per suit; court cards skipped) ===')
-  let totalSrc = 0
-  let totalFull = 0
-  let totalThumb = 0
-  let count = 0
-
-  for (const suit of SUITS) {
-    const suitDir = path.join(MINOR_SRC, suit)
-    const files = (await fs.readdir(suitDir))
-      .filter((f) => /\.(jpe?g|png)$/i.test(f))
-      .sort()
-
-    for (const file of files) {
-      const slug = minorSlugFromOriginal(file)
-      if (!slug) continue
-
-      const src = path.join(suitDir, file)
-      const fullDest = path.join(MINOR_OUT_FULL, `${slug}.jpg`)
-      const thumbDest = path.join(MINOR_OUT_THUMBS, `${slug}.jpg`)
-
-      await encodeFull(src, fullDest, { maxWidth: MINOR_FULL_WIDTH })
-      await encodeThumb(src, thumbDest)
-
-      const [srcStat, fullStat, thumbStat] = await Promise.all([
-        fs.stat(src),
-        fs.stat(fullDest),
-        fs.stat(thumbDest),
-      ])
-      totalSrc += srcStat.size
-      totalFull += fullStat.size
-      totalThumb += thumbStat.size
-      count += 1
-      console.log(
-        `${`${suit}/${file}`.padEnd(38)} ${kb(srcStat.size).padStart(7)} → full ${kb(fullStat.size).padStart(7)}  thumb ${kb(thumbStat.size).padStart(6)}`,
-      )
-    }
-  }
-
-  summarize(`minors (${count})`, totalSrc, totalFull, totalThumb)
-}
-
 function summarize(name: string, src: number, full: number, thumb: number) {
   console.log()
   console.log(`originals (${name}): ${mb(src)}`)
@@ -186,11 +125,10 @@ function pct(n: number, d: number) {
   return `${((n / d) * 100).toFixed(0)}%`
 }
 
-// Colored minor set — sourced from a third-party CDN, kept alongside
-// the official B&W version. Same slug naming as the B&W set so a single
-// `<slug>` resolves to either via different helper functions.
+// Colored minor set by Josh Yates — currently the only minor art style.
+// Outputs under the style-keyed minor tree: public/tarot/minor/josh-yates/.
 const MINOR_COLORED_SRC = path.join(ROOT, 'tarot-originals/minor-colored')
-const MINOR_COLORED_OUT = path.join(ROOT, 'public/tarot/minor-colored')
+const MINOR_COLORED_OUT = path.join(ROOT, 'public/tarot/minor/josh-yates')
 
 async function optimizeMinorsColored() {
   await fs.mkdir(MINOR_COLORED_OUT, { recursive: true })
@@ -244,7 +182,6 @@ async function optimizeMinorsColored() {
 
 async function main() {
   await optimizeMajors()
-  await optimizeMinors()
   await optimizeMinorsColored()
 }
 

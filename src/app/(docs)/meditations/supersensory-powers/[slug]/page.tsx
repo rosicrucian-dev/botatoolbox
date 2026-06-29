@@ -7,7 +7,8 @@ import {
   supersensoryBySlug,
   supersensoryMeditations,
 } from '@/content/data/meditations'
-import { cardBySlug, cardImage } from '@/content/data/tarot'
+import { cardBySlug } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 
 export function generateStaticParams() {
   return supersensoryMeditations.map((m) => ({ slug: m.slug }))
@@ -58,12 +59,12 @@ export default async function SupersensoryDetailPage({
         <div className="flex justify-center">
           {/* Same 30% width as Tarot Fundamentals so card sizing
               matches across all meditation views. */}
-          <img
-            src={cardImage(card)}
+          <MajorImage
+            card={card}
             alt={`${card.num}. ${card.name}`}
             width={362}
             height={600}
-            className="block w-[30%] rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
+            className="block w-[30%] shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
           />
         </div>
       )}

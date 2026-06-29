@@ -52,7 +52,7 @@ export default async function FileViewer({
         </p>
       )}
       {file.tableau ? (
-        <TarotTableau variant={file.tableau} link="image" rounded={false} />
+        <TarotTableau style={file.tableau} link="image" rounded={false} />
       ) : (
         <img
           src={file.src}

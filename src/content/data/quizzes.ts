@@ -8,8 +8,8 @@
 // (minor arcana, astrology, anything else). Builders are kept here so
 // the data layer stays the single source of truth.
 
-import { cards, cardImage, type TarotCard } from './tarot'
-import { minorCards, minorImage } from './index'
+import { cards, type TarotCard } from './tarot'
+import { minorCards } from './index'
 import { signs, planets, planetBySlug } from './astrology'
 import { numerology } from './numerology'
 import { getLetterMeta } from '@/lib/hebrew'
@@ -25,6 +25,17 @@ export type QuizDisplay =
   | {
       kind: 'image'
       src: string
+      alt: string
+      attribution?: { text: string; href: string }
+    }
+  | {
+      // A tarot card by identity (not a baked URL), so the player can render it
+      // in the user's chosen art style. `num` is the major-arcana number; minor
+      // cards omit it. See <MajorImage>/<MinorImage>.
+      kind: 'card'
+      arcana: 'major' | 'minor'
+      slug: string
+      num?: number
       alt: string
       attribution?: { text: string; href: string }
     }
@@ -106,7 +117,7 @@ function majorArcanaQuiz(opts: {
   const items: ReadonlyArray<QuizItem> = cards.map((c) => ({
     key: c.slug,
     label: c.name,
-    display: { kind: 'image', src: cardImage(c), alt: c.name },
+    display: { kind: 'card', arcana: 'major', num: c.num, slug: c.slug, alt: c.name },
     answer: String(c[opts.field]),
   }))
   return {
@@ -143,8 +154,9 @@ function minorArcanaKeywordsQuiz(opts: {
       key: card.slug,
       label,
       display: {
-        kind: 'image',
-        src: minorImage(card),
+        kind: 'card',
+        arcana: 'minor',
+        slug: card.slug,
         alt: label,
         attribution: {
           text: 'Josh Yates',

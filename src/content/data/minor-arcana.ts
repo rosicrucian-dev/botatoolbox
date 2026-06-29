@@ -9,6 +9,7 @@ import data from '@content/data/minor-arcana.json'
 
 import { MinorSuitSchema } from './schemas'
 import { byKey } from './helpers'
+import { DEFAULT_MINOR_STYLE } from './tarot-styles'
 
 export const suits = z.array(MinorSuitSchema).parse(data)
 
@@ -29,8 +30,7 @@ export interface MinorEntry {
 }
 
 // Slug pattern: `<num-lower>-<suit-lower>`, e.g. "ace-cups" or
-// "2-cups". Matches what scripts/optimize-tarot.ts writes to
-// public/tarot/minor/.
+// "2-cups". Matches the filenames under public/tarot/minor/<style>/.
 export const minorCards: ReadonlyArray<MinorEntry> = suits.flatMap((s) =>
   s.cards.map((c) => ({
     slug: `${c.num.toLowerCase()}-${s.suit.toLowerCase()}`,
@@ -45,18 +45,13 @@ export const minorCards: ReadonlyArray<MinorEntry> = suits.flatMap((s) =>
 
 export const minorBySlug = byKey(minorCards, 'slug', 'minor.slug')
 
-// Default minor image is the colored set (third-party, downloaded into
-// public/tarot/minor-colored/). Use `minorImageBW` explicitly when you
-// want the official B&W version — currently the detail page does that
-// since its caption references the storebota.org source.
-export function minorImage(card: Pick<MinorEntry, 'slug'>): string {
-  return `/tarot/minor-colored/${card.slug}.jpg`
-}
-
-export function minorImageBW(card: Pick<MinorEntry, 'slug'>): string {
-  return `/tarot/minor/${card.slug}.jpg`
-}
-
-export function minorThumbImage(card: Pick<MinorEntry, 'slug'>): string {
-  return `/tarot/minor/thumbs/${card.slug}.jpg`
+// Image URL for a minor-arcana card, in the given art style. The file lives at
+// /public/tarot/minor/<style>/<slug>.jpg. `style` defaults to the default
+// minor style; reactive callers pass the user's choice from `useTarotStyle()`
+// (usually via <MinorImage>). See `tarot-styles.ts`.
+export function minorImage(
+  card: Pick<MinorEntry, 'slug'>,
+  style: string = DEFAULT_MINOR_STYLE,
+): string {
+  return `/tarot/minor/${style}/${card.slug}.jpg`
 }

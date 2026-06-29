@@ -3,7 +3,8 @@
 import { useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { cards, cardImage } from '@/content/data/tarot'
+import { cards } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 import { getLetterMeta } from '@/lib/hebrew'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
 import { SlidePlayer } from '@/components/SlidePlayer'
@@ -15,10 +16,10 @@ import { usePlayerIndex } from '@/lib/usePlayerIndex'
 const cardData = cards.map((c) => {
   const meta = getLetterMeta(c.letter)
   return {
+    num: c.num,
     slug: c.slug,
     label: c.name,
     glyph: meta.glyph,
-    cardImage: cardImage(c),
     cardName: c.name,
     note: c.note,
     color: c.color,
@@ -66,10 +67,10 @@ export default function MajorArcanaPlayPage() {
         current?.note ? <SoundButton onClick={playCurrent} /> : null
       }
       renderLeft={(slide) => (
-        <img
-          src={slide.cardImage}
+        <MajorImage
+          card={{ num: slide.num, slug: slide.slug }}
           alt={slide.cardName}
-          className="max-h-[33svh] max-w-full rounded-lg object-contain md:max-h-[50vh] md:max-w-[280px]"
+          className="max-h-[33svh] max-w-full object-contain md:max-h-[50vh] md:max-w-[280px]"
         />
       )}
       renderRight={(slide) => (

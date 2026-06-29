@@ -9,7 +9,8 @@ import {
   neighborDays,
   tarotFundamentalsDays,
 } from '@/content/data/meditations'
-import { cardBySlug, cardImage } from '@/content/data/tarot'
+import { cardBySlug } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 
 export function generateStaticParams() {
   return tarotFundamentalsDays
@@ -54,13 +55,13 @@ export default async function TarotFundamentalsDayPage({
           const card = cardBySlug[slug]
           if (!card) return null
           return (
-            <img
+            <MajorImage
               key={slug}
-              src={cardImage(card)}
+              card={card}
               alt={`${card.num}. ${card.name}`}
               width={362}
               height={600}
-              className="block w-[30%] rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
+              className="block w-[30%] shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
             />
           )
         })}

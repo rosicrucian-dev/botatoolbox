@@ -6,7 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useMemo } from 'react'
 
 import { planets } from '@/content/data'
-import { cardByLetter, cardImage } from '@/content/data/tarot'
+import { cardByLetter } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 import { getLetterMeta } from '@/lib/hebrew'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
@@ -30,7 +31,8 @@ const planetData = healingPlanets.map((p) => {
     glyph: meta.glyph,
     note: card?.note,
     color: card?.color,
-    cardImage: card ? cardImage(card) : undefined,
+    cardNum: card?.num,
+    cardSlug: card?.slug,
     cardName: card?.name,
     isSetup: false as const,
   }
@@ -62,7 +64,8 @@ function buildSlides(theme: ThemeId, withTimer: boolean) {
     glyph: null,
     note: undefined,
     color: undefined,
-    cardImage: undefined,
+    cardNum: undefined,
+    cardSlug: undefined,
     cardName: undefined,
     bgColor: undefined,
     textColor: undefined,
@@ -144,11 +147,11 @@ export default function PlanetsPlayPage() {
             </div>
           )
         }
-        return slide.cardImage ? (
-          <img
-            src={slide.cardImage}
+        return slide.cardSlug ? (
+          <MajorImage
+            card={{ num: slide.cardNum!, slug: slide.cardSlug }}
             alt={slide.cardName}
-            className="max-h-[33svh] max-w-full rounded-lg object-contain md:max-h-[50vh] md:max-w-[280px]"
+            className="max-h-[33svh] max-w-full object-contain md:max-h-[50vh] md:max-w-[280px]"
           />
         ) : null
       }}

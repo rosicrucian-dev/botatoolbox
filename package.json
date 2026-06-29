@@ -10,6 +10,7 @@
     "lint": "eslint",
     "gen:schemas": "node --experimental-strip-types scripts/gen-schemas.ts",
     "optimize:tarot": "node --experimental-strip-types scripts/optimize-tarot.ts",
+    "zip:tarot": "node --experimental-strip-types scripts/zip-tarot.ts",
     "gen:cube-pdf": "node --experimental-strip-types scripts/generate-cube-pdf.ts",
     "gen:gematria-words": "node --experimental-strip-types scripts/build-gematria-words.ts"
   },

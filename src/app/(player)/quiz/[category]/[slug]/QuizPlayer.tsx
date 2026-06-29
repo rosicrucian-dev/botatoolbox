@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { InlineCombobox } from '@/components/InlineCombobox'
+import { MajorImage, MinorImage } from '@/components/CardImage'
 import { type Quiz, type QuizItem } from '@/content/data/quizzes'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 
@@ -240,17 +241,29 @@ export function QuizPlayer({ quiz }: { quiz: Quiz }) {
 // QuizItem.display: image for majors, glyph for signs (large grayscale
 // emoji, same sizing as astrology focus mode), text for everything else.
 function ItemDisplay({ item }: { item: QuizItem }) {
-  if (item.display.kind === 'image') {
-    const attribution = item.display.attribution
+  if (item.display.kind === 'image' || item.display.kind === 'card') {
+    const display = item.display
+    const attribution = display.attribution
+    // max-h dropped slightly from 33svh / 50vh to leave room for the
+    // attribution caption when present.
+    const imgClass =
+      'max-h-[30svh] max-w-full object-contain md:max-h-[47vh] md:max-w-[280px]'
     return (
       <div className="flex flex-col items-center gap-1">
-        <img
-          src={item.display.src}
-          alt={item.display.alt}
-          // max-h dropped slightly from 33svh / 50vh to leave room for
-          // the attribution caption when present.
-          className="max-h-[30svh] max-w-full rounded-lg object-contain md:max-h-[47vh] md:max-w-[280px]"
-        />
+        {display.kind === 'card' ? (
+          display.arcana === 'major' ? (
+            <MajorImage
+              card={{ num: display.num!, slug: display.slug }}
+              alt={display.alt}
+              className={imgClass}
+            />
+          ) : (
+            <MinorImage card={display} alt={display.alt} className={imgClass} />
+          )
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={display.src} alt={display.alt} className={imgClass} />
+        )}
         {attribution && (
           <p className="text-center text-xs opacity-70">
             Image provided by{' '}

@@ -1,18 +1,18 @@
 import { type Metadata } from 'next'
 
-import { TarotTableau } from '@/components/TarotTableau'
+import { SettingsClient } from './SettingsClient'
 
 export const metadata: Metadata = {
-  title: 'Tableau',
+  title: 'Settings',
 }
 
-export default function Tableau() {
+export default function Settings() {
   return (
     <article className="space-y-6">
       <h1 className="text-3xl font-semibold tracking-tight dark:text-white">
-        Tableau
+        Settings
       </h1>
-      <TarotTableau link="card" rounded={false} />
+      <SettingsClient />
     </article>
   )
 }

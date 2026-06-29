@@ -5,8 +5,9 @@ import { type Metadata } from 'next'
 import { DefinitionList, type DefinitionRow } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PrevNextNav } from '@/components/PrevNextNav'
+import { MajorImage } from '@/components/CardImage'
 import { grades, sephirahBySlug } from '@/content/data'
-import { cardByLetter, cards, thumbImage } from '@/content/data/tarot'
+import { cardByLetter, cards } from '@/content/data/tarot'
 import { romanToLetters } from '@/lib/hebrew'
 
 export function generateStaticParams() {
@@ -50,13 +51,14 @@ function KeyStrip({
             aria-label={`${card.num}. ${card.name}`}
             title={`${card.num}. ${card.name}`}
           >
-            <img
-              src={thumbImage(card)}
+            <MajorImage
+              card={card}
+              thumb
               alt={`${card.num}. ${card.name}`}
               width={362}
               height={600}
               loading="lazy"
-              className="w-full rounded-md shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
+              className="w-full shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-800"
             />
           </Link>
         ))}

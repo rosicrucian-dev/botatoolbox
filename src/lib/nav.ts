@@ -11,8 +11,8 @@ export interface NavGroup {
   title: string
   links: Array<NavLink>
   // When set, the group is hidden from the sidebar and home TOC unless
-  // the user has unlocked secret mode via /members-only. The gated
-  // routes themselves redirect to /members-only if visited directly
+  // the user has unlocked secret mode via /settings. The gated
+  // routes themselves redirect to /settings if visited directly
   // (see src/app/(docs)/meditations/layout.tsx).
   gated?: 'secret'
 }
@@ -234,9 +234,10 @@ const groups: Array<NavGroup> = [
         description: 'Who built this and why.',
       },
       {
-        title: 'Members Only',
-        href: '/members-only',
-        description: 'Enter a password to unlock members only content.',
+        title: 'Settings',
+        href: '/settings',
+        description:
+          'Choose your tarot art style and unlock members only content.',
       },
     ],
   },

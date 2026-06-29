@@ -8,6 +8,7 @@ import { Shape, TextureLoader, type Mesh, type Texture } from 'three'
 
 import { cardBySlug, thumbImage } from '@/content/data/tarot'
 import { getColor } from '@/lib/colors'
+import { useTarotStyle } from '@/lib/tarotStyle'
 
 const HALF = 2
 const BORDER_T = 0.12
@@ -309,8 +310,9 @@ function EdgeHalf({
 }
 
 function Face({ face }: { face: FaceDef }) {
+  const { majorStyle } = useTarotStyle()
   const card = cardBySlug[face.cardSlug]
-  const texture = useLoader(TextureLoader, thumbImage(card)) as Texture
+  const texture = useLoader(TextureLoader, thumbImage(card, majorStyle)) as Texture
   const wallColor = getColor(card.color) ?? 'white'
 
   return (
@@ -331,7 +333,7 @@ function Face({ face }: { face: FaceDef }) {
               <meshBasicMaterial color={edgeColor} toneMapped={false} />
             </mesh>
             <EdgeHalf
-              imageSrc={thumbImage(edgeCard)}
+              imageSrc={thumbImage(edgeCard, majorStyle)}
               size={half.size}
               position={half.position}
               rotation={half.rotation}

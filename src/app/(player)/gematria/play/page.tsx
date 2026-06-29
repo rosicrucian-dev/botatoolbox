@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import { cardImage } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 import { cardByGlyph } from '@/lib/gematria'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
 import { useAutoAdvance } from '@/lib/useAutoAdvance'
@@ -40,7 +40,8 @@ export default function GematriaPlayPage() {
           glyph,
           note: card.note,
           color: card.color,
-          cardImage: cardImage(card),
+          cardNum: card.num,
+          cardSlug: card.slug,
           cardName: card.name,
           bgColor: getColor(card.color, theme),
           textColor: textColorFor(card.color),
@@ -86,10 +87,10 @@ export default function GematriaPlayPage() {
       onIdxChange={handleIdxChange}
       onClose={() => router.push(backHref)}
       renderLeft={(slide) => (
-        <img
-          src={slide.cardImage}
+        <MajorImage
+          card={{ num: slide.cardNum, slug: slide.cardSlug }}
           alt={slide.cardName}
-          className="max-h-[33svh] max-w-full rounded-lg object-contain md:max-h-[50vh] md:max-w-[280px]"
+          className="max-h-[33svh] max-w-full object-contain md:max-h-[50vh] md:max-w-[280px]"
         />
       )}
       renderRight={(slide) => (

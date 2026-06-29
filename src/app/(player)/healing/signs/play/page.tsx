@@ -4,7 +4,8 @@ import { useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { signs } from '@/content/data'
-import { cardByLetter, cardImage } from '@/content/data/tarot'
+import { cardByLetter } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 import { getLetterMeta } from '@/lib/hebrew'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
 import { SlidePlayer } from '@/components/SlidePlayer'
@@ -22,7 +23,8 @@ const signData = signs.map((s) => {
     glyph: meta.glyph,
     note: card?.note,
     color: card?.color,
-    cardImage: card ? cardImage(card) : undefined,
+    cardNum: card?.num,
+    cardSlug: card?.slug,
     cardName: card?.name,
   }
 })
@@ -61,11 +63,11 @@ export default function SignsPlayPage() {
         current?.note ? <SoundButton onClick={playCurrent} /> : null
       }
       renderLeft={(slide) =>
-        slide.cardImage ? (
-          <img
-            src={slide.cardImage}
+        slide.cardSlug ? (
+          <MajorImage
+            card={{ num: slide.cardNum!, slug: slide.cardSlug }}
             alt={slide.cardName}
-            className="max-h-[33svh] max-w-full rounded-lg object-contain md:max-h-[50vh] md:max-w-[280px]"
+            className="max-h-[33svh] max-w-full object-contain md:max-h-[50vh] md:max-w-[280px]"
           />
         ) : null
       }

@@ -7,6 +7,7 @@ import { expandWord, type RawWord } from '@/lib/hebrew'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
 import { useAutoAdvance } from '@/lib/useAutoAdvance'
 import { SlidePlayer } from '@/components/SlidePlayer'
+import { MajorImage } from '@/components/CardImage'
 import { SoundButton } from '@/components/SoundButton'
 import { CHANT_BEAT_SECONDS } from '@/lib/chant'
 import { getColor, textColorFor } from '@/lib/colors'
@@ -67,11 +68,11 @@ export function WordOfPowerPlayer({ raw }: { raw: RawWord }) {
         ) : null
       }
       renderLeft={(slide) =>
-        slide.cardImage ? (
-          <img
-            src={slide.cardImage}
+        slide.cardSlug && slide.cardNum != null ? (
+          <MajorImage
+            card={{ num: slide.cardNum, slug: slide.cardSlug }}
             alt={slide.cardName}
-            className="max-h-[33svh] max-w-full rounded-lg object-contain md:max-h-[50vh] md:max-w-[280px]"
+            className="max-h-[33svh] max-w-full object-contain md:max-h-[50vh] md:max-w-[280px]"
           />
         ) : null
       }

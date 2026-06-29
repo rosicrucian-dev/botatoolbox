@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { cardImage } from '@/content/data/tarot'
+import { MajorImage } from '@/components/CardImage'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { getColor, textColorFor, type ThemeId } from '@/lib/colors'
 import { useColorTheme } from '@/lib/colorTheme'
@@ -96,10 +96,10 @@ export function AstrologyFocusPlayer({
         current?.note ? <SoundButton onClick={playCurrent} /> : null
       }
       renderLeft={(slide) => (
-        <img
-          src={cardImage({ num: slide.cardNum, slug: slide.cardSlug })}
+        <MajorImage
+          card={{ num: slide.cardNum, slug: slide.cardSlug }}
           alt={slide.cardName}
-          className="max-h-[33svh] max-w-full rounded-lg object-contain md:max-h-[50vh] md:max-w-[280px]"
+          className="max-h-[33svh] max-w-full object-contain md:max-h-[50vh] md:max-w-[280px]"
         />
       )}
       renderRight={(slide) => (

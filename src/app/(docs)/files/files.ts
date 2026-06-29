@@ -20,9 +20,10 @@ export interface FileEntry {
   downloads?: ReadonlyArray<FileDownload>
   // `direct` entries are listed as a plain download link (no viewer page).
   direct?: boolean
-  // When set, the viewer shows the tarot tableau spread (from this image set)
-  // as the preview instead of a single <img src>.
-  tableau?: 'major' | 'major-alt'
+  // When set, the viewer shows the major-arcana tableau spread in this art
+  // style (a Major style id from tarot-styles.ts) as the preview, instead of a
+  // single <img src>.
+  tableau?: string
   // Set false to drop the rounded corners on the viewer preview image (e.g. for
   // full-bleed art where rounding clips the corners).
   rounded?: boolean
@@ -43,20 +44,39 @@ export const files: ReadonlyArray<FileEntry> = [
     ],
   },
   {
-    slug: 'tarot-images',
-    name: 'Tarot Images',
-    src: '/files/Tarot Images.zip',
+    slug: 'major-arcana-images-traditional',
+    name: 'Major Arcana Images - Traditional',
+    src: '/files/Major Arcana Images - Traditional.zip',
     section: 'Downloads',
-    tableau: 'major',
-    downloads: [{ label: 'Download ZIP', src: '/files/Tarot Images.zip' }],
+    tableau: 'traditional',
+    downloads: [
+      {
+        label: 'Download ZIP',
+        src: '/files/Major Arcana Images - Traditional.zip',
+      },
+    ],
   },
   {
-    slug: 'tarot-alt-images',
-    name: 'Tarot Alt Images',
-    src: '/files/Tarot Alt Images.zip',
+    slug: 'major-arcana-images-modern',
+    name: 'Major Arcana Images - Modern',
+    src: '/files/Major Arcana Images - Modern.zip',
     section: 'Downloads',
-    tableau: 'major-alt',
-    downloads: [{ label: 'Download ZIP', src: '/files/Tarot Alt Images.zip' }],
+    tableau: 'modern',
+    downloads: [
+      { label: 'Download ZIP', src: '/files/Major Arcana Images - Modern.zip' },
+    ],
+  },
+  {
+    slug: 'minor-arcana-images-josh-yates',
+    name: 'Minor Arcana Images - Josh Yates',
+    src: '/tarot/minor/josh-yates/ace-wands.jpg',
+    section: 'Downloads',
+    downloads: [
+      {
+        label: 'Download ZIP',
+        src: '/files/Minor Arcana Images - Josh Yates.zip',
+      },
+    ],
   },
   {
     slug: 'tree-of-life',
@@ -71,16 +91,16 @@ export const files: ReadonlyArray<FileEntry> = [
     section: 'Downloads',
   },
   {
-    slug: 'wallpaper',
-    name: 'Wallpaper',
-    src: '/files/wallpaper.jpg',
+    slug: 'wallpaper-a',
+    name: 'Wallpaper A',
+    src: '/files/wallpaper-a.jpg',
     section: 'Downloads',
     rounded: false,
   },
   {
-    slug: 'wallpaper-alt',
-    name: 'Wallpaper Alt',
-    src: '/files/wallpaper-alt.jpg',
+    slug: 'wallpaper-b',
+    name: 'Wallpaper B',
+    src: '/files/wallpaper-b.jpg',
     section: 'Downloads',
     rounded: false,
   },

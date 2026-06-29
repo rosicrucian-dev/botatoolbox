@@ -1,8 +1,11 @@
+'use client'
+
 import Link from 'next/link'
 
 import { paths } from '@/content/data'
 import { cardBySlug, thumbImage } from '@/content/data/tarot'
 import { getColor, textColorFor } from '@/lib/colors'
+import { useTarotStyle } from '@/lib/tarotStyle'
 import {
   sephiroth,
   TREE_VIEWBOX,
@@ -40,6 +43,7 @@ export function TreeOfLifeSvg({
   flow?: boolean
   flowDirection?: FlowDirection
 }) {
+  const { majorStyle } = useTarotStyle()
   return (
     <svg
       viewBox={TREE_VIEWBOX}
@@ -143,7 +147,7 @@ export function TreeOfLifeSvg({
                     })
                   })()}
                 <image
-                  href={thumbImage(card)}
+                  href={thumbImage(card, majorStyle)}
                   x={mx - 16.5}
                   y={my - 28.5}
                   width={33}

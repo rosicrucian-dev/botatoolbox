@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { Tabs } from '@/components/Tabs'
-import { cardBySlug, cards, thumbImage } from '@/content/data/tarot'
-import { minorBySlug, minorCards, minorImage } from '@/content/data'
+import { MajorImage, MinorImage } from '@/components/CardImage'
+import { cardBySlug, cards } from '@/content/data/tarot'
+import { minorBySlug, minorCards } from '@/content/data'
 
 // Optimized card-back used for the deck top and the face-down side of the
 // flip (see public/tarot/back.jpg — a thumbnail of public/files/tarot-back.jpg).
@@ -276,24 +277,25 @@ function CardFace({ slug }: { slug: string }) {
   if (!found) return null
   if (found.kind === 'major') {
     return (
-      <img
-        src={thumbImage(found.card)}
+      <MajorImage
+        card={found.card}
+        thumb
         alt={found.card.name}
         width={724}
         height={1200}
         draggable={false}
-        className="aspect-[724/1200] w-full rounded-md object-cover shadow-lg"
+        className="aspect-[724/1200] w-full object-cover shadow-lg"
       />
     )
   }
   return (
-    <img
-      src={minorImage(found.card)}
+    <MinorImage
+      card={found.card}
       alt={`${found.card.num} of ${found.card.suit}`}
       draggable={false}
       // CSS aspect-ratio forces the major proportion; object-fill stretches
       // the minor pixels to fill it (nothing cropped) at ~4% vertical squash.
-      className="aspect-[724/1200] w-full rounded-md object-fill shadow-lg"
+      className="aspect-[724/1200] w-full object-fill shadow-lg"
     />
   )
 }
@@ -797,10 +799,10 @@ export function FreeformClient({
               src={BACK_IMAGE}
               alt=""
               draggable={false}
-              className="aspect-[724/1200] w-full rounded-md object-cover shadow-xl"
+              className="aspect-[724/1200] w-full object-cover shadow-xl"
             />
           ) : (
-            <span className="block aspect-[724/1200] w-full rounded-md border-2 border-dashed border-zinc-300 dark:border-zinc-600" />
+            <span className="block aspect-[724/1200] w-full border-2 border-dashed border-zinc-300 dark:border-zinc-600" />
           )}
         </button>
 
@@ -846,7 +848,7 @@ export function FreeformClient({
                   src={BACK_IMAGE}
                   alt=""
                   draggable={false}
-                  className="absolute inset-0 aspect-[724/1200] w-full rounded-md object-cover shadow-lg"
+                  className="absolute inset-0 aspect-[724/1200] w-full object-cover shadow-lg"
                   style={{
                     backfaceVisibility: 'hidden',
                     transform: 'rotateY(180deg)',
@@ -872,7 +874,7 @@ export function FreeformClient({
               src={BACK_IMAGE}
               alt=""
               draggable={false}
-              className="aspect-[724/1200] w-full rounded-md object-cover shadow-2xl"
+              className="aspect-[724/1200] w-full object-cover shadow-2xl"
             />
           </div>
         )}
