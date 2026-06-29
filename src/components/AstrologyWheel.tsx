@@ -141,9 +141,11 @@ export function AstrologyWheel({
               textAnchor="middle"
               dominantBaseline="central"
               fill={textColorFor(planet.color) ?? 'white'}
-              className="grayscale"
             >
-              {planet.glyph}
+              {/* U+FE0E forces text (monochrome) presentation. Without it,
+                  symbols with a default emoji form (e.g. ♀, ♆) render as emoji
+                  that ignore dominant-baseline and sit low in the disc. */}
+              {`${planet.glyph}\uFE0E`}
             </text>
           </g>
         )
