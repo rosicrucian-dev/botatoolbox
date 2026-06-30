@@ -47,7 +47,7 @@ export const COLOR_PALETTES: ReadonlyArray<ColorPalette> = [
 // Single source of truth for the default palette — the useColorPalette() store's
 // initial value and the default `palette` arg of getColor / getFlashColor /
 // flashOf.
-export const DEFAULT_COLOR_PALETTE: ColorPaletteId = 'apple'
+export const DEFAULT_COLOR_PALETTE: ColorPaletteId = 'flo'
 
 export function isColorPalette(id: string): id is ColorPaletteId {
   return COLOR_PALETTES.some((p) => p.id === id)
