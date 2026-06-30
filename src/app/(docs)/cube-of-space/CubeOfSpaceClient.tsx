@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { Button } from '@/components/catalyst/button'
 import { CubeCanvas } from '@/components/CubeCanvas'
 import { FlowToggle } from '@/components/FlowToggle'
+import { toolbarButtonSize } from '@/components/toolbarButton'
 
 export function CubeOfSpaceClient() {
   const [flow, setFlow] = useState(false)
@@ -16,7 +17,11 @@ export function CubeOfSpaceClient() {
         </h1>
         <div className="flex items-center gap-2 text-zinc-900 dark:text-white">
           <FlowToggle pressed={flow} onPressedChange={setFlow} />
-          <Button href="/cube-of-space/expand" color="emerald">
+          <Button
+            href="/cube-of-space/expand"
+            color="emerald"
+            className={toolbarButtonSize}
+          >
             Expand ⤢
           </Button>
         </div>

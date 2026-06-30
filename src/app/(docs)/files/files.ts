@@ -24,6 +24,9 @@ export interface FileEntry {
   // style (a Major style id from tarot-styles.ts) as the preview, instead of a
   // single <img src>.
   tableau?: string
+  // When true, the viewer shows the 56 minor-arcana cards as a per-suit preview
+  // gallery (Josh Yates style) instead of a single <img src>.
+  minorTableau?: boolean
   // Set false to drop the rounded corners on the viewer preview image (e.g. for
   // full-bleed art where rounding clips the corners).
   rounded?: boolean
@@ -71,6 +74,7 @@ export const files: ReadonlyArray<FileEntry> = [
     name: 'Minor Arcana Images - Josh Yates',
     src: '/tarot/minor/josh-yates/ace-wands.jpg',
     section: 'Downloads',
+    minorTableau: true,
     downloads: [
       {
         label: 'Download ZIP',

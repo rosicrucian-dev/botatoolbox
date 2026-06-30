@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import Link from 'next/link'
 
 import { Button } from '@/components/catalyst/button'
+import { toolbarButtonSize } from '@/components/toolbarButton'
 import { MajorImage } from '@/components/CardImage'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
@@ -90,6 +91,7 @@ export function GematriaClient() {
             href={`/gematria/play?seq=${encodeURIComponent(word)}`}
             color="emerald"
             onClick={() => ensureAudioContext()}
+            className={toolbarButtonSize}
           >
             Play ▶
           </Button>

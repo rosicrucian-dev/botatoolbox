@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { Button } from '@/components/catalyst/button'
 import { FlowToggle } from '@/components/FlowToggle'
 import { Tab, Tabs } from '@/components/Tabs'
+import { toolbarButtonSize } from '@/components/toolbarButton'
 import {
   TreeOfLifeSvg,
   type FlowDirection,
@@ -44,7 +45,11 @@ export function TreeOfLifeClient() {
             </Tabs>
           )}
           <FlowToggle pressed={flow} onPressedChange={setFlow} />
-          <Button href="/tree-of-life/expand" color="emerald">
+          <Button
+            href="/tree-of-life/expand"
+            color="emerald"
+            className={toolbarButtonSize}
+          >
             Expand ⤢
           </Button>
         </div>

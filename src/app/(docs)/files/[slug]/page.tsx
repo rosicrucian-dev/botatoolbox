@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { type Metadata } from 'next'
 
+import { MinorTableau } from '@/components/MinorTableau'
 import { TarotTableau } from '@/components/TarotTableau'
 import { fileBySlug, files } from '../files'
 
@@ -53,6 +54,8 @@ export default async function FileViewer({
       )}
       {file.tableau ? (
         <TarotTableau style={file.tableau} link="image" rounded={false} />
+      ) : file.minorTableau ? (
+        <MinorTableau />
       ) : (
         <img
           src={file.src}

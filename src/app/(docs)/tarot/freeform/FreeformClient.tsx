@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/catalyst/button'
+import { toolbarButtonSize } from '@/components/toolbarButton'
 import { Tabs } from '@/components/Tabs'
 import { MajorImage, MinorImage } from '@/components/CardImage'
 import { cardBySlug, cards } from '@/content/data/tarot'
@@ -939,7 +940,12 @@ export function FreeformClient({
         </h1>
         <div className="flex flex-wrap items-center gap-3 text-zinc-900 dark:text-white">
           {controls}
-          <Button href={expandHref} color="emerald" aria-label="Expand">
+          <Button
+            href={expandHref}
+            color="emerald"
+            aria-label="Expand"
+            className={toolbarButtonSize}
+          >
             Expand ⤢
           </Button>
         </div>

@@ -39,19 +39,3 @@ two halves, split by where the files live:
 | `src/components/`    | Shared React components.                                        |
 | `src/app/`           | Routes. `(docs)` are normal pages; `(player)` are full-screen meditation/slide players. |
 | `scripts/`           | One-off generators (`gen:schemas`, `gen:gematria-words`, image optimization, the cube PDF). `scripts/vendor/` holds public-domain build inputs. |
-
-## Contributing content
-
-- **Edit data** — change a value in `content/data/*.json`; your editor
-  validates it against the schema. Add a brand-new data file by following
-  the recipe in [`src/content/data/README.md`](src/content/data/README.md).
-- **Add a text** — drop `content/texts/<slug>.md` and add one line to
-  `content/data/texts.json`. It appears in the nav and sitemap
-  automatically. No code.
-- **Cross-reference, don't duplicate** — one page reads from several data
-  files (e.g. the gematria dictionary's "Numbers" cards read tarot,
-  sephiroth, and tree-path data). References between files are checked at
-  build by `src/content/integrity.ts`.
-
-> `CLAUDE.md` is guidance for AI assistants working in this repo, not the
-> human contributor guide — start here and in `src/content/data/README.md`.
