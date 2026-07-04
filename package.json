@@ -1,0 +1,63 @@
+{
+  "name": "bota-toolbox",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "postbuild": "npm run gen:sw",
+    "gen:sw": "node --experimental-strip-types scripts/gen-sw.ts",
+    "verify:build": "NEXT_DIST_DIR=.next-verify next build --webpack",
+    "start": "next start",
+    "lint": "eslint",
+    "gen:schemas": "node --experimental-strip-types scripts/gen-schemas.ts",
+    "gen:appicon": "node --experimental-strip-types scripts/gen-appicon.ts",
+    "gen:favicon": "node --experimental-strip-types scripts/gen-favicon.ts",
+    "gen:splash": "node --experimental-strip-types scripts/gen-splash.ts",
+    "optimize:tarot": "node --experimental-strip-types scripts/optimize-tarot.ts",
+    "zip:tarot": "node --experimental-strip-types scripts/zip-tarot.ts",
+    "gen:cube-pdf": "node --experimental-strip-types scripts/gen-cube-pdf.ts",
+    "gen:gematria-words": "node --experimental-strip-types scripts/gen-gematria-words.ts"
+  },
+  "browserslist": "Chrome >= 111, Firefox >= 128, Safari >= 16.4, iOS >= 16.4, Edge >= 111, not dead",
+  "dependencies": {
+    "@headlessui/react": "^2.2.10",
+    "@heroicons/react": "^2.2.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@tailwindcss/postcss": "^4.3.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "astronomy-engine": "^2.1.19",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "next": "^16.2.6",
+    "next-themes": "^0.4.6",
+    "next-view-transitions": "^0.3.5",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "tailwindcss": "^4.3.0",
+    "three": "^0.184.0",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.13"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "^0.184.1",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.6",
+    "pdf-lib": "^1.17.1",
+    "prettier": "^3.8.3",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "sharp": "0.34.5",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
+  }
+}

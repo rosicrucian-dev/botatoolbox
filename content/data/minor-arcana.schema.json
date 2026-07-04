@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "suit": {
+        "type": "string"
+      },
+      "cards": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "num": {
+              "type": "string"
+            },
+            "keyword": {
+              "type": "string"
+            },
+            "sign": {
+              "type": "string"
+            },
+            "dates": {
+              "type": "string"
+            },
+            "meaning": {
+              "type": "object",
+              "properties": {
+                "intro": {
+                  "type": "string"
+                },
+                "wellDignified": {
+                  "type": "string"
+                },
+                "illDignified": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "intro",
+                "wellDignified",
+                "illDignified"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "num",
+            "keyword"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "suit",
+      "cards"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string",
+        "description": "URL slug (lowercase sign name)."
+      },
+      "name": {
+        "type": "string"
+      },
+      "glyph": {
+        "type": "string",
+        "description": "Unicode astrological glyph (e.g. ♈)."
+      },
+      "symbol": {
+        "type": "string",
+        "description": "Iconic figure of the sign — Ram, Ox, Twins, etc."
+      },
+      "letter": {
+        "type": "string",
+        "description": "Hebrew letter attributed to this sign."
+      },
+      "bodyPart": {
+        "type": "string",
+        "description": "Body region governed by this sign."
+      },
+      "quality": {
+        "type": "string",
+        "enum": [
+          "Cardinal",
+          "Fixed",
+          "Mutable"
+        ]
+      },
+      "alchemicalStage": {
+        "type": "string"
+      },
+      "rulers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Planet slug(s) that rule this sign."
+      },
+      "exaltedBy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "description": "Planet slug exalted in this sign, or null if none."
+      }
+    },
+    "required": [
+      "slug",
+      "name",
+      "glyph",
+      "symbol",
+      "letter",
+      "bodyPart",
+      "quality",
+      "alchemicalStage",
+      "rulers",
+      "exaltedBy"
+    ],
+    "additionalProperties": false
+  }
+}

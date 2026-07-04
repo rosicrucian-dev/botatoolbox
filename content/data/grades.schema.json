@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "gradeNumber": {
+        "type": "string"
+      },
+      "sephirah": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "intelligenceName": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "intelligenceHebrew": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "intelligenceRoman": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "slug",
+      "name",
+      "gradeNumber",
+      "sephirah",
+      "intelligenceName",
+      "intelligenceRoman"
+    ],
+    "additionalProperties": false
+  }
+}

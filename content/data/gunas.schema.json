@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string"
+      },
+      "glyph": {
+        "type": "string"
+      },
+      "guna": {
+        "type": "string"
+      },
+      "color": {
+        "type": "string"
+      },
+      "element": {
+        "type": "string"
+      },
+      "alchemy": {
+        "type": "string"
+      },
+      "consciousness": {
+        "type": "string"
+      },
+      "principle": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "slug",
+      "glyph",
+      "guna",
+      "color",
+      "element",
+      "alchemy",
+      "consciousness",
+      "principle"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "src": {
+        "type": "string",
+        "description": "Image shown in the viewer. For PDFs this is a separate preview image, since an <img> can't render a PDF."
+      },
+      "section": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "downloads": {
+        "description": "When present, the viewer shows one button per download instead of a single Download of `src` (e.g. A4 + Letter variants of a print).",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "src": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "label",
+            "src"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "direct": {
+        "description": "Listed as a plain download link on the index page (no viewer page).",
+        "type": "boolean"
+      },
+      "tableau": {
+        "description": "When set, the viewer shows the major-arcana tableau spread in this art style (a Major style id from tarot-styles.ts) as the preview, instead of a single <img src>.",
+        "type": "string"
+      },
+      "minorTableau": {
+        "description": "When true, the viewer shows the 56 minor-arcana cards as a per-suit preview gallery (Josh Yates style) instead of a single <img src>.",
+        "type": "boolean"
+      },
+      "rounded": {
+        "description": "Set false to drop the rounded corners on the viewer preview image (e.g. for full-bleed art where rounding clips the corners).",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "slug",
+      "name",
+      "src",
+      "section"
+    ],
+    "additionalProperties": false
+  }
+}

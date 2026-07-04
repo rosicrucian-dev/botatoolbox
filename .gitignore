@@ -1,0 +1,23 @@
+node_modules
+.next
+.next-verify
+out
+dist
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.vscode/*
+!.vscode/settings.json
+.DS_Store
+*.log
+.vercel
+/catalyst-ui-kit
+/tailwind-plus-protocol
+certificates
+.cube-pdf-tmp
+/local
+
+# Claude Code (local only)
+CLAUDE.md
+.claude/

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "hidden": {
+        "description": "Hidden from nav, home TOC, and sitemap; still reachable by direct URL.",
+        "type": "boolean"
+      },
+      "custom": {
+        "description": "The text has its own bespoke route folder (a code task); the generic /texts/[slug] renderer skips it and would 404. Leave unset for normal prose texts.",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "slug",
+      "title"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,12 @@
+[
+  { "num": 1, "sphere": "Primum Mobile", "name": "Rashith ha-Galgalim" },
+  { "num": 2, "sphere": "Sphere of the Zodiac", "name": "Masloth" },
+  { "num": 3, "sphere": "Sphere of Saturn", "name": "Shabbathai" },
+  { "num": 4, "sphere": "Sphere of Jupiter", "name": "Tzedek" },
+  { "num": 5, "sphere": "Sphere of Mars", "name": "Madim" },
+  { "num": 6, "sphere": "Sphere of the Sun", "name": "Khammaw or Shemmesh" },
+  { "num": 7, "sphere": "Sphere of Venus", "name": "Nogah" },
+  { "num": 8, "sphere": "Sphere of Mercury", "name": "Kokab" },
+  { "num": 9, "sphere": "Sphere of the Moon", "name": "Levanah or Lebanah" },
+  { "num": 10, "sphere": "Sphere of the Elements", "name": "Cholom Yesodoth" }
+]

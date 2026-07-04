@@ -1,0 +1,214 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@config '../../typography.ts';
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /*
+   * Override the template's accent palette (originally Tailwind emerald)
+   * with a scale anchored at Apple's system blue (#0088FF). Class names
+   * stay as `*-emerald-*` everywhere they were written by the template;
+   * they just render as blue now. Buttons, sidebar active indicator,
+   * link colors, search highlights, etc. all pick this up automatically.
+   */
+  --color-emerald-50: #ebf5ff;
+  --color-emerald-100: #d6ebff;
+  --color-emerald-200: #addaff;
+  --color-emerald-300: #7dc1ff;
+  --color-emerald-400: #3fa5ff;
+  --color-emerald-500: #0088ff;
+  --color-emerald-600: #006ee0;
+  --color-emerald-700: #0058b3;
+  --color-emerald-800: #00457a;
+  --color-emerald-900: #00305c;
+  --color-emerald-950: #001a33;
+
+  --text-2xs: 0.75rem;
+  --text-2xs--line-height: 1.25rem;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 1;
+  --text-9xl: 8rem;
+  --text-9xl--line-height: 1;
+
+  --container-lg: 33rem;
+  --container-2xl: 40rem;
+  --container-3xl: 50rem;
+  --container-5xl: 66rem;
+
+  /*
+   * Box / four-fold breath — 4s inhale, 4s hold full, 4s exhale, 4s
+   * hold empty. Total cycle 16s; the Planets countdown is 64s so the
+   * visual ends exactly on the start of a new breath. Linear timing
+   * so the transitions feel like even, paced breath rather than eased
+   * ramps.
+   */
+  --animate-breathe: breathe 16s linear infinite;
+  @keyframes breathe {
+    0% {
+      transform: scale(0.4);
+      opacity: 0.2;
+    }
+    25% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    75% {
+      transform: scale(0.4);
+      opacity: 0.2;
+    }
+    100% {
+      transform: scale(0.4);
+      opacity: 0.2;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    /*
+     * Tells the user agent we render both schemes ourselves. Without
+     * this, iOS Safari may apply its own auto-dark treatment on top of
+     * light-mode pages — inverting black SVG fills to white and lifting
+     * saturated colors. Pairs with `colorScheme: 'light dark'` in the
+     * Viewport metadata in app/layout.tsx; either alone might be enough,
+     * both together make sure the signal is honored across UA versions.
+     */
+    color-scheme: light dark;
+  }
+
+  [inert] ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /*
+   * Touch feel. Kill the iOS gray tap flash everywhere — interactive
+   * elements signal presses through their own hover/active styles
+   * instead. `touch-action: manipulation` on interactive elements
+   * removes Safari's double-tap-to-zoom wait, so repeated taps
+   * (tap-to-advance slides, quiz answers, the gematria keypad) register
+   * instantly.
+   */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  a,
+  button,
+  input,
+  label,
+  select,
+  summary,
+  [role='button'] {
+    touch-action: manipulation;
+  }
+}
+
+/*
+ * View transitions (docs-side navigation, wired up via
+ * next-view-transitions in app/layout.tsx). Keep the default
+ * cross-fade but quicken it — 180ms reads as "responsive app",
+ * the ~250ms default as "animation".
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+}
+
+/*
+ * Reduced motion: kill decorative animation, keep function.
+ *   - Page navigations snap instead of cross-fading.
+ *   - The healing player's breathing circle holds its fully-expanded
+ *     state instead of pulsing (it's a pacing visual; a frozen circle
+ *     still shows what the timer text says).
+ */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  .animate-breathe {
+    animation: none;
+    opacity: 0.45;
+  }
+}
+
+/*
+ * Installed-app touch behavior. Long-pressing a link in an iOS
+ * home-screen app pops the Safari link-preview callout, and
+ * long-pressing a button can start text selection — both feel like a
+ * web page showing through the app. Scoped to standalone display mode
+ * so normal Safari browsing keeps its native behaviors (and prose
+ * links/text stay selectable there).
+ */
+@media (display-mode: standalone) {
+  a,
+  button {
+    -webkit-touch-callout: none;
+  }
+  button {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/*
+ * iOS Safari samples the bg of fixed/sticky elements at first paint and
+ * locks the browser chrome (URL bar, dynamic island) to that color for the
+ * session. We deliberately render the slide player BLACK on first paint so
+ * the toolbars lock to black — predictable, OLED-friendly, consistent
+ * across slide color changes. After two animation frames, JS sets
+ * data-primed on the player so the slide's own bg renders.
+ *
+ * @supports (-webkit-touch-callout: none) is iOS-only — desktop browsers
+ * don't support that property, so the override never fires there. No flash
+ * on desktop.
+ */
+@supports (-webkit-touch-callout: none) {
+  .player-shell:not([data-primed]) {
+    background: black !important;
+    color: white !important;
+  }
+}
+
+/*
+ * Installed-app breathing room. In a home-screen app the player header
+ * sits directly against the Dynamic Island (padded only by the exact
+ * safe-area inset, which iOS reports tightly). A small extra gap keeps
+ * the toolbar from feeling glued to the island. Zero outside standalone
+ * mode — Safari provides its own chrome spacing.
+ */
+.player-shell {
+  --player-top-breather: 0px;
+}
+@media (display-mode: standalone) {
+  .player-shell {
+    --player-top-breather: 10px;
+  }
+}

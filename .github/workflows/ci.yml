@@ -1,0 +1,25 @@
+name: CI
+
+# Validates contributions before merge: typecheck plus a full production
+# build, which runs every Zod parse, the cross-file integrity checks, and
+# the static export. This is the contributor-facing counterpart of the
+# deploy workflow (which only runs on push to main).
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Binary assets live directly in git (no LFS) — a plain checkout
+      # gets real files, so the integrity existence checks see the truth.
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run build

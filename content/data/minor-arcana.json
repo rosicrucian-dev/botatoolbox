@@ -1,0 +1,638 @@
+[
+  {
+    "suit": "Wands",
+    "cards": [
+      {
+        "num": "Ace",
+        "keyword": "Initiative",
+        "sign": "Aries, Taurus, Gemini",
+        "dates": "March 21 – June 21",
+        "meaning": {
+          "intro": "In Tarot Divination the Ace of Wands has these key meanings: natural as opposed to invoked force; strength; force; vigor; vitality; particularly the force of concentrated will; the principle of beginning; initiation or inception of any enterprise or activity; concentration of power; involution of force.",
+          "wellDignified": "",
+          "illDignified": ""
+        }
+      },
+      {
+        "num": "2",
+        "keyword": "Dominion",
+        "sign": "Aries",
+        "dates": "March 21 – March 30",
+        "meaning": {
+          "intro": "In Tarot divination the Two of Wands has these key meanings:",
+          "wellDignified": "it shows force, enterprise, boldness, resolution, some combativeness, much originality.",
+          "illDignified": "it signifies restlessness, fierceness, shamelessness, inordinate ambition, turbulence, obstinancy, revenge. A card of enthusiasm, but of strong self-interest."
+        }
+      },
+      {
+        "num": "3",
+        "keyword": "Established Strength",
+        "sign": "Aries",
+        "dates": "March 31 – April 9",
+        "meaning": {
+          "intro": "In Tarot divination the key ideas related to the Three of Wands are: mental energy, leadership, ambition, determination. It is a card related to the realization of hopes and of success after struggle.",
+          "wellDignified": "it stands for courage, persistence, pride and nobility.",
+          "illDignified": "it represents conceit, arrogance, insolence."
+        }
+      },
+      {
+        "num": "4",
+        "keyword": "Perfected Work",
+        "sign": "Aries",
+        "dates": "April 10 – April 19",
+        "meaning": {
+          "intro": "The Four of Wands is associated with the third decanate of Aries, the time period April 10 to April 19, ruled by Jupiter.",
+          "wellDignified": "this card signifies success through personal merit, good social standing, influential friends, the perfection of something built up after labor, benefit through travel, shipping and business with foreign countries.",
+          "illDignified": "loss in the same things, or in consequence of unpreparedness or by hasty action."
+        }
+      },
+      {
+        "num": "5",
+        "keyword": "Competition",
+        "sign": "Leo",
+        "dates": "July 23 – August 1",
+        "meaning": {
+          "intro": "The first decanate of Leo encompasses the time period from July 23 to August 1. It is ruled doubly by the Sun, so that the Sun and its attributions have a marked influence on the meanings of this Key. Thus the Five of Wands is a combination of the powers of Mars, active in Geburah and the powers of the Sun in Leo, together with the meanings of the number five and the pentagram. Key ideas associated with the Five of Wands are power and pleasure in exercising it. This is the combined influence of the strength resident in Geburah together with the pleasure associated with Leo and its natural fifth house in astrology. The Martian influence gives a spirit of adventure and speculation, together with some uncertainty in carrying out plans. The Leo influence, a fixed fire sign, intimates strong attachments, either to family or in love affairs.",
+          "wellDignified": "boldness, command and generosity.",
+          "illDignified": "cruelty, violence, lust, prodigality."
+        }
+      },
+      {
+        "num": "6",
+        "keyword": "Victory",
+        "sign": "Leo",
+        "dates": "August 2 – August 12",
+        "meaning": {
+          "intro": "The second decanate of Leo, related to this Key, is the time period of August 2 to August 12, ruled by Jupiter. In Tarot divination the Six of Wands partakes of a meaning similar to the conjunction of the Sun and Jupiter, combined with the influence of Leo and its natural fifth house.",
+          "wellDignified": "success, happiness, gain; gain through love affairs or by the opposite sex; pleasure in labor; gain after a period of uncertainty and competition.",
+          "illDignified": "loss through the same things; waste in pleasure; trouble through pride of riches or through insolence based on success."
+        }
+      },
+      {
+        "num": "7",
+        "keyword": "Valor",
+        "sign": "Leo",
+        "dates": "August 13 – August 22",
+        "meaning": {
+          "intro": "The third decanate of Leo, is the time period from August 13 to August 22. In divination, the Seven of Wands combines the activities of the Keys listed in the Tableau together with ideas of pleasure and love connected with the fifth house in Astrology, the natural house of Leo.",
+          "wellDignified": "denotes pleasure in strenuous action; some danger through love affairs or self indulgence; also strength and magnanimity; adventure; courage in the face of difficulties; influence over subordinates.",
+          "illDignified": "indicates ignorance, pretense, vain-glory, quarrels and wrangling, threats and very determined opposition, especially from subordinates and open enemies."
+        }
+      },
+      {
+        "num": "8",
+        "keyword": "Swiftness",
+        "sign": "Sagittarius",
+        "dates": "November 22 – December 1",
+        "meaning": {
+          "intro": "As the first decanate of Sagittarius, the Eight of Wands is the time period of November 22 to December 1, ruled by Jupiter, suggesting a combination of the powers of Mercury and Jupiter together with the zodiacal attributions of the sign Sagittarius and its natural 9th house.",
+          "wellDignified": "aspiration; foresight; rapid expression of force, but quickly expended; the acceleration of anything in which the querent is interested; generosity; confidence; freedom.",
+          "illDignified": "violence; warfare; rapacity; insolence; theft or robbery. These are suggested by some of the evil meanings connected with Hermes or Mercury associated with misuse of human intellect."
+        }
+      },
+      {
+        "num": "9",
+        "keyword": "Preparedness",
+        "sign": "Sagittarius",
+        "dates": "December 2 – December 11",
+        "meaning": {
+          "intro": "In Tarot divination this Key combines the forces of the Moon, Mars and Jupiter and the zodiacal influences of Sagittarius and Aries, together with the Ninth house of the Higher Mind.",
+          "wellDignified": "well placed in a divination, this Key suggests originality, independence and daring. It has meanings that include strength in reserve; health after illness; success, but attended with some strife.",
+          "illDignified": "danger; violence in foreign places or during long journeys; difficulties with relatives of the marriage partner; conflict with persons prominent in religion or law; obstinancy."
+        }
+      },
+      {
+        "num": "10",
+        "keyword": "Fullness of Power",
+        "sign": "Sagittarius",
+        "dates": "December 12 – December 21",
+        "meaning": {
+          "intro": "The third decanate of Sagittarius is the time period from December 12 to December 21. In divination its meanings are those of the Tenth Sephirah combined with the planetary forces of the Sun and Jupiter, the zodiacal sign of Sagittarius together with its natural Ninth house of the Higher Mind.",
+          "wellDignified": "generosity; success and honor in connection with the law, religion or philosophy; possibility of post of responsibility; gain through travel.",
+          "illDignified": "ostentation; dogmatism; overbearing pride. Note:- this card often carries the significance of a burden of responsibility of 'too many irons in the fire', or the need for a rearrangement of the Querent's affairs or activities so as to get them in better order."
+        }
+      },
+      {
+        "num": "Page",
+        "keyword": "Earth of Fire",
+        "sign": "Aries, Taurus, Gemini",
+        "dates": "March 21 – June 21",
+        "meaning": {
+          "intro": "The time period correlated with this Key is the whole first quarter of the zodiac from March 21 to June 21 inclusive, including Taurus and Gemini. The specific Divinatory meanings involved are",
+          "wellDignified": "a young person, youth or girl; brilliant mind, courageous disposition, perhaps given to sudden anger and desirous of power. Capable of great enthusiasm.",
+          "illDignified": "Revengeful at the least opposition, headstrong, theatrical, unstable, domineering and decidedly superficial. This Key often stands for a messenger."
+        }
+      },
+      {
+        "num": "Knight",
+        "keyword": "Air of Fire",
+        "sign": "Scorpio, Sagittarius",
+        "dates": "November 12 – December 11",
+        "meaning": {
+          "intro": "Astrologically the Knight of Wands includes the time period from the third decanate of Scorpio through the second decanate of Sagittarius, November 12 to December 11, representing, as we have seen, the combined influences of the Moon in Scorpio and of Jupiter and Mars in Sagittarius. In Divination we find the more specific meanings of each Key, but always remember that as advanced B.O.T.A. members, treading the Path of Return, you must use this art with discretion. It is best not to give querents for your help too specific instruction. Try to act as an emissary for the Hierophant and give them the principles behind their problems as they are unveiled to you by the sequence of Keys. Leave it to those you are helping to apply universal principles to specific problems in their lives.",
+          "wellDignified": "an active, generous, impetuous, quickmoving man, younger than the King of Wands. He is secretive, probably interested in the occult, somewhat psychic and mysterious. He is friendly to the querent and may bring him news relating to his enterprises.",
+          "illDignified": "evil-minded, false, cruel, bigoted, brutal young man (or situation), dangerous or unfriendly to the querent's affairs. This card sometimes signifies departure or change of residence."
+        }
+      },
+      {
+        "num": "Queen",
+        "keyword": "Water of Fire",
+        "sign": "Cancer, Leo",
+        "dates": "July 13 – August 12",
+        "meaning": {
+          "intro": "The time period related to the Queen of Wands is from July 13 to August 12, symbolizing the influence of Jupiter and Neptune in Cancer and of the Sun and Jupiter in Leo. The basic power suggested by this Key is that of command.",
+          "wellDignified": "in a divination the Queen of Wands symbolizes a kind, generous woman, resolute in the face of opposition, strongly psychic and intuitive but practical in applying her spiritual gifts; intense; magnetic; friendly to the querent and a favorable influence for the success or business of the querent.",
+          "illDignified": "Inimical to the querent; obstinate, dangerous woman, unfavorable to querent's affairs; revengeful and tyrannical."
+        }
+      },
+      {
+        "num": "King",
+        "keyword": "Fire of Fire",
+        "sign": "Pisces, Aries",
+        "dates": "March 11 – April 9",
+        "meaning": {
+          "intro": "When well aspected the powers listed above are expressed by a personality represented by the King of Wands. However these same qualities when overly strong or intense can express as cruelty, oppression, ostentation and pride. Thus in Tarot divination, besides the basic principles expressed by Ab, the Father, and Yod, the Creative principle, the King of Wands has these specific meanings",
+          "wellDignified": "an ardent, impulsive, influential man; one possessed of authority and strongly marked by the quality of leadership; somewhat hasty in temper but just, generous and friendly.",
+          "illDignified": "the same general type but cruel, ill-natured, intolerant and probably unfriendly to the querent."
+        }
+      }
+    ]
+  },
+  {
+    "suit": "Cups",
+    "cards": [
+      {
+        "num": "Ace",
+        "keyword": "Desire Force",
+        "sign": "Cancer, Leo, Virgo",
+        "dates": "June 22 – September 22",
+        "meaning": {
+          "intro": "",
+          "wellDignified": "fertility, productiveness, development, multiplication, happiness, pleasure, gratification, fruition of desires; cheerfulness, geniality, gaiety.",
+          "illDignified": "too much emphasis on pleasure; over-intensity of the desire nature; trouble in love."
+        }
+      },
+      {
+        "num": "2",
+        "keyword": "Response to Environment",
+        "sign": "Cancer",
+        "dates": "June 22 – July 1",
+        "meaning": {
+          "intro": "Continue your divinatory practice as outlined in Lesson 18, adding the Ace of Cups and the Two of Cups to your sequential reading It is important to continue this practice, adding each Key as it is dealt with in succeeding lessons. The Two of Cups, astrologically, is assigned to the first decanate of Cancer, ruled by the Moon, time period June 22 to July 1. The specific divinatory ideas associated with this Key are",
+          "wellDignified": "reciprocity, reflection; gain and benefit through parents; favors from the opposite sex; changes of residence.",
+          "illDignified": "reverses and losses through parents or the opposite sex; unfortunate changes of residence; fluctuations of mood; unwise decisions."
+        }
+      },
+      {
+        "num": "3",
+        "keyword": "Enjoyment",
+        "sign": "Cancer",
+        "dates": "July 2 – July 12",
+        "meaning": {
+          "intro": "The Three of Cups is astrologically related to the second decanate of Cancer ruled by the Scorpio aspect of Mars, time period July 2 to July 12. The distinct meanings in divination combine the pleasure and emotion associated with the suit of Cups and the sex magnetism of the Scorpio aspect of Mars, together with Cancerian practicality and penchant for attachments.",
+          "wellDignified": "activity, determination, practicality; fondness for pleasure and comfort; attachments and attractions to the opposite sex; pleasure, merriment, eating and drinking, plenty of new clothes, etc.",
+          "illDignified": "danger of the 'triangle' situation; trouble through attachments to the opposite sex; misunderstandings; prodigality; sensuality."
+        }
+      },
+      {
+        "num": "4",
+        "keyword": "Surfeit",
+        "sign": "Cancer",
+        "dates": "July 13 – July 22",
+        "meaning": {
+          "intro": "The specific divinatory meanings are thus based on the attributions of Chesed, the planetary forces of Jupiter and Neptune, the zodiacal influences of Cancer ruled by the Moon, and the astrological fourth house. Jupiter's sphere of influence is Chesed. It co-rules the third decanate of Cancer besides being exalted in this zodiacal sign. Therefore the Four of Cups has a very strong Jupiterian influence of wealth and expansiveness. The Four of Cups corresponding to the third decanate of Cancer is the time period July 13 to July 22, ruled by Jupiter and Neptune. In specific Tarot Divination its key meanings are",
+          "wellDignified": "success in material things, but desire for something higher; a period of comparative comfort, yet a little confining, thus suggesting a measure of satiety; it is a symbol of contemplation and of the turning away from pleasure in quest of higher things; it intimates strong psychic influences in the life or environment of the Querent.",
+          "illDignified": "material gain, but through injustice; sorrows resulting from satisfaction of desire; getting what one has wanted but finding no joy in it."
+        }
+      },
+      {
+        "num": "5",
+        "keyword": "Defeated Desire",
+        "sign": "Scorpio",
+        "dates": "October 23 – November 1",
+        "meaning": {
+          "intro": "The Five of Cups is the first decanate of Scorpio, ruled by Mars, time period October 22 to October 31.",
+          "wellDignified": "strength, power to do; ability to introduce needed changes and let go of relationships, prejudices and false ideas that are hindering spiritual progress.",
+          "illDignified": "loss in pleasure, vain regret, disappointment, sorrow and loss of those things which have been much desired; treachery, deceit; unexpected troubles and anxieties; disappointments in love, broken engagements, broken friendships. (Note: These sorrows and disappointments, as indicated by the Five of Cups, Ill-Dignified, are often the necessary destruction before the beginning of a new and greater expansion and growth in the life of the Querent, depending on his basic understanding and evolutionary level.)"
+        }
+      },
+      {
+        "num": "6",
+        "keyword": "Betterment",
+        "sign": "Scorpio",
+        "dates": "November 2 – November 11",
+        "meaning": {
+          "intro": "Time period is the second decanate of Scorpio, from November 1 to November 10 under the combined influences of Jupiter and Neptune.",
+          "wellDignified": "the meanings in specific divinations are based on the influence of Neptune and Jupiter in Scorpio combined with its natural 8th house; deep emotions, ardor, enthusiasm, generosity; money through marriage or business partner, or by inheritance; the beginning of steady gain in business or pleasure, but beginning only; peculiar circumstances.",
+          "illDignified": "deceit in reference to partner's money; loss of inheritance through some sort of swindle; danger of death on water, or through poisons or anesthetics; some reversal of fortune."
+        }
+      },
+      {
+        "num": "7",
+        "keyword": "Illusion",
+        "sign": "Scorpio",
+        "dates": "November 12 – November 21",
+        "meaning": {
+          "intro": "The time period is the third decanate of Scorpio, November 11 to November 20, under the subrulership of the Moon.",
+          "wellDignified": "possible victory, but the person to whom the card applies may be too indolent to take advantage of his opportunities for commanding circumstance. Success may be gained, but not followed up; necessity for choosing only the highest objectives.",
+          "illDignified": "Illusionary success; lying and deceit; drunkenness; violence, even lust."
+        }
+      },
+      {
+        "num": "8",
+        "keyword": "Instability",
+        "sign": "Pisces",
+        "dates": "February 19 – February 28",
+        "meaning": {
+          "intro": "The time period is the first decanate of Pisces, February 19 to February 28, ruled by Jupiter and Neptune.",
+          "wellDignified": "renunciation of material success for something higher; interest in psychic and spiritual things; strong emotions; charity and helpfulness; love of travel and of scientific investigation.",
+          "illDignified": "momentary success, but nothing lasting; the person to whom the card applies is over-impressionable, erratic and unsteady in his emotions; meaningless change of mood; purposeless journeying; querulous disposition."
+        }
+      },
+      {
+        "num": "9",
+        "keyword": "Desire Fulfilled",
+        "sign": "Pisces",
+        "dates": "March 1 – March 10",
+        "meaning": {
+          "intro": "The time period is the second decanate of Pisces, March 1 to March 10, under the subrulership of the Moon.",
+          "wellDignified": "complete realization of desires; almost perfect pleasure and happiness; wishes fulfilled; physical well-being.",
+          "illDignified": "vanity, conceit, egotism; foolish generosity or ostentatious expenditure; the person to whom the card applies is too easily led; one spoilt by prosperity."
+        }
+      },
+      {
+        "num": "10",
+        "keyword": "Excess",
+        "sign": "Pisces",
+        "dates": "March 11 – March 20",
+        "meaning": {
+          "intro": "The time period is the third decanate of Pisces, from March 11 to March 20, under the sub-rulership of Mars in its Scorpio aspect. The meanings are unfortunate unless the divination refers to spiritual matters; for the combined forces of Mars, Jupiter and Neptune in Pisces on the physical levels, while they mean tremendous power of desire and sometimes the satisfaction of desire, point rather to unbalanced force than otherwise.",
+          "wellDignified": "if relating to spiritual matters, permanent and lasting success through inspiration from higher levels of consciousness; high psychic development; realization of the highest aspirations; happiness. On questions at a lower level, even if well dignified: great ambition; ultra sensitiveness; great power of realizing desires, but equally great danger of misusing that power.",
+          "illDignified": "in spiritual questions, danger from psychism; probability of being injured mentally through unwise attempts at meditation. On all other questions: danger of self-undoing from psychism; prodigality; possibility of being influenced by others through the desire-nature; tendency to drug habits and drunkenness; disgust resulting from over-indulgence; excess in pleasure."
+        }
+      },
+      {
+        "num": "Page",
+        "keyword": "Earth of Water",
+        "sign": "Cancer, Leo, Virgo",
+        "dates": "June 22 – September 22",
+        "meaning": {
+          "intro": "In divination this Key suggests the warmth, radiance and the generous productivity of summer. Thus the Page of Cups indicates a radiant, generous, youthful personality of either sex. The time period is from the first decanate of Cancer, June 21, through the last decanate of Virgo, September 22 — the entire summer season.",
+          "wellDignified": "the character is sweet, poetical, gentle and kind; fond of home and all that it stands for; imaginative, dreamy, yet with a good deal of latent courage; friendly to the Querent and will further Querent's hopes and wishes.",
+          "illDignified": "may still show or profess friendship, or even wish to be of help, but the character is unstable, too indolent to be of real service and probably prone to promise far more than he can perform."
+        }
+      },
+      {
+        "num": "Knight",
+        "keyword": "Air of Water",
+        "sign": "Aquarius, Pisces",
+        "dates": "February 9 – March 10",
+        "meaning": {
+          "intro": "The time period is from the beginning of the last decanate of Aquarius to the end of the second decanate of Pisces, February 9 to March 10, under the rulerships of Venus, Jupiter, Neptune and the Moon.",
+          "wellDignified": "a man of graceful, somewhat indolent, personality; generous and enthusiastic, when he is really interested. Somewhat impressionable and psychic. Fond of home and probably puts all women more or less on a pedestal. Friendly to the Querent.",
+          "illDignified": "lazy, untruthful, likely to be effeminate and 'catty'. Brown hair, grey or brown eyes."
+        }
+      },
+      {
+        "num": "Queen",
+        "keyword": "Water of Water",
+        "sign": "Libra, Scorpio",
+        "dates": "October 13 – November 11",
+        "meaning": {
+          "intro": "The time period is the beginning of the last decanate of Libra to the end of the second decanate of Scorpio, October 13 to November 11, combining the rulerships of Mercury, Mars, Jupiter and Neptune.",
+          "wellDignified": "through the influence of Mercury in Libra the Queen of Cups personifies a woman, mentally alert, yet somewhat superficial, who probably has a touch of the poetic in her nature. She is kindhearted though not likely to go to too much trouble for anyone. The Scorpio influence added gives her strong desires and makes her emotionally responsive and attractive to the opposite sex; very psychic, and if her higher nature is developed she depicts a very powerful spiritual force akin to the influence of the purified desire nature and the influence of Neshamah.",
+          "illDignified": "a woman who is subtle, decidedly coquettish and may even be a deliberate heart-breaker."
+        }
+      },
+      {
+        "num": "King",
+        "keyword": "Fire of Water",
+        "sign": "Gemini, Cancer",
+        "dates": "June 11 – July 12",
+        "meaning": {
+          "intro": "The time period is from the beginning of the last decanate of Gemini to the second decanate of Cancer, June 11 to July 12, combining the rulerships of Saturn and Uranus, the Moon and Mars.",
+          "wellDignified": "a man subtle and secretive, crafty, psychic, artistic; of strong, violent desires but calm exterior. He is friendly to the Querent and really wise.",
+          "illDignified": "evil and merciless and likely to be attracted by occult studies promising power or knowledge for the satisfaction of desire and control of others; without purification of character. Usually fair-haired with blue eyes."
+        }
+      }
+    ]
+  },
+  {
+    "suit": "Swords",
+    "cards": [
+      {
+        "num": "Ace",
+        "keyword": "Activity",
+        "sign": "Libra, Scorpio, Sagittarius",
+        "dates": "September 23 – December 21",
+        "meaning": {
+          "intro": "The time period is from the beginning of Libra to the end of Sagittarius, Sept. 23 to Dec. 21, representing the conjoined power of Venus, Mars and Jupiter. In divination, when the sword is turned downward it is Ill-Dignified and has a negative significance. In ceremonial magic the sword in this position is used for the invocation of evil forces, while with the point upward it denotes invocation of spiritual forces. Keep this in mind in divination, as an Ill-Dignified Ace of Swords shows need to control and overcome negative emotions and thoughts.",
+          "wellDignified": "",
+          "illDignified": ""
+        }
+      },
+      {
+        "num": "2",
+        "keyword": "Indecision",
+        "sign": "Libra",
+        "dates": "September 23 – October 2",
+        "meaning": {
+          "intro": "The time period is the first decanate of Libra from September 23 to October 2, under the rulership of Venus.",
+          "wellDignified": "contradictory characteristics in the same nature; strength through suffering; pleasure after pain; delay in the realization of objectives. Sometimes indicates a period of uncertainty, during which the Querent, though he has a sense of adequate power, does not know just what to do with it. It also indicates justice, unselfishness and the restoration of peace.",
+          "illDignified": "falsehood; sorrow; injury from another who really means well to the Querent, or injury by the Querent to another whom he wishes to help; always a symbol of tension, of want of tact, and suggests force held in abeyance, awaiting some announcement or revelation that will make decision possible."
+        }
+      },
+      {
+        "num": "3",
+        "keyword": "Sorrow",
+        "sign": "Libra",
+        "dates": "October 3 – October 12",
+        "meaning": {
+          "intro": "The time period is the second decanate of Libra, under the combined rulership of Saturn and Uranus, October 3 to October 12. Because Libra is involved, remember that the qualities of the Seventh house are prominent.",
+          "wellDignified": "this is nevertheless a Key depicting sorrow, disappointment and tears, but it can be the beginning of deep understanding as to the basis and cause of our problems; disruption of friendship; interruption of cherished projects; quarrels; occasionally the position in the layout may indicate platonic friendships; in money matters this card is almost always a symbol of loss, but indicates that whatever money matters are under consideration have been fair and honest, so that no blame attaches to anyone for the loss.",
+          "illDignified": "slander; selfishness and dissipation; deceit with respect to promises; loss in legal affairs."
+        }
+      },
+      {
+        "num": "4",
+        "keyword": "Rest",
+        "sign": "Libra",
+        "dates": "October 13 – October 22",
+        "meaning": {
+          "intro": "The time period is the last decanate of Libra, October 13 to October 23, under the rulership of Mercury.",
+          "wellDignified": "rest from sorrow, yet after and through it; relief from anxiety; rest after illness; quietness; change for the better.",
+          "illDignified": "inharmony with partners; unsettled conditions in legal affairs; disorder and loss through ill-considered writings or needless short journeys; vexations through petty strife and sarcastic speech."
+        }
+      },
+      {
+        "num": "5",
+        "keyword": "Defeat",
+        "sign": "Aquarius",
+        "dates": "January 20 – January 29",
+        "meaning": {
+          "intro": "The time period is the first decanate of Aquarius, from January 20 to 29, under the rulership of Saturn and Uranus.",
+          "wellDignified": "the decision is adverse to the Querent in any matter of a material nature. In spiritual affairs this card portends apparent troubles which work out ultimately to good result. Thus this Key is one of trouble and anxiety, but rightly comprehended can be the turning point for positive good.",
+          "illDignified": "the troubles are intensified and are probably due to the Querent's own lack of understanding of the true nature of the situation. If the question is one of speculation, the Querent is likely to be disappointed due to his own desire to get something for nothing, to over-reach somebody else, or to get rich quick."
+        }
+      },
+      {
+        "num": "6",
+        "keyword": "Patience",
+        "sign": "Aquarius",
+        "dates": "January 30 – February 8",
+        "meaning": {
+          "intro": "The Six of Swords corresponds to the second decanate of Aquarius under the rulership of Mercury, January 30 to February 8.",
+          "wellDignified": "success after a period of trouble or anxiety; difficulties overcome; change of scene, possibly a journey by water; something mysterious effects a change of circumstances for the better; success earned by the Querent's laborious efforts.",
+          "illDignified": "sudden changes; circumstances dominate the Querent; he is in danger of being over-confident or conceited; too much effort expended for small results."
+        }
+      },
+      {
+        "num": "7",
+        "keyword": "Instability",
+        "sign": "Aquarius",
+        "dates": "February 9 – February 18",
+        "meaning": {
+          "intro": "The time period is the third decanate of Aquarius, February 9 to 18, under the rulership of Venus.",
+          "wellDignified": "partial success; the Querent is too easy-going or does not draw sufficiently on his reserve force; he has good opportunities but may not make the most of them; he is likely to compromise too easily.",
+          "illDignified": "love of ease and display cause loss; the Querent suffers from the insolence of others and may be insolent himself; there is danger that his own confidence may be betrayed, or that he may be led into betraying the confidence of others."
+        }
+      },
+      {
+        "num": "8",
+        "keyword": "Mediocrity",
+        "sign": "Gemini",
+        "dates": "May 21 – May 31",
+        "meaning": {
+          "intro": "The time period is the first decanate of Gemini, May 21 to May 31, under the rulership of Mercury.",
+          "wellDignified": "even well-dignified, the excessive Mercurial influence expressing in the Yetziratic field of unstable forces and changing forms, symbolized by the Eight of Swords, gives a marked tendency toward ill-directed or wasted action. Meanings in divination: force wasted in petty affairs; too much talk; too much ill-directed action; the state of being terribly busy without accomplishing much; over-careful about details; could possibly intimate a crisis in affairs, and probably much talk, correspondence and moving about.",
+          "illDignified": "malice; ill-natured gossip; pettiness; too much concern with personalities; disagreements with brothers and sisters. This Key divinatorily expresses unbalanced or excessive Gemini qualities in third house affairs. These negative Gemini qualities portend the need for balancing the quick-mindedness and penchant for action of this astrological type with the depth of feeling and emotional warmth corresponding to Netzach and Venus."
+        }
+      },
+      {
+        "num": "9",
+        "keyword": "Worry",
+        "sign": "Gemini",
+        "dates": "June 1 – June 10",
+        "meaning": {
+          "intro": "The time period is the second decanate of Gemini, June 1 to June 10, under the rulership of Venus.",
+          "wellDignified": "faithfulness, obedience, unselfishness, patience; fortunate news about legal affairs or partnerships, especially if the outcome has been delayed or in doubt; aid or gain through relatives, short journeys or writings, but not until the Querent has passed through a period of uncertainty or worry; ultimate good fortune, resulting from a series of events which at first present unfavorable appearances.",
+          "illDignified": "despair, cruelty, unfaithfulness; want, loss, misery; bad outcome of legal affairs; disagreements with relatives; unfortunate journeys."
+        }
+      },
+      {
+        "num": "10",
+        "keyword": "Destruction",
+        "sign": "Gemini",
+        "dates": "June 11 – June 21",
+        "meaning": {
+          "intro": "The time period is the third decanate of Gemini, June 11 to June 21, under the rulership of Saturn and Uranus.",
+          "wellDignified": "in spiritual matters, the end of delusion; the overthrow of limiting conditions; break-up of restrictions. In material affairs, sudden and unexpected changes, not always unfortunate in the long run, but disappointing when experienced. Interference from others and loss through indiscretion in writing or in signing contracts.",
+          "illDignified": "failure, desolation, misery."
+        }
+      },
+      {
+        "num": "Page",
+        "keyword": "Earth of Air",
+        "sign": "Libra, Scorpio, Sagittarius",
+        "dates": "September 23 – December 21",
+        "meaning": {
+          "intro": "The time period is from the beginning of Libra to the end of Sagittarius, September 23 to December 21. Meanings: a young person of either sex. Artistic, active, generous. Capable of weighing evidence; somewhat interested in occultism, philosophy or religion; naturally aspiring; graceful.",
+          "wellDignified": "",
+          "illDignified": "frivolous, cunning and prodigal. Light brown hair and blue eyes."
+        }
+      },
+      {
+        "num": "Knight",
+        "keyword": "Air of Air",
+        "sign": "Taurus, Gemini",
+        "dates": "May 11 – June 10",
+        "meaning": {
+          "intro": "The time period is from the beginning of the third decanate of Taurus to the end of the second decanate of Gemini, May 11 to June 10. Meanings: youngish man; some talent for governing; materialistic, with some artistic appreciation; active, clever, skillful in management.",
+          "wellDignified": "favorable to Querent and his enterprises.",
+          "illDignified": "inimical, domineering, overvalues small things, crafty. Dark hair and eyes."
+        }
+      },
+      {
+        "num": "Queen",
+        "keyword": "Water of Air",
+        "sign": "Capricorn, Aquarius",
+        "dates": "January 10 – February 8",
+        "meaning": {
+          "intro": "Saturn-Uranus in Aquarius and Mercury in Gemini. Meanings: a woman of some authority, outwardly agreeable and complaisant, but inwardly ambitious and subtle. She has keen perceptions, is a good observer and self-confident. She is accurate in superficial details; is often graceful and fond of dancing.",
+          "wellDignified": "she is friendly to the Querent.",
+          "illDignified": "she can be deceitful, sly, cruel. Usually light brown hair and gray eyes."
+        }
+      },
+      {
+        "num": "King",
+        "keyword": "Fire of Air",
+        "sign": "Virgo, Libra",
+        "dates": "September 13 – October 12",
+        "meaning": {
+          "intro": "The time period is from the beginning of the last decanate of Virgo to the end of the second decanate of Libra, September 13 to October 12, under the combined rulerships of Venus in Taurus, Venus in Libra, and Saturn-Uranus in Aquarius. Meanings: a man of strong and powerful imagination; hard worker and having authority; keen in understanding law and capable of excellent cooperation; somewhat distrustful and suspicious and therefore hard to convince. He sometimes surprises his friends by sudden changes of attitude, although he is usually over-cautious and analytical. In a divinatory lay-out",
+          "wellDignified": "he is friendly to the Querent and will cooperate with him.",
+          "illDignified": "he is inimical, harsh, malicious and plotting, obstinate and wholly unreliable. Dark hair and dark eyes."
+        }
+      }
+    ]
+  },
+  {
+    "suit": "Pentacles",
+    "cards": [
+      {
+        "num": "Ace",
+        "keyword": "Materiality",
+        "sign": "Capricorn, Aquarius, Pisces",
+        "dates": "December 22 – March 20",
+        "meaning": {
+          "intro": "The time period is from the beginning of Capricorn to the end of Pisces, December 22 to March 20. Occult title: The Root of the Powers of Earth. Divinatory meanings: The power of Will as expressed on the physical plane. Materiality in all its phases, whether good or evil. \"The things that are Caesar's.\" The power of the world-illusion. Material gain, contentment, wealth, and the things, conditions and works which contribute to such gain.",
+          "wellDignified": "",
+          "illDignified": ""
+        }
+      },
+      {
+        "num": "2",
+        "keyword": "Fluctuation",
+        "sign": "Capricorn",
+        "dates": "December 22 – December 31",
+        "meaning": {
+          "intro": "The time period is the first decanate of Capricorn, December 22 to December 31, under the rulership of Saturn. Meanings",
+          "wellDignified": "harmony in the midst of change; alternation of gain and loss; change of occupation; travel in quest of wealth; ups and downs of fortune; a visit to friends.",
+          "illDignified": "intimates discontent; foolishness in the management of resources; restricted condition of material affairs due to bad management; the Querent is probably too talkative and too suspicious. He is kind, but inconsistent, and should avoid arguments."
+        }
+      },
+      {
+        "num": "3",
+        "keyword": "Constructiveness",
+        "sign": "Capricorn",
+        "dates": "January 1 – January 9",
+        "meaning": {
+          "intro": "The time period is the second decanate of Capricorn, under the rulership of Venus, from January 1 to January 9.",
+          "wellDignified": "construction; increase, growth; financial gain; the building up of favorable conditions; gain in commercial transactions; rank or prestige in vocation or business; beginning of matters to be perfected later.",
+          "illDignified": "selfishness; cleverness in business, but lack of scruples; narrowness and prejudice; too much ambition."
+        }
+      },
+      {
+        "num": "4",
+        "keyword": "Management",
+        "sign": "Capricorn",
+        "dates": "January 10 – January 19",
+        "meaning": {
+          "intro": "The time period is the third decanate of Capricorn, under the rulership of Mercury, January 10 to 19. Meanings",
+          "wellDignified": "opportunities for public service; an acute, sharp, penetrating, tactful temperament; economy in the arrangement of material affairs; activity in money matters.",
+          "illDignified": "dangers to reputation; troubles through changes not carefully considered; desire for money, but unwisdom in its management; the Querent will meet with sharp criticism."
+        }
+      },
+      {
+        "num": "5",
+        "keyword": "Uncertainty",
+        "sign": "Taurus",
+        "dates": "April 20 – April 29",
+        "meaning": {
+          "intro": "The time period is the first decanate of Taurus, under the rulership of Venus, April 20 to 29. Meanings",
+          "wellDignified": "labor, toil, the cultivation of the land; building, and plans concerning it; some anxiety over money.",
+          "illDignified": "toil unrewarded; loss of money; poverty; trouble for the Querent through lack of imagination and foresight."
+        }
+      },
+      {
+        "num": "6",
+        "keyword": "Prosperity",
+        "sign": "Taurus",
+        "dates": "April 30 – May 10",
+        "meaning": {
+          "intro": "The time period is the second decanate of Taurus, under the rulership of Mercury, from April 30 to May 10. Meanings",
+          "wellDignified": "practicality and determination; discretion and diplomacy; gain by letters, writing, travel, speaking, teaching, commissions, and through advertising, study, books and all things ruled by Mercury.",
+          "illDignified": "loss through the same things."
+        }
+      },
+      {
+        "num": "7",
+        "keyword": "Loss",
+        "sign": "Taurus",
+        "dates": "May 11 – May 20",
+        "meaning": {
+          "intro": "The time period is the third decanate of Taurus, under the rulership of Saturn, May 11 to 20. Meanings",
+          "wellDignified": "slight gains, but of small account; much labor for small returns.",
+          "illDignified": "something promising turns out badly; loss in speculation and unprofitable employment; financial restriction; unrealized hopes and wishes."
+        }
+      },
+      {
+        "num": "8",
+        "keyword": "Prudence",
+        "sign": "Virgo",
+        "dates": "August 23 – September 2",
+        "meaning": {
+          "intro": "The time period is the first decanate of Virgo, under the rulership of Mercury, from August 23 to September 2. Meanings",
+          "wellDignified": "skill in the management of material affairs; industry; gain in subordinate positions through writing, clerical work or travel; gain of ready money in small sums.",
+          "illDignified": "avarice and hoarding; penny wisdom and pound foolishness; meanness in money matters; loss through travel or writings; the Querent is likely to be in difficulties with superiors and also with inferiors; he may lose through trying to overreach somebody else."
+        }
+      },
+      {
+        "num": "9",
+        "keyword": "Harvest",
+        "sign": "Virgo",
+        "dates": "September 3 – September 12",
+        "meaning": {
+          "intro": "The time period is the second decanate of Virgo, under the rulership of Saturn, September 3 to September 12. Meanings",
+          "wellDignified": "reserve, discretion, caution, frugality; some worries over money matters because of slow-maturing of plans; gain through careful investment. Occasionally when this card is especially well-dignified, and other cards in the layout confirm it, this Key represents inheritance, material gain and much increase of goods, corresponding to the positive meanings of Saturn in Capricorn.",
+          "illDignified": "discouragement; troubles through theft and knavery."
+        }
+      },
+      {
+        "num": "10",
+        "keyword": "Wealth",
+        "sign": "Virgo",
+        "dates": "September 13 – September 22",
+        "meaning": {
+          "intro": "The time period is the third decanate of Virgo, under the rulership of Venus, September 13 to September 22. Meanings",
+          "wellDignified": "money through servants or subordinates; gain in matters connected with medicine, drugs, food, nursing, farming or gardening; completion in material gain and fortune, but nothing beyond.",
+          "illDignified": "material success, but heaviness and dullness of mind; sometimes loss through the matters listed above; slothfulness."
+        }
+      },
+      {
+        "num": "Page",
+        "keyword": "Earth of Earth",
+        "sign": "Capricorn, Aquarius, Pisces",
+        "dates": "December 22 – March 20",
+        "meaning": {
+          "intro": "The time period is from December 21 to March 21, which encompasses the three signs of the winter quarter, Capricorn, Aquarius and Pisces, ruled by Saturn, Saturn-Uranus and Jupiter-Neptune.",
+          "wellDignified": "good command in practical matters; ability to see the principles behind physical plane situations and phenomena; a young person of either sex, friendly to the Querent. Usually a friendly disposition with some leaning to the occult or a touch of psychic ability in the make-up. Generous, diligent, compassionate.",
+          "illDignified": "more or less in bondage to material matters; inability to see beyond physical plane phenomena. A young person unfriendly, dull, wasteful, thoughtless, self-centered. If interested in the occult, it is usually for the sake of furthering selfish ends. Dark eyes and rich brown hair."
+        }
+      },
+      {
+        "num": "Knight",
+        "keyword": "Air of Earth",
+        "sign": "Leo, Virgo",
+        "dates": "August 13 – September 12",
+        "meaning": {
+          "intro": "The time period is from the beginning of the third decanate of Leo to the end of the second decanate of Virgo, August 13 to September 12. This period is under the rulership of Mars, Mercury and Saturn. Meanings",
+          "wellDignified": "ability to use actions effectively; good mind, able to see through the veils of sense experience to their true import. In specific divination, a man younger than the King and though intelligent, somewhat matter-of-fact; not original or imaginative; good at carrying out any plan calling for intelligent action on the physical plane.",
+          "illDignified": "avaricious, mean, jealous, somewhat violent and cruel. Dark brown hair and dark eyes."
+        }
+      },
+      {
+        "num": "Queen",
+        "keyword": "Water of Earth",
+        "sign": "Aries, Taurus",
+        "dates": "April 10 – May 10",
+        "meaning": {
+          "intro": "The time period is from the beginning of the last decanate of Aries to the end of the second decanate of Taurus, April 10 to May 10. This period is under the rulerships of Jupiter, Venus and Mercury.",
+          "wellDignified": "the ability to detect the workings of Divine Guidance in all aspects of incarnate life. In divination, a generous, somewhat ceremonious, great-hearted woman who is both charming and graceful. She is probably possessed of considerable means and is friendly to the Querent.",
+          "illDignified": "some problem with materialism and ability to express unselfish love. A woman who is ostentatious, loose in morals, capricious, changeable, superficial. Likely to do Querent harm through foolish talk, exposure of his plans, etc. Dark hair and eyes."
+        }
+      },
+      {
+        "num": "King",
+        "keyword": "Fire of Earth",
+        "sign": "Sagittarius, Capricorn",
+        "dates": "December 12 – January 9",
+        "meaning": {
+          "intro": "The time period is from the beginning of the last decanate of Sagittarius to the end of the second decanate of Capricorn, December 12 to January 9. This period combines the rulerships of the Sun, Saturn and Venus. Meanings",
+          "wellDignified": "the ability to see the workings of Divine Law in the phenomena of the physical plane — thus rulership. In divination, a dark man, friendly to the Querent, practical, steady and reliable. He is good at the practical application of ideas and theories. Things tend to prosper and increase under his direction. slow to anger, but furious when aroused.",
+          "illDignified": "good theoretical insight into the workings of Divine Law, but inability to apply it to everyday experiences. In divination, a man selfish and materialistic. Such a man could have some power to solidify evil forces and express them but is nevertheless somewhat stupid."
+        }
+      }
+    ]
+  }
+]

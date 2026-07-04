@@ -1,0 +1,12 @@
+[
+  { "num": 0, "meaning": "No-Thing" },
+  { "num": 1, "meaning": "Beginning" },
+  { "num": 2, "meaning": "Duplication" },
+  { "num": 3, "meaning": "Multiplication" },
+  { "num": 4, "meaning": "Order" },
+  { "num": 5, "meaning": "Mediation" },
+  { "num": 6, "meaning": "Reciprocation" },
+  { "num": 7, "meaning": "Equilibrium" },
+  { "num": 8, "meaning": "Rhythm" },
+  { "num": 9, "meaning": "Conclusion" }
+]

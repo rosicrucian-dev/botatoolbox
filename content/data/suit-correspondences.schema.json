@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "tarot": {
+        "type": "string"
+      },
+      "playingCard": {
+        "type": "string"
+      },
+      "world": {
+        "type": "string"
+      },
+      "element": {
+        "type": "string"
+      },
+      "letter": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "tarot",
+      "playingCard",
+      "world",
+      "element",
+      "letter"
+    ],
+    "additionalProperties": false
+  }
+}

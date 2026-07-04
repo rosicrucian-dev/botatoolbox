@@ -1,0 +1,170 @@
+[
+  {
+    "slug": "aries",
+    "name": "Aries",
+    "glyph": "♈",
+    "symbol": "Ram",
+    "letter": "Heh",
+    "bodyPart": "Head, face",
+    "quality": "Cardinal",
+    "alchemicalStage": "Calcination",
+    "rulers": [
+      "mars"
+    ],
+    "exaltedBy": "sun"
+  },
+  {
+    "slug": "taurus",
+    "name": "Taurus",
+    "glyph": "♉",
+    "symbol": "Ox",
+    "letter": "Vav",
+    "bodyPart": "Neck, throat",
+    "quality": "Fixed",
+    "alchemicalStage": "Congelation",
+    "rulers": [
+      "venus"
+    ],
+    "exaltedBy": "moon"
+  },
+  {
+    "slug": "gemini",
+    "name": "Gemini",
+    "glyph": "♊",
+    "symbol": "Twins",
+    "letter": "Zain",
+    "bodyPart": "Lungs, collar-bone, arms, hands",
+    "quality": "Mutable",
+    "alchemicalStage": "Fixation",
+    "rulers": [
+      "mercury"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "cancer",
+    "name": "Cancer",
+    "glyph": "♋",
+    "symbol": "Crab",
+    "letter": "Cheth",
+    "bodyPart": "Breast, stomach",
+    "quality": "Cardinal",
+    "alchemicalStage": "Separation",
+    "rulers": [
+      "moon"
+    ],
+    "exaltedBy": "jupiter"
+  },
+  {
+    "slug": "leo",
+    "name": "Leo",
+    "glyph": "♌",
+    "symbol": "Lion",
+    "letter": "Teth",
+    "bodyPart": "Sides, back, heart",
+    "quality": "Fixed",
+    "alchemicalStage": "Digestion",
+    "rulers": [
+      "sun"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "virgo",
+    "name": "Virgo",
+    "glyph": "♍",
+    "symbol": "Virgin",
+    "letter": "Yod",
+    "bodyPart": "Intestines",
+    "quality": "Mutable",
+    "alchemicalStage": "Distillation",
+    "rulers": [
+      "mercury"
+    ],
+    "exaltedBy": "mercury"
+  },
+  {
+    "slug": "libra",
+    "name": "Libra",
+    "glyph": "♎",
+    "symbol": "Balance",
+    "letter": "Lamed",
+    "bodyPart": "Kidneys, loins, back",
+    "quality": "Cardinal",
+    "alchemicalStage": "Sublimation",
+    "rulers": [
+      "venus"
+    ],
+    "exaltedBy": "saturn"
+  },
+  {
+    "slug": "scorpio",
+    "name": "Scorpio",
+    "glyph": "♏",
+    "symbol": "Scorpion",
+    "letter": "Nun",
+    "bodyPart": "Sex organs",
+    "quality": "Fixed",
+    "alchemicalStage": "Putrefaction",
+    "rulers": [
+      "mars"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "sagittarius",
+    "name": "Sagittarius",
+    "glyph": "♐",
+    "symbol": "Archer",
+    "letter": "Samekh",
+    "bodyPart": "Hips, thighs, liver",
+    "quality": "Mutable",
+    "alchemicalStage": "Incineration",
+    "rulers": [
+      "jupiter"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "capricorn",
+    "name": "Capricorn",
+    "glyph": "♑",
+    "symbol": "Goat",
+    "letter": "Ayin",
+    "bodyPart": "Knees",
+    "quality": "Cardinal",
+    "alchemicalStage": "Fermentation",
+    "rulers": [
+      "saturn"
+    ],
+    "exaltedBy": "mars"
+  },
+  {
+    "slug": "aquarius",
+    "name": "Aquarius",
+    "glyph": "♒",
+    "symbol": "Waterbearer",
+    "letter": "Tzaddi",
+    "bodyPart": "Ankles, blood",
+    "quality": "Fixed",
+    "alchemicalStage": "Dissolution",
+    "rulers": [
+      "uranus"
+    ],
+    "exaltedBy": null
+  },
+  {
+    "slug": "pisces",
+    "name": "Pisces",
+    "glyph": "♓",
+    "symbol": "Fishes",
+    "letter": "Qoph",
+    "bodyPart": "Feet",
+    "quality": "Mutable",
+    "alchemicalStage": "Multiplication",
+    "rulers": [
+      "neptune"
+    ],
+    "exaltedBy": "venus"
+  }
+]
