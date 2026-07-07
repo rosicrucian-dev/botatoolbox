@@ -43,6 +43,10 @@ export default function About() {
           <a href="https://buymeacoffee.com/rosicruciandev">Buy Me a Coffee</a>.
           I am always looking to improve and expand this website. Thank you!️ 🌹
         </p>
+        <h1>Other Projects from Rosicrucian Developers</h1>
+        <ul>
+          <li><a href="https://agelesswisdom.school">The School of Ageless Wisdom</a> - The early curriculum of Paul Foster Case.</li>
+        </ul>
       </Prose>
     </article>
   )
