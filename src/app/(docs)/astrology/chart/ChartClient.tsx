@@ -190,10 +190,17 @@ export function ChartClient() {
           </StepButton>
         </div>
       </div>
-      <div className="mx-auto aspect-square w-full max-w-[min(100%,calc(100svh-12rem))]">
+      {/* Gray rounded frame (matching the Freeform table's inline board) so
+          the circular wheel reads as sitting inside a contained square. The
+          wheel is positioned `absolute` with a uniform inset rather than via
+          padding + a percentage-height child: an aspect-ratio box doesn't give
+          a child's `h-full` a definite height to resolve against, which
+          letterboxed the SVG and made the vertical gap larger than the
+          horizontal. Absolute insets are exactly equal on all four sides. */}
+      <div className="relative aspect-square w-full rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800/40">
         {/* Chunkier ring geometry on phones, roomier on desktop — same SVG,
             different profile, toggled by breakpoint (no JS, no flicker). */}
-        <div className="h-full w-full sm:hidden">
+        <div className="absolute inset-4 sm:inset-6 sm:hidden">
           <AstrologyWheel
             chart={chart}
             aspects={aspects}
@@ -201,7 +208,7 @@ export function ChartClient() {
             label={wheelLabel}
           />
         </div>
-        <div className="hidden h-full w-full sm:block">
+        <div className="absolute inset-4 hidden sm:inset-6 sm:block">
           <AstrologyWheel
             chart={chart}
             aspects={aspects}

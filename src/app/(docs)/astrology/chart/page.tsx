@@ -1,5 +1,7 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+
 import { ChartClient } from './ChartClient'
 
 export const metadata: Metadata = {
@@ -7,5 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default function AstrologyChart() {
-  return <ChartClient />
+  return (
+    <>
+      <SetBreadcrumbs items={[{ label: 'Chart' }]} />
+      <ChartClient />
+    </>
+  )
 }

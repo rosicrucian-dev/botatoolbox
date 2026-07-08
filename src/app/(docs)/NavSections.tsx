@@ -1,20 +1,27 @@
 'use client'
 
-import { Link } from 'next-view-transitions'
-
-import { navigation, type NavGroup } from '@/lib/nav'
+import { CardGrid } from '@/components/NavCards'
+import { PinnedSection } from '@/components/PinnedSection'
+import { visibleNavigation, type NavGroup } from '@/lib/nav'
 import { useSecretMode } from '@/lib/useSecretMode'
 
-// Home-page table of contents. Lives as a client component so it can
-// filter out secret-mode-gated groups (e.g. Meditations) based on
-// useSecretMode's localStorage-backed state.
+// Home-page table of contents, styled as the Protocol template's
+// "Resources" cards (minus the circle icon): each section is a heading, a
+// hairline, then a grid of link cards with a mouse-following grid/gradient
+// hover reveal (see CardGrid). Lives as a client component so it can filter
+// out secret-mode-gated groups (e.g. Meditations) via useSecretMode.
+// visibleNavigation has already dropped `hidden` (unlisted) links.
 export function NavSections() {
   const { unlocked } = useSecretMode()
-  const visible = navigation.filter(
+  const visible = visibleNavigation.filter(
     (group) => group.gated !== 'secret' || unlocked,
   )
   return (
     <>
+      {/* Pinned grid first when the user has pins (renders nothing
+          otherwise); it shares the article's space-y-14 rhythm with the
+          groups below, so it appears and pushes them down on hydration. */}
+      <PinnedSection />
       {visible.map((group) => (
         <Section key={group.title} group={group} />
       ))}
@@ -28,19 +35,8 @@ function Section({ group }: { group: NavGroup }) {
       <h2 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white">
         {group.title}
       </h2>
-      <div className="mt-4 border-t border-zinc-900/5 pt-6 dark:border-white/5">
-        <ul className="space-y-3">
-          {group.links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-base font-medium text-zinc-900 transition hover:text-emerald-500 dark:text-white dark:hover:text-emerald-400"
-              >
-                {link.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div className="mt-4 border-t border-zinc-900/5 pt-8 dark:border-white/5">
+        <CardGrid links={group.links} pinnable />
       </div>
     </section>
   )

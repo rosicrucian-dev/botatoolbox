@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DataList } from '@/components/DataList'
 import { PageHeading } from '@/components/PageHeading'
 import { PlayLink } from '@/components/PlayLink'
@@ -35,6 +36,12 @@ export default async function WordOfPowerPage({
 
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs
+        items={[
+          { label: 'Words of Power', href: '/words-of-power' },
+          { label: word.name },
+        ]}
+      />
       <div className="flex items-start justify-between gap-4">
         <PageHeading>{word.name}</PageHeading>
         <div className="flex shrink-0 items-center gap-2">

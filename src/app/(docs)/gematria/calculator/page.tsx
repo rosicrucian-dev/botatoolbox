@@ -1,6 +1,8 @@
 import { type Metadata } from 'next'
 import { Suspense } from 'react'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+
 import { GematriaClient } from './GematriaClient'
 
 export const metadata: Metadata = {
@@ -13,6 +15,11 @@ export const metadata: Metadata = {
 export default function GematriaPage() {
   return (
     <Suspense>
+      <SetBreadcrumbs
+        items={[
+          { label: 'Calculator' },
+        ]}
+      />
       <GematriaClient />
     </Suspense>
   )

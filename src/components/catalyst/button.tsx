@@ -6,7 +6,7 @@ import { Link } from './link'
 const styles = {
   base: [
     // Base
-    'relative isolate inline-flex items-baseline justify-center gap-x-2 rounded-lg border text-base/6 font-semibold',
+    'relative isolate inline-flex items-baseline justify-center gap-x-2 rounded-full border text-base/6 font-semibold',
     // Sizing
     'px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] sm:text-sm/6',
     // Focus
@@ -22,7 +22,7 @@ const styles = {
     // Dark mode: border is rendered on `after` so background is set to button background
     'dark:bg-(--btn-bg)',
     // Button background, implemented as foreground layer to stack on top of pseudo-border layer
-    'before:absolute before:inset-0 before:-z-10 before:rounded-[calc(var(--radius-lg)-1px)] before:bg-(--btn-bg)',
+    'before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-(--btn-bg)',
     // Drop shadow, applied to the inset `before` layer so it blends with the border
     'before:shadow-sm',
     // Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
@@ -30,13 +30,13 @@ const styles = {
     // Dark mode: Subtle white outline is applied using a border
     'dark:border-white/5',
     // Shim/overlay, inset to match button foreground and used for hover state + highlight shadow
-    'after:absolute after:inset-0 after:-z-10 after:rounded-[calc(var(--radius-lg)-1px)]',
+    'after:absolute after:inset-0 after:-z-10 after:rounded-full',
     // Inner highlight shadow
     'after:shadow-[inset_0_1px_--theme(--color-white/15%)]',
     // White overlay on hover
     'data-active:after:bg-(--btn-hover-overlay) data-hover:after:bg-(--btn-hover-overlay)',
     // Dark mode: `after` layer expands to cover entire button
-    'dark:after:-inset-px dark:after:rounded-lg',
+    'dark:after:-inset-px dark:after:rounded-full',
     // Disabled
     'data-disabled:before:shadow-none data-disabled:after:shadow-none',
   ],
@@ -119,9 +119,17 @@ const styles = {
       'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-green-600)] [--btn-border:var(--color-green-700)]/90',
       '[--btn-icon:var(--color-white)]/60 data-active:[--btn-icon:var(--color-white)]/80 data-hover:[--btn-icon:var(--color-white)]/80',
     ],
+    // Flat, vibrant emerald — matches the PlayLink CTAs (a plain
+    // bg-emerald-500 with no border or shadow) rather than the raised
+    // solid look. Brightens the fill to 500, hides the optical border
+    // (border = bg), and strips the solid variant's drop shadow + inner
+    // highlight via `!` overrides. Emerald is used only by the Expand/Play
+    // toolbar buttons (tree-of-life, cube-of-space, freeform, gematria),
+    // so this stays scoped to them.
     emerald: [
-      'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-emerald-600)] [--btn-border:var(--color-emerald-700)]/90',
-      '[--btn-icon:var(--color-white)]/60 data-active:[--btn-icon:var(--color-white)]/80 data-hover:[--btn-icon:var(--color-white)]/80',
+      'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-emerald-500)] [--btn-border:var(--color-emerald-500)]',
+      'before:shadow-none! after:shadow-none! dark:border-transparent!',
+      '[--btn-icon:var(--color-white)]/70 data-active:[--btn-icon:var(--color-white)]/90 data-hover:[--btn-icon:var(--color-white)]/90',
     ],
     teal: [
       'text-white [--btn-hover-overlay:var(--color-white)]/10 [--btn-bg:var(--color-teal-600)] [--btn-border:var(--color-teal-700)]/90',

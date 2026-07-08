@@ -7,11 +7,15 @@
      tools (e.g. Apple's Icon Composer) if a native app ever happens. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-102 -2 204 235">
   <g stroke="#000000" stroke-width="3.2" stroke-linejoin="round">
-    <!-- top face -->
-    <polygon points="0,0 100,57.735 0,115.47 -100,57.735" fill="#F4ED38" />
-    <!-- left face -->
-    <polygon points="-100,57.735 0,115.47 0,230.94 -100,173.205" fill="#3D5DAB" />
-    <!-- right face -->
-    <polygon points="100,57.735 0,115.47 0,230.94 100,173.205" fill="#EF3125" />
+    <!-- Emerald cube: Tailwind's emerald ramp at three lightnesses
+         (light → dark) for classic isometric shading. Top catches the
+         most light. The middle face (emerald-500) is the app's accent /
+         primary-button color. -->
+    <!-- top face (lightest) — emerald-300 -->
+    <polygon points="0,0 100,57.735 0,115.47 -100,57.735" fill="#5EE9B5" />
+    <!-- left face (medium) — emerald-500 -->
+    <polygon points="-100,57.735 0,115.47 0,230.94 -100,173.205" fill="#00BC7D" />
+    <!-- right face (darkest) — emerald-700 -->
+    <polygon points="100,57.735 0,115.47 0,230.94 100,173.205" fill="#007A55" />
   </g>
 </svg>

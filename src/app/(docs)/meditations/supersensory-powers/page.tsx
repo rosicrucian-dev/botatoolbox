@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { Link } from 'next-view-transitions'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { supersensoryMeditations } from '@/content/data'
 
@@ -14,6 +15,12 @@ const ROW =
 export default function SupersensoryIndex() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs
+        items={[
+          { label: 'Meditations', href: '/meditations' },
+          { label: 'Developing Supersensory Powers' },
+        ]}
+      />
       <PageHeading>Developing Supersensory Powers</PageHeading>
       <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
         {supersensoryMeditations.map((m) => (

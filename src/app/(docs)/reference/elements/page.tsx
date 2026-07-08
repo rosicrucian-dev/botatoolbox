@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { elements, gunas } from '@/content/data'
 
@@ -54,6 +55,7 @@ function ElementSymbol({ slug }: { slug: string }) {
 export default function ElementsPage() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Elements' }]} />
       <PageHeading>Elements</PageHeading>
 
       <h2 className="text-2xl font-semibold tracking-tight dark:text-white">

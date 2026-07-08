@@ -9,7 +9,7 @@ import {
   type ColorPaletteId,
 } from '@/lib/colors'
 
-// The active color palette (FLO / Apple), persisted to localStorage. Mirrors
+// The active color palette (FLO / Tailwind), persisted to localStorage. Mirrors
 // src/lib/tarotStyle.ts: the store starts at the default (so SSR/static-export
 // render is stable) and hydrates from localStorage once on mount, switching to
 // the saved choice on the client. Distinct from next-themes' light/dark

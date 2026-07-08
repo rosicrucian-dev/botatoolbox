@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { IndexLabel } from '@/components/IndexLabel'
 import { PageHeading } from '@/components/PageHeading'
 import { PlayLink } from '@/components/PlayLink'
@@ -12,6 +13,9 @@ export const metadata: Metadata = {
 export default function Trestleboard() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs
+        items={[{ label: 'The Pattern on the Trestleboard' }]}
+      />
       <div className="flex items-start justify-between gap-4">
         <PageHeading>The Pattern on the Trestleboard</PageHeading>
         <PlayLink href="/texts/pattern-trestleboard/play">

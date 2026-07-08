@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { TextLink } from '@/components/TextLink'
 import { chakras, planetBySlug } from '@/content/data'
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
 export default function ChakrasPage() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Chakras' }]} />
       <PageHeading>Chakras</PageHeading>
 
       <Table className="[--gutter:1rem] sm:[--gutter:1.5rem] lg:[--gutter:2rem]">

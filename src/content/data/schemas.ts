@@ -46,6 +46,10 @@ export const TarotCardSchema = z.object({
 export const TextSchema = z.object({
   slug: z.string(),
   title: z.string(),
+  description: z
+    .string()
+    .optional()
+    .describe('Shown on the home-page TOC card for this text.'),
   hidden: z
     .boolean()
     .optional()

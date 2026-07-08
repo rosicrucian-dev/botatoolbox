@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { cardBySlugOrNum, cards, minorBySlug } from '@/content/data'
 import { MajorCard } from './MajorCard'
 import { MinorCard } from './MinorCard'
@@ -38,8 +39,30 @@ export default async function TarotCardPage({
 }) {
   const { slug } = await params
   const major = cardBySlugOrNum(slug)
-  if (major) return <MajorCard card={major} />
+  if (major)
+    return (
+      <>
+        <SetBreadcrumbs
+          items={[
+            { label: 'Major Arcana', href: '/tarot/major-arcana' },
+            { label: major.name },
+          ]}
+        />
+        <MajorCard card={major} />
+      </>
+    )
   const minor = minorBySlug[slug]
-  if (minor) return <MinorCard card={minor} />
+  if (minor)
+    return (
+      <>
+        <SetBreadcrumbs
+          items={[
+            { label: 'Minor Arcana', href: '/tarot/minor-arcana' },
+            { label: `${minor.num} of ${minor.suit}` },
+          ]}
+        />
+        <MinorCard card={minor} />
+      </>
+    )
   notFound()
 }

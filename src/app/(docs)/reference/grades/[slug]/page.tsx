@@ -2,6 +2,7 @@ import { type Metadata } from 'next'
 import { Link } from 'next-view-transitions'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { MajorImage } from '@/components/CardImage'
 import { DefinitionList, type DefinitionRow } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
@@ -126,6 +127,12 @@ export default async function GradePage({
 
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs
+        items={[
+          { label: 'Grades', href: '/reference/grades' },
+          { label: grade.name },
+        ]}
+      />
       <KeyboardNav prevHref={prevHref} nextHref={nextHref} />
       <PageHeading>{grade.name}</PageHeading>
 

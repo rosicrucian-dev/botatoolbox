@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'next-view-transitions'
 
+import { BreadcrumbProvider } from '@/components/Breadcrumbs'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Logo } from '@/components/Logo'
@@ -10,7 +11,8 @@ import { Navigation } from '@/components/Navigation'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-full lg:ml-72 xl:ml-80">
+    <BreadcrumbProvider>
+      <div className="h-full lg:ml-72 xl:ml-80">
       <motion.header
         layoutScroll
         className="contents lg:pointer-events-none lg:fixed lg:inset-0 lg:z-40 lg:flex"
@@ -36,6 +38,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </main>
         <Footer />
       </div>
-    </div>
+      </div>
+    </BreadcrumbProvider>
   )
 }

@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { PlayLink } from '@/components/PlayLink'
 import {
@@ -28,6 +29,7 @@ const SUB_ROWS: Array<Row> = SUB_ORDER.map((sub, idx) => ({ sub, idx }))
 export default function Tattvas() {
   return (
     <article className="space-y-8">
+      <SetBreadcrumbs items={[{ label: 'Tattvas' }]} />
       <PageHeading>Tattvas</PageHeading>
 
       {/* A column per main tattva, a row per sub. Each cell links to that main's

@@ -33,7 +33,7 @@ export function HeaderChip({
       aria-pressed={pressed}
       title={title}
       className={
-        'relative inline-flex h-9 shrink-0 items-center justify-center rounded-md px-3 text-sm font-medium whitespace-nowrap ring-1 ring-current/20 transition ' +
+        'relative inline-flex h-9 shrink-0 items-center justify-center rounded-lg px-3 text-sm font-medium whitespace-nowrap ring-1 ring-current/20 transition ' +
         (pressed ? 'bg-current/15' : 'hover:bg-current/10')
       }
     >

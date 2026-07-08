@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { FreeformClient } from '@/components/FreeformClient'
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 }
 
 export default function FreeformPage() {
-  return <FreeformClient />
+  return (
+    <>
+      <SetBreadcrumbs items={[{ label: 'Freeform' }]} />
+      <FreeformClient />
+    </>
+  )
 }

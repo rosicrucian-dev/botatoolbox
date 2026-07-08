@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { TextLink } from '@/components/TextLink'
 import { cards, type TarotCard } from '@/content/data'
@@ -59,6 +60,7 @@ const STICKY = 'sticky left-0 z-10 bg-white text-xs dark:bg-zinc-900'
 export default function CorrespondencesPage() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Correspondences' }]} />
       <PageHeading>Correspondences</PageHeading>
 
       <Table className="[--gutter:1rem] sm:[--gutter:1.5rem] lg:[--gutter:2rem]">

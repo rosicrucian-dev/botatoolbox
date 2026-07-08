@@ -27,7 +27,7 @@ export function PlayLink({
       }}
       className={
         className ??
-        'shrink-0 rounded-md bg-emerald-500 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-white transition hover:bg-emerald-400'
+        'shrink-0 rounded-full bg-emerald-500 px-3 py-1.5 text-sm font-medium whitespace-nowrap text-white transition hover:bg-emerald-400'
       }
     >
       {children}

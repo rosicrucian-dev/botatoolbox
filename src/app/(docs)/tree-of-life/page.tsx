@@ -1,5 +1,7 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+
 import { TreeOfLifeClient } from './TreeOfLifeClient'
 
 export const metadata: Metadata = {
@@ -7,5 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default function TreeOfLife() {
-  return <TreeOfLifeClient />
+  return (
+    <>
+      <SetBreadcrumbs items={[{ label: 'Tree of Life' }]} />
+      <TreeOfLifeClient />
+    </>
+  )
 }

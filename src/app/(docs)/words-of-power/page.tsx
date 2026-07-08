@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DataList } from '@/components/DataList'
 import { PageHeading } from '@/components/PageHeading'
 import { words } from '@/content/data'
@@ -34,6 +35,7 @@ function groupByWords(
 export default function WordsOfPower() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Words of Power' }]} />
       <PageHeading>Words of Power</PageHeading>
       <DataList
         items={words}

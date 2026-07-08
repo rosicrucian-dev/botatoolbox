@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { grades, sephirahBySlug } from '@/content/data'
 
@@ -22,6 +23,7 @@ function Dash() {
 export default function GradesPage() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Grades' }]} />
       <PageHeading>Grades</PageHeading>
       <Table className="[--gutter:1rem] sm:[--gutter:1.5rem] lg:[--gutter:2rem]">
         <TableHead>

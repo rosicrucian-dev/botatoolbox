@@ -1,6 +1,8 @@
 import { Link } from 'next-view-transitions'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { ContinueChip } from '@/components/LastVisited'
+import { HeroPattern } from '@/components/HeroPattern'
 import { PageHeading } from '@/components/PageHeading'
 import { Prose } from '@/components/Prose'
 import { NavSections } from './NavSections'
@@ -12,7 +14,15 @@ import { NavSections } from './NavSections'
 
 export default function Home() {
   return (
-    <article className="space-y-14">
+    <>
+      {/* The Protocol template's homepage flair — a green grid/gradient
+          wash behind the top of the page. Rendered as a sibling of the
+          article (not inside its space-y-14) so its absolute box doesn't
+          count as a flow child and push the header down. It anchors to
+          the Layout's `relative` content wrapper. */}
+      <HeroPattern />
+      <SetBreadcrumbs items={[{ label: 'Overview' }]} />
+      <article className="space-y-14">
       {/* The hero block — title, lead subtitle, and any short
           paragraphs of supporting copy — lives inside one <header>.
           Prose handles its own internal paragraph rhythm and the
@@ -21,7 +31,17 @@ export default function Home() {
           space-y-14 only fires between hero ↔ NavSections, not
           between title ↔ Prose. */}
       <header>
-        <PageHeading className="text-zinc-900">BOTA Toolbox</PageHeading>
+        {/* Heading and the "Continue" chip share one row — the chip is
+            right-aligned to the title so it uses the empty horizontal
+            space beside it instead of adding a vertical band below.
+            ContinueChip is lg:hidden, so on desktop the heading sits
+            alone at the start. */}
+        <div className="flex items-center justify-between gap-16">
+          <PageHeading className="shrink-0 text-zinc-900">
+            BOTA Toolbox
+          </PageHeading>
+          {/* <ContinueChip /> */}
+        </div>
         <Prose className="mt-2">
           <p className="lead">
             An unofficial set of advanced tools for members of the{' '}
@@ -34,13 +54,9 @@ export default function Home() {
             . Thank you! 🌹
           </p> */}
         </Prose>
-        {/* One-tap jump back to the last-visited page — an installed
-            home-screen app always relaunches here at /, so this is the
-            "resume studying" affordance. Renders nothing on a first
-            visit. */}
-        <ContinueChip />
       </header>
       <NavSections />
-    </article>
+      </article>
+    </>
   )
 }

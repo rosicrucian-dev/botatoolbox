@@ -99,16 +99,18 @@ export function ContinueChip() {
     // desktop the sidebar + history make it redundant.
     <Link
       href={last.path}
-      className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-50 py-1.5 pr-4 pl-3 text-sm font-medium text-emerald-600 ring-1 ring-emerald-600/20 transition hover:bg-emerald-100 lg:hidden dark:bg-emerald-500/10 dark:text-emerald-400 dark:ring-emerald-400/30 dark:hover:bg-emerald-500/20"
+      className="inline-flex min-w-0 items-center gap-2 rounded-full bg-emerald-50 py-1.5 pr-4 pl-3 text-sm font-medium text-emerald-600 ring-1 ring-emerald-600/20 transition hover:bg-emerald-100 lg:hidden dark:bg-emerald-500/10 dark:text-emerald-400 dark:ring-emerald-400/30 dark:hover:bg-emerald-500/20"
     >
-      <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+      <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 shrink-0">
         <path
           fillRule="evenodd"
           d="M2 10a8 8 0 1 1 16 0 8 8 0 0 1-16 0Zm6.39-2.908a.75.75 0 0 1 .766.027l3.5 2.25a.75.75 0 0 1 0 1.262l-3.5 2.25A.75.75 0 0 1 8 12.25v-4.5a.75.75 0 0 1 .39-.658Z"
           clipRule="evenodd"
         />
       </svg>
-      Continue: {last.title}
+      {/* Truncates so a long page title can't overflow the heading row on
+          a narrow phone — the heading keeps its width, the chip gives. */}
+      <span className="truncate">Continue: {last.title}</span>
     </Link>
   )
 }

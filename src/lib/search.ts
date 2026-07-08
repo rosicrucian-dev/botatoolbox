@@ -25,7 +25,9 @@ export const searchEntries: ReadonlyArray<SearchEntry> = [
   ...navigation
     .filter((group) => !group.gated)
     .flatMap((group) =>
-      group.links.map((l) => ({ url: l.href, title: l.title })),
+      group.links
+        .filter((l) => !l.hidden)
+        .map((l) => ({ url: l.href, title: l.title })),
     ),
   ...cards.map((c) => ({ url: `/tarot/${c.slug}`, title: c.name })),
   ...minorCards.map((c) => ({

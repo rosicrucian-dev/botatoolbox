@@ -1,5 +1,7 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+
 import { HoraClient } from './HoraClient'
 
 export const metadata: Metadata = {
@@ -9,5 +11,10 @@ export const metadata: Metadata = {
 }
 
 export default function Hora() {
-  return <HoraClient />
+  return (
+    <>
+      <SetBreadcrumbs items={[{ label: 'Hora' }]} />
+      <HoraClient />
+    </>
+  )
 }

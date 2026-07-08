@@ -91,7 +91,7 @@ export function AstrologyWheel({
   // pinned to a moment other than now.
   label?: string
 }) {
-  // Respects the user's colour palette (FLO / Apple) from Settings; planets
+  // Respects the user's colour palette (FLO / Tailwind) from Settings; planets
   // render in their attributed BOTA colour (Mercury yellow, Venus green, …).
   const { colorPalette } = useColorPalette()
   const m = ringMetrics(profile)
@@ -106,7 +106,10 @@ export function AstrologyWheel({
     <svg
       viewBox={ASTRO_VIEWBOX}
       xmlns="http://www.w3.org/2000/svg"
-      className="h-full w-full"
+      // `block` removes the inline-SVG baseline gap that otherwise adds a
+      // sliver of space below the wheel, making the vertical padding look
+      // uneven against the horizontal.
+      className="block h-full w-full"
       preserveAspectRatio="xMidYMid meet"
       role="img"
       aria-label={label}

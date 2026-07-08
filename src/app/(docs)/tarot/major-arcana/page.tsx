@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DataList } from '@/components/DataList'
 import { IndexLabel } from '@/components/IndexLabel'
 import { PageHeading } from '@/components/PageHeading'
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function MajorArcana() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Major Arcana' }]} />
       <PageHeading>Major Arcana</PageHeading>
       <DataList
         items={cards}

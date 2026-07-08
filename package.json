@@ -13,6 +13,7 @@
     "gen:schemas": "node --experimental-strip-types scripts/gen-schemas.ts",
     "gen:appicon": "node --experimental-strip-types scripts/gen-appicon.ts",
     "gen:favicon": "node --experimental-strip-types scripts/gen-favicon.ts",
+    "gen:social": "node --experimental-strip-types scripts/gen-social.ts",
     "gen:splash": "node --experimental-strip-types scripts/gen-splash.ts",
     "optimize:tarot": "node --experimental-strip-types scripts/optimize-tarot.ts",
     "zip:tarot": "node --experimental-strip-types scripts/zip-tarot.ts",

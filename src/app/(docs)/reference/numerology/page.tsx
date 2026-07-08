@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { numerology } from '@/content/data'
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 export default function NumerologyPage() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Numerology' }]} />
       <PageHeading>Numerology</PageHeading>
 
       <Table className="[--gutter:1rem] sm:[--gutter:1.5rem] lg:[--gutter:2rem]">

@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DefinitionList, type DefinitionRow } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PageHeading } from '@/components/PageHeading'
@@ -118,6 +119,12 @@ export default async function SephirahPage({
 
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs
+        items={[
+          { label: 'Tree of Life', href: '/tree-of-life' },
+          { label: sephirah.hebrewName },
+        ]}
+      />
       <KeyboardNav prevHref={prevHref} nextHref={nextHref} />
       <PageHeading>{sephirah.hebrewName}</PageHeading>
 

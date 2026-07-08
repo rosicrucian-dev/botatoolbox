@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DataList } from '@/components/DataList'
 import { PageHeading } from '@/components/PageHeading'
 import { signs } from '@/content/data'
@@ -15,6 +16,7 @@ const signsWithIdx = signs.map((s, i) => ({ ...s, idx: i }))
 export default function Signs() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Signs' }]} />
       <PageHeading>Signs</PageHeading>
 
       <DataList

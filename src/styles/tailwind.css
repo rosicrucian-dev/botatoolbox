@@ -5,23 +5,12 @@
 
 @theme {
   /*
-   * Override the template's accent palette (originally Tailwind emerald)
-   * with a scale anchored at Apple's system blue (#0088FF). Class names
-   * stay as `*-emerald-*` everywhere they were written by the template;
-   * they just render as blue now. Buttons, sidebar active indicator,
-   * link colors, search highlights, etc. all pick this up automatically.
+   * The template's accent is Tailwind's stock emerald — links, buttons,
+   * the sidebar active indicator, and search highlights all use
+   * `*-emerald-*`. We render it as-is (green), matching the cube and the
+   * homepage's green hero/card flair. (This used to be remapped to
+   * Apple system blue; that override was removed.)
    */
-  --color-emerald-50: #ebf5ff;
-  --color-emerald-100: #d6ebff;
-  --color-emerald-200: #addaff;
-  --color-emerald-300: #7dc1ff;
-  --color-emerald-400: #3fa5ff;
-  --color-emerald-500: #0088ff;
-  --color-emerald-600: #006ee0;
-  --color-emerald-700: #0058b3;
-  --color-emerald-800: #00457a;
-  --color-emerald-900: #00305c;
-  --color-emerald-950: #001a33;
 
   --text-2xs: 0.75rem;
   --text-2xs--line-height: 1.25rem;

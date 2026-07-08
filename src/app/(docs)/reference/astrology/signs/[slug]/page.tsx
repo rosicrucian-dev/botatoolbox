@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DefinitionList } from '@/components/DefinitionList'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PageHeading } from '@/components/PageHeading'
@@ -49,6 +50,12 @@ export default async function SignPage({
 
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs
+        items={[
+          { label: 'Astrology', href: '/reference/astrology' },
+          { label: sign.name },
+        ]}
+      />
       <KeyboardNav
         prevHref={`/reference/astrology/signs/${prev.slug}`}
         nextHref={`/reference/astrology/signs/${next.slug}`}

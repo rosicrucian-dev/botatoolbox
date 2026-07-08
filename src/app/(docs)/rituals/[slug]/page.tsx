@@ -5,6 +5,7 @@ import { type Metadata } from 'next'
 import { Link } from 'next-view-transitions'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { IndexLabel } from '@/components/IndexLabel'
 import { PageHeading } from '@/components/PageHeading'
 import { PlayLink } from '@/components/PlayLink'
@@ -95,6 +96,7 @@ export default async function RitualPage({
   const sections = ritualSections(slug)
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: ritual.title }]} />
       <div className="flex items-start justify-between gap-4">
         <div>
           <PageHeading>{ritual.title}</PageHeading>

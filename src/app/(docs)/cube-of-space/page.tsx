@@ -1,5 +1,7 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+
 import { CubeOfSpaceClient } from './CubeOfSpaceClient'
 
 export const metadata: Metadata = {
@@ -7,5 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default function CubeOfSpace() {
-  return <CubeOfSpaceClient />
+  return (
+    <>
+      <SetBreadcrumbs items={[{ label: 'Cube of Space' }]} />
+      <CubeOfSpaceClient />
+    </>
+  )
 }

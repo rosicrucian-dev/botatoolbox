@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DataList } from '@/components/DataList'
 import { IndexLabel } from '@/components/IndexLabel'
 import { PageHeading } from '@/components/PageHeading'
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 export default function MinorArcana() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Minor Arcana' }]} />
       <PageHeading>Minor Arcana</PageHeading>
 
       <section>

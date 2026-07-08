@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { Suspense, useEffect } from 'react'
 
 import { useColorPalette } from '@/lib/colorPalette'
+import { usePinnedCards } from '@/lib/pinnedCards'
 import { decodeSettingsToken } from '@/lib/settingsLink'
 import { useTarotStyle } from '@/lib/tarotStyle'
 import { applyRestoredUnlock } from '@/lib/useSecretMode'
@@ -25,6 +26,7 @@ function Restore() {
   const token = searchParams.get('restore')
   const { setMajorStyle, setMinorStyle } = useTarotStyle()
   const { setColorPalette } = useColorPalette()
+  const { setPins } = usePinnedCards()
 
   useEffect(() => {
     if (!token) return
@@ -36,11 +38,14 @@ function Restore() {
       // Only ever unlocks — a snapshot taken while locked simply
       // doesn't carry the unlock.
       if (snapshot.unlocked) applyRestoredUnlock()
+      // Present (incl. empty) → reset pins to the snapshot; absent (older
+      // link) → leave the current pins untouched.
+      if (snapshot.pins) setPins(snapshot.pins)
     }
     const url = new URL(window.location.href)
     url.searchParams.delete('restore')
     window.history.replaceState(null, '', url.toString())
-  }, [token, setMajorStyle, setMinorStyle, setColorPalette])
+  }, [token, setMajorStyle, setMinorStyle, setColorPalette, setPins])
 
   return null
 }

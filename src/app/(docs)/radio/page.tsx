@@ -1,14 +1,16 @@
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Ann Davies Radio',
+  title: 'Radio',
 }
 
-export default function AnnDaviesRadio() {
+export default function Radio() {
   return (
     <article className="space-y-6">
-      <PageHeading>Ann Davies Radio</PageHeading>
+      <SetBreadcrumbs items={[{ label: 'Radio' }]} />
+      <PageHeading>Radio</PageHeading>
       <div
         className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800"
         style={{ backgroundColor: '#25292c' }}

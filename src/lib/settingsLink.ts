@@ -18,6 +18,10 @@ export interface SettingsSnapshot {
   minorStyle: string
   colorPalette: ColorPaletteId
   unlocked: boolean
+  // Pinned homepage cards (hrefs). Optional so pre-pins permalinks still
+  // decode: absent means "leave pins as they are"; an empty array means
+  // "reset to no pins". Applied hrefs are validated by the pins store.
+  pins?: Array<string>
 }
 
 function toBase64Url(s: string): string {
@@ -36,6 +40,7 @@ export function encodeSettingsToken(snapshot: SettingsSnapshot): string {
       mn: snapshot.minorStyle,
       cp: snapshot.colorPalette,
       u: snapshot.unlocked ? 1 : 0,
+      pn: snapshot.pins ?? [],
     }),
   )
 }
@@ -44,16 +49,24 @@ export function decodeSettingsToken(token: string): SettingsSnapshot | null {
   try {
     const raw: unknown = JSON.parse(fromBase64Url(token))
     if (typeof raw !== 'object' || raw === null) return null
-    const { v, mj, mn, cp, u } = raw as Record<string, unknown>
+    const { v, mj, mn, cp, u, pn } = raw as Record<string, unknown>
     if (v !== 1) return null
     if (typeof mj !== 'string' || !isMajorStyle(mj)) return null
     if (typeof mn !== 'string' || !isMinorStyle(mn)) return null
     if (typeof cp !== 'string' || !isColorPalette(cp)) return null
+    // `pn` is optional (older links predate pins). When present it must be
+    // an array of strings; unknown hrefs are dropped later by the store.
+    let pins: Array<string> | undefined
+    if (pn !== undefined) {
+      if (!Array.isArray(pn) || pn.some((x) => typeof x !== 'string')) return null
+      pins = pn as Array<string>
+    }
     return {
       majorStyle: mj,
       minorStyle: mn,
       colorPalette: cp,
       unlocked: u === 1,
+      pins,
     }
   } catch {
     return null

@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { alchemyTerms } from '@/content/data'
 
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function AlchemyPage() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Alchemy' }]} />
       <PageHeading>Alchemy</PageHeading>
 
       <dl className="divide-y divide-zinc-950/5 border-y border-zinc-950/5 text-sm/6 dark:divide-white/5 dark:border-white/5">

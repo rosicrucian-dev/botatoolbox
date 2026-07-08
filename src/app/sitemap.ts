@@ -23,7 +23,7 @@ const SITE = 'https://botatoolbox.org'
 const staticRoutes = [
   '/',
   '/about',
-  '/ann-davies-radio',
+  '/radio',
   '/astrology/chart',
   '/astrology/hora',
   '/reference/alchemy',
@@ -33,6 +33,7 @@ const staticRoutes = [
   '/reference/qabalah',
   '/cube-of-space',
   '/reference/grades',
+  '/reference/hebrew',
   '/healing/planets',
   '/healing/signs',
   '/files',
@@ -54,10 +55,29 @@ const staticRoutes = [
   '/words-of-power',
 ]
 
+// Group landing pages (the card grid for each sidebar group). Excludes
+// /meditations (gated: 'secret'). The dual-URL aliases under flat groups
+// (e.g. /devices/cube-of-space) are intentionally omitted — the canonical
+// flat URL above is the one to index.
+const groupRoutes = [
+  '/astrology',
+  '/devices',
+  '/gematria',
+  '/healing',
+  '/practice',
+  '/reference',
+  '/resources',
+  '/rituals',
+  '/tarot',
+  '/texts',
+  '/utilities',
+  '/website',
+]
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
   return [
-    ...staticRoutes.map((path) => ({
+    ...[...staticRoutes, ...groupRoutes].map((path) => ({
       url: `${SITE}${path}`,
       lastModified,
     })),

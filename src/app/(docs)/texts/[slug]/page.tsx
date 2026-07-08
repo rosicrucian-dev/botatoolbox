@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { remark } from 'remark'
 import remarkHtml from 'remark-html'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { Prose } from '@/components/Prose'
 import { textBySlug, texts } from '@/content/data'
@@ -54,6 +55,7 @@ export default async function TextPage({
   const html = bodyHtml(slug)
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: text.title }]} />
       <PageHeading>{text.title}</PageHeading>
       <Prose>
         <div dangerouslySetInnerHTML={{ __html: html }} />

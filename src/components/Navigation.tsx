@@ -8,12 +8,12 @@ import { usePathname } from 'next/navigation'
 import { useRef } from 'react'
 
 import { useIsInsideMobileNavigation } from '@/components/MobileNavigation'
-import { navigation, type NavGroup } from '@/lib/nav'
+import { visibleNavigation, type NavGroup } from '@/lib/nav'
 import { remToPx } from '@/lib/remToPx'
 import { useSecretMode } from '@/lib/useSecretMode'
 import { CloseButton } from '@headlessui/react'
 
-export { navigation }
+export { visibleNavigation as navigation }
 
 function useInitialValue<T>(value: T, condition = true) {
   // eslint-disable-next-line react-hooks/refs
@@ -169,7 +169,7 @@ function NavigationGroup({
 
 export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   const { unlocked } = useSecretMode()
-  const visible = navigation.filter(
+  const visible = visibleNavigation.filter(
     (group) => group.gated !== 'secret' || unlocked,
   )
   return (

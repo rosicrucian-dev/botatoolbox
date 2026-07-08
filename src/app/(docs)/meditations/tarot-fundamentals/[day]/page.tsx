@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { MajorImage } from '@/components/CardImage'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PageHeading } from '@/components/PageHeading'
@@ -48,6 +49,15 @@ export default async function TarotFundamentalsDayPage({
 
   return (
     <article className="space-y-8">
+      <SetBreadcrumbs
+        items={[
+          {
+            label: 'Tarot Fundamentals',
+            href: '/meditations/tarot-fundamentals',
+          },
+          { label: `Day ${entry.day}` },
+        ]}
+      />
       <KeyboardNav prevHref={prevHref} nextHref={nextHref} />
       <PageHeading>Day {entry.day}</PageHeading>
 

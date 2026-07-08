@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { TextLink } from '@/components/TextLink'
 import {
@@ -61,6 +62,7 @@ function LinkList({
 export default function Astrology() {
   return (
     <article className="space-y-8">
+      <SetBreadcrumbs items={[{ label: 'Astrology' }]} />
       <PageHeading>Astrology</PageHeading>
 
       <section className="space-y-3">

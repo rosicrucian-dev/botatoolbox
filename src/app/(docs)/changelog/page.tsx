@@ -5,6 +5,7 @@ import { type Metadata } from 'next'
 import { remark } from 'remark'
 import remarkHtml from 'remark-html'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { Prose } from '@/components/Prose'
 
@@ -25,6 +26,7 @@ export default function Changelog() {
   const html = changelogHtml()
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Changelog' }]} />
       <PageHeading>Changelog</PageHeading>
       <Prose>
         <div dangerouslySetInnerHTML={{ __html: html }} />

@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { Link } from 'next-view-transitions'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { files, sectionsInOrder } from '@/content/data'
 
@@ -14,6 +15,7 @@ const itemClass =
 export default function Files() {
   return (
     <article className="space-y-8">
+      <SetBreadcrumbs items={[{ label: 'Files' }]} />
       <PageHeading>Files</PageHeading>
       {sectionsInOrder.map((section) => (
         <section key={section} className="space-y-3">

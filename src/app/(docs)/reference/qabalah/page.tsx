@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { fourWorlds, pillars, tenPalaces, threeVeils } from '@/content/data'
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 export default function QabalahPage() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Qabalah' }]} />
       <PageHeading>Qabalah</PageHeading>
 
       <h2 className="text-2xl font-semibold tracking-tight dark:text-white">

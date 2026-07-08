@@ -4,6 +4,7 @@ import { Link } from 'next-view-transitions'
 import NextLink from 'next/link'
 import { forwardRef } from 'react'
 
+import { BreadcrumbTrail, useBreadcrumbs } from '@/components/Breadcrumbs'
 import { Logo } from '@/components/Logo'
 import {
   MobileNavigation,
@@ -20,6 +21,7 @@ export const Header = forwardRef<
 >(function Header({ className, ...props }, ref) {
   let { isOpen: mobileNavIsOpen } = useMobileNavigationStore()
   let isInsideMobileNavigation = useIsInsideMobileNavigation()
+  let crumbs = useBreadcrumbs()
 
   let { scrollY } = useScroll()
   let bgOpacityLight = useTransform(scrollY, [0, 72], ['50%', '90%'])
@@ -31,7 +33,7 @@ export const Header = forwardRef<
       ref={ref}
       className={clsx(
         className,
-        'fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-12 px-4 transition sm:px-6 lg:left-72 lg:z-30 lg:px-8 xl:left-80',
+        'fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-4 px-4 transition sm:px-6 lg:left-72 lg:z-30 lg:px-8 xl:left-80',
         !isInsideMobileNavigation &&
           'backdrop-blur-xs lg:left-72 xl:left-80 dark:backdrop-blur-sm',
         isInsideMobileNavigation
@@ -58,24 +60,37 @@ export const Header = forwardRef<
             'bg-zinc-900/7.5 dark:bg-white/7.5',
         )}
       />
-      <div className="flex items-center gap-5 lg:hidden">
-        <MobileNavigation />
-        {/* Plain link inside the open drawer — same reasoning as NavLink
-            in Navigation.tsx: don't stack a view transition on top of
-            the drawer's own close animation. */}
-        <CloseButton
-          as={isInsideMobileNavigation ? NextLink : Link}
-          href="/"
-          aria-label="Home"
-        >
-          <Logo className="h-6" />
-        </CloseButton>
-      </div>
-      <div className="ml-auto flex items-center gap-5">
-        <div className="flex gap-4">
-          <MobileSearch />
-          <ThemeToggle />
+      {/* Left: the mobile nav FAB (fixed-position; kept mounted here) plus
+          the page's breadcrumb trail. When a page declares no trail, fall
+          back to the mobile logo — breadcrumbs are never forced. */}
+      <div className="flex min-w-0 flex-1 items-center gap-4">
+        <div className="lg:hidden">
+          <MobileNavigation />
         </div>
+        {/* Both states (breadcrumb trail / logo fallback) share one fixed
+            h-6 centered box, so toggling between home and a detail page
+            never shifts them vertically relative to the hamburger. */}
+        <div className="flex h-6 min-w-0 flex-1 items-center">
+          {crumbs.length > 0 ? (
+            <BreadcrumbTrail items={crumbs} />
+          ) : (
+            /* Plain link inside the open drawer — same reasoning as NavLink
+               in Navigation.tsx: don't stack a view transition on top of the
+               drawer's own close animation. */
+            <CloseButton
+              as={isInsideMobileNavigation ? NextLink : Link}
+              href="/"
+              aria-label="Home"
+              className="lg:hidden"
+            >
+              <Logo />
+            </CloseButton>
+          )}
+        </div>
+      </div>
+      <div className="flex shrink-0 items-center gap-4">
+        <MobileSearch />
+        <ThemeToggle />
       </div>
     </motion.div>
   )

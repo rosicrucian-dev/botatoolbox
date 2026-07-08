@@ -8,6 +8,11 @@
     "title": "Aquarian Doxology"
   },
   {
+    "slug": "book-of-tokens",
+    "title": "The Book of Tokens",
+    "custom": true
+  },
+  {
     "slug": "chaldean-oracles",
     "title": "Chaldean Oracles",
     "hidden": true

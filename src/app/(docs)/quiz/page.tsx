@@ -1,5 +1,7 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+
 import { QuizCatalog } from './QuizCatalog'
 
 export const metadata: Metadata = {
@@ -7,5 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default function QuizIndex() {
-  return <QuizCatalog />
+  return (
+    <>
+      <SetBreadcrumbs items={[{ label: 'Quiz' }]} />
+      <QuizCatalog />
+    </>
+  )
 }

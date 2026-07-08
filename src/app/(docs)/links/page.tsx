@@ -1,3 +1,4 @@
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { type Metadata } from 'next'
 
@@ -43,6 +44,7 @@ const sections: Array<{ title: string; links: Array<LinkItem> }> = [
 export default function Links() {
   return (
     <article className="space-y-8">
+      <SetBreadcrumbs items={[{ label: 'Links' }]} />
       <PageHeading>Links</PageHeading>
       {sections.map((section) => (
         <section key={section.title} className="space-y-3">

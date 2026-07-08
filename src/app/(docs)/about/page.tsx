@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { PageHeading } from '@/components/PageHeading'
 import { Prose } from '@/components/Prose'
 
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'About' }]} />
       <PageHeading>About</PageHeading>
       <Prose>
         <p>

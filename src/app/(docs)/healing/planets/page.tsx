@@ -1,5 +1,6 @@
 import { type Metadata } from 'next'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DataList } from '@/components/DataList'
 import { PageHeading } from '@/components/PageHeading'
 import { PlayLink } from '@/components/PlayLink'
@@ -19,6 +20,7 @@ const planetsWithIdx = healingPlanets.map((p, i) => ({ ...p, idx: i + 1 }))
 export default function Planets() {
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label: 'Planets' }]} />
       <div className="flex items-start justify-between gap-4">
         <PageHeading>Planets</PageHeading>
         <PlayLink href="/healing/planets/play">Start Exercise ▶</PlayLink>

@@ -2,6 +2,7 @@ import { type Metadata } from 'next'
 import { Link } from 'next-view-transitions'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs, type Crumb } from '@/components/Breadcrumbs'
 import { MajorImage, MinorImage } from '@/components/CardImage'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PageHeading } from '@/components/PageHeading'
@@ -89,8 +90,21 @@ export default async function TarotCardImagePage({
 
   const backHref = `/tarot/${major ? major.slug : minor!.slug}`
 
+  const crumbs: Array<Crumb> = major
+    ? [
+        { label: 'Major Arcana', href: '/tarot/major-arcana' },
+        { label: title, href: backHref },
+        { label: 'Image' },
+      ]
+    : [
+        { label: 'Minor Arcana', href: '/tarot/minor-arcana' },
+        { label: title, href: backHref },
+        { label: 'Image' },
+      ]
+
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs items={crumbs} />
       <KeyboardNav prevHref={prev.href} nextHref={next.href} />
       <div className="flex items-start justify-between gap-4">
         <PageHeading>{title}</PageHeading>

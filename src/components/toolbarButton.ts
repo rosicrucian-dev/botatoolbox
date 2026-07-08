@@ -10,5 +10,11 @@
 // shared Button component untouched. The `!` keeps these winning over Button's
 // own base classes regardless of stylesheet order; TouchTarget still guarantees
 // a 44px touch hit-area underneath.
+//
+// Also pins the squared radius (rounded-lg). The Catalyst base is now
+// rounded-full (Protocol's default for content buttons), but toolbar buttons
+// read better squared-off and match the HeaderChip row beside them. Catalyst
+// paints the fill/hover on inset `before`/`after` pseudo-layers, so those are
+// pinned too or the fill wouldn't match the squared outline.
 export const toolbarButtonSize =
-  'text-sm/6! px-[calc(--spacing(3)-1px)]! py-[calc(--spacing(1.5)-1px)]!'
+  'text-sm/6! px-[calc(--spacing(3)-1px)]! py-[calc(--spacing(1.5)-1px)]! rounded-lg! before:rounded-lg! after:rounded-lg!'

@@ -12,6 +12,7 @@ import {
 import { MAJOR_STYLES, MINOR_STYLES } from '@/content/data/tarot-styles'
 import { useColorPalette } from '@/lib/colorPalette'
 import { COLOR_PALETTES, type ColorPaletteId } from '@/lib/colors'
+import { usePinnedCards } from '@/lib/pinnedCards'
 import { encodeSettingsToken } from '@/lib/settingsLink'
 import { useTarotStyle } from '@/lib/tarotStyle'
 import { useSecretMode } from '@/lib/useSecretMode'
@@ -53,6 +54,7 @@ function PermalinkSection() {
   const { majorStyle, minorStyle } = useTarotStyle()
   const { colorPalette } = useColorPalette()
   const { unlocked } = useSecretMode()
+  const { pins } = usePinnedCards()
   const [copied, setCopied] = useState(false)
   // Set when the clipboard API is unavailable/denied — the link is shown
   // for manual copying instead.
@@ -68,6 +70,7 @@ function PermalinkSection() {
     minorStyle,
     colorPalette,
     unlocked,
+    pins,
   })
   const permalink = `/?restore=${token}`
 

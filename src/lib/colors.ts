@@ -27,7 +27,7 @@ export type ColorName =
   | 'binah'
   | 'malkuth'
 
-export type ColorPaletteId = 'flo' | 'apple'
+export type ColorPaletteId = 'flo' | 'tailwind'
 
 export interface ColorPalette {
   id: ColorPaletteId
@@ -41,62 +41,66 @@ export interface ColorPalette {
 // Fraternity of the Hidden Light spectrum — the traditional BOTA colors.
 export const COLOR_PALETTES: ReadonlyArray<ColorPalette> = [
   { id: 'flo', label: 'FLO' },
-  { id: 'apple', label: 'Apple' },
+  { id: 'tailwind', label: 'Tailwind' },
 ]
 
 // Single source of truth for the default palette — the useColorPalette() store's
 // initial value and the default `palette` arg of getColor.
-export const DEFAULT_COLOR_PALETTE: ColorPaletteId = 'apple'
+export const DEFAULT_COLOR_PALETTE: ColorPaletteId = 'tailwind'
 
 export function isColorPalette(id: string): id is ColorPaletteId {
   return COLOR_PALETTES.some((p) => p.id === id)
 }
 
-// Apple system colors (iOS). Used as anchors for the apple theme; the
-// 12-wheel midpoints between adjacent anchors are blended at module load.
-const APPLE = {
-  red: '#FF383C',
-  orange: '#FF8D28',
-  yellow: '#FFCC00',
-  green: '#34C759',
-  teal: '#00C3D0',
-  blue: '#0088FF',
-  indigo: '#6155F5',
-  purple: '#CB30E0',
-  pink: '#FF2D55',
-  brown: '#AC7F5E',
-  gray: '#8E8E93',
+// Tailwind palette. For consistency, only the six RYB anchors — red,
+// orange, yellow, green, blue, violet — come straight from Tailwind (at
+// their namesake 500 shade), and every in-between (tertiary) slot is the
+// RGB midpoint blend of its two neighbors — so each tertiary is a true,
+// even step between two anchors rather than a separately-chosen hue.
+//
+// yellow is the one anchor NOT at 500: it uses the 400 shade. Yellow's
+// vibrancy lives at high lightness (it peaks near L 90%), so yellow-500
+// reads as a dull mustard next to the other spokes; yellow-400 is the
+// vibrant golden yellow the wheel wants.
+//
+// Hexes are the sRGB forms of Tailwind v4's OKLCH definitions.
+const TAILWIND = {
+  red: '#FB2C36', // red-500
+  orange: '#FF6900', // orange-500
+  yellow: '#FDC700', // yellow-400 (see note above), not yellow-500
+  green: '#00BC7D', // emerald-500 — matches the primary buttons/links (PlayLink, the Catalyst Expand button)
+  blue: '#2B7FFF', // blue-500
+  violet: '#8E51FF', // violet-500
+  gray: '#6A7282', // gray-500 (for chokmah)
 }
 
-// Build the apple theme by blending three midpoints between Apple's
-// six base hues. Apple supplies its own teal/indigo/pink as the other
-// three midpoints, so the user's spec maps:
-//   green-blue → teal, blue-violet → indigo, violet-red → pink
-function buildAppleTheme(): Record<ColorName, string> {
+function buildTailwindTheme(): Record<ColorName, string> {
   return {
-    red: APPLE.red,
-    'red-orange': blendColors(APPLE.red, APPLE.orange)!,
-    orange: APPLE.orange,
-    'orange-yellow': blendColors(APPLE.orange, APPLE.yellow)!,
-    yellow: APPLE.yellow,
-    'yellow-green': blendColors(APPLE.yellow, APPLE.green)!,
-    green: APPLE.green,
-    'green-blue': blendColors(APPLE.green, APPLE.blue)!,
-    blue: APPLE.blue,
-    'blue-violet': APPLE.indigo,
-    violet: APPLE.purple,
-    'violet-red': blendColors(APPLE.purple, APPLE.red)!,
+    red: TAILWIND.red,
+    'red-orange': blendColors(TAILWIND.red, TAILWIND.orange)!,
+    orange: TAILWIND.orange,
+    'orange-yellow': blendColors(TAILWIND.orange, TAILWIND.yellow)!,
+    yellow: TAILWIND.yellow,
+    'yellow-green': blendColors(TAILWIND.yellow, TAILWIND.green)!,
+    green: TAILWIND.green,
+    'green-blue': blendColors(TAILWIND.green, TAILWIND.blue)!,
+    blue: TAILWIND.blue,
+    'blue-violet': blendColors(TAILWIND.blue, TAILWIND.violet)!,
+    violet: TAILWIND.violet,
+    'violet-red': blendColors(TAILWIND.violet, TAILWIND.red)!,
     kether: '#FFFFFF',
-    chokmah: APPLE.gray,
+    chokmah: TAILWIND.gray,
     binah: '#000000',
-    malkuth: APPLE.brown,
+    // Channel-wise blend of three lower-tree hues for the earthy Malkuth
+    // backdrop, mirroring the FLO palette's construction.
+    malkuth: blendColors(TAILWIND.green, TAILWIND.orange, TAILWIND.violet)!,
   }
 }
 
 // Theme-invariant colors used by features whose visual identity doesn't
 // shift with the BOTA palette. The Golden Dawn flashing-color choices for
 // tattvas, for instance, are part of the meditation tradition itself —
-// they shouldn't change when the user picks the Apple theme. Keys are
+// they shouldn't change when the user switches palette. Keys are
 // prefixed by feature so they don't collide with the 16-name palette.
 const staticColors: Record<string, string> = {
   // Plain monochromes — used as canonical text colors and as the moon's
@@ -145,7 +149,7 @@ const palettes: Record<ColorPaletteId, Record<ColorName, string>> = {
     // backdrop the original Trestleboard slide used for Malkuth.
     malkuth: blendColors('#397351', '#E65C29', '#3C2070')!,
   },
-  apple: buildAppleTheme(),
+  tailwind: buildTailwindTheme(),
 }
 
 export function getColor(

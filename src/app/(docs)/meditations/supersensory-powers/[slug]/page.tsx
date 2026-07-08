@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { MajorImage } from '@/components/CardImage'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PageHeading } from '@/components/PageHeading'
@@ -51,6 +52,15 @@ export default async function SupersensoryDetailPage({
 
   return (
     <article className="space-y-8">
+      <SetBreadcrumbs
+        items={[
+          {
+            label: 'Developing Supersensory Powers',
+            href: '/meditations/supersensory-powers',
+          },
+          { label: entry.name },
+        ]}
+      />
       <KeyboardNav prevHref={prevHref} nextHref={nextHref} />
       <PageHeading>{entry.name}</PageHeading>
 

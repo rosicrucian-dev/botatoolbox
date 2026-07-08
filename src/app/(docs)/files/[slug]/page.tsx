@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { MinorTableau } from '@/components/MinorTableau'
 import { PageHeading } from '@/components/PageHeading'
 import { TarotTableau } from '@/components/TarotTableau'
@@ -36,6 +37,9 @@ export default async function FileViewer({
 
   return (
     <article className="space-y-6">
+      <SetBreadcrumbs
+        items={[{ label: 'Files', href: '/files' }, { label: file.name }]}
+      />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <PageHeading>{file.name}</PageHeading>
         <div className="flex flex-wrap gap-2">
