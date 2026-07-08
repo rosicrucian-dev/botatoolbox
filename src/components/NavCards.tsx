@@ -86,7 +86,11 @@ export function Card({
         mouseY={mouseY}
       />
       <div className="absolute inset-0 rounded-2xl ring-1 ring-zinc-900/7.5 ring-inset group-hover:ring-zinc-900/10 dark:ring-white/10 dark:group-hover:ring-white/20" />
-      <div className="relative rounded-2xl px-4 py-4">
+      {/* w-full so this (the positioning context for the hit target
+          below) fills the card even when there's no description — without
+          it a flex item shrinks to the title's width and only that strip
+          is clickable. */}
+      <div className="relative w-full rounded-2xl px-4 py-4">
         <h3
           className={clsx(
             'text-sm/7 font-semibold text-zinc-900 dark:text-white',
@@ -132,12 +136,18 @@ function PinButton({ href, title }: { href: string; title: string }) {
       }}
       className={clsx(
         'absolute top-2 right-2 z-10 flex h-6 w-6 items-center justify-center rounded-md transition',
-        // Same glyph throughout — only color/visibility change. Pinned:
-        // emerald and always shown. Unpinned: muted, revealed on card
-        // hover, and turns emerald when the button itself is hovered.
+        // Same glyph throughout — only color/visibility change. Emerald
+        // means pinned, and pinned only; an unpinned pin stays muted zinc
+        // even on hover (it darkens slightly for feedback, never emerald).
+        //
+        // Visibility depends on whether the device can hover. On touch
+        // (no hover) the muted pin stays visible so it reads as a tappable
+        // control — there's no hover to reveal it otherwise. On hover-
+        // capable devices it's hidden until the card is hovered (or the
+        // button is focused), keeping the resting card clean.
         pinned
           ? 'text-emerald-600 dark:text-emerald-400'
-          : 'text-zinc-400 opacity-0 group-hover:opacity-100 hover:text-emerald-600 focus-visible:opacity-100 dark:text-zinc-500 dark:hover:text-emerald-400',
+          : 'text-zinc-400 opacity-100 hover:text-zinc-600 focus-visible:opacity-100 dark:text-zinc-500 dark:hover:text-zinc-300 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100',
       )}
     >
       <PinIcon />
