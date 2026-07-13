@@ -1,3 +1,18 @@
-// Dual-URL alias: the canonical page lives at /quiz; this mounts the same
-// page under the Practice group so /practice/quiz also works.
-export { default, metadata } from '../../quiz/page'
+import { type Metadata } from 'next'
+
+import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+
+import { QuizCatalog } from './QuizCatalog'
+
+export const metadata: Metadata = {
+  title: 'Quiz',
+}
+
+export default function QuizIndex() {
+  return (
+    <>
+      <SetBreadcrumbs items={[{ label: 'Quiz' }]} />
+      <QuizCatalog />
+    </>
+  )
+}

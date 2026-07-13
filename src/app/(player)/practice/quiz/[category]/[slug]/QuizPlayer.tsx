@@ -149,18 +149,54 @@ export function QuizPlayer({ quiz }: { quiz: Quiz }) {
       slides={slides}
       idx={idx}
       onIdxChange={handleIdxChange}
-      onClose={() => router.push('/quiz')}
+      onClose={() => router.push('/practice/quiz')}
       disableClickToAdvance
       renderFull={(slide) =>
         slide.kind === 'finish' ? (
-          // Centered full-width summary — escapes the left/right split.
-          <div className="text-center text-zinc-900 dark:text-zinc-100">
-            <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
-              Finished!
-            </h2>
-            <p className="text-2xl font-medium">
-              Score: {earnedCount}/{totalQuestions}
-            </p>
+          // Escapes the left/right split for a two-column summary: the
+          // "Finished!" score on the left, a scrollable per-question
+          // results table on the right. h-full gives the table area a
+          // definite height so it scrolls inside the fixed shell rather
+          // than pushing the shell's bounds.
+          <div className="flex h-full min-h-0 w-full flex-col items-center gap-6 py-2 text-zinc-900 md:flex-row md:gap-10 md:py-4 dark:text-zinc-100">
+            <div className="flex w-full shrink-0 flex-col items-center justify-center gap-2 text-center md:w-2/5">
+              <h2 className="text-4xl font-semibold tracking-tight md:text-5xl">
+                Finished!
+              </h2>
+              <p className="text-2xl font-medium">
+                Score: {earnedCount}/{totalQuestions}
+              </p>
+            </div>
+            {/* Owns its own scroll. min-h-0 + max-h-full cap it at the
+                available height so it never pushes the footer: on desktop
+                (row) it's content-sized and vertically centered until the
+                rows exceed the height, then it scrolls; on mobile (column)
+                flex-1 fills the space below the score and scrolls. The
+                parent's py-* keeps a gap from the header/footer. */}
+            <div className="min-h-0 w-full flex-1 overflow-y-auto rounded-lg border border-zinc-200 md:max-h-full dark:border-zinc-700">
+              <table className="w-full border-collapse text-left text-sm">
+                <tbody>
+                  {items.map((item, i) => {
+                    // Emerald when the point was earned; red otherwise
+                    // (a wrong pick, a reveal, or never answered).
+                    const earned = responses[i]?.status === 'earned'
+                    return (
+                      <tr
+                        key={item.key}
+                        className={`border-t border-current/10 first:border-t-0 ${
+                          earned
+                            ? 'bg-emerald-50 text-emerald-900 dark:bg-emerald-500/10 dark:text-emerald-200'
+                            : 'bg-red-50 text-red-900 dark:bg-red-500/10 dark:text-red-200'
+                        }`}
+                      >
+                        <td className="px-4 py-2 font-medium">{item.label}</td>
+                        <td className="px-4 py-2">{item.answer}</td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : null
       }

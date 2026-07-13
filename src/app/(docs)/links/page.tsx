@@ -39,6 +39,15 @@ const sections: Array<{ title: string; links: Array<LinkItem> }> = [
       },
     ],
   },
+  {
+    title: 'Rosicrucian Developers',
+    links: [
+      {
+        name: 'The School of Ageless Wisdom',
+        href: 'https://agelesswisdom.school/',
+      },
+    ],
+  },
 ]
 
 export default function Links() {

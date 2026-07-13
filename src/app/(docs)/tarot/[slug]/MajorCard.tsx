@@ -52,18 +52,7 @@ export function MajorCard({ card }: { card: TarotCard }) {
       />
       <CardStack
         header={
-          <PageHeading>
-            {card.mobileTitle ? (
-              <>
-                {/* Shorter title on phones so the heading + toolbar fit on
-                    one row; full name from sm up. */}
-                <span className="sm:hidden">{card.mobileTitle}</span>
-                <span className="hidden sm:inline">{card.name}</span>
-              </>
-            ) : (
-              card.name
-            )}
-          </PageHeading>
+          <PageHeading truncate>{card.name}</PageHeading>
         }
         actions={
           <PlayLink href={`/tarot/major-arcana/play?idx=${card.num}`}>

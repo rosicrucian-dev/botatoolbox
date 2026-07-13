@@ -66,21 +66,17 @@ export default function MajorArcanaPlayPage() {
       extraHeaderItem={
         current?.note ? <SoundButton onClick={playCurrent} /> : null
       }
-      renderLeft={(slide) => (
+      // Focus on the card alone — no Hebrew-letter half. renderFull
+      // replaces the two-pane split with a single centered pane, so the
+      // card sits in the middle of the screen.
+      renderLeft={() => null}
+      renderRight={() => null}
+      renderFull={(slide) => (
         <MajorImage
           card={{ num: slide.num, slug: slide.slug }}
           alt={slide.cardName}
-          className="max-h-[33svh] max-w-full object-contain md:max-h-[50vh] md:max-w-[280px]"
+          className="max-h-[65svh] max-w-full object-contain md:max-h-[72vh] md:max-w-[360px]"
         />
-      )}
-      renderRight={(slide) => (
-        <div
-          className="text-center font-serif text-[min(22vh,55vw)] leading-none md:text-[min(40vh,80vw)]"
-          dir="rtl"
-          lang="he"
-        >
-          {slide.glyph}
-        </div>
       )}
     />
   )

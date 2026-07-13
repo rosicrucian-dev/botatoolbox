@@ -17,7 +17,7 @@ export default function Trestleboard() {
         items={[{ label: 'The Pattern on the Trestleboard' }]}
       />
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>The Pattern on the Trestleboard</PageHeading>
+        <PageHeading truncate>The Pattern on the Trestleboard</PageHeading>
         <PlayLink href="/texts/pattern-trestleboard/play">
           Start Pattern ▶
         </PlayLink>

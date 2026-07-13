@@ -14,6 +14,16 @@ export interface NavLink {
 export interface NavGroup {
   title: string
   links: Array<NavLink>
+  // Two-tier URL scheme. `flat` groups (Devices, Resources, Website,
+  // Utilities) serve each member at a short top-level URL — its `href`,
+  // e.g. `/cube-of-space` — *and* a grouped alias (`/devices/cube-of-space`)
+  // via a one-line re-export page at app/(docs)/<group>/<item>/page.tsx.
+  // Every other group is single-URL nested: `href` is the `/<group>/<item>`
+  // form (e.g. `/practice/quiz`) with no top-level alias. This keeps the
+  // top-level namespace reserved for the flat groups and avoids collisions
+  // between the many nested items. content/integrity.ts enforces both the
+  // href shape and the existence of each flat group's alias files.
+  flat?: true
   // When set, the group is hidden from the sidebar and home TOC unless
   // the user has unlocked secret mode via /settings. The gated
   // routes themselves redirect to /settings if visited directly
@@ -46,6 +56,7 @@ const groups: Array<NavGroup> = [
   },
   {
     title: 'Devices',
+    flat: true,
     links: [
       {
         title: 'Cube of Space',
@@ -118,13 +129,13 @@ const groups: Array<NavGroup> = [
     links: [
       {
         title: 'Quiz',
-        href: '/quiz',
+        href: '/practice/quiz',
         description:
           'Test your knowledge of tarot, astrology, and Hebrew with these quizzes.',
       },
       {
         title: 'Words of Power',
-        href: '/words-of-power',
+        href: '/practice/words-of-power',
         description:
           'Practice intoning words of power with the associated sound and color.',
       },
@@ -173,6 +184,7 @@ const groups: Array<NavGroup> = [
   },
   {
     title: 'Resources',
+    flat: true,
     links: [
       {
         title: 'Files',
@@ -248,6 +260,7 @@ const groups: Array<NavGroup> = [
   },
   {
     title: 'Utilities',
+    flat: true,
     links: [
       {
         title: 'Keyboard',
@@ -255,10 +268,17 @@ const groups: Array<NavGroup> = [
         description:
           'A 12-key chromatic keyboard.',
       },
+      {
+        title: 'Timer',
+        href: '/timer',
+        description:
+          'A meditation timer with timed and paced-breath steps.',
+      },
     ],
   },
   {
     title: 'Website',
+    flat: true,
     links: [
       {
         title: 'About',

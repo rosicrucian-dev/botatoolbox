@@ -13,11 +13,6 @@ import { z } from 'zod'
 export const TarotCardSchema = z.object({
   num: z.number(),
   name: z.string(),
-  // Shorter title used only on narrow (mobile) screens so the heading and
-  // toolbar buttons fit on one row; desktop always uses `name`. Optional —
-  // set only on cards whose full name is too long (e.g. "The High
-  // Priestess" → "High Priestess").
-  mobileTitle: z.string().optional(),
   slug: z.string(),
   letter: z.string(),
   english: z.string(),

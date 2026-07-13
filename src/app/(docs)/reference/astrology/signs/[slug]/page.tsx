@@ -61,7 +61,7 @@ export default async function SignPage({
         nextHref={`/reference/astrology/signs/${next.slug}`}
       />
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>{sign.name}</PageHeading>
+        <PageHeading truncate>{sign.name}</PageHeading>
         <PlayLink href={`/reference/astrology/signs/${sign.slug}/focus`}>
           Focus ▶
         </PlayLink>

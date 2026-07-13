@@ -38,12 +38,12 @@ export default async function WordOfPowerPage({
     <article className="space-y-6">
       <SetBreadcrumbs
         items={[
-          { label: 'Words of Power', href: '/words-of-power' },
+          { label: 'Words of Power', href: '/practice/words-of-power' },
           { label: word.name },
         ]}
       />
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>{word.name}</PageHeading>
+        <PageHeading truncate>{word.name}</PageHeading>
         <div className="flex shrink-0 items-center gap-2">
           {word.slug === 'ahih' && (
             <a
@@ -53,7 +53,7 @@ export default async function WordOfPowerPage({
               AD Recording
             </a>
           )}
-          <PlayLink href={`/words-of-power/${word.slug}/play?autoplay=1`}>
+          <PlayLink href={`/practice/words-of-power/${word.slug}/play?autoplay=1`}>
             Practice ▶
           </PlayLink>
         </div>
@@ -69,7 +69,7 @@ export default async function WordOfPowerPage({
       <DataList
         items={word.letters}
         getKey={(_, i) => String(i)}
-        getHref={(_, i) => `/words-of-power/${word.slug}/play?idx=${i}`}
+        getHref={(_, i) => `/practice/words-of-power/${word.slug}/play?idx=${i}`}
         player
         renderRow={(l) => (
           <>

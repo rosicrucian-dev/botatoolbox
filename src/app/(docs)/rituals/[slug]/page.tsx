@@ -56,7 +56,7 @@ function RenderInstruction({ instruction }: { instruction: Instruction }) {
         ) : (
           <Link
             key={i}
-            href={`/words-of-power/${seg.ref}`}
+            href={`/practice/words-of-power/${seg.ref}`}
             className="font-medium text-zinc-900 underline decoration-zinc-300 underline-offset-2 transition hover:decoration-zinc-700 dark:text-zinc-100 dark:decoration-zinc-700 dark:hover:decoration-zinc-300"
           >
             {seg.display}
@@ -99,7 +99,7 @@ export default async function RitualPage({
       <SetBreadcrumbs items={[{ label: ritual.title }]} />
       <div className="flex items-start justify-between gap-4">
         <div>
-          <PageHeading>{ritual.title}</PageHeading>
+          <PageHeading truncate>{ritual.title}</PageHeading>
           {ritual.musicFileSlug && (
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
               See the{' '}

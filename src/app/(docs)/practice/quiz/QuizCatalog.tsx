@@ -15,7 +15,7 @@ export function QuizCatalog() {
   return (
     <article className="space-y-10">
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>Quiz</PageHeading>
+        <PageHeading truncate>Quiz</PageHeading>
         <div className="flex items-center gap-2 text-zinc-900 dark:text-white">
           <HeaderChip
             pressed={randomize}
@@ -51,7 +51,7 @@ function Category({
         player
         className="mt-4 border-t border-zinc-200 dark:border-zinc-800"
         getKey={(q) => q.slug}
-        getHref={(q) => `/quiz/${category.slug}/${q.slug}${linkSuffix}`}
+        getHref={(q) => `/practice/quiz/${category.slug}/${q.slug}${linkSuffix}`}
         renderRow={(q) => (
           <>
             <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">

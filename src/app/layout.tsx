@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   // to the production origin. Without it, Next emits localhost URLs in
   // build output and Google can't resolve canonicals across crawlers.
   metadataBase: new URL('https://botatoolbox.org'),
+  // Next's `appleWebApp.capable` only emits the modern `mobile-web-app-capable`.
+  // iOS keys the launch splash (apple-touch-startup-image) off the legacy
+  // apple-prefixed flag, so add it too — without it, standalone launches skip
+  // the splash and flash a blank page on open.
+  other: { 'apple-mobile-web-app-capable': 'yes' },
   title: {
     template: '%s - BOTA Toolbox',
     default: 'BOTA Toolbox',

@@ -99,7 +99,7 @@ export function GematriaClient() {
   return (
     <article className="space-y-6">
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>Calculator</PageHeading>
+        <PageHeading truncate>Calculator</PageHeading>
         {playableCount > 0 && (
           <Button
             href={`/gematria/play?seq=${encodeURIComponent(word)}`}

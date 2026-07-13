@@ -107,7 +107,7 @@ export default async function TarotCardImagePage({
       <SetBreadcrumbs items={crumbs} />
       <KeyboardNav prevHref={prev.href} nextHref={next.href} />
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>{title}</PageHeading>
+        <PageHeading truncate>{title}</PageHeading>
         <Link
           href={backHref}
           aria-label="Back to card details"

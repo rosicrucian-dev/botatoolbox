@@ -426,13 +426,11 @@ export function FreeformClient({
 
   return (
     <article className="space-y-6">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <PageHeading>
-          {/* Below md the toolbar needs the whole row, so the title is
-              visually hidden (sr-only occupies zero px) — but the h1 is
-              never empty for screen readers / the document outline. */}
-          <span className="sr-only md:not-sr-only">Freeform</span>
-        </PageHeading>
+      <div className="flex items-start justify-between gap-3">
+        {/* Title truncates to make room for the controls on narrow screens;
+            the controls block keeps its own flex-wrap so a crowded toolbar
+            wraps within its column instead of pushing the title to line 2. */}
+        <PageHeading truncate>Freeform</PageHeading>
         <div className="flex flex-wrap items-center gap-3 text-zinc-900 dark:text-white">
           {controls}
           <Button

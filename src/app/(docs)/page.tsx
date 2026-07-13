@@ -21,7 +21,7 @@ export default function Home() {
           count as a flow child and push the header down. It anchors to
           the Layout's `relative` content wrapper. */}
       <HeroPattern />
-      <SetBreadcrumbs items={[{ label: 'Overview' }]} />
+      <SetBreadcrumbs items={[{ label: 'Home' }]} />
       <article className="space-y-14">
       {/* The hero block — title, lead subtitle, and any short
           paragraphs of supporting copy — lives inside one <header>.

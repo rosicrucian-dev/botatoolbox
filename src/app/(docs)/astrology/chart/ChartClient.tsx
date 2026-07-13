@@ -141,12 +141,13 @@ export function ChartClient() {
 
   return (
     <article className="space-y-6">
-      <div className="flex items-start justify-between gap-4">
-        <PageHeading className="hidden sm:block">Chart</PageHeading>
-        {/* Mobile: fill the row — chevrons/Now stay fixed, the date/time
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <PageHeading truncate>Chart</PageHeading>
+        {/* Mobile: the title takes its own line and the stepper takes the
+            full width below it — chevrons/Now stay fixed, the date/time
             fields flex to share the rest (and squish when Now appears).
-            Desktop: fixed widths, right-aligned. */}
-        <div className="ml-auto flex w-full items-center gap-2 sm:w-auto">
+            Desktop: title left, fixed-width stepper right. */}
+        <div className="flex w-full items-center gap-2 sm:w-auto">
           {/* On mobile, Now sits between the time field and the › chevron
               (order-1, with the chevron bumped to order-2) so the ‹ and ›
               stay pinned to the screen edges. Desktop keeps DOM order. */}

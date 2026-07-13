@@ -208,11 +208,23 @@ export function SlidePlayer<S extends Slide>({
 
       <main
         onClick={onMainClick}
-        className={`flex flex-1 flex-col pb-2 select-none lg:px-2 ${
+        // min-h-0 so intrinsically-tall slide content (e.g. the quiz
+        // results table) stays bounded by this flex-1 region and scrolls
+        // internally, instead of growing main past the fixed shell and
+        // pushing the footer nav off-screen.
+        className={`flex min-h-0 flex-1 flex-col pb-2 select-none lg:px-2 ${
           disableClickToAdvance ? '' : 'cursor-pointer'
         }`}
       >
-        <div className="flex min-h-0 grow flex-col p-6 lg:p-10">
+        {/* No top padding on purpose: the flex-1 content area centers its
+            content, and its bottom edge is the footer divider while its top
+            edge is the header. Any top padding here would inset only the top
+            — pushing the content lower than the footer gap and reading as
+            unbalanced (top gap − bottom gap == whatever top padding we add).
+            Zero top padding makes those two gaps equal. Horizontal padding
+            and a small bottom gap stay; the shell adds safe-area beneath. */}
+        <div className="flex min-h-0 grow flex-col px-6 pb-4 lg:px-10 lg:pb-6">
+
           <div className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 items-stretch justify-center">
             {current &&
               (() => {

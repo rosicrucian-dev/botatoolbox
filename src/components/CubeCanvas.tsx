@@ -2,7 +2,14 @@
 
 import { OrbitControls } from '@react-three/drei'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { useDeferredValue, useEffect, useMemo, useRef } from 'react'
+import {
+  Component,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useRef,
+  type ReactNode,
+} from 'react'
 
 import {
   Shape,
@@ -323,6 +330,30 @@ const halfCard: Record<
   },
 }
 
+// Isolates one card-image texture so that if it fails to load (a dropped
+// request, a flaky network, a blocked asset), only that single overlay
+// disappears — the colored wall/border scaffolding underneath still
+// renders. Without this, one rejected texture crashes the whole canvas
+// with a "Could not load …" error. No retry: the wall/border color is an
+// acceptable, quiet degradation, and retrying a genuinely bad response
+// (e.g. a poisoned browser cache) just loops. Loading itself is unchanged
+// (useLoader + Suspense) — this only catches the failure case.
+class TextureFallback extends Component<
+  { children: ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false }
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+  componentDidCatch(error: Error) {
+    console.warn('Cube of Space: a card texture failed to load', error)
+  }
+  render() {
+    return this.state.failed ? null : this.props.children
+  }
+}
+
 function EdgeHalf({
   imageSrc,
   size,
@@ -357,10 +388,16 @@ function EdgeHalf({
   )
 }
 
-function Face({ face, style }: { face: FaceDef; style: string }) {
-  const { colorPalette } = useColorPalette()
-  const card = cardBySlug[face.cardSlug]
-  const texture = useLoader(TextureLoader, thumbImage(card, style)) as Texture
+// The card image on a face. Split out so it can sit inside a
+// TextureFallback: if this texture fails, the face keeps its wall color.
+function FaceImage({
+  src,
+  rotation,
+}: {
+  src: string
+  rotation?: [number, number, number]
+}) {
+  const texture = useLoader(TextureLoader, src) as Texture
   // Shared cached texture — mark it sRGB once (idempotent; see EdgeHalf).
   useMemo(() => {
     if (texture.colorSpace !== SRGBColorSpace) {
@@ -372,6 +409,17 @@ function Face({ face, style }: { face: FaceDef; style: string }) {
       texture.needsUpdate = true
     }
   }, [texture])
+  return (
+    <mesh position={[0, 0, 0.01]} rotation={rotation ?? [0, 0, 0]}>
+      <planeGeometry args={[1.0, 1.6]} />
+      <meshBasicMaterial map={texture} toneMapped={false} />
+    </mesh>
+  )
+}
+
+function Face({ face, style }: { face: FaceDef; style: string }) {
+  const { colorPalette } = useColorPalette()
+  const card = cardBySlug[face.cardSlug]
   const wallColor = getColor(card.color, colorPalette) ?? 'white'
 
   return (
@@ -391,22 +439,23 @@ function Face({ face, style }: { face: FaceDef; style: string }) {
               <shapeGeometry args={[borderShapes[b.key]]} />
               <meshBasicMaterial color={edgeColor} toneMapped={false} />
             </mesh>
-            <EdgeHalf
-              imageSrc={thumbImage(edgeCard, style)}
-              size={half.size}
-              position={half.position}
-              rotation={half.rotation}
-              uvOffset={half.uvOffset}
-              uvRepeat={half.uvRepeat}
-            />
+            <TextureFallback>
+              <EdgeHalf
+                imageSrc={thumbImage(edgeCard, style)}
+                size={half.size}
+                position={half.position}
+                rotation={half.rotation}
+                uvOffset={half.uvOffset}
+                uvRepeat={half.uvRepeat}
+              />
+            </TextureFallback>
           </group>
         )
       })}
 
-      <mesh position={[0, 0, 0.01]} rotation={face.cardRotation ?? [0, 0, 0]}>
-        <planeGeometry args={[1.0, 1.6]} />
-        <meshBasicMaterial map={texture} toneMapped={false} />
-      </mesh>
+      <TextureFallback>
+        <FaceImage src={thumbImage(card, style)} rotation={face.cardRotation} />
+      </TextureFallback>
     </group>
   )
 }

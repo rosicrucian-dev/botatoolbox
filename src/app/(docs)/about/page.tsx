@@ -19,7 +19,7 @@ export default function About() {
           <a href="https://github.com/rosicrucian-dev">
             Rosicrucian Developers
           </a>
-          . For questions, contact{' '}
+          . For questions, contact the lead developer{' '}
           <a href="mailto:jonathan@rosicrucian.dev">Jonathan</a>. You can open
           an issue or help contribute on{' '}
           <a href="https://github.com/rosicrucian-dev/botatoolbox">GitHub</a>.
@@ -35,7 +35,7 @@ export default function About() {
           other sources. The minor arcana images are colored and provided with
           permission by <a href="https://joshyates.me/">Josh Yates</a>.
         </p>
-        <p>
+        {/* <p>
           Join the{' '}
           <a href="https://discord.gg/hKWWH6ukdV">Symposium of the Rose</a> on
           Discord to discuss this and other Rosicrucian related projects.
@@ -44,7 +44,7 @@ export default function About() {
           To support this project, you can keep Jonathan caffeinated with{' '}
           <a href="https://buymeacoffee.com/rosicruciandev">Buy Me a Coffee</a>.
           I am always looking to improve and expand this website. Thank you!️ 🌹
-        </p>
+        </p> */}
         <h1>Other Projects from Rosicrucian Developers</h1>
         <ul>
           <li><a href="https://agelesswisdom.school">The School of Ageless Wisdom</a> - The early curriculum of Paul Foster Case.</li>

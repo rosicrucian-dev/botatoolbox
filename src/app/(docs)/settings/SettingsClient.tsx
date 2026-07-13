@@ -92,7 +92,7 @@ function PermalinkSection() {
         Permalink
       </h2>
       <p className="max-w-2xl text-sm text-zinc-600 dark:text-zinc-400">
-        A permanent link to the homepage that applies the settings above automatically. 
+        A permanent link to the homepage that applies the settings above automatically, including pinned pages on the homepage. 
       </p>
       <div className="flex items-center gap-3">
         <Button href={permalink}>Permalink</Button>

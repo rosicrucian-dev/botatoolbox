@@ -61,7 +61,7 @@ export default async function PlanetPage({
         nextHref={`/reference/astrology/planets/${next.slug}`}
       />
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>{planet.name}</PageHeading>
+        <PageHeading truncate>{planet.name}</PageHeading>
         <PlayLink href={`/reference/astrology/planets/${planet.slug}/focus`}>
           Focus ▶
         </PlayLink>

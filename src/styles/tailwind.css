@@ -52,6 +52,13 @@
    * visual ends exactly on the start of a new breath. Linear timing
    * so the transitions feel like even, paced breath rather than eased
    * ramps.
+   *
+   * The scale (0.4↔1) and opacity (0.2↔0.45) extremes below are the
+   * shared breath-circle look; the canonical values live in
+   * `src/lib/breathVisual.ts` (used by the JS-driven <BreathCircle>). A
+   * static @keyframes can't import TS, so these mirror that file by
+   * hand — keep them in sync, including the reduced-motion override in
+   * the base layer.
    */
   --animate-breathe: breathe 16s linear infinite;
   @keyframes breathe {

@@ -41,7 +41,7 @@ const staticRoutes = [
   '/gematria/dictionary',
   '/links',
   '/reference/numerology',
-  '/quiz',
+  '/practice/quiz',
   '/settings',
   '/reference/tattvas',
   '/tarot/correspondences',
@@ -51,14 +51,16 @@ const staticRoutes = [
   '/tarot/tableau',
   '/keyboard',
   '/keyboard/tableau',
+  '/timer',
   '/tree-of-life',
-  '/words-of-power',
+  '/practice/words-of-power',
 ]
 
 // Group landing pages (the card grid for each sidebar group). Excludes
-// /meditations (gated: 'secret'). The dual-URL aliases under flat groups
-// (e.g. /devices/cube-of-space) are intentionally omitted — the canonical
-// flat URL above is the one to index.
+// /meditations (gated: 'secret'). Each dual-URL page has one canonical URL
+// listed above and its alias omitted: for Devices the canonical is the flat
+// URL (/cube-of-space) and /devices/cube-of-space is the alias; for Practice
+// the canonical is the grouped URL (/practice/quiz) and /quiz is the alias.
 const groupRoutes = [
   '/astrology',
   '/devices',
@@ -90,7 +92,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
     })),
     ...words.map((w) => ({
-      url: `${SITE}/words-of-power/${w.slug}`,
+      url: `${SITE}/practice/words-of-power/${w.slug}`,
       lastModified,
     })),
     ...visibleTexts.map((t) => ({

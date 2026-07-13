@@ -18,8 +18,11 @@ export function PlayerHeader({
 }) {
   return (
     <header className="flex h-14 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-      <span className="truncate font-semibold">{title}</span>
-      <div className="flex items-center gap-2">
+      {/* text-sm/6 + gap-4 mirror the regular Header (Header.tsx): the
+          breadcrumb text size on the left and the icon-cluster spacing on
+          the right, so the chrome reads the same across pages and players. */}
+      <span className="truncate text-sm/6 font-semibold">{title}</span>
+      <div className="flex items-center gap-4">
         {extraHeaderItem}
         <HeaderChip onClick={onClose} ariaLabel="Close">
           {/* Expanded touch target on coarse-pointer (touch) devices —

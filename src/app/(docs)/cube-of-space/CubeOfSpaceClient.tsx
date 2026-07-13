@@ -38,7 +38,7 @@ export function CubeOfSpaceClient() {
   return (
     <article className="space-y-6">
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>Cube of Space</PageHeading>
+        <PageHeading truncate>Cube of Space</PageHeading>
         <div className="flex items-center gap-2 text-zinc-900 dark:text-white">
           <FlowToggle pressed={flow} onPressedChange={setFlow} />
           <Button

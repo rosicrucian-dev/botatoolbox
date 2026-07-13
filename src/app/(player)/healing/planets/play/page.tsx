@@ -1,9 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
-
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { MajorImage } from '@/components/CardImage'
 import { SlidePlayer } from '@/components/SlidePlayer'
@@ -92,10 +90,12 @@ export default function PlanetsPlayPage() {
   const current = slides[idx]
   const [phase, setPhase] = useState(withTimer ? 'countdown' : 'iao')
 
-  useEffect(() => {
-    if (slides[idx]?.isSetup) return
-    setPhase(withTimer ? 'countdown' : 'iao')
-  }, [idx, withTimer, slides])
+  // Phase is fully driven by two events plus the initial state above:
+  // handleIdxChange resets it to 'countdown' when moving to a timed slide,
+  // and useAutoAdvance's onAdvance flips it to 'iao' when the countdown
+  // ends. (A prior effect also reset phase on every idx/slides change, but
+  // handleIdxChange already covers idx, and reacting to the slides identity
+  // meant a theme change mid-'iao' would silently restart the countdown.)
 
   // Reset phase synchronously alongside idx so the new slide renders
   // immediately in countdown phase. Without this, a stale 'iao' phase

@@ -4,6 +4,9 @@ interface Options {
   duration: number
   idx: number
   enabled: boolean
+  // While true the countdown holds at its current remaining time; it
+  // resumes from there (not from the top) when this flips back to false.
+  paused?: boolean
   onAdvance: () => void
 }
 
@@ -17,6 +20,7 @@ export function useAutoAdvance({
   duration,
   idx,
   enabled,
+  paused = false,
   onAdvance,
 }: Options): number | null {
   const [timeRemaining, setTimeRemaining] = useState<number | null>(null)
@@ -26,17 +30,29 @@ export function useAutoAdvance({
     onAdvanceRef.current = onAdvance
   }, [onAdvance])
 
+  // Seconds still to run for the current step. Reset to the full duration
+  // only when the step actually changes (a new idx/duration/enabled), but
+  // carried across a pause so resuming continues from where it stopped —
+  // toggling `paused` re-runs this effect without touching the budget.
+  const remainingRef = useRef(duration)
+  const stepKeyRef = useRef<string | null>(null)
+
   useEffect(() => {
-    if (!enabled) {
-      setTimeRemaining(null)
-      return
+    const stepKey = `${idx}:${duration}:${enabled}`
+    if (stepKeyRef.current !== stepKey) {
+      stepKeyRef.current = stepKey
+      remainingRef.current = duration
+      setTimeRemaining(enabled ? duration : null)
     }
 
+    if (!enabled || paused) return
+
+    const budget = remainingRef.current
     const startTime = Date.now()
-    setTimeRemaining(duration)
     const interval = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000
-      const remaining = Math.max(0, Math.min(duration, duration - elapsed))
+      const remaining = Math.max(0, budget - elapsed)
+      remainingRef.current = remaining
       setTimeRemaining(remaining)
       if (remaining <= 0) {
         clearInterval(interval)
@@ -44,7 +60,7 @@ export function useAutoAdvance({
       }
     }, 100)
     return () => clearInterval(interval)
-  }, [idx, enabled, duration])
+  }, [idx, enabled, duration, paused])
 
   return timeRemaining
 }

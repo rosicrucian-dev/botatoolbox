@@ -40,8 +40,8 @@ export default async function FileViewer({
       <SetBreadcrumbs
         items={[{ label: 'Files', href: '/files' }, { label: file.name }]}
       />
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <PageHeading>{file.name}</PageHeading>
+      <div className="flex items-start justify-between gap-4">
+        <PageHeading truncate>{file.name}</PageHeading>
         <div className="flex flex-wrap gap-2">
           {downloads.map((d) => (
             <a key={d.src} href={encodeURI(d.src)} download className={btn}>

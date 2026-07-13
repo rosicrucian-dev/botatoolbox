@@ -80,9 +80,12 @@ export function useBreadcrumbs(): Array<Crumb> {
 // and every group now has a landing page at `/<group>` (lowercased title).
 // Map each top-level route segment to its group so the trail can link the
 // group crumb to that page. Two kinds of segment map to a group:
-//   - a member's first segment (`/tarot/the-fool` → tarot → Tarot; also
-//     covers the dual-URL aliases like `/cube-of-space` → Devices), and
-//   - the group's own slug (`/devices` → Devices).
+//   - a member's first segment (`/tarot/the-fool` → tarot → Tarot; for a
+//     flat group this is the short canonical URL, `/cube-of-space` →
+//     Devices; for a nested group it equals the group slug, `/practice/quiz`
+//     → practice → Practice), and
+//   - the group's own slug (`/devices` → Devices), which also covers a flat
+//     group's grouped alias (`/devices/cube-of-space` → Devices).
 const GROUP_BY_SEGMENT: Record<string, string> = {}
 for (const group of navigation) {
   const slug = group.title.toLowerCase()
@@ -94,8 +97,8 @@ for (const group of navigation) {
 }
 
 // Groups whose crumb is intentionally suppressed: their member pages show
-// just `BOTA / <Leaf>` (e.g. `BOTA / About`), not `BOTA / Website / About`.
-// The group's own landing page (/website) still shows `BOTA / Website` via
+// just `Home / <Leaf>` (e.g. `Home / About`), not `Home / Website / About`.
+// The group's own landing page (/website) still shows `Home / Website` via
 // its items — only the derived parent crumb is dropped.
 const HIDE_GROUP_CRUMB = new Set(['Website'])
 
@@ -142,7 +145,7 @@ function Crumb({
   )
 }
 
-// Renders "BOTA / <Group> / …items". BOTA links home; the group crumb links
+// Renders "Home / <Group> / …items". Home links to /; the group crumb links
 // to that group's landing page (dropped when we're already on it — the group
 // page's own leaf comes through `items`).
 //
@@ -159,13 +162,19 @@ export function BreadcrumbTrail({ items }: { items: Array<Crumb> }) {
   const normalized = pathname.replace(/(.)\/$/, '$1')
   const group = groupForPath(pathname)
   const onGroupPage = group ? normalized === group.href : false
-  const trail: Array<Crumb> = [
-    { label: 'BOTA', href: '/' },
-    ...(group && !onGroupPage
-      ? [{ label: group.title, href: group.href }]
-      : []),
-    ...items,
-  ]
+  const isHome = normalized === '/'
+  // On the home page the leaf IS home, so show a single "Home" crumb (from
+  // items) with no duplicated root prefix. Everywhere else, prepend the
+  // "Home" root (and the group crumb) ahead of the page's own items.
+  const trail: Array<Crumb> = isHome
+    ? items
+    : [
+        { label: 'Home', href: '/' },
+        ...(group && !onGroupPage
+          ? [{ label: group.title, href: group.href }]
+          : []),
+        ...items,
+      ]
 
   return (
     <nav

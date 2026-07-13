@@ -12,6 +12,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { romanToLetters } from '@/lib/hebrew'
+import { navigation } from '@/lib/nav'
 import {
   cardByLetter,
   cards,
@@ -369,4 +370,36 @@ for (const c of chakras) {
     planetSlugs.has(c.planet),
     `chakra row angel="${c.angel}" planet="${c.planet}" has no matching planet`,
   )
+}
+
+// --- two-tier URL scheme (see NavGroup.flat in lib/nav.ts). A `flat` group
+// serves each member at a short top-level URL plus a grouped re-export alias;
+// every other group is single-URL nested. Enforce the href shape for both,
+// and — for flat groups — that the grouped alias page actually exists, so a
+// dual URL can never silently 404 or drift out of sync with the nav.
+{
+  const docsDir = join(process.cwd(), 'src/app/(docs)')
+  for (const group of navigation) {
+    const slug = group.title.toLowerCase()
+    for (const link of group.links) {
+      const segs = link.href.split('/').filter(Boolean)
+      if (group.flat) {
+        expect(
+          segs.length === 1,
+          `flat group "${group.title}" member ${link.href} must be a single top-level segment (e.g. /${segs[0] ?? ''})`,
+        )
+        // Canonical short URL lives at (docs)/<item>/; the grouped alias must
+        // exist at (docs)/<group>/<item>/page.tsx as a re-export of it.
+        expect(
+          existsSync(join(docsDir, slug, segs[0], 'page.tsx')),
+          `flat group "${group.title}" member ${link.href} is missing its grouped alias at (docs)/${slug}/${segs[0]}/page.tsx`,
+        )
+      } else {
+        expect(
+          segs.length >= 2 && segs[0] === slug,
+          `nested group "${group.title}" member ${link.href} must be nested as /${slug}/<item> (single-URL, no top-level alias)`,
+        )
+      }
+    }
+  }
 }

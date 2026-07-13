@@ -27,6 +27,10 @@ export function playTone(
   ctx: AudioContext,
   freq: number,
   duration: number,
+  // Absolute AudioContext time to begin the tone. Defaults to "now";
+  // pass a future time to schedule (or stagger) tones — e.g. a run of
+  // beeps at now, now+gap, now+2*gap.
+  startAt?: number,
 ): ActiveTone {
   const osc = ctx.createOscillator()
   const gain = ctx.createGain()
@@ -34,7 +38,7 @@ export function playTone(
   osc.type = 'sine'
   osc.frequency.value = freq
 
-  const now = ctx.currentTime
+  const now = startAt ?? ctx.currentTime
   const attack = 0.02
   const release = 0.05
 

@@ -25,7 +25,7 @@ export function MinorCard({ card }: { card: MinorEntry }) {
       />
       <CardStack
         header={
-          <PageHeading>
+          <PageHeading truncate>
             {card.num} of {card.suit}
           </PageHeading>
         }

@@ -108,7 +108,9 @@ export default async function SephirahPage({
   rows.push({
     label: 'Name of God',
     value: mantra ? (
-      <TextLink href={`/words-of-power/${mantra.slug}`}>{mantra.name}</TextLink>
+      <TextLink href={`/practice/words-of-power/${mantra.slug}`}>
+        {mantra.name}
+      </TextLink>
     ) : (
       '—'
     ),

@@ -22,7 +22,7 @@ export default function Planets() {
     <article className="space-y-6">
       <SetBreadcrumbs items={[{ label: 'Planets' }]} />
       <div className="flex items-start justify-between gap-4">
-        <PageHeading>Planets</PageHeading>
+        <PageHeading truncate>Planets</PageHeading>
         <PlayLink href="/healing/planets/play">Start Exercise ▶</PlayLink>
       </div>
 

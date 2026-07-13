@@ -15,7 +15,7 @@ export function KeyboardLayout({
   return (
     <article className="space-y-6">
       <div className="flex items-start justify-between gap-3">
-        <PageHeading>Keyboard</PageHeading>
+        <PageHeading truncate>Keyboard</PageHeading>
         <Tabs>
           <Tab href="/keyboard/tableau" active={tab === 'tableau'}>
             Tableau

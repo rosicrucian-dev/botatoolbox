@@ -34,7 +34,10 @@ export const searchEntries: ReadonlyArray<SearchEntry> = [
     url: `/tarot/${c.slug}`,
     title: `${c.num} of ${c.suit}`,
   })),
-  ...words.map((w) => ({ url: `/words-of-power/${w.slug}`, title: w.name })),
+  ...words.map((w) => ({
+    url: `/practice/words-of-power/${w.slug}`,
+    title: w.name,
+  })),
   ...sephiroth.map((s) => ({
     url: `/tree-of-life/${s.slug}`,
     title: `${s.hebrewName} — ${s.name}`,
