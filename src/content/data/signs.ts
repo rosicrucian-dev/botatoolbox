@@ -1,10 +1,14 @@
 // Zodiac signs — raw records from signs.json (healing/body-part data,
 // rulers, exaltations). For the tarot-joined view used by the astrology
-// pages, see ./astrology.ts (astrologySigns).
+// pages, see ./astrology.ts (astrologySigns). German display fields come
+// from `de/signs.json` (see overlay-config.ts) via getSigns(locale); the
+// top-level exports stay pinned to English.
 
 import { z } from 'zod'
 
 import signsData from '@content/data/signs.json'
+import { defineLocalized } from './localized'
+import { localizedRaw } from './overlay'
 import { SignSchema } from './schemas'
 
 export type HealingSign = z.infer<typeof SignSchema>
@@ -17,7 +21,13 @@ export type HealingSign = z.infer<typeof SignSchema>
 // raw data stays a clean codepoint per sign.
 const TEXT_VS = '\uFE0E'
 
-export const signs: ReadonlyArray<HealingSign> = z
-  .array(SignSchema)
-  .parse(signsData)
-  .map((s) => ({ ...s, glyph: s.glyph + TEXT_VS }))
+const rawFor = localizedRaw('signs', signsData)
+
+export const getSigns = defineLocalized((locale) => {
+  const signs: ReadonlyArray<HealingSign> = z
+    .array(SignSchema)
+    .parse(rawFor(locale))
+    .map((s) => ({ ...s, glyph: s.glyph + TEXT_VS }))
+
+  return { signs }
+})

@@ -16,7 +16,11 @@ import { mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import sharp from 'sharp'
 
-import { SPLASH_DEVICES, SPLASH_SCHEMES, splashPath } from '../src/lib/splash.ts'
+import {
+  SPLASH_DEVICES,
+  SPLASH_SCHEMES,
+  splashPath,
+} from '../src/lib/splash.ts'
 
 const ICON = join('public', 'icon-512.png')
 const OUT_DIR = join('public', 'splash')

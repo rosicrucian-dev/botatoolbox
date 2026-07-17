@@ -1,7 +1,9 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 @config '../../typography.ts';
-@custom-variant dark (&:where(.dark, .dark *));
+/* dark: uses Tailwind's default prefers-color-scheme media variant — the
+   UI follows the system scheme with no toggle and no JS (the class-based
+   @custom-variant + next-themes setup was removed July 2026). */
 
 @theme {
   /*

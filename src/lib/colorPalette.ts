@@ -12,8 +12,8 @@ import {
 // The active color palette (FLO / Tailwind), persisted to localStorage. Mirrors
 // src/lib/tarotStyle.ts: the store starts at the default (so SSR/static-export
 // render is stable) and hydrates from localStorage once on mount, switching to
-// the saved choice on the client. Distinct from next-themes' light/dark
-// `useTheme` — this is the BOTA color spectrum, not the UI mode.
+// the saved choice on the client. This is the BOTA color spectrum, not the
+// light/dark UI mode (which simply follows the system scheme).
 
 const STORAGE_KEY = 'bota:color-palette'
 

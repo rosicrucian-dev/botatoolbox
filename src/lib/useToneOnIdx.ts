@@ -21,11 +21,9 @@ interface Options {
 //
 // The active tone is tracked and stopped on idx change / unmount so tones
 // don't overlap.
-export function useToneOnIdx({
-  note,
-  idx,
-  autoplay = true,
-}: Options): { playCurrent: () => void } {
+export function useToneOnIdx({ note, idx, autoplay = true }: Options): {
+  playCurrent: () => void
+} {
   const activeRef = useRef<ActiveTone | null>(null)
 
   function stopActive() {

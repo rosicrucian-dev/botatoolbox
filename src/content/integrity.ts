@@ -12,30 +12,47 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { romanToLetters } from '@/lib/hebrew'
-import { navigation } from '@/lib/nav'
+import { DEFAULT_LOCALE, LOCALES } from '@/lib/locales'
+import { getNavigation } from '@/lib/nav'
 import {
-  cardByLetter,
-  cards,
-  chakras,
   cubeEdges,
   cubeFaces,
-  fileBySlug,
-  grades,
+  getChakras,
+  getFiles,
+  getGrades,
+  getMeditations,
+  getMinorArcana,
+  getPlanets,
+  getRituals,
+  getSephiroth,
+  getSigns,
+  getTarot,
+  getTexts,
+  getWords,
   isRestDay,
   MAJOR_STYLES,
   MINOR_STYLES,
-  minorCards,
   parseRitual,
   paths,
-  planets,
-  rituals,
-  sephiroth,
-  signs,
-  supersensoryMeditations,
-  tarotFundamentalsDays,
-  texts,
-  wordBySlug,
 } from './data'
+
+// Integrity checks validate the ENGLISH source of truth on purpose —
+// slugs, foreign keys, and manifest↔file bijections are structural and
+// identical across locales (overlays can't touch them; see overlay.ts).
+const { cards, cardByLetter } = getTarot(DEFAULT_LOCALE)
+const { minorCards } = getMinorArcana(DEFAULT_LOCALE)
+const { chakras } = getChakras(DEFAULT_LOCALE)
+const { fileBySlug } = getFiles(DEFAULT_LOCALE)
+const { grades } = getGrades(DEFAULT_LOCALE)
+const { planets } = getPlanets(DEFAULT_LOCALE)
+const { signs } = getSigns(DEFAULT_LOCALE)
+const { sephiroth } = getSephiroth(DEFAULT_LOCALE)
+const { rituals } = getRituals(DEFAULT_LOCALE)
+const { texts } = getTexts(DEFAULT_LOCALE)
+const { wordBySlug } = getWords(DEFAULT_LOCALE)
+const { supersensoryMeditations, tarotFundamentalsDays } =
+  getMeditations(DEFAULT_LOCALE)
+const navigation = getNavigation(DEFAULT_LOCALE)
 
 function fail(msg: string): never {
   throw new Error(`Data integrity error: ${msg}`)
@@ -84,6 +101,30 @@ expectManifestMatchesDir(
   'rituals',
   rituals.map((r) => r.slug),
 )
+
+// --- translation markdown (content/<kind>/<locale>/), warnings only.
+// A missing translation is normal (falls back to English); an orphan
+// (a de/ file whose English source was renamed/removed) means finished
+// work that silently stopped rendering — surface it, but never fail
+// the build over a translation file.
+for (const [kind, slugs] of [
+  ['texts', texts.map((t) => t.slug)],
+  ['rituals', rituals.map((r) => r.slug)],
+] as const) {
+  for (const locale of LOCALES) {
+    if (locale === DEFAULT_LOCALE) continue
+    const dir = join(process.cwd(), 'content', kind, locale)
+    if (!existsSync(dir)) continue
+    const known = new Set(slugs)
+    for (const f of readdirSync(dir).filter((n) => n.endsWith('.md'))) {
+      if (!known.has(f.replace(/\.md$/, ''))) {
+        console.warn(
+          `[i18n] content/${kind}/${locale}/${f} has no matching English file — was the English source renamed? This translation no longer renders.`,
+        )
+      }
+    }
+  }
+}
 
 // --- ritual musicFileSlug → files.slug
 for (const ritual of rituals) {
@@ -378,7 +419,7 @@ for (const c of chakras) {
 // and — for flat groups — that the grouped alias page actually exists, so a
 // dual URL can never silently 404 or drift out of sync with the nav.
 {
-  const docsDir = join(process.cwd(), 'src/app/(docs)')
+  const docsDir = join(process.cwd(), 'src/app/[locale]/(docs)')
   for (const group of navigation) {
     const slug = group.title.toLowerCase()
     for (const link of group.links) {

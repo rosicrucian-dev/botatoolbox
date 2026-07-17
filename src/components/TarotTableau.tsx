@@ -1,8 +1,9 @@
 'use client'
 
-import { Link } from 'next-view-transitions'
+import { Link } from '@/components/LocaleLink'
 
-import { cardImage, cards, thumbImage, type TarotCard } from '@/content/data'
+import { useLocale } from '@/components/LocaleProvider'
+import { cardImage, getTarot, thumbImage, type TarotCard } from '@/content/data'
 import { majorThumbHeight } from '@/content/data/tarot-styles'
 import { useTarotStyle } from '@/lib/tarotStyle'
 
@@ -19,9 +20,6 @@ import { useTarotStyle } from '@/lib/tarotStyle'
 //             it can be viewed full-size and downloaded. Not an app route.
 type LinkMode = 'none' | 'card' | 'image'
 
-const fool = cards.find((c) => c.num === 0)!
-const keys = cards.filter((c) => c.num !== 0)
-
 export function TarotTableau({
   style,
   link = 'none',
@@ -33,6 +31,10 @@ export function TarotTableau({
   link?: LinkMode
   rounded?: boolean
 }) {
+  const locale = useLocale()
+  const { cards } = getTarot(locale)
+  const fool = cards.find((c) => c.num === 0)!
+  const keys = cards.filter((c) => c.num !== 0)
   const { majorStyle } = useTarotStyle()
   const effective = style ?? majorStyle
 

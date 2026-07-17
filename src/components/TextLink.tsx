@@ -1,5 +1,5 @@
+import { Link } from '@/components/LocaleLink'
 import clsx from 'clsx'
-import { Link } from 'next-view-transitions'
 
 // The standard inline text link for tables, definition rows, and running
 // text: inherits the surrounding size, underlines on hover. This is THE

@@ -1,6 +1,6 @@
 'use client'
 
-import { useTransitionRouter } from 'next-view-transitions'
+import { useLocaleTransitionRouter } from '@/components/LocaleLink'
 import { useEffect } from 'react'
 
 // Wires prev/next navigation to input gestures; renders nothing. Drop it on
@@ -51,7 +51,7 @@ export function KeyboardNav({
 }) {
   // Transition-aware router: arrow-key/swipe page turns get the same
   // view-transition cross-fade as clicking a link.
-  const router = useTransitionRouter()
+  const router = useLocaleTransitionRouter()
 
   // Arrow keys.
   useEffect(() => {

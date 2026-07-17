@@ -6,7 +6,8 @@
 // `Chart` (or null, before the client has computed one) and the geometry from
 // `astro/layout`; it knows nothing about the ephemeris.
 
-import { planetBySlug, signBySlug } from '@/content/data'
+import { useLocale } from '@/components/LocaleProvider'
+import { getAstrology } from '@/content/data'
 import type { Aspect, AspectNature } from '@/lib/astro/aspects'
 import {
   angleToPoint,
@@ -91,6 +92,7 @@ export function AstrologyWheel({
   // pinned to a moment other than now.
   label?: string
 }) {
+  const { planetBySlug, signBySlug } = getAstrology(useLocale())
   // Respects the user's colour palette (FLO / Tailwind) from Settings; planets
   // render in their attributed BOTA colour (Mercury yellow, Venus green, …).
   const { colorPalette } = useColorPalette()

@@ -1,6 +1,6 @@
-import sharp from 'sharp'
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import sharp from 'sharp'
 
 // Re-encodes the tarot card originals into compressed JPEGs + smaller
 // thumbnail variants for the public asset tree. Reads from
@@ -35,7 +35,10 @@ const MINOR_COLORED_QUALITY = 92
 //          + public/tarot/major/traditional/thumbs/<num>-<slug>.jpg
 const MAJOR_SRC = path.join(ROOT, 'tarot-originals/major')
 const MAJOR_OUT_FULL = path.join(ROOT, 'public/tarot/major/traditional')
-const MAJOR_OUT_THUMBS = path.join(ROOT, 'public/tarot/major/traditional/thumbs')
+const MAJOR_OUT_THUMBS = path.join(
+  ROOT,
+  'public/tarot/major/traditional/thumbs',
+)
 
 const SUITS = ['wands', 'cups', 'swords', 'pentacles']
 
@@ -109,7 +112,9 @@ async function optimizeMajors() {
 function summarize(name: string, src: number, full: number, thumb: number) {
   console.log()
   console.log(`originals (${name}): ${mb(src)}`)
-  console.log(`full q${FULL_QUALITY}:  ${mb(full)}  (${pct(full, src)} of originals)`)
+  console.log(
+    `full q${FULL_QUALITY}:  ${mb(full)}  (${pct(full, src)} of originals)`,
+  )
   console.log(
     `thumbs (${THUMB_WIDTH}w q${THUMB_QUALITY}): ${mb(thumb)}  (${pct(thumb, src)} of originals)`,
   )

@@ -1,17 +1,19 @@
 // Minor Arcana — 56 cards across Wands, Cups, Swords, Pentacles.
 // Edit `minor-arcana.json` for keyword/sign/dates/meaning; this module
 // flattens the per-suit JSON into a list of cards with URL slugs and
-// exposes the image-path helpers.
+// exposes the image-path helpers. German keywords/meanings come from
+// `de/minor-arcana.json` (keyed suit → card num) via getMinorArcana(locale);
+// the top-level exports stay pinned to English.
 
 import { z } from 'zod'
 
 import data from '@content/data/minor-arcana.json'
 
 import { byKey } from './helpers'
+import { defineLocalized } from './localized'
+import { localizedRaw } from './overlay'
 import { MinorSuitSchema } from './schemas'
 import { DEFAULT_MINOR_STYLE } from './tarot-styles'
-
-export const suits = z.array(MinorSuitSchema).parse(data)
 
 export interface MinorMeaning {
   intro: string
@@ -29,21 +31,31 @@ export interface MinorEntry {
   meaning?: MinorMeaning
 }
 
-// Slug pattern: `<num-lower>-<suit-lower>`, e.g. "ace-cups" or
-// "2-cups". Matches the filenames under public/tarot/minor/<style>/.
-export const minorCards: ReadonlyArray<MinorEntry> = suits.flatMap((s) =>
-  s.cards.map((c) => ({
-    slug: `${c.num.toLowerCase()}-${s.suit.toLowerCase()}`,
-    suit: s.suit,
-    num: c.num,
-    keyword: c.keyword,
-    sign: c.sign,
-    dates: c.dates,
-    meaning: c.meaning,
-  })),
-)
+const rawFor = localizedRaw('minor-arcana', data)
 
-export const minorBySlug = byKey(minorCards, 'slug', 'minor.slug')
+export const getMinorArcana = defineLocalized((locale) => {
+  const suits = z.array(MinorSuitSchema).parse(rawFor(locale))
+
+  // Slug pattern: `<num-lower>-<suit-lower>`, e.g. "ace-cups" or
+  // "2-cups". Matches the filenames under public/tarot/minor/<style>/.
+  // Suit/num never translate — slugs (and image paths) are shared
+  // across locales.
+  const minorCards: ReadonlyArray<MinorEntry> = suits.flatMap((s) =>
+    s.cards.map((c) => ({
+      slug: `${c.num.toLowerCase()}-${s.suit.toLowerCase()}`,
+      suit: s.suit,
+      num: c.num,
+      keyword: c.keyword,
+      sign: c.sign,
+      dates: c.dates,
+      meaning: c.meaning,
+    })),
+  )
+
+  const minorBySlug = byKey(minorCards, 'slug', 'minor.slug')
+
+  return { suits, minorCards, minorBySlug }
+})
 
 // Image URL for a minor-arcana card, in the given art style. The file lives at
 // /public/tarot/minor/<style>/<slug>.jpg. `style` defaults to the default

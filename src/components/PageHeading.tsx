@@ -1,8 +1,19 @@
+'use client'
+
 import clsx from 'clsx'
+
+import { useLocale } from '@/components/LocaleProvider'
+import { localizedTitle } from '@/lib/nav'
 
 // The standard page <h1>. Nearly every docs page (and several players)
 // renders exactly this style — keep it here so a heading restyle is a
 // one-file edit. Pass className for the rare size/spacing tweak.
+//
+// Localization is centralized here: a plain-string child that mirrors a
+// nav title (which is nearly every static page heading — 'Alchemy',
+// 'Settings', …) is swapped for its translation; anything else (card
+// names and other data-driven headings arrive already localized) passes
+// through untouched. Client component purely to read the locale.
 //
 // By default the title wraps normally (a long title on a plain page — e.g.
 // a text — flows onto a second line). Pass `truncate` on the rows where a
@@ -19,6 +30,7 @@ export function PageHeading({
   truncate?: boolean
   children: React.ReactNode
 }) {
+  const locale = useLocale()
   return (
     <h1
       className={clsx(
@@ -27,7 +39,9 @@ export function PageHeading({
         className,
       )}
     >
-      {children}
+      {typeof children === 'string'
+        ? localizedTitle(locale, children)
+        : children}
     </h1>
   )
 }

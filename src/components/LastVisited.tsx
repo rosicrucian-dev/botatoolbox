@@ -1,5 +1,11 @@
 'use client'
 
+import { useT } from '@/content/messages/useT'
+// Deliberate raw next/link: the chip restores the exact stored pathname,
+// locale prefix and all. Routing it through the locale-aware Link would
+// re-prefix a stored English path when the chip renders on /de/,
+// sending the user to the other locale's copy of where they left off.
+// eslint-disable-next-line no-restricted-imports
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useMemo, useSyncExternalStore } from 'react'
@@ -61,6 +67,7 @@ function subscribeToStorage(callback: () => void) {
 }
 
 export function ContinueChip() {
+  const { t } = useT()
   // useSyncExternalStore reads localStorage hydration-safely: the server
   // snapshot is null (chip absent in the static HTML), the client
   // snapshot fills in after hydration.
@@ -110,7 +117,9 @@ export function ContinueChip() {
       </svg>
       {/* Truncates so a long page title can't overflow the heading row on
           a narrow phone — the heading keeps its width, the chip gives. */}
-      <span className="truncate">Continue: {last.title}</span>
+      <span className="truncate">
+        {t('lastVisited.continue')} {last.title}
+      </span>
     </Link>
   )
 }

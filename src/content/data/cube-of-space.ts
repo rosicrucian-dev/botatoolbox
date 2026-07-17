@@ -5,6 +5,7 @@
 
 import { z } from 'zod'
 
+import { DEFAULT_LOCALE } from '@/lib/locales'
 import cubeData from '@content/data/cube-of-space.json'
 import { byKey } from './helpers'
 import {
@@ -13,7 +14,11 @@ import {
   CubeFlowDirectionSchema,
   CubeOfSpaceSchema,
 } from './schemas'
-import { cardBySlug } from './tarot'
+import { getTarot } from './tarot'
+
+// Structural join only (astrology attribution, never displayed from
+// here) — English on purpose.
+const { cardBySlug } = getTarot(DEFAULT_LOCALE)
 
 export type CubeEdge = z.infer<typeof CubeEdgeSchema>
 export type CubeFace = z.infer<typeof CubeFaceSchema>

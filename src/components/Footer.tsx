@@ -1,4 +1,7 @@
-import { Link } from 'next-view-transitions'
+'use client'
+
+import { Link } from '@/components/LocaleLink'
+import { useT } from '@/content/messages/useT'
 
 function GitHubIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -13,16 +16,17 @@ function GitHubIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 }
 
 function SmallPrint() {
+  const { t } = useT()
   return (
     <div className="flex flex-col items-center justify-between gap-5 border-t border-zinc-900/5 pt-8 sm:flex-row dark:border-white/5">
       <p className="text-xs text-zinc-600 dark:text-zinc-400">
-        <a href="https://github.com/rosicrucian-dev">Rosicrucian Developers</a>
+        <a href="https://rosicrucian.dev">Rosicrucian Developers</a>
       </p>
       <Link
         href="https://github.com/rosicrucian-dev/botatoolbox"
         target="_blank"
         rel="noreferrer"
-        aria-label="View source on GitHub"
+        aria-label={t('footer.viewSource')}
         className="group"
       >
         <GitHubIcon className="h-5 w-5 fill-zinc-700 transition group-hover:fill-zinc-900 dark:group-hover:fill-zinc-500" />

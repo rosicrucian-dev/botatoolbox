@@ -1,7 +1,5 @@
 import { type Metadata, type Viewport } from 'next'
-import { ViewTransitions } from 'next-view-transitions'
 
-import { Providers } from '@/app/providers'
 import { SPLASH_DEVICES, splashMedia, splashPath } from '@/lib/splash'
 
 import '@/styles/tailwind.css'
@@ -67,43 +65,32 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
   // Match the page background per scheme so browser chrome (Safari tab
   // bar, Android status bar) blends with the page instead of always
-  // hinting dark against a white light-mode page. When the user's
-  // next-themes toggle disagrees with the system scheme, ThemeColorSync
-  // (in providers.tsx) rewrites these metas to the resolved theme.
+  // hinting dark against a white light-mode page. The UI follows the
+  // system scheme (dark: is a prefers-color-scheme variant), so these
+  // media-keyed metas are always correct; the SlidePlayer temporarily
+  // overwrites them with the slide color (src/lib/themeColor.ts).
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#18181b' },
   ],
-  // Tells the browser we handle both color schemes ourselves (via
-  // next-themes flipping the .dark class on <html>). Without this, iOS
-  // Safari sometimes applies its own dark-mode treatment to sites it
-  // can't detect as "dark-aware," causing white-on-white and frozen-toggle
-  // symptoms on real devices that don't reproduce in the simulator.
-  // Also makes native form controls / scrollbars track the right mode.
+  // Tells the browser this site is dark-aware. Without this, iOS Safari
+  // sometimes applies its own dark-mode treatment to sites it can't
+  // detect as such, causing white-on-white symptoms on real devices
+  // that don't reproduce in the simulator. Also makes native form
+  // controls / scrollbars track the right mode.
   colorScheme: 'light dark',
 }
 
+// Pass-through root layout. The real document (<html lang=...>, body,
+// providers) lives in [locale]/layout.tsx so the lang attribute can
+// follow the locale segment. This file still has to exist — the root
+// not-found boundary renders into it (not-found.tsx supplies its own
+// <html>) — and it keeps the site-wide metadata/viewport exports plus
+// the stylesheet and integrity side-effect imports above.
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return (
-    // ViewTransitions wraps navigations from the next-view-transitions
-    // Link/useTransitionRouter (docs-side nav) in
-    // document.startViewTransition — a quick cross-fade between pages
-    // (see the ::view-transition rules in tailwind.css). Browsers
-    // without the API, and the full-screen players (which keep plain
-    // next/link + next/navigation so the iOS toolbar-priming dance is
-    // undisturbed), navigate instantly as before.
-    <ViewTransitions>
-      <html lang="en" className="h-full" suppressHydrationWarning>
-        <body className="flex min-h-full bg-white antialiased dark:bg-zinc-900">
-          <Providers>
-            <div className="w-full">{children}</div>
-          </Providers>
-        </body>
-      </html>
-    </ViewTransitions>
-  )
+  return children
 }

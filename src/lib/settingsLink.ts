@@ -58,7 +58,8 @@ export function decodeSettingsToken(token: string): SettingsSnapshot | null {
     // an array of strings; unknown hrefs are dropped later by the store.
     let pins: Array<string> | undefined
     if (pn !== undefined) {
-      if (!Array.isArray(pn) || pn.some((x) => typeof x !== 'string')) return null
+      if (!Array.isArray(pn) || pn.some((x) => typeof x !== 'string'))
+        return null
       pins = pn as Array<string>
     }
     return {

@@ -20,7 +20,7 @@ const OUT = join(ROOT, 'scripts/vendor/paul-case.json')
 // else the committed scripts/vendor/paul-case.json IS the source of truth.
 if (!existsSync(OCR)) {
   console.log(
-    'gen-paul-case: requires the maintainer\'s private OCR scans (ocr/ is\n' +
+    "gen-paul-case: requires the maintainer's private OCR scans (ocr/ is\n" +
       'gitignored). The committed scripts/vendor/paul-case.json is the source\n' +
       'of truth for contributors — nothing to do.',
   )
@@ -110,10 +110,24 @@ for (const k of Object.keys(out)) {
 writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n')
 
 const nums = accepted.map((b) => b.num)
-console.log(`Wrote ${nums.length} numbered entries → ${OUT.replace(ROOT + '/', '')}`)
+console.log(
+  `Wrote ${nums.length} numbered entries → ${OUT.replace(ROOT + '/', '')}`,
+)
 console.log('numbers:', nums.join(' '))
 // Sanity: report any non-increasing (should be none) and longest/shortest.
 const lens = Object.entries(out).map(([n, t]) => [n, t.length] as const)
 lens.sort((a, b) => a[1] - b[1])
-console.log('shortest:', lens.slice(0, 3).map(([n, l]) => `${n}(${l})`).join(' '))
-console.log('longest:', lens.slice(-3).map(([n, l]) => `${n}(${l})`).join(' '))
+console.log(
+  'shortest:',
+  lens
+    .slice(0, 3)
+    .map(([n, l]) => `${n}(${l})`)
+    .join(' '),
+)
+console.log(
+  'longest:',
+  lens
+    .slice(-3)
+    .map(([n, l]) => `${n}(${l})`)
+    .join(' '),
+)

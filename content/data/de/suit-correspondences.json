@@ -1,0 +1,22 @@
+[
+  {
+    "tarot": "Wands (Scepters)",
+    "playingCard": "Clubs",
+    "element": "Fire"
+  },
+  {
+    "tarot": "Cups (Chalices)",
+    "playingCard": "Hearts",
+    "element": "Water"
+  },
+  {
+    "tarot": "Swords",
+    "playingCard": "Spades",
+    "element": "Air"
+  },
+  {
+    "tarot": "Pentacles (Coins)",
+    "playingCard": "Diamonds",
+    "element": "Earth"
+  }
+]

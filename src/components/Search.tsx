@@ -1,5 +1,6 @@
 'use client'
 
+import { useT } from '@/content/messages/useT'
 import dynamic from 'next/dynamic'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -76,6 +77,7 @@ function useSearchProps() {
 }
 
 export function Search() {
+  const { t } = useT()
   let [modifierKey, setModifierKey] = useState<string>()
   let { buttonProps, dialogProps } = useSearchProps()
 
@@ -94,7 +96,7 @@ export function Search() {
         {...buttonProps}
       >
         <SearchIcon className="h-5 w-5 stroke-current" />
-        Find something...
+        {t('search.find')}
         <kbd className="ml-auto text-2xs text-zinc-400 dark:text-zinc-500">
           <kbd className="font-sans">{modifierKey}</kbd>
           <kbd className="font-sans">K</kbd>
@@ -106,6 +108,7 @@ export function Search() {
 }
 
 export function MobileSearch() {
+  const { t } = useT()
   let { close } = useMobileNavigationStore()
   let { buttonProps, dialogProps } = useSearchProps()
 
@@ -114,7 +117,7 @@ export function MobileSearch() {
       <button
         type="button"
         className="relative flex size-6 items-center justify-center rounded-md transition hover:bg-zinc-900/5 dark:hover:bg-white/5"
-        aria-label="Find something..."
+        aria-label={t('search.find')}
         {...buttonProps}
       >
         <span className="absolute size-12 pointer-fine:hidden" />

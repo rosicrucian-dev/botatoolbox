@@ -1,0 +1,82 @@
+{
+  "adni": {
+    "english": "Adonai"
+  },
+  "adni-mlk": {
+    "english": "Adonai Melekh",
+    "meaning": "Lord (and) King."
+  },
+  "athh-gbvr-lovlm-adni": {
+    "english": "Ateh Gebur Le-Olahm Adonai",
+    "meaning": "Thou art mighty forever, O Lord — the name AGLA spelled in full."
+  },
+  "ahih": {
+    "english": "Eheyeh",
+    "meaning": "Existence."
+  },
+  "al": {
+    "english": "El",
+    "meaning": "Strength."
+  },
+  "alhim": {
+    "english": "Elohim",
+    "meaning": "The Creative Powers."
+  },
+  "alhim-gbvr": {
+    "english": "Elohim Gibor",
+    "meaning": "The Force of the Creative Powers."
+  },
+  "alhim-tzbavth": {
+    "english": "Elohim Tzabaoth",
+    "meaning": "The Creative Powers (manifested in) Hosts (of forms)."
+  },
+  "alh-vdth": {
+    "english": "Eloah va-Da’ath",
+    "meaning": "Strength and Knowledge."
+  },
+  "amn": {
+    "english": "Amen"
+  },
+  "athh": {
+    "english": "Ateh"
+  },
+  "avrial": {
+    "english": "Uriel"
+  },
+  "gbrial": {
+    "english": "Gabriel"
+  },
+  "ih": {
+    "english": "Yah",
+    "meaning": "Reality (the short form of IHVH, which means: ‘That which was, that which is, that which will be the only Reality.’)"
+  },
+  "ihvh": {
+    "english": "YHWH"
+  },
+  "ihvh-tzbavth": {
+    "english": "YHWH Tzabaoth",
+    "meaning": "Reality (manifested in) Hosts (of forms)."
+  },
+  "lovlm": {
+    "english": "le-Olam"
+  },
+  "mikal": {
+    "english": "Michael"
+  },
+  "mlkvth": {
+    "english": "Malkuth"
+  },
+  "rpal": {
+    "english": "Raphael"
+  },
+  "shdi-al-chi": {
+    "english": "Shaddai El Chai",
+    "meaning": "Almighty Strength of Life."
+  },
+  "vgbvrh": {
+    "english": "ve-Geburah"
+  },
+  "vgdvlh": {
+    "english": "ve-Gedulah"
+  }
+}

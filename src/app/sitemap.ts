@@ -1,15 +1,25 @@
 import { type MetadataRoute } from 'next'
 
 import {
-  astrologyPlanets,
-  astrologySigns,
-  cards,
-  minorCards,
-  sephiroth,
-  visibleRituals,
-  visibleTexts,
-  words,
+  getAstrology,
+  getMinorArcana,
+  getRituals,
+  getSephiroth,
+  getTarot,
+  getTexts,
+  getWords,
 } from '@/content/data'
+import { DEFAULT_LOCALE, RELEASED_LOCALES, type Locale } from '@/lib/locales'
+
+// Slugs are locale-independent — the sitemap enumerates from the
+// English source on purpose (both locales' URLs are emitted below).
+const { cards } = getTarot(DEFAULT_LOCALE)
+const { minorCards } = getMinorArcana(DEFAULT_LOCALE)
+const { words } = getWords(DEFAULT_LOCALE)
+const { visibleTexts } = getTexts(DEFAULT_LOCALE)
+const { visibleRituals } = getRituals(DEFAULT_LOCALE)
+const { sephiroth } = getSephiroth(DEFAULT_LOCALE)
+const { astrologySigns, astrologyPlanets } = getAstrology(DEFAULT_LOCALE)
 
 // Required by `output: 'export'` for metadata routes — emits a static
 // /sitemap.xml file at build time instead of treating it as dynamic.
@@ -78,42 +88,41 @@ const groupRoutes = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
+
+  // Each logical page exists once per locale: English unprefixed (the
+  // build's /en/ tree is hoisted to the root by scripts/hoist-en.ts) and
+  // every translated locale under its /<locale>/ prefix. All rows carry
+  // the same hreflang alternates so crawlers pair them up; x-default
+  // points at English. Iterates LOCALES, so new locales join
+  // automatically.
+  function url(locale: Locale, path: string): string {
+    if (locale === DEFAULT_LOCALE) return `${SITE}${path}`
+    return `${SITE}/${locale}${path === '/' ? '' : path}`
+  }
+  function entries(path: string): MetadataRoute.Sitemap {
+    const alternates = {
+      languages: {
+        ...Object.fromEntries(RELEASED_LOCALES.map((l) => [l, url(l, path)])),
+        'x-default': url(DEFAULT_LOCALE, path),
+      },
+    }
+    return RELEASED_LOCALES.map((locale) => ({
+      url: url(locale, path),
+      lastModified,
+      alternates,
+    }))
+  }
+
   return [
-    ...[...staticRoutes, ...groupRoutes].map((path) => ({
-      url: `${SITE}${path}`,
-      lastModified,
-    })),
-    ...cards.map((c) => ({
-      url: `${SITE}/tarot/${c.slug}`,
-      lastModified,
-    })),
-    ...minorCards.map((c) => ({
-      url: `${SITE}/tarot/${c.slug}`,
-      lastModified,
-    })),
-    ...words.map((w) => ({
-      url: `${SITE}/practice/words-of-power/${w.slug}`,
-      lastModified,
-    })),
-    ...visibleTexts.map((t) => ({
-      url: `${SITE}/texts/${t.slug}`,
-      lastModified,
-    })),
-    ...visibleRituals.map((r) => ({
-      url: `${SITE}/rituals/${r.slug}`,
-      lastModified,
-    })),
-    ...sephiroth.map((s) => ({
-      url: `${SITE}/tree-of-life/${s.slug}`,
-      lastModified,
-    })),
-    ...astrologySigns.map((s) => ({
-      url: `${SITE}/reference/astrology/signs/${s.slug}`,
-      lastModified,
-    })),
-    ...astrologyPlanets.map((p) => ({
-      url: `${SITE}/reference/astrology/planets/${p.slug}`,
-      lastModified,
-    })),
-  ]
+    ...staticRoutes,
+    ...groupRoutes,
+    ...cards.map((c) => `/tarot/${c.slug}`),
+    ...minorCards.map((c) => `/tarot/${c.slug}`),
+    ...words.map((w) => `/practice/words-of-power/${w.slug}`),
+    ...visibleTexts.map((t) => `/texts/${t.slug}`),
+    ...visibleRituals.map((r) => `/rituals/${r.slug}`),
+    ...sephiroth.map((s) => `/tree-of-life/${s.slug}`),
+    ...astrologySigns.map((s) => `/reference/astrology/signs/${s.slug}`),
+    ...astrologyPlanets.map((p) => `/reference/astrology/planets/${p.slug}`),
+  ].flatMap(entries)
 }

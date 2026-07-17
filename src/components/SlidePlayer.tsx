@@ -3,11 +3,9 @@
 import { useEffect, useState } from 'react'
 
 import { PlayerHeader } from '@/components/PlayerHeader'
-import {
-  setThemeColorMeta,
-  themeColorForCurrentTheme,
-} from '@/components/ThemeColorSync'
+import { useT } from '@/content/messages/useT'
 import { usePlayerFullscreenExit } from '@/lib/playerFullscreen'
+import { setThemeColorMeta, themeColorForCurrentTheme } from '@/lib/themeColor'
 import { usePlayerScrollLock } from '@/lib/usePlayerScrollLock'
 import { useWakeLock } from '@/lib/useWakeLock'
 
@@ -56,6 +54,7 @@ export function SlidePlayer<S extends Slide>({
   extraHeaderItem,
   disableClickToAdvance = false,
 }: SlidePlayerProps<S>) {
+  const { t } = useT()
   // Meditation slides are looked at, not touched — keep the screen on.
   useWakeLock()
 
@@ -190,7 +189,8 @@ export function SlidePlayer<S extends Slide>({
   const safeAreaStyle: React.CSSProperties = {
     // --player-top-breather (tailwind.css): a small extra gap below the
     // Dynamic Island in standalone mode; 0 in a browser.
-    paddingTop: 'calc(env(safe-area-inset-top) + var(--player-top-breather, 0px))',
+    paddingTop:
+      'calc(env(safe-area-inset-top) + var(--player-top-breather, 0px))',
     paddingBottom: 'env(safe-area-inset-bottom)',
   }
 
@@ -224,7 +224,6 @@ export function SlidePlayer<S extends Slide>({
             Zero top padding makes those two gaps equal. Horizontal padding
             and a small bottom gap stay; the shell adds safe-area beneath. */}
         <div className="flex min-h-0 grow flex-col px-6 pb-4 lg:px-10 lg:pb-6">
-
           <div className="mx-auto flex min-h-0 w-full max-w-6xl flex-1 items-stretch justify-center">
             {current &&
               (() => {
@@ -255,18 +254,18 @@ export function SlidePlayer<S extends Slide>({
                 routing) and current-color so it adapts to the slide's
                 background. */}
             <nav
-              aria-label="Slide navigation"
+              aria-label={t('slidePlayer.navLabel')}
               className="flex items-center justify-between gap-4 border-t border-current/15 pt-6"
             >
               {idx > 0 ? (
                 <button
                   type="button"
                   onClick={() => onIdxChange(idx - 1)}
-                  aria-label={`Previous${slides[idx - 1].label ? `: ${slides[idx - 1].label}` : ''}`}
+                  aria-label={`${t('common.previous')}${slides[idx - 1].label ? `: ${slides[idx - 1].label}` : ''}`}
                   className="group flex flex-col items-start gap-1 text-sm transition hover:opacity-70"
                 >
                   <span className="text-xs font-medium opacity-70">
-                    ← Previous
+                    ← {t('common.previous')}
                   </span>
                   {slides[idx - 1].label && (
                     <span className="font-medium">{slides[idx - 1].label}</span>
@@ -279,10 +278,12 @@ export function SlidePlayer<S extends Slide>({
                 <button
                   type="button"
                   onClick={() => onIdxChange(idx + 1)}
-                  aria-label={`Next${slides[idx + 1].label ? `: ${slides[idx + 1].label}` : ''}`}
+                  aria-label={`${t('common.next')}${slides[idx + 1].label ? `: ${slides[idx + 1].label}` : ''}`}
                   className="group flex flex-col items-end gap-1 text-sm transition hover:opacity-70"
                 >
-                  <span className="text-xs font-medium opacity-70">Next →</span>
+                  <span className="text-xs font-medium opacity-70">
+                    {t('common.next')} →
+                  </span>
                   {slides[idx + 1].label && (
                     <span className="font-medium">{slides[idx + 1].label}</span>
                   )}

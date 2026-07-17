@@ -8,12 +8,17 @@
 // paths; `downloadUrl` maps them to the release at load time. Local
 // copies live in local/files/ (gitignored). To add or update an asset:
 //   gh release upload downloads local/files/<name> --clobber
+//
+// German display fields come from `de/files.json` via getFiles(locale);
+// the top-level exports stay pinned to English for legacy consumers.
 
 import { z } from 'zod'
 
 import filesData from '@content/data/files.json'
 import { byKey } from './helpers'
-import { FileEntrySchema, FileDownloadSchema } from './schemas'
+import { defineLocalized } from './localized'
+import { localizedRaw } from './overlay'
+import { FileDownloadSchema, FileEntrySchema } from './schemas'
 
 export type FileEntry = z.infer<typeof FileEntrySchema>
 export type FileDownload = z.infer<typeof FileDownloadSchema>
@@ -29,27 +34,33 @@ export function downloadUrl(src: string): string {
     : src
 }
 
-export const files: ReadonlyArray<FileEntry> = z
-  .array(FileEntrySchema)
-  .parse(filesData)
-  .map((f) => ({
-    ...f,
-    src: downloadUrl(f.src),
-    downloads: f.downloads?.map((d) => ({ ...d, src: downloadUrl(d.src) })),
-  }))
+const rawFor = localizedRaw('files', filesData)
 
-export const fileBySlug = byKey(files, 'slug', 'file.slug')
+export const getFiles = defineLocalized((locale) => {
+  const files: ReadonlyArray<FileEntry> = z
+    .array(FileEntrySchema)
+    .parse(rawFor(locale))
+    .map((f) => ({
+      ...f,
+      src: downloadUrl(f.src),
+      downloads: f.downloads?.map((d) => ({ ...d, src: downloadUrl(d.src) })),
+    }))
 
-// Stable section ordering for the index page (insertion order of first
-// occurrence in `files`).
-export const sectionsInOrder: ReadonlyArray<string> = (() => {
-  const seen = new Set<string>()
-  const out: Array<string> = []
-  for (const f of files) {
-    if (!seen.has(f.section)) {
-      seen.add(f.section)
-      out.push(f.section)
+  const fileBySlug = byKey(files, 'slug', 'file.slug')
+
+  // Stable section ordering for the index page (insertion order of first
+  // occurrence in `files`).
+  const sectionsInOrder: ReadonlyArray<string> = (() => {
+    const seen = new Set<string>()
+    const out: Array<string> = []
+    for (const f of files) {
+      if (!seen.has(f.section)) {
+        seen.add(f.section)
+        out.push(f.section)
+      }
     }
-  }
-  return out
-})()
+    return out
+  })()
+
+  return { files, fileBySlug, sectionsInOrder }
+})

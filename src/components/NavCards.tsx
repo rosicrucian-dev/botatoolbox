@@ -1,13 +1,13 @@
 'use client'
 
+import { Link } from '@/components/LocaleLink'
+import clsx from 'clsx'
 import {
   motion,
   useMotionTemplate,
   useMotionValue,
   type MotionValue,
 } from 'framer-motion'
-import { Link } from 'next-view-transitions'
-import clsx from 'clsx'
 
 import { GridPattern } from '@/components/GridPattern'
 import { type NavLink } from '@/lib/nav'
@@ -47,9 +47,27 @@ type CardShape = Pick<
   'y' | 'squares'
 >
 const CARD_SHAPES: Array<CardShape> = [
-  { y: 16, squares: [[0, 1], [1, 3]] },
-  { y: -6, squares: [[-1, 2], [1, 3]] },
-  { y: 32, squares: [[0, 2], [1, 4]] },
+  {
+    y: 16,
+    squares: [
+      [0, 1],
+      [1, 3],
+    ],
+  },
+  {
+    y: -6,
+    squares: [
+      [-1, 2],
+      [1, 3],
+    ],
+  },
+  {
+    y: 32,
+    squares: [
+      [0, 2],
+      [1, 4],
+    ],
+  },
   { y: 22, squares: [[0, 1]] },
 ]
 
@@ -174,11 +192,7 @@ function PinIcon() {
         strokeLinejoin="round"
         d="M9.25 2.75h1.5l-.4 5.05 2.4 1.9v1.55H7.25V9.7l2.4-1.9-.4-5.05Z"
       />
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M10 12.75v4.5"
-      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10 12.75v4.5" />
     </svg>
   )
 }

@@ -1,0 +1,74 @@
+{
+  "aries": {
+    "name": "Aries",
+    "symbol": "Ram",
+    "bodyPart": "Head, face",
+    "alchemicalStage": "Calcination"
+  },
+  "taurus": {
+    "name": "Taurus",
+    "symbol": "Ox",
+    "bodyPart": "Neck, throat",
+    "alchemicalStage": "Congelation"
+  },
+  "gemini": {
+    "name": "Gemini",
+    "symbol": "Twins",
+    "bodyPart": "Lungs, collar-bone, arms, hands",
+    "alchemicalStage": "Fixation"
+  },
+  "cancer": {
+    "name": "Cancer",
+    "symbol": "Crab",
+    "bodyPart": "Breast, stomach",
+    "alchemicalStage": "Separation"
+  },
+  "leo": {
+    "name": "Leo",
+    "symbol": "Lion",
+    "bodyPart": "Sides, back, heart",
+    "alchemicalStage": "Digestion"
+  },
+  "virgo": {
+    "name": "Virgo",
+    "symbol": "Virgin",
+    "bodyPart": "Intestines",
+    "alchemicalStage": "Distillation"
+  },
+  "libra": {
+    "name": "Libra",
+    "symbol": "Balance",
+    "bodyPart": "Kidneys, loins, back",
+    "alchemicalStage": "Sublimation"
+  },
+  "scorpio": {
+    "name": "Scorpio",
+    "symbol": "Scorpion",
+    "bodyPart": "Sex organs",
+    "alchemicalStage": "Putrefaction"
+  },
+  "sagittarius": {
+    "name": "Sagittarius",
+    "symbol": "Archer",
+    "bodyPart": "Hips, thighs, liver",
+    "alchemicalStage": "Incineration"
+  },
+  "capricorn": {
+    "name": "Capricorn",
+    "symbol": "Goat",
+    "bodyPart": "Knees",
+    "alchemicalStage": "Fermentation"
+  },
+  "aquarius": {
+    "name": "Aquarius",
+    "symbol": "Waterbearer",
+    "bodyPart": "Ankles, blood",
+    "alchemicalStage": "Dissolution"
+  },
+  "pisces": {
+    "name": "Pisces",
+    "symbol": "Fishes",
+    "bodyPart": "Feet",
+    "alchemicalStage": "Multiplication"
+  }
+}

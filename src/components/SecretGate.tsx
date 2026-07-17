@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useLocaleRouter } from '@/components/LocaleLink'
 import { useEffect, type ReactNode } from 'react'
 
 import { useSecretMode } from '@/lib/useSecretMode'
@@ -12,7 +12,7 @@ import { useSecretMode } from '@/lib/useSecretMode'
 // export — but it's enough friction for accidental visitors.
 export function SecretGate({ children }: { children: ReactNode }) {
   const { unlocked, hydrated } = useSecretMode()
-  const router = useRouter()
+  const router = useLocaleRouter()
 
   useEffect(() => {
     if (hydrated && !unlocked) router.replace('/settings')

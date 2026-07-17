@@ -6,8 +6,13 @@
 // This is a structural / UI concern, not editable attribution data —
 // hence it lives in /lib, not /data.
 
-import { cards } from '@/content/data'
+import { getTarot } from '@/content/data'
 import { letters as glyphMap } from '@/lib/hebrew'
+import { DEFAULT_LOCALE } from '@/lib/locales'
+
+// Note/color/letter are language-neutral attributions — English on
+// purpose (the keyboard shows glyphs and notes, not card names).
+const { cards } = getTarot(DEFAULT_LOCALE)
 
 const ZODIAC = new Set([
   'Aries',

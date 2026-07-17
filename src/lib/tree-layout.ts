@@ -5,7 +5,12 @@
 // Coordinates are in user space within the diagram's viewBox
 // (`TREE_VIEWBOX`). Both TreeOfLifeSvg and ProgressiveTree use them.
 
-import { sephiroth as baseSephiroth, type Sephirah } from '@/content/data'
+import { getSephiroth, type Sephirah } from '@/content/data'
+import { DEFAULT_LOCALE } from '@/lib/locales'
+
+// Layout geometry is keyed by slug and locale-independent; display
+// consumers (TreeOfLifeSvg) re-read localized records themselves.
+const { sephiroth: baseSephiroth } = getSephiroth(DEFAULT_LOCALE)
 
 export const TREE_VIEWBOX = '0 10 400 680'
 

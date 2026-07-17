@@ -89,7 +89,8 @@ export function createBreathTones(): BreathToneController {
     if (phase === 'holdIn' || phase === 'holdOut') {
       const note = phase === 'holdIn' ? 'A#' : 'C'
       const freq = noteToFrequency(note)
-      if (freq) scheduleBlip(ctx, active, freq, t0, Math.min(1, seconds), HOLD_PEAK)
+      if (freq)
+        scheduleBlip(ctx, active, freq, t0, Math.min(1, seconds), HOLD_PEAK)
       return
     }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { PlainLink as Link } from '@/components/LocaleLink'
 
 import { ensureAudioContext } from '@/lib/audioContext'
 import { enterPlayerFullscreen } from '@/lib/playerFullscreen'

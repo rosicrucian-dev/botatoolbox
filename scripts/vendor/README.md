@@ -3,8 +3,8 @@
 ## `sepher-sephiroth.source.json`
 
 A number-indexed dictionary of Hebrew words from Aleister Crowley's
-**Sepher Sephiroth** (first published 1909 in *The Equinox* I(8); also in
-*777 and Other Qabalistic Writings*). The underlying text is **public
+**Sepher Sephiroth** (first published 1909 in _The Equinox_ I(8); also in
+_777 and Other Qabalistic Writings_). The underlying text is **public
 domain**.
 
 This particular JSON serialization was produced by the
@@ -17,7 +17,7 @@ artifact is the derived file, not this source.
 
 ## `strongs-hebrew.source.json`
 
-James Strong's *A Concise Dictionary of the Words in the Hebrew Bible*
+James Strong's _A Concise Dictionary of the Words in the Hebrew Bible_
 (1894, public domain), in the JSON serialization from
 [openscriptures/strongs](https://github.com/openscriptures/strongs)
 (**CC-BY-SA**, © Open Scriptures). 8,674 lemmas with definitions. The

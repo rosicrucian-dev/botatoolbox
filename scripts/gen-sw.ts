@@ -18,6 +18,8 @@ import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, relative, sep } from 'node:path'
 
+import { TRANSLATION_LOCALES } from '../src/lib/locales.ts'
+
 const outDir = process.argv[2] ?? 'out'
 const templatePath = join('scripts', 'sw.template.js')
 
@@ -48,6 +50,14 @@ const precachePaths = walk(outDir)
   .map((full) => relative(outDir, full))
   .filter((rel) => {
     const posix = rel.split(sep).join('/')
+    // Translated-locale pages (/de/** etc.) are NOT precached —
+    // installing the PWA shouldn't multiply the download for locales
+    // most users never open. The runtime cache picks them up as they're
+    // browsed, same as images and data. (English pages sit at the root
+    // after scripts/hoist-en.ts, so they're unaffected.)
+    if (TRANSLATION_LOCALES.some((l) => posix.startsWith(`${l}/`))) {
+      return false
+    }
     if (posix.endsWith('/index.html') || posix === 'index.html') return true
     if (posix === '404.html') return true
     if (posix.startsWith('_next/static/')) return true
@@ -64,9 +74,10 @@ const manifest = precachePaths.map((rel) => ({
 }))
 
 if (manifest.length < 100) {
-  // A fresh export has ~350 pages; a tiny manifest means we scanned a
-  // partial/wrong directory and would ship a worker that "works" but
-  // caches almost nothing. Fail loudly instead.
+  // A fresh export has ~500 English pages (German /de/** is excluded
+  // above); a tiny manifest means we scanned a partial/wrong directory
+  // and would ship a worker that "works" but caches almost nothing.
+  // Fail loudly instead.
   throw new Error(
     `gen-sw: only ${manifest.length} precache entries found in ${outDir}/ — is this a complete export?`,
   )

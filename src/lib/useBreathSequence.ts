@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
 import {
+  BREATH_MAX_OPACITY,
   BREATH_MAX_SCALE,
   BREATH_MIN_OPACITY,
   BREATH_MIN_SCALE,
-  BREATH_MAX_OPACITY,
   opacityForScale,
 } from './breathVisual'
 
@@ -27,10 +27,30 @@ interface Segment {
 // A zero-length segment is dropped (e.g. all-in / all-out with no holds).
 function buildSegments(p: BreathPattern): Array<Segment> {
   const segs: Array<Segment> = [
-    { key: 'inhale', label: 'Inhale', seconds: p.inhale, scale: BREATH_MAX_SCALE },
-    { key: 'holdIn', label: 'Hold', seconds: p.holdIn, scale: BREATH_MAX_SCALE },
-    { key: 'exhale', label: 'Exhale', seconds: p.exhale, scale: BREATH_MIN_SCALE },
-    { key: 'holdOut', label: 'Hold', seconds: p.holdOut, scale: BREATH_MIN_SCALE },
+    {
+      key: 'inhale',
+      label: 'Inhale',
+      seconds: p.inhale,
+      scale: BREATH_MAX_SCALE,
+    },
+    {
+      key: 'holdIn',
+      label: 'Hold',
+      seconds: p.holdIn,
+      scale: BREATH_MAX_SCALE,
+    },
+    {
+      key: 'exhale',
+      label: 'Exhale',
+      seconds: p.exhale,
+      scale: BREATH_MIN_SCALE,
+    },
+    {
+      key: 'holdOut',
+      label: 'Hold',
+      seconds: p.holdOut,
+      scale: BREATH_MIN_SCALE,
+    },
   ]
   return segs.filter((s) => s.seconds > 0)
 }

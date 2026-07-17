@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useLocaleRouter } from '@/components/LocaleLink'
 import { useCallback, useMemo, useState } from 'react'
 
 import { MajorImage } from '@/components/CardImage'
@@ -45,7 +45,7 @@ export function AstrologyFocusPlayer({
   // and the in-player Next/Prev URL sync use this.
   const detailHrefForSlug = (s: string) => `/astrology/${kind}/${s}`
 
-  const router = useRouter()
+  const router = useLocaleRouter()
   const { colorPalette: theme } = useColorPalette()
 
   const slides = useMemo(

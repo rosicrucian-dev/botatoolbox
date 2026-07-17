@@ -1,3 +1,5 @@
+'use client'
+
 // Tabular view of the chart's aspects, one row per aspect: the pair joined by
 // the aspect's symbol (e.g. "Mars △ Jupiter") and the aspect's angle. Lists
 // every detected aspect, conjunctions included (which the wheel draws no line
@@ -11,7 +13,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
-import { planetBySlug } from '@/content/data'
+import { useLocale } from '@/components/LocaleProvider'
+import { getAstrology } from '@/content/data'
 import type { Aspect, AspectType } from '@/lib/astro/aspects'
 import { formatDegreesMinutes } from '@/lib/astro/layout'
 
@@ -26,6 +29,7 @@ const ASPECT_GLYPH: Record<AspectType, string> = {
 }
 
 export function AspectsTable({ aspects }: { aspects: Aspect[] }) {
+  const { planetBySlug } = getAstrology(useLocale())
   return (
     <section className="space-y-3">
       <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
@@ -65,7 +69,8 @@ export function AspectsTable({ aspects }: { aspects: Aspect[] }) {
             </TableBody>
           </Table>
           <p className="text-xs text-zinc-500 dark:text-zinc-400">
-            A — applying (moving toward exact)<br/>S — separating
+            A — applying (moving toward exact)
+            <br />S — separating
           </p>
         </>
       )}

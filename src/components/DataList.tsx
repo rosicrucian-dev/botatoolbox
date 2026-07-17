@@ -1,5 +1,5 @@
+import { Link } from '@/components/LocaleLink'
 import clsx from 'clsx'
-import { Link } from 'next-view-transitions'
 
 import { PlayLink } from './PlayLink'
 

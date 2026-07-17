@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "propertyNames": {
+    "type": "string"
+  },
+  "additionalProperties": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "quality": {
+        "type": "string"
+      },
+      "relatingTo": {
+        "type": "string"
+      },
+      "spirit": {
+        "type": "string"
+      },
+      "kerub": {
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  }
+}

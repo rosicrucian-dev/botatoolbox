@@ -2,16 +2,16 @@
 
 Two halves, split between the project root and `src/`:
 
-| Path                              | What lives here                                                 |
-| --------------------------------- | --------------------------------------------------------------- |
-| `content/data/*.json`             | Raw, editable JSON. Hand-editable; non-developers can touch.    |
-| `content/data/*.schema.json`      | JSON Schema sidecars for VS Code autocomplete. **Generated.**   |
-| `public/data/*.json`              | **Generated** data — built by `npm run gen:*`, fetched on demand. Do **not** edit. |
-| `src/content/data/schemas.ts`     | Zod schemas — single source of truth for shape + TS types.      |
-| `src/content/data/<domain>.ts`    | Typed view of one or more JSON files + lookup maps + helpers.   |
-| `src/content/data/index.ts`       | Pure barrel — consumers import **only** from `@/content/data`.  |
-| `src/content/data/helpers.ts`     | `byKey<T>()` and other shared utilities.                        |
-| `src/content/integrity.ts`        | Cross-file ref checks (mantraSlug → word, grade.sephirah, …).   |
+| Path                           | What lives here                                                                    |
+| ------------------------------ | ---------------------------------------------------------------------------------- |
+| `content/data/*.json`          | Raw, editable JSON. Hand-editable; non-developers can touch.                       |
+| `content/data/*.schema.json`   | JSON Schema sidecars for VS Code autocomplete. **Generated.**                      |
+| `public/data/*.json`           | **Generated** data — built by `npm run gen:*`, fetched on demand. Do **not** edit. |
+| `src/content/data/schemas.ts`  | Zod schemas — single source of truth for shape + TS types.                         |
+| `src/content/data/<domain>.ts` | Typed view of one or more JSON files + lookup maps + helpers.                      |
+| `src/content/data/index.ts`    | Pure barrel — consumers import **only** from `@/content/data`.                     |
+| `src/content/data/helpers.ts`  | `byKey<T>()` and other shared utilities.                                           |
+| `src/content/integrity.ts`     | Cross-file ref checks (mantraSlug → word, grade.sephirah, …).                      |
 
 ## Adding a new data file
 
@@ -27,6 +27,43 @@ Two halves, split between the project root and `src/`:
 5. If the new file references records in another file, add a check to
    `integrity.ts`. It runs once at boot (imported from `app/layout.tsx`)
    and throws an actionable error on any dangling reference.
+6. If the file has human-readable display fields, register it in
+   `overlay-config.ts` (keying + translatable-field whitelist) and run
+   `npm run gen:translations` — that emits the per-locale skeleton under
+   `content/data/de/` for the translator. The loader then follows the
+   localized pattern (see below).
+
+## Translations (overlays)
+
+English JSON is the single source of truth for structure — slugs, nums,
+foreign keys, glyphs. Per-locale overlay files (`content/data/de/*.json`,
+translator-edited, see `content/TRANSLATING.md`) carry ONLY whitelisted
+display fields, keyed per `overlay-config.ts`, and are deep-merged over
+the English rows before the Zod parse with English fallback for anything
+missing. Overlay mistakes warn (`[i18n] …`) but never fail the build.
+
+Each loader exposes exactly one way to read data — the locale accessor:
+
+```ts
+const rawFor = localizedRaw('tarot', data, { de: deData })
+export const getTarot = defineLocalized((locale) => {
+  const cards = z.array(TarotCardSchema).parse(rawFor(locale))
+  …derived views…
+  return { cards, cardBySlug, … }
+})
+```
+
+There are deliberately NO module-level English-pinned exports. Pages pass
+`params.locale` (via `toLocale`), client components use `useLocale()`, and
+locale-independent consumers (generateStaticParams, integrity.ts, the
+sitemap, geometry/layout helpers) call `getTarot(DEFAULT_LOCALE)` — so
+"this reads English on purpose" is always explicit at the call site.
+
+Prose markdown translations live at `content/{texts,rituals}/de/<slug>.md`
+(same filename as the English source; `readLocalizedMarkdown()` in
+`src/content/markdown.ts` falls back to English when absent). The
+`gen:translations` script creates any missing skeletons and never
+overwrites existing work.
 
 ## Conventions
 
@@ -41,9 +78,9 @@ Two halves, split between the project root and `src/`:
     `intelligenceHebrew: "Shefa Nivdal"`)
   - Letter romanization (e.g. `hebrewRoman: "ThPARTh"`,
     `intelligenceRoman: "ShPO NBDL"`)
-  The list of Hebrew letters spelling the word is **never stored** — it's
-  derived via `romanToLetters(roman)` in `@/lib/hebrew`. Editing the
-  roman string is the only place you change spelling.
+    The list of Hebrew letters spelling the word is **never stored** — it's
+    derived via `romanToLetters(roman)` in `@/lib/hebrew`. Editing the
+    roman string is the only place you change spelling.
 - **Reverse maps** (e.g. `gradeBySephirahSlug`) live alongside the
   forward map. Add them when a foreign key is read across multiple pages.
 - **Image paths are derived**, never stored. Each card type has a small
@@ -102,4 +139,4 @@ card), `musicFileSlug` (reference link to a /files entry), and
   server→client boundary as plain data. New quizzes are added there.
 - **`src/lib` vs here:** data + lookup maps + cross-file refs belong in
   `src/content/data`. Framework/UI/audio utilities (hooks, audio, color
-  theming, the gematria *math* in `lib/gematria.ts`) belong in `src/lib`.
+  theming, the gematria _math_ in `lib/gematria.ts`) belong in `src/lib`.

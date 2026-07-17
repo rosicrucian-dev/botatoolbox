@@ -2,11 +2,16 @@
 // trump (BOTA attribution). Base data lives in content/signs.json and
 // content/planets.json; this module just adds the derived tarot fields
 // (cardSlug, cardName, alchemy, color) and exposes lookup maps.
+// Localized via getAstrology(locale), which joins the same-locale sign/
+// planet/tarot views (the join key — English sign/planet `name` vs
+// tarot `astrology` — is never translated); top-level exports stay
+// pinned to English.
 
 import { byKey } from './helpers'
-import { planets as basePlanets, type HealingPlanet } from './planets'
-import { signs as baseSigns, type HealingSign } from './signs'
-import { cardByAstrology } from './tarot'
+import { defineLocalized } from './localized'
+import { getPlanets, type HealingPlanet } from './planets'
+import { getSigns, type HealingSign } from './signs'
+import { getTarot, type TarotCard } from './tarot'
 
 interface CardJoin {
   cardSlug: string
@@ -19,28 +24,8 @@ interface CardJoin {
   note: string
 }
 
-function joinTarot(name: string): CardJoin {
-  const card = cardByAstrology[name.toLowerCase()]
-  if (!card) throw new Error(`No tarot card for ${name}`)
-  return {
-    cardSlug: card.slug,
-    cardName: card.name,
-    cardNum: card.num,
-    alchemy: card.alchemy,
-    color: card.color,
-    note: card.note,
-  }
-}
-
 export type Sign = HealingSign & CardJoin
 export type Planet = HealingPlanet & CardJoin
-
-// Named astrologySigns/astrologyPlanets (not signs/planets) because the
-// raw records keep those names — this is the joined, re-ordered view.
-export const astrologySigns: ReadonlyArray<Sign> = baseSigns.map((s) => ({
-  ...s,
-  ...joinTarot(s.name),
-}))
 
 // Traditional educational order for the astrology views: luminaries
 // first (Sun, Moon — most important in any chart), then the rest by
@@ -66,13 +51,46 @@ const ASTROLOGY_PLANET_ORDER = [
   'pluto',
 ] as const
 
-export const astrologyPlanets: ReadonlyArray<Planet> = [...basePlanets]
-  .map((p) => ({ ...p, ...joinTarot(p.name) }))
-  .sort(
-    (a, b) =>
-      ASTROLOGY_PLANET_ORDER.indexOf(a.slug as never) -
-      ASTROLOGY_PLANET_ORDER.indexOf(b.slug as never),
+export const getAstrology = defineLocalized((locale) => {
+  const { cardByAstrology } = getTarot(locale)
+
+  // Joined by SLUG, not display name: for every sign/planet the slug
+  // equals the lowercased English name — which is exactly how
+  // cardByAstrology is keyed — and unlike the name it never translates.
+  function joinTarot(slug: string): CardJoin {
+    const card: TarotCard | undefined = cardByAstrology[slug]
+    if (!card) throw new Error(`No tarot card for ${slug}`)
+    return {
+      cardSlug: card.slug,
+      cardName: card.name,
+      cardNum: card.num,
+      alchemy: card.alchemy,
+      color: card.color,
+      note: card.note,
+    }
+  }
+
+  // Named astrologySigns/astrologyPlanets (not signs/planets) because the
+  // raw records keep those names — this is the joined, re-ordered view.
+  const astrologySigns: ReadonlyArray<Sign> = getSigns(locale).signs.map(
+    (s) => ({
+      ...s,
+      ...joinTarot(s.slug),
+    }),
   )
 
-export const signBySlug = byKey(astrologySigns, 'slug', 'sign.slug')
-export const planetBySlug = byKey(astrologyPlanets, 'slug', 'planet.slug')
+  const astrologyPlanets: ReadonlyArray<Planet> = [
+    ...getPlanets(locale).planets,
+  ]
+    .map((p) => ({ ...p, ...joinTarot(p.slug) }))
+    .sort(
+      (a, b) =>
+        ASTROLOGY_PLANET_ORDER.indexOf(a.slug as never) -
+        ASTROLOGY_PLANET_ORDER.indexOf(b.slug as never),
+    )
+
+  const signBySlug = byKey(astrologySigns, 'slug', 'sign.slug')
+  const planetBySlug = byKey(astrologyPlanets, 'slug', 'planet.slug')
+
+  return { astrologySigns, astrologyPlanets, signBySlug, planetBySlug }
+})

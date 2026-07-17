@@ -1,7 +1,7 @@
 'use client'
 
+import { Link } from '@/components/LocaleLink'
 import clsx from 'clsx'
-import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
 import {
   createContext,
@@ -12,7 +12,11 @@ import {
   useState,
 } from 'react'
 
-import { navigation } from '@/lib/nav'
+import { useLocale } from '@/components/LocaleProvider'
+import { useT } from '@/content/messages/useT'
+import { DEFAULT_LOCALE, stripLocale } from '@/lib/locales'
+import { getNavigation, localizedTitle } from '@/lib/nav'
+import { navGroupSlug } from '@/lib/nav-data'
 
 // Breadcrumb trail for the top bar, ported from the Compass template and
 // adapted to the toolbox's shared Header. A page declares its trail by
@@ -86,8 +90,10 @@ export function useBreadcrumbs(): Array<Crumb> {
 //     → practice → Practice), and
 //   - the group's own slug (`/devices` → Devices), which also covers a flat
 //     group's grouped alias (`/devices/cube-of-space` → Devices).
+// Mapping is built from the ENGLISH nav on purpose: segments and group
+// slugs derive from English titles; only displayed labels localize.
 const GROUP_BY_SEGMENT: Record<string, string> = {}
-for (const group of navigation) {
+for (const group of getNavigation(DEFAULT_LOCALE)) {
   const slug = group.title.toLowerCase()
   if (!(slug in GROUP_BY_SEGMENT)) GROUP_BY_SEGMENT[slug] = group.title
   for (const link of group.links) {
@@ -114,9 +120,7 @@ function Separator() {
   // shrink-0 so the slash keeps its own width (and the gap-x-2 on either
   // side) even when the trail is tight — it must never get squeezed onto a
   // neighbouring label.
-  return (
-    <span className="shrink-0 text-zinc-900/25 dark:text-white/25">/</span>
-  )
+  return <span className="shrink-0 text-zinc-900/25 dark:text-white/25">/</span>
 }
 
 // A single crumb. `truncate` (only used on the leaf) must sit on a block-level
@@ -135,7 +139,10 @@ function Crumb({
     crumb.muted || current
       ? 'text-zinc-500 dark:text-zinc-400'
       : 'text-zinc-900 dark:text-white'
-  const cls = clsx(truncate ? 'block truncate' : 'block whitespace-nowrap', color)
+  const cls = clsx(
+    truncate ? 'block truncate' : 'block whitespace-nowrap',
+    color,
+  )
   return crumb.href && !current ? (
     <Link href={crumb.href} className={cls}>
       {crumb.label}
@@ -157,23 +164,46 @@ function Crumb({
 // detail that gives way (which is also the page's <h1>).
 export function BreadcrumbTrail({ items }: { items: Array<Crumb> }) {
   const pathname = usePathname()
+  const { t, tDyn } = useT()
+  const locale = useLocale()
+  // Centralized label localization: labels that mirror a nav title
+  // (nearly every static page's leaf crumb) swap for their translation;
+  // data-driven labels arrive already localized and pass through.
+  const localizedItems = items.map((c) => ({
+    ...c,
+    label: localizedTitle(locale, c.label),
+  }))
+  // Under /de/ the pathname carries a locale prefix that nav hrefs never
+  // have — strip it before any comparison (the crumb hrefs stay in
+  // unprefixed English form; the locale-aware Link re-adds the prefix).
+  const { path } = stripLocale(pathname)
   // trailingSlash: true means usePathname() returns "/devices/", so compare
   // against the group href with any trailing slash stripped (but keep "/").
-  const normalized = pathname.replace(/(.)\/$/, '$1')
-  const group = groupForPath(pathname)
+  const normalized = path.replace(/(.)\/$/, '$1')
+  const group = groupForPath(path)
   const onGroupPage = group ? normalized === group.href : false
   const isHome = normalized === '/'
   // On the home page the leaf IS home, so show a single "Home" crumb (from
   // items) with no duplicated root prefix. Everywhere else, prepend the
   // "Home" root (and the group crumb) ahead of the page's own items.
   const trail: Array<Crumb> = isHome
-    ? items
+    ? localizedItems
     : [
-        { label: 'Home', href: '/' },
+        { label: t('breadcrumbs.home'), href: '/' },
         ...(group && !onGroupPage
-          ? [{ label: group.title, href: group.href }]
+          ? [
+              {
+                // The mapping is keyed on English titles; only the
+                // displayed label localizes.
+                label: tDyn(
+                  `nav.group.${navGroupSlug(group.title)}.title`,
+                  group.title,
+                ),
+                href: group.href,
+              },
+            ]
           : []),
-        ...items,
+        ...localizedItems,
       ]
 
   return (

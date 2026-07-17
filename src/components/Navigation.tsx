@@ -2,18 +2,17 @@
 
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Link } from 'next-view-transitions'
-import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useRef } from 'react'
 
+import { Link, PlainLink } from '@/components/LocaleLink'
+import { useLocale } from '@/components/LocaleProvider'
 import { useIsInsideMobileNavigation } from '@/components/MobileNavigation'
-import { visibleNavigation, type NavGroup } from '@/lib/nav'
+import { stripLocale } from '@/lib/locales'
+import { getVisibleNavigation, type NavGroup } from '@/lib/nav'
 import { remToPx } from '@/lib/remToPx'
 import { useSecretMode } from '@/lib/useSecretMode'
 import { CloseButton } from '@headlessui/react'
-
-export { visibleNavigation as navigation }
 
 function useInitialValue<T>(value: T, condition = true) {
   // eslint-disable-next-line react-hooks/refs
@@ -23,9 +22,11 @@ function useInitialValue<T>(value: T, condition = true) {
 
 // `trailingSlash: true` in next.config.mjs makes usePathname() return paths
 // with a trailing slash ("/healing/planets/"), but our nav hrefs don't have
-// one. Normalize before comparing.
-function stripTrailingSlash(p: string) {
-  return p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p
+// one — and under /de/ the pathname carries a locale prefix the (English)
+// nav hrefs never do. Normalize both away before comparing.
+function normalizePath(p: string) {
+  const path = stripLocale(p).path
+  return path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path
 }
 
 function NavLink({
@@ -46,7 +47,7 @@ function NavLink({
   const insideMobileNav = useIsInsideMobileNavigation()
   return (
     <CloseButton
-      as={insideMobileNav ? NextLink : Link}
+      as={insideMobileNav ? PlainLink : Link}
       href={href}
       aria-current={active ? 'page' : undefined}
       className={clsx(
@@ -70,7 +71,7 @@ function ActivePageHighlight({
   pathname: string
 }) {
   let itemHeight = remToPx(2)
-  let normalizedPath = stripTrailingSlash(pathname)
+  let normalizedPath = normalizePath(pathname)
   let top =
     group.links.findIndex((link) => link.href === normalizedPath) * itemHeight
 
@@ -95,7 +96,7 @@ function ActivePageMarker({
 }) {
   let itemHeight = remToPx(2)
   let offset = remToPx(0.25)
-  let normalizedPath = stripTrailingSlash(pathname)
+  let normalizedPath = normalizePath(pathname)
   let activePageIndex = group.links.findIndex(
     (link) => link.href === normalizedPath,
   )
@@ -126,7 +127,7 @@ function NavigationGroup({
   let isInsideMobileNavigation = useIsInsideMobileNavigation()
   let pathname = useInitialValue(usePathname(), isInsideMobileNavigation)
 
-  let normalizedPath = stripTrailingSlash(pathname)
+  let normalizedPath = normalizePath(pathname)
   let isActiveGroup =
     group.links.findIndex((link) => link.href === normalizedPath) !== -1
 
@@ -169,7 +170,8 @@ function NavigationGroup({
 
 export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   const { unlocked } = useSecretMode()
-  const visible = visibleNavigation.filter(
+  const locale = useLocale()
+  const visible = getVisibleNavigation(locale).filter(
     (group) => group.gated !== 'secret' || unlocked,
   )
   return (

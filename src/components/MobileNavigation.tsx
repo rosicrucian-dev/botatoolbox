@@ -1,5 +1,6 @@
 'use client'
 
+import { useT } from '@/content/messages/useT'
 import {
   Dialog,
   DialogBackdrop,
@@ -50,12 +51,13 @@ const NAV_FAB_CLASS =
   'fixed right-[calc(env(safe-area-inset-right)+1.25rem)] bottom-[calc(env(safe-area-inset-bottom)+1.25rem)] z-[60] flex size-14 items-center justify-center rounded-full bg-white/75 text-zinc-900 shadow-lg shadow-zinc-900/20 ring-1 ring-zinc-900/10 backdrop-blur-md transition active:scale-95 lg:hidden dark:bg-zinc-800/75 dark:text-white dark:shadow-black/40 dark:ring-white/10'
 
 function NavFab({ open, onClick }: { open: boolean; onClick: () => void }) {
+  const { t } = useT()
   const Icon = open ? XIcon : MenuIcon
   return (
     <button
       type="button"
       className={NAV_FAB_CLASS}
-      aria-label="Toggle navigation"
+      aria-label={t('mobileNav.toggle')}
       aria-expanded={open}
       onClick={onClick}
     >
@@ -142,6 +144,7 @@ export const useMobileNavigationStore = create<{
 }))
 
 export function MobileNavigation() {
+  const { t } = useT()
   let isInsideMobileNavigation = useIsInsideMobileNavigation()
   let { isOpen, toggle, close } = useMobileNavigationStore()
   let ToggleIcon = isOpen ? XIcon : MenuIcon
@@ -152,7 +155,7 @@ export function MobileNavigation() {
       <button
         type="button"
         className="relative flex size-6 items-center justify-center rounded-md transition hover:bg-zinc-900/5 dark:hover:bg-white/5"
-        aria-label="Toggle navigation"
+        aria-label={t('mobileNav.toggle')}
         onClick={toggle}
       >
         <span className="absolute size-12 pointer-fine:hidden" />

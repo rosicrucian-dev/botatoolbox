@@ -78,41 +78,6 @@
     "rounded": false
   },
   {
-    "slug": "occult-fundamentals",
-    "name": "1. Occult Fundamentals and Spiritual Unfoldment",
-    "src": "/files/1-occult-fundamentals-and-spiritual-unfoldment.pdf",
-    "section": "Early Writings Curriculum",
-    "direct": true
-  },
-  {
-    "slug": "esoteric-secrets",
-    "name": "2. Esoteric Secrets of Meditation and Magic",
-    "src": "/files/2-esoteric-secrets-of-meditation-and-magic.pdf",
-    "section": "Early Writings Curriculum",
-    "direct": true
-  },
-  {
-    "slug": "wisdom-of-tarot",
-    "name": "3. Wisdom of Tarot",
-    "src": "/files/3-wisdom-of-tarot.pdf",
-    "section": "Early Writings Curriculum",
-    "direct": true
-  },
-  {
-    "slug": "tarot-revelations",
-    "name": "4. Tarot Revelations",
-    "src": "/files/4-tarot-revelations.pdf",
-    "section": "Early Writings Curriculum",
-    "direct": true
-  },
-  {
-    "slug": "hermetic-alchemy",
-    "name": "5. Hermetic Alchemy",
-    "src": "/files/5-hermetic-alchemy.pdf",
-    "section": "Early Writings Curriculum",
-    "direct": true
-  },
-  {
     "slug": "correlation-sound-colour",
     "name": "Correlation of Sound and Colour",
     "src": "/files/correlation-sound-colour.pdf",

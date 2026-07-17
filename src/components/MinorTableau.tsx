@@ -1,5 +1,11 @@
-import { minorCards, minorImage, suits } from '@/content/data/minor-arcana'
+import { getMinorArcana, minorImage } from '@/content/data/minor-arcana'
 import { DEFAULT_MINOR_STYLE } from '@/content/data/tarot-styles'
+import { DEFAULT_LOCALE } from '@/lib/locales'
+
+// Deliberately static/English (suit names + "N of Suit" alt text): this
+// is the Files viewer's preview gallery for a fixed English-titled
+// download, and staying locale-free keeps it a server component.
+const { minorCards, suits } = getMinorArcana(DEFAULT_LOCALE)
 
 // All 56 minors as a preview gallery for the Files viewer, grouped one section
 // per suit (Wands, Cups, Swords, Pentacles). Each card is a lightweight preview

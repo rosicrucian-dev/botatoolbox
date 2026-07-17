@@ -3,7 +3,8 @@
 import { useEffect } from 'react'
 import { create } from 'zustand'
 
-import { visibleNavigation } from '@/lib/nav'
+import { DEFAULT_LOCALE } from '@/lib/locales'
+import { getVisibleNavigation } from '@/lib/nav'
 
 // The user's pinned homepage cards, persisted to localStorage.
 //
@@ -34,7 +35,11 @@ const STORAGE_KEY = 'bota:pinned-cards'
 // gated groups; visibility gating is applied at render time, so a pin
 // made while unlocked survives a re-lock in storage).
 const VALID_HREFS: ReadonlySet<string> = new Set(
-  visibleNavigation.flatMap((group) => group.links.map((link) => link.href)),
+  // hrefs are locale-independent (unprefixed English form) — display
+  // titles come from PinnedSection, which localizes.
+  getVisibleNavigation(DEFAULT_LOCALE).flatMap((group) =>
+    group.links.map((link) => link.href),
+  ),
 )
 
 // Keep only known hrefs, in order, de-duplicated.
@@ -101,7 +106,9 @@ function hydrateFromStorage() {
     if (raw === null) return // never set — no pins
     const parsed: unknown = JSON.parse(raw)
     if (!Array.isArray(parsed)) return
-    const next = sanitize(parsed.filter((x): x is string => typeof x === 'string'))
+    const next = sanitize(
+      parsed.filter((x): x is string => typeof x === 'string'),
+    )
     usePinnedStore.setState({ pins: next })
   } catch {
     // Corrupt/blocked storage — leave pins empty (no section).

@@ -27,6 +27,11 @@ export default function manifest(): MetadataRoute.Manifest {
     // splash and the browser chrome agree.
     background_color: '#18181b',
     theme_color: '#18181b',
+    // The manifest is single-locale by nature (one start_url, one lang).
+    // It stays English: the first-visit bounce in [locale]/layout.tsx
+    // redirects a German-preferring install from '/' to /de/ at launch.
+    // Future work: emit a second manifest under /de/ with a German
+    // name/start_url if German users should get a fully German install.
     lang: 'en',
     icons: [
       {

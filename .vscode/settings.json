@@ -149,6 +149,150 @@
         "content/data/files.json"
       ],
       "url": "./content/data/files.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/tarot.json"
+      ],
+      "url": "./content/data/de/tarot.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/minor-arcana.json"
+      ],
+      "url": "./content/data/de/minor-arcana.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/words.json"
+      ],
+      "url": "./content/data/de/words.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/sephiroth.json"
+      ],
+      "url": "./content/data/de/sephiroth.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/signs.json"
+      ],
+      "url": "./content/data/de/signs.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/planets.json"
+      ],
+      "url": "./content/data/de/planets.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/meditations-tarot-fundamentals.json"
+      ],
+      "url": "./content/data/de/meditations-tarot-fundamentals.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/meditations-supersensory-powers.json"
+      ],
+      "url": "./content/data/de/meditations-supersensory-powers.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/grades.json"
+      ],
+      "url": "./content/data/de/grades.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/chakras.json"
+      ],
+      "url": "./content/data/de/chakras.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/elements.json"
+      ],
+      "url": "./content/data/de/elements.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/gunas.json"
+      ],
+      "url": "./content/data/de/gunas.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/houses.json"
+      ],
+      "url": "./content/data/de/houses.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/numerology.json"
+      ],
+      "url": "./content/data/de/numerology.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/three-veils.json"
+      ],
+      "url": "./content/data/de/three-veils.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/four-worlds.json"
+      ],
+      "url": "./content/data/de/four-worlds.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/suit-correspondences.json"
+      ],
+      "url": "./content/data/de/suit-correspondences.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/pillars.json"
+      ],
+      "url": "./content/data/de/pillars.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/ten-palaces.json"
+      ],
+      "url": "./content/data/de/ten-palaces.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/alchemy.json"
+      ],
+      "url": "./content/data/de/alchemy.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/texts.json"
+      ],
+      "url": "./content/data/de/texts.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/rituals.json"
+      ],
+      "url": "./content/data/de/rituals.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/de/files.json"
+      ],
+      "url": "./content/data/de/files.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/messages/de.json"
+      ],
+      "url": "./content/messages/de.schema.json"
     }
   ]
 }

@@ -14,21 +14,31 @@
 import { z } from 'zod'
 
 import ritualsData from '@content/data/rituals.json'
+
 import { byKey } from './helpers'
+import { defineLocalized } from './localized'
+import { localizedRaw } from './overlay'
 import { RitualSchema } from './schemas'
 
 export type Ritual = z.infer<typeof RitualSchema>
 
-export const rituals: ReadonlyArray<Ritual> = z
-  .array(RitualSchema)
-  .parse(ritualsData)
+// German titles/descriptions come from `de/rituals.json` (bodies from
+// content/rituals/de/*.md) via getRituals(locale); the top-level
+// exports stay pinned to English.
+const rawFor = localizedRaw('rituals', ritualsData)
 
-export const ritualBySlug = byKey(rituals, 'slug', 'ritual.slug')
+export const getRituals = defineLocalized((locale) => {
+  const rituals: ReadonlyArray<Ritual> = z
+    .array(RitualSchema)
+    .parse(rawFor(locale))
 
-// Rituals shown in nav / home TOC / sitemap (everything not flagged hidden).
-export const visibleRituals: ReadonlyArray<Ritual> = rituals.filter(
-  (r) => !r.hidden,
-)
+  const ritualBySlug = byKey(rituals, 'slug', 'ritual.slug')
+
+  // Rituals shown in nav / home TOC / sitemap (everything not flagged hidden).
+  const visibleRituals: ReadonlyArray<Ritual> = rituals.filter((r) => !r.hidden)
+
+  return { rituals, ritualBySlug, visibleRituals }
+})
 
 export interface InstructionRef {
   ref: string

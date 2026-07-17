@@ -2,7 +2,13 @@
 // persistence. Pure functions + constants — the React state machine that
 // uses them lives in components/useFreeformSpread.ts.
 
-import { cardBySlug, cards, minorBySlug, minorCards } from '@/content/data'
+import {
+  getMinorArcana,
+  getTarot,
+  type MinorEntry,
+  type TarotCard,
+} from '@/content/data'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/locales'
 
 // The deck sits pinned at top-center; cards are drawn off it and dropped
 // anywhere on the tabletop. DECK_Y is its distance from the top edge (%).
@@ -51,13 +57,15 @@ export const SPREAD_KEY = 'freeform:spread'
 // Resolve a slug to either a major or minor card. Major slugs never match the
 // `<num>-<suit>` form of minor slugs, so a slug uniquely identifies one deck.
 export type ResolvedCard =
-  | { kind: 'major'; card: (typeof cards)[number] }
-  | { kind: 'minor'; card: (typeof minorCards)[number] }
+  | { kind: 'major'; card: TarotCard }
+  | { kind: 'minor'; card: MinorEntry }
 
-export function resolveSlug(slug: string): ResolvedCard | null {
-  const major = cardBySlug[slug]
+// Locale picks which display fields (name, keyword) ride along — the
+// caller uses them for image alt text.
+export function resolveSlug(slug: string, locale: Locale): ResolvedCard | null {
+  const major = getTarot(locale).cardBySlug[slug]
   if (major) return { kind: 'major', card: major }
-  const minor = minorBySlug[slug]
+  const minor = getMinorArcana(locale).minorBySlug[slug]
   if (minor) return { kind: 'minor', card: minor }
   return null
 }
@@ -75,10 +83,11 @@ export type Placed = {
   removing?: boolean
 }
 
-// The full 78-card deck. Freeform always uses the whole deck.
+// The full 78-card deck (slugs are locale-independent). Freeform always
+// uses the whole deck.
 export const FULL_DECK: ReadonlyArray<string> = [
-  ...cards.map((c) => c.slug),
-  ...minorCards.map((c) => c.slug),
+  ...getTarot(DEFAULT_LOCALE).cards.map((c) => c.slug),
+  ...getMinorArcana(DEFAULT_LOCALE).minorCards.map((c) => c.slug),
 ]
 
 // Drop a returned card back into the pile at a random spot, so it can come up
@@ -160,7 +169,7 @@ export function parseSpread(str: string): Array<Placed> {
         typeof p !== 'object' ||
         p === null ||
         typeof (p as { slug?: unknown }).slug !== 'string' ||
-        resolveSlug((p as { slug: string }).slug) === null
+        resolveSlug((p as { slug: string }).slug, DEFAULT_LOCALE) === null
       ) {
         return false
       }

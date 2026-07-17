@@ -19,7 +19,7 @@ import {
   type Texture,
 } from 'three'
 
-import { cardBySlug, thumbImage } from '@/content/data'
+import { getTarot, thumbImage } from '@/content/data'
 import {
   cubeEdgeById,
   cubeEdgeIdBySign,
@@ -30,7 +30,12 @@ import {
 } from '@/content/data/cube-of-space'
 import { useColorPalette } from '@/lib/colorPalette'
 import { getColor } from '@/lib/colors'
+import { DEFAULT_LOCALE } from '@/lib/locales'
 import { useTarotStyle } from '@/lib/tarotStyle'
+
+// Only the structural `color` attribution (a palette key) is read here
+// — English on purpose.
+const { cardBySlug } = getTarot(DEFAULT_LOCALE)
 
 const HALF = 2
 const BORDER_T = 0.12

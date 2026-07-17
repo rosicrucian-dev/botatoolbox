@@ -1,0 +1,30 @@
+{
+  "fire": {
+    "name": "Fire",
+    "quality": "Heat & Dryness",
+    "relatingTo": "Radiant energy",
+    "spirit": "Salamanders",
+    "kerub": "Leo"
+  },
+  "water": {
+    "name": "Water",
+    "quality": "Cold & Moisture",
+    "relatingTo": "Fluids",
+    "spirit": "Undines",
+    "kerub": "Scorpio"
+  },
+  "air": {
+    "name": "Air",
+    "quality": "Heat & Moisture",
+    "relatingTo": "Gases",
+    "spirit": "Sylphs",
+    "kerub": "Aquarius"
+  },
+  "earth": {
+    "name": "Earth",
+    "quality": "Cold & Dryness",
+    "relatingTo": "Solids",
+    "spirit": "Gnomes",
+    "kerub": "Taurus"
+  }
+}

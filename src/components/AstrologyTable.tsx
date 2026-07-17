@@ -1,3 +1,5 @@
+'use client'
+
 // Tabular view of the chart, one row per body: name, sign, and position
 // within the sign (degrees and arcminutes). Pure presentation over the same
 // `Chart` the wheel consumes; rows appear once the client has computed it.
@@ -10,11 +12,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
-import { planetBySlug, signBySlug } from '@/content/data'
+import { useLocale } from '@/components/LocaleProvider'
+import { getAstrology } from '@/content/data'
 import { formatDegreesMinutes } from '@/lib/astro/layout'
 import { lunarQuarter, type Chart } from '@/lib/astro/types'
 
 export function AstrologyTable({ chart }: { chart: Chart | null }) {
+  const { planetBySlug, signBySlug } = getAstrology(useLocale())
   if (!chart) return null
   // Shown on the Moon's row: which quarter of the lunation it's in.
   const quarter = lunarQuarter(chart)

@@ -1,7 +1,11 @@
 // Imports the tarot submodule directly (not the '@/content/data' barrel):
 // this module is itself imported by data-layer modules (quizzes.ts), so a
 // barrel import here would be circular and throw at module init.
-import { cardByLetter } from '@/content/data/tarot'
+import { getTarot } from '@/content/data/tarot'
+import { DEFAULT_LOCALE } from '@/lib/locales'
+
+// Letter/glyph metadata is language-neutral — English on purpose.
+const { cardByLetter } = getTarot(DEFAULT_LOCALE)
 
 interface LetterMeta {
   glyph: string

@@ -1,10 +1,11 @@
 import clsx from 'clsx'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Link } from 'next-view-transitions'
-import NextLink from 'next/link'
 import { forwardRef } from 'react'
 
+import { Link, PlainLink } from '@/components/LocaleLink'
+
 import { BreadcrumbTrail, useBreadcrumbs } from '@/components/Breadcrumbs'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { Logo } from '@/components/Logo'
 import {
   MobileNavigation,
@@ -12,7 +13,6 @@ import {
   useMobileNavigationStore,
 } from '@/components/MobileNavigation'
 import { MobileSearch } from '@/components/Search'
-import { ThemeToggle } from '@/components/ThemeToggle'
 import { CloseButton } from '@headlessui/react'
 
 export const Header = forwardRef<
@@ -78,7 +78,7 @@ export const Header = forwardRef<
                in Navigation.tsx: don't stack a view transition on top of the
                drawer's own close animation. */
             <CloseButton
-              as={isInsideMobileNavigation ? NextLink : Link}
+              as={isInsideMobileNavigation ? PlainLink : Link}
               href="/"
               aria-label="Home"
               className="lg:hidden"
@@ -90,7 +90,7 @@ export const Header = forwardRef<
       </div>
       <div className="flex shrink-0 items-center gap-4">
         <MobileSearch />
-        <ThemeToggle />
+        <LanguageSwitcher />
       </div>
     </motion.div>
   )

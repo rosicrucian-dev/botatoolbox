@@ -1,0 +1,20 @@
+{
+  "rajas": {
+    "element": "Air",
+    "alchemy": "Sulfur",
+    "consciousness": "Superconscious",
+    "principle": "Desire & Activity"
+  },
+  "sattva": {
+    "element": "Fire",
+    "alchemy": "Mercury",
+    "consciousness": "Self-conscious",
+    "principle": "Wisdom & Light"
+  },
+  "tamas": {
+    "element": "Water",
+    "alchemy": "Salt",
+    "consciousness": "Subconscious",
+    "principle": "Ignorance & Inertia"
+  }
+}

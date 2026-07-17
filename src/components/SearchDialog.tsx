@@ -4,6 +4,8 @@
 // lib/search (substring match — see there). Default-exported so
 // next/dynamic in Search.tsx can lazy-load the dialog chunk on first use.
 
+import { useLocaleRouter } from '@/components/LocaleLink'
+import { useT } from '@/content/messages/useT'
 import {
   Combobox,
   ComboboxInput,
@@ -14,11 +16,12 @@ import {
   DialogPanel,
 } from '@headlessui/react'
 import clsx from 'clsx'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-import { navigation } from '@/lib/nav'
-import { searchTitles, type SearchEntry } from '@/lib/search'
+import { useLocale } from '@/components/LocaleProvider'
+import { getNavigation } from '@/lib/nav'
+import { getSearchEntries, searchTitles, type SearchEntry } from '@/lib/search'
 
 function SearchIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -72,7 +75,8 @@ function SearchOption({
 }) {
   // Breadcrumb: the nav group this page lives under (detail pages like a
   // single tarot card aren't nav-listed and just show their title).
-  const sectionTitle = navigation.find((group) =>
+  const locale = useLocale()
+  const sectionTitle = getNavigation(locale).find((group) =>
     group.links.some((link) => link.href === entry.url),
   )?.title
 
@@ -108,7 +112,9 @@ export default function SearchDialog({
   className?: string
   onNavigate?: () => void
 }) {
-  const router = useRouter()
+  const router = useLocaleRouter()
+  const locale = useLocale()
+  const { t } = useT()
   const [query, setQuery] = useState('')
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -117,7 +123,7 @@ export default function SearchDialog({
     setOpen(false)
   }, [pathname, searchParams, setOpen])
 
-  const results = searchTitles(query)
+  const results = searchTitles(query, 8, getSearchEntries(locale))
 
   function close() {
     setOpen(false)
@@ -159,8 +165,8 @@ export default function SearchDialog({
               <SearchIcon className="pointer-events-none absolute top-0 left-3 h-full w-5 stroke-zinc-500" />
               <ComboboxInput
                 autoFocus
-                placeholder="Find something..."
-                aria-label="Search"
+                placeholder={t('search.find')}
+                aria-label={t('search.label')}
                 displayValue={() => query}
                 onChange={(event) => setQuery(event.target.value)}
                 className="flex-auto appearance-none bg-transparent pr-4 pl-10 text-zinc-900 outline-hidden placeholder:text-zinc-500 sm:text-sm dark:text-white"
@@ -172,11 +178,11 @@ export default function SearchDialog({
                   <div className="p-6 text-center">
                     <NoResultsIcon className="mx-auto h-5 w-5 stroke-zinc-900 dark:stroke-zinc-600" />
                     <p className="mt-2 text-xs text-zinc-700 dark:text-zinc-400">
-                      Nothing found for{' '}
+                      {t('search.nothingFoundBefore')}{' '}
                       <strong className="font-semibold wrap-break-word text-zinc-900 dark:text-white">
                         &lsquo;{query}&rsquo;
                       </strong>
-                      . Please try again.
+                      {t('search.nothingFoundAfter')}
                     </p>
                   </div>
                 ) : (

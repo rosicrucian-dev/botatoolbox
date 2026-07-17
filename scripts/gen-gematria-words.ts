@@ -19,11 +19,11 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 
-import { GematriaWordsSchema } from '../src/content/data/schemas.ts'
 import {
   GEMATRIA_SOURCES,
   type GematriaSourceId,
 } from '../src/content/data/gematria-sources.ts'
+import { GematriaWordsSchema } from '../src/content/data/schemas.ts'
 import {
   LETTER_VALUE,
   ROMAN_TO_BASE_GLYPH,

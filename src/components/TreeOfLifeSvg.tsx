@@ -1,8 +1,9 @@
 'use client'
 
-import { Link } from 'next-view-transitions'
+import { Link } from '@/components/LocaleLink'
 
-import { cardBySlug, paths, thumbImage } from '@/content/data'
+import { useLocale } from '@/components/LocaleProvider'
+import { getSephiroth, getTarot, paths, thumbImage } from '@/content/data'
 import { useColorPalette } from '@/lib/colorPalette'
 import { getColor, textColorFor } from '@/lib/colors'
 import { useTarotStyle } from '@/lib/tarotStyle'
@@ -39,6 +40,11 @@ export function TreeOfLifeSvg({
   flow?: boolean
   flowDirection?: FlowDirection
 }) {
+  const locale = useLocale()
+  // Localized display names; positions still come from lib/tree-layout
+  // (English-pinned — slugs and coordinates are locale-independent).
+  const { cardBySlug } = getTarot(locale)
+  const { sephirahBySlug } = getSephiroth(locale)
   const { majorStyle } = useTarotStyle()
   const { colorPalette } = useColorPalette()
   return (
@@ -167,7 +173,7 @@ export function TreeOfLifeSvg({
           return (
             <Link key={s.slug} href={`/tree-of-life/${s.slug}`}>
               <g className="group cursor-pointer">
-                <title>{s.name}</title>
+                <title>{sephirahBySlug[s.slug]?.name ?? s.name}</title>
                 {s.quadrantColors ? (
                   <>
                     {/* Four quarter-circle wedges, clockwise from the top.
@@ -235,7 +241,7 @@ export function TreeOfLifeSvg({
                           : 'text-[12px]'
                     }
                   >
-                    {s.name}
+                    {sephirahBySlug[s.slug]?.name ?? s.name}
                   </tspan>
                   <tspan x={s.cx} y={s.cy + 11} className="text-[12px]">
                     {s.hebrewName}

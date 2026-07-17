@@ -1,0 +1,39 @@
+{
+  "saturn": {
+    "name": "Saturn",
+    "chakra": "Root Chakra"
+  },
+  "sun": {
+    "name": "Sun",
+    "chakra": "Heart"
+  },
+  "mars": {
+    "name": "Mars",
+    "chakra": "Below Naval"
+  },
+  "jupiter": {
+    "name": "Jupiter",
+    "chakra": "Solar Plexus"
+  },
+  "venus": {
+    "name": "Venus",
+    "chakra": "Throat"
+  },
+  "moon": {
+    "name": "Moon",
+    "chakra": "Pituitary"
+  },
+  "mercury": {
+    "name": "Mercury",
+    "chakra": "Pineal"
+  },
+  "uranus": {
+    "name": "Uranus"
+  },
+  "neptune": {
+    "name": "Neptune"
+  },
+  "pluto": {
+    "name": "Pluto"
+  }
+}

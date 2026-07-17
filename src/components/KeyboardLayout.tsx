@@ -1,5 +1,5 @@
+import { Link } from '@/components/LocaleLink'
 import { PageHeading } from '@/components/PageHeading'
-import { Link } from 'next-view-transitions'
 import { Children, Fragment, type ReactNode } from 'react'
 
 // Title row + tab links shared by /keyboard, /keyboard/piano, and

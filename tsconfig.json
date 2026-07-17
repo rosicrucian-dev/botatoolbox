@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -11,6 +15,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
@@ -20,8 +25,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@content/*": ["./content/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@content/*": [
+        "./content/*"
+      ]
     }
   },
   "include": [
@@ -33,7 +42,9 @@
     "*.tsx",
     "*.mjs",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next-dev-test/types/**/*.ts",
+    ".next-dev-test/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

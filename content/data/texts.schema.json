@@ -10,6 +10,10 @@
       "title": {
         "type": "string"
       },
+      "description": {
+        "description": "Shown on the home-page TOC card for this text.",
+        "type": "string"
+      },
       "hidden": {
         "description": "Hidden from nav, home TOC, and sitemap; still reachable by direct URL.",
         "type": "boolean"

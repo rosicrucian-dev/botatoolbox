@@ -7,9 +7,13 @@
 
 // Direct submodule import — this file sits under the data layer via
 // lib/hebrew (see the note there), so it avoids the barrel too.
-import { cardByLetter, type TarotCard } from '@/content/data/tarot'
+import { getTarot, type TarotCard } from '@/content/data/tarot'
 import { letters as hebrewLetters } from '@/lib/hebrew'
 import { LETTER_VALUE } from '@/lib/hebrew-letters'
+import { DEFAULT_LOCALE } from '@/lib/locales'
+
+// Letter → gematria values are language-neutral — English on purpose.
+const { cardByLetter } = getTarot(DEFAULT_LOCALE)
 
 // Letter values come from the shared core (LETTER_VALUE) — the same table the
 // dictionary generator uses — so a built word's total always matches the

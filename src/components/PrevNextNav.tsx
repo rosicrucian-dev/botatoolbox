@@ -1,4 +1,7 @@
-import { Link } from 'next-view-transitions'
+'use client'
+
+import { Link } from '@/components/LocaleLink'
+import { useT } from '@/content/messages/useT'
 
 export interface PrevNextLink {
   href: string
@@ -14,15 +17,16 @@ export interface PrevNextLink {
 export function PrevNextNav({
   prev,
   next,
-  ariaLabel = 'Page navigation',
+  ariaLabel,
 }: {
   prev?: PrevNextLink
   next?: PrevNextLink
   ariaLabel?: string
 }) {
+  const { t } = useT()
   return (
     <nav
-      aria-label={ariaLabel}
+      aria-label={ariaLabel ?? t('prevNext.label')}
       className="flex items-center justify-between gap-4 border-t border-zinc-200 pt-6 dark:border-zinc-800"
     >
       {prev ? (
@@ -31,7 +35,7 @@ export function PrevNextNav({
           className="group flex flex-col items-start gap-1 text-sm transition hover:text-zinc-600 dark:hover:text-zinc-400"
         >
           <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
-            ← Previous
+            ← {t('common.previous')}
           </span>
           <span className="font-medium text-zinc-900 dark:text-zinc-100">
             {prev.label}
@@ -46,7 +50,7 @@ export function PrevNextNav({
           className="group flex flex-col items-end gap-1 text-sm transition hover:text-zinc-600 dark:hover:text-zinc-400"
         >
           <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
-            Next →
+            {t('common.next')} →
           </span>
           <span className="font-medium text-zinc-900 dark:text-zinc-100">
             {next.label}

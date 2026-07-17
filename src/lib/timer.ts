@@ -189,7 +189,15 @@ const useTimerStore = create<TimerStore>((set, get) => ({
   addBreath: () => {
     const next: Array<TimerStep> = [
       ...get().steps,
-      { id: newId(), kind: 'breath', inhale: 4, holdIn: 4, exhale: 4, holdOut: 4, cycles: 10 },
+      {
+        id: newId(),
+        kind: 'breath',
+        inhale: 4,
+        holdIn: 4,
+        exhale: 4,
+        holdOut: 4,
+        cycles: 10,
+      },
     ]
     set({ steps: next })
     persist(next)

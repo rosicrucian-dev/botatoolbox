@@ -5,17 +5,17 @@
 // state and gesture handling lives in useFreeformSpread, the coordinate
 // math and persistence in @/lib/freeform.
 
+import { Link, useLocaleRouter } from '@/components/LocaleLink'
+import { useLocale } from '@/components/LocaleProvider'
 import {
   MagnifyingGlassMinusIcon,
   MagnifyingGlassPlusIcon,
 } from '@heroicons/react/24/outline'
-import { Link } from 'next-view-transitions'
-import { useRouter } from 'next/navigation'
 import { memo, useEffect } from 'react'
 
 import { MajorImage, MinorImage } from '@/components/CardImage'
 import { Button } from '@/components/catalyst/button'
-import { PageHeading } from '@/components/PageHeading'
+import { PageToolbar } from '@/components/PageToolbar'
 import { Tabs } from '@/components/Tabs'
 import { toolbarButtonSize } from '@/components/toolbarButton'
 import { useFreeformSpread } from '@/components/useFreeformSpread'
@@ -52,7 +52,8 @@ const BACK_IMAGE = '/tarot/back.jpg'
 // the placed-card render), so the back simply fills whatever box the face sets.
 function CardFace({ slug }: { slug: string }) {
   const { majorStyle, minorStyle } = useTarotStyle()
-  const found = resolveSlug(slug)
+  const locale = useLocale()
+  const found = resolveSlug(slug, locale)
   if (!found) return null
   if (found.kind === 'major') {
     return (
@@ -154,7 +155,7 @@ export function FreeformClient({
 }: {
   variant?: 'inline' | 'expand'
 } = {}) {
-  const router = useRouter()
+  const router = useLocaleRouter()
   // The active major ratio shapes the generic card slots (deck pile,
   // placeholder, in-flight draw) — placed cards take each card's own ratio
   // via CardFace.
@@ -426,13 +427,13 @@ export function FreeformClient({
 
   return (
     <article className="space-y-6">
-      <div className="flex items-start justify-between gap-3">
-        {/* Title truncates to make room for the controls on narrow screens;
-            the controls block keeps its own flex-wrap so a crowded toolbar
-            wraps within its column instead of pushing the title to line 2. */}
-        <PageHeading truncate>Freeform</PageHeading>
-        <div className="flex flex-wrap items-center gap-3 text-zinc-900 dark:text-white">
-          {controls}
+      <PageToolbar
+        title="Freeform"
+        splitMobileActions
+        actionsClassName="text-zinc-900 dark:text-white"
+        secondaryActionsClassName="gap-3"
+        secondaryActions={controls}
+        primaryAction={
           <Button
             href={expandHref}
             onClick={enterPlayerFullscreen}
@@ -442,8 +443,8 @@ export function FreeformClient({
           >
             Expand ⤢
           </Button>
-        </div>
-      </div>
+        }
+      />
       {board}
     </article>
   )

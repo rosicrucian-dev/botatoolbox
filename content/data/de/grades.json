@@ -1,0 +1,46 @@
+{
+  "neophyte": {
+    "name": "Neophyte",
+    "intelligenceName": null
+  },
+  "zelator": {
+    "name": "Zelator",
+    "intelligenceName": "Resplendent"
+  },
+  "theoricus": {
+    "name": "Theoricus",
+    "intelligenceName": "Pure"
+  },
+  "practicus": {
+    "name": "Practicus",
+    "intelligenceName": "Perfect"
+  },
+  "philosophus": {
+    "name": "Philosophus",
+    "intelligenceName": "Occult"
+  },
+  "lesser-adept": {
+    "name": "Lesser Adept",
+    "intelligenceName": "Mediating"
+  },
+  "greater-adept": {
+    "name": "Greater Adept",
+    "intelligenceName": "Radical"
+  },
+  "adeptus-exemptus": {
+    "name": "Exempt Adept",
+    "intelligenceName": "Receiving"
+  },
+  "magister-templi": {
+    "name": "Magister Templi",
+    "intelligenceName": "Sanctifying"
+  },
+  "magus": {
+    "name": "Magus",
+    "intelligenceName": "Illuminating"
+  },
+  "ipsissimus": {
+    "name": "Ipsissimus",
+    "intelligenceName": "Admirable"
+  }
+}

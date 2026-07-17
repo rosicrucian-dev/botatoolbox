@@ -1,0 +1,156 @@
+{
+  "the-fool": {
+    "name": "The Fool",
+    "significance": "Ox or Bull",
+    "intelligence": "Fiery or Scintillating Intelligence",
+    "power": "Life Breath",
+    "human": "Life Breath"
+  },
+  "the-magician": {
+    "name": "Der Magier",
+    "significance": "House",
+    "intelligence": "The Transparent Intelligence",
+    "power": "Aufmerksamkeit",
+    "human": "Life and Death"
+  },
+  "high-priestess": {
+    "name": "The High Priestess",
+    "significance": "Camel",
+    "intelligence": "The Uniting Intelligence",
+    "power": "Memory",
+    "human": "Peace & Strife"
+  },
+  "the-empress": {
+    "name": "The Empress",
+    "significance": "Door",
+    "intelligence": "The Luminous Intelligence",
+    "power": "Imagination",
+    "human": "Wisdom and Folly (Knowledge and Ignorance)"
+  },
+  "the-emperor": {
+    "name": "The Emperor",
+    "significance": "Window",
+    "intelligence": "The Constituting Intelligence",
+    "power": "Reason",
+    "human": "Sight"
+  },
+  "the-hierophant": {
+    "name": "The Hierophant",
+    "significance": "Hook or Nail",
+    "intelligence": "The Triumphant and Eternal Intelligence",
+    "power": "Intuition",
+    "human": "Hearing"
+  },
+  "the-lovers": {
+    "name": "The Lovers",
+    "significance": "Sword",
+    "intelligence": "The Disposing Intelligence",
+    "power": "Discrimination",
+    "human": "Smell"
+  },
+  "the-chariot": {
+    "name": "The Chariot",
+    "significance": "Fence",
+    "intelligence": "The Intelligence of the House of Influence",
+    "power": "Receptivity to Divine Will",
+    "human": "Speech"
+  },
+  "strength": {
+    "name": "Strength",
+    "significance": "Serpent",
+    "intelligence": "The Intelligence of the Secret of all Spiritual Activities",
+    "power": "The Law of Suggestion",
+    "human": "Taste or Digestion"
+  },
+  "the-hermit": {
+    "name": "The Hermit",
+    "significance": "Open or Creative Hand",
+    "intelligence": "The Intelligence of Will",
+    "power": "The Law of Response",
+    "human": "Coition or Touch"
+  },
+  "the-wheel-of-fortune": {
+    "name": "The Wheel of Fortune",
+    "significance": "Closed or Grasping Hand",
+    "intelligence": "The Conciliating or Rewarding Intelligence of Those Who Seek",
+    "power": "The Law of Rotation",
+    "human": "Wealth and Poverty"
+  },
+  "justice": {
+    "name": "Justice",
+    "significance": "Ox-goad",
+    "intelligence": "The Faithful Intelligence",
+    "power": "The Law of Equilibrium",
+    "human": "Action"
+  },
+  "the-hanged-man": {
+    "name": "The Hanged Man",
+    "significance": "Water",
+    "intelligence": "The Stable Intelligence",
+    "power": "The Law of Reversal",
+    "human": "Surrender"
+  },
+  "death": {
+    "name": "Death",
+    "significance": "Fish",
+    "intelligence": "The Imaginative Intelligence",
+    "power": "The Law of Transformation",
+    "human": "Motion"
+  },
+  "temperance": {
+    "name": "Temperance",
+    "significance": "Prop or Support",
+    "intelligence": "The Intelligence of Probation or Trial",
+    "power": "The Law of Probation",
+    "human": "Wrath"
+  },
+  "the-devil": {
+    "name": "The Devil",
+    "significance": "Eye",
+    "intelligence": "The Renewing Intelligence",
+    "power": "Bondage",
+    "human": "Laughter"
+  },
+  "the-tower": {
+    "name": "The Tower",
+    "significance": "Mouth",
+    "intelligence": "The Exciting Intelligence",
+    "power": "Awakening",
+    "human": "Beauty and Ugliness (Grace and Sin)"
+  },
+  "the-star": {
+    "name": "The Star",
+    "significance": "Fish-hook",
+    "intelligence": "The Natural Intelligence",
+    "power": "Revelation",
+    "human": "Meditation"
+  },
+  "the-moon": {
+    "name": "The Moon",
+    "significance": "Back of Head",
+    "intelligence": "The Corporeal Intelligence",
+    "power": "Organization",
+    "human": "Sleep"
+  },
+  "the-sun": {
+    "name": "The Sun",
+    "significance": "Front of Head (Face)",
+    "intelligence": "The Collecting Intelligence",
+    "power": "Regeneration",
+    "human": "Fertility & Sterility"
+  },
+  "judgement": {
+    "name": "Judgement",
+    "significance": "Tooth or Fang",
+    "intelligence": "The Perpetual Intelligence",
+    "power": "Realization",
+    "human": "Decision"
+  },
+  "the-world": {
+    "name": "The World",
+    "significance": "Mark or Cross",
+    "intelligence": "The Administrative Intelligence",
+    "power": "Cosmic Consciousness",
+    "human": "Dominion and Slavery"
+  }
+}
