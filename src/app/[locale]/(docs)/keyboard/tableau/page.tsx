@@ -1,6 +1,7 @@
 import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { KeyboardLayout } from '@/components/KeyboardLayout'
 import { TarotKeyboard } from '@/components/TarotKeyboard'
+import { getTarot } from '@/content/data'
 import { toLocale } from '@/lib/locales'
 import { localizedTitle } from '@/lib/nav'
 
@@ -15,13 +16,18 @@ export async function generateMetadata({
   }
 }
 
-export default function KeyboardTableauPage() {
+export default async function KeyboardTableauPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { cards } = getTarot(toLocale((await params).locale))
   return (
     <KeyboardLayout tab="tableau">
       <SetBreadcrumbs
         items={[{ label: 'Keyboard', href: '/keyboard' }, { label: 'Tableau' }]}
       />
-      <TarotKeyboard />
+      <TarotKeyboard cards={cards} />
     </KeyboardLayout>
   )
 }

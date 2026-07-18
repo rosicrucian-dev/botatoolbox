@@ -12,7 +12,6 @@ import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
 import { TarotCardSchema } from './schemas'
-import { DEFAULT_MAJOR_STYLE } from './tarot-styles'
 
 export type TarotCard = z.infer<typeof TarotCardSchema>
 
@@ -43,25 +42,7 @@ export const getTarot = defineLocalized((locale) => {
   return { cards, cardBySlug, cardByLetter, cardBySlugOrNum, cardByAstrology }
 })
 
-// Image URL for a major-arcana card, in the given art style. The file lives at
-// /public/tarot/major/<style>/<num>-<slug>.jpg. Styles come from the registry
-// in `tarot-styles.ts`; `style` defaults to the default style so non-reactive
-// callers (and server render) get sensible output. Reactive callers pass the
-// user's chosen style from `useTarotStyle()` (usually via <MajorImage>).
-// Paralleled by `minorImage` in data/minor-arcana.ts. Locale-free: images
-// are shared across languages (slugs/nums never translate).
-export function cardImage(
-  card: Pick<TarotCard, 'num' | 'slug'>,
-  style: string = DEFAULT_MAJOR_STYLE,
-): string {
-  return `/tarot/major/${style}/${card.num}-${card.slug}.jpg`
-}
-
-// Half-size variant for the tableau (22 cards in a grid) and the tree of life.
-// Same JPEG, resized by scripts/optimize-tarot.ts. Style-aware like cardImage.
-export function thumbImage(
-  card: Pick<TarotCard, 'num' | 'slug'>,
-  style: string = DEFAULT_MAJOR_STYLE,
-): string {
-  return `/tarot/major/${style}/thumbs/${card.num}-${card.slug}.jpg`
-}
+// Image helpers live in tarot-images.ts (dependency-free so client
+// components can import them without the data graph); re-exported here
+// to keep the barrel surface unchanged.
+export { cardImage, thumbImage } from './tarot-images'

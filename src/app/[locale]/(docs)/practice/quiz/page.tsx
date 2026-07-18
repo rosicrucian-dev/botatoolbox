@@ -1,5 +1,6 @@
 import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 
+import { getQuizzes } from '@/content/data'
 import { toLocale } from '@/lib/locales'
 import { localizedTitle } from '@/lib/nav'
 import { QuizCatalog } from './QuizCatalog'
@@ -15,11 +16,16 @@ export async function generateMetadata({
   }
 }
 
-export default function QuizIndex() {
+export default async function QuizIndex({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { quizzes, quizCategories } = getQuizzes(toLocale((await params).locale))
   return (
     <>
       <SetBreadcrumbs items={[{ label: 'Quiz' }]} />
-      <QuizCatalog />
+      <QuizCatalog quizzes={quizzes} quizCategories={quizCategories} />
     </>
   )
 }

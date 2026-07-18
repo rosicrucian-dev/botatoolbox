@@ -9,8 +9,9 @@ import { Tab, Tabs } from '@/components/Tabs'
 import { toolbarButtonSize } from '@/components/toolbarButton'
 import { TreeOfLifeSvg, type FlowDirection } from '@/components/TreeOfLifeSvg'
 import { enterPlayerFullscreen } from '@/lib/playerFullscreen'
+import type { TreeSvgData } from '@/lib/tree-layout'
 
-export function TreeOfLifeClient() {
+export function TreeOfLifeClient({ tree }: { tree: TreeSvgData }) {
   const [flow, setFlow] = useState(false)
   const [direction, setDirection] = useState<FlowDirection>('descend')
   return (
@@ -49,7 +50,7 @@ export function TreeOfLifeClient() {
         </div>
       </div>
       <div className="h-[calc(100svh-12rem)] w-full">
-        <TreeOfLifeSvg flow={flow} flowDirection={direction} />
+        <TreeOfLifeSvg tree={tree} flow={flow} flowDirection={direction} />
       </div>
     </article>
   )

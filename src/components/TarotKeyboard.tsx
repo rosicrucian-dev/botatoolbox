@@ -3,23 +3,17 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { MajorImage } from '@/components/CardImage'
-import { useLocale } from '@/components/LocaleProvider'
-import { getTarot, type TarotCard } from '@/content/data'
+import type { TarotCard } from '@/content/data'
 import { noteToFrequency, playTone, type ActiveTone } from '@/lib/audio'
 import { ensureAudioContext } from '@/lib/audioContext'
 
 const TONE_DURATION = 30
 
-// Built per locale so card names (alt text) localize.
-function deck(cards: ReadonlyArray<TarotCard>) {
-  return {
-    fool: cards.find((c) => c.num === 0)!,
-    tableau: cards.filter((c) => c.num !== 0),
-  }
-}
-
-export function TarotKeyboard() {
-  const { fool, tableau } = deck(getTarot(useLocale()).cards)
+// Cards come from the server parent's getTarot(locale) so card names
+// (alt text) localize without bundling the data client-side.
+export function TarotKeyboard({ cards }: { cards: ReadonlyArray<TarotCard> }) {
+  const fool = cards.find((c) => c.num === 0)!
+  const tableau = cards.filter((c) => c.num !== 0)
   const activeRef = useRef<ActiveTone | null>(null)
   const [pressed, setPressed] = useState<string | null>(null)
 

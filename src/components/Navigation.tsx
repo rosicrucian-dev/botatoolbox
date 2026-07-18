@@ -9,7 +9,8 @@ import { Link, PlainLink } from '@/components/LocaleLink'
 import { useLocale } from '@/components/LocaleProvider'
 import { useIsInsideMobileNavigation } from '@/components/MobileNavigation'
 import { stripLocale } from '@/lib/locales'
-import { getVisibleNavigation, type NavGroup } from '@/lib/nav'
+import { useVisibleNav } from '@/components/NavProvider'
+import type { NavGroup } from '@/lib/nav'
 import { remToPx } from '@/lib/remToPx'
 import { useSecretMode } from '@/lib/useSecretMode'
 import { CloseButton } from '@headlessui/react'
@@ -170,8 +171,7 @@ function NavigationGroup({
 
 export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   const { unlocked } = useSecretMode()
-  const locale = useLocale()
-  const visible = getVisibleNavigation(locale).filter(
+  const visible = useVisibleNav().filter(
     (group) => group.gated !== 'secret' || unlocked,
   )
   return (

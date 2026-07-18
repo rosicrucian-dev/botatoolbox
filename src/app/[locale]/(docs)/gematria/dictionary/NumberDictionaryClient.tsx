@@ -8,12 +8,12 @@ import { GematriaNoteSection } from '@/components/GematriaNoteSection'
 import { GematriaSources } from '@/components/GematriaSources'
 import { GematriaWordSection } from '@/components/GematriaWordSection'
 import { PageHeading } from '@/components/PageHeading'
+import { GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
 import {
-  GEMATRIA_SOURCES,
   wordsForNumber,
   type GematriaDict,
   type GematriaNumberEntry,
-} from '@/content/data'
+} from '@/content/data/gematria-words'
 import { theosophicExtension, theosophicReduction } from '@/lib/gematria'
 import { useGematriaDict } from '@/lib/useGematriaDict'
 import { useQueryParamState } from '@/lib/useQueryParamState'

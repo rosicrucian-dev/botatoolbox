@@ -2,16 +2,12 @@
 
 import { Link } from '@/components/LocaleLink'
 
-import { useLocale } from '@/components/LocaleProvider'
-import { getSephiroth, getTarot, paths, thumbImage } from '@/content/data'
+import { thumbImage } from '@/content/data/tarot-images'
 import { useColorPalette } from '@/lib/colorPalette'
 import { getColor, textColorFor } from '@/lib/colors'
 import { useTarotStyle } from '@/lib/tarotStyle'
-import { sephiroth, TREE_VIEWBOX, type PlacedSephirah } from '@/lib/tree-layout'
-
-const sephBySlug: Record<string, PlacedSephirah> = Object.fromEntries(
-  sephiroth.map((s) => [s.slug, s]),
-)
+import { TREE_VIEWBOX } from '@/lib/tree-geometry'
+import type { TreeSvgData, TreeSvgSephirah } from '@/lib/tree-layout'
 
 // ---- Flow animation knobs (mirror CubeCanvas where it makes sense) ----
 // Per-path particle count, duration (seconds) for one traversal, radius
@@ -31,20 +27,23 @@ export type FlowDirection = 'descend' | 'ascend'
 // `flow=true` adds animated translucent dots traveling each path.
 // `flowDirection` picks between the lightning descent (from→to as
 // stored in tree-paths.json, default) and the path of return (to→from).
+// `tree` comes from the server parent's treeSvgData(locale) — localized
+// display fields ride in as props so the datasets stay out of the
+// client bundle.
 export function TreeOfLifeSvg({
+  tree,
   className,
   flow = false,
   flowDirection = 'descend',
 }: {
+  tree: TreeSvgData
   className?: string
   flow?: boolean
   flowDirection?: FlowDirection
 }) {
-  const locale = useLocale()
-  // Localized display names; positions still come from lib/tree-layout
-  // (English-pinned — slugs and coordinates are locale-independent).
-  const { cardBySlug } = getTarot(locale)
-  const { sephirahBySlug } = getSephiroth(locale)
+  const sephBySlug: Record<string, TreeSvgSephirah> = Object.fromEntries(
+    tree.sephiroth.map((s) => [s.slug, s]),
+  )
   const { majorStyle } = useTarotStyle()
   const { colorPalette } = useColorPalette()
   return (
@@ -55,11 +54,10 @@ export function TreeOfLifeSvg({
       preserveAspectRatio="xMidYMid meet"
     >
       <g>
-        {paths.map((path) => {
+        {tree.paths.map((path) => {
           const a = sephBySlug[path.from]
           const b = sephBySlug[path.to]
-          const card = cardBySlug[path.slug]
-          if (!a || !b || !card) return null
+          if (!a || !b) return null
           const mx = (a.cx + b.cx) / 2
           const my = (a.cy + b.cy) / 2
           let angle = (Math.atan2(b.cy - a.cy, b.cx - a.cx) * 180) / Math.PI
@@ -74,7 +72,7 @@ export function TreeOfLifeSvg({
           return (
             <Link key={path.slug} href={`/tarot/${path.slug}`}>
               <g className="group cursor-pointer">
-                <title>{`${card.num}. ${card.name}`}</title>
+                <title>{`${path.num}. ${path.name}`}</title>
                 <line
                   x1={a.cx}
                   y1={a.cy}
@@ -88,7 +86,7 @@ export function TreeOfLifeSvg({
                   y1={a.cy}
                   x2={b.cx}
                   y2={b.cy}
-                  stroke={getColor(card.color, colorPalette) ?? 'white'}
+                  stroke={getColor(path.color, colorPalette) ?? 'white'}
                   strokeWidth={16}
                 />
                 <line
@@ -113,7 +111,7 @@ export function TreeOfLifeSvg({
                     // Yellow paths (Fool / Magician / Strength) have
                     // poor contrast under translucent white — flip to
                     // translucent black so the dots are still visible.
-                    const dotFill = card.color === 'Yellow' ? 'black' : 'white'
+                    const dotFill = path.color === 'Yellow' ? 'black' : 'white'
                     return Array.from({ length: FLOW_COUNT }, (_, j) => {
                       // Negative begin offsets the start so particles
                       // appear pre-staggered along the path on first
@@ -149,7 +147,7 @@ export function TreeOfLifeSvg({
                     })
                   })()}
                 <image
-                  href={thumbImage(card, majorStyle)}
+                  href={thumbImage(path, majorStyle)}
                   x={mx - 16.5}
                   y={my - 28.5}
                   width={33}
@@ -167,13 +165,13 @@ export function TreeOfLifeSvg({
       </g>
 
       <g>
-        {sephiroth.map((s) => {
+        {tree.sephiroth.map((s) => {
           const r = 32
           const d = r / Math.sqrt(2)
           return (
             <Link key={s.slug} href={`/tree-of-life/${s.slug}`}>
               <g className="group cursor-pointer">
-                <title>{sephirahBySlug[s.slug]?.name ?? s.name}</title>
+                <title>{s.name}</title>
                 {s.quadrantColors ? (
                   <>
                     {/* Four quarter-circle wedges, clockwise from the top.
@@ -241,7 +239,7 @@ export function TreeOfLifeSvg({
                           : 'text-[12px]'
                     }
                   >
-                    {sephirahBySlug[s.slug]?.name ?? s.name}
+                    {s.name}
                   </tspan>
                   <tspan x={s.cx} y={s.cy + 11} className="text-[12px]">
                     {s.hebrewName}

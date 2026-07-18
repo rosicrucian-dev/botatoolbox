@@ -1,5 +1,7 @@
+import { getTarot, getWords } from '@/content/data'
 import { parseRitual } from '@/content/data/rituals'
 import { readLocalizedMarkdown } from '@/content/markdown'
+import { expandWord, type ExpandedWord } from '@/lib/hebrew'
 import { toLocale } from '@/lib/locales'
 import { LrpPlayer } from './LrpPlayer'
 
@@ -12,7 +14,11 @@ export default async function LesserPentagramPlayPage({
 }: {
   params: Promise<{ locale: string }>
 }) {
-  const { locale: rawLocale } = await params
-  const md = readLocalizedMarkdown('rituals', toLocale(rawLocale), 'lrp')
-  return <LrpPlayer sections={parseRitual(md)} />
+  const locale = toLocale((await params).locale)
+  const md = readLocalizedMarkdown('rituals', locale, 'lrp')
+  const { cardByLetter } = getTarot(locale)
+  const expandedBySlug: Record<string, ExpandedWord> = Object.fromEntries(
+    getWords(locale).words.map((w) => [w.slug, expandWord(w, cardByLetter)]),
+  )
+  return <LrpPlayer sections={parseRitual(md)} expandedBySlug={expandedBySlug} />
 }

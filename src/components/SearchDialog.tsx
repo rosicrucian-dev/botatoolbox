@@ -20,7 +20,7 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { useLocale } from '@/components/LocaleProvider'
-import { getNavigation } from '@/lib/nav'
+import { useNavData } from '@/components/NavProvider'
 import { getSearchEntries, searchTitles, type SearchEntry } from '@/lib/search'
 
 function SearchIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -75,8 +75,7 @@ function SearchOption({
 }) {
   // Breadcrumb: the nav group this page lives under (detail pages like a
   // single tarot card aren't nav-listed and just show their title).
-  const locale = useLocale()
-  const sectionTitle = getNavigation(locale).find((group) =>
+  const sectionTitle = useNavData()?.groups.find((group) =>
     group.links.some((link) => link.href === entry.url),
   )?.title
 

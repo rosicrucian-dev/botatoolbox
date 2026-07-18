@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 
-import { getWords } from '@/content/data'
+import { getTarot, getWords } from '@/content/data'
+import { expandWord } from '@/lib/hebrew'
 import { DEFAULT_LOCALE, toLocale } from '@/lib/locales'
 import { WordOfPowerPlayer } from './WordPlayer'
 
@@ -17,9 +18,11 @@ export default async function WordOfPowerPlayPage({
   params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale: rawLocale, slug } = await params
-  const { wordBySlug } = getWords(toLocale(rawLocale))
-  const raw = wordBySlug[slug]
+  const locale = toLocale(rawLocale)
+  const raw = getWords(locale).wordBySlug[slug]
   if (!raw) notFound()
 
-  return <WordOfPowerPlayer raw={raw} />
+  return (
+    <WordOfPowerPlayer word={expandWord(raw, getTarot(locale).cardByLetter)} />
+  )
 }

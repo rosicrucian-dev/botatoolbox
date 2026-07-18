@@ -11,6 +11,7 @@ import { AspectsTable } from '@/components/AspectsTable'
 import { AstrologyTable } from '@/components/AstrologyTable'
 import { AstrologyWheel } from '@/components/AstrologyWheel'
 import { PageHeading } from '@/components/PageHeading'
+import type { Planet, Sign } from '@/content/data'
 import { computeAspects } from '@/lib/astro/aspects'
 import { getEngine } from '@/lib/astro/engine'
 import { DESKTOP_RINGS, MOBILE_RINGS } from '@/lib/astro/layout'
@@ -63,7 +64,15 @@ function toTimeInputValue(d: Date): string {
   return `${pad(d.getHours())}:${pad(d.getMinutes())}`
 }
 
-export function ChartClient() {
+// planetBySlug/signBySlug come from the server page's
+// getAstrology(locale) so the datasets stay out of the client bundle.
+export function ChartClient({
+  planetBySlug,
+  signBySlug,
+}: {
+  planetBySlug: Record<string, Planet>
+  signBySlug: Record<string, Sign>
+}) {
   // `instant` is the moment the chart is drawn for — null until mounted, so the
   // server renders the empty wheel and there's no hydration mismatch. `pinned`
   // means the user chose a specific date; while pinned we stop tracking "now".
@@ -207,6 +216,8 @@ export function ChartClient() {
             aspects={aspects}
             profile={MOBILE_RINGS}
             label={wheelLabel}
+            planetBySlug={planetBySlug}
+            signBySlug={signBySlug}
           />
         </div>
         <div className="absolute inset-4 hidden sm:inset-6 sm:block">
@@ -215,13 +226,19 @@ export function ChartClient() {
             aspects={aspects}
             profile={DESKTOP_RINGS}
             label={wheelLabel}
+            planetBySlug={planetBySlug}
+            signBySlug={signBySlug}
           />
         </div>
       </div>
-      <AstrologyTable chart={chart} />
+      <AstrologyTable
+        chart={chart}
+        planetBySlug={planetBySlug}
+        signBySlug={signBySlug}
+      />
       {/* Gated on chart (not aspects) so the pre-hydration state stays
           blank but a computed chart with nothing in orb says so. */}
-      {chart && <AspectsTable aspects={aspects} />}
+      {chart && <AspectsTable aspects={aspects} planetBySlug={planetBySlug} />}
     </article>
   )
 }

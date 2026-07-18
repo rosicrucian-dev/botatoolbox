@@ -1,14 +1,9 @@
 // Freeform tabletop domain: coordinate math, deck geometry, and spread
 // persistence. Pure functions + constants — the React state machine that
-// uses them lives in components/useFreeformSpread.ts.
-
-import {
-  getMinorArcana,
-  getTarot,
-  type MinorEntry,
-  type TarotCard,
-} from '@/content/data'
-import { DEFAULT_LOCALE, type Locale } from '@/lib/locales'
+// uses them lives in components/useFreeformSpread.ts. Deliberately free
+// of @/content/data imports (this ships in the client bundle): the deck
+// itself arrives as DeckCard props built server-side in
+// lib/freeformDeck.ts.
 
 // The deck sits pinned at top-center; cards are drawn off it and dropped
 // anywhere on the tabletop. DECK_Y is its distance from the top edge (%).
@@ -54,21 +49,14 @@ export const ZOOM_ORIGIN_X = 0.5 // fraction of width (50%)
 // here; Expand/Close navigate to plain, constant URLs.
 export const SPREAD_KEY = 'freeform:spread'
 
-// Resolve a slug to either a major or minor card. Major slugs never match the
-// `<num>-<suit>` form of minor slugs, so a slug uniquely identifies one deck.
-export type ResolvedCard =
-  | { kind: 'major'; card: TarotCard }
-  | { kind: 'minor'; card: MinorEntry }
-
-// Locale picks which display fields (name, keyword) ride along — the
-// caller uses them for image alt text.
-export function resolveSlug(slug: string, locale: Locale): ResolvedCard | null {
-  const major = getTarot(locale).cardBySlug[slug]
-  if (major) return { kind: 'major', card: major }
-  const minor = getMinorArcana(locale).minorBySlug[slug]
-  if (minor) return { kind: 'minor', card: minor }
-  return null
-}
+// One card of the 78-card deck as the client needs it: enough to build
+// the image URL (kind + num + slug) and localized alt text (name).
+// Major slugs never match the `<num>-<suit>` form of minor slugs, so a
+// slug uniquely identifies one deck. Built per locale by
+// lib/freeformDeck.ts (server) and passed to FreeformClient as a prop.
+export type DeckCard =
+  | { slug: string; kind: 'major'; num: number; name: string }
+  | { slug: string; kind: 'minor'; name: string }
 
 // A card sitting on the tabletop. x/y are the top-left corner as a percentage
 // of the tabletop; z is the stacking order (last touched rises to the top);
@@ -82,13 +70,6 @@ export type Placed = {
   // Mid put-back: flipping face-down before it's removed and returned to pile.
   removing?: boolean
 }
-
-// The full 78-card deck (slugs are locale-independent). Freeform always
-// uses the whole deck.
-export const FULL_DECK: ReadonlyArray<string> = [
-  ...getTarot(DEFAULT_LOCALE).cards.map((c) => c.slug),
-  ...getMinorArcana(DEFAULT_LOCALE).minorCards.map((c) => c.slug),
-]
 
 // Drop a returned card back into the pile at a random spot, so it can come up
 // again later rather than always being the next draw.
@@ -156,10 +137,13 @@ export function serializeSpread(placed: ReadonlyArray<Placed>): string {
 
 // Throws on malformed input (including the pre-JSON compact format) — the
 // caller's try/catch treats that as "no saved spread" and starts empty.
-// Duplicate slugs (only possible via hand-edited/corrupt storage) are
-// dropped after the first occurrence: a dupe would collide React keys and
-// break the pile/placed invariant.
-export function parseSpread(str: string): Array<Placed> {
+// `validSlugs` is the deck (unknown slugs from hand-edited/corrupt storage
+// are dropped). Duplicate slugs are dropped after the first occurrence: a
+// dupe would collide React keys and break the pile/placed invariant.
+export function parseSpread(
+  str: string,
+  validSlugs: ReadonlySet<string>,
+): Array<Placed> {
   const data: unknown = JSON.parse(str)
   if (!Array.isArray(data)) return []
   const seen = new Set<string>()
@@ -169,7 +153,7 @@ export function parseSpread(str: string): Array<Placed> {
         typeof p !== 'object' ||
         p === null ||
         typeof (p as { slug?: unknown }).slug !== 'string' ||
-        resolveSlug((p as { slug: string }).slug, DEFAULT_LOCALE) === null
+        !validSlugs.has((p as { slug: string }).slug)
       ) {
         return false
       }

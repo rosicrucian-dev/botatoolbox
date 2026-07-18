@@ -13,8 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
-import { useLocale } from '@/components/LocaleProvider'
-import { getAstrology } from '@/content/data'
+import type { Planet } from '@/content/data'
 import type { Aspect, AspectType } from '@/lib/astro/aspects'
 import { formatDegreesMinutes } from '@/lib/astro/layout'
 
@@ -28,8 +27,15 @@ const ASPECT_GLYPH: Record<AspectType, string> = {
   opposition: '☍︎',
 }
 
-export function AspectsTable({ aspects }: { aspects: Aspect[] }) {
-  const { planetBySlug } = getAstrology(useLocale())
+// planetBySlug comes from the server parent's getAstrology(locale) so
+// the datasets stay out of the client bundle.
+export function AspectsTable({
+  aspects,
+  planetBySlug,
+}: {
+  aspects: Aspect[]
+  planetBySlug: Record<string, Planet>
+}) {
   return (
     <section className="space-y-3">
       <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">

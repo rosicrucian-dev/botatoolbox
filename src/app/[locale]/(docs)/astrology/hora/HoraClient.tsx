@@ -10,9 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
-import { useLocale } from '@/components/LocaleProvider'
 import { PageHeading } from '@/components/PageHeading'
-import { getAstrology } from '@/content/data'
+import type { Planet } from '@/content/data'
 import { planetaryHours } from '@/lib/astro/hora'
 
 // Planetary hours for the user's location — prototype. Geolocation is
@@ -128,8 +127,13 @@ function useNow(intervalMs: number): Date {
   return now
 }
 
-export function HoraClient() {
-  const { planetBySlug } = getAstrology(useLocale())
+// planetBySlug comes from the server page's getAstrology(locale) so the
+// datasets stay out of the client bundle.
+export function HoraClient({
+  planetBySlug,
+}: {
+  planetBySlug: Record<string, Planet>
+}) {
   const [location, retry] = useLocation()
   const now = useNow(30_000)
 

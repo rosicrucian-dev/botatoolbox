@@ -1,10 +1,9 @@
 'use client'
 
 import { SetBreadcrumbs } from '@/components/Breadcrumbs'
-import { useLocale } from '@/components/LocaleProvider'
 import { CardGrid } from '@/components/NavCards'
 import { PageHeading } from '@/components/PageHeading'
-import { getVisibleNavigation } from '@/lib/nav'
+import { useVisibleNav } from '@/components/NavProvider'
 
 // A landing page for a sidebar group (Astrology, Reference, Devices, …).
 // Renders the group's title and the same hover-reveal card grid the home
@@ -19,8 +18,7 @@ import { getVisibleNavigation } from '@/lib/nav'
 // "BOTA" and knows this page IS the group page, so it renders "BOTA /
 // <Group>" without linking the group crumb back to itself.
 export function GroupPage({ slug }: { slug: string }) {
-  const locale = useLocale()
-  const group = getVisibleNavigation(locale).find((g) => g.slug === slug)
+  const group = useVisibleNav().find((g) => g.slug === slug)
   const links = group?.links ?? []
   const label = group?.title ?? slug
   return (

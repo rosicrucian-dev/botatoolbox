@@ -3,8 +3,7 @@
 import { useEffect } from 'react'
 import { create } from 'zustand'
 
-import { DEFAULT_LOCALE } from '@/lib/locales'
-import { getVisibleNavigation } from '@/lib/nav'
+import { useVisibleNav } from '@/components/NavProvider'
 
 // The user's pinned homepage cards, persisted to localStorage.
 //
@@ -31,23 +30,29 @@ import { getVisibleNavigation } from '@/lib/nav'
 const STORAGE_KEY = 'bota:pinned-cards'
 
 // Every href the nav actually exposes — the allowlist a stored/restored
-// pin set is filtered against. Built once from the static nav (includes
-// gated groups; visibility gating is applied at render time, so a pin
-// made while unlocked survives a re-lock in storage).
-const VALID_HREFS: ReadonlySet<string> = new Set(
-  // hrefs are locale-independent (unprefixed English form) — display
-  // titles come from PinnedSection, which localizes.
-  getVisibleNavigation(DEFAULT_LOCALE).flatMap((group) =>
-    group.links.map((link) => link.href),
-  ),
-)
+// pin set is filtered against. Filled from the NavProvider context by the
+// hooks below (the nav is server-assembled now; hrefs are
+// locale-independent, and gated groups are included — visibility gating
+// is applied at render time, so a pin made while unlocked survives a
+// re-lock in storage). Module-level because the store's mutators run
+// outside React.
+let validHrefs: ReadonlySet<string> | null = null
+
+function ensureValidHrefs(
+  groups: ReadonlyArray<{ links: ReadonlyArray<{ href: string }> }>,
+): void {
+  if (validHrefs || groups.length === 0) return
+  validHrefs = new Set(
+    groups.flatMap((group) => group.links.map((link) => link.href)),
+  )
+}
 
 // Keep only known hrefs, in order, de-duplicated.
 function sanitize(hrefs: ReadonlyArray<string>): Array<string> {
   const seen = new Set<string>()
   const out: Array<string> = []
   for (const href of hrefs) {
-    if (VALID_HREFS.has(href) && !seen.has(href)) {
+    if (validHrefs?.has(href) && !seen.has(href)) {
       seen.add(href)
       out.push(href)
     }
@@ -78,7 +83,7 @@ const usePinnedStore = create<PinnedStore>((set, get) => ({
   // mount. See the file header.
   pins: [],
   togglePin: (href) => {
-    if (!VALID_HREFS.has(href)) return
+    if (!validHrefs?.has(href)) return
     const current = get().pins
     const next = current.includes(href)
       ? current.filter((h) => h !== href)
@@ -118,6 +123,7 @@ function hydrateFromStorage() {
 // The pin set and its mutators. Triggers the one-time hydration on first
 // mount, mirroring useColorPalette.
 export function usePinnedCards() {
+  ensureValidHrefs(useVisibleNav())
   const pins = usePinnedStore((s) => s.pins)
   const togglePin = usePinnedStore((s) => s.togglePin)
   const setPins = usePinnedStore((s) => s.setPins)
@@ -142,5 +148,6 @@ export function useIsPinned(href: string): boolean {
 // on every pin/unpin anywhere. Does not trigger hydration; the always-
 // mounted PinnedSection (usePinnedCards) owns that.
 export function useTogglePin(): (href: string) => void {
+  ensureValidHrefs(useVisibleNav())
   return usePinnedStore((s) => s.togglePin)
 }

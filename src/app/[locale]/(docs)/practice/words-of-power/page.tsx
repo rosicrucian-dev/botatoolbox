@@ -1,7 +1,7 @@
 import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DataList } from '@/components/DataList'
 import { PageHeading } from '@/components/PageHeading'
-import { getWords } from '@/content/data'
+import { getTarot, getWords } from '@/content/data'
 import { expandWord, formatPronunciation } from '@/lib/hebrew'
 import { toLocale } from '@/lib/locales'
 import { localizedTitle } from '@/lib/nav'
@@ -45,7 +45,9 @@ export default async function WordsOfPower({
   params: Promise<{ locale: string }>
 }) {
   const { locale: rawLocale } = await params
-  const { words } = getWords(toLocale(rawLocale))
+  const locale = toLocale(rawLocale)
+  const { words } = getWords(locale)
+  const { cardByLetter } = getTarot(locale)
   return (
     <article className="space-y-6">
       <SetBreadcrumbs items={[{ label: 'Words of Power' }]} />
@@ -56,7 +58,7 @@ export default async function WordsOfPower({
         getHref={(w) => `/practice/words-of-power/${w.slug}`}
         rowClassName={ROW_CLASS}
         renderRow={(word) => {
-          const w = expandWord(word)
+          const w = expandWord(word, cardByLetter)
           // Space the glyphs between words (using wordSizes) so multi-word
           // names wrap at word boundaries instead of as one unbreakable run.
           const hebrew = groupByWords(

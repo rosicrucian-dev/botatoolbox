@@ -4,9 +4,8 @@ import {
   cardImage,
   minorImage,
   thumbImage,
-  type MinorEntry,
-  type TarotCard,
-} from '@/content/data'
+} from '@/content/data/tarot-images'
+import type { MinorEntry, TarotCard } from '@/content/data'
 import { useTarotStyle } from '@/lib/tarotStyle'
 
 type ImgProps = Omit<React.ComponentPropsWithoutRef<'img'>, 'src'>

@@ -2,8 +2,7 @@
 
 import clsx from 'clsx'
 
-import { useLocale } from '@/components/LocaleProvider'
-import { localizedTitle } from '@/lib/nav'
+import { useLocalizedTitle } from '@/components/NavProvider'
 
 // The standard page <h1>. Nearly every docs page (and several players)
 // renders exactly this style — keep it here so a heading restyle is a
@@ -30,7 +29,7 @@ export function PageHeading({
   truncate?: boolean
   children: React.ReactNode
 }) {
-  const locale = useLocale()
+  const localizedTitle = useLocalizedTitle()
   return (
     <h1
       className={clsx(
@@ -39,9 +38,7 @@ export function PageHeading({
         className,
       )}
     >
-      {typeof children === 'string'
-        ? localizedTitle(locale, children)
-        : children}
+      {typeof children === 'string' ? localizedTitle(children) : children}
     </h1>
   )
 }

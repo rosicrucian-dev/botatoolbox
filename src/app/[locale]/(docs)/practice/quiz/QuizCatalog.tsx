@@ -2,16 +2,21 @@
 
 import { DataList } from '@/components/DataList'
 import { HeaderChip } from '@/components/HeaderChip'
-import { useLocale } from '@/components/LocaleProvider'
 import { PageHeading } from '@/components/PageHeading'
-import { getQuizzes, type QuizCategory } from '@/content/data'
+import type { Quiz, QuizCategory } from '@/content/data'
 import { usePersistedToggle } from '@/lib/usePersistedToggle'
 
 const RANDOMIZE_KEY = 'quiz:randomize'
 
-export function QuizCatalog() {
-  const locale = useLocale()
-  const { quizzes, quizCategories } = getQuizzes(locale)
+// quizzes/quizCategories come from the server page's getQuizzes(locale)
+// so the quiz definitions stay out of the client bundle.
+export function QuizCatalog({
+  quizzes,
+  quizCategories,
+}: {
+  quizzes: ReadonlyArray<Quiz>
+  quizCategories: ReadonlyArray<QuizCategory>
+}) {
   const [randomize, setRandomize] = usePersistedToggle(RANDOMIZE_KEY, false)
   const suffix = randomize ? '?random=1' : ''
 
@@ -46,7 +51,7 @@ function Category({
   linkSuffix,
 }: {
   category: QuizCategory
-  quizzes: ReturnType<typeof getQuizzes>['quizzes']
+  quizzes: ReadonlyArray<Quiz>
   linkSuffix: string
 }) {
   const items = quizzes.filter((q) => q.categorySlug === category.slug)

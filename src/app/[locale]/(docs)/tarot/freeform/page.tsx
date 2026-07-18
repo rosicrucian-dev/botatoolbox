@@ -1,5 +1,6 @@
 import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { FreeformClient } from '@/components/FreeformClient'
+import { freeformDeck } from '@/lib/freeformDeck'
 import { toLocale } from '@/lib/locales'
 import { localizedTitle } from '@/lib/nav'
 
@@ -14,11 +15,16 @@ export async function generateMetadata({
   }
 }
 
-export default function FreeformPage() {
+export default async function FreeformPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const deck = freeformDeck(toLocale((await params).locale))
   return (
     <>
       <SetBreadcrumbs items={[{ label: 'Freeform' }]} />
-      <FreeformClient />
+      <FreeformClient deck={deck} />
     </>
   )
 }

@@ -12,13 +12,14 @@ import { GematriaSources } from '@/components/GematriaSources'
 import { GematriaWordSection } from '@/components/GematriaWordSection'
 import { PageHeading } from '@/components/PageHeading'
 import { toolbarButtonSize } from '@/components/toolbarButton'
+import { GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
 import {
-  GEMATRIA_SOURCES,
   wordMatchesForSpelling,
   wordsForNumber,
-} from '@/content/data'
+} from '@/content/data/gematria-words'
 import { ensureAudioContext } from '@/lib/audioContext'
-import { cardByGlyph, valueByGlyph } from '@/lib/gematria'
+import { valueByGlyph } from '@/lib/gematria'
+import type { CardByGlyph } from '@/lib/glyphCards'
 import { letters } from '@/lib/hebrew'
 import { useGematriaDict } from '@/lib/useGematriaDict'
 import { useQueryParamState } from '@/lib/useQueryParamState'
@@ -43,7 +44,9 @@ for (const [name, meta] of Object.entries(letters)) {
   if (meta.sofit) NAME_BY_GLYPH[meta.sofit] = `${name} (final)`
 }
 
-export function GematriaClient() {
+// `cardByGlyph` comes from the server parent (lib/glyphCards.ts) so the
+// tarot dataset stays out of the client bundle.
+export function GematriaClient({ cardByGlyph }: { cardByGlyph: CardByGlyph }) {
   // The user's sequence (one glyph per char) is mirrored to ?seq=… so it
   // survives a refresh and a back-navigation from the meditation player, which
   // reads ?seq= to know what to play.

@@ -12,10 +12,9 @@ import {
   useState,
 } from 'react'
 
-import { useLocale } from '@/components/LocaleProvider'
+import { useLocalizedTitle, useNavData } from '@/components/NavProvider'
 import { useT } from '@/content/messages/useT'
-import { DEFAULT_LOCALE, stripLocale } from '@/lib/locales'
-import { getNavigation, localizedTitle } from '@/lib/nav'
+import { stripLocale } from '@/lib/locales'
 
 // Breadcrumb trail for the top bar, ported from the Compass template and
 // adapted to the toolbox's shared Header. A page declares its trail by
@@ -89,16 +88,21 @@ export function useBreadcrumbs(): Array<Crumb> {
 //     → practice → Practice), and
 //   - the group's own slug (`/devices` → Devices), which also covers a flat
 //     group's grouped alias (`/devices/cube-of-space` → Devices).
-// Mapping is built from the ENGLISH nav on purpose (segments are
-// locale-independent); values are group SLUGS — displayed labels come
+// Mapping is built from the nav's slugs/hrefs, which are
+// locale-independent; values are group SLUGS — displayed labels come
 // from the localized nav at render time.
-const GROUP_BY_SEGMENT: Record<string, string> = {}
-for (const group of getNavigation(DEFAULT_LOCALE)) {
-  if (!(group.slug in GROUP_BY_SEGMENT)) GROUP_BY_SEGMENT[group.slug] = group.slug
-  for (const link of group.links) {
-    const seg = link.href.split('/')[1]
-    if (seg && !(seg in GROUP_BY_SEGMENT)) GROUP_BY_SEGMENT[seg] = group.slug
+function buildGroupBySegment(
+  groups: ReadonlyArray<{ slug: string; links: ReadonlyArray<{ href: string }> }>,
+): Record<string, string> {
+  const map: Record<string, string> = {}
+  for (const group of groups) {
+    if (!(group.slug in map)) map[group.slug] = group.slug
+    for (const link of group.links) {
+      const seg = link.href.split('/')[1]
+      if (seg && !(seg in map)) map[seg] = group.slug
+    }
   }
+  return map
 }
 
 // Groups whose crumb is intentionally suppressed: their member pages show
@@ -109,8 +113,9 @@ const HIDE_GROUP_CRUMB = new Set(['website'])
 
 function groupForPath(
   pathname: string,
+  groupBySegment: Record<string, string>,
 ): { slug: string; href: string } | null {
-  const slug = GROUP_BY_SEGMENT[pathname.split('/')[1] ?? '']
+  const slug = groupBySegment[pathname.split('/')[1] ?? '']
   if (!slug || HIDE_GROUP_CRUMB.has(slug)) return null
   return { slug, href: `/${slug}` }
 }
@@ -164,13 +169,18 @@ function Crumb({
 export function BreadcrumbTrail({ items }: { items: Array<Crumb> }) {
   const pathname = usePathname()
   const { t } = useT()
-  const locale = useLocale()
+  const nav = useNavData()
+  const localizedTitle = useLocalizedTitle()
+  const groupBySegment = useMemo(
+    () => buildGroupBySegment(nav?.groups ?? []),
+    [nav],
+  )
   // Centralized label localization: labels that mirror a nav title
   // (nearly every static page's leaf crumb) swap for their translation;
   // data-driven labels arrive already localized and pass through.
   const localizedItems = items.map((c) => ({
     ...c,
-    label: localizedTitle(locale, c.label),
+    label: localizedTitle(c.label),
   }))
   // Under /de/ the pathname carries a locale prefix that nav hrefs never
   // have — strip it before any comparison (the crumb hrefs stay in
@@ -179,7 +189,7 @@ export function BreadcrumbTrail({ items }: { items: Array<Crumb> }) {
   // trailingSlash: true means usePathname() returns "/devices/", so compare
   // against the group href with any trailing slash stripped (but keep "/").
   const normalized = path.replace(/(.)\/$/, '$1')
-  const group = groupForPath(path)
+  const group = groupForPath(path, groupBySegment)
   const onGroupPage = group ? normalized === group.href : false
   const isHome = normalized === '/'
   // On the home page the leaf IS home, so show a single "Home" crumb (from
@@ -194,8 +204,8 @@ export function BreadcrumbTrail({ items }: { items: Array<Crumb> }) {
               {
                 // Localized group title, looked up by the stable slug.
                 label:
-                  getNavigation(locale).find((g) => g.slug === group.slug)
-                    ?.title ?? group.slug,
+                  nav?.groups.find((g) => g.slug === group.slug)?.title ??
+                  group.slug,
                 href: group.href,
               },
             ]

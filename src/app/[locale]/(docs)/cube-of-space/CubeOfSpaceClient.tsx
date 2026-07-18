@@ -1,33 +1,43 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { Suspense, useState } from 'react'
 
 import { Button } from '@/components/catalyst/button'
-import { CubeCanvas } from '@/components/CubeCanvas'
 import { FlowToggle } from '@/components/FlowToggle'
-import { useLocale } from '@/components/LocaleProvider'
 import { PageHeading } from '@/components/PageHeading'
 import { toolbarButtonSize } from '@/components/toolbarButton'
-import { cubeEdges, cubeFaces, getTarot } from '@/content/data'
+import type { CubeAttributions, CubeSceneData } from '@/lib/cubeScene'
 import { enterPlayerFullscreen } from '@/lib/playerFullscreen'
+
+// three.js + react-three-fiber are by far the heaviest imports on this
+// route — load them on demand so the page shell paints without them.
+// (The expand player keeps a static import; it IS the cube.)
+const CubeCanvas = dynamic(
+  () => import('@/components/CubeCanvas').then((m) => m.CubeCanvas),
+  { ssr: false },
+)
 
 // The cube's attributions, as text, for screen readers — the WebGL canvas
 // is invisible to AT and this is real content (which card sits on each
 // face and edge). Zero visual footprint.
-function CubeAttributionsSrOnly() {
-  const { cardBySlug } = getTarot(useLocale())
+function CubeAttributionsSrOnly({
+  attributions,
+}: {
+  attributions: CubeAttributions
+}) {
   return (
     <div className="sr-only">
       <h2>Cube attributions</h2>
       <ul>
-        {cubeFaces.map((f) => (
+        {attributions.faces.map((f) => (
           <li key={f.id}>
-            {f.id} face: {cardBySlug[f.cardSlug]?.name}
+            {f.id} face: {f.cardName}
           </li>
         ))}
-        {cubeEdges.map((e) => (
+        {attributions.edges.map((e) => (
           <li key={e.id}>
-            {e.id} edge: {cardBySlug[e.cardSlug]?.name}, flowing {e.flow}
+            {e.id} edge: {e.cardName}, flowing {e.flow}
           </li>
         ))}
       </ul>
@@ -35,7 +45,13 @@ function CubeAttributionsSrOnly() {
   )
 }
 
-export function CubeOfSpaceClient() {
+export function CubeOfSpaceClient({
+  scene,
+  attributions,
+}: {
+  scene: CubeSceneData
+  attributions: CubeAttributions
+}) {
   const [flow, setFlow] = useState(false)
   return (
     <article className="space-y-6">
@@ -61,10 +77,10 @@ export function CubeOfSpaceClient() {
         {/* Local boundary: keeps the texture load from suspending the whole
             route (which white-flashed the page on first visit). */}
         <Suspense fallback={null}>
-          <CubeCanvas flow={flow} />
+          <CubeCanvas flow={flow} scene={scene} />
         </Suspense>
       </div>
-      <CubeAttributionsSrOnly />
+      <CubeAttributionsSrOnly attributions={attributions} />
     </article>
   )
 }

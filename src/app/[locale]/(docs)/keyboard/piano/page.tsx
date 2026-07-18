@@ -1,5 +1,6 @@
 import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { Keyboard } from '@/components/Keyboard'
+import { keys } from '@/lib/keyboard'
 import { KeyboardLayout } from '@/components/KeyboardLayout'
 import { toLocale } from '@/lib/locales'
 import { localizedTitle } from '@/lib/nav'
@@ -21,7 +22,7 @@ export default function KeyboardPianoPage() {
       <SetBreadcrumbs
         items={[{ label: 'Keyboard', href: '/keyboard' }, { label: 'Piano' }]}
       />
-      <Keyboard />
+      <Keyboard keys={keys} />
     </KeyboardLayout>
   )
 }

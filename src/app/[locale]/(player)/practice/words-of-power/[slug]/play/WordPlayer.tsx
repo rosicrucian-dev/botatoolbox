@@ -10,17 +10,17 @@ import { SoundButton } from '@/components/SoundButton'
 import { CHANT_BEAT_SECONDS } from '@/lib/chant'
 import { useColorPalette } from '@/lib/colorPalette'
 import { getColor, textColorFor } from '@/lib/colors'
-import { expandWord, type RawWord } from '@/lib/hebrew'
+import { type ExpandedWord } from '@/lib/hebrew'
 import { useAutoAdvance } from '@/lib/useAutoAdvance'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
 
-export function WordOfPowerPlayer({ raw }: { raw: RawWord }) {
+// The server page expands the word (letter → card join) so the datasets
+// stay out of the client bundle.
+export function WordOfPowerPlayer({ word }: { word: ExpandedWord }) {
   const router = useLocaleRouter()
   const searchParams = useSearchParams()
   const autoplay = searchParams.get('autoplay') === '1'
-
-  const word = expandWord(raw)
   const { colorPalette: theme } = useColorPalette()
   const slides = useMemo(
     () =>

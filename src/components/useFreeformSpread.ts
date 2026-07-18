@@ -13,11 +13,10 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { majorAspectRatio } from '@/content/data'
+import { majorAspectRatio } from '@/content/data/tarot-styles'
 import {
   DECK_TOUCH_BUFFER_PX,
   DECK_Y,
-  FULL_DECK,
   PUT_BACK_MS,
   REF_MAX_PX,
   SPREAD_KEY,
@@ -63,7 +62,9 @@ function useBaseWidthPct(): number {
   return pct
 }
 
-export function useFreeformSpread() {
+// `deckSlugs` is the full 78-card deck in draw order (slugs are
+// locale-independent), from the server-built deck prop.
+export function useFreeformSpread(deckSlugs: ReadonlyArray<string>) {
   const baseWPct = useBaseWidthPct()
   const [zoom, setZoom] = useState(1)
   const [tableW, setTableW] = useState(0)
@@ -149,7 +150,9 @@ export function useFreeformSpread() {
     let initial: Array<Placed> = []
     try {
       const stored = localStorage.getItem(SPREAD_KEY)
-      const restored = stored ? parseSpread(stored) : []
+      const restored = stored
+        ? parseSpread(stored, new Set(deckSlugs))
+        : []
       if (restored.length) {
         initial = restored
         topZ.current = restored.length
@@ -157,7 +160,9 @@ export function useFreeformSpread() {
       }
     } catch {}
     const have = new Set(initial.map((p) => p.slug))
-    setPile(shuffle(FULL_DECK.filter((s) => !have.has(s))))
+    setPile(shuffle(deckSlugs.filter((s) => !have.has(s))))
+    // Mount-only on purpose: deckSlugs is a static server prop.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // The spread's single source of truth: persist it to localStorage on every
@@ -547,8 +552,8 @@ export function useFreeformSpread() {
   const reshuffle = useCallback(() => {
     setPlaced([])
     topZ.current = 0
-    setPile(shuffle(FULL_DECK))
-  }, [])
+    setPile(shuffle(deckSlugs))
+  }, [deckSlugs])
 
   // The hint lives in the lower half of the board. Once the space is panned
   // far enough down that the deck descends past the board's vertical midline,

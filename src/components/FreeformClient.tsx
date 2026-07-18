@@ -6,12 +6,11 @@
 // math and persistence in @/lib/freeform.
 
 import { Link, useLocaleRouter } from '@/components/LocaleLink'
-import { useLocale } from '@/components/LocaleProvider'
 import {
   MagnifyingGlassMinusIcon,
   MagnifyingGlassPlusIcon,
 } from '@heroicons/react/24/outline'
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useMemo } from 'react'
 
 import { MajorImage, MinorImage } from '@/components/CardImage'
 import { Button } from '@/components/catalyst/button'
@@ -19,7 +18,10 @@ import { PageToolbar } from '@/components/PageToolbar'
 import { Tabs } from '@/components/Tabs'
 import { toolbarButtonSize } from '@/components/toolbarButton'
 import { useFreeformSpread } from '@/components/useFreeformSpread'
-import { majorAspectRatio, minorAspectRatio } from '@/content/data'
+import {
+  majorAspectRatio,
+  minorAspectRatio,
+} from '@/content/data/tarot-styles'
 import {
   DECK_Y,
   DECK_Z,
@@ -27,7 +29,7 @@ import {
   ZOOM_MAX,
   ZOOM_MIN,
   ZOOM_STEP,
-  resolveSlug,
+  type DeckCard,
   type Placed,
 } from '@/lib/freeform'
 import {
@@ -50,17 +52,15 @@ const BACK_IMAGE = '/tarot/back.jpg'
 // or stretched, no matter which style is active or whether it's a major or a
 // minor. The face drives the card's box; the face-down side is `inset-0` (see
 // the placed-card render), so the back simply fills whatever box the face sets.
-function CardFace({ slug }: { slug: string }) {
+function CardFace({ card }: { card: DeckCard | undefined }) {
   const { majorStyle, minorStyle } = useTarotStyle()
-  const locale = useLocale()
-  const found = resolveSlug(slug, locale)
-  if (!found) return null
-  if (found.kind === 'major') {
+  if (!card) return null
+  if (card.kind === 'major') {
     return (
       <MajorImage
-        card={found.card}
+        card={card}
         thumb
-        alt={found.card.name}
+        alt={card.name}
         loading="lazy"
         draggable={false}
         style={{ aspectRatio: majorAspectRatio(majorStyle) }}
@@ -70,8 +70,8 @@ function CardFace({ slug }: { slug: string }) {
   }
   return (
     <MinorImage
-      card={found.card}
-      alt={`${found.card.num} of ${found.card.suit}`}
+      card={card}
+      alt={card.name}
       loading="lazy"
       draggable={false}
       style={{ aspectRatio: minorAspectRatio(minorStyle) }}
@@ -87,6 +87,7 @@ function CardFace({ slug }: { slug: string }) {
 // doesn't change, and startCardDrag/movedRef are stable).
 const PlacedCard = memo(function PlacedCard({
   card,
+  face,
   x,
   y,
   isDragging,
@@ -95,6 +96,9 @@ const PlacedCard = memo(function PlacedCard({
   movedRef,
 }: {
   card: Placed
+  // The deck entry for this slug (stable reference from the server-built
+  // deck prop, so memoization holds).
+  face: DeckCard | undefined
   x: number
   y: number
   isDragging: boolean
@@ -130,7 +134,7 @@ const PlacedCard = memo(function PlacedCard({
         }}
       >
         <span className="block" style={{ backfaceVisibility: 'hidden' }}>
-          <CardFace slug={card.slug} />
+          <CardFace card={face} />
         </span>
         <img
           src={BACK_IMAGE}
@@ -151,16 +155,26 @@ const PlacedCard = memo(function PlacedCard({
 })
 
 export function FreeformClient({
+  deck,
   variant = 'inline',
 }: {
+  // The full 78-card deck for the locale, from the server parent's
+  // freeformDeck(locale) — keeps the tarot datasets out of the bundle.
+  deck: ReadonlyArray<DeckCard>
   variant?: 'inline' | 'expand'
-} = {}) {
+}) {
   const router = useLocaleRouter()
   // The active major ratio shapes the generic card slots (deck pile,
   // placeholder, in-flight draw) — placed cards take each card's own ratio
   // via CardFace.
   const { majorStyle } = useTarotStyle()
   const deckAspect = majorAspectRatio(majorStyle)
+
+  const deckSlugs = useMemo(() => deck.map((d) => d.slug), [deck])
+  const bySlug = useMemo(
+    () => new Map(deck.map((d) => [d.slug, d])),
+    [deck],
+  )
 
   const {
     tableRef,
@@ -179,7 +193,7 @@ export function FreeformClient({
     startCardDrag,
     drawToTable,
     reshuffle,
-  } = useFreeformSpread()
+  } = useFreeformSpread(deckSlugs)
 
   // If the Expand tap put us in true fullscreen, leave it when the
   // expand variant unmounts. Disabled inline: the inline board also
@@ -344,6 +358,7 @@ export function FreeformClient({
             <PlacedCard
               key={p.slug}
               card={p}
+              face={bySlug.get(p.slug)}
               x={isDragging ? drag!.x : p.x}
               y={isDragging ? drag!.y : p.y}
               isDragging={isDragging}

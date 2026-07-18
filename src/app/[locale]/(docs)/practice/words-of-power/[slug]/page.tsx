@@ -5,7 +5,7 @@ import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { DataList } from '@/components/DataList'
 import { PageHeading } from '@/components/PageHeading'
 import { PlayLink } from '@/components/PlayLink'
-import { getWords } from '@/content/data'
+import { getTarot, getWords } from '@/content/data'
 import { downloadUrl } from '@/content/data/files'
 import { expandWord } from '@/lib/hebrew'
 import { DEFAULT_LOCALE, toLocale } from '@/lib/locales'
@@ -33,10 +33,11 @@ export default async function WordOfPowerPage({
   params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale: rawLocale, slug } = await params
-  const raw = getWords(toLocale(rawLocale)).wordBySlug[slug]
+  const locale = toLocale(rawLocale)
+  const raw = getWords(locale).wordBySlug[slug]
   if (!raw) notFound()
 
-  const word = expandWord(raw)
+  const word = expandWord(raw, getTarot(locale).cardByLetter)
 
   return (
     <article className="space-y-6">

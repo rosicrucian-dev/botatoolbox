@@ -19,23 +19,15 @@ import {
   type Texture,
 } from 'three'
 
-import { getTarot, thumbImage } from '@/content/data'
-import {
-  cubeEdgeById,
-  cubeEdgeIdBySign,
-  cubeFaces,
-  cubeFlowBySign,
-  type CubeFace,
-  type CubeFlowDirection,
+import type {
+  CubeFace,
+  CubeFlowDirection,
 } from '@/content/data/cube-of-space'
+import { thumbImage } from '@/content/data/tarot-images'
 import { useColorPalette } from '@/lib/colorPalette'
 import { getColor } from '@/lib/colors'
-import { DEFAULT_LOCALE } from '@/lib/locales'
+import type { CubeSceneData } from '@/lib/cubeScene'
 import { useTarotStyle } from '@/lib/tarotStyle'
-
-// Only the structural `color` attribution (a palette key) is read here
-// — English on purpose.
-const { cardBySlug } = getTarot(DEFAULT_LOCALE)
 
 const HALF = 2
 const BORDER_T = 0.12
@@ -89,24 +81,14 @@ const EDGE_CORNERS: Record<string, [keyof typeof CORNER, keyof typeof CORNER]> =
     SW: ['bot-SW', 'top-SW'],
   }
 
-// Sign → edge corners, derived once from the cube data's sign ↔ edge
-// mapping. Lets resolveFlow() take a zodiac key directly.
-const SIGN_CORNERS: Record<string, [keyof typeof CORNER, keyof typeof CORNER]> =
-  Object.fromEntries(
-    Object.entries(cubeEdgeIdBySign).map(([sign, edgeId]) => [
-      sign,
-      EDGE_CORNERS[edgeId],
-    ]),
-  )
-
 // Resolves a zodiac sign's two corners + direction word into [startVec,
-// endVec] for animation. Picks whichever corner is "toward" the direction
-// word as the END of the flow.
-function resolveFlow(sign: string): [Vec3, Vec3] {
-  const [cornerA, cornerB] = SIGN_CORNERS[sign]
+// endVec] for animation, via the scene data's sign ↔ edge mapping. Picks
+// whichever corner is "toward" the direction word as the END of the flow.
+function resolveFlow(sign: string, scene: CubeSceneData): [Vec3, Vec3] {
+  const [cornerA, cornerB] = EDGE_CORNERS[scene.edgeIdBySign[sign]]
   const a = CORNER[cornerA]
   const b = CORNER[cornerB]
-  const dir = cubeFlowBySign[sign]
+  const dir = scene.flowBySign[sign]
   // axis index: 0=X (east+/west-), 1=Y (up+/down-), 2=Z (south+/north-)
   const axisOf: Record<CubeFlowDirection, 0 | 1 | 2> = {
     east: 0,
@@ -174,11 +156,6 @@ const FACE_GEOMETRY: Record<CubeFace['id'], FaceGeometry> = {
 }
 
 type FaceDef = CubeFace & FaceGeometry
-
-const faces: Array<FaceDef> = cubeFaces.map((f) => ({
-  ...f,
-  ...FACE_GEOMETRY[f.id],
-}))
 
 function makeBorderShape(side: 'top' | 'bottom' | 'left' | 'right') {
   const H = HALF
@@ -422,9 +399,17 @@ function FaceImage({
   )
 }
 
-function Face({ face, style }: { face: FaceDef; style: string }) {
+function Face({
+  face,
+  style,
+  scene,
+}: {
+  face: FaceDef
+  style: string
+  scene: CubeSceneData
+}) {
   const { colorPalette } = useColorPalette()
-  const card = cardBySlug[face.cardSlug]
+  const card = scene.cards[face.cardSlug]
   const wallColor = getColor(card.color, colorPalette) ?? 'white'
 
   return (
@@ -435,7 +420,8 @@ function Face({ face, style }: { face: FaceDef; style: string }) {
       </mesh>
 
       {borderDefs.map((b) => {
-        const edgeCard = cardBySlug[cubeEdgeById[face.borders[b.key]].cardSlug]
+        const edgeCard =
+          scene.cards[scene.edgeCardSlugById[face.borders[b.key]]]
         const edgeColor = getColor(edgeCard.color, colorPalette) ?? 'white'
         const half = halfCard[face.halfCardSet][b.key]
         return (
@@ -502,11 +488,11 @@ function FlowDot({
   )
 }
 
-function FlowParticles() {
+function FlowParticles({ scene }: { scene: CubeSceneData }) {
   return (
     <>
-      {Object.keys(cubeFlowBySign).map((sign) => {
-        const [start, end] = resolveFlow(sign)
+      {Object.keys(scene.flowBySign).map((sign) => {
+        const [start, end] = resolveFlow(sign, scene)
         return (
           <group key={sign}>
             {Array.from({ length: FLOW_COUNT }, (_, j) => (
@@ -519,13 +505,26 @@ function FlowParticles() {
   )
 }
 
-function Cube({ flow = false, style }: { flow?: boolean; style: string }) {
+function Cube({
+  flow = false,
+  style,
+  scene,
+}: {
+  flow?: boolean
+  style: string
+  scene: CubeSceneData
+}) {
   return (
     <>
-      {faces.map((face) => (
-        <Face key={face.id} face={face} style={style} />
+      {scene.faces.map((face) => (
+        <Face
+          key={face.id}
+          face={{ ...face, ...FACE_GEOMETRY[face.id] }}
+          style={style}
+          scene={scene}
+        />
       ))}
-      {flow && <FlowParticles />}
+      {flow && <FlowParticles scene={scene} />}
     </>
   )
 }
@@ -535,7 +534,15 @@ function Cube({ flow = false, style }: { flow?: boolean; style: string }) {
 // half-card wraparounds at the edges. The container's size is left to the
 // caller; pass any sized div around it.
 //   `flow` — animated particles along each edge in the canonical direction.
-export function CubeCanvas({ flow = false }: { flow?: boolean }) {
+//   `scene` — from the server parent's cubeSceneData() (lib/cubeScene.ts),
+//             so the datasets stay out of the client bundle.
+export function CubeCanvas({
+  flow = false,
+  scene,
+}: {
+  flow?: boolean
+  scene: CubeSceneData
+}) {
   const { majorStyle } = useTarotStyle()
   // Deferred so a style switch keeps showing the current textures while
   // the new set loads, instead of hard-suspending the whole canvas.
@@ -561,7 +568,7 @@ export function CubeCanvas({ flow = false }: { flow?: boolean }) {
         )
       }}
     >
-      <Cube flow={flow} style={style} />
+      <Cube flow={flow} style={style} scene={scene} />
       <OrbitControls
         target={[0, 0, 0]}
         enableZoom={false}

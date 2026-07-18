@@ -2,9 +2,9 @@
 
 import { useMemo } from 'react'
 
-import { useLocale } from '@/components/LocaleProvider'
 import { Card } from '@/components/NavCards'
-import { getVisibleNavigation, type NavLink } from '@/lib/nav'
+import { useVisibleNav } from '@/components/NavProvider'
+import type { NavLink } from '@/lib/nav'
 import { usePinnedCards } from '@/lib/pinnedCards'
 import { useSecretMode } from '@/lib/useSecretMode'
 
@@ -20,16 +20,16 @@ import { useSecretMode } from '@/lib/useSecretMode'
 // re-lock hides it from the row without discarding it from storage).
 function usePinnedLinks(pins: Array<string>): Array<NavLink> {
   const { unlocked } = useSecretMode()
-  const locale = useLocale()
+  const visible = useVisibleNav()
 
   const titleByHref = useMemo(() => {
     const map = new Map<string, string>()
-    for (const group of getVisibleNavigation(locale)) {
+    for (const group of visible) {
       if (group.gated === 'secret' && !unlocked) continue
       for (const link of group.links) map.set(link.href, link.title)
     }
     return map
-  }, [unlocked, locale])
+  }, [unlocked, visible])
 
   return useMemo(
     () =>

@@ -5,7 +5,7 @@ import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { MinorTableau } from '@/components/MinorTableau'
 import { PageHeading } from '@/components/PageHeading'
 import { TarotTableau } from '@/components/TarotTableau'
-import { getFiles } from '@/content/data'
+import { getFiles, getTarot } from '@/content/data'
 import { DEFAULT_LOCALE, toLocale } from '@/lib/locales'
 
 // Structural (slug) enumeration — English source on purpose.
@@ -60,7 +60,12 @@ export default async function FileViewer({
         </p>
       )}
       {file.tableau ? (
-        <TarotTableau style={file.tableau} link="image" rounded={false} />
+        <TarotTableau
+          cards={getTarot(toLocale(rawLocale)).cards}
+          style={file.tableau}
+          link="image"
+          rounded={false}
+        />
       ) : file.minorTableau ? (
         <MinorTableau />
       ) : (

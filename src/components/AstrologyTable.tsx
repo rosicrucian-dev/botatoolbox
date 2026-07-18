@@ -12,13 +12,21 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
-import { useLocale } from '@/components/LocaleProvider'
-import { getAstrology } from '@/content/data'
+import type { Planet, Sign } from '@/content/data'
 import { formatDegreesMinutes } from '@/lib/astro/layout'
 import { lunarQuarter, type Chart } from '@/lib/astro/types'
 
-export function AstrologyTable({ chart }: { chart: Chart | null }) {
-  const { planetBySlug, signBySlug } = getAstrology(useLocale())
+// planetBySlug/signBySlug come from the server parent's
+// getAstrology(locale) so the datasets stay out of the client bundle.
+export function AstrologyTable({
+  chart,
+  planetBySlug,
+  signBySlug,
+}: {
+  chart: Chart | null
+  planetBySlug: Record<string, Planet>
+  signBySlug: Record<string, Sign>
+}) {
   if (!chart) return null
   // Shown on the Moon's row: which quarter of the lunation it's in.
   const quarter = lunarQuarter(chart)

@@ -1,7 +1,16 @@
 // The data layer's single front door. Every domain has its own typed
 // module that validates its JSON via Zod and exposes lookup maps; this
-// index re-exports them all, and consumers outside the data layer import
-// ONLY from `@/content/data` — never from the submodules.
+// index re-exports them all, and SERVER consumers outside the data layer
+// import ONLY from `@/content/data` — never from the submodules.
+//
+// CLIENT components ('use client') must NOT value-import this barrel:
+// the data modules parse their JSON (all locales) eagerly at load, so a
+// single barrel import drags every dataset plus Zod into the browser
+// bundle. Instead, client components
+//   - receive data slices as props from their server-component parent,
+//   - may `import type` from here (types are erased at build), and
+//   - may value-import the dependency-free leaves `tarot-styles.ts`
+//     and `tarot-images.ts`.
 //
 //   - tarot.ts         — major arcana + cardImage()/thumbImage()
 //   - minor-arcana.ts  — minor arcana flat list + minorImage variants

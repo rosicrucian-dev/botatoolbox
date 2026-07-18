@@ -1,11 +1,8 @@
-// Imports the tarot submodule directly (not the '@/content/data' barrel):
-// this module is itself imported by data-layer modules (quizzes.ts), so a
-// barrel import here would be circular and throw at module init.
-import { getTarot } from '@/content/data/tarot'
-import { DEFAULT_LOCALE } from '@/lib/locales'
-
-// Letter/glyph metadata is language-neutral — English on purpose.
-const { cardByLetter } = getTarot(DEFAULT_LOCALE)
+// Letter/glyph tables and helpers. Deliberately data-free (no
+// @/content/data imports) — this module ships in client bundles, so the
+// tarot join in expandWord takes the letter → card map as a parameter;
+// server callers pass getTarot(locale).cardByLetter.
+import type { TarotCard } from '@/content/data/tarot'
 
 interface LetterMeta {
   glyph: string
@@ -163,7 +160,10 @@ export function formatPronunciation(
   return words.join(' ')
 }
 
-export function expandWord(word: RawWord): ExpandedWord {
+export function expandWord(
+  word: RawWord,
+  cardByLetter: Record<string, TarotCard | undefined>,
+): ExpandedWord {
   const expanded: Array<ExpandedLetter> = word.letters.map((l, i) => {
     const isLast = i === word.letters.length - 1
     const meta = letters[l.letter] ?? { glyph: '?', sofit: null }

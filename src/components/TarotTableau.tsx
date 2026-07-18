@@ -2,8 +2,8 @@
 
 import { Link } from '@/components/LocaleLink'
 
-import { useLocale } from '@/components/LocaleProvider'
-import { cardImage, getTarot, thumbImage, type TarotCard } from '@/content/data'
+import type { TarotCard } from '@/content/data'
+import { cardImage, thumbImage } from '@/content/data/tarot-images'
 import { majorThumbHeight } from '@/content/data/tarot-styles'
 import { useTarotStyle } from '@/lib/tarotStyle'
 
@@ -21,18 +21,20 @@ import { useTarotStyle } from '@/lib/tarotStyle'
 type LinkMode = 'none' | 'card' | 'image'
 
 export function TarotTableau({
+  cards,
   style,
   link = 'none',
   rounded = true,
 }: {
+  // The locale's majors, from the server parent's getTarot(locale) —
+  // data stays out of the client bundle.
+  cards: ReadonlyArray<TarotCard>
   // Pin a specific major style (the download previews). Omit to follow the
   // user's chosen Major style.
   style?: string
   link?: LinkMode
   rounded?: boolean
 }) {
-  const locale = useLocale()
-  const { cards } = getTarot(locale)
   const fool = cards.find((c) => c.num === 0)!
   const keys = cards.filter((c) => c.num !== 0)
   const { majorStyle } = useTarotStyle()

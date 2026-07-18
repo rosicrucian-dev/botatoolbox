@@ -1,9 +1,9 @@
 'use client'
 
-import { useLocale } from '@/components/LocaleProvider'
 import { CardGrid } from '@/components/NavCards'
 import { PinnedSection } from '@/components/PinnedSection'
-import { getVisibleNavigation, type NavGroup } from '@/lib/nav'
+import { useVisibleNav } from '@/components/NavProvider'
+import type { NavGroup } from '@/lib/nav'
 import { useSecretMode } from '@/lib/useSecretMode'
 
 // Home-page table of contents, styled as the Protocol template's
@@ -14,8 +14,7 @@ import { useSecretMode } from '@/lib/useSecretMode'
 // visibleNavigation has already dropped `hidden` (unlisted) links.
 export function NavSections() {
   const { unlocked } = useSecretMode()
-  const locale = useLocale()
-  const visible = getVisibleNavigation(locale).filter(
+  const visible = useVisibleNav().filter(
     (group) => group.gated !== 'secret' || unlocked,
   )
   return (

@@ -10,11 +10,15 @@
 // the page session. Validated once at build time (inside the generator); cast —
 // not re-parsed — here.
 
-import { z } from 'zod'
+// Type-only imports on purpose: this module is imported by client
+// components (the dictionary/calculator UIs), and value-importing zod or
+// schemas.ts would drag them into the browser bundle. z.infer works fine
+// on type-only imports.
+import type { z } from 'zod'
 
 import { skeleton } from '@/lib/hebrew-letters'
 import { type GematriaSourceId } from './gematria-sources'
-import { GematriaNumberEntrySchema, GematriaWordSchema } from './schemas'
+import type { GematriaNumberEntrySchema, GematriaWordSchema } from './schemas'
 
 export type GematriaWord = z.infer<typeof GematriaWordSchema>
 export type GematriaNumberEntry = z.infer<typeof GematriaNumberEntrySchema>

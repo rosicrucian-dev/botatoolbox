@@ -6,7 +6,7 @@ import { noteToFrequency, playTone, type ActiveTone } from '@/lib/audio'
 import { ensureAudioContext } from '@/lib/audioContext'
 import { useColorPalette } from '@/lib/colorPalette'
 import { getColor, type ColorPaletteId } from '@/lib/colors'
-import { keys, type Key } from '@/lib/keyboard'
+import type { Key } from '@/lib/keyboard'
 
 // Black keys overlay the white-key boundaries. The five black notes
 // (C#, D#, F#, G#, A#) sit at boundaries 1/7, 2/7, 4/7, 5/7, 6/7 of
@@ -26,7 +26,9 @@ const BLACK_KEY_LEFT: Record<string, number> = {
 // at the end via playTone's release envelope.
 const TONE_DURATION = 30
 
-export function Keyboard() {
+// `keys` comes from the server page (lib/keyboard.ts) so the tarot
+// dataset stays out of the client bundle.
+export function Keyboard({ keys }: { keys: ReadonlyArray<Key> }) {
   const { colorPalette } = useColorPalette()
   const activeRef = useRef<ActiveTone | null>(null)
   const [pressed, setPressed] = useState<string | null>(null)

@@ -1,18 +1,11 @@
-import { paths, SEPHIROTH_DESCENT_SLUGS } from '@/content/data'
 import {
   DEFAULT_COLOR_PALETTE,
   getColor,
   type ColorPaletteId,
 } from '@/lib/colors'
-import { sephiroth, TREE_VIEWBOX } from '@/lib/tree-layout'
+import { TREE_VIEWBOX } from '@/lib/tree-geometry'
+import type { ProgressiveTreeData } from '@/lib/tree-layout'
 
-const sephBySlug = Object.fromEntries(sephiroth.map((s) => [s.slug, s]))
-// Descent index per slug (0 = Kether, 9 = Malkuth). `filledThrough` is
-// expressed in descent units, so we can't rely on `sephiroth` array
-// position — the source JSON orders entries Malkuth-first.
-const descentIndexBySlug = Object.fromEntries(
-  SEPHIROTH_DESCENT_SLUGS.map((slug, i) => [slug, i]),
-) as Record<string, number>
 const RADIUS = 32
 // Half-width of the "column" between the two parallel rails.
 const PATH_HALF_WIDTH = 8
@@ -22,14 +15,25 @@ const PATH_HALF_WIDTH = 8
 // diagram tracks the slide's foreground color and stays readable on any
 // bg. Without it, falls back to a system dark/light-mode default class.
 export function ProgressiveTree({
+  tree,
   filledThrough = -1,
   strokeColor,
   palette = DEFAULT_COLOR_PALETTE,
 }: {
+  // From the server parent's progressiveTreeData() (lib/tree-layout.ts)
+  // so the datasets stay out of the client bundle.
+  tree: ProgressiveTreeData
   filledThrough?: number
   strokeColor?: string | null
   palette?: ColorPaletteId
 }) {
+  const sephBySlug = Object.fromEntries(tree.sephiroth.map((s) => [s.slug, s]))
+  // Descent index per slug (0 = Kether, 9 = Malkuth). `filledThrough` is
+  // expressed in descent units, so we can't rely on `sephiroth` array
+  // position — the source JSON orders entries Malkuth-first.
+  const descentIndexBySlug = Object.fromEntries(
+    tree.descentSlugs.map((slug, i) => [slug, i]),
+  ) as Record<string, number>
   const strokeProps = strokeColor
     ? { stroke: strokeColor }
     : { className: 'stroke-zinc-900 dark:stroke-zinc-100' }
@@ -42,7 +46,7 @@ export function ProgressiveTree({
       preserveAspectRatio="xMidYMid meet"
     >
       <g>
-        {paths.map((p, i) => {
+        {tree.paths.map((p, i) => {
           const a = sephBySlug[p.from]
           const b = sephBySlug[p.to]
           if (!a || !b) return null
@@ -84,7 +88,7 @@ export function ProgressiveTree({
         })}
       </g>
       <g>
-        {sephiroth.map((s) => {
+        {tree.sephiroth.map((s) => {
           const descentIdx = descentIndexBySlug[s.slug] ?? -1
           const filled = descentIdx >= 0 && descentIdx <= filledThrough
           const isActive = descentIdx === filledThrough && !!strokeColor

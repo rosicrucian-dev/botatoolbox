@@ -13,7 +13,6 @@ import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
 import { MinorSuitSchema } from './schemas'
-import { DEFAULT_MINOR_STYLE } from './tarot-styles'
 
 export interface MinorMeaning {
   intro: string
@@ -57,13 +56,7 @@ export const getMinorArcana = defineLocalized((locale) => {
   return { suits, minorCards, minorBySlug }
 })
 
-// Image URL for a minor-arcana card, in the given art style. The file lives at
-// /public/tarot/minor/<style>/<slug>.jpg. `style` defaults to the default
-// minor style; reactive callers pass the user's choice from `useTarotStyle()`
-// (usually via <MinorImage>). See `tarot-styles.ts`.
-export function minorImage(
-  card: Pick<MinorEntry, 'slug'>,
-  style: string = DEFAULT_MINOR_STYLE,
-): string {
-  return `/tarot/minor/${style}/${card.slug}.jpg`
-}
+// Image helper lives in tarot-images.ts (dependency-free so client
+// components can import it without the data graph); re-exported here to
+// keep the barrel surface unchanged.
+export { minorImage } from './tarot-images'

@@ -6,26 +6,15 @@ import { useMemo } from 'react'
 import { useLocale } from '@/components/LocaleProvider'
 import { SlidePlayer } from '@/components/SlidePlayer'
 import { SoundButton } from '@/components/SoundButton'
-import { getWords, type Word } from '@/content/data'
-import { type RitualSection } from '@/content/data/rituals'
+import type { RitualSection } from '@/content/data/rituals'
 import { tDyn } from '@/content/messages'
 import { useT } from '@/content/messages/useT'
 import { CHANT_BEAT_SECONDS } from '@/lib/chant'
-import {
-  expandWord,
-  formatPronunciation,
-  type ExpandedWord,
-} from '@/lib/hebrew'
+import { formatPronunciation, type ExpandedWord } from '@/lib/hebrew'
 import { type Locale } from '@/lib/locales'
 import { useAutoAdvance } from '@/lib/useAutoAdvance'
 import { usePlayerIndex } from '@/lib/usePlayerIndex'
 import { useToneOnIdx } from '@/lib/useToneOnIdx'
-
-function buildExpandedBySlug(
-  words: ReadonlyArray<Word>,
-): Record<string, ExpandedWord> {
-  return Object.fromEntries(words.map((w) => [w.slug, expandWord(w)]))
-}
 
 interface LRPSlide {
   section: string
@@ -135,18 +124,17 @@ function buildSlides(
 
 export function LrpPlayer({
   sections,
+  expandedBySlug,
 }: {
   sections: ReadonlyArray<RitualSection>
+  // Word breakdowns (glyphs, pronunciations, tones), pre-expanded by the
+  // server page from the locale's words dataset so translated
+  // pronunciations render without bundling the data client-side.
+  expandedBySlug: Record<string, ExpandedWord>
 }) {
   const router = useLocaleRouter()
   const locale = useLocale()
   const { t } = useT()
-  // Word breakdowns (glyphs, pronunciations, tones) follow the locale's
-  // words dataset so translated pronunciations render in the player.
-  const expandedBySlug = useMemo(
-    () => buildExpandedBySlug(getWords(locale).words),
-    [locale],
-  )
 
   const slides = useMemo(
     () => buildSlides(sections, expandedBySlug, locale),
