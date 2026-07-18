@@ -40,7 +40,7 @@ function bodyHtml(locale: Locale, slug: string): string {
     md = readLocalizedMarkdown('texts', locale, slug)
   } catch {
     throw new Error(
-      `texts.json lists "${slug}" but content/texts/${slug}.md is missing`,
+      `texts.json lists "${slug}" but content/texts/en/${slug}.md is missing`,
     )
   }
   return String(remark().use(remarkHtml).processSync(md))

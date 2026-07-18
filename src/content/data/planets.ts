@@ -7,7 +7,7 @@
 
 import { z } from 'zod'
 
-import planetsData from '@content/data/planets.json'
+import planetsData from '@content/data/en/planets.json'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
 import { PlanetSchema } from './schemas'

@@ -7,7 +7,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/pillars.json'
+import data from '@content/data/en/pillars.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

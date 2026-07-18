@@ -17,5 +17,5 @@ export async function generateMetadata({
 // /settings if secret mode isn't unlocked, so this page only renders its
 // cards once the group is visible.
 export default function MeditationsIndex() {
-  return <GroupPage title="Meditations" />
+  return <GroupPage slug="meditations" />
 }

@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function ResourcesIndex() {
-  return <GroupPage title="Resources" />
+  return <GroupPage slug="resources" />
 }

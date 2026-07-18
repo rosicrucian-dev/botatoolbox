@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function PracticeIndex() {
-  return <GroupPage title="Practice" />
+  return <GroupPage slug="practice" />
 }

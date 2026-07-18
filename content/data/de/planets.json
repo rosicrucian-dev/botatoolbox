@@ -1,39 +1,110 @@
-{
-  "saturn": {
+[
+  {
+    "slug": "saturn",
     "name": "Saturn",
-    "chakra": "Root Chakra"
+    "glyph": "♄",
+    "letter": "Tav",
+    "chakra": "Root Chakra",
+    "rules": [
+      "capricorn"
+    ],
+    "exaltedIn": "libra"
   },
-  "sun": {
+  {
+    "slug": "sun",
     "name": "Sun",
-    "chakra": "Heart"
+    "glyph": "☉",
+    "letter": "Resh",
+    "chakra": "Heart",
+    "rules": [
+      "leo"
+    ],
+    "exaltedIn": "aries"
   },
-  "mars": {
+  {
+    "slug": "mars",
     "name": "Mars",
-    "chakra": "Below Naval"
+    "glyph": "♂",
+    "letter": "Peh",
+    "chakra": "Below Naval",
+    "rules": [
+      "aries",
+      "scorpio"
+    ],
+    "exaltedIn": "capricorn"
   },
-  "jupiter": {
+  {
+    "slug": "jupiter",
     "name": "Jupiter",
-    "chakra": "Solar Plexus"
+    "glyph": "♃",
+    "letter": "Kaph",
+    "chakra": "Solar Plexus",
+    "rules": [
+      "sagittarius"
+    ],
+    "exaltedIn": "cancer"
   },
-  "venus": {
+  {
+    "slug": "venus",
     "name": "Venus",
-    "chakra": "Throat"
+    "glyph": "♀",
+    "letter": "Daleth",
+    "chakra": "Throat",
+    "rules": [
+      "taurus",
+      "libra"
+    ],
+    "exaltedIn": "pisces"
   },
-  "moon": {
+  {
+    "slug": "moon",
     "name": "Moon",
-    "chakra": "Pituitary"
+    "glyph": "☽",
+    "letter": "Gimel",
+    "chakra": "Pituitary",
+    "rules": [
+      "cancer"
+    ],
+    "exaltedIn": "taurus"
   },
-  "mercury": {
+  {
+    "slug": "mercury",
     "name": "Mercury",
-    "chakra": "Pineal"
+    "glyph": "☿",
+    "letter": "Beth",
+    "chakra": "Pineal",
+    "rules": [
+      "gemini",
+      "virgo"
+    ],
+    "exaltedIn": "virgo"
   },
-  "uranus": {
-    "name": "Uranus"
+  {
+    "slug": "uranus",
+    "name": "Uranus",
+    "glyph": "♅",
+    "letter": "Aleph",
+    "rules": [
+      "aquarius"
+    ],
+    "exaltedIn": null
   },
-  "neptune": {
-    "name": "Neptune"
+  {
+    "slug": "neptune",
+    "name": "Neptune",
+    "glyph": "♆",
+    "letter": "Mem",
+    "rules": [
+      "pisces"
+    ],
+    "exaltedIn": null
   },
-  "pluto": {
-    "name": "Pluto"
+  {
+    "slug": "pluto",
+    "name": "Pluto",
+    "glyph": "♇",
+    "letter": "Shin",
+    "rules": [],
+    "exaltedIn": null
   }
-}
+]

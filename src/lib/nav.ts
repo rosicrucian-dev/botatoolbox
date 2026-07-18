@@ -1,30 +1,59 @@
-// Navigation assembly. The hand-authored group/link content (the
-// English source of truth) lives in ./nav-data.ts; this module fills in
-// the generated Rituals/Texts groups from the content manifests, sorts,
-// and derives the visible view — per locale. `getNavigation(locale)` /
-// `getVisibleNavigation(locale)` localize titles/descriptions through
-// the message catalog (nav.* keys) and the content overlays. Structural
-// consumers (integrity checks, sitemap, breadcrumb segment mapping —
-// group slugs always derive from the ENGLISH titles) call
-// `getNavigation(DEFAULT_LOCALE)` explicitly.
+// Navigation assembly. Structure (hrefs, grouping, flags) is
+// hand-authored in ./nav-data.ts; display strings come from the message
+// catalog (content/messages/en.json + translated siblings) under keys
+// derived from the slugs/hrefs; the generated Rituals/Texts groups pull
+// their links from the localized content manifests. A module-load
+// assertion guarantees every hand-authored entry has its catalog keys —
+// a missing nav title is a loud build failure, not silent fallback.
+// Structural consumers (integrity checks, breadcrumb segment mapping)
+// call `getNavigation(DEFAULT_LOCALE)` explicitly.
 
 import { getRituals, getTexts } from '@/content/data'
 import { defineLocalized } from '@/content/data/localized'
-import { tDyn } from '@/content/messages'
+import { en as messages, tKey } from '@/content/messages'
 import { DEFAULT_LOCALE, type Locale } from '@/lib/locales'
-import {
-  navGroups,
-  navGroupSlug,
-  type NavGroup,
-  type NavLink,
-} from '@/lib/nav-data'
+import { navGroups } from '@/lib/nav-data'
 
-export type { NavGroup, NavLink }
+export interface NavLink {
+  title: string
+  href: string
+  // Used by the home page TOC cards. Sidebar nav ignores this.
+  description?: string
+  // See RawNavLink.hidden in nav-data.ts.
+  hidden?: boolean
+}
+
+export interface NavGroup {
+  title: string
+  // Stable locale-independent id (also the landing page's URL segment).
+  slug: string
+  links: Array<NavLink>
+  flat?: true
+  gated?: 'secret'
+  generated?: 'rituals' | 'texts'
+}
+
+// Every hand-authored group/link must have its English catalog entry —
+// checked once at module load, integrity-style.
+for (const group of navGroups) {
+  if (messages[`nav.group.${group.slug}.title`] === undefined) {
+    throw new Error(
+      `nav: missing "nav.group.${group.slug}.title" in content/messages/en.json`,
+    )
+  }
+  for (const link of group.links) {
+    if (messages[`nav.${link.href}.title`] === undefined) {
+      throw new Error(
+        `nav: missing "nav.${link.href}.title" in content/messages/en.json`,
+      )
+    }
+  }
+}
 
 export const getNavigation = defineLocalized((locale) => {
   const groups: Array<NavGroup> = navGroups.map((group) => {
     // Generated groups: links come from the content manifests, whose
-    // titles/descriptions localize through the data overlays.
+    // titles/descriptions localize through the data files.
     const links: Array<NavLink> =
       group.generated === 'rituals'
         ? getRituals(locale).visibleRituals.map((r) => ({
@@ -40,31 +69,19 @@ export const getNavigation = defineLocalized((locale) => {
             }))
           : group.links.map((link) => ({
               ...link,
-              title: tDyn(locale, `nav.${link.href}.title`, link.title),
-              description: link.description
-                ? tDyn(locale, `nav.${link.href}.description`, link.description)
-                : undefined,
+              title: tKey(locale, `nav.${link.href}.title`)!,
+              description: tKey(locale, `nav.${link.href}.description`),
             }))
     return {
       ...group,
-      slug: navGroupSlug(group.title),
-      title: tDyn(
-        locale,
-        `nav.group.${navGroupSlug(group.title)}.title`,
-        group.title,
-      ),
+      title: tKey(locale, `nav.group.${group.slug}.title`)!,
       links,
     }
   })
-  // Sort by the ENGLISH titles so group order is identical across
-  // locales (localeCompare on translated titles would shuffle groups
-  // between languages).
-  const englishTitle = new Map(
-    groups.map((g, i) => [g, navGroups[i].title] as const),
-  )
-  return groups.sort((a, b) =>
-    englishTitle.get(a)!.localeCompare(englishTitle.get(b)!),
-  )
+  // Sort by slug so group order is identical across locales
+  // (localeCompare on translated titles would shuffle groups between
+  // languages).
+  return groups.sort((a, b) => a.slug.localeCompare(b.slug))
 })
 
 export const getVisibleNavigation = defineLocalized((locale) =>
@@ -100,12 +117,13 @@ export const getNavTitleMap = defineLocalized((locale) => {
 /**
  * Localize an English display title: nav-mirroring strings resolve via
  * the map above; anything else tries an explicit `title.<English>` key
- * in the message catalog (for the few non-nav titles, e.g. 'Piano') and
- * falls back to the English text itself.
+ * in the message catalog (for the few non-nav titles, e.g. 'Astrology
+ * Chart') and falls back to the English text itself.
  */
 export function localizedTitle(locale: Locale, english: string): string {
   return (
     getNavTitleMap(locale).get(english) ??
-    tDyn(locale, `title.${english}`, english)
+    tKey(locale, `title.${english}`) ??
+    english
   )
 }

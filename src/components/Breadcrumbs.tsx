@@ -16,7 +16,6 @@ import { useLocale } from '@/components/LocaleProvider'
 import { useT } from '@/content/messages/useT'
 import { DEFAULT_LOCALE, stripLocale } from '@/lib/locales'
 import { getNavigation, localizedTitle } from '@/lib/nav'
-import { navGroupSlug } from '@/lib/nav-data'
 
 // Breadcrumb trail for the top bar, ported from the Compass template and
 // adapted to the toolbox's shared Header. A page declares its trail by
@@ -90,15 +89,15 @@ export function useBreadcrumbs(): Array<Crumb> {
 //     → practice → Practice), and
 //   - the group's own slug (`/devices` → Devices), which also covers a flat
 //     group's grouped alias (`/devices/cube-of-space` → Devices).
-// Mapping is built from the ENGLISH nav on purpose: segments and group
-// slugs derive from English titles; only displayed labels localize.
+// Mapping is built from the ENGLISH nav on purpose (segments are
+// locale-independent); values are group SLUGS — displayed labels come
+// from the localized nav at render time.
 const GROUP_BY_SEGMENT: Record<string, string> = {}
 for (const group of getNavigation(DEFAULT_LOCALE)) {
-  const slug = group.title.toLowerCase()
-  if (!(slug in GROUP_BY_SEGMENT)) GROUP_BY_SEGMENT[slug] = group.title
+  if (!(group.slug in GROUP_BY_SEGMENT)) GROUP_BY_SEGMENT[group.slug] = group.slug
   for (const link of group.links) {
     const seg = link.href.split('/')[1]
-    if (seg && !(seg in GROUP_BY_SEGMENT)) GROUP_BY_SEGMENT[seg] = group.title
+    if (seg && !(seg in GROUP_BY_SEGMENT)) GROUP_BY_SEGMENT[seg] = group.slug
   }
 }
 
@@ -106,14 +105,14 @@ for (const group of getNavigation(DEFAULT_LOCALE)) {
 // just `Home / <Leaf>` (e.g. `Home / About`), not `Home / Website / About`.
 // The group's own landing page (/website) still shows `Home / Website` via
 // its items — only the derived parent crumb is dropped.
-const HIDE_GROUP_CRUMB = new Set(['Website'])
+const HIDE_GROUP_CRUMB = new Set(['website'])
 
 function groupForPath(
   pathname: string,
-): { title: string; href: string } | null {
-  const title = GROUP_BY_SEGMENT[pathname.split('/')[1] ?? '']
-  if (!title || HIDE_GROUP_CRUMB.has(title)) return null
-  return { title, href: `/${title.toLowerCase()}` }
+): { slug: string; href: string } | null {
+  const slug = GROUP_BY_SEGMENT[pathname.split('/')[1] ?? '']
+  if (!slug || HIDE_GROUP_CRUMB.has(slug)) return null
+  return { slug, href: `/${slug}` }
 }
 
 function Separator() {
@@ -164,7 +163,7 @@ function Crumb({
 // detail that gives way (which is also the page's <h1>).
 export function BreadcrumbTrail({ items }: { items: Array<Crumb> }) {
   const pathname = usePathname()
-  const { t, tDyn } = useT()
+  const { t } = useT()
   const locale = useLocale()
   // Centralized label localization: labels that mirror a nav title
   // (nearly every static page's leaf crumb) swap for their translation;
@@ -193,12 +192,10 @@ export function BreadcrumbTrail({ items }: { items: Array<Crumb> }) {
         ...(group && !onGroupPage
           ? [
               {
-                // The mapping is keyed on English titles; only the
-                // displayed label localizes.
-                label: tDyn(
-                  `nav.group.${navGroupSlug(group.title)}.title`,
-                  group.title,
-                ),
+                // Localized group title, looked up by the stable slug.
+                label:
+                  getNavigation(locale).find((g) => g.slug === group.slug)
+                    ?.title ?? group.slug,
                 href: group.href,
               },
             ]

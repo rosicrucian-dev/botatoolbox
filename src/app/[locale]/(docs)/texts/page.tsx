@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function TextsIndex() {
-  return <GroupPage title="Texts" />
+  return <GroupPage slug="texts" />
 }

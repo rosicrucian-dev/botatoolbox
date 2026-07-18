@@ -1,9 +1,11 @@
-// Central registry of translation-overlay JSON — THE one place that
-// imports per-locale data files (webpack needs static import paths, so
-// they can't be looped; keeping them all here means adding a locale
-// touches this file once instead of every loader). Keyed to match
-// overlay-config.ts; loaders reach it through localizedRaw() in
-// overlay.ts and never import locale JSON themselves.
+// Central registry of TRANSLATED-locale data files — THE one place that
+// imports them (webpack needs static import paths, so they can't be
+// looped; keeping them all here means adding a locale touches this
+// file once instead of every loader). Keyed to match overlay-config.ts;
+// loaders import their own English master (content/data/en/<file>.json)
+// and reach the translations through localizedRaw() in overlay.ts.
+// Translated files are FULL sibling copies of the English file; the
+// merge takes only the whitelisted display fields from them.
 //
 // The Record<TranslationLocale, …> typing is deliberate: adding a
 // locale to LOCALES makes tsc flag every missing entry below. Run

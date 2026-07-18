@@ -6,7 +6,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/chakras.json'
+import data from '@content/data/en/chakras.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

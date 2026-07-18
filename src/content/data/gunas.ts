@@ -7,7 +7,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/gunas.json'
+import data from '@content/data/en/gunas.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

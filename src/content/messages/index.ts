@@ -1,47 +1,44 @@
-// UI chrome translation. English lives in typed catalogs under ./en/
-// (plus the nav strings in src/lib/nav-data.ts); German lives in the
-// flat translator-edited content/messages/de.json, generated/synced by
-// `npm run gen:translations` (English pre-filled; existing translations
-// never overwritten). A missing key falls back to English — partial
-// translation always ships — and unknown de.json keys warn at load.
+// UI chrome translation. content/messages/<locale>.json are FULL
+// sibling files — en.json is the source (every chrome string, nav
+// titles included), translated locales are the same file with values
+// translated in place, synced by `npm run gen:translations`. A missing
+// translated key falls back to English — partial translation always
+// ships — and unknown keys in a translated file warn at load.
 //
-// Two lookups:
-//   t(locale, key)            — statically-known chrome keys (typed).
-//   tDyn(locale, key, en)     — derived keys (nav.*, quiz.*) where the
-//                               English text lives in code/data and the
-//                               key is built at runtime.
+// Three lookups:
+//   t(locale, key)     — statically-known keys (typed MessageKey).
+//   tKey(locale, key)  — dynamically-built keys (nav.*, quiz.*):
+//                        translated value, else English, else
+//                        undefined (caller decides the fallback).
+//   tDyn(locale, key, english) — dynamic key with a code-supplied
+//                        English fallback (used where the English text
+//                        legitimately lives in data/code).
 
 import deRaw from '@content/messages/de.json'
+import enRaw from '@content/messages/en.json'
 
 import {
   DEFAULT_LOCALE,
   type Locale,
   type TranslationLocale,
 } from '@/lib/locales'
-import { navMessageEntries } from '@/lib/nav-data'
 
-import { en, type MessageKey } from './en'
+export const en: Record<string, string> = enRaw
+export type MessageKey = keyof typeof enRaw
 
-export type { MessageKey }
-
-// Record<TranslationLocale, …>: adding a locale to LOCALES makes tsc
-// flag the missing dictionary import here.
 const dictionaries: Record<TranslationLocale, Record<string, string>> = {
   de: deRaw as Record<string, string>,
 }
 
-// Validate de.json once at module load: unknown keys are silently dead
-// weight (likely a renamed English key) — warn, never throw.
+// Validate translated files once at module load: unknown keys are
+// silently dead weight (likely a renamed English key) — warn, never
+// throw.
 {
-  const known = new Set<string>([
-    ...Object.keys(en),
-    ...Object.keys(navMessageEntries()),
-  ])
   for (const [locale, dict] of Object.entries(dictionaries)) {
     for (const key of Object.keys(dict)) {
-      if (!known.has(key)) {
+      if (!(key in enRaw)) {
         console.warn(
-          `[i18n] messages/${locale}.json: key "${key}" is not a known message — was the English key renamed? This translation no longer renders.`,
+          `[i18n] messages/${locale}.json: key "${key}" is not in en.json — was the English key renamed? This translation no longer renders.`,
         )
       }
     }
@@ -53,11 +50,14 @@ export function t(locale: Locale, key: MessageKey): string {
   return dictionaries[locale as TranslationLocale]?.[key] ?? en[key]
 }
 
-/**
- * Lookup for derived keys (nav.*, quiz.*). `english` is the source
- * string from code/data and doubles as the fallback, so an unregistered
- * or untranslated key degrades to English instead of breaking.
- */
+export function tKey(locale: Locale, key: string): string | undefined {
+  if (locale !== DEFAULT_LOCALE) {
+    const translated = dictionaries[locale as TranslationLocale]?.[key]
+    if (translated !== undefined) return translated
+  }
+  return en[key]
+}
+
 export function tDyn(locale: Locale, key: string, english: string): string {
   if (locale === DEFAULT_LOCALE) return english
   return dictionaries[locale as TranslationLocale]?.[key] ?? english

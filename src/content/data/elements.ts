@@ -8,7 +8,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/elements.json'
+import data from '@content/data/en/elements.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

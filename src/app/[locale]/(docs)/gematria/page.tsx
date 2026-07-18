@@ -18,7 +18,7 @@ export default function GematriaIndex() {
   return (
     <>
       <GematriaSeqRedirect />
-      <GroupPage title="Gematria" />
+      <GroupPage slug="gematria" />
     </>
   )
 }

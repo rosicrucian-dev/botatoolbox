@@ -5,7 +5,10 @@
     "src": "/files/cube-of-space-net-preview.jpg",
     "section": "Downloads",
     "downloads": [
-      { "label": "Download A4", "src": "/files/cube-of-space-net-a4.pdf" },
+      {
+        "label": "Download A4",
+        "src": "/files/cube-of-space-net-a4.pdf"
+      },
       {
         "label": "Download US Letter",
         "src": "/files/cube-of-space-net-letter.pdf"

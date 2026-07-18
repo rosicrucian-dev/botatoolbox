@@ -41,7 +41,7 @@ function ritualSections(locale: Locale, slug: string) {
     md = readLocalizedMarkdown('rituals', locale, slug)
   } catch {
     throw new Error(
-      `rituals.json lists "${slug}" but content/rituals/${slug}.md is missing`,
+      `rituals.json lists "${slug}" but content/rituals/en/${slug}.md is missing`,
     )
   }
   return parseRitual(md)

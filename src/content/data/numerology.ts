@@ -5,7 +5,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/numerology.json'
+import data from '@content/data/en/numerology.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

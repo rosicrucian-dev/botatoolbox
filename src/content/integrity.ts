@@ -77,19 +77,19 @@ function expectManifestMatchesDir(
   kind: 'texts' | 'rituals',
   slugs: ReadonlyArray<string>,
 ) {
-  const dir = join(process.cwd(), 'content', kind)
+  const dir = join(process.cwd(), 'content', kind, DEFAULT_LOCALE)
   const files = readdirSync(dir).filter((f) => f.endsWith('.md'))
   for (const slug of slugs) {
     expect(
       files.includes(`${slug}.md`),
-      `${kind}.json lists "${slug}" but content/${kind}/${slug}.md is missing`,
+      `${kind}.json lists "${slug}" but content/${kind}/${DEFAULT_LOCALE}/${slug}.md is missing`,
     )
   }
   const known = new Set(slugs)
   for (const f of files) {
     expect(
       known.has(f.replace(/\.md$/, '')),
-      `content/${kind}/${f} has no entry in content/data/${kind}.json — it won't render anywhere. Add a manifest entry (or delete the file).`,
+      `content/${kind}/${DEFAULT_LOCALE}/${f} has no entry in content/data/${kind}.json — it won't render anywhere. Add a manifest entry (or delete the file).`,
     )
   }
 }
@@ -139,7 +139,7 @@ for (const ritual of rituals) {
 // --- ritual word refs → words.slug
 for (const ritual of rituals) {
   const md = readFileSync(
-    join(process.cwd(), 'content/rituals', `${ritual.slug}.md`),
+    join(process.cwd(), 'content/rituals', DEFAULT_LOCALE, `${ritual.slug}.md`),
     'utf8',
   )
   for (const section of parseRitual(md)) {
@@ -421,7 +421,7 @@ for (const c of chakras) {
 {
   const docsDir = join(process.cwd(), 'src/app/[locale]/(docs)')
   for (const group of navigation) {
-    const slug = group.title.toLowerCase()
+    const slug = group.slug
     for (const link of group.links) {
       const segs = link.href.split('/').filter(Boolean)
       if (group.flat) {

@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function DevicesIndex() {
-  return <GroupPage title="Devices" />
+  return <GroupPage slug="devices" />
 }

@@ -1,20 +1,29 @@
-{
-  "adoration-lord-universe": {
+[
+  {
+    "slug": "adoration-lord-universe",
     "title": "Adoration to the Lord of the Universe"
   },
-  "aquarian-doxology": {
+  {
+    "slug": "aquarian-doxology",
     "title": "Aquarian Doxology"
   },
-  "book-of-tokens": {
-    "title": "The Book of Tokens"
+  {
+    "slug": "book-of-tokens",
+    "title": "The Book of Tokens",
+    "custom": true
   },
-  "chaldean-oracles": {
-    "title": "Chaldean Oracles"
+  {
+    "slug": "chaldean-oracles",
+    "title": "Chaldean Oracles",
+    "hidden": true
   },
-  "emerald-tablet-hermes": {
+  {
+    "slug": "emerald-tablet-hermes",
     "title": "The Emerald Tablet of Hermes"
   },
-  "pattern-trestleboard": {
-    "title": "The Pattern on the Trestleboard"
+  {
+    "slug": "pattern-trestleboard",
+    "title": "The Pattern on the Trestleboard",
+    "custom": true
   }
-}
+]

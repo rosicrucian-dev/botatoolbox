@@ -10,11 +10,12 @@
 // `<name>.schema.json` alongside `<name>.json` and regenerates the
 // editor wiring — this list is the single source of truth.
 
-import { writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { z } from 'zod'
 
 import { overlayTargets } from '../src/content/data/overlay-config.ts'
+import { DEFAULT_LOCALE, LOCALES } from '../src/lib/locales.ts'
 import {
   AlchemyTermSchema,
   ChakraSchema,
@@ -42,12 +43,11 @@ import {
   TreePathSchema,
   WordSchema,
 } from '../src/content/data/schemas.ts'
-import { en as chromeEnglish } from '../src/content/messages/en/index.ts'
-import { DEFAULT_LOCALE, LOCALES } from '../src/lib/locales.ts'
-import { navMessageEntries } from '../src/lib/nav-data.ts'
 
 const here = import.meta.dirname
 const dataDir = join(here, '..', 'content', 'data')
+const schemaDir = join(dataDir, '.schemas')
+mkdirSync(schemaDir, { recursive: true })
 
 const targets = [
   { file: 'tarot', schema: z.array(TarotCardSchema) },
@@ -83,96 +83,33 @@ const targets = [
   { file: 'files', schema: z.array(FileEntrySchema) },
 ]
 
+// One schema per data file, shared by every locale: en/ and translated
+// siblings have the SAME full shape (full-copy model), so the editor
+// wiring below maps content/data/*/<file>.json to it with a glob. The
+// generated sidecars live in content/data/.schemas/ to keep the data
+// directories clean for translators.
 for (const { file, schema } of targets) {
   const json = z.toJSONSchema(schema)
-  const out = join(dataDir, `${file}.schema.json`)
+  const out = join(schemaDir, `${file}.schema.json`)
   writeFileSync(out, JSON.stringify(json, null, 2) + '\n')
   console.log(`wrote ${out}`)
 }
 
-// ---------- translation-overlay schemas ----------
+// ---------- chrome-message schema (content/messages/*.json) ----------
 //
-// One schema per content/data/<locale>/<file>.json (the translator-
-// edited overlays; see overlay-config.ts + gen-translations.ts). Built
-// from the SAME base schemas: pick the translatable fields, make them
-// all optional, and wrap in the overlay's keying shape. The element
-// schema for each file comes from the `targets` array above.
+// One schema shared by every locale's messages file. Enumerates every
+// known message key (typed catalog + nav-derived) so the translator's
+// editor flags typo'd or orphaned keys and non-string values.
 
-const elementSchemaByFile = new Map<string, z.ZodType>(
-  targets.map(({ file, schema }) => [
-    file,
-    schema instanceof z.ZodArray ? (schema.element as z.ZodType) : schema,
-  ]),
+const messageKeys = Object.keys(
+  JSON.parse(
+    readFileSync(
+      join(here, '..', 'content', 'messages', `${DEFAULT_LOCALE}.json`),
+      'utf8',
+    ),
+  ) as Record<string, string>,
 )
-
-const overlayLocales = LOCALES.filter((l) => l !== DEFAULT_LOCALE)
-
-function overlaySchemaFor(target: (typeof overlayTargets)[number]): z.ZodType {
-  const element = elementSchemaByFile.get(target.file)
-  const { keying, fields } = target
-
-  // pillars: tuple rows are replaced wholesale — the overlay is the
-  // same shape as the English file.
-  if (keying.kind === 'index' && target.file === 'pillars') {
-    return z.array(PillarPairSchema)
-  }
-
-  if (!(element instanceof z.ZodObject)) {
-    throw new Error(
-      `gen-schemas: no object schema for overlay "${target.file}"`,
-    )
-  }
-
-  const pick = Object.fromEntries(fields.map((f) => [f, true as const]))
-
-  if (keying.kind === 'nested') {
-    // minor-arcana: { "<suit>": { "<num>": {…fields} } }. The child
-    // element schema lives under `childList`; `meaning` may be partial
-    // (untranslated subfields fall back to English).
-    const child = (element.shape as Record<string, z.ZodType>)[keying.childList]
-    if (
-      !(child instanceof z.ZodArray) ||
-      !(child.element instanceof z.ZodObject)
-    ) {
-      throw new Error(`gen-schemas: bad childList for overlay "${target.file}"`)
-    }
-    let entry = child.element.pick(pick).partial()
-    if ('meaning' in entry.shape) {
-      const meaning = child.element.shape.meaning
-      if (
-        meaning instanceof z.ZodOptional &&
-        meaning.unwrap() instanceof z.ZodObject
-      ) {
-        entry = entry.extend({
-          meaning: (meaning.unwrap() as z.ZodObject).partial().optional(),
-        })
-      }
-    }
-    return z.record(z.string(), z.record(z.string(), entry))
-  }
-
-  const entry = element.pick(pick).partial()
-  if (keying.kind === 'index') return z.array(entry)
-  return z.record(z.string(), entry)
-}
-
-for (const locale of overlayLocales) {
-  for (const target of overlayTargets) {
-    const json = z.toJSONSchema(overlaySchemaFor(target))
-    const out = join(dataDir, locale, `${target.file}.schema.json`)
-    writeFileSync(out, JSON.stringify(json, null, 2) + '\n')
-    console.log(`wrote ${out}`)
-  }
-}
-
-// ---------- chrome-message schemas (content/messages/<locale>.json) ----------
-//
-// Enumerates every known message key (typed catalog + nav-derived) so
-// the translator's editor flags typo'd or orphaned keys and non-string
-// values.
-
-const messageKeys = Object.keys({ ...chromeEnglish, ...navMessageEntries() })
-for (const locale of overlayLocales) {
+{
   const json = z.toJSONSchema(
     z
       .object(
@@ -180,29 +117,35 @@ for (const locale of overlayLocales) {
       )
       .strict(),
   )
-  const out = join(here, '..', 'content', 'messages', `${locale}.schema.json`)
+  const out = join(here, '..', 'content', 'messages', 'messages.schema.json')
   writeFileSync(out, JSON.stringify(json, null, 2) + '\n')
   console.log(`wrote ${out}`)
 }
+
+const localizedFiles = new Set(overlayTargets.map((t) => t.file))
 
 // Editor wiring, derived from the same lists so they can't drift.
 const settingsPath = join(here, '..', '.vscode', 'settings.json')
 const settings = {
   'json.schemas': [
+    // One schema per data file. Language-carrying files live in the
+    // locale dirs (the glob covers en/, de/, and any future locale);
+    // language-free files (cube-of-space, tree-paths) sit top level.
     ...targets.map(({ file }) => ({
-      fileMatch: [`content/data/${file}.json`],
-      url: `./content/data/${file}.schema.json`,
+      fileMatch: [
+        localizedFiles.has(file)
+          ? `content/data/*/${file}.json`
+          : `content/data/${file}.json`,
+      ],
+      url: `./content/data/.schemas/${file}.schema.json`,
     })),
-    ...overlayLocales.flatMap((locale) =>
-      overlayTargets.map(({ file }) => ({
-        fileMatch: [`content/data/${locale}/${file}.json`],
-        url: `./content/data/${locale}/${file}.schema.json`,
-      })),
-    ),
-    ...overlayLocales.map((locale) => ({
-      fileMatch: [`content/messages/${locale}.json`],
-      url: `./content/messages/${locale}.schema.json`,
-    })),
+    {
+      fileMatch: [
+        'content/messages/*.json',
+        '!content/messages/*.schema.json',
+      ],
+      url: './content/messages/messages.schema.json',
+    },
   ],
 }
 writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n')

@@ -4,7 +4,7 @@
 
 import { z } from 'zod'
 
-import wordsData from '@content/data/words.json'
+import wordsData from '@content/data/en/words.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

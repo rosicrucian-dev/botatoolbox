@@ -7,7 +7,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/minor-arcana.json'
+import data from '@content/data/en/minor-arcana.json'
 
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'

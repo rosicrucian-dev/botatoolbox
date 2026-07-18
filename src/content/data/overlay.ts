@@ -1,13 +1,20 @@
-// Translation-overlay merge. Applies a per-locale overlay file
-// (content/data/<locale>/<file>.json — only whitelisted display fields,
-// keyed per overlay-config.ts) over the English data BEFORE the Zod
-// parse in each loader, falling back to English for anything missing.
+// Locale merge. Every language-carrying data file exists as a FULL,
+// same-shaped copy per locale — content/data/en/<file>.json (the
+// master) and content/data/<locale>/<file>.json siblings — so a
+// translator sees exactly the file they know, with values to
+// translate in place. The safety lives HERE, not in the file shapes:
+// the merge reads STRUCTURE exclusively from English and takes only
+// the whitelisted display fields (overlay-config.ts) from a translated
+// file, matched by the entry's stable key. A translated file's
+// structural fields are inert context — editing them warns and is
+// IGNORED; a missing/mismatched record falls back to English wholesale.
 //
 // Failure philosophy: a translator's mistake (typo'd key, wrong type,
-// extra field) WARNS and is skipped — it must never fail the build or
-// change structure. The merged result still goes through the loader's
-// strict Zod parse, which stays satisfied because structure is copied
-// from English and only whitelisted display values are substituted.
+// edited structural field) WARNS and is skipped — it must never fail
+// the build or change structure. The merged result still goes through
+// the loader's strict Zod parse, which stays satisfied because
+// structure is copied from English and only whitelisted display values
+// are substituted.
 
 import {
   DEFAULT_LOCALE,
@@ -28,8 +35,8 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 
 // Merge one whitelisted field's overlay value onto a cloned entry. The
 // English value is the type authority: string→replace, array→replace
-// wholesale, object→merge subkeys that exist in English. Mismatches and
-// unknown-to-English fields are skipped with a warning.
+// wholesale, object→merge subkeys that exist in English. Mismatches
+// and unknown-to-English fields are skipped with a warning.
 function mergeField(
   entry: Record<string, unknown>,
   field: string,
@@ -38,6 +45,7 @@ function mergeField(
   where: string,
 ) {
   const en = entry[field]
+  if (value === en) return // no-op (covers null === null attributions)
   if (en === undefined) {
     warn(target, `${where}: field "${field}" not present in English — skipped`)
     return
@@ -99,7 +107,15 @@ function mergeEntry(
   const merged: Record<string, unknown> = { ...enEntry }
   for (const [field, value] of Object.entries(ovEntry)) {
     if (!target.fields.includes(field)) {
-      warn(target, `${where}: field "${field}" is not translatable — skipped`)
+      // Structural fields ride along in the full-copy translation file
+      // as inert context. Matching English exactly → silence; edited →
+      // warn and IGNORE (English structure always wins).
+      if (JSON.stringify(value) !== JSON.stringify(enEntry[field])) {
+        warn(
+          target,
+          `${where}: "${field}" is structural — the edit is ignored (English wins)`,
+        )
+      }
       continue
     }
     mergeField(merged, field, value, target, where)
@@ -108,19 +124,21 @@ function mergeEntry(
 }
 
 /**
- * Loader-facing entry point. Per-locale overlay JSON lives in the
+ * Loader-facing entry point. Translated-locale JSON lives in the
  * central registry (./overlays.ts — the ONE place locale files are
- * imported); each loader builds a raw-rows getter:
+ * imported); each loader imports its own content/data/en/<file>.json
+ * (the master) and builds a raw-rows getter:
  *
- *   const rawFor = localizedRaw('tarot', data)
+ *   const rawFor = localizedRaw('tarot', english)
  *   const rows = z.array(Schema).parse(rawFor(locale))
  *
- * English passes through untouched (provably identical to the source
- * JSON); other locales get their overlay merged over a copy.
+ * English passes through untouched; a translated locale's full-copy
+ * file is merged over it (structure from English, whitelisted display
+ * fields from the translation, everything else falls back).
  */
 export function localizedRaw<T>(
   file: string,
-  en: readonly T[],
+  english: readonly T[],
 ): (locale: Locale) => readonly T[] {
   const target = overlayTargetByFile.get(file)
   if (!target)
@@ -128,8 +146,8 @@ export function localizedRaw<T>(
   const byLocale = overlays[file]
   return (locale) =>
     locale === DEFAULT_LOCALE
-      ? en
-      : mergeOverlay(en, byLocale?.[locale as TranslationLocale], target)
+      ? english
+      : mergeOverlay(english, byLocale?.[locale as TranslationLocale], target)
 }
 
 /**
@@ -145,17 +163,18 @@ export function mergeOverlay<T>(
 ): T[] {
   const { keying } = target
 
-  if (keying.kind === 'index') {
-    if (!Array.isArray(overlay)) {
-      if (overlay !== undefined && overlay !== null) {
-        warn(target, 'overlay should be an array (merged by position)')
-      }
-      return [...en]
+  if (!Array.isArray(overlay)) {
+    if (overlay !== undefined && overlay !== null) {
+      warn(target, 'translation file should be an array (a full sibling copy)')
     }
+    return [...en]
+  }
+
+  if (keying.kind === 'index') {
     if (overlay.length !== en.length) {
       warn(
         target,
-        `overlay has ${overlay.length} rows but English has ${en.length} — extra/missing rows ignored`,
+        `translation has ${overlay.length} rows but English has ${en.length} — extra/missing rows ignored`,
       )
     }
     return en.map(
@@ -163,68 +182,74 @@ export function mergeOverlay<T>(
     )
   }
 
-  if (!isRecord(overlay)) {
-    if (overlay !== undefined && overlay !== null) {
-      warn(target, 'overlay should be an object keyed by entry key')
+  // Key the translated rows so reordering/deletion can't shift meaning.
+  function byField(
+    rows: unknown[],
+    field: string,
+    what: string,
+  ): Map<string, unknown> {
+    const map = new Map<string, unknown>()
+    for (const row of rows) {
+      if (isRecord(row)) map.set(String(row[field]), row)
     }
-    return [...en]
+    if (map.size !== rows.length) {
+      warn(target, `${what}: duplicate or malformed keys — later rows win`)
+    }
+    return map
   }
 
   if (keying.kind === 'field') {
+    const ovByKey = byField(overlay, keying.field, 'translation')
     const seen = new Set<string>()
     const merged = en.map((entry) => {
       if (!isRecord(entry)) return entry
       const key = String(entry[keying.field])
       seen.add(key)
-      const ov = overlay[key]
+      const ov = ovByKey.get(key)
       if (ov === undefined) return entry
       return mergeEntry(entry, ov, target, `"${key}"`) as T
     })
-    for (const key of Object.keys(overlay)) {
+    for (const key of ovByKey.keys()) {
       if (!seen.has(key)) {
-        warn(target, `key "${key}" doesn't exist in English — skipped`)
+        warn(target, `entry "${key}" doesn't exist in English — skipped`)
       }
     }
     return merged
   }
 
-  // nested (minor-arcana): { "<group>": { "<childKey>": {…fields} } }
-  const seenGroups = new Set<string>()
+  // nested (minor-arcana): translated file = array of groups, each with
+  // a child array — same shape as English. Groups pair by `groupBy`,
+  // children by `childKey`.
+  const ovGroups = byField(overlay, keying.groupBy, 'translation groups')
   const merged = en.map((group) => {
     if (!isRecord(group)) return group
     const groupKey = String(group[keying.groupBy])
-    seenGroups.add(groupKey)
-    const ovGroup = overlay[groupKey]
-    if (ovGroup === undefined) return group
-    if (!isRecord(ovGroup)) {
-      warn(
-        target,
-        `"${groupKey}" should be an object keyed by ${keying.childKey}`,
-      )
-      return group
-    }
+    const ovGroup = ovGroups.get(groupKey)
+    ovGroups.delete(groupKey)
+    if (!isRecord(ovGroup)) return group
     const children = group[keying.childList]
-    if (!Array.isArray(children)) return group
-    const seenChildren = new Set<string>()
+    const ovChildren = ovGroup[keying.childList]
+    if (!Array.isArray(children) || !Array.isArray(ovChildren)) return group
+    const ovByChild = byField(
+      ovChildren,
+      keying.childKey,
+      `"${groupKey}" children`,
+    )
     const mergedChildren = children.map((child) => {
       if (!isRecord(child)) return child
       const childKey = String(child[keying.childKey])
-      seenChildren.add(childKey)
-      const ovChild = ovGroup[childKey]
+      const ovChild = ovByChild.get(childKey)
+      ovByChild.delete(childKey)
       if (ovChild === undefined) return child
       return mergeEntry(child, ovChild, target, `"${groupKey}" ${childKey}`)
     })
-    for (const key of Object.keys(ovGroup)) {
-      if (!seenChildren.has(key)) {
-        warn(target, `"${groupKey}" ${key} doesn't exist in English — skipped`)
-      }
+    for (const key of ovByChild.keys()) {
+      warn(target, `"${groupKey}" ${key} doesn't exist in English — skipped`)
     }
     return { ...group, [keying.childList]: mergedChildren } as T
   })
-  for (const key of Object.keys(overlay)) {
-    if (!seenGroups.has(key)) {
-      warn(target, `group "${key}" doesn't exist in English — skipped`)
-    }
+  for (const key of ovGroups.keys()) {
+    warn(target, `group "${key}" doesn't exist in English — skipped`)
   }
   return merged
 }

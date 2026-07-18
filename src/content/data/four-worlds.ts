@@ -7,7 +7,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/four-worlds.json'
+import data from '@content/data/en/four-worlds.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

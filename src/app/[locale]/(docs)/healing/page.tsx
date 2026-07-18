@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function HealingIndex() {
-  return <GroupPage title="Healing" />
+  return <GroupPage slug="healing" />
 }

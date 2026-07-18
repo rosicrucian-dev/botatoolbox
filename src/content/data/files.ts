@@ -14,7 +14,7 @@
 
 import { z } from 'zod'
 
-import filesData from '@content/data/files.json'
+import filesData from '@content/data/en/files.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

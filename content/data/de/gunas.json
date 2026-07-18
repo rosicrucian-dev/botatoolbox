@@ -1,20 +1,32 @@
-{
-  "rajas": {
+[
+  {
+    "slug": "rajas",
+    "glyph": "🜍",
+    "guna": "Rajas",
+    "color": "Yellow",
     "element": "Air",
     "alchemy": "Sulfur",
     "consciousness": "Superconscious",
     "principle": "Desire & Activity"
   },
-  "sattva": {
+  {
+    "slug": "sattva",
+    "glyph": "☿",
+    "guna": "Sattva",
+    "color": "Red",
     "element": "Fire",
     "alchemy": "Mercury",
     "consciousness": "Self-conscious",
     "principle": "Wisdom & Light"
   },
-  "tamas": {
+  {
+    "slug": "tamas",
+    "glyph": "🜔",
+    "guna": "Tamas",
+    "color": "Blue",
     "element": "Water",
     "alchemy": "Salt",
     "consciousness": "Subconscious",
     "principle": "Ignorance & Inertia"
   }
-}
+]

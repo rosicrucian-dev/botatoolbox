@@ -6,7 +6,7 @@
 
 import { z } from 'zod'
 
-import signsData from '@content/data/signs.json'
+import signsData from '@content/data/en/signs.json'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
 import { SignSchema } from './schemas'

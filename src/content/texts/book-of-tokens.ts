@@ -12,7 +12,7 @@
 // may be translated freely as long as the chapter/verse structure stays
 // identical to the English file.
 
-import source from '@content/texts/book-of-tokens.md?raw'
+import source from '@content/texts/en/book-of-tokens.md?raw'
 import sourceDe from '@content/texts/de/book-of-tokens.md?raw'
 
 import { defineLocalized } from '@/content/data/localized'

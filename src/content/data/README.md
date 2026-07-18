@@ -4,8 +4,9 @@ Two halves, split between the project root and `src/`:
 
 | Path                           | What lives here                                                                    |
 | ------------------------------ | ---------------------------------------------------------------------------------- |
-| `content/data/*.json`          | Raw, editable JSON. Hand-editable; non-developers can touch.                       |
-| `content/data/*.schema.json`   | JSON Schema sidecars for VS Code autocomplete. **Generated.**                      |
+| `content/data/<locale>/*.json` | One FULL copy of each language-carrying data file per locale — `en/` is the master (structure is only ever read from it), translated siblings are the same file with display values translated in place. |
+| `content/data/*.json`          | Language-free files only (cube-of-space, tree-paths) — no display text, so no locale dirs. |
+| `content/data/.schemas/`       | JSON Schema sidecars for VS Code autocomplete — one per file, shared by every locale. **Generated.** |
 | `public/data/*.json`           | **Generated** data — built by `npm run gen:*`, fetched on demand. Do **not** edit. |
 | `src/content/data/schemas.ts`  | Zod schemas — single source of truth for shape + TS types.                         |
 | `src/content/data/<domain>.ts` | Typed view of one or more JSON files + lookup maps + helpers.                      |
@@ -27,25 +28,36 @@ Two halves, split between the project root and `src/`:
 5. If the new file references records in another file, add a check to
    `integrity.ts`. It runs once at boot (imported from `app/layout.tsx`)
    and throws an actionable error on any dangling reference.
-6. If the file has human-readable display fields, register it in
-   `overlay-config.ts` (keying + translatable-field whitelist) and run
-   `npm run gen:translations` — that emits the per-locale skeleton under
-   `content/data/de/` for the translator. The loader then follows the
+6. If the file has human-readable display fields, it lives in
+   `content/data/en/<name>.json` instead of top level: register it in
+   `overlay-config.ts` (keying + display-field whitelist) and
+   `overlays.ts` (the translated-locale imports), then run
+   `npm run gen:translations` — that emits the translated siblings
+   (e.g. `content/data/de/<name>.json`). The loader then follows the
    localized pattern (see below).
 
-## Translations (overlays)
+## Translations (full sibling copies, overlay semantics)
 
-English JSON is the single source of truth for structure — slugs, nums,
-foreign keys, glyphs. Per-locale overlay files (`content/data/de/*.json`,
-translator-edited, see `content/TRANSLATING.md`) carry ONLY whitelisted
-display fields, keyed per `overlay-config.ts`, and are deep-merged over
-the English rows before the Zod parse with English fallback for anything
-missing. Overlay mistakes warn (`[i18n] …`) but never fail the build.
+Every language-carrying file exists as a FULL copy per locale, all the
+same shape — a translator opens `de/tarot.json` and sees exactly what
+`en/tarot.json` shows, with values to translate in place. The safety
+lives in the merge, not the file shapes: `en/` is the master, and the
+runtime reads STRUCTURE exclusively from it. From a translated file it
+takes only the display fields whitelisted in `overlay-config.ts`,
+matching entries by their stable key — so a translated file's
+structural fields are inert context. Editing one warns and is IGNORED
+(English wins); a missing or key-broken entry falls back to English
+wholesale; nothing a translator does can fail the build.
+`npm run gen:translations` is the gardener: rerunning it resyncs every
+translated file's structure from English while preserving all
+translated display values. Translated-locale JSON is imported in
+exactly one place — the registry in `overlays.ts`; loaders import only
+their own `en/` master.
 
 Each loader exposes exactly one way to read data — the locale accessor:
 
 ```ts
-const rawFor = localizedRaw('tarot', data, { de: deData })
+const rawFor = localizedRaw('tarot', data) // overlays come from overlays.ts
 export const getTarot = defineLocalized((locale) => {
   const cards = z.array(TarotCardSchema).parse(rawFor(locale))
   …derived views…
@@ -103,7 +115,8 @@ committed, so a fresh clone builds without running any generator. See
 
 ## Prose texts
 
-The markdown texts under `content/texts/*.md` are listed in
+The markdown texts under `content/texts/en/*.md` (translations as full
+parallel copies in sibling locale dirs, e.g. `content/texts/de/`) are listed in
 `content/data/texts.json`. Each entry is `{ slug, title }` plus two
 opt-in flags. The generic `/texts/[slug]` route renders any entry by
 reading its `.md` at build. **Adding a text = a `.md` file + one manifest
@@ -122,7 +135,7 @@ build in both directions (manifest entry without a file, or an orphan
 
 ## Rituals
 
-Rituals work the same way: `content/rituals/<slug>.md` + one entry in
+Rituals work the same way: `content/rituals/en/<slug>.md` + one entry in
 `content/data/rituals.json`, rendered by the generic `/rituals/[slug]`
 route. The markdown is structured: `## Heading` starts a section, a line
 like `i. Do the thing` becomes a numbered step (label kept verbatim), and

@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function RitualsIndex() {
-  return <GroupPage title="Rituals" />
+  return <GroupPage slug="rituals" />
 }

@@ -6,7 +6,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/three-veils.json'
+import data from '@content/data/en/three-veils.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

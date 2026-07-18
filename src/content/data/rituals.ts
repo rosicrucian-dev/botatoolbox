@@ -13,7 +13,7 @@
 
 import { z } from 'zod'
 
-import ritualsData from '@content/data/rituals.json'
+import ritualsData from '@content/data/en/rituals.json'
 
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'

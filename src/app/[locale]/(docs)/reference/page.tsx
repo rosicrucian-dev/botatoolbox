@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function ReferenceIndex() {
-  return <GroupPage title="Reference" />
+  return <GroupPage slug="reference" />
 }

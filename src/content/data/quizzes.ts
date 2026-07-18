@@ -8,7 +8,7 @@
 // (minor arcana, astrology, anything else). Builders are kept here so
 // the data layer stays the single source of truth.
 
-import { tDyn } from '@/content/messages'
+import { tKey } from '@/content/messages'
 import { getLetterMeta } from '@/lib/hebrew'
 import { getAstrology } from './astrology'
 import { defineLocalized } from './localized'
@@ -77,42 +77,41 @@ export interface Quiz {
   answerOptions: ReadonlyArray<string>
 }
 
-const englishCategories: ReadonlyArray<QuizCategory> = [
-  { slug: 'major-arcana', label: 'Major Arcana' },
-  { slug: 'minor-arcana', label: 'Minor Arcana' },
-  { slug: 'signs', label: 'Signs' },
-  { slug: 'hebrew', label: 'Hebrew' },
-  { slug: 'miscellaneous', label: 'Miscellaneous' },
-]
+const categorySlugs = [
+  'major-arcana',
+  'minor-arcana',
+  'signs',
+  'hebrew',
+  'miscellaneous',
+] as const
 
 // ---------- builders ----------
 //
 // Everything below closes over the locale-specific data views, so quiz
-// answers (keywords, meanings, body parts, …) follow the translation
-// overlays automatically. Quiz titles / category labels are UI chrome:
-// they look up `quiz.*` keys in the message catalog (tDyn — the code
-// string is the English source and the fallback; keys are registered
-// in src/content/messages/en/quizzes.ts).
+// answers (keywords, meanings, body parts, …) follow the translations
+// automatically. Quiz titles / category labels / field labels live in
+// the message catalog ONLY (`quiz.*` keys in content/messages/en.json)
+// — a quiz slug without its catalog title fails the build loudly.
 
 export const getQuizzes = defineLocalized((locale) => {
-  const quizCategories: ReadonlyArray<QuizCategory> = englishCategories.map(
-    (c) => ({ ...c, label: tDyn(locale, `quiz.category.${c.slug}`, c.label) }),
-  )
-
-  // Applied to every catalog entry below: swap title/fieldLabel for
-  // their translations. A fieldLabel equal to the title shares the
-  // title's key, so the translator translates it once.
-  function localizeLabels(q: Quiz): Quiz {
-    const base = `quiz.${q.categorySlug}.${q.slug}`
-    return {
-      ...q,
-      title: tDyn(locale, `${base}.title`, q.title),
-      fieldLabel:
-        q.fieldLabel === q.title
-          ? tDyn(locale, `${base}.title`, q.fieldLabel)
-          : tDyn(locale, `${base}.fieldLabel`, q.fieldLabel),
+  function requireKey(key: string): string {
+    const value = tKey(locale, key)
+    if (value === undefined) {
+      throw new Error(`quizzes: missing "${key}" in content/messages/en.json`)
     }
+    return value
   }
+
+  // Title (required) + field label (optional key, defaults to title).
+  function labels(categorySlug: string, slug: string) {
+    const base = `quiz.${categorySlug}.${slug}`
+    const title = requireKey(`${base}.title`)
+    return { title, fieldLabel: tKey(locale, `${base}.fieldLabel`) ?? title }
+  }
+
+  const quizCategories: ReadonlyArray<QuizCategory> = categorySlugs.map(
+    (slug) => ({ slug, label: requireKey(`quiz.category.${slug}`) }),
+  )
 
   const { cards } = getTarot(locale)
   const {
@@ -138,8 +137,6 @@ export const getQuizzes = defineLocalized((locale) => {
   // Left side shows the card image.
   function majorArcanaQuiz(opts: {
     slug: string
-    title: string
-    fieldLabel?: string
     field: keyof TarotCard
   }): Quiz {
     const items: ReadonlyArray<QuizItem> = cards.map((c) => ({
@@ -156,8 +153,7 @@ export const getQuizzes = defineLocalized((locale) => {
     }))
     return {
       slug: opts.slug,
-      title: opts.title,
-      fieldLabel: opts.fieldLabel ?? opts.title,
+      ...labels('major-arcana', opts.slug),
       categorySlug: 'major-arcana',
       items,
       answerOptions: dedupSort(items.map((i) => i.answer)),
@@ -170,7 +166,6 @@ export const getQuizzes = defineLocalized((locale) => {
   // quizzes. answerOptions are deduped + sorted within the chosen pool.
   function minorArcanaKeywordsQuiz(opts: {
     slug: string
-    title: string
     suit?: string
   }): Quiz {
     // Quizzes only include cards that have a keyword in the data —
@@ -200,8 +195,7 @@ export const getQuizzes = defineLocalized((locale) => {
     })
     return {
       slug: opts.slug,
-      title: opts.title,
-      fieldLabel: 'Keyword',
+      ...labels('minor-arcana', opts.slug),
       categorySlug: 'minor-arcana',
       items,
       answerOptions: dedupSort(items.map((i) => i.answer)),
@@ -216,7 +210,6 @@ export const getQuizzes = defineLocalized((locale) => {
   // comparator (Gematria's numeric sort) to override.
   function hebrewLetterQuiz(opts: {
     slug: string
-    title: string
     answer: (c: TarotCard) => string
     answerOptions?: ReadonlyArray<string>
     sort?: (a: string, b: string) => number
@@ -234,8 +227,7 @@ export const getQuizzes = defineLocalized((locale) => {
     }))
     return {
       slug: opts.slug,
-      title: opts.title,
-      fieldLabel: opts.title,
+      ...labels('hebrew', opts.slug),
       categorySlug: 'hebrew',
       items,
       answerOptions:
@@ -276,8 +268,7 @@ export const getQuizzes = defineLocalized((locale) => {
     }))
     return {
       slug: 'numerology',
-      title: 'Numerology',
-      fieldLabel: 'Meaning',
+      ...labels('miscellaneous', 'numerology'),
       categorySlug: 'miscellaneous',
       items,
       answerOptions: dedupSort(items.map((i) => i.answer)),
@@ -289,8 +280,6 @@ export const getQuizzes = defineLocalized((locale) => {
   // the dedup'd set of every sign's answer.
   function signFieldQuiz(opts: {
     slug: string
-    title: string
-    fieldLabel: string
     answer: (s: (typeof signs)[number]) => string
   }): Quiz {
     const items: ReadonlyArray<QuizItem> = signs.map((sign) => ({
@@ -301,8 +290,7 @@ export const getQuizzes = defineLocalized((locale) => {
     }))
     return {
       slug: opts.slug,
-      title: opts.title,
-      fieldLabel: opts.fieldLabel,
+      ...labels('signs', opts.slug),
       categorySlug: 'signs',
       items,
       answerOptions: dedupSort(items.map((i) => i.answer)),
@@ -315,8 +303,6 @@ export const getQuizzes = defineLocalized((locale) => {
   // Returning null excludes the sign entirely (e.g. signs with no exaltation).
   function signQuiz(opts: {
     slug: string
-    title: string
-    fieldLabel: string
     answerSlugs: (s: (typeof signs)[number]) => ReadonlyArray<string> | null
   }): Quiz {
     const items: ReadonlyArray<QuizItem> = signs.flatMap((sign): QuizItem[] => {
@@ -336,8 +322,7 @@ export const getQuizzes = defineLocalized((locale) => {
     })
     return {
       slug: opts.slug,
-      title: opts.title,
-      fieldLabel: opts.fieldLabel,
+      ...labels('signs', opts.slug),
       categorySlug: 'signs',
       items,
       // Every planet is in the dropdown — the user should be able to
@@ -352,120 +337,92 @@ export const getQuizzes = defineLocalized((locale) => {
   const quizzes: ReadonlyArray<Quiz> = [
     majorArcanaQuiz({
       slug: 'letter',
-      title: 'Letter',
       field: 'letter',
     }),
     majorArcanaQuiz({
       slug: 'letter-significance',
-      title: 'Letter Significance',
       field: 'significance',
     }),
     majorArcanaQuiz({
       slug: 'astrology',
-      title: 'Astrology',
       field: 'astrology',
     }),
     majorArcanaQuiz({
       slug: 'alchemy',
-      title: 'Alchemy',
       field: 'alchemy',
     }),
     majorArcanaQuiz({
       slug: 'intelligence',
-      title: 'Intelligence',
       field: 'intelligence',
     }),
     majorArcanaQuiz({
       slug: 'power',
-      title: 'Power',
       field: 'power',
     }),
     majorArcanaQuiz({
       slug: 'human-faculty',
-      title: 'Human Faculty and Opposites',
       field: 'human',
     }),
     hebrewLetterQuiz({
       slug: 'letter',
-      title: 'Letter',
       answer: (c) => c.letter,
     }),
     hebrewLetterQuiz({
       slug: 'transliteration',
-      title: 'Transliteration',
       answer: (c) => c.english,
     }),
     hebrewLetterQuiz({
       slug: 'gematria',
-      title: 'Gematria',
       answer: (c) => String(c.gematria),
       sort: byNumber,
     }),
     hebrewLetterQuiz({
       slug: 'type',
-      title: 'Type',
       answer: (c) => hebrewLetterType(c.letter),
       answerOptions: ['Mother', 'Double', 'Single'],
     }),
     minorArcanaKeywordsQuiz({
       slug: 'wand-keywords',
-      title: 'Wand Keywords',
       suit: 'Wands',
     }),
     minorArcanaKeywordsQuiz({
       slug: 'cup-keywords',
-      title: 'Cup Keywords',
       suit: 'Cups',
     }),
     minorArcanaKeywordsQuiz({
       slug: 'sword-keywords',
-      title: 'Sword Keywords',
       suit: 'Swords',
     }),
     minorArcanaKeywordsQuiz({
       slug: 'pentacle-keywords',
-      title: 'Pentacle Keywords',
       suit: 'Pentacles',
     }),
     minorArcanaKeywordsQuiz({
       slug: 'all-keywords',
-      title: 'All Keywords',
     }),
     signFieldQuiz({
       slug: 'symbol',
-      title: 'Symbol',
-      fieldLabel: 'Sign',
       answer: (s) => s.name,
     }),
     signQuiz({
       slug: 'ruler',
-      title: 'Ruler',
-      fieldLabel: 'Ruler',
       answerSlugs: (s) => s.rulers,
     }),
     signQuiz({
       slug: 'exaltation',
-      title: 'Exaltation',
-      fieldLabel: 'Exaltation',
       // Returning null skips signs with no exaltation.
       answerSlugs: (s) => (s.exaltedBy ? [s.exaltedBy] : null),
     }),
     signFieldQuiz({
       slug: 'body',
-      title: 'Body',
-      fieldLabel: 'Body',
       answer: (s) => s.bodyPart,
     }),
     signFieldQuiz({
       slug: 'quality',
-      title: 'Quality',
-      fieldLabel: 'Quality',
       answer: (s) => s.quality,
     }),
     signFieldQuiz({
       slug: 'opposites',
-      title: 'Opposites',
-      fieldLabel: 'Opposite',
       // Zodiac opposites — signs[i] and signs[i+6] are 180° apart, so
       // the lookup wraps cleanly with mod 12.
       answer: (s) => {
@@ -475,14 +432,10 @@ export const getQuizzes = defineLocalized((locale) => {
     }),
     signFieldQuiz({
       slug: 'alchemy-element',
-      title: 'Alchemy - Element',
-      fieldLabel: 'Element',
       answer: (s) => s.alchemy,
     }),
     signFieldQuiz({
       slug: 'alchemy-stage',
-      title: 'Alchemy - Stage',
-      fieldLabel: 'Stage',
       answer: (s) => s.alchemicalStage,
     }),
     numerologyQuiz(),
@@ -494,12 +447,5 @@ export const getQuizzes = defineLocalized((locale) => {
     )
   }
 
-  return {
-    quizzes: quizzes.map(localizeLabels),
-    quizCategories,
-    quizBySlug: (categorySlug: string, slug: string) => {
-      const q = quizBySlug(categorySlug, slug)
-      return q && localizeLabels(q)
-    },
-  }
+  return { quizzes, quizCategories, quizBySlug }
 })

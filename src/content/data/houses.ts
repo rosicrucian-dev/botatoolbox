@@ -6,7 +6,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/houses.json'
+import data from '@content/data/en/houses.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

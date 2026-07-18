@@ -1,7 +1,12 @@
-{
-  "malkuth": {
+[
+  {
+    "slug": "malkuth",
+    "hebrewName": "Malkuth",
+    "hebrewRoman": "MLKVTh",
     "name": "Kingdom",
     "element": "Earth",
+    "mantraSlug": "adni-mlk",
+    "color": "malkuth",
     "situationOnTree": "At the Base of the Pillar of Equilibrium",
     "briaticColors": "Citrine, Olive, Russet, Black",
     "astrological": "The Elements",
@@ -13,11 +18,22 @@
     "bodyCorrespondence": "Feet, External Sex Organs, Mouth",
     "perfumes": "Dittany of Crete",
     "stones": "Rock Crystal",
-    "animals": "Sphynx"
+    "animals": "Sphynx",
+    "quadrantColors": {
+      "top": "green",
+      "right": "violet",
+      "bottom": "black",
+      "left": "orange"
+    }
   },
-  "yesod": {
+  {
+    "slug": "yesod",
+    "hebrewName": "Yesod",
+    "hebrewRoman": "ISVD",
     "name": "Foundation",
     "element": "Air",
+    "mantraSlug": "shdi-al-chi",
+    "color": "violet",
     "situationOnTree": "Towards the Base of the Pillar of Equilibrium; Below Tiphareth and Above Malkuth",
     "briaticColors": "Violet",
     "astrological": "Moon",
@@ -31,9 +47,14 @@
     "stones": "Quartz",
     "animals": "Elephant"
   },
-  "hod": {
+  {
+    "slug": "hod",
+    "hebrewName": "Hod",
+    "hebrewRoman": "HVD",
     "name": "Splendor",
     "element": "Water",
+    "mantraSlug": "alhim-tzbavth",
+    "color": "orange",
     "situationOnTree": "At the Foot of the Pillar of Severity",
     "briaticColors": "Orange",
     "astrological": "Mercury",
@@ -47,9 +68,14 @@
     "stones": "Opal, especially Fire Opal",
     "animals": "Hermaphrodite, Jackal"
   },
-  "netzach": {
+  {
+    "slug": "netzach",
+    "hebrewName": "Netzach",
+    "hebrewRoman": "NTzCh",
     "name": "Victory",
     "element": "Fire",
+    "mantraSlug": "ihvh-tzbavth",
+    "color": "green",
     "situationOnTree": "At the Foot of the Pillar of Mercy",
     "briaticColors": "Green",
     "astrological": "Venus",
@@ -63,9 +89,14 @@
     "stones": "Emerald",
     "animals": "Lynx"
   },
-  "tiphareth": {
+  {
+    "slug": "tiphareth",
+    "hebrewName": "Tiphareth",
+    "hebrewRoman": "ThPARTh",
     "name": "Beauty",
     "element": "Air",
+    "mantraSlug": "alh-vdth",
+    "color": "yellow",
     "situationOnTree": "In the center of the Pillar of Equilibrium",
     "briaticColors": "Yellow",
     "astrological": "Sun (Sol)",
@@ -79,9 +110,14 @@
     "stones": "Topaz, yellow diamond",
     "animals": "Phoenix, Lion, Child"
   },
-  "geburah": {
+  {
+    "slug": "geburah",
+    "hebrewName": "Geburah",
+    "hebrewRoman": "GBVRH",
     "name": "Severity",
     "element": "Fire",
+    "mantraSlug": "alhim-gbvr",
+    "color": "red",
     "situationOnTree": "In the center of the Pillar of Severity",
     "briaticColors": "Red",
     "astrological": "Mars",
@@ -95,9 +131,14 @@
     "stones": "Ruby",
     "animals": "Basilisk"
   },
-  "chesed": {
+  {
+    "slug": "chesed",
+    "hebrewName": "Chesed",
+    "hebrewRoman": "ChSD",
     "name": "Mercy",
     "element": "Water",
+    "mantraSlug": "al",
+    "color": "blue",
     "situationOnTree": "In the center of the Pillar of Mercy",
     "briaticColors": "Blue",
     "astrological": "Jupiter",
@@ -111,9 +152,14 @@
     "stones": "Amethyst, sapphire",
     "animals": "Unicorn"
   },
-  "binah": {
+  {
+    "slug": "binah",
+    "hebrewName": "Binah",
+    "hebrewRoman": "BINH",
     "name": "Understanding",
     "element": "Water",
+    "mantraSlug": "alhim",
+    "color": "binah",
     "situationOnTree": "At the head of the Pillar of Severity in the Supernal Triangle",
     "briaticColors": "Black",
     "astrological": "Saturn",
@@ -127,9 +173,14 @@
     "stones": "Star Sapphire, Pearl",
     "animals": "Woman"
   },
-  "chokmah": {
+  {
+    "slug": "chokmah",
+    "hebrewName": "Chokmah",
+    "hebrewRoman": "ChKMH",
     "name": "Wisdom",
     "element": "Fire",
+    "mantraSlug": "ih",
+    "color": "chokmah",
     "situationOnTree": "At the head of the Pillar of Mercy in the Supernal Triangle",
     "briaticColors": "Gray",
     "astrological": "Fixed Stars (Zodiac)",
@@ -143,9 +194,14 @@
     "stones": "Star ruby, turquoise",
     "animals": "Man"
   },
-  "kether": {
+  {
+    "slug": "kether",
+    "hebrewName": "Kether",
+    "hebrewRoman": "KThR",
     "name": "Crown",
     "element": "Air",
+    "mantraSlug": "ahih",
+    "color": "kether",
     "situationOnTree": "At the head of the Pillar of Equilibrium in the Supernal Triangle",
     "briaticColors": "White",
     "astrological": "Primum Mobile, the First Mover",
@@ -159,4 +215,4 @@
     "stones": "Diamond",
     "animals": "God"
   }
-}
+]

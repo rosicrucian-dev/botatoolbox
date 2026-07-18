@@ -6,8 +6,8 @@
 
 import { z } from 'zod'
 
-import dspData from '@content/data/meditations-supersensory-powers.json'
-import data from '@content/data/meditations-tarot-fundamentals.json'
+import dspData from '@content/data/en/meditations-supersensory-powers.json'
+import data from '@content/data/en/meditations-tarot-fundamentals.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

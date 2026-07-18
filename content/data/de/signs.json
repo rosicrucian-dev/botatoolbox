@@ -1,74 +1,170 @@
-{
-  "aries": {
+[
+  {
+    "slug": "aries",
     "name": "Aries",
+    "glyph": "♈",
     "symbol": "Ram",
+    "letter": "Heh",
     "bodyPart": "Head, face",
-    "alchemicalStage": "Calcination"
+    "quality": "Cardinal",
+    "alchemicalStage": "Calcination",
+    "rulers": [
+      "mars"
+    ],
+    "exaltedBy": "sun"
   },
-  "taurus": {
+  {
+    "slug": "taurus",
     "name": "Taurus",
+    "glyph": "♉",
     "symbol": "Ox",
+    "letter": "Vav",
     "bodyPart": "Neck, throat",
-    "alchemicalStage": "Congelation"
+    "quality": "Fixed",
+    "alchemicalStage": "Congelation",
+    "rulers": [
+      "venus"
+    ],
+    "exaltedBy": "moon"
   },
-  "gemini": {
+  {
+    "slug": "gemini",
     "name": "Gemini",
+    "glyph": "♊",
     "symbol": "Twins",
+    "letter": "Zain",
     "bodyPart": "Lungs, collar-bone, arms, hands",
-    "alchemicalStage": "Fixation"
+    "quality": "Mutable",
+    "alchemicalStage": "Fixation",
+    "rulers": [
+      "mercury"
+    ],
+    "exaltedBy": null
   },
-  "cancer": {
+  {
+    "slug": "cancer",
     "name": "Cancer",
+    "glyph": "♋",
     "symbol": "Crab",
+    "letter": "Cheth",
     "bodyPart": "Breast, stomach",
-    "alchemicalStage": "Separation"
+    "quality": "Cardinal",
+    "alchemicalStage": "Separation",
+    "rulers": [
+      "moon"
+    ],
+    "exaltedBy": "jupiter"
   },
-  "leo": {
+  {
+    "slug": "leo",
     "name": "Leo",
+    "glyph": "♌",
     "symbol": "Lion",
+    "letter": "Teth",
     "bodyPart": "Sides, back, heart",
-    "alchemicalStage": "Digestion"
+    "quality": "Fixed",
+    "alchemicalStage": "Digestion",
+    "rulers": [
+      "sun"
+    ],
+    "exaltedBy": null
   },
-  "virgo": {
+  {
+    "slug": "virgo",
     "name": "Virgo",
+    "glyph": "♍",
     "symbol": "Virgin",
+    "letter": "Yod",
     "bodyPart": "Intestines",
-    "alchemicalStage": "Distillation"
+    "quality": "Mutable",
+    "alchemicalStage": "Distillation",
+    "rulers": [
+      "mercury"
+    ],
+    "exaltedBy": "mercury"
   },
-  "libra": {
+  {
+    "slug": "libra",
     "name": "Libra",
+    "glyph": "♎",
     "symbol": "Balance",
+    "letter": "Lamed",
     "bodyPart": "Kidneys, loins, back",
-    "alchemicalStage": "Sublimation"
+    "quality": "Cardinal",
+    "alchemicalStage": "Sublimation",
+    "rulers": [
+      "venus"
+    ],
+    "exaltedBy": "saturn"
   },
-  "scorpio": {
+  {
+    "slug": "scorpio",
     "name": "Scorpio",
+    "glyph": "♏",
     "symbol": "Scorpion",
+    "letter": "Nun",
     "bodyPart": "Sex organs",
-    "alchemicalStage": "Putrefaction"
+    "quality": "Fixed",
+    "alchemicalStage": "Putrefaction",
+    "rulers": [
+      "mars"
+    ],
+    "exaltedBy": null
   },
-  "sagittarius": {
+  {
+    "slug": "sagittarius",
     "name": "Sagittarius",
+    "glyph": "♐",
     "symbol": "Archer",
+    "letter": "Samekh",
     "bodyPart": "Hips, thighs, liver",
-    "alchemicalStage": "Incineration"
+    "quality": "Mutable",
+    "alchemicalStage": "Incineration",
+    "rulers": [
+      "jupiter"
+    ],
+    "exaltedBy": null
   },
-  "capricorn": {
+  {
+    "slug": "capricorn",
     "name": "Capricorn",
+    "glyph": "♑",
     "symbol": "Goat",
+    "letter": "Ayin",
     "bodyPart": "Knees",
-    "alchemicalStage": "Fermentation"
+    "quality": "Cardinal",
+    "alchemicalStage": "Fermentation",
+    "rulers": [
+      "saturn"
+    ],
+    "exaltedBy": "mars"
   },
-  "aquarius": {
+  {
+    "slug": "aquarius",
     "name": "Aquarius",
+    "glyph": "♒",
     "symbol": "Waterbearer",
+    "letter": "Tzaddi",
     "bodyPart": "Ankles, blood",
-    "alchemicalStage": "Dissolution"
+    "quality": "Fixed",
+    "alchemicalStage": "Dissolution",
+    "rulers": [
+      "uranus"
+    ],
+    "exaltedBy": null
   },
-  "pisces": {
+  {
+    "slug": "pisces",
     "name": "Pisces",
+    "glyph": "♓",
     "symbol": "Fishes",
+    "letter": "Qoph",
     "bodyPart": "Feet",
-    "alchemicalStage": "Multiplication"
+    "quality": "Mutable",
+    "alchemicalStage": "Multiplication",
+    "rulers": [
+      "neptune"
+    ],
+    "exaltedBy": "venus"
   }
-}
+]

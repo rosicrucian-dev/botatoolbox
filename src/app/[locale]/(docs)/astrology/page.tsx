@@ -18,5 +18,5 @@ export async function generateMetadata({
 // bookmarks; that content now lives at /reference/astrology (linked from the
 // Reference group), so /astrology belongs to the Astrology tools group.
 export default function AstrologyIndex() {
-  return <GroupPage title="Astrology" />
+  return <GroupPage slug="astrology" />
 }

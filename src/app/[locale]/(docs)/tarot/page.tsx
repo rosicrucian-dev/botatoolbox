@@ -14,5 +14,5 @@ export async function generateMetadata({
 }
 
 export default function TarotIndex() {
-  return <GroupPage title="Tarot" />
+  return <GroupPage slug="tarot" />
 }

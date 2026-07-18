@@ -1,62 +1,130 @@
-{
-  "cube-of-space": {
+[
+  {
+    "slug": "cube-of-space",
     "name": "Printable Cube of Space",
-    "section": "Downloads"
+    "src": "/files/cube-of-space-net-preview.jpg",
+    "section": "Downloads",
+    "downloads": [
+      {
+        "label": "Download A4",
+        "src": "/files/cube-of-space-net-a4.pdf"
+      },
+      {
+        "label": "Download US Letter",
+        "src": "/files/cube-of-space-net-letter.pdf"
+      }
+    ]
   },
-  "major-arcana-images-traditional": {
+  {
+    "slug": "major-arcana-images-traditional",
     "name": "Major Arcana Images - Traditional",
-    "section": "Downloads"
+    "src": "/files/major-arcana-images-traditional.zip",
+    "section": "Downloads",
+    "tableau": "traditional",
+    "downloads": [
+      {
+        "label": "Download ZIP",
+        "src": "/files/major-arcana-images-traditional.zip"
+      }
+    ]
   },
-  "major-arcana-images-modern": {
+  {
+    "slug": "major-arcana-images-modern",
     "name": "Major Arcana Images - Modern",
-    "section": "Downloads"
+    "src": "/files/major-arcana-images-modern.zip",
+    "section": "Downloads",
+    "tableau": "modern",
+    "downloads": [
+      {
+        "label": "Download ZIP",
+        "src": "/files/major-arcana-images-modern.zip"
+      }
+    ]
   },
-  "minor-arcana-images-josh-yates": {
+  {
+    "slug": "minor-arcana-images-josh-yates",
     "name": "Minor Arcana Images - Josh Yates",
-    "section": "Downloads"
+    "src": "/tarot/minor/josh-yates/ace-wands.jpg",
+    "section": "Downloads",
+    "minorTableau": true,
+    "downloads": [
+      {
+        "label": "Download ZIP",
+        "src": "/files/minor-arcana-images-josh-yates.zip"
+      }
+    ]
   },
-  "tree-of-life": {
+  {
+    "slug": "tree-of-life",
     "name": "Tree of Life",
+    "src": "/files/tree-of-life.jpg",
     "section": "Downloads"
   },
-  "tree-of-life-chakras": {
+  {
+    "slug": "tree-of-life-chakras",
     "name": "Tree of Life with Chakras",
+    "src": "/files/tree-of-life-chakras.jpg",
     "section": "Downloads"
   },
-  "wallpaper-traditional": {
+  {
+    "slug": "wallpaper-traditional",
     "name": "Wallpaper Traditional",
-    "section": "Downloads"
+    "src": "/files/wallpaper-traditional.jpg",
+    "section": "Downloads",
+    "rounded": false
   },
-  "wallpaper-modern": {
+  {
+    "slug": "wallpaper-modern",
     "name": "Wallpaper Modern",
-    "section": "Downloads"
+    "src": "/files/wallpaper-modern.jpg",
+    "section": "Downloads",
+    "rounded": false
   },
-  "correlation-sound-colour": {
+  {
+    "slug": "correlation-sound-colour",
     "name": "Correlation of Sound and Colour",
-    "section": "Historical"
+    "src": "/files/correlation-sound-colour.pdf",
+    "section": "Historical",
+    "direct": true
   },
-  "dissertation-thirty-two-paths": {
+  {
+    "slug": "dissertation-thirty-two-paths",
     "name": "A Dissertation Concerning the Thirty-Two Paths of Wisdom",
-    "section": "Historical"
+    "src": "/files/dissertation.pdf",
+    "section": "Historical",
+    "direct": true
   },
-  "gematria-notebook": {
+  {
+    "slug": "gematria-notebook",
     "name": "The Gematria Notebook of Paul Foster Case",
-    "section": "Historical"
+    "src": "/files/gematria-notebook.pdf",
+    "section": "Historical",
+    "direct": true
   },
-  "lesser-ritual-of-the-pentagram": {
+  {
+    "slug": "lesser-ritual-of-the-pentagram",
     "name": "Lesser Ritual of the Pentagram",
+    "src": "/files/lrp.jpg",
     "section": "Historical"
   },
-  "life-power": {
+  {
+    "slug": "life-power",
     "name": "The Life Power",
-    "section": "Historical"
+    "src": "/files/life-power.pdf",
+    "section": "Historical",
+    "direct": true
   },
-  "oracle-of-tarot": {
+  {
+    "slug": "oracle-of-tarot",
     "name": "The Oracle of Tarot",
-    "section": "Historical"
+    "src": "/files/the-oracle-of-tarot.pdf",
+    "section": "Historical",
+    "direct": true
   },
-  "tarot-back": {
+  {
+    "slug": "tarot-back",
     "name": "Tarot Back Image",
+    "src": "/files/tarot-back.jpg",
     "section": "Historical"
   }
-}
+]

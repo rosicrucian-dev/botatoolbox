@@ -6,7 +6,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/tarot.json'
+import data from '@content/data/en/tarot.json'
 
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'

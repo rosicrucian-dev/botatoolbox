@@ -1,25 +1,25 @@
-// Translation-overlay registry — the single source of truth for WHAT is
-// translatable in content/data/*.json and HOW each file's entries are
-// keyed. Three things consume it, so they can never drift:
+// Display-field registry — the single source of truth for WHAT is
+// translatable in each data file and HOW its entries are keyed. Three
+// things consume it, so they can never drift:
 //
-//   - overlay.ts               — merges content/data/<locale>/<file>.json
-//                                over the English data at module load
-//   - scripts/gen-translations.ts — emits/updates the per-locale overlay
-//                                skeletons the translator edits
-//   - scripts/gen-schemas.ts   — emits .schema.json sidecars for the
-//                                overlay files (editor autocomplete)
+//   - overlay.ts               — merges a locale's full-copy file over
+//                                the English master at module load
+//   - scripts/gen-translations.ts — emits/resyncs the translated
+//                                sibling files the translator edits
+//   - scripts/gen-schemas.ts   — emits the shared .schemas/ sidecars
 //
-// Design rules (see also content/TRANSLATING.md):
-//   - English JSON is the single source of truth for structure: slugs,
-//     nums, foreign keys, glyphs, Hebrew names/romanizations, and any
+// Design rules:
+//   - content/data/en/ is the single source of truth for structure:
+//     slugs, nums, foreign keys, glyphs, Hebrew romanizations, and any
 //     field used as a lookup key (e.g. `color` feeds getColor(), and
 //     `astrology`/`letter` are cross-checked by integrity.ts). None of
-//     those are listed here.
-//   - Overlays carry ONLY the whitelisted display fields below, keyed by
-//     the entry's stable key. Anything missing falls back to English, so
-//     a partial translation always ships.
-//   - Overlay mistakes warn at build/dev time (see overlay.ts) but never
-//     fail the build — a translator PR can't break the site.
+//     those are listed below — which is exactly what makes them inert
+//     in a translated file: the merge only reads listed fields.
+//   - Translated files are FULL sibling copies; anything missing or
+//     mismatched falls back to English, so a partial translation always
+//     ships.
+//   - Translator mistakes warn at build/dev time (see overlay.ts) but
+//     never fail the build — a translator PR can't break the site.
 
 export type OverlayKeying =
   /** Entries keyed by a stable field: overlay is { "<key>": {…fields} }. */

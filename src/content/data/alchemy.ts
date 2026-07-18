@@ -6,7 +6,7 @@
 
 import { z } from 'zod'
 
-import data from '@content/data/alchemy.json'
+import data from '@content/data/en/alchemy.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

@@ -7,7 +7,7 @@
 
 import { z } from 'zod'
 
-import textsData from '@content/data/texts.json'
+import textsData from '@content/data/en/texts.json'
 
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'

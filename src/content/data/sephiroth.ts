@@ -4,7 +4,7 @@
 
 import { z } from 'zod'
 
-import sephirothData from '@content/data/sephiroth.json'
+import sephirothData from '@content/data/en/sephiroth.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'

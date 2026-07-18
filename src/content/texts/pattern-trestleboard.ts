@@ -8,7 +8,7 @@
 // match the English file; on mismatch we warn and show English.
 
 import sourceDe from '@content/texts/de/pattern-trestleboard.md?raw'
-import source from '@content/texts/pattern-trestleboard.md?raw'
+import source from '@content/texts/en/pattern-trestleboard.md?raw'
 
 import { defineLocalized } from '@/content/data/localized'
 import { DEFAULT_LOCALE, type TranslationLocale } from '@/lib/locales'

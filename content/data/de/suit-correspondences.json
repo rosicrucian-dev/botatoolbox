@@ -2,21 +2,29 @@
   {
     "tarot": "Wands (Scepters)",
     "playingCard": "Clubs",
-    "element": "Fire"
+    "world": "Atziluth",
+    "element": "Fire",
+    "letter": "Yod"
   },
   {
     "tarot": "Cups (Chalices)",
     "playingCard": "Hearts",
-    "element": "Water"
+    "world": "Briah",
+    "element": "Water",
+    "letter": "Heh"
   },
   {
     "tarot": "Swords",
     "playingCard": "Spades",
-    "element": "Air"
+    "world": "Yetzirah",
+    "element": "Air",
+    "letter": "Vav"
   },
   {
     "tarot": "Pentacles (Coins)",
     "playingCard": "Diamonds",
-    "element": "Earth"
+    "world": "Assiah",
+    "element": "Earth",
+    "letter": "Heh"
   }
 ]
