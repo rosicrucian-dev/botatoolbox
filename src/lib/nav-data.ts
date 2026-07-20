@@ -98,7 +98,15 @@ export const navGroups: Array<RawNavGroup> = [
   {
     slug: 'resources',
     flat: true,
-    links: [{ href: '/files' }, { href: '/links' }, { href: '/radio' }],
+    links: [
+      { href: '/files' },
+      { href: '/links' },
+      { href: '/radio' },
+      // Recordings ship hidden until transcription + audio upload are complete
+      // (audio 404s and the set is partial). Un-hide to launch — the sitemap
+      // derives visibility from this same flag.
+      { href: '/recordings', hidden: true },
+    ],
   },
   {
     // Generated from content/data/en/rituals.json (order + titles live there).

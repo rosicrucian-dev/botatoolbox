@@ -21,3 +21,6 @@ certificates
 # Claude Code (local only)
 CLAUDE.md
 .claude/
+
+# Local recording audio for dev (real files live on R2 in prod)
+/public/recordings-audio/

@@ -152,6 +152,12 @@
     },
     {
       "fileMatch": [
+        "content/data/recordings.json"
+      ],
+      "url": "./content/data/.schemas/recordings.schema.json"
+    },
+    {
+      "fileMatch": [
         "content/messages/*.json",
         "!content/messages/*.schema.json"
       ],

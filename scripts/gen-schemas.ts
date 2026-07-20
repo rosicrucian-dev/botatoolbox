@@ -31,6 +31,7 @@ import {
   NumerologySchema,
   PillarPairSchema,
   PlanetSchema,
+  RecordingSchema,
   RitualSchema,
   SephirahSchema,
   SignSchema,
@@ -81,6 +82,7 @@ const targets = [
   { file: 'rituals', schema: z.array(RitualSchema) },
   { file: 'cube-of-space', schema: CubeOfSpaceSchema },
   { file: 'files', schema: z.array(FileEntrySchema) },
+  { file: 'recordings', schema: z.array(RecordingSchema) },
 ]
 
 // One schema per data file, shared by every locale: en/ and translated

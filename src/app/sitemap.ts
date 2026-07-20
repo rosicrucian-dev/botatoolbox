@@ -3,6 +3,7 @@ import { type MetadataRoute } from 'next'
 import {
   getAstrology,
   getMinorArcana,
+  getRecordings,
   getRituals,
   getSephiroth,
   getTarot,
@@ -10,6 +11,7 @@ import {
   getWords,
 } from '@/content/data'
 import { DEFAULT_LOCALE, RELEASED_LOCALES, type Locale } from '@/lib/locales'
+import { navGroups } from '@/lib/nav-data'
 
 // Slugs are locale-independent — the sitemap enumerates from the
 // English source on purpose (both locales' URLs are emitted below).
@@ -20,6 +22,14 @@ const { visibleTexts } = getTexts(DEFAULT_LOCALE)
 const { visibleRituals } = getRituals(DEFAULT_LOCALE)
 const { sephiroth } = getSephiroth(DEFAULT_LOCALE)
 const { astrologySigns, astrologyPlanets } = getAstrology(DEFAULT_LOCALE)
+const { recordings, groupingsInOrder } = getRecordings(DEFAULT_LOCALE)
+
+// Recordings are omitted from the sitemap while the section is hidden in the
+// nav (single source of truth) — so crawlers don't index the partial,
+// audio-less pages before launch. Un-hiding the nav link publishes them here.
+const recordingsPublic = !navGroups
+  .flatMap((g) => g.links)
+  .some((l) => l.href === '/recordings' && l.hidden)
 
 // Required by `output: 'export'` for metadata routes — emits a static
 // /sitemap.xml file at build time instead of treating it as dynamic.
@@ -121,6 +131,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...words.map((w) => `/practice/words-of-power/${w.slug}`),
     ...visibleTexts.map((t) => `/texts/${t.slug}`),
     ...visibleRituals.map((r) => `/rituals/${r.slug}`),
+    ...groupingsInOrder.map((g) => `/recordings/${g.slug}`),
+    ...recordings
+      .filter((r) => !r.hidden)
+      .map((r) => `/recordings/${r.groupingSlug}/${r.slug}`),
     ...sephiroth.map((s) => `/tree-of-life/${s.slug}`),
     ...astrologySigns.map((s) => `/reference/astrology/signs/${s.slug}`),
     ...astrologyPlanets.map((p) => `/reference/astrology/planets/${p.slug}`),

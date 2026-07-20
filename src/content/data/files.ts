@@ -2,12 +2,12 @@
 // have a viewer route at /files/<slug>; entries marked `direct` link
 // straight to `src` as a download and have no viewer page.
 //
-// The assets themselves are NOT in the repo: they live as assets on the
-// permanent `downloads` GitHub Release (free, unmetered bandwidth; the
-// repo stays small). files.json keeps the canonical `/files/<name>`
-// paths; `downloadUrl` maps them to the release at load time. Local
-// copies live in local/files/ (gitignored). To add or update an asset:
-//   gh release upload downloads local/files/<name> --clobber
+// The assets themselves are NOT in the repo: they live on Cloudflare R2,
+// served via cdn.botatoolbox.org (free egress, real CDN; the repo stays
+// small). files.json keeps the canonical `/files/<name>` paths;
+// `downloadUrl` maps them to the CDN base at load time. Local copies live
+// in local/files/ (gitignored). To add or update an asset:
+//   rclone copy local/files rosicruciandev:botatoolbox/files
 //
 // German display fields come from `de/files.json` via getFiles(locale);
 // the top-level exports stay pinned to English for legacy consumers.
@@ -23,14 +23,17 @@ import { FileDownloadSchema, FileEntrySchema } from './schemas'
 export type FileEntry = z.infer<typeof FileEntrySchema>
 export type FileDownload = z.infer<typeof FileDownloadSchema>
 
-export const DOWNLOADS_RELEASE_URL =
-  'https://github.com/rosicrucian-dev/botatoolbox/releases/download/downloads/'
+// Base URL for the R2-hosted file assets, overridable via
+// NEXT_PUBLIC_FILES_BASE (same pattern as recordingAudioUrl). Default is the
+// production CDN.
+export const FILES_BASE_URL =
+  process.env.NEXT_PUBLIC_FILES_BASE ?? 'https://cdn.botatoolbox.org/files/'
 
-// `/files/<name>` → the release asset URL. Non-/files/ paths (e.g. a
-// preview image reused from public/tarot) pass through untouched.
+// `/files/<name>` → the CDN asset URL. Non-/files/ paths (e.g. a preview
+// image reused from public/tarot) pass through untouched.
 export function downloadUrl(src: string): string {
   return src.startsWith('/files/')
-    ? DOWNLOADS_RELEASE_URL + src.slice('/files/'.length)
+    ? FILES_BASE_URL + src.slice('/files/'.length)
     : src
 }
 

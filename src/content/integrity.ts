@@ -23,6 +23,7 @@ import {
   getMeditations,
   getMinorArcana,
   getPlanets,
+  getRecordings,
   getRituals,
   getSephiroth,
   getSigns,
@@ -49,6 +50,7 @@ const { signs } = getSigns(DEFAULT_LOCALE)
 const { sephiroth } = getSephiroth(DEFAULT_LOCALE)
 const { rituals } = getRituals(DEFAULT_LOCALE)
 const { texts } = getTexts(DEFAULT_LOCALE)
+const { recordings } = getRecordings(DEFAULT_LOCALE)
 const { wordBySlug } = getWords(DEFAULT_LOCALE)
 const { supersensoryMeditations, tarotFundamentalsDays } =
   getMeditations(DEFAULT_LOCALE)
@@ -74,7 +76,7 @@ for (const s of sephiroth) {
 // no .md fails the page render anyway, but an orphan .md would otherwise
 // be a silent no-op — the most likely contributor mistake.
 function expectManifestMatchesDir(
-  kind: 'texts' | 'rituals',
+  kind: 'texts' | 'rituals' | 'recordings',
   slugs: ReadonlyArray<string>,
 ) {
   const dir = join(process.cwd(), 'content', kind, DEFAULT_LOCALE)
@@ -100,6 +102,10 @@ expectManifestMatchesDir(
 expectManifestMatchesDir(
   'rituals',
   rituals.map((r) => r.slug),
+)
+expectManifestMatchesDir(
+  'recordings',
+  recordings.map((r) => r.slug),
 )
 
 // --- translation markdown (content/<kind>/<locale>/), warnings only.

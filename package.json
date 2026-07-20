@@ -20,7 +20,9 @@
     "optimize:tarot": "node --experimental-strip-types scripts/optimize-tarot.ts",
     "zip:tarot": "node --experimental-strip-types scripts/zip-tarot.ts",
     "gen:cube-pdf": "node --experimental-strip-types scripts/gen-cube-pdf.ts",
-    "gen:gematria-words": "node --experimental-strip-types scripts/gen-gematria-words.ts"
+    "gen:gematria-words": "node --experimental-strip-types scripts/gen-gematria-words.ts",
+    "gen:recordings": "node --experimental-strip-types scripts/gen-recordings.ts",
+    "gen:search": "node --experimental-strip-types scripts/gen-recordings-search.ts"
   },
   "browserslist": "Chrome >= 111, Firefox >= 128, Safari >= 16.4, iOS >= 16.4, Edge >= 111, not dead",
   "dependencies": {
