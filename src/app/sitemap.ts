@@ -131,10 +131,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...words.map((w) => `/practice/words-of-power/${w.slug}`),
     ...visibleTexts.map((t) => `/texts/${t.slug}`),
     ...visibleRituals.map((r) => `/rituals/${r.slug}`),
-    ...groupingsInOrder.map((g) => `/recordings/${g.slug}`),
-    ...recordings
-      .filter((r) => !r.hidden)
-      .map((r) => `/recordings/${r.groupingSlug}/${r.slug}`),
+    ...(recordingsPublic
+      ? [
+          '/recordings',
+          ...groupingsInOrder.map((g) => `/recordings/${g.slug}`),
+          ...recordings
+            .filter((r) => !r.hidden)
+            .map((r) => `/recordings/${r.groupingSlug}/${r.slug}`),
+        ]
+      : []),
     ...sephiroth.map((s) => `/tree-of-life/${s.slug}`),
     ...astrologySigns.map((s) => `/reference/astrology/signs/${s.slug}`),
     ...astrologyPlanets.map((p) => `/reference/astrology/planets/${p.slug}`),

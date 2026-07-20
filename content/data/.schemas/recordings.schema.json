@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string",
+        "description": "Globally-unique URL/file slug for this recording."
+      },
+      "title": {
+        "type": "string"
+      },
+      "catalogNumber": {
+        "type": "string",
+        "description": "BOTA tape/catalog number (e.g. '5C'), or '' if uncatalogued."
+      },
+      "grouping": {
+        "type": "string",
+        "description": "Display name of the grouping (Services, a series…)."
+      },
+      "groupingSlug": {
+        "type": "string",
+        "description": "URL segment for the grouping."
+      },
+      "durationSeconds": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 9007199254740991
+      },
+      "audioPath": {
+        "type": "string",
+        "description": "Relative MP3 path (e.g. \"services/5c-….mp3\"); the base host is resolved at runtime via NEXT_PUBLIC_RECORDINGS_AUDIO_BASE (R2 in prod, local in dev)."
+      },
+      "hidden": {
+        "description": "Hidden from listings/sitemap; still reachable by direct URL.",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "slug",
+      "title",
+      "catalogNumber",
+      "grouping",
+      "groupingSlug",
+      "durationSeconds",
+      "audioPath"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "attainment-on-the-tree-of-life-class-1",
+    "title": "Attainment on the Tree of Life - Class 1",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 4795,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-1.mp3"
+  },
+  {
+    "slug": "5c-the-astral-body-and-the-astral-world",
+    "title": "The Astral Body And The Astral World",
+    "catalogNumber": "5C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2663,
+    "audioPath": "services/5c-the-astral-body-and-the-astral-world.mp3"
+  },
+  {
+    "slug": "10a-tarot-the-keys-to-freedom-key21",
+    "title": "Tarot - The Keys To Freedom - Key21",
+    "catalogNumber": "10A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2079,
+    "audioPath": "services/10a-tarot-the-keys-to-freedom-key21.mp3"
+  }
+]
