@@ -37,10 +37,11 @@ const sourcePath = (locale: string) =>
 const outPath = (locale: string) =>
   join(ROOT, `public/data/book-of-tokens-search.${locale}.json`)
 
-/** Flatten a chapter's verses to one searchable string (title + all lines). */
+/** Flatten a chapter to one searchable string (title + verses + comment). */
 function chapterText(c: Chapter): string {
-  const lines = c.verses.flatMap((v) => v.stanzas.flat())
-  return `${c.title} ${lines.join(' ')}`
+  const verses = c.verses.flatMap((v) => v.stanzas.flat())
+  const comment = c.comment.flatMap((v) => v.stanzas.flat())
+  return `${c.title} ${verses.join(' ')} ${comment.join(' ')}`
 }
 
 // Slugs (and chapter count) come from the English parse — the structural

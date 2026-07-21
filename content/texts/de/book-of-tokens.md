@@ -206,7 +206,18 @@ In all worlds I AM;
 And when worlds are but a memory,
 I SHALL BE.
 
+### Comment
 
+Throughout this text the proper name "Israel" should be understood as applying to the spiritual Israel. This name means "He shall rule as God", and thus the text is addressed to all who, by identifying themselves with the Divine Will, become unobstructed channels for its expression. Thus they truly live the Divine Life, and consequently share in the Divine Rulership,
+
+2.
+"To me neither men nor angels may draw nigh". Nothing conscious of separateness can approach the Reality of the Absolute. When all at last return to the One, the differences that constitute various classes, such as plants, animals, men, and angels, will vanish.
+
+4.
+"I am the vital principle of all that is." This is a reference to the attribution of *Ruach* to the letter ALEPH. The Hebrew *Ruach* is analogous to Sanskrit *Prana*, Greek *Pneuma*, and Latin *Spiritus*. Every one of these words means Breath, and every one means Life. The meditation says emphatically that this Life-Breath animates even those forms which are commonly regarded as being lifeless.
+
+5.
+The phrase 'my works unfinished' is a key to the whole philosophy of good and evil running through these meditations. In the thought of the author, we live in a dynamic, growing organism, which we call 'the universe'. The purpose for which that organism has been projected into relative manifestation is not yet fully achieved. It is not a finished mechanism, a thing made, once and for all. Rather it is a living Being, whose life includes innumerable lesser lives and lesser degrees of knowledge.
 ## Beth
 
 1.
@@ -362,7 +373,25 @@ In the bliss of mine experience of the universe,
 A joy unknown to those of unperfected soul
 Whose time of realization is not yet at hand.
 
+### Comment
 
+The ten "lights" are the ten Sephiroth, represented by the circles on the diagram of the Tree of Life used as a frontispiece in this volume. Their names are;
+
+1. KETHER, the Crown, or Primal Will; 2. CHOKMAH, Wisdom; 3. BINAH, Understanding; 4. CHESED, Mercy; 5. GEBURAH, Strength, or Severity; 6. TIPHARETH, Beauty; 7. NETZACH, Victory; 8. HOD, Splendor; 9. YESOD, Foundation; 10. MALKUTH, Kingdom.
+
+The second, fourth and seventh Sephiroth form the Pillar of Mercy, named after the fourth Sephirah. Opposed to them, yet their complements, are the third, fifth and eighth Sephiroth, which form the Pillar of Severity, named after the fifth Sephirah. The middle pillar, composed of the first, sixth, ninth and tenth Sephiroth, is named the Pillar of Mildness.
+
+The ten Sephiroth are also divided into a Supernal Triad, which includes the first three, and a Heptad, which includes the Sephiroth from CHESED to MALKUTH. This Heptad is the basis for many septenary schemes to be found in the literature of occultism. Yet always behind the Seven, and beyond it, is the Supernal Triad, for, as the *Book of Formation* tells us, the Lights of Emanation are 'Ten and not Nine, Ten and not Eleven'; that is, neither more nor less than Ten.
+
+4.
+'I am the eternal longing'. This is an example of the author's use of Gematria, the Qabalistic method of establishing identities of meaning between words of the same number. Each Hebrew letter is also a number. 'the number of a word is the sum of the numeral values of its letters. The Hebrew for 'longing' is *Tahavaw*, Th A V H, and the number of this word is 412, equivalent to that of the letter-name BETH, B I Th.
+
+The 'inmost essence' mentioned in this paragraph is *En Soph Aur*, AIN SVP AVR, the Limitless Light. In the philosophy of the Qabalah, *En Soph Aur* is held to subsist throughout eternity, and is regarded as being THAT which precedes all manifestation. Hence, although KETHER, the Crown, or Primal Will, is the first among the Lights of Emanation, it is secondary in the order of thought to the Limitless Light. Therefore KETHER is here compared to a HOUSE for that Light, and as HOUSE is the name of the second letter, which also has the value of 2, the Qabalistic ideas just explained are truly represented by that letter and its number.
+
+5–6.
+These two paragraphs of the meditation should be compared with the symbolism of the first Tarot Key. The
+
+Magician is obviously the On-looker, and he corresponds to the 'superior nature'. The four subtle principles mentioned in the sixth section are also shown in the symbolism of this Key, as the implements on the table. The Wand is the element of FIRE. The Cup stands for the element of WATER. The Sword is a symbol of AIR. The Coin or Pentacle represents the element of EARTH. Note well that the text says 'the wise conceal' the true 'principles' under the names of the elements of ancient physics.
 ## Gimel
 
 1.
@@ -508,7 +537,16 @@ Who would gain this victory;
 But these stall be as kings and princes in this world,
 And even as gods in the world to come.
 
+### Comment
 
+1.
+On the Tree of Life the path of the letter GIMEL joins KETHER to TIPHARETH. But in the meditation GIMEL is referred correctly to CHOKMAH, the second Sephirah, because the letter-name, GIMEL, G M L, adds up to 73 and this is the value of the noun *Chokmah*, ChKMH, "wisdom". There are even profounder reasons for the identification of GIMEL with CHOKMAH, which cannot be included in this brief commentary.
+
+2.
+The quotation is from the *Emerald Tablet*, supposed to have been written by Hermes Trismegistus, and is one of the evidences that our author is one of the later Qabalists. In the Qabalah, the direction *Below* is attributed to GIMEL, and *Above* to BETH. Philosophically they refer to the superior and inferior natures of the one Life, as described in the meditations. The doctrine here is so closely allied to that of the *Bhagavad-Gita* as to suggest that our author may have met one of the wandering Hindu philosophers.
+
+4.
+Compare the words of this paragraph with the symbols of Key 2, the High Priestess. The phrase, 'whose purity naught can defile', means that no matter how many the forms developed from it, the virgin substance is itself unchanged. Like water, which holds matter in suspension or solution, this substance remains ever itself. Here is one key to the alchemical mystery of the First Matter. Here, too, one may find a clue to the inner significance of the Virgin-myths of all religions.
 ## Daleth
 
 1.
@@ -658,7 +696,34 @@ And if thou honourest me, the Giver of Life,
 Then shalt thou triumph at the last,
 Even over death.
 
+### Comment
 
+I DALETH is the sign of the combined action of KETHER and CHOKMAH, or 1 and 2, expressed in 3. Thus the ancient Hebrew character for DALETH was a triangle, although the value of the letter is 4. The values of the letters apparently conflict with the numbers of the Sephiroth and with those of the Tarot Keys to which the letters are assigned; but 1 in the alphabet is the original ONE without a second. In our numerals this Absolute Unity is expressed by the sign 0. Our figure 1 stands for the first emanation, which implies the duad and also the triad.
+
+KETHER, 1, is BETH, the HOUSE of *En Soph Aur*, and BETH is 2 in the alphabet; but BETH is also assigned to the Magician, or 1, which is the first of the Tarot sequence, because 0, the Fool, symbol of pure Spirit and the No-number, really precedes the idea of relative unity represented by 1. Yet the No-number, or 0, also follows every number, just as the Hindus say that ether, or Akasha, intervenes between each two manifested elements. The logical place for 0 in a definite series is before 1, but it is also the reality manifested *as* 1, or as any other number.
+
+and that which may be thought of as subsisting between any two consecutive numbers. Even in common parlance this is true. If we ask, "What comes between 1 and 2?" the correct answer is, of course, "Nothing".
+
+2.
+The idea that the universe is created with the letters of the alphabet is a commonplace of Qabalistic doctrine. It is found also in Hindu teaching. (See *The Serpent Power* and *Shakti and Shakta*, by Arthur Avalon). What is meant is that the powers designated by the letters are the building-forces of the cosmos.
+
+4.
+BINAH, Understanding, is named A I M A, the Mother. In this paragraph she is called "the desirable one", or "the precious thing", because the number of the word A I M A is 52, and this is also the number of the noun Ch M D, *Khamad*, which means "something desirable, an object of delight".
+
+The Sephirah BINAH is "both Father and Mother" because:
+
+The word A I M A is formed from another noun, A M A, signifying "the dark, sterile Mother", by the interpolation of the letter YOD, I, between the first and second letters of A M A. YOD is called the paternal letter, not only because its name, the Hand, is a euphemism for the phallus, but also because it is the characteristic letter of the Sephirah CHOKMAH, in Qabalistic philosophy, and CHOKMAH is named AB, the Father.
+
+A I M A is the number 52, and this is the value of the particular Divine Name associated with Fatherhood, when the Name is "written in its plentitude"; that is, with the full letter-names instead of the single characters, thus: IVD HH VV HH. This also explains the meaning of the line, "In her is concealed the plentitude of Tetragrammaton", for Tetragrammaton is the Qabalistic designation of *the* four-lettered Divine Name, **IHVH**.
+
+'Door of perplexity' refers to the letter-name DALETH, signifying 'Door'. Perplexity, because to DALETH Qabalists attribute the pair of opposites, Wisdom and Folly. It is said that the Son is hidden in her because the value of the noun B N, *Ben*, Son, is 52, the same as the number of AIMA. And, again, since DALETH is here identified with BINAH, the text refers also to the Qabalistic doctrine that in BINAH are concealed both the Father and the Son, because BINAH is spelt B I N H, so that this noun contains YOD, I, the letter of the Father, HEH, H, the letter of the Mother, and B N, *Ben*, the name of the Son.
+
+6.
+Adding the digits of 434 gives us 11. In the Qabalah the number 22 represents the whole circle of creation because it is the number of letters in the alphabet. Thus the *Book of Formation* says: 'Twenty-two basal letters: He designed them, He formed them, He purified them, He weighed them, and He exchanged them, each one with all: He formed by means of them the whole creation and everything that should be created (subsequently).'—*Book of Formation*, 1 : 2, Stenring's translation. Hence D L Th, 434, is held by our author to be a symbol of division, just as a door divides what is outside a house from what is within, because 434 digits to 11, the half of 22.
+
+The letter-name, D L Th, is concealed in the saying, 'the Lord is a man of war', because the Hebrew for 'Man of War', used in Exodus 15 : 3, is *Ish milkhamah*, A I Sh M L Ch M H, which has the value 434, the same as the letter-name.
+
+ATZILUTH is the highest of the four Qabalistic 'worlds'. It is the Archetypal World, practically the same as Plato's World of Ideas. Below it is BRIAH, the Creative World, or world of mental patterns. Below BRIAH is YETZIRAH, the World of Formation, or plane of invisible forces. The fourth, and lowest, plane is ASSIAH, the Material World, or world of action and things.
 ## Heh
 
 1.
@@ -898,7 +963,36 @@ Laying his hand on anything soever,
 Verily, in *this* shalt thou find Him,
 If *thou* hast eyes to see.'
 
+### Comment
 
+The first two paragraphs of this meditation state the fundamental premise upon which is based the Qabalistic practice of meditation. The third paragraph establishes the correspondence between HEH, the Window, and DALETH, the Door, as being of the same nature as that between CHESED, Mercy, and BINAH, Understanding. The fourth paragraph is an elaboration of the Qabalistic attribution of the sense of Sight to the letter HEH.
+
+In this paragraph are two examples of Gematria, both in the phrase, 'my way soareth high'. In Hebrew, *Dawaw*, D A H, means 'to fly, to soar', and *Gawiah*, G B H, means 'high' or 'soaring'. The numeral value of each word is 10, which is also the value of the letter-name HEH, H H.
+
+Another example of Gematria comes in a later phrase of paragraph 5, for 'hidden in my bosom' is evidently based on the numeral identity between *Chob*, Ch B, 'hiding-place, bosom', and the letter-name HEH, H H.
+
+6.
+"HEH concealeth the Word". The value of the letter-name is 10, which reduces to 1, the number of ALEPH, and ALEPH stands for the Creative Word (the Divine Name, IHVH) which calls all things into being.
+
+The phrase "I utter myself by seeing", based on the attribution of Sight to HEH, means that the universe is called into manifestation by the self-contemplation of Spirit.
+
+"A mist and a vapor". The Hebrew noun Ade, A D, has the numeral value 5, the same as the single letter HEH, and means "fog, mist".
+
+9.
+HEH is called "the Mother wherewith creation took place", because H is the second letter of the Tetragrammaton, IHVH, and this second letter is attributed to BINAH, which is AIMA, the Mother. HEH conceals YOD, because the letter-name HEH, H H, has the value 10, the number of the letter YOD.
+
+Ten is concealed in Four, the number of the Sephirah CHESED, because 4 implies the pre-existence of 1, 2 and 3 so that it may be taken as representing 1 plus 2 plus 3 plus 4, or 10. Here the Qabalah agrees with Pythagorean number occultism. When CHESED is considered to be the number 4, the "riches of the Kingdom He concealed therein", because 10 is the number of the Sephirah MALKUTH, the Kingdom.
+
+10.
+The phrase, "to yield fruit", which sums up this paragraph, is another example of Gematria. The Hebrew is Awbab, ABB, "to blossom, to bear fruit", and the numeral value of this word is 5, the same as that of the letter H.
+
+11.
+"Who turn their faces to the East", and what follows, refers to the attribution of the direction East to the letter DALETH, which precedes HEH in the alphabet.
+
+12.
+'Eternal Fugitive' is from the proper name *Agee*, A G A, 'fugitive', probably derived from the Arabic. Its numeral value is 5, the same as the letter H.
+
+'Food', in Hebrew is *Bag*, B G, a word derived from the Persian. Its numeral value also is 5.
 ## Vav
 
 1.
@@ -1067,7 +1161,12 @@ Time ceaseth for those who come to me.
 The quest will be forgotten
 When thou hast reached the Goal.
 
+### Comment
 
+Up to paragraph 4, the text requires little explanation. Readers of the works of Jacob Boehme will see a close correspondence between his doctrine and that of paragraph 3. In paragraph 4, the phrase 'A hunger, and a desire, and a longing', is based upon the verb *Avah*, A V H, 'to wish for', which has the numeral value 12, equivalent to that of the letter-name VAV, V V.
+
+5.
+'A property of sharpness' corresponds to the adjective *Khad*, Ch D, 'sharp'. This adds up to 12 also. The idea of joining together the parts of the universe may be based on the noun *Gehbeh*, G B A, 'a reservoir', from a root signifying 'to gather, to collect'. The value of G B A is 6, the same as V.
 ## Zain
 
 1.
@@ -1178,7 +1277,31 @@ Is the breath of my angel, Raphael,
 He who rightly apportioneth my Word,
 And ruleth as lord in the sign of the Twins.
 
+### Comment
 
+1.
+"The sword which is understanding". The letter-name, ZAIN, means "sword". The numeral value of Z I N is 67, the same as that of B I N H, BINAH, Understanding.
+
+2.
+"The beginning of all things is division". The English Bible says, "In the beginning God created", but a literal rendering of the verb *Baraw*, B R A, is "to cut out, to separate, to select".
+
+3.
+The Mother is AIMA or BINAH. To this Sephirah the Qabalah assigns the Divine Name *Elohim*, A L H I M, and it is said also to be the seat of those cosmic powers named *Aralim*, A R A L I M, "Thrones". Qabalistically, the Thrones are Twelve because A R A L I M adds up to 282, and the digits of this number reduce to 12. These are the Thrones of the Breath of Lives because 282, the number of *Aralim*, is also the number of *Ruach Chaim*, R V Ch C h I I M, "Breath of Lives".
+
+"In whose name are hid the names of the Father and the Son" refers to the word BINAH, B I N H, composed of the letters forming the Divine Name *Jah*, I H, which is referred to CHOKMAH, also called the Father, combined with the letters forming the name *Ben*, B N, referred to TIPHARETH, also called the Son. As it is written: 'The Mother concealeth the power of the Father, and manifested that power in the Son.' This is true on all planes.
+
+4.
+The letter-name ZAIN, Z I N, begins with Z, the Sword, has I, the paternal YOD for its middle letter, and ends with N, the value of which, 50, refers to the Fifty Gates of BINAH, the Mother.
+
+The Elohim are traditionally Seven, thus corresponding to the number of Z. The Lights of Emanation (Sephiroth) are Ten, corresponding to the numeration of I. The Gates of Understanding are Fifty, corresponding to the numeration of the letter NUN, N.
+
+5.
+The path of the Disposing Intelligence, attributed to ZAIN, begins in BINAH, the Mother, and ends in TIPHARETH, the Son.
+
+6.
+'Great Sea' is a name sometimes applied to BINAH, and BINAH is also *Shabbathai*, Sh B Th A I, the Sphere of Saturn. Saturn, in alchemy, is Lead. Alchemical Lead is the secret abode of FIRE, because BINAH, although this Sephirah is called the Root of Water, by practical Qabalists, nevertheless conceals in her depths the active, fiery power of CHOKMAH, the Root of Fire, just as the name AIMA contains the paternal I, and as B I N H is formed from *Jah*, I H, a name of the Father, and *Ben*, B N, a name of the Son.
+
+The 'Airy Spirit' of the path of ZAIN is a reference to the airy quality of the zodiacal sign Gemini, whose ruler, according to the Qabalah, is Raphael, angel of the planet Mercury.
 ## Cheth
 
 1.
@@ -1282,7 +1405,13 @@ Thou shalt pass,
 Into the boundless freedom
 Of my divine perfection.
 
+### Comment
 
+1.
+The Limitless Light is *En Soph Aur*, which is to us as darkness because it transcends our earthly vision. It is the Divine Darkness concerning which so much is said in all mystical literature. It was, for the Egyptians, indicated by their declaration, "Osiris is a black god." It is also the terrible darkness of the Hindu goddess, Kali.
+
+2.
+*Khattawath*, Ch T A Th, a Hebrew noun meaning both "sin" and "punishment", corresponds to the letter-name CHETH, Ch I Th, because both add up to 418. The derivation of Ch T A Th is from a verb meaning "to miss the target".
 ## Teth
 
 1.
@@ -1356,7 +1485,29 @@ And he who knoweth this shall be a Measurer of Mercy,
 And all his works shall be rooted
 In the strength of my Law.
 
+### Comment
 
+1.
+The ancient form of the letter TETH was a crude picture of a Tally, in the form of a circle enclosing a cross.
+
+*Mispawr*, M S P R, 'number', *Arawfel*, O R P L, 'darkness', and *Mizraim*, M Tz R I M, the name given to Egypt by the Jews, are equivalent numerically to 380.
+
+The Uraeus, or Royal Serpent, is the characteristic symbol of Egypt. Those versed in Egyptian wisdom will know how truly it may be said that the secret wisdom of that land is 'hid in number'. In Egypt Pythagoras learned the great mathematical principles embodied in his system. The same truths are summed up in the Great Pyramid.
+
+2.
+*Nachash*, N Ch Sh, the name of the serpent of temptation, is equivalent by number, 358, to *Messiach*, M Sh I Ch, the Anointed One, or Redeemer.
+
+'The serpent coiled around the Tau' refers to the ancient form of the letter TETH, a circle (suggesting the serpent holding its tail in its mouth) enclosing a cross, which was the ancient form of the letter TAV (or TAU).
+
+A circle enclosing a cross is a mathematical symbol of the Name of Names, IHVH, because every circle corresponds numerically to the number 22, and every cross to the number 4. Thus the circle enclosing the cross represents 22 plus 4, or 26, the value of IHVH, the Unutterable Name.
+
+The cross, as the letter TAV, stands for the number assigned to TAV, 400. This number represents the total manifestation of the Ten Sephiroth in the four Qabalistic worlds, because each Sephirah is regarded as being itself tenfold, so that the numerical formula for complete manifestation is 10 x 10 x 4, or 400. Hence the Cross or TAV is a symbol of the Tree of Divine Perfection; and in the ancient form of TETH the circle surrounding the cross is a symbol of the 'power of the letters', because the total number of Hebrew letters is 22, and 22 is the characteristic number of any circle.
+
+Arithmetic is the basis of all practical occultism. A knowledge of the esoteric properties and uses of number is indispensable to every seeker for liberation.
+
+'The coiled fiery power' is the Astral Light, symbolized by a coiled serpent. It is also the Kundalini of the Yogis, and much concerning it will be found in the writings of Madame Blavatsky, who calls it Fohat, and says outright that the letter TETH is a symbol for Fohat. See also Arthur Avalon's *Serpent Power* and *Shakti and Shakta*.
+
+The 'lamps' are the 'interior stars' or 'chakras'. The 'oil' is the nerve-force (a modification of Fohat or Kundalini). It is made to energize the 'lamps' by means of exercises in which counting is essential, because they include rhythmic breathing, and rhythmic intonation of Divine Names, etc. In Hebrew, *Shemen Le-Mawaur*, Sh M N L M A V R, 'oil for lighting', is the number 667, and this is the number of *Sod Ha-Pehooluth*, S V D H P O V L V Th, 'secret of all spiritual activities', the name of the path of Wisdom corresponding to TETH.
 ## Yod
 
 1.
@@ -1449,7 +1600,25 @@ For tenfold is my self-utterance,
 And therefore is it written of the Lights of Emanation,
 "Ten, and not eleven, ten and not nine."
 
+### Comment
 
+1.
+The letter-name YOD means 'Hand'. The ancient pictographic form of this letter was a representation of the extended forefinger, a distinctly phallic emblem. The same idea of masculinity is applied to this letter in Qabalistic literature. For example, as the first letter of the Tetragrammaton, IHVH, YOD is called the 'paternal' letter, and is assigned to CHOKMAH, which is named AB, the Father. This idea is elaborated in the meditation, paragraphs 1 to 3.
+
+4.
+'Fluid darkness' or 'ink' is *Dehyo*, DIV, in Hebrew. The letters of this word are the same as those of IVD, YOD, and the number, 20, is of course the same.
+
+The phrase 'it was' is *Hayah*, HIH, in Hebrew, having also the numeral value 20.
+
+'Vision of the prophet' is *Khawzaw*, ChZH, 'to have a vision of', and the active participle of this verb is used as the noun *Khozeh*, ChZH, 'prophet, seer', as in 2 Samuel, 24 : 11, and 2 Chronicles, 9 : 29.
+
+5.
+This paragraph refers to the 20th path of Wisdom, joining CHESED and TIPHARETH. It is named 'Intelligence of Will'.
+
+6.
+The 'Ten Ineffable' are the unmanifested Sephiroth, or the potentialities of the Limitless Light, subsisting in eternity, which become the Sephiroth when a cycle of manifestation begins. YOD is both Ten and Twenty because the numeral value of the single letter I is 10, and that of the letter-name I V D is 20. The Ten Ineffable Sephiroth subsist eternally, but the Manifested Sephiroth come and go, as cycle succeeds cycle in the cosmic out-breathing and in-breathing. During a cycle of expression, therefore, when the Sephiroth are both unmanifest and manifest, they are represented by the number 20.
+
+All the forces represented by the Ten Lights of Emanation are included in the Seven Spirits of God, or Elohim. The number Seven includes the number Ten, because the theosophic extension of 7 is 28, which digits to 10. The Heptad below the Supernal Triad consists of the Sephiroth from CHESED to MALKUTH inclusive, and this Heptad begins and ends in 10, because the extension of 4, the number of CHESED, is 10, and the number of MALKUTH is also 10. MALKUTH is sometimes called *Kallah*, K L H, the Bride. Hence we read: 'The Heptad which is below the Supernal Triad completeth itself in the Kingdom of the Bride.'
 ## Kaph
 
 1.
@@ -1532,7 +1701,31 @@ Shall know me in truth as the Father of Mercy
 Whose chariot in the heavens
 Is the Great Benefactor, Tsedek.
 
+### Comment
 
+1.
+KAPH means "palm of the hand", and the old pictograph represented a cupped hand, held out as if to receive something about to be placed therein. The idea of grasp is thus combined with that of receptivity. Control and comprehension are related ideas.
+
+The letter-name KAPH, K P, has the value 100, and this is the numeration of M Ch I T B A L, "mitigation of one by the other".
+
+2.
+"Vases" is the English for *Keliim*, K L I M, which has the numeration 100, equivalent to that of KAPH, K P.
+
+3.
+"All semblance of exertion". This is based upon the noun *Mawdohn*, M D V N, "contest, quarrel, exertion", which has also the numeral value 100.
+
+The final five lines of this paragraph elaborate the significance of the titles of the 21st path of Wisdom. It is called "The Conciliating Intelligence", "The Rewarding Intelligence of Those who Seek", and "The Intelligence of Desirous Quest".
+
+4.
+The second section of this paragraph is based on the fact that the value of the letter-name KAPH, 100, is also the value of the single letter QOPH, to which Qabalists assign the function of Sleep. When the outline of these meditations was first received, the following comment was made:
+
+"The vague hints of the ancient sage have to do with the process through which the aspiration of the patient seeker for occult wisdom is rewarded. It is in sleep that knowledge gained in the subtler vehicles is made a part of the corporeal intelligence, by being impressed upon the cells of the brain while sleep inhibits sensation. It is in this way that one seeking the solution of a problem so often finds the answer on waking. It is not unconscious cerebration in the sense in which that term is generally employed, although of course there is brain-activity; but that activity is the recording of impressions from the higher planes."
+
+5.
+"Days", "seas", and "times" are all represented by the one Hebrew noun, Yawmim, I M I M, which has the value 100.
+
+6.
+This paragraph refers to the attribution of the planet Jupiter to KAPH. The Hebrew name for this planet is Tsedek, Tz D Q, signifying "righteousness, equity, or prosperity".
 ## Lamed
 
 1.
@@ -1592,7 +1785,18 @@ Doing all things well in thee.
 Lo, I guide thee all the way.
 Rest thou in me.
 
+### Comment
 
+1.
+The letter-name LAMED means "ox-goad". The Ox is ALEPH, called "the Great Ox of the Breath of Life", because *Ruach*, R V Ch, the Life-Breath, is assigned to ALEPH.
+
+The second section of this part of the meditation combines the notion of balance suggested by the sign Libra, the Scales, with that of guidance, suggested by the letter-name.
+
+2.
+"The wise find me thus concealed in LAMED" because *Lamed*, L M D, adds up to 74, and this is the number of the noun *Diin*, D I I N, "leader, chief, judge".
+
+3.
+"The long circuit of existence" is probably based upon the Gematria of *Sabeeb*, S B I B, "a circuit, the place round about, environs". The number of S B I B is 74, the same as L M D.
 ## Mem
 
 1.
@@ -1672,7 +1876,38 @@ Then shall the glory of my Self,
 Which is thy true Self,
 Be mirrored unto thee.
 
+### Comment
 
+1.
+The letter-name MEM, M I M, means Water. In the *Book of Formation* the element of WATER is assigned to this letter, and Qabalists say, 'Mem is mute, like water.' The letter-name, M I M, adds to 90, which is the value of *Dawmam*, D V M M, 'still, silent, dumb'. The meditation opens with an explicit statement of the Qabalistic doctrine that the Life-power's self-reflection is the cause of all manifestation.
+
+The 23rd path of Wisdom, assigned to the letter MEM, is called 'The Stable Intelligence'. This section of the paragraph develops the ideas behind that designation. Qabalists say that the Stable Intelligence 'is the source of consistency in all the Sephiroth.'
+
+2.
+The number 90 reveals the operation of YESOD through the Ten Lights of Emanation because 90 is 9 x 10. The number 9 is that of YESOD, and 10 here signifies the Ten Sephiroth.
+
+YESOD means 'Foundation, or Basis'. Qabalists assign to this Sephirah the reproductive organs of the Cosmic
+
+Man. YESOD is thus regarded as the focus of the self-perpetuating potencies of the Life-power, and esoterically WATER is the seed-principle out of which all forms are developed.
+
+To commemorate this fourfold manifestation of Life, the Divine Names in many languages are four-lettered. This is particularly true in Hebrew, and of the Divine Names in that language the most important is the Tetragrammaton, IHVH. Each letter of this Name represents one of the four aspects of Life called 'elements'. I stands for FIRE; the first H for WATER; the V for AIR; and the second H for EARTH.
+
+Since the numeral value of the character MEM is 40, it represents 4 x 10, and this is an arithmetical symbol of what the text calls 'the fourfold elemental division of my nature, working through the Ten Sephiroth.'
+
+The Great Mother, AIMA, is also the Great Sea which is the Root of all the waters. That Sea is BINAH, the Bringerforth and Nourisher.
+
+Here is the advice given by all mystical teachers. When the Great Sea is perceived as something pertaining to our inner life, we may learn to dive deep into it, thus losing the sense of personal separateness in our understanding of the perfect Unity of the All. When we have lost the false, illusive, personal 'self', we find the true, eternal Self, and then we are one with Him who is our Lord and King.
+
+'The restoration of the King unto his throne' is an echo from the *Book of Formation*:
+
+'Ten are the numbers out of nothing, and not the number nine, ten and not eleven. Comprehend this great wisdom, understand this knowledge, inquire into it and ponder on it, render it evident and lead the Creator back to His throne again.'—Kalisch's translation, 1 : 3.
+
+6.
+This refers to the fact that the 23rd path begins in the Radical Intelligence of GEBURAH ("Roots of Being"), and completes itself in HOD, Splendor.
+
+The last sentence is a key to the practice of meditation. It may be compared with the Yoga teaching as to the various means for establishing a state of quiet in what is described as "the lake of *Chitta*, the mind-stuff". Hindu teachers hold that when the *Chitta* is perfectly calm, it mirrors the light of the Spiritual Sun. This is just what is declared in our text. Compare it carefully with the symbolism of the 12th Tarot Key.
+
+Here it may be noted that there is a connection between the letter-name M I M, which adds to 90, and the letter TZADDI, which, as a single character, has the same value. To TZADDI Qabalists assign the function of Meditation. Thus there becomes evident an underlying relation between the WATER which is "the mute, dark mirror", and the mental process whereby the wise attain to conscious union with the Life-power.
 ## Nun
 
 1.
@@ -1757,7 +1992,52 @@ Is mine own changeless Life,
 Which bindeth together the unending series
 Of little lives and deaths.
 
+### Comment
 
+1.
+The quotation, "He had his dwelling in the Great Sea, and was a fish therein", is from the *Zohar*, or *Book of Splendor*. The Great Sea, of course, is BINAH.
+
+2.
+The prophet is Jonah, I V N H, signifying "a dove". Note well that the dove is the bird of Venus, and that the "great fish" mentioned in Jonah 1 : 17 is *Dag gedul*, D G G D V L, for which the numeral value is 50, the same as that of the letter NUN. Furthermore, the zodiacal sign Scorpio, relating to reproduction, and ruled by Mars, is attributed to NUN. When the "great fish" swallows the "dove" the forces of Venus and Mars are conjoined. Note also that Nineveh, the capital of Assyria, where Jonah was sent, is spelt N I N V H, so that it combines the letters in N V N, NUN, and I H, *Jah*.
+
+"Pains and sorrows" in Hebrew is *Khobli*, Ch B L I, and this word adds up to 50, the value of NUN. SO also the noun translated "sea" is *Yawm*, I M, and this is 50, too. "The Fish and the Sea are one" because of this Gematria, and the Sea is BINAH, or AIMA, the Mother. Qabalistically, also, the Fish and the Son are One, because the Fish is one with the Sea which is the Mother, and because the Mother, AIMA, is by numeration the same as *Ben*, B N, the Son.
+
+3.
+*Kole*, K L, 'all, every', adds up to 50, the number of the letter N. This is referred to in the passage beginning 'That One is the All'.
+
+'Shut up within the semblance of the Many' is based upon the verb *Awtam*, A T M, 'to close, to contract, to shut up'. The numeration is again 50.
+
+4.
+'To thee' is *Le-khah*, L K. 'What?' and 'Which?' are *Mi*, M I. Both L K and M I have the value 50.
+
+'White Brilliance' is a technical name for KETHER, the Crown. The reference to it here is derived from *Tsate-khakh*, Tz Ch Ch, 'to glare, to be bright, to be dazzling white'. This word adds up to 106, the value of the letter-name N V N.
+
+5.
+The Book of Exodus says that Joshua was the son of Nun. His father's name signifies 'perpetuity'. Joshua means 'the nature of Reality is to liberate'. The name Jesus is a variant of Joshua.
+
+Concerning the doctrine in the succeeding portion of this paragraph, the following comment was given at the time the outline of the text was first received:
+
+'The attribution of Motion to Nun becomes more intelligible when it is remembered that the older philosophers used the term Motion to designate what is now more commonly called Change. Thus Aristotle enumerates four kinds of Motion: first, change of position; second, generation and dissolution; third, alteration; and fourth, increase and decrease.
+
+'Nun refers most particularly to the phenomena of generation, as you will see by our remarks on the significance of Scorpio. Outwardly, generation presents the appearance of dissolution, a fact noted by many philosophers, and pithily expressed by St. Paul's remark, 'That which thou sowest is not quickened, except it die.' '
+
+The remarks on Scorpio were, in part, as follows:
+
+'The Imaginative Intelligence attributed to the letter Nun is a specialization of the image-making faculty inherent in the universal consciousness. As manifested in human mentation, it is the force by means of which man transforms his environment, and hence it is essentially destructive in its effects upon existing conditions, for it destroys the old to build the new.
+
+'In this connection observe that Scorpio is the house of Mars by night, in contrast to Aries which Mars rules by day. In the Tarot, Nun corresponds to DEATH, while Heh, the letter corresponding to Aries, is attributed to THE EMPEROR. DEATH is the ruler of form, and the world of formation, as THE EMPEROR is the ruler of the creative world. That is to say, all forms must change, and what changes them is imagination.
+
+'The universal imagination performs the greater transformations, but the imagination of man is no different, save in degree. In fact, the imagination of man is the universal imagination at work in a particular localized center. The same power works through all animate and inanimate creation (if we may say that there is any such thing as inanimate matter). Its essential nature is shown by the root-meaning of the verb *Nun*, N V N—to sprout, to propagate by sprouting. The same idea is to be found in the familiar parable of the leaven. Leaven is yeast, a one-celled plant that propagates by budding, or emanation. The universal imagination effects all its transformations by a like process, for every new form is, as it were, sprouted from something pre-existing.
+
+'The Imaginative Intelligence is, of course, especially active in the reproductive centers of the body, and hence NUN-, through its correspondence to Scorpio, is attributed to those centers. Here be careful to observe that the reproductive organism includes certain ganglia of the sympathetic nervous system. These are the Hindu chakras at the base of the spine, at the navel (or rather just a little below it), and at the solar plexus. It is by imagination that the serpent-force in these centers is raised so that the poisonous Scorpion becomes the Eagle of aspiration. Psychologists know that in primitive minds the chief outlet of imagination is erotic, and this erotic tendency is never eliminated, even in the highest aspirations. All that is changed is the mode of expression, although the higher forms bear little outward resemblance to the crudities of gross imagination, so that we do not always find it easy to recognize the fundamental identity.
+
+'You must wholly alter your conception of sex in order to comprehend the Ancient Wisdom. The story of the Fall should be sufficient to afford a clue. Not until after the Fall were Adam and Eve ashamed, and all our false sex modesty is the fruit of our remembrance of sex evils. We cannot too strongly insist that sex is sacred, and that it must be so regarded, for all the great symbols of the Ancient Wisdom have a decidedly phallic aspect.
+
+'The error into which seekers for truth so often fall as soon as they realize this fact is in supposing that the way of regeneration is somehow related to the reproductive function of the sex organism. Nothing could be farther from the truth. It is the interior nervous organism, not the external organs, that is always meant in phallic symbolism, and the force that works through these interior centers is the Great Magical Agent, the divine serpent-fire.
+
+'We have the almost superhuman task of creating a new set of associations with the word 'sex', because after all, certain aspects of the truth must be worked out to practical application through exercises which will lead only to most terrible results unless the minds of those who undertake them are first completely purged. False modesty must be replaced by a high and reverential attitude of respect for the centers where the fire of life is most active in the human body.'
+
+The Hebrew for 'thread' is *Kav*, QV, which adds to 106, the value of the letter-name, N V N.
 ## Samekh
 
 1.
@@ -1822,7 +2102,28 @@ And all thy habitations shall be blest
 By the White Brilliance
 Which descendeth from the Crown.
 
+### Comment
 
+2.
+In Hebrew, "tried by fire" is *Bawkhan*, B Ch N, which adds to 60, the value of the letter SAMEKH. Furthermore, the sign Sagittarius, attributed to SAMEKH, belongs to the fiery triplicity.
+
+Again B Ch N may be read *Be-khane*, by taking the initial B as a preposition signifying "in", and then it will be translated "in Grace". There is also a yet deep significance in this reading, because *Khane*, Ch N is an abbreviation for the words *Chokmah Nesethrah*, Ch K M H N S Th R H, The Secret Wisdom, i. e., the Qabalah. Hence we may assume that the mystical trial by fire has something to do with initiation into the Qabalah.
+
+3.
+The serpent of temptation is *Nachash*, N Ch Sh, whose name is the number 358, the number of the name Messiah. M Sh I Ch.
+
+4.
+"The time of the decree" is *Moade*, M V O D, and the number of this word is 120, the same as that of the lettername, SAMEKH, S M K. 120 is also the symbolic Hebrew number of the perfected life of man. 'His days shall be an hundred and twenty years'; Genesis 6 : 3. This number is also prominent in Rosicrucianism, as the result of the continuous multiplication of the first five digits: 1 x 2 x 3 x 4 x 5.
+
+'Strengthening', in the next section of the meditation, is *Mawkheen*, M K I N, which also adds to 120.
+
+'The plenitude of my Great Name in the abode of Wisdom' is a typical Qabalistic passage. The Divine Name attributed to CHOKMAH, Wisdom, is *Jah*, I H, and its numeral value is 15. The extension of 15, or the sum of the numbers from 1 to 15, is 120, so that in M K I N, 'strengthening' or 'renewal' of powers, is manifested the plenitude of the numeral value of *Jah*, I H. In this connection, also, note that *Jah*, I H, is directly connected with *Chaiah*, Ch I H, the Life-force, and with the cosmic cycles of the zodiac, since CHOKMAH is said to be the seat of the Life-force and the Sphere of the Zodiac.
+
+Qabalistic alchemy assigns the metal gold to TIPHARETH, Beauty, and this same Sephirah is the Heavenly Son, *Ben*, B N. The Hebrew for 'sublimity' or 'glory' is *Gawawn*, G A V N, which adds up to 60, the value of the letter SAMEKH. The same number is represented by the emphatic *Hinnay*, H N H, 'behold'.
+
+'Vision' is *Makhazeh*, M Ch Z H, which adds up to 60, the number of the letter SAMEKH. This paragraph also contains another typical Qabalism in the phrase, 'the fullness of that blessed vision'. Since the letter SAMKEH and *Makhazeh* are identical in numeration, the 'fullness of vision' may be said to refer to the letter-name SAMEKH written in its plenitude, thus: S M K M I M K P. So written, the values of the letters add to 310, which is the number of *Kephir*, K P I R, 'a young lion', and of *Dush*, D V Sh, 'to trample on'.
+
+From the same spelling of S M K in its plenitude are derived the words *Yesh*, I Sh, 'is' or 'are'; *Chabash*, Ch B Sh, 'to bridle, to rule, to govern'; and *Medorin*, M D V R I N, 'habitations'. All these words correspond to the number 310.
 ## Ayin
 
 1.
@@ -1924,7 +2225,22 @@ For then shall that enlightened one see
 That the demon is but the shadow
 Of the Lord.
 
+### Comment
 
+4.
+"The darkness is the fountain of existence" is based on a secondary meaning of AYIN, O I N, which is "well, fountain, or spring".
+
+5.
+"Five-score and thirty", 130, is the numeration of AYIN, O I N, which is here called "the wellspring of outward appearance" because AYIN, O I N, means also "look, face, appearance, color".
+
+130 is 13 multiplied by 10. 13 is a Qabalistic number signifying Unity, because *Achad*, "one", is written with letters whose total value is 13. The number 10 may always be taken as a symbol of the Ten Sephiroth. Thus 130 Qabalistically corresponds to the statement, "The EYE is the ONE, multiplied through the Sephiroth."
+
+The two aspects spoken of in the last section of this paragraph are represented on the Tree of Life by the two opposing pillars, the Pillar of Mercy and the Pillar of Severity. The Pillar of Mercy is that of Light, and the Pillar of Severity is that of Darkness. In Hebrew the noun for "pillars" is *Ammoodi*, O M V D I, and the number of this is 130, the same as the letter-name O I N.
+
+7.
+'Who succeedeth in contemplation, as did our father Abraham' refers to the last section of the last chapter of the *Book of Formation*:
+
+'And when our father Abraham had come, he beheld this, revolved it in his mind, conceived it perfectly, made careful investigations and profound inquiries, pondered upon it, and when he had succeeded in his contemplations the Lord of the Universe appeared to him.'
 ## Peh
 
 1.
@@ -1985,7 +2301,18 @@ That by the balance of Mercy and Severity
 Is the continuance of every life,
 Yea, and of this whole universe.
 
+### Comment
 
+2.
+Here as elsewhere in these meditations our author regards the process of manifestation as being one in which the Life-power realizes itself.
+
+3.
+This paragraph refers to the 27th path of Wisdom, called the "Active or Exciting Intelligence", which joins the Sephirah NETZACH, Victory, to the Sephirah HOD, Splendor. The fourth paragraph continues the same theme.
+
+5.
+"Destruction is the foundation of existence". The letter PEH, as a single character, is the number 80, and 80 is the enumeration of YESOD, I S V D, "Foundation". On the Tree of Life the Sephirah YESOD represents the reproductive organism of the Heavenly Man. The process which begins the generation of a human or animal body is primarily a destruction. The male cell, or spermatozoon, penetrates the female cell, or ovum, and begins a process of division in the ovum.
+
+The quotation is from Deuteronomy, 8 : 3. The Authorized Version reads: ' Man doth not live by bread only, but by every word that proceedeth out of the mouth (PEH) of the Lord.' But the Authorized Version is a translation made by theologians, who interpolated the noun 'word'. It does not occur in the original, and the rendering given by our author is at once more accurate and more illuminating.
 ## Tzaddi
 
 1.
@@ -2057,7 +2384,29 @@ Herein is the secret of the pillar of establishment
 Which Solomon set before the porch of the Temple;
 And this is the royal secret of my reign.
 
+### Comment
 
+3.
+'The Hook' is the letter TZADDI, 'the Gate' is the letter DALETH, and 'the Right Hand' is the letter YOD. This paragraph of the meditation is merely a development, letter by letter, of some of the implicits of the letter-name TZADDI, Tz D I.
+
+The number of the letter-name TZADDI is 104, and the addition of the digits of this number is 5, the number of the letter HEH, which means 'a window'. The vision of reality which corrects the illusions of outer appearance results from the turning the eye of the soul within. Compare this passage with the whole meditation on the letter HEH.
+
+4.
+This paragraph refers to the 28th path of Wisdom which joins the Sephirah NETZACH to the Sephirah YESOD. This path is called the 'Natural Intelligence', and it is associated, through the letter TZADDI, with the function of meditation.
+
+At the time the outline of these meditations was first given, we also received the following comment on the fourth paragraph:
+
+'Here is one of the profoundest doctrines of Sacred Science, the doctrine that the universe owes its existence to the Creator's perpetual self-recognition. Nature is thus the result of Spirit's meditation upon the powers of its own being. The universe is thought into existence, and is maintained in existence by thought. Upon this foundation rests the whole structure of practical occultism, and from this doctrine you may understand the importance of meditation.
+
+'Whenever aspirants really meditate they are sharing in the exercise of the divine power that created everything. Thus one of the tests whereby a student may know whether or not he has really succeeded in meditation is this: Let him find out whether or not what he has been doing takes form in the production of something better than he had before he began to meditate.'
+
+Students of Tarot will be interested in this comment on the relation between TZADDI and the 17th Key, called THE STAR:
+
+'The application to the Tarot is that to the self-contemplation of Spirit the universe appears as it really is. The Divine Mother is always unveiled before her Lord. To man, except in those rare moments when he participates in the Divine Meditation, she is at best the veiled Isis, and at worst the Demon of the 15th Key, THE DEVIL.'
+
+'A great silence' in Hebrew is *Domam*, D V M M, which adds to 90, the value of the letter TZADDI.
+
+'The pillar of establishment' is *Jakin*, I K I N, which also adds to 90.
 ## Qoph
 
 1.
@@ -2113,7 +2462,28 @@ And thou dwellest with me.
 Take heed
 That thou despise not thy Lord in human form.
 
+### Comment
 
+1.
+The ancient form of the letter QOPH looks like a knot tied in a cord.
+
+AtEPH and TAV are the first and last letters of the Hebrew alphabet. This statement, 'I am ALEPH and TAV', is like that in the Apocalypse, which says of the Heavenly Man that He is Alpha and Omega.
+
+It is a commonplace of the Qabalah that the accusative particle *Eth*, A Th, formed from the first and last letters of the alphabet, implies the whole alphabet, and thus the totality of the Divine Powers.
+
+2.
+This paragraph is based on the meaning of the letter-name QOPH, Q V P, 'Back of the Head'. The 'Head which is not a Head' is a Qabalistic name for KETHER, the Crown. It is the Head, or beginning of the Ten Sephiroth. It is 'not a Head' because the concentration of the Limitless light in KETHER is itself an effect of the mysterious power inherent in *En Soph Aur*. The Vast Countenance, or Macroprosopus, is another name for KETHER. Thus what is implied here is that QOPH represents the Radiant Darkness, *En Soph Aur*, which is behind, or back of, the first Sephirah.
+
+3.
+The numeral value of the letter QOPH is 100, or 10 X 10, the Decad. multiplied by itself. The 'key to the bringing forth of form' is this:
+
+The ineffable Sephiroth hidden in *EN Soph Aur* are brought into manifestation as the Ten Sephiroth forming the Tree of Life. This is accomplished by means of the self-contemplation of the Life-power. Thus the power of the ineffable Sephiroth is, as it were, multiplied through the manifested Sephiroth, and this multiplication is represented by the number 100.
+
+4.
+The Key-word in this paragraph is the noun 'place', which, in Hebrew, is *Maqawm*, M Q V M. The number of this word is 186, the same as that of the letter-name QOPH, Q V P.
+
+5.
+This paragraph and the next refer to the 29th path of Wisdom, called 'Corporeal Intelligence', i. e., 'Consciousness of Body'. It is written of this path that it 'forms every body which is formed in all the worlds, and is the reproduction of them.'
 ## Resh
 
 1.
@@ -2159,7 +2529,22 @@ Shalt thou sing unto the Lord a new song,
 A song of rejoicing in His beautiful countenance,
 The PACE of thine own true Self.
 
+### Comment
 
+1.
+The first paragraph rehearses various names of KETHER, the Crown. These are: *Resha Ha-Orah*, R I Sh A H V V R H, the White Head; *Tath Zal*, Th Th Z L, the Profuse Giver; *Nequdah Peshut*, N Q D H P Sh V Th, the Small Point; and *Oliun*, O L I V N, the Most High. The end of the paragraph refers to the path of RESH, the 30th path of Wisdom called the "Collective Intelligence", which joins HOD, Glory or Splendor, to YESOD, Foundation.
+
+2.
+ASSIAH is the lowest of the four Qabalistic worlds. This paragraph begins with the attribution of the physical Sun to the letter RESH. It goes on to warn us that the physical Sun is not to be confounded with the Spiritual Sun.
+
+3.
+This paragraph is reminiscent of the great Egyptian symbol of the winged disk. The key-word is *Kanaphim*, K N P I M, "wings", which adds up to 200, the numeral value of the letter RESH.
+
+Compare this with the conclusion of the Rosicrucian *Fama Fraternitatis*, which ends, *Sub umbra alarum tuarum, Jehova*, "Under the shadow of thy wings, Jehovah."
+
+In the last section the key-word is the noun *Sheer*, Sh I R, 'a song'. This has the same numeral value, 510, as th. letter-name RESH, R I Sh, and is spelt with the same letters, in a different order.
+
+The word FACE, in the last line, is a direct play upon the meaning of the letter-name.
 ## Shin
 
 1.
@@ -2220,7 +2605,33 @@ Which divideth the One into the Two,
 And in its return
 Absorbeth the Two into the perfect Unity.
 
+### Comment
 
+1.
+"Circle" is used here because every circle has 360 degrees, and 360 is the value of the letter-name SHIN, ShIN. "Flame", because of the attribution of the element of Fire to the letter SHIN.
+
+Note also that the circle is the geometrical symbol of outgoing and return.
+
+2.
+The key-word in this paragraph is "fang", which is one meaning of the letter-name SHIN.
+
+3.
+This paragraph contains a repetition of the reference to the number of the letter-name, 360, as that of the degrees of a circle.
+
+4.
+This paragraph is based upon the shape of the letter, which resembles three tongues of flame rising from a fire.
+
+5.
+The key-word in this paragraph is "formation", which is *Yetzer*, ITzR, having for its number 300, the value of the character SHIN. Similarly, "atonement" is *Kafar*, KPR, "to cover, to condone, to placate, to cancel", which also adds to 300.
+
+The second section of this paragraph contains the same doctrine as that given in the meditation on ZAIN. BINAH is the Great Sea, and the Root of Waters, and CHOKMAH is the Father, and the Root of Fire.
+
+6.
+The Fire in CHOKMAH springs from the descent of the primal whirling motion which begins in KETHER, and it descends through the path of ALEPH, to which is attributed *Ruach*, R V Ch, the Life-Breath. The *Ruach Elohim* is what the text means by 'the Breath of the Mighty Ones', and *Ruach Elohim* is R V Ch A L H I M, which words add up to 300, the value of SHIN. It is on this account that SHIN is called the 'Holy Letter'. It is said to appear as a flame of separation because 'separation' is *Pirawd*, P I R V D, which also adds to 300. Note, too, that the form of the letter shows three separated flames.
+
+'The Anointed One' is *Ha-Messiah*, H M Sh I H (a variant spelling of the word ordinarily rendered M Sh I Ch). In this form it adds to 300. 'Thunders' is *Rahamim*, R O M I M, which adds to 360, the value of the letter-name Sh I N.
+
+The 'swift flash' is the descent of the Sephiroth into instantaneous manifestation, often pictured by Qabalists as a Lightning-flash, because of the words of the *Book of Formation*: 'Ten ineffable Sephiroth: their appearance is like that of a flash of lightning, their goal is infinite'. The descent of the Sephiroth seems to divide the unity of Spirit into the divisions, Manifest and Unmanifest. In Hebrew 'two' is Sh N I, *Shenay*, and pronounced as *Shani* it means 'the second'. This word is made up of the same letters as Sh I N, and has, consequently, the same numeral value. Even so the circle, which the number 360 expresses numerically, is a symbol of circumscription, and thus of division between the definite area within its circumference and the indefinite expanse outside.
 ## Tav
 
 1.
@@ -2278,7 +2689,33 @@ The treasure thou journeyest afar to find
 Is the Jewel of Eternity
 In thy heart of hearts.
 
+### Comment
 
+1.
+As the final letter of the Hebrew alphabet, TAV symbolically represents completeness, or the end of manifestation. The letter-name TAV, Th V, however, subtly conveys the idea which the meditation calls "the end which is without end". For in Hebrew the letter V is used as the conjunction "and", so that the letter-name Th V suggests "end" by Th and "continuation" by V.
+
+2.
+The doctrine of the fourfold activity of Spirit occurs again and again in the Qabalah, and is expressed in many ways. The Name of God, I H V H, is four-lettered, each letter corresponding to one of the four elements and to one of the four Qabalistic worlds. The letters of this name are represented by the four animals described in the Vision of Ezekiel: "They four had the face of a lion, of an eagle, of a man, and of an ox." These living creatures correspond to the four aspects of the Absolute. The lion corresponds to Life, to the element of Fire, to ATZILUTH, the archetypal world, to YOD in I H V H, and to the Sephirah CHOKMAH, Root of Fire. The eagle corresponds to Mind, to the element of Water, to BRIAH, the creative world, to the first HEH in I H V H, and to the Sephirah
+
+BINAH, the Root of Water. The man corresponds to the third aspect, Truth or Law, to the element of Air, to YETZIRAH, the formative world, to VAV in I H V H, and to the Sephirah TIPHARETH, attributed to Air. The ox or bull corresponds to the fourth aspect, Love, to the element of Earth, to ASSIAH, the material world, to the final HEH in I H V H, and to the Sephirah MALKUTH, attributed to Earth.
+
+According to the Qabalah, the Life-power differentiates itself into Ten Lights of Emanation, the Sephiroth, and as each Sephirah is regarded as including all the others, the total number in each world is 100, or 400 for the four worlds. Yet all 400 are included in the primal Ten, the ineffable, unmanifested Tree of Life subsistent eternally in *En Soph Aur*, the Limitless Light. The letter TAV, because its number is 400, represents the total manifestation of the Sephiroth.
+
+The 'four-and-twenty thrones of primal forces' are the 'thrones of the elders' mentioned in the first chapter of the Apocalypse, written by one who was a profound Qabalist. The number 24 is the result of the multiplication of the digits in 406 (4 x 6), the number of the letter-name Th V. The twenty-four thrones are the positive and negative manifestations of the twelve forces corresponding to the twelve signs of the zodiac.
+
+'Instruction' or 'erudition' is the meaning of the Hebrew *Maskil*, M Sh K I L. This word is a title of the Sephirah YESOD, Foundation. Its numeration is 400, that of the character TAV.
+
+The Source of all things is likewise the goal of all endeavors, and that Source is the true Self of every seeker for Light. Therefore the author says: 'Behold, in Th V, TAV, is it concealed, for Th V is A Th H, *Atah*, also.' That is, Th V is 406, the number of A Th H, which means 'Thou'.
+
+This last is used as a personal pronoun and as a Divine Name. Its first letter, A, begins the alphabet, and is therefore a sign of Beginning. Its second letter, Th, as the last of the alphabet, is the sign of the End. The final letter, H, means 'window', and to it is attributed the faculty of Sight.
+
+So ends the *Book of Tokens*, with the affirmation which is made, in one way or another, by all the sages, of whatever race, time, or creed. The innermost Self of Man is the Jewel of Eternity, or the Magical Stone of the Wise, which gives its possessor the priceless boon of immortality.
+
+He who truly knows the Self, who has freed himself from the bonds of delusion which make the ignorant mistakenly apply the term 'self' to the limited, transitory personality, such an one has found the goal. They who find it are sometimes called Lords of the Secret of Saturn, for they understand why Saturn is said to have devoured his children.
+
+That many readers of the *Book of Tokens* may in this life come to know that Secret, so that by reason of their transformed consciousness they may truly be 'more than men', truly numbered among the 'immortals', is the earnest prayer of those who are responsible for the publication of this volume.
+
+*May the White Brilliance Of the Supreme Crown Descend upon you. And may you rest in peace Beneath the shadow of the wings of that Mighty One, Whose Name no man may utter.*
 ## Malkuth
 
 I AM the Clarion call of the Beyond,

@@ -12,12 +12,18 @@ import { useHighlightQuery } from '@/components/useHighlightQuery'
 export function HighlightMatches({
   children,
   dep,
+  className,
 }: {
   children: React.ReactNode
   /** Re-run the highlight pass when this changes (e.g. the chapter slug). */
   dep?: unknown
+  className?: string
 }) {
   const ref = useRef<HTMLDivElement>(null)
   useHighlightQuery(ref, dep)
-  return <div ref={ref}>{children}</div>
+  return (
+    <div ref={ref} className={className}>
+      {children}
+    </div>
+  )
 }
