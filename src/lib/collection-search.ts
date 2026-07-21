@@ -1,38 +1,41 @@
-// Recordings-scoped full-text search over a prebuilt inverted index.
+// Generic full-text search over a prebuilt inverted index — the shared
+// engine behind every section-scoped search (recordings transcripts, the
+// Book of Tokens meditations, …).
 //
-// scripts/gen-recordings-search.ts tokenizes every transcript with the SAME
-// tokenize() below and writes public/data/recordings-search.json
-// ({ tracks, words }); the recordings search dialog fetches it on first open
-// and queries it here. Keeping tokenizer + query logic in this one module is
-// what guarantees the index and the queries can never disagree. Ported from
-// the agelesswisdom lesson search — English-only (one stopword set), and
-// results resolve to a recording rather than a lesson.
+// A generator (scripts/gen-*-search.ts, via scripts/lib/build-search-index.ts)
+// tokenizes each item's body with the SAME tokenize() below and writes a
+// static /public JSON ({ tracks, words }); a search dialog fetches it on
+// first open and queries it here. Keeping tokenizer + query logic in this one
+// module is what guarantees the index and the queries can never disagree.
 //
-// Dependency-free on purpose: imported both by the client dialog (@/lib/…)
-// and by the Node generator (relative path). Nothing browser- or Node-
-// specific runs at import time.
+// Dependency-free on purpose: imported both by the client dialog (@/lib/…) and
+// by the Node generators (relative path). Nothing browser- or Node-specific
+// runs at import time. English-only tokenizer (one stopword set) — adequate
+// while the only translated locale (de) ships English placeholder text.
 
 export interface SearchTrack {
-  slug: string
+  /** Stable identity, used as the React key. */
+  id: string
   title: string
-  grouping: string
-  /** Route href to the transcript page. */
+  /** Optional secondary line under the title (e.g. a grouping). */
+  subtitle?: string
+  /** Route href to the result page. */
   href: string
 }
 
-export interface RecordingsSearchIndex {
+export interface CollectionSearchIndex {
   tracks: SearchTrack[]
   /** word → flat pairs [trackIdx, count, trackIdx, count, …] */
   words: Record<string, number[]>
 }
 
-export interface RecordingsSearchResult {
+export interface CollectionSearchResult {
   track: SearchTrack
-  /** Total occurrences of all matched words in this transcript. */
+  /** Total occurrences of all matched words in this item. */
   count: number
 }
 
-// High-frequency words that would match nearly every transcript. Doctrinal
+// High-frequency words that would match nearly every item. Doctrinal
 // vocabulary (life, power, light, love…) stays searchable on purpose.
 const STOPWORDS = new Set(
   (
@@ -57,16 +60,16 @@ export function tokenize(text: string): string[] {
 }
 
 /**
- * Query the index: every query word must appear in a transcript for it to
- * match (AND across words); the final word also matches by prefix so results
- * appear while the user is still typing. Ranked by total occurrences — the
- * transcript that says the word most rises to the top.
+ * Query the index: every query word must appear in an item for it to match
+ * (AND across words); the final word also matches by prefix so results appear
+ * while the user is still typing. Ranked by total occurrences — the item that
+ * says the word most rises to the top.
  */
 export function searchIndex(
-  index: RecordingsSearchIndex,
+  index: CollectionSearchIndex,
   query: string,
   limit = 12,
-): RecordingsSearchResult[] {
+): CollectionSearchResult[] {
   const tokens = tokenize(query)
   if (tokens.length === 0) return []
 
@@ -90,7 +93,7 @@ export function searchIndex(
   })
 
   const [first, ...rest] = perToken
-  const results: RecordingsSearchResult[] = []
+  const results: CollectionSearchResult[] = []
   for (const [trackIdx, count] of first) {
     let total = count
     let inAll = true
@@ -108,20 +111,22 @@ export function searchIndex(
   return results.sort((a, b) => b.count - a.count).slice(0, limit)
 }
 
-// Fetch the (non-bundled) index once and cache the promise for the session.
-const INDEX_URL = '/data/recordings-search.json'
-let cache: Promise<RecordingsSearchIndex> | null = null
-export function fetchRecordingsIndex(): Promise<RecordingsSearchIndex> {
-  if (!cache) {
-    cache = fetch(INDEX_URL)
+// Fetch a (non-bundled) index once and cache the promise per URL for the
+// session, so distinct collections don't clobber each other's cache.
+const cache = new Map<string, Promise<CollectionSearchIndex>>()
+export function fetchIndex(url: string): Promise<CollectionSearchIndex> {
+  let promise = cache.get(url)
+  if (!promise) {
+    promise = fetch(url)
       .then((r) => {
-        if (!r.ok) throw new Error(`recordings search index: HTTP ${r.status}`)
-        return r.json() as Promise<RecordingsSearchIndex>
+        if (!r.ok) throw new Error(`search index ${url}: HTTP ${r.status}`)
+        return r.json() as Promise<CollectionSearchIndex>
       })
       .catch((err) => {
-        cache = null // don't cache a failure — allow retry
+        cache.delete(url) // don't cache a failure — allow retry
         throw err
       })
+    cache.set(url, promise)
   }
-  return cache
+  return promise
 }

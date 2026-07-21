@@ -1,6 +1,7 @@
 import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+import { CollectionSearch } from '@/components/CollectionSearch'
 import { DataList } from '@/components/DataList'
-import { PageHeading } from '@/components/PageHeading'
+import { PageToolbar } from '@/components/PageToolbar'
 import { getBookOfTokens } from '@/content/texts/book-of-tokens'
 import { toLocale } from '@/lib/locales'
 import { localizedTitle } from '@/lib/nav'
@@ -24,11 +25,21 @@ export default async function BookOfTokens({
   params: Promise<{ locale: string }>
 }) {
   const { locale: rawLocale } = await params
-  const { chapters } = getBookOfTokens(toLocale(rawLocale))
+  const locale = toLocale(rawLocale)
+  const { chapters } = getBookOfTokens(locale)
   return (
     <article className="space-y-6">
       <SetBreadcrumbs items={[{ label: 'The Book of Tokens' }]} />
-      <PageHeading>The Book of Tokens</PageHeading>
+      <PageToolbar
+        title="The Book of Tokens"
+        primaryAction={
+          <CollectionSearch
+            indexUrl={`/data/book-of-tokens-search.${locale}.json`}
+            placeholder="Search the meditations…"
+            nounPlural="meditations"
+          />
+        }
+      />
       <DataList
         items={chapters}
         getKey={(c) => c.slug}

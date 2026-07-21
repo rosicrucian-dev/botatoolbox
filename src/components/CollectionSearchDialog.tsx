@@ -1,11 +1,12 @@
 'use client'
 
-// Recordings-scoped full-text search dialog. Same HeadlessUI combobox shell as
-// the global SearchDialog, but backed by the prebuilt transcript index
-// (src/lib/recordings-search) instead of the title index — results are whole
-// recordings ranked by how often the query appears, and open the transcript
-// with the term highlighted (#q=…). Kept separate from lib/search so the
-// global title search is untouched.
+// Generic section-scoped full-text search dialog. Same HeadlessUI combobox
+// shell as the global SearchDialog, but backed by a prebuilt inverted index
+// (src/lib/collection-search) instead of the title index — results are whole
+// items ranked by how often the query appears, and open the target page with
+// the term highlighted (#q=…). Parameterized by the index URL and copy so one
+// component serves recordings, the Book of Tokens, and any future collection.
+// Kept separate from lib/search so the global title search is untouched.
 
 import {
   Combobox,
@@ -24,9 +25,9 @@ import { useLocaleRouter } from '@/components/LocaleLink'
 import { useT } from '@/content/messages/useT'
 import {
   searchIndex,
-  type RecordingsSearchResult,
-} from '@/lib/recordings-search'
-import { useRecordingsIndex } from '@/lib/useRecordingsIndex'
+  type CollectionSearchResult,
+} from '@/lib/collection-search'
+import { useSearchIndex } from '@/lib/useSearchIndex'
 
 function SearchIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -60,7 +61,7 @@ function ResultRow({
   index,
   query,
 }: {
-  result: RecordingsSearchResult
+  result: CollectionSearchResult
   index: number
   query: string
 }) {
@@ -77,9 +78,11 @@ function ResultRow({
         <div className="truncate text-sm font-medium text-zinc-900 group-data-focus:text-emerald-500 dark:text-white">
           <HighlightQuery text={result.track.title} query={query} />
         </div>
-        <div className="mt-1 truncate text-2xs whitespace-nowrap text-zinc-500">
-          {result.track.grouping}
-        </div>
+        {result.track.subtitle ? (
+          <div className="mt-1 truncate text-2xs whitespace-nowrap text-zinc-500">
+            {result.track.subtitle}
+          </div>
+        ) : null}
       </div>
       <span className="shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 font-mono text-2xs tabular-nums text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
         {result.count}
@@ -88,18 +91,27 @@ function ResultRow({
   )
 }
 
-export default function RecordingsSearchDialog({
+export default function CollectionSearchDialog({
   open,
   setOpen,
+  indexUrl,
+  placeholder,
+  nounPlural,
 }: {
   open: boolean
   setOpen: (open: boolean) => void
+  /** URL of the prebuilt index JSON to fetch and query. */
+  indexUrl: string
+  /** Input placeholder, e.g. "Search transcripts…". */
+  placeholder: string
+  /** Plural noun for the empty/loading copy, e.g. "transcripts". */
+  nounPlural: string
 }) {
   const router = useLocaleRouter()
   const { t } = useT()
   const [query, setQuery] = useState('')
   const pathname = usePathname()
-  const { status, index, retry } = useRecordingsIndex()
+  const { status, index, retry } = useSearchIndex(indexUrl)
 
   // Close on navigation — but NOT on the initial mount. This dialog is
   // lazy-mounted on the first "Search" click, so a mount-time setOpen(false)
@@ -111,8 +123,7 @@ export default function RecordingsSearchDialog({
     else didMount.current = true
   }, [pathname, setOpen])
 
-  const results =
-    index && query.trim() ? searchIndex(index, query, 10) : []
+  const results = index && query.trim() ? searchIndex(index, query, 10) : []
 
   function close() {
     setOpen(false)
@@ -132,7 +143,7 @@ export default function RecordingsSearchDialog({
           className="mx-auto transform-gpu overflow-hidden rounded-lg bg-zinc-50 shadow-xl ring-1 ring-zinc-900/7.5 data-closed:scale-95 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:max-w-xl dark:bg-zinc-900 dark:ring-zinc-800"
         >
           <Combobox
-            onChange={(result: RecordingsSearchResult | null) => {
+            onChange={(result: CollectionSearchResult | null) => {
               if (!result) return
               router.push(
                 `${result.track.href}#q=${encodeURIComponent(query.trim())}`,
@@ -144,7 +155,7 @@ export default function RecordingsSearchDialog({
               <SearchIcon className="pointer-events-none absolute top-0 left-3 h-full w-5 stroke-zinc-500" />
               <ComboboxInput
                 autoFocus
-                placeholder="Search transcripts…"
+                placeholder={placeholder}
                 aria-label={t('search.label')}
                 displayValue={() => query}
                 onChange={(event) => setQuery(event.target.value)}
@@ -155,7 +166,7 @@ export default function RecordingsSearchDialog({
               <div className="border-t border-zinc-200 bg-white dark:border-zinc-100/5 dark:bg-white/2.5">
                 {status === 'loading' ? (
                   <p className="p-6 text-center text-xs text-zinc-500">
-                    Loading transcripts…
+                    Loading {nounPlural}…
                   </p>
                 ) : status === 'error' ? (
                   <div className="p-6 text-center">
@@ -172,7 +183,7 @@ export default function RecordingsSearchDialog({
                   </div>
                 ) : results.length === 0 ? (
                   <p className="p-6 text-center text-xs text-zinc-700 dark:text-zinc-400">
-                    No transcripts mention{' '}
+                    No {nounPlural} mention{' '}
                     <strong className="font-semibold text-zinc-900 dark:text-white">
                       ‘{query}’
                     </strong>
@@ -182,7 +193,7 @@ export default function RecordingsSearchDialog({
                   <ComboboxOptions static as="ul">
                     {results.map((result, i) => (
                       <ResultRow
-                        key={result.track.slug}
+                        key={result.track.id}
                         result={result}
                         index={i}
                         query={query}

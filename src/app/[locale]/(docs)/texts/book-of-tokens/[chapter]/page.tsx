@@ -2,6 +2,7 @@ import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { SetBreadcrumbs } from '@/components/Breadcrumbs'
+import { HighlightMatches } from '@/components/HighlightMatches'
 import { IndexLabel } from '@/components/IndexLabel'
 import { KeyboardNav } from '@/components/KeyboardNav'
 import { PageHeading } from '@/components/PageHeading'
@@ -56,24 +57,26 @@ export default async function Chapter({
       <KeyboardNav prevHref={prevHref} nextHref={nextHref} />
       <PageHeading>{c.title}</PageHeading>
 
-      <ol className="space-y-6">
-        {c.verses.map((v, vi) => (
-          <li key={vi} className="flex items-baseline gap-3 md:gap-4">
-            {v.label ? <IndexLabel>{v.label}</IndexLabel> : null}
-            <div className="max-w-prose space-y-4 leading-relaxed text-zinc-700 dark:text-zinc-300">
-              {v.stanzas.map((stanza, si) => (
-                <p key={si}>
-                  {stanza.map((line, li) => (
-                    <span key={li} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </p>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ol>
+      <HighlightMatches dep={c.slug}>
+        <ol className="space-y-6">
+          {c.verses.map((v, vi) => (
+            <li key={vi} className="flex items-baseline gap-3 md:gap-4">
+              {v.label ? <IndexLabel>{v.label}</IndexLabel> : null}
+              <div className="max-w-prose space-y-4 leading-relaxed text-zinc-700 dark:text-zinc-300">
+                {v.stanzas.map((stanza, si) => (
+                  <p key={si}>
+                    {stanza.map((line, li) => (
+                      <span key={li} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </p>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </HighlightMatches>
 
       <PrevNextNav
         ariaLabel="Meditation navigation"
