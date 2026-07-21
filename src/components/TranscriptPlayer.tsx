@@ -183,7 +183,7 @@ export function TranscriptPlayer({
   return (
     <div className="space-y-6">
       {src ? (
-        <div className="sticky top-[calc(3.5rem+env(safe-area-inset-top))] z-10 flex items-center gap-3 rounded-lg border border-zinc-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90">
+        <div className="sticky top-[calc(3.5rem+env(safe-area-inset-top)+0.5rem)] z-10 flex items-center gap-3 rounded-lg border border-zinc-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90">
           <audio ref={audioRef} src={src} preload="none" />
           <button
             type="button"
