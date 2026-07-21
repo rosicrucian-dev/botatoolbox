@@ -22,17 +22,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx tsc --noEmit
-      # The prebuilt search indexes (public/data/*-search*.json) are committed
-      # artifacts, not built by `npm run build`. Regenerate them from the
-      # committed content and fail if they differ — i.e. someone edited a
-      # transcript or the Book of Tokens without rerunning `npm run gen:search`.
-      # (Recordings timings need the off-repo Whisper pipeline, so they can't be
-      # verified here; they fail safe at runtime instead.)
-      - name: Verify prebuilt search indexes are current
-        run: |
-          npm run gen:search
-          git diff --exit-code -- public/data/ || {
-            echo "::error::Search indexes are stale — run 'npm run gen:search' and commit public/data/*.json";
-            exit 1;
-          }
+      # `npm run build` runs `prebuild` (gen:search) first, so the search
+      # indexes are regenerated from committed content on every build — they
+      # can't go stale, no freshness guard needed.
       - run: npm run build

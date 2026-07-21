@@ -26,10 +26,7 @@ import {
 } from '../src/content/texts/book-of-tokens-parse.ts'
 import type { SearchTrack } from '../src/lib/collection-search.ts'
 import { DEFAULT_LOCALE, LOCALES } from '../src/lib/locales.ts'
-import {
-  buildInvertedIndex,
-  type IndexItem,
-} from './lib/build-search-index.ts'
+import { buildInvertedIndex } from '../src/lib/search-engine.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const sourcePath = (locale: string) =>
@@ -63,17 +60,18 @@ for (const locale of LOCALES) {
     }
   }
 
-  const items: IndexItem[] = chapters.map((c, i) => {
+  const items = chapters.map((c, i) => {
     const slug = enChapters[i].slug // URL slug is always English
-    const track: SearchTrack = {
+    const doc: SearchTrack = {
       id: slug,
       title: c.title,
       href: `/texts/book-of-tokens/${slug}`,
     }
-    return { track, text: chapterText(c) }
+    return { doc, text: chapterText(c) }
   })
 
-  const index = buildInvertedIndex(items)
+  // English stopwords everywhere: the `de` meditation is an English placeholder.
+  const index = buildInvertedIndex(items, 'en')
   CollectionSearchIndexSchema.parse(index)
 
   const out = outPath(locale)
@@ -82,7 +80,7 @@ for (const locale of LOCALES) {
 
   const bytes = readFileSync(out).length
   console.log(
-    `Wrote search index: ${index.tracks.length} meditations (${locale}), ` +
+    `Wrote search index: ${index.docs.length} meditations (${locale}), ` +
       `${Object.keys(index.words).length} unique words, ` +
       `${(bytes / 1024).toFixed(0)} KB → ${out.replace(ROOT + '/', '')}`,
   )

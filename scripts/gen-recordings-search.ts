@@ -17,11 +17,7 @@ import { dirname, join, resolve } from 'node:path'
 
 import { CollectionSearchIndexSchema } from '../src/content/data/schemas.ts'
 import type { SearchTrack } from '../src/lib/collection-search.ts'
-import {
-  buildInvertedIndex,
-  stripMarkdown,
-  type IndexItem,
-} from './lib/build-search-index.ts'
+import { buildInvertedIndex, stripMarkdown } from '../src/lib/search-engine.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const MANIFEST = join(ROOT, 'content/data/recordings.json')
@@ -37,8 +33,8 @@ interface ManifestRow {
 
 const manifest: ManifestRow[] = JSON.parse(readFileSync(MANIFEST, 'utf8'))
 
-const items: IndexItem[] = manifest.map((r) => {
-  const track: SearchTrack = {
+const items = manifest.map((r) => {
+  const doc: SearchTrack = {
     id: r.slug,
     title: r.title,
     subtitle: r.grouping,
@@ -46,10 +42,10 @@ const items: IndexItem[] = manifest.map((r) => {
   }
   const body = readFileSync(join(BODY_DIR, `${r.slug}.md`), 'utf8')
   // Index the title too, so a title-only word is findable.
-  return { track, text: `${r.title} ${stripMarkdown(body)}` }
+  return { doc, text: `${r.title} ${stripMarkdown(body)}` }
 })
 
-const index = buildInvertedIndex(items)
+const index = buildInvertedIndex(items, 'en')
 CollectionSearchIndexSchema.parse(index)
 
 mkdirSync(dirname(OUT), { recursive: true })
@@ -57,7 +53,7 @@ writeFileSync(OUT, JSON.stringify(index))
 
 const bytes = readFileSync(OUT).length
 console.log(
-  `Wrote search index: ${index.tracks.length} recordings, ` +
+  `Wrote search index: ${index.docs.length} recordings, ` +
     `${Object.keys(index.words).length} unique words, ` +
     `${(bytes / 1024).toFixed(0)} KB → ${OUT.replace(ROOT + '/', '')}`,
 )

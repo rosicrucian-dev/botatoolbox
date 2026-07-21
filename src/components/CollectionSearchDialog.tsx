@@ -76,11 +76,11 @@ function ResultRow({
     >
       <div className="min-w-0">
         <div className="truncate text-sm font-medium text-zinc-900 group-data-focus:text-emerald-500 dark:text-white">
-          <HighlightQuery text={result.track.title} query={query} />
+          <HighlightQuery text={result.doc.title} query={query} />
         </div>
-        {result.track.subtitle ? (
+        {result.doc.subtitle ? (
           <div className="mt-1 truncate text-2xs whitespace-nowrap text-zinc-500">
-            {result.track.subtitle}
+            {result.doc.subtitle}
           </div>
         ) : null}
       </div>
@@ -147,11 +147,12 @@ export default function CollectionSearchDialog({
           <Combobox
             onChange={(result: CollectionSearchResult | null) => {
               if (!result) return
-              // On-page term highlighting is off for now — multi-word queries
-              // lit up every "of"/"the". Navigate without the #q= fragment so
-              // useHighlightQuery finds nothing; readers can Ctrl-F instead.
-              // (Re-enable by appending `#q=${encodeURIComponent(query.trim())}`.)
-              router.push(result.track.href)
+              // #q= drives the on-page highlight (phrase-first — see
+              // useHighlightQuery), so the destination marks the actual phrase
+              // and scrolls to it, rather than every scattered "of"/"the".
+              router.push(
+                `${result.doc.href}#q=${encodeURIComponent(query.trim())}`,
+              )
               close()
             }}
           >
@@ -197,7 +198,7 @@ export default function CollectionSearchDialog({
                   <ComboboxOptions static as="ul">
                     {results.map((result, i) => (
                       <ResultRow
-                        key={result.track.id}
+                        key={result.doc.id}
                         result={result}
                         index={i}
                         query={query}

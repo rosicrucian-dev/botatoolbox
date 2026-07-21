@@ -262,25 +262,29 @@
     "english": "Elohim Tzabaoth",
     "meaning": "The Creative Powers (manifested in) Hosts (of forms).",
     "wordSizes": [
-      4,
+      5,
       5
     ],
     "letters": [
       {
+        "letter": "Aleph",
+        "pronunciation": "ay"
+      },
+      {
+        "letter": "Lamed",
+        "pronunciation": "yil"
+      },
+      {
+        "letter": "Heh",
+        "pronunciation": "oh"
+      },
+      {
         "letter": "Yod",
-        "pronunciation": "yod"
+        "pronunciation": "he"
       },
       {
-        "letter": "Heh",
-        "pronunciation": "hay"
-      },
-      {
-        "letter": "Vav",
-        "pronunciation": "waw"
-      },
-      {
-        "letter": "Heh",
-        "pronunciation": "hay"
+        "letter": "Mem",
+        "pronunciation": "eem"
       },
       {
         "letter": "Tzaddi",
