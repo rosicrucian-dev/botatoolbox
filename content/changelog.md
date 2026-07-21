@@ -1,3 +1,7 @@
+## July 21, 2026
+
+- Added Ann Davies recordings with searchable transcripts.
+
 ## July 9, 2026
 
 - Added timer feature.
