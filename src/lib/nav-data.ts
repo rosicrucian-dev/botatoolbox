@@ -53,7 +53,7 @@ export const navGroups: Array<RawNavGroup> = [
     slug: 'astrology',
     links: [
       { href: '/astrology/chart' },
-      { href: '/astrology/hora', hidden: true },
+      { href: '/astrology/hora' },
     ],
   },
   {
