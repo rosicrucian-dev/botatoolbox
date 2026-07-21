@@ -84,8 +84,10 @@ function ResultRow({
           </div>
         ) : null}
       </div>
+      {/* Phrase-match count when the query occurs as a phrase, else total
+          word occurrences. */}
       <span className="shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 font-mono text-2xs tabular-nums text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
-        {result.count}
+        {result.phrase || result.count}
       </span>
     </ComboboxOption>
   )
@@ -145,9 +147,11 @@ export default function CollectionSearchDialog({
           <Combobox
             onChange={(result: CollectionSearchResult | null) => {
               if (!result) return
-              router.push(
-                `${result.track.href}#q=${encodeURIComponent(query.trim())}`,
-              )
+              // On-page term highlighting is off for now — multi-word queries
+              // lit up every "of"/"the". Navigate without the #q= fragment so
+              // useHighlightQuery finds nothing; readers can Ctrl-F instead.
+              // (Re-enable by appending `#q=${encodeURIComponent(query.trim())}`.)
+              router.push(result.track.href)
               close()
             }}
           >

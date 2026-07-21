@@ -18,16 +18,23 @@ export interface IndexItem {
   text: string
 }
 
-/** Build a { tracks, words } inverted index from items in list order. */
+// Build a positional inverted index: for each word, per item it records the
+// item index, its occurrence count, then every position in the item's
+// (stopword-removed) token stream — encoded flat as
+//   words[word] = [itemIdx, count, p0, p1, …, itemIdx2, count2, …]
+// Positions let the query rank exact phrases ("Builders of the Adytum" =
+// `builders` immediately followed by `adytum`) above scattered word hits.
 export function buildInvertedIndex(items: IndexItem[]): CollectionSearchIndex {
   const tracks = items.map((i) => i.track)
   const words: Record<string, number[]> = {}
   items.forEach((item, idx) => {
-    const counts = new Map<string, number>()
-    for (const w of tokenize(item.text)) {
-      counts.set(w, (counts.get(w) ?? 0) + 1)
-    }
-    for (const [w, c] of counts) (words[w] ??= []).push(idx, c)
+    const positions = new Map<string, number[]>()
+    tokenize(item.text).forEach((w, pos) => {
+      const arr = positions.get(w)
+      if (arr) arr.push(pos)
+      else positions.set(w, [pos])
+    })
+    for (const [w, pos] of positions) (words[w] ??= []).push(idx, pos.length, ...pos)
   })
   return { tracks, words }
 }
