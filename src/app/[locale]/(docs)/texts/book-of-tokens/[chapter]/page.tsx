@@ -6,8 +6,10 @@ import { SetBreadcrumbs } from '@/components/Breadcrumbs'
 import { HighlightMatches } from '@/components/HighlightMatches'
 import { IndexLabel } from '@/components/IndexLabel'
 import { KeyboardNav } from '@/components/KeyboardNav'
+import { Link } from '@/components/LocaleLink'
 import { PageHeading } from '@/components/PageHeading'
 import { PrevNextNav } from '@/components/PrevNextNav'
+import { getTarot } from '@/content/data/tarot'
 import { getBookOfTokens } from '@/content/texts/book-of-tokens'
 import { DEFAULT_LOCALE, toLocale } from '@/lib/locales'
 
@@ -47,9 +49,16 @@ export default async function Chapter({
   params: Promise<{ locale: string; chapter: string }>
 }) {
   const { locale: rawLocale, chapter } = await params
-  const { chapters, chapterBySlug } = getBookOfTokens(toLocale(rawLocale))
+  const locale = toLocale(rawLocale)
+  const { chapters, chapterBySlug } = getBookOfTokens(locale)
   const c = chapterBySlug[chapter]
   if (!c) notFound()
+
+  // The Major Arcana card attributed to this letter. Slugs are always the
+  // English letter name lowercased, so capitalizing keys cardByLetter directly;
+  // Prologos and Malkuth aren't letters, so there's no card.
+  const letterName = c.slug.charAt(0).toUpperCase() + c.slug.slice(1)
+  const card = getTarot(locale).cardByLetter[letterName]
 
   const idx = chapters.findIndex((x) => x.slug === c.slug)
   const prev = chapters[idx - 1]
@@ -66,7 +75,17 @@ export default async function Chapter({
         ]}
       />
       <KeyboardNav prevHref={prevHref} nextHref={nextHref} />
-      <PageHeading>{c.title}</PageHeading>
+      <div>
+        <PageHeading>{c.title}</PageHeading>
+        {card ? (
+          <Link
+            href={`/tarot/${card.slug}`}
+            className="mt-1 inline-block text-sm font-medium text-emerald-600 hover:text-emerald-500 dark:text-emerald-400"
+          >
+            {card.name}
+          </Link>
+        ) : null}
+      </div>
 
       <HighlightMatches dep={c.slug} className="space-y-10">
         <ol className="space-y-6">
