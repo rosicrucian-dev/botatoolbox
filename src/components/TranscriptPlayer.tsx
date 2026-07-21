@@ -28,8 +28,10 @@ import { Prose } from '@/components/Prose'
 import { useHighlightQuery } from '@/components/useHighlightQuery'
 
 // Classes toggled on the currently-playing paragraph. Kept as literal strings
-// so Tailwind's content scan generates them.
-const ACTIVE_CLASSES = ['bg-emerald-100', 'dark:bg-emerald-400/20']
+// so Tailwind's content scan generates them. The trailing `!` (important) is
+// intentional: it must outrank the paragraph's own hover:/focus: backgrounds so
+// an active paragraph stays the stronger emerald even while hovered.
+const ACTIVE_CLASSES = ['bg-emerald-100!', 'dark:bg-emerald-400/20!']
 
 function fmt(sec: number): string {
   if (!Number.isFinite(sec)) return '0:00'
