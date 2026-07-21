@@ -87,7 +87,15 @@ const rows: Row[] = []
 const seen = new Set<string>()
 for (const file of files) {
   const { fm, body } = parse(readFileSync(file, 'utf8'))
-  const name = basename(file, '.md')
+  // The .md/.json FILENAMES can be truncated for dotted titles (a Python
+  // Path.with_suffix quirk in batch.py: "1. Foo.mp3" → "1.md"). The JSON's
+  // `slug` field holds the true audio stem — which is also what
+  // stage-r2-audio.ts slugifies for the R2 object key — so derive the slug
+  // from it, guaranteeing manifest audioPaths match the uploaded keys.
+  const jsonPath = file.replace(/\.md$/, '.json')
+  const name = existsSync(jsonPath)
+    ? (JSON.parse(readFileSync(jsonPath, 'utf8')).slug as string)
+    : basename(file, '.md')
   const grouping = basename(dirname(file)) // immediate parent = Services / series
   const groupingSlug = slugify(grouping)
 
@@ -119,7 +127,9 @@ rows.sort(
   (a, b) =>
     groupOrder.get(a.grouping)! - groupOrder.get(b.grouping)! ||
     a.catalogNumber.localeCompare(b.catalogNumber, undefined, { numeric: true }) ||
-    a.title.localeCompare(b.title),
+    // Numeric-aware so "… Class 2" precedes "… Class 10" (the class ordinal
+    // lives in the title; there's no separate track number in the source).
+    a.title.localeCompare(b.title, undefined, { numeric: true }),
 )
 
 z.array(RecordingSchema).parse(rows)

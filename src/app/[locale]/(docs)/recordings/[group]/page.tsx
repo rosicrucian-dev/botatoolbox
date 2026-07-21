@@ -40,7 +40,17 @@ export default async function RecordingGroup({
   const grouping = groupingsInOrder.find((g) => g.slug === group)
   if (!grouping) notFound()
 
-  const items = recordings.filter((r) => r.groupingSlug === group)
+  // Natural (numeric-aware) order: by catalog number when present (Services:
+  // 5C < 10A), else by title — so "… Class 2" precedes "… Class 10" instead of
+  // sorting lexically. The ordinal lives in the title; there's no track field.
+  const items = recordings
+    .filter((r) => r.groupingSlug === group)
+    .sort(
+      (a, b) =>
+        a.catalogNumber.localeCompare(b.catalogNumber, undefined, {
+          numeric: true,
+        }) || a.title.localeCompare(b.title, undefined, { numeric: true }),
+    )
   // Only reserve the tape-number column for groupings that actually have
   // catalog numbers (Services). Class series have none, so titles start flush.
   const hasNumbers = items.some((r) => r.catalogNumber)

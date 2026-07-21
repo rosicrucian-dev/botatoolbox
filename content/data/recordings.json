@@ -9,6 +9,1302 @@
     "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-1.mp3"
   },
   {
+    "slug": "attainment-on-the-tree-of-life-class-10",
+    "title": "Attainment on the Tree of Life - Class 10",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 6900,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-10.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-11",
+    "title": "Attainment on the Tree of Life - Class 11",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 3064,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-11.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-2",
+    "title": "Attainment on the Tree of Life - Class 2",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 5429,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-2.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-3",
+    "title": "Attainment on the Tree of Life - Class 3",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 4174,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-3.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-4",
+    "title": "Attainment on the Tree of Life - Class 4",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 4737,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-4.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-5",
+    "title": "Attainment on the Tree of Life - Class 5",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 6518,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-5.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-6",
+    "title": "Attainment on the Tree of Life - Class 6",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 5194,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-6.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-7",
+    "title": "Attainment on the Tree of Life - Class 7",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 5704,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-7.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-8",
+    "title": "Attainment on the Tree of Life - Class 8",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 5966,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-8.mp3"
+  },
+  {
+    "slug": "attainment-on-the-tree-of-life-class-9",
+    "title": "Attainment on the Tree of Life - Class 9",
+    "catalogNumber": "",
+    "grouping": "Attainment on the Tree of Life",
+    "groupingSlug": "attainment-on-the-tree-of-life",
+    "durationSeconds": 6347,
+    "audioPath": "attainment-on-the-tree-of-life/attainment-on-the-tree-of-life-class-9.mp3"
+  },
+  {
+    "slug": "1-how-tarot-perfects-the-intellect",
+    "title": "1. How Tarot Perfects the Intellect",
+    "catalogNumber": "",
+    "grouping": "Preparing the Personality for Initiation",
+    "groupingSlug": "preparing-the-personality-for-initiation",
+    "durationSeconds": 2631,
+    "audioPath": "preparing-the-personality-for-initiation/1-how-tarot-perfects-the-intellect.mp3"
+  },
+  {
+    "slug": "2-tarot-for-strengthening-emotional-control",
+    "title": "2. Tarot for Strengthening Emotional Control",
+    "catalogNumber": "",
+    "grouping": "Preparing the Personality for Initiation",
+    "groupingSlug": "preparing-the-personality-for-initiation",
+    "durationSeconds": 2292,
+    "audioPath": "preparing-the-personality-for-initiation/2-tarot-for-strengthening-emotional-control.mp3"
+  },
+  {
+    "slug": "3-balance-your-mind-and-emotions-through-tarot",
+    "title": "3. Balance your Mind and Emotions through Tarot",
+    "catalogNumber": "",
+    "grouping": "Preparing the Personality for Initiation",
+    "groupingSlug": "preparing-the-personality-for-initiation",
+    "durationSeconds": 2392,
+    "audioPath": "preparing-the-personality-for-initiation/3-balance-your-mind-and-emotions-through-tarot.mp3"
+  },
+  {
+    "slug": "4-the-way-tarot-brings-spiritual-perception",
+    "title": "4. The way Tarot brings Spiritual Perception",
+    "catalogNumber": "",
+    "grouping": "Preparing the Personality for Initiation",
+    "groupingSlug": "preparing-the-personality-for-initiation",
+    "durationSeconds": 3076,
+    "audioPath": "preparing-the-personality-for-initiation/4-the-way-tarot-brings-spiritual-perception.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-1",
+    "title": "Qabalistic Paths to the Inner Planes - Class 1",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 5287,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-1.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-2",
+    "title": "Qabalistic Paths to the Inner Planes - Class 2",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 6164,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-2.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-3",
+    "title": "Qabalistic Paths to the Inner Planes - Class 3",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 5595,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-3.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-4",
+    "title": "Qabalistic Paths to the Inner Planes - Class 4",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 6110,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-4.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-5",
+    "title": "Qabalistic Paths to the Inner Planes - Class 5",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 4338,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-5.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-6",
+    "title": "Qabalistic Paths to the Inner Planes - Class 6",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 4742,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-6.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-7",
+    "title": "Qabalistic Paths to the Inner Planes - Class 7",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 3130,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-7.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-8",
+    "title": "Qabalistic Paths to the Inner Planes - Class 8",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 5904,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-8.mp3"
+  },
+  {
+    "slug": "qabalistic-paths-to-the-inner-planes-class-9",
+    "title": "Qabalistic Paths to the Inner Planes - Class 9",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Paths to the Inner Planes",
+    "groupingSlug": "qabalistic-paths-to-the-inner-planes",
+    "durationSeconds": 5684,
+    "audioPath": "qabalistic-paths-to-the-inner-planes/qabalistic-paths-to-the-inner-planes-class-9.mp3"
+  },
+  {
+    "slug": "vol-1-track-01",
+    "title": "Vol 1-Track 01",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1619,
+    "audioPath": "qabalistic-power-of-words/vol-1-track-01.mp3"
+  },
+  {
+    "slug": "vol-1-track-02",
+    "title": "Vol 1-Track 02",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1451,
+    "audioPath": "qabalistic-power-of-words/vol-1-track-02.mp3"
+  },
+  {
+    "slug": "vol-2-track-01",
+    "title": "Vol 2-Track 01",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1685,
+    "audioPath": "qabalistic-power-of-words/vol-2-track-01.mp3"
+  },
+  {
+    "slug": "vol-2-track-02",
+    "title": "Vol 2-Track 02",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1688,
+    "audioPath": "qabalistic-power-of-words/vol-2-track-02.mp3"
+  },
+  {
+    "slug": "vol-3-track-01",
+    "title": "Vol 3-Track 01",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1808,
+    "audioPath": "qabalistic-power-of-words/vol-3-track-01.mp3"
+  },
+  {
+    "slug": "vol-3-track-02",
+    "title": "Vol 3-Track 02",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1547,
+    "audioPath": "qabalistic-power-of-words/vol-3-track-02.mp3"
+  },
+  {
+    "slug": "vol-4-track-01",
+    "title": "Vol 4-Track 01",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1576,
+    "audioPath": "qabalistic-power-of-words/vol-4-track-01.mp3"
+  },
+  {
+    "slug": "vol-4-track-02",
+    "title": "Vol 4-Track 02",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1562,
+    "audioPath": "qabalistic-power-of-words/vol-4-track-02.mp3"
+  },
+  {
+    "slug": "vol-5-track-01",
+    "title": "Vol 5-Track 01",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1591,
+    "audioPath": "qabalistic-power-of-words/vol-5-track-01.mp3"
+  },
+  {
+    "slug": "vol-5-track-02",
+    "title": "Vol 5-Track 02",
+    "catalogNumber": "",
+    "grouping": "Qabalistic Power Of Words",
+    "groupingSlug": "qabalistic-power-of-words",
+    "durationSeconds": 1609,
+    "audioPath": "qabalistic-power-of-words/vol-5-track-02.mp3"
+  },
+  {
+    "slug": "evolutionary-plans-of-the-divine-hierarchy",
+    "title": "Evolutionary Plans of the Divine Hierarchy",
+    "catalogNumber": "",
+    "grouping": "Qualifying for Discipleship in the Mystery Schools",
+    "groupingSlug": "qualifying-for-discipleship-in-the-mystery-schools",
+    "durationSeconds": 3243,
+    "audioPath": "qualifying-for-discipleship-in-the-mystery-schools/evolutionary-plans-of-the-divine-hierarchy.mp3"
+  },
+  {
+    "slug": "qabalah-a-blueprint-towards-adeptship",
+    "title": "Qabalah A Blueprint Towards Adeptship",
+    "catalogNumber": "",
+    "grouping": "Qualifying for Discipleship in the Mystery Schools",
+    "groupingSlug": "qualifying-for-discipleship-in-the-mystery-schools",
+    "durationSeconds": 3088,
+    "audioPath": "qualifying-for-discipleship-in-the-mystery-schools/qabalah-a-blueprint-towards-adeptship.mp3"
+  },
+  {
+    "slug": "tarot-a-guide-to-supersensory-awakening",
+    "title": "Tarot A Guide to Supersensory Awakening",
+    "catalogNumber": "",
+    "grouping": "Qualifying for Discipleship in the Mystery Schools",
+    "groupingSlug": "qualifying-for-discipleship-in-the-mystery-schools",
+    "durationSeconds": 3176,
+    "audioPath": "qualifying-for-discipleship-in-the-mystery-schools/tarot-a-guide-to-supersensory-awakening.mp3"
+  },
+  {
+    "slug": "use-of-tarot-for-contact-with-masters",
+    "title": "Use of Tarot for Contact with Masters",
+    "catalogNumber": "",
+    "grouping": "Qualifying for Discipleship in the Mystery Schools",
+    "groupingSlug": "qualifying-for-discipleship-in-the-mystery-schools",
+    "durationSeconds": 3054,
+    "audioPath": "qualifying-for-discipleship-in-the-mystery-schools/use-of-tarot-for-contact-with-masters.mp3"
+  },
+  {
+    "slug": "1-seven-stages-to-spiritual-unfolment-through-tarot",
+    "title": "1. Seven Stages to Spiritual Unfolment Through Tarot",
+    "catalogNumber": "",
+    "grouping": "Seven Stages to Spiritual Unfoldment Through Tarot",
+    "groupingSlug": "seven-stages-to-spiritual-unfoldment-through-tarot",
+    "durationSeconds": 2519,
+    "audioPath": "seven-stages-to-spiritual-unfoldment-through-tarot/1-seven-stages-to-spiritual-unfolment-through-tarot.mp3"
+  },
+  {
+    "slug": "2-seven-stages-to-spiritual-unfoldment-though-tarot",
+    "title": "2. Seven Stages to Spiritual Unfoldment Though Tarot",
+    "catalogNumber": "",
+    "grouping": "Seven Stages to Spiritual Unfoldment Through Tarot",
+    "groupingSlug": "seven-stages-to-spiritual-unfoldment-through-tarot",
+    "durationSeconds": 4693,
+    "audioPath": "seven-stages-to-spiritual-unfoldment-through-tarot/2-seven-stages-to-spiritual-unfoldment-though-tarot.mp3"
+  },
+  {
+    "slug": "3-seven-stages-to-spiritual-unfoldment-though-tarot",
+    "title": "3. Seven Stages to Spiritual Unfoldment Though Tarot",
+    "catalogNumber": "",
+    "grouping": "Seven Stages to Spiritual Unfoldment Through Tarot",
+    "groupingSlug": "seven-stages-to-spiritual-unfoldment-through-tarot",
+    "durationSeconds": 4719,
+    "audioPath": "seven-stages-to-spiritual-unfoldment-through-tarot/3-seven-stages-to-spiritual-unfoldment-though-tarot.mp3"
+  },
+  {
+    "slug": "4-seven-stages-to-spiritual-unfoldment-though-tarot",
+    "title": "4. Seven Stages to Spiritual Unfoldment Though Tarot",
+    "catalogNumber": "",
+    "grouping": "Seven Stages to Spiritual Unfoldment Through Tarot",
+    "groupingSlug": "seven-stages-to-spiritual-unfoldment-through-tarot",
+    "durationSeconds": 3863,
+    "audioPath": "seven-stages-to-spiritual-unfoldment-through-tarot/4-seven-stages-to-spiritual-unfoldment-though-tarot.mp3"
+  },
+  {
+    "slug": "5-seven-stages-to-spiritual-unfolment-through-tarot",
+    "title": "5. Seven Stages to Spiritual Unfolment Through Tarot",
+    "catalogNumber": "",
+    "grouping": "Seven Stages to Spiritual Unfoldment Through Tarot",
+    "groupingSlug": "seven-stages-to-spiritual-unfoldment-through-tarot",
+    "durationSeconds": 1065,
+    "audioPath": "seven-stages-to-spiritual-unfoldment-through-tarot/5-seven-stages-to-spiritual-unfolment-through-tarot.mp3"
+  },
+  {
+    "slug": "6-seven-stages-to-spiritual-unfolment-through-tarot",
+    "title": "6. Seven Stages to Spiritual Unfolment Through Tarot",
+    "catalogNumber": "",
+    "grouping": "Seven Stages to Spiritual Unfoldment Through Tarot",
+    "groupingSlug": "seven-stages-to-spiritual-unfoldment-through-tarot",
+    "durationSeconds": 5357,
+    "audioPath": "seven-stages-to-spiritual-unfoldment-through-tarot/6-seven-stages-to-spiritual-unfolment-through-tarot.mp3"
+  },
+  {
+    "slug": "7-seven-stages-to-spiritual-unfolment-through-tarot",
+    "title": "7. Seven Stages to Spiritual Unfolment Through Tarot",
+    "catalogNumber": "",
+    "grouping": "Seven Stages to Spiritual Unfoldment Through Tarot",
+    "groupingSlug": "seven-stages-to-spiritual-unfoldment-through-tarot",
+    "durationSeconds": 4547,
+    "audioPath": "seven-stages-to-spiritual-unfoldment-through-tarot/7-seven-stages-to-spiritual-unfolment-through-tarot.mp3"
+  },
+  {
+    "slug": "1-tarot-the-link-between-self-an-subconscious-states",
+    "title": "1. Tarot - The Link Between Self an Subconscious States",
+    "catalogNumber": "",
+    "grouping": "Spiritual Progress Through Tarot Symbolism",
+    "groupingSlug": "spiritual-progress-through-tarot-symbolism",
+    "durationSeconds": 2732,
+    "audioPath": "spiritual-progress-through-tarot-symbolism/1-tarot-the-link-between-self-an-subconscious-states.mp3"
+  },
+  {
+    "slug": "2-how-tarot-symbolism-can-change-habit-patterns",
+    "title": "2. How Tarot Symbolism Can Change Habit Patterns",
+    "catalogNumber": "",
+    "grouping": "Spiritual Progress Through Tarot Symbolism",
+    "groupingSlug": "spiritual-progress-through-tarot-symbolism",
+    "durationSeconds": 2737,
+    "audioPath": "spiritual-progress-through-tarot-symbolism/2-how-tarot-symbolism-can-change-habit-patterns.mp3"
+  },
+  {
+    "slug": "3-how-to-tune-into-the-mental-states-of-the-masters",
+    "title": "3. How to Tune Into the Mental States of the Masters",
+    "catalogNumber": "",
+    "grouping": "Spiritual Progress Through Tarot Symbolism",
+    "groupingSlug": "spiritual-progress-through-tarot-symbolism",
+    "durationSeconds": 2686,
+    "audioPath": "spiritual-progress-through-tarot-symbolism/3-how-to-tune-into-the-mental-states-of-the-masters.mp3"
+  },
+  {
+    "slug": "4-tarot-heightens-your-understanding-of-experience",
+    "title": "4. Tarot - Heightens Your Understanding of Experience",
+    "catalogNumber": "",
+    "grouping": "Spiritual Progress Through Tarot Symbolism",
+    "groupingSlug": "spiritual-progress-through-tarot-symbolism",
+    "durationSeconds": 2657,
+    "audioPath": "spiritual-progress-through-tarot-symbolism/4-tarot-heightens-your-understanding-of-experience.mp3"
+  },
+  {
+    "slug": "5-improve-your-relationship-with-others-through-tarot",
+    "title": "5. Improve Your Relationship with Others Through Tarot",
+    "catalogNumber": "",
+    "grouping": "Spiritual Progress Through Tarot Symbolism",
+    "groupingSlug": "spiritual-progress-through-tarot-symbolism",
+    "durationSeconds": 1774,
+    "audioPath": "spiritual-progress-through-tarot-symbolism/5-improve-your-relationship-with-others-through-tarot.mp3"
+  },
+  {
+    "slug": "how-tarot-awakens-the-power-of-awareness",
+    "title": "How Tarot Awakens the Power of Awareness",
+    "catalogNumber": "",
+    "grouping": "Sunday Service Lectures",
+    "groupingSlug": "sunday-service-lectures",
+    "durationSeconds": 2216,
+    "audioPath": "sunday-service-lectures/how-tarot-awakens-the-power-of-awareness.mp3"
+  },
+  {
+    "slug": "how-to-become-an-initiate",
+    "title": "How to Become an Initiate",
+    "catalogNumber": "",
+    "grouping": "Sunday Service Lectures",
+    "groupingSlug": "sunday-service-lectures",
+    "durationSeconds": 3414,
+    "audioPath": "sunday-service-lectures/how-to-become-an-initiate.mp3"
+  },
+  {
+    "slug": "reversing-adversity-through-tarot",
+    "title": "Reversing Adversity Through Tarot",
+    "catalogNumber": "",
+    "grouping": "Sunday Service Lectures",
+    "groupingSlug": "sunday-service-lectures",
+    "durationSeconds": 2967,
+    "audioPath": "sunday-service-lectures/reversing-adversity-through-tarot.mp3"
+  },
+  {
+    "slug": "the-mystical-capacity-to-love",
+    "title": "The Mystical Capacity to Love",
+    "catalogNumber": "",
+    "grouping": "Sunday Service Lectures",
+    "groupingSlug": "sunday-service-lectures",
+    "durationSeconds": 3616,
+    "audioPath": "sunday-service-lectures/the-mystical-capacity-to-love.mp3"
+  },
+  {
+    "slug": "truth-about-the-masters-of-wisdom",
+    "title": "Truth About the Masters of Wisdom",
+    "catalogNumber": "",
+    "grouping": "Sunday Service Lectures",
+    "groupingSlug": "sunday-service-lectures",
+    "durationSeconds": 3993,
+    "audioPath": "sunday-service-lectures/truth-about-the-masters-of-wisdom.mp3"
+  },
+  {
+    "slug": "key-0-the-fool",
+    "title": "Key 0 - The Fool",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1680,
+    "audioPath": "tarot/key-0-the-fool.mp3"
+  },
+  {
+    "slug": "key-1-the-magician",
+    "title": "Key 1 - The Magician",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1163,
+    "audioPath": "tarot/key-1-the-magician.mp3"
+  },
+  {
+    "slug": "key-10-the-wheel-of-fortune",
+    "title": "Key 10 - The Wheel Of Fortune",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1727,
+    "audioPath": "tarot/key-10-the-wheel-of-fortune.mp3"
+  },
+  {
+    "slug": "key-11-justice",
+    "title": "Key 11 - Justice",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1656,
+    "audioPath": "tarot/key-11-justice.mp3"
+  },
+  {
+    "slug": "key-12-the-hanged-man",
+    "title": "Key 12 - The Hanged Man",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1760,
+    "audioPath": "tarot/key-12-the-hanged-man.mp3"
+  },
+  {
+    "slug": "key-13-death",
+    "title": "Key 13 - Death",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1551,
+    "audioPath": "tarot/key-13-death.mp3"
+  },
+  {
+    "slug": "key-14-temperance",
+    "title": "Key 14 - Temperance",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1746,
+    "audioPath": "tarot/key-14-temperance.mp3"
+  },
+  {
+    "slug": "key-15-the-devil",
+    "title": "Key 15 - The Devil",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1642,
+    "audioPath": "tarot/key-15-the-devil.mp3"
+  },
+  {
+    "slug": "key-16-the-tower",
+    "title": "Key 16 - The Tower",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1606,
+    "audioPath": "tarot/key-16-the-tower.mp3"
+  },
+  {
+    "slug": "key-17-the-star",
+    "title": "Key 17 - The Star",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1618,
+    "audioPath": "tarot/key-17-the-star.mp3"
+  },
+  {
+    "slug": "key-18-the-moon",
+    "title": "Key 18 - The Moon",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1750,
+    "audioPath": "tarot/key-18-the-moon.mp3"
+  },
+  {
+    "slug": "key-19-the-sun",
+    "title": "Key 19 - The Sun",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1554,
+    "audioPath": "tarot/key-19-the-sun.mp3"
+  },
+  {
+    "slug": "key-2-the-high-priestess",
+    "title": "Key 2 - The High Priestess",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1573,
+    "audioPath": "tarot/key-2-the-high-priestess.mp3"
+  },
+  {
+    "slug": "key-20-judgement",
+    "title": "Key 20 - Judgement",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1758,
+    "audioPath": "tarot/key-20-judgement.mp3"
+  },
+  {
+    "slug": "key-21-the-world",
+    "title": "Key 21 - The World",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1584,
+    "audioPath": "tarot/key-21-the-world.mp3"
+  },
+  {
+    "slug": "key-3-the-empress",
+    "title": "Key 3 - The Empress",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1175,
+    "audioPath": "tarot/key-3-the-empress.mp3"
+  },
+  {
+    "slug": "key-4-the-emperor",
+    "title": "Key 4 - The Emperor",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1610,
+    "audioPath": "tarot/key-4-the-emperor.mp3"
+  },
+  {
+    "slug": "key-5-the-hierophant",
+    "title": "Key 5 - The Hierophant",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1683,
+    "audioPath": "tarot/key-5-the-hierophant.mp3"
+  },
+  {
+    "slug": "key-6-the-lovers",
+    "title": "Key 6 - The Lovers",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1585,
+    "audioPath": "tarot/key-6-the-lovers.mp3"
+  },
+  {
+    "slug": "key-7-the-chariot",
+    "title": "Key 7 - The Chariot",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1669,
+    "audioPath": "tarot/key-7-the-chariot.mp3"
+  },
+  {
+    "slug": "key-8-strength",
+    "title": "Key 8 - Strength",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1760,
+    "audioPath": "tarot/key-8-strength.mp3"
+  },
+  {
+    "slug": "key-9-the-hermit",
+    "title": "Key 9 - The Hermit",
+    "catalogNumber": "",
+    "grouping": "Tarot",
+    "groupingSlug": "tarot",
+    "durationSeconds": 1752,
+    "audioPath": "tarot/key-9-the-hermit.mp3"
+  },
+  {
+    "slug": "mediation-the-secret-of-peace",
+    "title": "Mediation, the Secret of Peace",
+    "catalogNumber": "",
+    "grouping": "The Art of Meditation",
+    "groupingSlug": "the-art-of-meditation",
+    "durationSeconds": 1660,
+    "audioPath": "the-art-of-meditation/mediation-the-secret-of-peace.mp3"
+  },
+  {
+    "slug": "meditation-in-the-aquarian-age",
+    "title": "Meditation in the Aquarian Age",
+    "catalogNumber": "",
+    "grouping": "The Art of Meditation",
+    "groupingSlug": "the-art-of-meditation",
+    "durationSeconds": 1645,
+    "audioPath": "the-art-of-meditation/meditation-in-the-aquarian-age.mp3"
+  },
+  {
+    "slug": "meditation-mystical-and-practical",
+    "title": "Meditation, Mystical and Practical",
+    "catalogNumber": "",
+    "grouping": "The Art of Meditation",
+    "groupingSlug": "the-art-of-meditation",
+    "durationSeconds": 1415,
+    "audioPath": "the-art-of-meditation/meditation-mystical-and-practical.mp3"
+  },
+  {
+    "slug": "meditation-the-guiding-light",
+    "title": "Meditation, the Guiding Light",
+    "catalogNumber": "",
+    "grouping": "The Art of Meditation",
+    "groupingSlug": "the-art-of-meditation",
+    "durationSeconds": 1623,
+    "audioPath": "the-art-of-meditation/meditation-the-guiding-light.mp3"
+  },
+  {
+    "slug": "the-occult-secret-of-meditation",
+    "title": "The Occult Secret of Meditation",
+    "catalogNumber": "",
+    "grouping": "The Art of Meditation",
+    "groupingSlug": "the-art-of-meditation",
+    "durationSeconds": 1823,
+    "audioPath": "the-art-of-meditation/the-occult-secret-of-meditation.mp3"
+  },
+  {
+    "slug": "the-western-occult-techniques-of-meditation",
+    "title": "The Western Occult Techniques of Meditation",
+    "catalogNumber": "",
+    "grouping": "The Art of Meditation",
+    "groupingSlug": "the-art-of-meditation",
+    "durationSeconds": 1787,
+    "audioPath": "the-art-of-meditation/the-western-occult-techniques-of-meditation.mp3"
+  },
+  {
+    "slug": "truth-and-fallacies-about-the-art-of-meditation",
+    "title": "Truth and Fallacies About the Art of Meditation",
+    "catalogNumber": "",
+    "grouping": "The Art of Meditation",
+    "groupingSlug": "the-art-of-meditation",
+    "durationSeconds": 1722,
+    "audioPath": "the-art-of-meditation/truth-and-fallacies-about-the-art-of-meditation.mp3"
+  },
+  {
+    "slug": "what-is-true-occult-meditation",
+    "title": "What is True Occult Meditation",
+    "catalogNumber": "",
+    "grouping": "The Art of Meditation",
+    "groupingSlug": "the-art-of-meditation",
+    "durationSeconds": 1659,
+    "audioPath": "the-art-of-meditation/what-is-true-occult-meditation.mp3"
+  },
+  {
+    "slug": "1-kether",
+    "title": "1. Kether",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1689,
+    "audioPath": "tree-of-life/1-kether.mp3"
+  },
+  {
+    "slug": "10-malkuth",
+    "title": "10. Malkuth",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1822,
+    "audioPath": "tree-of-life/10-malkuth.mp3"
+  },
+  {
+    "slug": "2-chokmah",
+    "title": "2. Chokmah",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1803,
+    "audioPath": "tree-of-life/2-chokmah.mp3"
+  },
+  {
+    "slug": "3-binah",
+    "title": "3. Binah",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1488,
+    "audioPath": "tree-of-life/3-binah.mp3"
+  },
+  {
+    "slug": "4-chesed",
+    "title": "4. Chesed",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1597,
+    "audioPath": "tree-of-life/4-chesed.mp3"
+  },
+  {
+    "slug": "5-geburah",
+    "title": "5. Geburah",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1803,
+    "audioPath": "tree-of-life/5-geburah.mp3"
+  },
+  {
+    "slug": "6-tiphareth",
+    "title": "6. Tiphareth",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1744,
+    "audioPath": "tree-of-life/6-tiphareth.mp3"
+  },
+  {
+    "slug": "7-netzach",
+    "title": "7. Netzach",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1709,
+    "audioPath": "tree-of-life/7-netzach.mp3"
+  },
+  {
+    "slug": "8-hod",
+    "title": "8. Hod",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1603,
+    "audioPath": "tree-of-life/8-hod.mp3"
+  },
+  {
+    "slug": "9-yesod",
+    "title": "9. Yesod",
+    "catalogNumber": "",
+    "grouping": "Tree of Life",
+    "groupingSlug": "tree-of-life",
+    "durationSeconds": 1627,
+    "audioPath": "tree-of-life/9-yesod.mp3"
+  },
+  {
+    "slug": "are-you-a-true-initiate",
+    "title": "Are You a True Initiate",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2653,
+    "audioPath": "services/are-you-a-true-initiate.mp3"
+  },
+  {
+    "slug": "consciousness-as-ruler-universal-and-personal",
+    "title": "Consciousness As Ruler, Universal And Personal",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2966,
+    "audioPath": "services/consciousness-as-ruler-universal-and-personal.mp3"
+  },
+  {
+    "slug": "cosimic-mother-in-qabalah",
+    "title": "Cosimic Mother In Qabalah",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2439,
+    "audioPath": "services/cosimic-mother-in-qabalah.mp3"
+  },
+  {
+    "slug": "cosmic-illumination-through-tarot",
+    "title": "Cosmic Illumination Through Tarot",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3429,
+    "audioPath": "services/cosmic-illumination-through-tarot.mp3"
+  },
+  {
+    "slug": "cosmic-unity-in-occultism",
+    "title": "Cosmic Unity In Occultism",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 598,
+    "audioPath": "services/cosmic-unity-in-occultism.mp3"
+  },
+  {
+    "slug": "creativity-secret-of-divine-love",
+    "title": "Creativity - Secret Of Divine Love",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3616,
+    "audioPath": "services/creativity-secret-of-divine-love.mp3"
+  },
+  {
+    "slug": "cycles-of-evolution-in-tarot",
+    "title": "Cycles Of Evolution In Tarot",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3088,
+    "audioPath": "services/cycles-of-evolution-in-tarot.mp3"
+  },
+  {
+    "slug": "desire-and-love-in-qabalah",
+    "title": "Desire And Love In Qabalah",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 4122,
+    "audioPath": "services/desire-and-love-in-qabalah.mp3"
+  },
+  {
+    "slug": "disciples-initiates-adepts-and-masters",
+    "title": "Disciples, Initiates, Adepts And Masters",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 4082,
+    "audioPath": "services/disciples-initiates-adepts-and-masters.mp3"
+  },
+  {
+    "slug": "discover-your-true-self-through-tarot",
+    "title": "Discover Your True Self Through Tarot",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2808,
+    "audioPath": "services/discover-your-true-self-through-tarot.mp3"
+  },
+  {
+    "slug": "discrimination-in-mysticism",
+    "title": "Discrimination In Mysticism",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2900,
+    "audioPath": "services/discrimination-in-mysticism.mp3"
+  },
+  {
+    "slug": "divine-grace-and-sin-in-mysticism",
+    "title": "Divine Grace And Sin In Mysticism",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3157,
+    "audioPath": "services/divine-grace-and-sin-in-mysticism.mp3"
+  },
+  {
+    "slug": "divine-self-ruler-of-the-body",
+    "title": "Divine Self - Ruler Of The Body",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2548,
+    "audioPath": "services/divine-self-ruler-of-the-body.mp3"
+  },
+  {
+    "slug": "easter-life-death-and-ressuretion-in-the-western-mysteries",
+    "title": "Easter - Life, Death And Ressuretion In The Western Mysteries",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3469,
+    "audioPath": "services/easter-life-death-and-ressuretion-in-the-western-mysteries.mp3"
+  },
+  {
+    "slug": "easter-man-the-immortal-begotten-of-god",
+    "title": "Easter - Man - The Immortal Begotten Of God",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 4098,
+    "audioPath": "services/easter-man-the-immortal-begotten-of-god.mp3"
+  },
+  {
+    "slug": "easter-mystical-resurrection-secret-of-life",
+    "title": "Easter - Mystical Resurrection - Secret Of Life",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3104,
+    "audioPath": "services/easter-mystical-resurrection-secret-of-life.mp3"
+  },
+  {
+    "slug": "easter-mystical-truth-of-eternal-ressurection",
+    "title": "Easter - Mystical Truth Of Eternal Ressurection",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3825,
+    "audioPath": "services/easter-mystical-truth-of-eternal-ressurection.mp3"
+  },
+  {
+    "slug": "energies-of-summer-solstice-in-mysticism",
+    "title": "Energies Of Summer Solstice In Mysticism",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3377,
+    "audioPath": "services/energies-of-summer-solstice-in-mysticism.mp3"
+  },
+  {
+    "slug": "fathers-day-the-masuline-principle",
+    "title": "Fathers Day - The Masuline Principle",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3948,
+    "audioPath": "services/fathers-day-the-masuline-principle.mp3"
+  },
+  {
+    "slug": "goals-of-the-divine-hierarchy",
+    "title": "Goals Of The Divine Hierarchy",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 1217,
+    "audioPath": "services/goals-of-the-divine-hierarchy.mp3"
+  },
+  {
+    "slug": "grades-of-initiation-in-mysticism",
+    "title": "Grades Of Initiation In Mysticism",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2637,
+    "audioPath": "services/grades-of-initiation-in-mysticism.mp3"
+  },
+  {
+    "slug": "harmonizing-the-seven-chakras",
+    "title": "Harmonizing The Seven Chakras",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2371,
+    "audioPath": "services/harmonizing-the-seven-chakras.mp3"
+  },
+  {
+    "slug": "heights-of-attainment-in-tarot",
+    "title": "Heights Of Attainment In Tarot",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3080,
+    "audioPath": "services/heights-of-attainment-in-tarot.mp3"
+  },
+  {
+    "slug": "how-tarot-negates-lackwav",
+    "title": "How Tarot Negates Lack.Wav",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2125,
+    "audioPath": "services/how-tarot-negates-lackwav.mp3"
+  },
+  {
+    "slug": "how-to-contact-the-hierarchy",
+    "title": "How to Contact the Hierarchy",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 4100,
+    "audioPath": "services/how-to-contact-the-hierarchy.mp3"
+  },
+  {
+    "slug": "masters-of-compassion",
+    "title": "Masters of Compassion",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2555,
+    "audioPath": "services/masters-of-compassion.mp3"
+  },
+  {
+    "slug": "superconsciousness-in-the-sacred-tarot",
+    "title": "Superconsciousness in the Sacred Tarot",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3183,
+    "audioPath": "services/superconsciousness-in-the-sacred-tarot.mp3"
+  },
+  {
+    "slug": "tarot-and-the-guiding-star",
+    "title": "Tarot and the Guiding Star",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3124,
+    "audioPath": "services/tarot-and-the-guiding-star.mp3"
+  },
+  {
+    "slug": "the-cosmic-father-in-qabalah",
+    "title": "The Cosmic Father In Qabalah",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2892,
+    "audioPath": "services/the-cosmic-father-in-qabalah.mp3"
+  },
+  {
+    "slug": "the-dance-of-the-cosmos",
+    "title": "The Dance Of The Cosmos",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2935,
+    "audioPath": "services/the-dance-of-the-cosmos.mp3"
+  },
+  {
+    "slug": "the-devine-victory-of-love",
+    "title": "The Devine Victory Of Love",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 4296,
+    "audioPath": "services/the-devine-victory-of-love.mp3"
+  },
+  {
+    "slug": "the-divine-gates-of-evolution",
+    "title": "The Divine Gates Of Evolution",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3527,
+    "audioPath": "services/the-divine-gates-of-evolution.mp3"
+  },
+  {
+    "slug": "the-divine-hierarchy-in-qabalah",
+    "title": "The Divine Hierarchy In Qabalah",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3205,
+    "audioPath": "services/the-divine-hierarchy-in-qabalah.mp3"
+  },
+  {
+    "slug": "the-power-of-the-word-and-how-to-use-it",
+    "title": "The power of the Word and how to use it",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2503,
+    "audioPath": "services/the-power-of-the-word-and-how-to-use-it.mp3"
+  },
+  {
+    "slug": "the-western-occult-techniques-of-meditation-2",
+    "title": "The Western Occult Techniques of Meditation",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3026,
+    "audioPath": "services/the-western-occult-techniques-of-meditation-2.mp3"
+  },
+  {
+    "slug": "truth-about-the-masters-of-wisdom-2",
+    "title": "Truth about the Masters of Wisdom",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3993,
+    "audioPath": "services/truth-about-the-masters-of-wisdom-2.mp3"
+  },
+  {
+    "slug": "use-of-tarot-to-develop-personal-magnetism",
+    "title": "Use of Tarot to Develop Personal Magnetism",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3339,
+    "audioPath": "services/use-of-tarot-to-develop-personal-magnetism.mp3"
+  },
+  {
+    "slug": "what-is-cosmic-consciousness",
+    "title": "What is Cosmic Consciousness",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2614,
+    "audioPath": "services/what-is-cosmic-consciousness.mp3"
+  },
+  {
+    "slug": "you-are-immortal",
+    "title": "You are Immortal",
+    "catalogNumber": "",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3731,
+    "audioPath": "services/you-are-immortal.mp3"
+  },
+  {
+    "slug": "1b-tarot-the-way-to-mental-freedom",
+    "title": "Tarot - The Way To Mental Freedom",
+    "catalogNumber": "1B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2227,
+    "audioPath": "services/1b-tarot-the-way-to-mental-freedom.mp3"
+  },
+  {
+    "slug": "1c-the-key-to-mental-mastery",
+    "title": "The Key To Mental Mastery",
+    "catalogNumber": "1C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2717,
+    "audioPath": "services/1c-the-key-to-mental-mastery.mp3"
+  },
+  {
+    "slug": "2a-what-is-security",
+    "title": "What Is Security",
+    "catalogNumber": "2A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2508,
+    "audioPath": "services/2a-what-is-security.mp3"
+  },
+  {
+    "slug": "2b-how-to-love-and-be-loved",
+    "title": "How To Love And Be Loved",
+    "catalogNumber": "2B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2446,
+    "audioPath": "services/2b-how-to-love-and-be-loved.mp3"
+  },
+  {
+    "slug": "2c-the-link-between-you-and-the-universal-mind",
+    "title": "The Link Between You And The Universal Mind",
+    "catalogNumber": "2C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3718,
+    "audioPath": "services/2c-the-link-between-you-and-the-universal-mind.mp3"
+  },
+  {
+    "slug": "3a-the-cosmic-influence-for-1960",
+    "title": "The Cosmic Influence For 1960",
+    "catalogNumber": "3A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2622,
+    "audioPath": "services/3a-the-cosmic-influence-for-1960.mp3"
+  },
+  {
+    "slug": "3b-how-to-make-every-day-a-new-yearwav",
+    "title": "How To Make Every Day A New Year.Wav",
+    "catalogNumber": "3B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2952,
+    "audioPath": "services/3b-how-to-make-every-day-a-new-yearwav.mp3"
+  },
+  {
+    "slug": "4a-turn-your-tears-to-laughter",
+    "title": "Turn Your Tears To Laughter",
+    "catalogNumber": "4A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3193,
+    "audioPath": "services/4a-turn-your-tears-to-laughter.mp3"
+  },
+  {
+    "slug": "4b-the-esoteric-principle-behind-initiation",
+    "title": "The Esoteric Principle Behind Initiation",
+    "catalogNumber": "4B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3024,
+    "audioPath": "services/4b-the-esoteric-principle-behind-initiation.mp3"
+  },
+  {
+    "slug": "5a-qabalah-the-western-tree-of-life",
+    "title": "Qabalah - The Western Tree Of Life",
+    "catalogNumber": "5A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3435,
+    "audioPath": "services/5a-qabalah-the-western-tree-of-life.mp3"
+  },
+  {
+    "slug": "5b-love-the-great-catalyst",
+    "title": "Love - The Great Catalyst",
+    "catalogNumber": "5B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3211,
+    "audioPath": "services/5b-love-the-great-catalyst.mp3"
+  },
+  {
     "slug": "5c-the-astral-body-and-the-astral-world",
     "title": "The Astral Body And The Astral World",
     "catalogNumber": "5C",
@@ -18,6 +1314,123 @@
     "audioPath": "services/5c-the-astral-body-and-the-astral-world.mp3"
   },
   {
+    "slug": "6a-qabalah-and-reincarnation-key-16",
+    "title": "Qabalah And Reincarnation - Key 16",
+    "catalogNumber": "6A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3243,
+    "audioPath": "services/6a-qabalah-and-reincarnation-key-16.mp3"
+  },
+  {
+    "slug": "6b-reversing-adversity-through-tarot-key-12",
+    "title": "Reversing Adversity Through Tarot - Key 12",
+    "catalogNumber": "6B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2969,
+    "audioPath": "services/6b-reversing-adversity-through-tarot-key-12.mp3"
+  },
+  {
+    "slug": "7a-does-justice-rule-the-universe",
+    "title": "Does Justice Rule The Universe",
+    "catalogNumber": "7A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3687,
+    "audioPath": "services/7a-does-justice-rule-the-universe.mp3"
+  },
+  {
+    "slug": "7a-does-justice-rule-the-universe-key-11",
+    "title": "Does Justice Rule The Universe - Key 11",
+    "catalogNumber": "7A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3075,
+    "audioPath": "services/7a-does-justice-rule-the-universe-key-11.mp3"
+  },
+  {
+    "slug": "7b-the-secret-behind-spiritual-strength",
+    "title": "The Secret Behind Spiritual Strength",
+    "catalogNumber": "7B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 262,
+    "audioPath": "services/7b-the-secret-behind-spiritual-strength.mp3"
+  },
+  {
+    "slug": "7c-tarot-the-message-of-peace-key-2",
+    "title": "Tarot - The Message Of Peace - Key 2",
+    "catalogNumber": "7C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3355,
+    "audioPath": "services/7c-tarot-the-message-of-peace-key-2.mp3"
+  },
+  {
+    "slug": "8a-stop-complaining-and-start-aiming",
+    "title": "Stop Complaining And Start Aiming",
+    "catalogNumber": "8A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3309,
+    "audioPath": "services/8a-stop-complaining-and-start-aiming.mp3"
+  },
+  {
+    "slug": "8b-alchemists-crucible",
+    "title": "Alchemists Crucible",
+    "catalogNumber": "8B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2801,
+    "audioPath": "services/8b-alchemists-crucible.mp3"
+  },
+  {
+    "slug": "8b-qabalah-the-alchemists-crucible",
+    "title": "Qabalah - The Alchemists Crucible",
+    "catalogNumber": "8B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2701,
+    "audioPath": "services/8b-qabalah-the-alchemists-crucible.mp3"
+  },
+  {
+    "slug": "9a-true-worship",
+    "title": "True Worship",
+    "catalogNumber": "9A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2881,
+    "audioPath": "services/9a-true-worship.mp3"
+  },
+  {
+    "slug": "9b-if-god-went-on-a-vactation",
+    "title": "If God Went On A Vactation",
+    "catalogNumber": "9B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2893,
+    "audioPath": "services/9b-if-god-went-on-a-vactation.mp3"
+  },
+  {
+    "slug": "9c-you-do-take-it-with-you",
+    "title": "You Do Take It With You",
+    "catalogNumber": "9C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2603,
+    "audioPath": "services/9c-you-do-take-it-with-you.mp3"
+  },
+  {
+    "slug": "9d-death-the-giver-of-life",
+    "title": "Death - The Giver Of Life",
+    "catalogNumber": "9D",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2847,
+    "audioPath": "services/9d-death-the-giver-of-life.mp3"
+  },
+  {
     "slug": "10a-tarot-the-keys-to-freedom-key21",
     "title": "Tarot - The Keys To Freedom - Key21",
     "catalogNumber": "10A",
@@ -25,5 +1438,464 @@
     "groupingSlug": "services",
     "durationSeconds": 2079,
     "audioPath": "services/10a-tarot-the-keys-to-freedom-key21.mp3"
+  },
+  {
+    "slug": "10b-tuning-in-on-the-great-ones-key-5",
+    "title": "Tuning In On The Great Ones - Key 5",
+    "catalogNumber": "10B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3119,
+    "audioPath": "services/10b-tuning-in-on-the-great-ones-key-5.mp3"
+  },
+  {
+    "slug": "11a-what-is-guilt-and-who-is-guilty",
+    "title": "What Is Guilt And Who Is Guilty",
+    "catalogNumber": "11A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2489,
+    "audioPath": "services/11a-what-is-guilt-and-who-is-guilty.mp3"
+  },
+  {
+    "slug": "11b-the-tarot-mine-of-abundance",
+    "title": "The Tarot - Mine Of Abundance",
+    "catalogNumber": "11B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3425,
+    "audioPath": "services/11b-the-tarot-mine-of-abundance.mp3"
+  },
+  {
+    "slug": "11c-tarot-the-fear-breaker",
+    "title": "Tarot - The Fear Breaker",
+    "catalogNumber": "11C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3241,
+    "audioPath": "services/11c-tarot-the-fear-breaker.mp3"
+  },
+  {
+    "slug": "27a-how-to-develope-esp",
+    "title": "How To Develope Esp",
+    "catalogNumber": "27A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3187,
+    "audioPath": "services/27a-how-to-develope-esp.mp3"
+  },
+  {
+    "slug": "27c-the-qabalistic-christoswav",
+    "title": "The Qabalistic Christos.Wav",
+    "catalogNumber": "27C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2383,
+    "audioPath": "services/27c-the-qabalistic-christoswav.mp3"
+  },
+  {
+    "slug": "28a-achieving-unity-or-conformity",
+    "title": "Achieving Unity Or Conformity",
+    "catalogNumber": "28A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2761,
+    "audioPath": "services/28a-achieving-unity-or-conformity.mp3"
+  },
+  {
+    "slug": "28b-the-qabbalistic-interpretation-of-christmas",
+    "title": "The Qabbalistic Interpretation Of Christmas",
+    "catalogNumber": "28B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3026,
+    "audioPath": "services/28b-the-qabbalistic-interpretation-of-christmas.mp3"
+  },
+  {
+    "slug": "29c-a-qabalistic-view-of-reincarnation",
+    "title": "A Qabalistic View Of Reincarnation",
+    "catalogNumber": "29C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2489,
+    "audioPath": "services/29c-a-qabalistic-view-of-reincarnation.mp3"
+  },
+  {
+    "slug": "29e-the-true-meaning-of-planetary-influence",
+    "title": "The True Meaning Of Planetary Influence",
+    "catalogNumber": "29E",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2969,
+    "audioPath": "services/29e-the-true-meaning-of-planetary-influence.mp3"
+  },
+  {
+    "slug": "30a-the-art-of-forgiveness",
+    "title": "The Art Of Forgiveness",
+    "catalogNumber": "30A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2136,
+    "audioPath": "services/30a-the-art-of-forgiveness.mp3"
+  },
+  {
+    "slug": "30b-how-tarot-awakens-the-power-of-awareness",
+    "title": "How Tarot Awakens The Power Of Awareness",
+    "catalogNumber": "30B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2206,
+    "audioPath": "services/30b-how-tarot-awakens-the-power-of-awareness.mp3"
+  },
+  {
+    "slug": "30c-what-is-life-after-death",
+    "title": "What Is Life After Death",
+    "catalogNumber": "30C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2985,
+    "audioPath": "services/30c-what-is-life-after-death.mp3"
+  },
+  {
+    "slug": "30d-how-to-attain-the-awareness-of-immortality",
+    "title": "How To Attain The Awareness Of Immortality",
+    "catalogNumber": "30D",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 1851,
+    "audioPath": "services/30d-how-to-attain-the-awareness-of-immortality.mp3"
+  },
+  {
+    "slug": "31a-your-relationship-to-the-universe-at-equinox",
+    "title": "Your Relationship To The Universe At Equinox",
+    "catalogNumber": "31A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2153,
+    "audioPath": "services/31a-your-relationship-to-the-universe-at-equinox.mp3"
+  },
+  {
+    "slug": "31c-why-the-stars-influence-you",
+    "title": "Why The Stars Influence You",
+    "catalogNumber": "31C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 1942,
+    "audioPath": "services/31c-why-the-stars-influence-you.mp3"
+  },
+  {
+    "slug": "31d-man-in-the-aquarian-age",
+    "title": "Man In The Aquarian Age",
+    "catalogNumber": "31D",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2237,
+    "audioPath": "services/31d-man-in-the-aquarian-age.mp3"
+  },
+  {
+    "slug": "31e-the-difference-between-personality-and-self",
+    "title": "The Difference Between Personality And Self",
+    "catalogNumber": "31E",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2048,
+    "audioPath": "services/31e-the-difference-between-personality-and-self.mp3"
+  },
+  {
+    "slug": "32a-the-mystical-resurrection-easter-sunday",
+    "title": "The Mystical Resurrection - Easter Sunday",
+    "catalogNumber": "32A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2134,
+    "audioPath": "services/32a-the-mystical-resurrection-easter-sunday.mp3"
+  },
+  {
+    "slug": "32b-the-wheel-of-reincarnationwav",
+    "title": "The Wheel Of Reincarnation.Wav",
+    "catalogNumber": "32B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2684,
+    "audioPath": "services/32b-the-wheel-of-reincarnationwav.mp3"
+  },
+  {
+    "slug": "32c-how-to-intone-divine-names-for-healing",
+    "title": "How To Intone Divine Names For Healing",
+    "catalogNumber": "32C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3256,
+    "audioPath": "services/32c-how-to-intone-divine-names-for-healing.mp3"
+  },
+  {
+    "slug": "32d-divine-aspects-of-the-cosmic-mother-for-healing",
+    "title": "Divine Aspects Of The Cosmic Mother For Healing",
+    "catalogNumber": "32D",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3261,
+    "audioPath": "services/32d-divine-aspects-of-the-cosmic-mother-for-healing.mp3"
+  },
+  {
+    "slug": "33a-invocation-of-angelic-forces-for-healing",
+    "title": "Invocation of Angelic Forces for Healing",
+    "catalogNumber": "33A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2549,
+    "audioPath": "services/33a-invocation-of-angelic-forces-for-healing.mp3"
+  },
+  {
+    "slug": "33c-the-difference-between-psychic-and-spiritual-influence",
+    "title": "The Difference Between Psychic And Spiritual Influence",
+    "catalogNumber": "33C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2715,
+    "audioPath": "services/33c-the-difference-between-psychic-and-spiritual-influence.mp3"
+  },
+  {
+    "slug": "33d-physical-astral-and-spiritual-plane-telepathy",
+    "title": "Physical, Astral And Spiritual Plane Telepathy",
+    "catalogNumber": "33D",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2387,
+    "audioPath": "services/33d-physical-astral-and-spiritual-plane-telepathy.mp3"
+  },
+  {
+    "slug": "33e-evidence-of-survial-from-the-inner-planes",
+    "title": "Evidence Of Survial From The Inner Planes",
+    "catalogNumber": "33E",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2112,
+    "audioPath": "services/33e-evidence-of-survial-from-the-inner-planes.mp3"
+  },
+  {
+    "slug": "33f-the-difference-astral-and-mystical-awareness",
+    "title": "The Difference Astral And Mystical Awareness",
+    "catalogNumber": "33F",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2422,
+    "audioPath": "services/33f-the-difference-astral-and-mystical-awareness.mp3"
+  },
+  {
+    "slug": "42c-the-way-of-return-as-a-way-of-life",
+    "title": "The Way Of Return As A Way Of Life",
+    "catalogNumber": "42C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2197,
+    "audioPath": "services/42c-the-way-of-return-as-a-way-of-life.mp3"
+  },
+  {
+    "slug": "42d-awaken-your-inner-sensorium-through-tarot",
+    "title": "Awaken Your Inner Sensorium Through Tarot",
+    "catalogNumber": "42D",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2002,
+    "audioPath": "services/42d-awaken-your-inner-sensorium-through-tarot.mp3"
+  },
+  {
+    "slug": "43a-easter-the-esoteric-meaning-of-rebirthwav",
+    "title": "Easter  The Esoteric Meaning Of Rebirth.Wav",
+    "catalogNumber": "43A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 1790,
+    "audioPath": "services/43a-easter-the-esoteric-meaning-of-rebirthwav.mp3"
+  },
+  {
+    "slug": "50a-qabalistic-secret-teachings-of-the-mystery-schools-the-four-worlds",
+    "title": "Qabalistic Secret Teachings of the Mystery Schools (The Four Worlds)",
+    "catalogNumber": "50A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2543,
+    "audioPath": "services/50a-qabalistic-secret-teachings-of-the-mystery-schools-the-four-worlds.mp3"
+  },
+  {
+    "slug": "50b-practical-teachings-of-esoteric-work",
+    "title": "Practical Teachings of Esoteric Work",
+    "catalogNumber": "50B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 1838,
+    "audioPath": "services/50b-practical-teachings-of-esoteric-work.mp3"
+  },
+  {
+    "slug": "50c-tarot-psychology-of-spiritual-illumination",
+    "title": "Tarot - Psychology of Spiritual Illumination",
+    "catalogNumber": "50C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2348,
+    "audioPath": "services/50c-tarot-psychology-of-spiritual-illumination.mp3"
+  },
+  {
+    "slug": "50d-the-qabalistic-story-of-creation-genesis-1",
+    "title": "The Qabalistic Story of Creation (Genesis 1)",
+    "catalogNumber": "50D",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2584,
+    "audioPath": "services/50d-the-qabalistic-story-of-creation-genesis-1.mp3"
+  },
+  {
+    "slug": "50e-the-qabalistic-truth-about-adam-and-eve-genesis-2",
+    "title": "The Qabalistic Truth About Adam and Eve (Genesis 2)",
+    "catalogNumber": "50E",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2985,
+    "audioPath": "services/50e-the-qabalistic-truth-about-adam-and-eve-genesis-2.mp3"
+  },
+  {
+    "slug": "50f-understanding-good-and-evil-through-qabalah-genesis-3",
+    "title": "Understanding Good and Evil Through Qabalah (Genesis 3)",
+    "catalogNumber": "50F",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 6619,
+    "audioPath": "services/50f-understanding-good-and-evil-through-qabalah-genesis-3.mp3"
+  },
+  {
+    "slug": "51a-thanksgiving-giving-and-receiving-with-love",
+    "title": "Thanksgiving - Giving and receiving with Love",
+    "catalogNumber": "51A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2830,
+    "audioPath": "services/51a-thanksgiving-giving-and-receiving-with-love.mp3"
+  },
+  {
+    "slug": "51b-understanding-joy-and-sorrow-through-qabalah",
+    "title": "Understanding Joy and Sorrow Through Qabalah",
+    "catalogNumber": "51B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 2752,
+    "audioPath": "services/51b-understanding-joy-and-sorrow-through-qabalah.mp3"
+  },
+  {
+    "slug": "51c-qabalistic-interpretation-of-angelic-forces",
+    "title": "Qabalistic Interpretation of Angelic Forces",
+    "catalogNumber": "51C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 6048,
+    "audioPath": "services/51c-qabalistic-interpretation-of-angelic-forces.mp3"
+  },
+  {
+    "slug": "51e-the-qabalistic-interpretation-of-christmas",
+    "title": "The Qabalistic Interpretation of Christmas",
+    "catalogNumber": "51E",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3662,
+    "audioPath": "services/51e-the-qabalistic-interpretation-of-christmas.mp3"
+  },
+  {
+    "slug": "60a-how-to-practise-the-magic-of-light",
+    "title": "How To Practise The Magic Of Light",
+    "catalogNumber": "60A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3312,
+    "audioPath": "services/60a-how-to-practise-the-magic-of-light.mp3"
+  },
+  {
+    "slug": "61b-mastering-your-stars",
+    "title": "Mastering Your Stars",
+    "catalogNumber": "61B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3681,
+    "audioPath": "services/61b-mastering-your-stars.mp3"
+  },
+  {
+    "slug": "63b-spiritual-workers-incarnate-and-discarnate",
+    "title": "Spiritual Workers, Incarnate And Discarnate",
+    "catalogNumber": "63B",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3406,
+    "audioPath": "services/63b-spiritual-workers-incarnate-and-discarnate.mp3"
+  },
+  {
+    "slug": "66d-the-living-tarot-of-the-soul",
+    "title": "The Living Tarot Of The Soul",
+    "catalogNumber": "66D",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3243,
+    "audioPath": "services/66d-the-living-tarot-of-the-soul.mp3"
+  },
+  {
+    "slug": "68a-understanding-the-occult-meaning-of-will",
+    "title": "Understanding The Occult Meaning Of Will",
+    "catalogNumber": "68A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3353,
+    "audioPath": "services/68a-understanding-the-occult-meaning-of-will.mp3"
+  },
+  {
+    "slug": "72a-subconscious-transmutions-in-the-initiate",
+    "title": "Subconscious Transmutions In The Initiate",
+    "catalogNumber": "72A",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3557,
+    "audioPath": "services/72a-subconscious-transmutions-in-the-initiate.mp3"
+  },
+  {
+    "slug": "80h-preparing-for-mystical-ilumination",
+    "title": "Preparing For Mystical Ilumination",
+    "catalogNumber": "80H",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 393,
+    "audioPath": "services/80h-preparing-for-mystical-ilumination.mp3"
+  },
+  {
+    "slug": "84m-the-mystical-foundation-of-love",
+    "title": "The Mystical Foundation Of Love",
+    "catalogNumber": "84M",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3351,
+    "audioPath": "services/84m-the-mystical-foundation-of-love.mp3"
+  },
+  {
+    "slug": "84n-mothers-day-the-cosmic-mother",
+    "title": "Mothers Day  The Cosmic Mother",
+    "catalogNumber": "84N",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3478,
+    "audioPath": "services/84n-mothers-day-the-cosmic-mother.mp3"
+  },
+  {
+    "slug": "87c-the-secret-behind-spiritual-strength",
+    "title": "The Secret Behind Spiritual Strength",
+    "catalogNumber": "87C",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3405,
+    "audioPath": "services/87c-the-secret-behind-spiritual-strength.mp3"
+  },
+  {
+    "slug": "87e-wealth-poverty-and-security-tmp3",
+    "title": "Wealth, Poverty And Security T.Mp3",
+    "catalogNumber": "87E",
+    "grouping": "Services",
+    "groupingSlug": "services",
+    "durationSeconds": 3409,
+    "audioPath": "services/87e-wealth-poverty-and-security-tmp3.mp3"
   }
 ]
