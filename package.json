@@ -23,6 +23,7 @@
     "gen:gematria-words": "node --experimental-strip-types scripts/gen-gematria-words.ts",
     "gen:recordings": "node --experimental-strip-types scripts/gen-recordings.ts",
     "gen:recordings:timings": "node --experimental-strip-types scripts/gen-recordings-timings.ts",
+    "fix:transcripts": "node --experimental-strip-types scripts/fix-transcripts.ts",
     "gen:search": "npm run gen:search:recordings && npm run gen:search:bot",
     "gen:search:recordings": "node --experimental-strip-types scripts/gen-recordings-search.ts",
     "gen:search:bot": "node --experimental-strip-types scripts/gen-book-of-tokens-search.ts"

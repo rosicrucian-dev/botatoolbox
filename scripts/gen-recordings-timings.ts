@@ -25,6 +25,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
 import { slugify } from './lib/recordings-slug.ts'
+import { buildNormalize, capitalize } from './lib/transcript-normalize.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const PILOT = join(ROOT, 'local/transcription-pilot')
@@ -42,27 +43,12 @@ interface Segment {
   text: string
 }
 
-const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-
-const NORM: Record<string, string> = JSON.parse(
-  readFileSync(join(PILOT, 'glossary.json'), 'utf8'),
-).normalize
-// Whole-word, case-insensitive, longest alternative first (matches batch.py).
-const NORM_RE = new RegExp(
-  '\\b(' +
-    Object.keys(NORM)
-      .sort((a, b) => b.length - a.length)
-      .map(escapeRegExp)
-      .join('|') +
-    ')\\b',
-  'gi',
+// Glossary normalize (matches batch.py) — shared with the transcript fixer so
+// the derived text stays byte-identical to the corrected .md.
+const normalize = buildNormalize(
+  JSON.parse(readFileSync(join(PILOT, 'glossary.json'), 'utf8'))
+    .normalize as Record<string, string>,
 )
-function normalize(text: string): string {
-  return text.replace(NORM_RE, (m) => {
-    const tgt = NORM[m.toLowerCase()]
-    return /[A-Z]/.test(m[0]) ? tgt[0].toUpperCase() + tgt.slice(1) : tgt
-  })
-}
 
 const endsSentence = (t: string) => /[.!?]["')]?$/.test(t.trim())
 const wordCount = (t: string) => t.split(/\s+/).filter(Boolean).length
@@ -85,12 +71,12 @@ function paragraphs(segs: Segment[]): Array<{ start: number; text: string }> {
       (words >= MAX_WORDS && endsSentence(t)) ||
       i + 1 === segs.length
     ) {
-      out.push({ start, text: cur.join(' ') })
+      out.push({ start, text: capitalize(normalize(cur.join(' '))) })
       cur = []
       words = 0
     }
   }
-  if (cur.length) out.push({ start, text: cur.join(' ') })
+  if (cur.length) out.push({ start, text: capitalize(normalize(cur.join(' '))) })
   return out
 }
 
