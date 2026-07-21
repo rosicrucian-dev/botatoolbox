@@ -34,8 +34,8 @@ export default async function Recordings({
         role="note"
         className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800 dark:border-blue-400/20 dark:bg-blue-400/10 dark:text-blue-200"
       >
-        These recordings were transcribed using Whisper AI, and may contain
-        errors. You can help correct these issues on{' '}
+        These recordings were transcribed using Whisper, and may contain
+        errors. You can help correct any issues on{' '}
         <a
           href="https://github.com/rosicrucian-dev/botatoolbox"
           target="_blank"

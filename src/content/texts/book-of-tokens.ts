@@ -49,6 +49,11 @@ export const getBookOfTokens = defineLocalized((locale) => {
             `[i18n] book-of-tokens (${locale}): chapter "${en.title}" has ${c.verses.length} verses vs ${en.verses.length} in English — check the verse-number lines`,
           )
         }
+        if (c.comment.length !== en.comment.length) {
+          console.warn(
+            `[i18n] book-of-tokens (${locale}): chapter "${en.title}" has ${c.comment.length} comment notes vs ${en.comment.length} in English — check the ### Comment section`,
+          )
+        }
         // URL slug stays English — pages are parallel across locales.
         return { ...c, slug: en.slug }
       })

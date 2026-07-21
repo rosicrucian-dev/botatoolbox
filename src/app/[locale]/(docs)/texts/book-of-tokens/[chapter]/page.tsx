@@ -87,7 +87,12 @@ export default async function Chapter({
         ) : null}
       </div>
 
-      <HighlightMatches dep={c.slug} className="space-y-10">
+      {/* key={c.slug} forces a fresh mount per chapter: useHighlightQuery
+          mutates this (React-owned) DOM to inject <mark>s, and chapter-to-
+          chapter nav is client-side (reconciled in place), so without a remount
+          React would diff the previous chapter's mutated tree into the next —
+          risking stale marks or a removeChild error. Remounting sidesteps that. */}
+      <HighlightMatches key={c.slug} dep={c.slug} className="space-y-10">
         <ol className="space-y-6">
           {c.verses.map((v, vi) => (
             <li key={vi} className="flex items-baseline gap-3 md:gap-4">

@@ -26,6 +26,16 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      # Guard against shipping a stale search index on a direct push to main
+      # (CI skips main). Mirrors ci.yml — regenerate the committed indexes from
+      # content and fail on drift.
+      - name: Verify prebuilt search indexes are current
+        run: |
+          npm run gen:search
+          git diff --exit-code -- public/data/ || {
+            echo "::error::Search indexes are stale — run 'npm run gen:search' and commit public/data/*.json";
+            exit 1;
+          }
       - run: npm run build
       - uses: actions/upload-pages-artifact@v5
         with:
