@@ -32,7 +32,12 @@ export function NavSections() {
 
 function Section({ group }: { group: NavGroup }) {
   return (
-    <section>
+    <section
+      id={group.slug}
+      // Clear the fixed Header (3.5rem + top safe-area inset) when the
+      // home TOC scrolls to this section, plus a small breather.
+      className="scroll-mt-[calc(5rem+env(safe-area-inset-top))]"
+    >
       <h2 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white">
         {group.title}
       </h2>

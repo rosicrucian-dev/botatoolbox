@@ -5,6 +5,7 @@ import { HeroPattern } from '@/components/HeroPattern'
 import { PageHeading } from '@/components/PageHeading'
 import { Prose } from '@/components/Prose'
 import { NavSections } from './NavSections'
+import { TableOfContents } from './TableOfContents'
 
 // No `metadata.title` here — falls back to layout's `default: 'BOTA
 // Toolbox'`, which skips the `'%s - BOTA Toolbox'` template wrapping
@@ -54,6 +55,7 @@ export default function Home() {
           </p> */}
           </Prose>
         </header>
+        <TableOfContents />
         <NavSections />
       </article>
     </>
