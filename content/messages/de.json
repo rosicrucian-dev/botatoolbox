@@ -168,6 +168,7 @@
   "settings.copied": "Copied ✓",
   "settings.copy": "Copy",
   "settings.copyFailed": "Copying failed — select the link manually:",
+  "settings.general": "Allgemein",
   "settings.incorrectPassword": "Incorrect password.",
   "settings.language": "Sprache",
   "settings.lock": "Lock",

@@ -178,6 +178,17 @@ export function SettingsClient() {
     <div className="space-y-10">
       <section className="space-y-6">
         <h2 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">
+          {t('settings.general')}
+        </h2>
+        <div className="grid max-w-2xl gap-6 sm:grid-cols-2">
+          <LanguageField />
+        </div>
+      </section>
+
+      <hr className="border-zinc-200 dark:border-zinc-800" />
+
+      <section className="space-y-6">
+        <h2 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">
           {t('settings.style')}
         </h2>
         <div className="grid max-w-2xl gap-6 sm:grid-cols-2">
@@ -199,7 +210,6 @@ export function SettingsClient() {
             value={colorPalette}
             onChange={(id) => setColorPalette(id as ColorPaletteId)}
           />
-          <LanguageField />
         </div>
       </section>
 
