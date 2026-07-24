@@ -60,6 +60,7 @@ export default function About() {
           </li>
         </ul>
       </Prose>
+      <br/>
       <a href="https://rosicrucian.dev" className="inline-block">
         <img
           src="/avatar.png"
