@@ -10,7 +10,8 @@
   {
     "slug": "book-of-tokens",
     "title": "The Book of Tokens",
-    "custom": true
+    "custom": true,
+    "hidden": true
   },
   {
     "slug": "chaldean-oracles",
