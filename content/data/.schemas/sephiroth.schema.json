@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string"
+      },
+      "hebrewName": {
+        "type": "string"
+      },
+      "hebrewRoman": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "element": {
+        "type": "string"
+      },
+      "mantraSlug": {
+        "type": "string"
+      },
+      "color": {
+        "type": "string"
+      },
+      "situationOnTree": {
+        "type": "string"
+      },
+      "briaticColors": {
+        "type": "string"
+      },
+      "astrological": {
+        "type": "string"
+      },
+      "gods": {
+        "type": "string"
+      },
+      "magicalImage": {
+        "type": "string"
+      },
+      "symbols": {
+        "type": "string"
+      },
+      "tarotMinors": {
+        "type": "string"
+      },
+      "microcosm": {
+        "type": "string"
+      },
+      "bodyCorrespondence": {
+        "type": "string"
+      },
+      "perfumes": {
+        "type": "string"
+      },
+      "stones": {
+        "type": "string"
+      },
+      "animals": {
+        "type": "string"
+      },
+      "quadrantColors": {
+        "type": "object",
+        "properties": {
+          "top": {
+            "type": "string"
+          },
+          "right": {
+            "type": "string"
+          },
+          "bottom": {
+            "type": "string"
+          },
+          "left": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "slug",
+      "hebrewName",
+      "name",
+      "element",
+      "mantraSlug",
+      "color"
+    ],
+    "additionalProperties": false
+  }
+}

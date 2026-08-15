@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "edges": {
+      "minItems": 12,
+      "maxItems": 12,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "T-E",
+              "T-N",
+              "T-W",
+              "T-S",
+              "B-E",
+              "B-N",
+              "B-W",
+              "B-S",
+              "NE",
+              "SE",
+              "SW",
+              "NW"
+            ],
+            "description": "Edge position: T-*/B-* are the top/bottom horizontals of the named face; two-letter ids are the vertical corner edges."
+          },
+          "cardSlug": {
+            "type": "string",
+            "description": "Major arcana card (simple Hebrew letter / zodiac sign) attributed to this edge."
+          },
+          "flow": {
+            "type": "string",
+            "enum": [
+              "north",
+              "south",
+              "east",
+              "west",
+              "up",
+              "down"
+            ],
+            "description": "Direction the edge's flow runs. Horizontal edges use compass words; vertical corner edges use up/down."
+          }
+        },
+        "required": [
+          "id",
+          "cardSlug",
+          "flow"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "faces": {
+      "minItems": 6,
+      "maxItems": 6,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "east",
+              "west",
+              "above",
+              "below",
+              "north",
+              "south"
+            ]
+          },
+          "cardSlug": {
+            "type": "string",
+            "description": "Major arcana card (double Hebrew letter / planet) attributed to this face."
+          },
+          "borders": {
+            "type": "object",
+            "properties": {
+              "top": {
+                "type": "string",
+                "enum": [
+                  "T-E",
+                  "T-N",
+                  "T-W",
+                  "T-S",
+                  "B-E",
+                  "B-N",
+                  "B-W",
+                  "B-S",
+                  "NE",
+                  "SE",
+                  "SW",
+                  "NW"
+                ],
+                "description": "Edge position: T-*/B-* are the top/bottom horizontals of the named face; two-letter ids are the vertical corner edges."
+              },
+              "bottom": {
+                "type": "string",
+                "enum": [
+                  "T-E",
+                  "T-N",
+                  "T-W",
+                  "T-S",
+                  "B-E",
+                  "B-N",
+                  "B-W",
+                  "B-S",
+                  "NE",
+                  "SE",
+                  "SW",
+                  "NW"
+                ],
+                "description": "Edge position: T-*/B-* are the top/bottom horizontals of the named face; two-letter ids are the vertical corner edges."
+              },
+              "right": {
+                "type": "string",
+                "enum": [
+                  "T-E",
+                  "T-N",
+                  "T-W",
+                  "T-S",
+                  "B-E",
+                  "B-N",
+                  "B-W",
+                  "B-S",
+                  "NE",
+                  "SE",
+                  "SW",
+                  "NW"
+                ],
+                "description": "Edge position: T-*/B-* are the top/bottom horizontals of the named face; two-letter ids are the vertical corner edges."
+              },
+              "left": {
+                "type": "string",
+                "enum": [
+                  "T-E",
+                  "T-N",
+                  "T-W",
+                  "T-S",
+                  "B-E",
+                  "B-N",
+                  "B-W",
+                  "B-S",
+                  "NE",
+                  "SE",
+                  "SW",
+                  "NW"
+                ],
+                "description": "Edge position: T-*/B-* are the top/bottom horizontals of the named face; two-letter ids are the vertical corner edges."
+              }
+            },
+            "required": [
+              "top",
+              "bottom",
+              "right",
+              "left"
+            ],
+            "additionalProperties": false,
+            "description": "Which edge frames each side of this face, as seen facing the face from inside the cube."
+          }
+        },
+        "required": [
+          "id",
+          "cardSlug",
+          "borders"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "edges",
+    "faces"
+  ],
+  "additionalProperties": false
+}

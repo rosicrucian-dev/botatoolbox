@@ -1,0 +1,33 @@
+// Zodiac signs — raw records from signs.json (healing/body-part data,
+// rulers, exaltations). For the tarot-joined view used by the astrology
+// pages, see ./astrology.ts (astrologySigns). German display fields come
+// from `de/signs.json` (see overlay-config.ts) via getSigns(locale); the
+// top-level exports stay pinned to English.
+
+import { z } from 'zod'
+
+import signsData from '@content/data/en/signs.json'
+import { defineLocalized } from './localized'
+import { localizedRaw } from './overlay'
+import { SignSchema } from './schemas'
+
+export type HealingSign = z.infer<typeof SignSchema>
+
+// Zodiac glyphs (U+2648–U+2653) default to full-color emoji presentation
+// on Apple platforms. Appending U+FE0E (variation selector-15) forces the
+// monochrome text symbol. Doing it once here means EVERY consumer — the
+// astrology tables, the focus player, the quiz, and the chart wheel — gets
+// the plain text glyph instead of an emoji. Kept out of signs.json so the
+// raw data stays a clean codepoint per sign.
+const TEXT_VS = '\uFE0E'
+
+const rawFor = localizedRaw('signs', signsData)
+
+export const getSigns = defineLocalized((locale) => {
+  const signs: ReadonlyArray<HealingSign> = z
+    .array(SignSchema)
+    .parse(rawFor(locale))
+    .map((s) => ({ ...s, glyph: s.glyph + TEXT_VS }))
+
+  return { signs }
+})

@@ -1,0 +1,24 @@
+[
+  {
+    "slug": "adoration-lord-universe",
+    "title": "Adoration to the Lord of the Universe"
+  },
+  {
+    "slug": "aquarian-doxology",
+    "title": "Aquarian Doxology"
+  },
+  {
+    "slug": "chaldean-oracles",
+    "title": "Chaldean Oracles",
+    "hidden": true
+  },
+  {
+    "slug": "emerald-tablet-hermes",
+    "title": "The Emerald Tablet of Hermes"
+  },
+  {
+    "slug": "pattern-trestleboard",
+    "title": "The Pattern on the Trestleboard",
+    "custom": true
+  }
+]

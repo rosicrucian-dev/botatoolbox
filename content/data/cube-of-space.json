@@ -1,0 +1,48 @@
+{
+  "edges": [
+    { "id": "T-N", "cardSlug": "strength", "flow": "west" },
+    { "id": "T-E", "cardSlug": "the-lovers", "flow": "north" },
+    { "id": "T-S", "cardSlug": "the-star", "flow": "east" },
+    { "id": "T-W", "cardSlug": "temperance", "flow": "south" },
+    { "id": "B-N", "cardSlug": "the-hermit", "flow": "west" },
+    { "id": "B-E", "cardSlug": "the-chariot", "flow": "south" },
+    { "id": "B-S", "cardSlug": "the-moon", "flow": "east" },
+    { "id": "B-W", "cardSlug": "the-devil", "flow": "south" },
+    { "id": "NE", "cardSlug": "the-emperor", "flow": "down" },
+    { "id": "SE", "cardSlug": "the-hierophant", "flow": "up" },
+    { "id": "SW", "cardSlug": "death", "flow": "up" },
+    { "id": "NW", "cardSlug": "justice", "flow": "down" }
+  ],
+  "faces": [
+    {
+      "id": "east",
+      "cardSlug": "the-empress",
+      "borders": { "top": "T-E", "bottom": "B-E", "right": "SE", "left": "NE" }
+    },
+    {
+      "id": "west",
+      "cardSlug": "the-wheel-of-fortune",
+      "borders": { "top": "T-W", "bottom": "B-W", "right": "NW", "left": "SW" }
+    },
+    {
+      "id": "above",
+      "cardSlug": "the-magician",
+      "borders": { "top": "T-S", "bottom": "T-N", "right": "T-E", "left": "T-W" }
+    },
+    {
+      "id": "below",
+      "cardSlug": "high-priestess",
+      "borders": { "top": "B-N", "bottom": "B-S", "right": "B-E", "left": "B-W" }
+    },
+    {
+      "id": "north",
+      "cardSlug": "the-tower",
+      "borders": { "top": "T-N", "bottom": "B-N", "right": "NE", "left": "NW" }
+    },
+    {
+      "id": "south",
+      "cardSlug": "the-sun",
+      "borders": { "top": "T-S", "bottom": "B-S", "right": "SW", "left": "SE" }
+    }
+  ]
+}

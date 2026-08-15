@@ -1,0 +1,167 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "content/data/*/tarot.json"
+      ],
+      "url": "./content/data/.schemas/tarot.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/words.json"
+      ],
+      "url": "./content/data/.schemas/words.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/signs.json"
+      ],
+      "url": "./content/data/.schemas/signs.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/planets.json"
+      ],
+      "url": "./content/data/.schemas/planets.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/minor-arcana.json"
+      ],
+      "url": "./content/data/.schemas/minor-arcana.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/sephiroth.json"
+      ],
+      "url": "./content/data/.schemas/sephiroth.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/tree-paths.json"
+      ],
+      "url": "./content/data/.schemas/tree-paths.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/meditations-tarot-fundamentals.json"
+      ],
+      "url": "./content/data/.schemas/meditations-tarot-fundamentals.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/meditations-supersensory-powers.json"
+      ],
+      "url": "./content/data/.schemas/meditations-supersensory-powers.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/grades.json"
+      ],
+      "url": "./content/data/.schemas/grades.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/chakras.json"
+      ],
+      "url": "./content/data/.schemas/chakras.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/elements.json"
+      ],
+      "url": "./content/data/.schemas/elements.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/alchemy.json"
+      ],
+      "url": "./content/data/.schemas/alchemy.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/houses.json"
+      ],
+      "url": "./content/data/.schemas/houses.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/gunas.json"
+      ],
+      "url": "./content/data/.schemas/gunas.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/three-veils.json"
+      ],
+      "url": "./content/data/.schemas/three-veils.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/four-worlds.json"
+      ],
+      "url": "./content/data/.schemas/four-worlds.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/pillars.json"
+      ],
+      "url": "./content/data/.schemas/pillars.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/ten-palaces.json"
+      ],
+      "url": "./content/data/.schemas/ten-palaces.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/suit-correspondences.json"
+      ],
+      "url": "./content/data/.schemas/suit-correspondences.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/numerology.json"
+      ],
+      "url": "./content/data/.schemas/numerology.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/texts.json"
+      ],
+      "url": "./content/data/.schemas/texts.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/rituals.json"
+      ],
+      "url": "./content/data/.schemas/rituals.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/cube-of-space.json"
+      ],
+      "url": "./content/data/.schemas/cube-of-space.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/files.json"
+      ],
+      "url": "./content/data/.schemas/files.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/recordings.json"
+      ],
+      "url": "./content/data/.schemas/recordings.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/messages/*.json",
+        "!content/messages/*.schema.json"
+      ],
+      "url": "./content/messages/messages.schema.json"
+    }
+  ]
+}

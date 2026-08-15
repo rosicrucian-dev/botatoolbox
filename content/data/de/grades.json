@@ -1,0 +1,100 @@
+[
+  {
+    "slug": "neophyte",
+    "name": "Neophyte",
+    "gradeNumber": "0=0",
+    "sephirah": null,
+    "intelligenceName": null,
+    "intelligenceRoman": null
+  },
+  {
+    "slug": "zelator",
+    "name": "Zelator",
+    "gradeNumber": "1=10",
+    "sephirah": "malkuth",
+    "intelligenceName": "Resplendent",
+    "intelligenceHebrew": "Mitnotzetz",
+    "intelligenceRoman": "MThNVTzO"
+  },
+  {
+    "slug": "theoricus",
+    "name": "Theoricus",
+    "gradeNumber": "2=9",
+    "sephirah": "yesod",
+    "intelligenceName": "Pure",
+    "intelligenceHebrew": "Tahoor",
+    "intelligenceRoman": "THVR"
+  },
+  {
+    "slug": "practicus",
+    "name": "Practicus",
+    "gradeNumber": "3=8",
+    "sephirah": "hod",
+    "intelligenceName": "Perfect",
+    "intelligenceHebrew": "Shalom",
+    "intelligenceRoman": "ShLM"
+  },
+  {
+    "slug": "philosophus",
+    "name": "Philosophus",
+    "gradeNumber": "4=7",
+    "sephirah": "netzach",
+    "intelligenceName": "Occult",
+    "intelligenceHebrew": "Nesether",
+    "intelligenceRoman": "NSThR"
+  },
+  {
+    "slug": "lesser-adept",
+    "name": "Lesser Adept",
+    "gradeNumber": "5=6",
+    "sephirah": "tiphareth",
+    "intelligenceName": "Mediating",
+    "intelligenceHebrew": "Shefa Nabadal",
+    "intelligenceRoman": "ShPO NBDL"
+  },
+  {
+    "slug": "greater-adept",
+    "name": "Greater Adept",
+    "gradeNumber": "6=5",
+    "sephirah": "geburah",
+    "intelligenceName": "Radical",
+    "intelligenceHebrew": "Nasharash",
+    "intelligenceRoman": "NShRSh"
+  },
+  {
+    "slug": "adeptus-exemptus",
+    "name": "Exempt Adept",
+    "gradeNumber": "7=4",
+    "sephirah": "chesed",
+    "intelligenceName": "Receiving",
+    "intelligenceHebrew": "Qavuah",
+    "intelligenceRoman": "QBVO"
+  },
+  {
+    "slug": "magister-templi",
+    "name": "Magister Templi",
+    "gradeNumber": "8=3",
+    "sephirah": "binah",
+    "intelligenceName": "Sanctifying",
+    "intelligenceHebrew": "Mekudash",
+    "intelligenceRoman": "MQVDSh"
+  },
+  {
+    "slug": "magus",
+    "name": "Magus",
+    "gradeNumber": "9=2",
+    "sephirah": "chokmah",
+    "intelligenceName": "Illuminating",
+    "intelligenceHebrew": "Zohir",
+    "intelligenceRoman": "ZHIR"
+  },
+  {
+    "slug": "ipsissimus",
+    "name": "Ipsissimus",
+    "gradeNumber": "10=1",
+    "sephirah": "kether",
+    "intelligenceName": "Admirable",
+    "intelligenceHebrew": "Pehleh",
+    "intelligenceRoman": "PLA"
+  }
+]

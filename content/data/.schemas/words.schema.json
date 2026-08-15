@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "english": {
+        "type": "string"
+      },
+      "meaning": {
+        "type": "string"
+      },
+      "wordSizes": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      },
+      "letters": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "letter": {
+              "type": "string"
+            },
+            "pronunciation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "letter",
+            "pronunciation"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "slug",
+      "name",
+      "letters"
+    ],
+    "additionalProperties": false
+  }
+}
