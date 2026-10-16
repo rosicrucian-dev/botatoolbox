@@ -1,0 +1,51 @@
+name: Cleanup
+
+# Janitor: keeps the Actions and Deployments lists from accumulating
+# forever. GitHub has no retention setting for either — the Actions
+# "artifact and log retention" setting expires what's INSIDE runs, but
+# the run entries themselves (and Pages deployment records) pile up
+# indefinitely. Weekly, this deletes both kinds of record once they're
+# older than 7 days — recent history stays available for debugging a
+# bad deploy. The janitor prunes its own old runs on the same schedule.
+
+on:
+  schedule:
+    - cron: '0 4 * * 0' # Sundays 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  deployments: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Delete workflow runs older than 7 days
+        run: |
+          cutoff=$(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ)
+          gh api --paginate "repos/$REPO/actions/runs?per_page=100" \
+            --jq ".workflow_runs[] | select(.status == \"completed\" and .created_at < \"$cutoff\") | .id" |
+          while read -r id; do
+            gh api -X DELETE "repos/$REPO/actions/runs/$id" > /dev/null \
+              && echo "deleted run $id" || echo "failed run $id"
+          done
+
+      - name: Delete deployment records older than 7 days
+        run: |
+          cutoff=$(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ)
+          # API returns newest first; `tail -n +2` always spares the
+          # newest of the old records, so the github-pages environment
+          # keeps a current deployment even in a quiet week. Records
+          # must be marked inactive before GitHub allows deletion.
+          gh api --paginate "repos/$REPO/deployments?per_page=100" \
+            --jq ".[] | select(.created_at < \"$cutoff\") | .id" | tail -n +2 |
+          while read -r id; do
+            gh api -X POST "repos/$REPO/deployments/$id/statuses" \
+              -f state=inactive > /dev/null || true
+            gh api -X DELETE "repos/$REPO/deployments/$id" > /dev/null \
+              && echo "deleted deployment $id" || echo "failed deployment $id"
+          done

@@ -1,0 +1,5 @@
+/* Loaded only by the development-only meditations layout. Keep utilities
+   from ignored local source out of the public stylesheet and export. */
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@reference './tailwind.css';
+@source '../../private/legacy/src';

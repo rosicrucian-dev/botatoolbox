@@ -1,0 +1,554 @@
+{
+  "tarot": [
+    {
+      "id": "heights-of-attainment-in-tarot",
+      "phrase": 28,
+      "count": 28
+    },
+    {
+      "id": "superconsciousness-in-the-sacred-tarot",
+      "phrase": 23,
+      "count": 23
+    },
+    {
+      "id": "cycles-of-evolution-in-tarot",
+      "phrase": 18,
+      "count": 18
+    },
+    {
+      "id": "10a-tarot-the-keys-to-freedom-key21",
+      "phrase": 29,
+      "count": 29
+    },
+    {
+      "id": "use-of-tarot-for-contact-with-masters",
+      "phrase": 27,
+      "count": 27
+    },
+    {
+      "id": "how-tarot-awakens-the-power-of-awareness",
+      "phrase": 24,
+      "count": 24
+    },
+    {
+      "id": "30b-how-tarot-awakens-the-power-of-awareness",
+      "phrase": 24,
+      "count": 24
+    },
+    {
+      "id": "tarot-and-the-guiding-star",
+      "phrase": 14,
+      "count": 14
+    },
+    {
+      "id": "reversing-adversity-through-tarot",
+      "phrase": 22,
+      "count": 22
+    },
+    {
+      "id": "66d-the-living-tarot-of-the-soul",
+      "phrase": 14,
+      "count": 14
+    }
+  ],
+  "tree of life": [
+    {
+      "id": "attainment-on-the-tree-of-life-class-6",
+      "phrase": 16,
+      "count": 54
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-10",
+      "phrase": 13,
+      "count": 60
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-5",
+      "phrase": 11,
+      "count": 46
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-8",
+      "phrase": 9,
+      "count": 58
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-4",
+      "phrase": 10,
+      "count": 43
+    },
+    {
+      "id": "5a-qabalah-the-western-tree-of-life",
+      "phrase": 5,
+      "count": 32
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-11",
+      "phrase": 7,
+      "count": 29
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-2",
+      "phrase": 7,
+      "count": 47
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-9",
+      "phrase": 5,
+      "count": 51
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-3",
+      "phrase": 6,
+      "count": 44
+    }
+  ],
+  "\"tree of life\"": [
+    {
+      "id": "attainment-on-the-tree-of-life-class-6",
+      "phrase": 16,
+      "count": 54
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-10",
+      "phrase": 13,
+      "count": 60
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-5",
+      "phrase": 11,
+      "count": 46
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-8",
+      "phrase": 9,
+      "count": 58
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-4",
+      "phrase": 10,
+      "count": 43
+    },
+    {
+      "id": "5a-qabalah-the-western-tree-of-life",
+      "phrase": 5,
+      "count": 32
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-11",
+      "phrase": 7,
+      "count": 29
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-2",
+      "phrase": 7,
+      "count": 47
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-9",
+      "phrase": 5,
+      "count": 51
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-3",
+      "phrase": 6,
+      "count": 44
+    }
+  ],
+  "key 21": [
+    {
+      "id": "key-21-the-world",
+      "phrase": 4,
+      "count": 24
+    },
+    {
+      "id": "key-12-the-hanged-man",
+      "phrase": 5,
+      "count": 27
+    },
+    {
+      "id": "key-11-justice",
+      "phrase": 3,
+      "count": 22
+    },
+    {
+      "id": "what-is-cosmic-consciousness",
+      "phrase": 4,
+      "count": 26
+    },
+    {
+      "id": "the-dance-of-the-cosmos",
+      "phrase": 4,
+      "count": 28
+    },
+    {
+      "id": "easter-mystical-truth-of-eternal-ressurection",
+      "phrase": 2,
+      "count": 9
+    },
+    {
+      "id": "easter-mystical-resurrection-secret-of-life",
+      "phrase": 2,
+      "count": 14
+    },
+    {
+      "id": "key-17-the-star",
+      "phrase": 1,
+      "count": 25
+    },
+    {
+      "id": "7-seven-stages-to-spiritual-unfolment-through-tarot",
+      "phrase": 1,
+      "count": 24
+    },
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-8",
+      "phrase": 1,
+      "count": 20
+    }
+  ],
+  "cube of space": [
+    {
+      "id": "87e-wealth-poverty-and-security-tmp3",
+      "phrase": 2,
+      "count": 4
+    },
+    {
+      "id": "the-dance-of-the-cosmos",
+      "phrase": 0,
+      "count": 3
+    },
+    {
+      "id": "creativity-secret-of-divine-love",
+      "phrase": 0,
+      "count": 3
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-5",
+      "phrase": 0,
+      "count": 3
+    }
+  ],
+  "first matte": [
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-5",
+      "phrase": 1,
+      "count": 26
+    },
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-2",
+      "phrase": 0,
+      "count": 35
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-2",
+      "phrase": 0,
+      "count": 27
+    },
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-1",
+      "phrase": 0,
+      "count": 26
+    },
+    {
+      "id": "32a-the-mystical-resurrection-easter-sunday",
+      "phrase": 0,
+      "count": 15
+    },
+    {
+      "id": "energies-of-summer-solstice-in-mysticism",
+      "phrase": 0,
+      "count": 18
+    },
+    {
+      "id": "50a-qabalistic-secret-teachings-of-the-mystery-schools-the-four-worlds",
+      "phrase": 0,
+      "count": 17
+    },
+    {
+      "id": "easter-mystical-truth-of-eternal-ressurection",
+      "phrase": 0,
+      "count": 18
+    },
+    {
+      "id": "3-seven-stages-to-spiritual-unfoldment-though-tarot",
+      "phrase": 0,
+      "count": 19
+    },
+    {
+      "id": "32d-divine-aspects-of-the-cosmic-mother-for-healing",
+      "phrase": 0,
+      "count": 16
+    }
+  ],
+  "color": [
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-9",
+      "phrase": 19,
+      "count": 19
+    },
+    {
+      "id": "33c-the-difference-between-psychic-and-spiritual-influence",
+      "phrase": 12,
+      "count": 12
+    },
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-1",
+      "phrase": 12,
+      "count": 12
+    },
+    {
+      "id": "the-power-of-the-word-and-how-to-use-it",
+      "phrase": 9,
+      "count": 9
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-10",
+      "phrase": 12,
+      "count": 12
+    },
+    {
+      "id": "discrimination-in-mysticism",
+      "phrase": 8,
+      "count": 8
+    },
+    {
+      "id": "harmonizing-the-seven-chakras",
+      "phrase": 7,
+      "count": 7
+    },
+    {
+      "id": "vol-1-track-01",
+      "phrase": 6,
+      "count": 6
+    },
+    {
+      "id": "key-20-judgement",
+      "phrase": 6,
+      "count": 6
+    },
+    {
+      "id": "vol-4-track-01",
+      "phrase": 6,
+      "count": 6
+    }
+  ],
+  "colors": [
+    {
+      "id": "attainment-on-the-tree-of-life-class-10",
+      "phrase": 6,
+      "count": 6
+    },
+    {
+      "id": "7-seven-stages-to-spiritual-unfolment-through-tarot",
+      "phrase": 4,
+      "count": 4
+    },
+    {
+      "id": "51b-understanding-joy-and-sorrow-through-qabalah",
+      "phrase": 3,
+      "count": 3
+    },
+    {
+      "id": "60a-how-to-practise-the-magic-of-light",
+      "phrase": 3,
+      "count": 3
+    },
+    {
+      "id": "50a-qabalistic-secret-teachings-of-the-mystery-schools-the-four-worlds",
+      "phrase": 3,
+      "count": 3
+    },
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-1",
+      "phrase": 3,
+      "count": 3
+    },
+    {
+      "id": "vol-4-track-01",
+      "phrase": 2,
+      "count": 2
+    },
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-9",
+      "phrase": 3,
+      "count": 3
+    },
+    {
+      "id": "the-western-occult-techniques-of-meditation",
+      "phrase": 2,
+      "count": 2
+    },
+    {
+      "id": "42d-awaken-your-inner-sensorium-through-tarot",
+      "phrase": 2,
+      "count": 2
+    }
+  ],
+  "qabalah": [
+    {
+      "id": "8b-qabalah-the-alchemists-crucible",
+      "phrase": 15,
+      "count": 15
+    },
+    {
+      "id": "the-cosmic-father-in-qabalah",
+      "phrase": 11,
+      "count": 11
+    },
+    {
+      "id": "6a-qabalah-and-reincarnation-key-16",
+      "phrase": 17,
+      "count": 17
+    },
+    {
+      "id": "cosimic-mother-in-qabalah",
+      "phrase": 7,
+      "count": 7
+    },
+    {
+      "id": "5a-qabalah-the-western-tree-of-life",
+      "phrase": 10,
+      "count": 10
+    },
+    {
+      "id": "desire-and-love-in-qabalah",
+      "phrase": 7,
+      "count": 7
+    },
+    {
+      "id": "qabalah-a-blueprint-towards-adeptship",
+      "phrase": 8,
+      "count": 8
+    },
+    {
+      "id": "the-divine-hierarchy-in-qabalah",
+      "phrase": 5,
+      "count": 5
+    },
+    {
+      "id": "50f-understanding-good-and-evil-through-qabalah-genesis-3",
+      "phrase": 13,
+      "count": 13
+    },
+    {
+      "id": "51b-understanding-joy-and-sorrow-through-qabalah",
+      "phrase": 2,
+      "count": 2
+    }
+  ],
+  "meditation on the": [
+    {
+      "id": "meditation-mystical-and-practical",
+      "phrase": 33,
+      "count": 33
+    },
+    {
+      "id": "meditation-in-the-aquarian-age",
+      "phrase": 31,
+      "count": 31
+    },
+    {
+      "id": "meditation-the-guiding-light",
+      "phrase": 29,
+      "count": 29
+    },
+    {
+      "id": "what-is-true-occult-meditation",
+      "phrase": 23,
+      "count": 23
+    },
+    {
+      "id": "the-occult-secret-of-meditation",
+      "phrase": 21,
+      "count": 21
+    },
+    {
+      "id": "truth-and-fallacies-about-the-art-of-meditation",
+      "phrase": 36,
+      "count": 36
+    },
+    {
+      "id": "the-western-occult-techniques-of-meditation-2",
+      "phrase": 16,
+      "count": 16
+    },
+    {
+      "id": "the-western-occult-techniques-of-meditation",
+      "phrase": 12,
+      "count": 12
+    },
+    {
+      "id": "mediation-the-secret-of-peace",
+      "phrase": 28,
+      "count": 28
+    },
+    {
+      "id": "key-17-the-star",
+      "phrase": 25,
+      "count": 25
+    }
+  ],
+  "ann davies": [
+    {
+      "id": "2c-the-link-between-you-and-the-universal-mind",
+      "phrase": 1,
+      "count": 2
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-7",
+      "phrase": 1,
+      "count": 2
+    }
+  ],
+  "\"pattern on the trestleboard\"": [],
+  "hod": [
+    {
+      "id": "8-hod",
+      "phrase": 1,
+      "count": 1
+    },
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-5",
+      "phrase": 3,
+      "count": 3
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-9",
+      "phrase": 3,
+      "count": 3
+    },
+    {
+      "id": "42d-awaken-your-inner-sensorium-through-tarot",
+      "phrase": 2,
+      "count": 2
+    },
+    {
+      "id": "84m-the-mystical-foundation-of-love",
+      "phrase": 2,
+      "count": 2
+    },
+    {
+      "id": "attainment-on-the-tree-of-life-class-8",
+      "phrase": 2,
+      "count": 2
+    },
+    {
+      "id": "key-15-the-devil",
+      "phrase": 1,
+      "count": 1
+    },
+    {
+      "id": "5a-qabalah-the-western-tree-of-life",
+      "phrase": 1,
+      "count": 1
+    },
+    {
+      "id": "qabalistic-paths-to-the-inner-planes-class-6",
+      "phrase": 1,
+      "count": 1
+    }
+  ],
+  "א": [],
+  "the": []
+}

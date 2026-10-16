@@ -1,0 +1,51 @@
+[
+  {
+    "planet": "saturn",
+    "angel": "Tsaphkiel",
+    "metal": "Lead",
+    "chakra": "Center at base of spine",
+    "church": "Ephesus"
+  },
+  {
+    "planet": "mars",
+    "angel": "Kamael",
+    "metal": "Iron",
+    "chakra": "Center below navel",
+    "church": "Smyrna"
+  },
+  {
+    "planet": "jupiter",
+    "angel": "Tzadkiel",
+    "metal": "Tin",
+    "chakra": "Solar plexus",
+    "church": "Pergamos"
+  },
+  {
+    "planet": "sun",
+    "angel": "Michael",
+    "metal": "Gold",
+    "chakra": "Heart center",
+    "church": "Thyatira"
+  },
+  {
+    "planet": "venus",
+    "angel": "Anael",
+    "metal": "Copper",
+    "chakra": "Throat center",
+    "church": "Sardis"
+  },
+  {
+    "planet": "moon",
+    "angel": "Gabriel",
+    "metal": "Silver",
+    "chakra": "Pituitary gland",
+    "church": "Philadelphia"
+  },
+  {
+    "planet": "mercury",
+    "angel": "Raphael",
+    "metal": "Quicksilver",
+    "chakra": "Cerebrum and pineal body",
+    "church": "Laodicea"
+  }
+]

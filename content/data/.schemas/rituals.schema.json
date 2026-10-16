@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "slug": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "description": {
+        "description": "Shown on the home-page TOC card for this ritual.",
+        "type": "string"
+      },
+      "musicFileSlug": {
+        "description": "Slug of the /files entry holding this ritual's music sheet; renders a reference link when set.",
+        "type": "string"
+      },
+      "hasPlayer": {
+        "description": "The ritual has a bespoke guided player at /rituals/<slug>/play. Building a player is a code task — only set this once that route exists.",
+        "type": "boolean"
+      },
+      "hidden": {
+        "description": "Hidden from nav, home TOC, and sitemap; still reachable by direct URL.",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "slug",
+      "title"
+    ],
+    "additionalProperties": false
+  }
+}

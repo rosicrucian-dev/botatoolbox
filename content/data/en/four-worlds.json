@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "atziluth",
+    "world": "Atziluth",
+    "principle": "Archetypal",
+    "element": "Fire",
+    "beings": "Deity"
+  },
+  {
+    "slug": "briah",
+    "world": "Briah",
+    "principle": "Creative",
+    "element": "Water",
+    "beings": "Archangelic"
+  },
+  {
+    "slug": "yetzirah",
+    "world": "Yetzirah",
+    "principle": "Formative",
+    "element": "Air",
+    "beings": "Angelic"
+  },
+  {
+    "slug": "assiah",
+    "world": "Assiah",
+    "principle": "Material",
+    "element": "Earth",
+    "beings": "Action, Man, matter, shells & demons"
+  }
+]

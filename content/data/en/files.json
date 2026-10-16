@@ -1,0 +1,110 @@
+[
+  {
+    "slug": "cube-of-space",
+    "name": "Printable Cube of Space",
+    "src": "/files/cube-of-space-net-preview.jpg",
+    "section": "Downloads",
+    "downloads": [
+      {
+        "label": "Download A4",
+        "src": "/files/cube-of-space-net-a4.pdf"
+      },
+      {
+        "label": "Download US Letter",
+        "src": "/files/cube-of-space-net-letter.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "major-arcana-images-traditional",
+    "name": "Major Arcana Images - Traditional",
+    "src": "/files/major-arcana-images-traditional.zip",
+    "section": "Downloads",
+    "tableau": "traditional",
+    "downloads": [
+      {
+        "label": "Download ZIP",
+        "src": "/files/major-arcana-images-traditional.zip"
+      }
+    ]
+  },
+  {
+    "slug": "major-arcana-images-modern",
+    "name": "Major Arcana Images - Modern",
+    "src": "/files/major-arcana-images-modern.zip",
+    "section": "Downloads",
+    "tableau": "modern",
+    "downloads": [
+      {
+        "label": "Download ZIP",
+        "src": "/files/major-arcana-images-modern.zip"
+      }
+    ]
+  },
+  {
+    "slug": "minor-arcana-images-josh-yates",
+    "name": "Minor Arcana Images - Josh Yates",
+    "src": "/tarot/minor/josh-yates/ace-wands.jpg",
+    "section": "Downloads",
+    "minorTableau": true,
+    "downloads": [
+      {
+        "label": "Download ZIP",
+        "src": "/files/minor-arcana-images-josh-yates.zip"
+      }
+    ]
+  },
+  {
+    "slug": "tree-of-life",
+    "name": "Tree of Life",
+    "src": "/files/tree-of-life.jpg",
+    "section": "Downloads"
+  },
+  {
+    "slug": "wallpaper-traditional",
+    "name": "Wallpaper Traditional",
+    "src": "/files/wallpaper-traditional.jpg",
+    "section": "Downloads",
+    "rounded": false
+  },
+  {
+    "slug": "wallpaper-modern",
+    "name": "Wallpaper Modern",
+    "src": "/files/wallpaper-modern.jpg",
+    "section": "Downloads",
+    "rounded": false
+  },
+  {
+    "slug": "dissertation-thirty-two-paths",
+    "name": "A Dissertation Concerning the Thirty-Two Paths of Wisdom",
+    "src": "/files/dissertation.pdf",
+    "section": "Historical",
+    "direct": true
+  },
+  {
+    "slug": "gematria-notebook",
+    "name": "The Gematria Notebook of Paul Foster Case",
+    "src": "/files/gematria-notebook.pdf",
+    "section": "Historical",
+    "direct": true
+  },
+  {
+    "slug": "lesser-ritual-of-the-pentagram",
+    "name": "Lesser Ritual of the Pentagram",
+    "src": "/files/lrp.jpg",
+    "section": "Historical"
+  },
+  {
+    "slug": "life-power",
+    "name": "The Life Power",
+    "src": "/files/life-power.pdf",
+    "section": "Historical",
+    "direct": true
+  },
+  {
+    "slug": "tarot-back",
+    "name": "Tarot Back Image",
+    "src": "/files/tarot-back.jpg",
+    "section": "Historical"
+  }
+]

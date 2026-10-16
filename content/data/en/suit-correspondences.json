@@ -1,0 +1,30 @@
+[
+  {
+    "tarot": "Wands (Scepters)",
+    "playingCard": "Clubs",
+    "world": "Atziluth",
+    "element": "Fire",
+    "letter": "Yod"
+  },
+  {
+    "tarot": "Cups (Chalices)",
+    "playingCard": "Hearts",
+    "world": "Briah",
+    "element": "Water",
+    "letter": "Heh"
+  },
+  {
+    "tarot": "Swords",
+    "playingCard": "Spades",
+    "world": "Yetzirah",
+    "element": "Air",
+    "letter": "Vav"
+  },
+  {
+    "tarot": "Pentacles (Coins)",
+    "playingCard": "Diamonds",
+    "world": "Assiah",
+    "element": "Earth",
+    "letter": "Heh"
+  }
+]

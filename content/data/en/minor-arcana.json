@@ -1,0 +1,358 @@
+[
+  {
+    "suit": "Wands",
+    "cards": [
+      {
+        "num": "Ace",
+        "keyword": "Initiative",
+        "sign": "Aries, Taurus, Gemini",
+        "dates": "March 21 – June 21"
+      },
+      {
+        "num": "2",
+        "keyword": "Dominion",
+        "sign": "Aries",
+        "dates": "March 21 – March 30"
+      },
+      {
+        "num": "3",
+        "keyword": "Established Strength",
+        "sign": "Aries",
+        "dates": "March 31 – April 9"
+      },
+      {
+        "num": "4",
+        "keyword": "Perfected Work",
+        "sign": "Aries",
+        "dates": "April 10 – April 19"
+      },
+      {
+        "num": "5",
+        "keyword": "Competition",
+        "sign": "Leo",
+        "dates": "July 23 – August 1"
+      },
+      {
+        "num": "6",
+        "keyword": "Victory",
+        "sign": "Leo",
+        "dates": "August 2 – August 12"
+      },
+      {
+        "num": "7",
+        "keyword": "Valor",
+        "sign": "Leo",
+        "dates": "August 13 – August 22"
+      },
+      {
+        "num": "8",
+        "keyword": "Swiftness",
+        "sign": "Sagittarius",
+        "dates": "November 22 – December 1"
+      },
+      {
+        "num": "9",
+        "keyword": "Preparedness",
+        "sign": "Sagittarius",
+        "dates": "December 2 – December 11"
+      },
+      {
+        "num": "10",
+        "keyword": "Fullness of Power",
+        "sign": "Sagittarius",
+        "dates": "December 12 – December 21"
+      },
+      {
+        "num": "Page",
+        "keyword": "Earth of Fire",
+        "sign": "Aries, Taurus, Gemini",
+        "dates": "March 21 – June 21"
+      },
+      {
+        "num": "Knight",
+        "keyword": "Air of Fire",
+        "sign": "Scorpio, Sagittarius",
+        "dates": "November 12 – December 11"
+      },
+      {
+        "num": "Queen",
+        "keyword": "Water of Fire",
+        "sign": "Cancer, Leo",
+        "dates": "July 13 – August 12"
+      },
+      {
+        "num": "King",
+        "keyword": "Fire of Fire",
+        "sign": "Pisces, Aries",
+        "dates": "March 11 – April 9"
+      }
+    ]
+  },
+  {
+    "suit": "Cups",
+    "cards": [
+      {
+        "num": "Ace",
+        "keyword": "Desire Force",
+        "sign": "Cancer, Leo, Virgo",
+        "dates": "June 22 – September 22"
+      },
+      {
+        "num": "2",
+        "keyword": "Response to Environment",
+        "sign": "Cancer",
+        "dates": "June 22 – July 1"
+      },
+      {
+        "num": "3",
+        "keyword": "Enjoyment",
+        "sign": "Cancer",
+        "dates": "July 2 – July 12"
+      },
+      {
+        "num": "4",
+        "keyword": "Surfeit",
+        "sign": "Cancer",
+        "dates": "July 13 – July 22"
+      },
+      {
+        "num": "5",
+        "keyword": "Defeated Desire",
+        "sign": "Scorpio",
+        "dates": "October 23 – November 1"
+      },
+      {
+        "num": "6",
+        "keyword": "Betterment",
+        "sign": "Scorpio",
+        "dates": "November 2 – November 11"
+      },
+      {
+        "num": "7",
+        "keyword": "Illusion",
+        "sign": "Scorpio",
+        "dates": "November 12 – November 21"
+      },
+      {
+        "num": "8",
+        "keyword": "Instability",
+        "sign": "Pisces",
+        "dates": "February 19 – February 28"
+      },
+      {
+        "num": "9",
+        "keyword": "Desire Fulfilled",
+        "sign": "Pisces",
+        "dates": "March 1 – March 10"
+      },
+      {
+        "num": "10",
+        "keyword": "Excess",
+        "sign": "Pisces",
+        "dates": "March 11 – March 20"
+      },
+      {
+        "num": "Page",
+        "keyword": "Earth of Water",
+        "sign": "Cancer, Leo, Virgo",
+        "dates": "June 22 – September 22"
+      },
+      {
+        "num": "Knight",
+        "keyword": "Air of Water",
+        "sign": "Aquarius, Pisces",
+        "dates": "February 9 – March 10"
+      },
+      {
+        "num": "Queen",
+        "keyword": "Water of Water",
+        "sign": "Libra, Scorpio",
+        "dates": "October 13 – November 11"
+      },
+      {
+        "num": "King",
+        "keyword": "Fire of Water",
+        "sign": "Gemini, Cancer",
+        "dates": "June 11 – July 12"
+      }
+    ]
+  },
+  {
+    "suit": "Swords",
+    "cards": [
+      {
+        "num": "Ace",
+        "keyword": "Activity",
+        "sign": "Libra, Scorpio, Sagittarius",
+        "dates": "September 23 – December 21"
+      },
+      {
+        "num": "2",
+        "keyword": "Indecision",
+        "sign": "Libra",
+        "dates": "September 23 – October 2"
+      },
+      {
+        "num": "3",
+        "keyword": "Sorrow",
+        "sign": "Libra",
+        "dates": "October 3 – October 12"
+      },
+      {
+        "num": "4",
+        "keyword": "Rest",
+        "sign": "Libra",
+        "dates": "October 13 – October 22"
+      },
+      {
+        "num": "5",
+        "keyword": "Defeat",
+        "sign": "Aquarius",
+        "dates": "January 20 – January 29"
+      },
+      {
+        "num": "6",
+        "keyword": "Patience",
+        "sign": "Aquarius",
+        "dates": "January 30 – February 8"
+      },
+      {
+        "num": "7",
+        "keyword": "Instability",
+        "sign": "Aquarius",
+        "dates": "February 9 – February 18"
+      },
+      {
+        "num": "8",
+        "keyword": "Mediocrity",
+        "sign": "Gemini",
+        "dates": "May 21 – May 31"
+      },
+      {
+        "num": "9",
+        "keyword": "Worry",
+        "sign": "Gemini",
+        "dates": "June 1 – June 10"
+      },
+      {
+        "num": "10",
+        "keyword": "Destruction",
+        "sign": "Gemini",
+        "dates": "June 11 – June 21"
+      },
+      {
+        "num": "Page",
+        "keyword": "Earth of Air",
+        "sign": "Libra, Scorpio, Sagittarius",
+        "dates": "September 23 – December 21"
+      },
+      {
+        "num": "Knight",
+        "keyword": "Air of Air",
+        "sign": "Taurus, Gemini",
+        "dates": "May 11 – June 10"
+      },
+      {
+        "num": "Queen",
+        "keyword": "Water of Air",
+        "sign": "Capricorn, Aquarius",
+        "dates": "January 10 – February 8"
+      },
+      {
+        "num": "King",
+        "keyword": "Fire of Air",
+        "sign": "Virgo, Libra",
+        "dates": "September 13 – October 12"
+      }
+    ]
+  },
+  {
+    "suit": "Pentacles",
+    "cards": [
+      {
+        "num": "Ace",
+        "keyword": "Materiality",
+        "sign": "Capricorn, Aquarius, Pisces",
+        "dates": "December 22 – March 20"
+      },
+      {
+        "num": "2",
+        "keyword": "Fluctuation",
+        "sign": "Capricorn",
+        "dates": "December 22 – December 31"
+      },
+      {
+        "num": "3",
+        "keyword": "Constructiveness",
+        "sign": "Capricorn",
+        "dates": "January 1 – January 9"
+      },
+      {
+        "num": "4",
+        "keyword": "Management",
+        "sign": "Capricorn",
+        "dates": "January 10 – January 19"
+      },
+      {
+        "num": "5",
+        "keyword": "Uncertainty",
+        "sign": "Taurus",
+        "dates": "April 20 – April 29"
+      },
+      {
+        "num": "6",
+        "keyword": "Prosperity",
+        "sign": "Taurus",
+        "dates": "April 30 – May 10"
+      },
+      {
+        "num": "7",
+        "keyword": "Loss",
+        "sign": "Taurus",
+        "dates": "May 11 – May 20"
+      },
+      {
+        "num": "8",
+        "keyword": "Prudence",
+        "sign": "Virgo",
+        "dates": "August 23 – September 2"
+      },
+      {
+        "num": "9",
+        "keyword": "Harvest",
+        "sign": "Virgo",
+        "dates": "September 3 – September 12"
+      },
+      {
+        "num": "10",
+        "keyword": "Wealth",
+        "sign": "Virgo",
+        "dates": "September 13 – September 22"
+      },
+      {
+        "num": "Page",
+        "keyword": "Earth of Earth",
+        "sign": "Capricorn, Aquarius, Pisces",
+        "dates": "December 22 – March 20"
+      },
+      {
+        "num": "Knight",
+        "keyword": "Air of Earth",
+        "sign": "Leo, Virgo",
+        "dates": "August 13 – September 12"
+      },
+      {
+        "num": "Queen",
+        "keyword": "Water of Earth",
+        "sign": "Aries, Taurus",
+        "dates": "April 10 – May 10"
+      },
+      {
+        "num": "King",
+        "keyword": "Fire of Earth",
+        "sign": "Sagittarius, Capricorn",
+        "dates": "December 12 – January 9"
+      }
+    ]
+  }
+]
