@@ -38,7 +38,6 @@
     "fix:transcripts": "node --experimental-strip-types scripts/fix-transcripts.ts",
     "gen:search": "npm run gen:search:recordings",
     "gen:search:recordings": "node --experimental-strip-types scripts/gen-recordings-search.ts",
-    "check:shared": "node --experimental-strip-types scripts/check-shared.ts",
     "bench:search": "node --experimental-strip-types scripts/bench-search.ts"
   },
   "browserslist": "Chrome >= 111, Firefox >= 128, Safari >= 16.4, iOS >= 16.4, Edge >= 111, not dead",
@@ -47,6 +46,7 @@
     "@heroicons/react": "^2.2.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@rosicrucian/search": "file:vendor/rosicrucian-search-0.1.0.tgz",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.19",
     "astronomy-engine": "^2.1.19",

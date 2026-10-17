@@ -8,7 +8,7 @@ import { useRef } from 'react'
 
 import { Prose } from '@/components/ui/Prose'
 import { RECORDINGS_TOKENIZER, SEARCH_MARK_CLASS } from '@/lib/collectionSearch'
-import { useMarkQuery } from '@/lib/search-engine/react/use-mark-query'
+import { useMarkQuery } from '@rosicrucian/search/react'
 
 export function TranscriptBody({ html }: { html: string }) {
   const ref = useRef<HTMLDivElement>(null)

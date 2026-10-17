@@ -179,9 +179,8 @@ export const RecordingSchema = z.object({
 })
 
 // The recordings search index (public/data/recordings-search.json) has no
-// schema here: its shape belongs to the shared search engine
-// (src/lib/search-engine/format.ts), and the generator validates what it wrote
-// with the engine's own loadIndex.
+// schema here: its shape belongs to the search engine (@rosicrucian/search),
+// and the generator validates what it wrote with the engine's own loadIndex.
 
 // ---------- cube-of-space.json ----------
 //

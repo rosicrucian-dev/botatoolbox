@@ -1,9 +1,7 @@
 // Reveal more of a long list as the reader scrolls toward its end.
 //
-// ⚠ KEEP BYTE-IDENTICAL with the sibling project, like search-engine.ts —
-//   FIX BOTH when you change it:
-//     botatoolbox:   src/lib/use-chunked-limit.ts
-//     agelesswisdom: src/lib/use-chunked-limit.ts
+// The same file exists in agelesswisdom and botaschool; a fix here probably
+// belongs there too.
 //
 // Used for search snippets: every result is listed, but only the first `chunk`
 // fetch their sidecar. A fixed number assumes people read top-down, and plenty

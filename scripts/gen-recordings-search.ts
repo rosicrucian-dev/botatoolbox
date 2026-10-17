@@ -21,15 +21,11 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 
+import { buildIndex, loadIndex, type SearchDocument } from '@rosicrucian/search'
 import {
   RECORDINGS_TOKENIZER,
   type SearchTrackMeta,
 } from '../src/lib/collectionSearch.ts'
-import {
-  buildIndex,
-  loadIndex,
-  type SearchDocument,
-} from '../src/lib/search-engine/index.ts'
 import { splitParagraphs } from '../src/lib/transcriptParagraphs.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')

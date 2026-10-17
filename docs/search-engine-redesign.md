@@ -1,10 +1,10 @@
 # Search engine redesign — task list
 
-Status: steps 0–3 implemented 2026-10-10 in both repos (uncommitted at the
-time of writing); step 4's manual browser checks are still to do. Applies to
-**botatoolbox** and **agelesswisdom** together; the shared files stay
-byte-identical across the two repos under `check:shared`, exactly as today.
-Extraction into a package is a later step and is out of scope here.
+Status: steps 0–3 implemented 2026-10-10 in both repos and used in
+production since; step 5 (extraction) done 2026-10-17: the engine is now the
+`@rosicrucian/search` package in the rosicrucian-dev repo (`packages/search/`),
+and botatoolbox, agelesswisdom and botaschool install it. The shared-by-copy
+files and `check:shared` are gone. Paths below are as they were in-repo.
 
 Where the implementation departed from the plan below, the code is right and
 this note says why:

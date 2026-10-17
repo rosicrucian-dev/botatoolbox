@@ -26,7 +26,7 @@ import {
 
 import { Prose } from '@/components/ui/Prose'
 import { RECORDINGS_TOKENIZER, SEARCH_MARK_CLASS } from '@/lib/collectionSearch'
-import { locate, useMarkQuery } from '@/lib/search-engine/react/use-mark-query'
+import { locate, useMarkQuery } from '@rosicrucian/search/react'
 
 // Classes toggled on the currently-playing paragraph. Kept as literal strings
 // so Tailwind's content scan generates them. The trailing `!` (important) is

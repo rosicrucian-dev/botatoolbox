@@ -12,7 +12,7 @@
 import { readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
-import { loadIndex, search } from '../src/lib/search-engine/index.ts'
+import { loadIndex, search } from '@rosicrucian/search'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const INDEX = join(ROOT, 'public/data/recordings-search.json')

@@ -2,7 +2,7 @@
 
 // Generic section-scoped full-text search dialog. Same HeadlessUI combobox
 // shell as the global SearchDialog, but backed by a prebuilt index from the
-// shared search engine (src/lib/search-engine) instead of the title index:
+// search engine (@rosicrucian/search) instead of the title index:
 // results are whole items ranked phrase-first then by relevance, each showing
 // the passage it matched, and open the target page AT that passage (`#p<n>`)
 // with the words marked (`?q=`). Parameterized by the index URL and copy so one
@@ -24,6 +24,7 @@ import {
   type RecordingsResult,
   type SearchTrackMeta,
 } from '@/lib/collectionSearch'
+import { useChunkedLimit } from '@/lib/use-chunked-limit'
 import {
   highlight,
   IndexFormatError,
@@ -31,10 +32,8 @@ import {
   search,
   type Part,
   type Query,
-} from '@/lib/search-engine'
-import { useSearchIndex } from '@/lib/search-engine/react/use-search-index'
-import { useSectionTexts } from '@/lib/search-engine/react/use-section-texts'
-import { useChunkedLimit } from '@/lib/use-chunked-limit'
+} from '@rosicrucian/search'
+import { useSearchIndex, useSectionTexts } from '@rosicrucian/search/react'
 
 /**
  * How many results get an excerpt AT A TIME. EVERY match is listed; these pay

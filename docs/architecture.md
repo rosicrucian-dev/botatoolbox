@@ -43,9 +43,9 @@ any file:
 `src/lib/` keeps most modules at its root, with three groupings:
 `hooks/` (every `useX` hook), `stores/` (persisted preferences, all built
 on `createPersistedStore` in `stores/persisted.ts`) and `audio/`.
-`astro/` is the astrology engine. `search-engine/` is the full-text search
-engine, shared byte-for-byte with agelesswisdom (see Search below), as is
-`use-chunked-limit.ts` beside it.
+`astro/` is the astrology engine. Full-text search comes from the
+`@rosicrucian/search` package (see Search below); `collectionSearch.ts` is the
+project-local adapter over it.
 
 ## Build pipeline
 
@@ -70,8 +70,8 @@ npm run build      prebuild   → gen:search   writes public/data/recordings-sea
   layout calls it, so every dev boot and every build runs the cross-file
   reference checks and fails loudly on a dangling reference; `npm test`
   calls it too, so a content mistake fails in seconds without a build.
-- CI (`.github/workflows/ci.yml`) runs typecheck, tests, `check:shared`,
-  `check:schemas`, and a full build on every PR. `deploy.yml` builds and
+- CI (`.github/workflows/ci.yml`) runs typecheck, tests, `check:schemas`,
+  and a full build on every PR. `deploy.yml` builds and
   publishes `out/` on push to `main`.
 
 ## Routing and locales
@@ -161,14 +161,13 @@ full guide. In brief:
 
 ## Search
 
-The full-text search engine is hand-rolled and **shared byte-for-byte**
-with the sibling project `agelesswisdom` (checked out next to this repo).
-The whole of `src/lib/search-engine/` and `test/search-engine/`, plus
-`src/lib/use-chunked-limit.ts` and `scripts/check-shared.ts`, must stay
-identical in both repos. **Fix bugs in both.** `npm run check:shared`
-verifies the pair locally and skips in CI. The engine's own header
-(`src/lib/search-engine/index.ts`) explains its model; the redesign that
-produced it is recorded in `docs/search-engine-redesign.md`.
+The full-text search engine is the `@rosicrucian/search` package, developed
+in the rosicrucian-dev repo (`packages/search/`) and shared with agelesswisdom
+and botaschool. Its README explains the model (document, section, index,
+result) and the API; the redesign that produced it is recorded in
+`docs/search-engine-redesign.md`. An engine bug is fixed there and released;
+this repo only holds the adapter (`src/lib/collectionSearch.ts`), the
+generator and the dialog.
 
 How search works, in one paragraph: a recording is a document — its title,
 and its transcript paragraphs as the sections. `gen-recordings-search.ts`
@@ -219,22 +218,21 @@ Do not simplify them without testing on a real iPhone:
 
 ## Scripts
 
-| Script                                                      | Runs                 | Inputs                                    | Purpose                                                     |
-| ----------------------------------------------------------- | -------------------- | ----------------------------------------- | ----------------------------------------------------------- |
-| `gen:search`                                                | `prebuild`           | `content/recordings/`                     | Full-text index + section texts for recordings search.      |
-| `hoist:en`                                                  | `postbuild`          | `out/`                                    | Moves the English export to the root.                       |
-| `gen:sw`                                                    | `postbuild`          | `out/`, `scripts/sw.template.js`          | Generates the offline service worker.                       |
-| `check:shared`                                              | CI (skips), pre-push | `../agelesswisdom`                        | Verifies the shared search files are byte-identical.        |
-| `check:schemas`                                             | CI                   | `schemas.ts`                              | Fails if the generated JSON Schemas are stale.              |
-| `gen:schemas`                                               | manual               | `schemas.ts`                              | Regenerates JSON Schema sidecars and VS Code wiring.        |
-| `gen:translations`                                          | manual               | `content/data/en/`, `content/messages/en` | Creates or resyncs translated-locale skeletons.             |
-| `gen:gematria-words`                                        | manual               | `scripts/vendor/*.json`                   | Builds `public/data/gematria-words.json` (committed).       |
-| `gen:appicon` `gen:favicon` `gen:social` `gen:splash`       | manual               | `assets/cube.svg`                         | Icon, favicon, social card, and iOS splash images.          |
-| `gen:cube-pdf`                                              | manual               | data layer                                | Printable Cube of Space PDF (writes to `local/`).           |
-| `gen:recordings` `gen:recordings:timings` `fix:transcripts` | maintainer           | `local/` + Whisper pipeline               | Transcript and timing data for recordings. Off-repo inputs. |
-| `optimize:tarot` `zip:tarot`                                | maintainer           | original card scans                       | Card image derivatives and the downloadable zip.            |
-| `scripts/stage-r2-audio.ts`                                 | maintainer           | R2 credentials                            | Uploads recording audio to object storage. Run directly.    |
-| `scripts/gen-paul-case.ts`                                  | frozen               | private OCR                               | Produced `scripts/vendor/paul-case.json` once.              |
+| Script                                                      | Runs        | Inputs                                    | Purpose                                                     |
+| ----------------------------------------------------------- | ----------- | ----------------------------------------- | ----------------------------------------------------------- |
+| `gen:search`                                                | `prebuild`  | `content/recordings/`                     | Full-text index + section texts for recordings search.      |
+| `hoist:en`                                                  | `postbuild` | `out/`                                    | Moves the English export to the root.                       |
+| `gen:sw`                                                    | `postbuild` | `out/`, `scripts/sw.template.js`          | Generates the offline service worker.                       |
+| `check:schemas`                                             | CI          | `schemas.ts`                              | Fails if the generated JSON Schemas are stale.              |
+| `gen:schemas`                                               | manual      | `schemas.ts`                              | Regenerates JSON Schema sidecars and VS Code wiring.        |
+| `gen:translations`                                          | manual      | `content/data/en/`, `content/messages/en` | Creates or resyncs translated-locale skeletons.             |
+| `gen:gematria-words`                                        | manual      | `scripts/vendor/*.json`                   | Builds `public/data/gematria-words.json` (committed).       |
+| `gen:appicon` `gen:favicon` `gen:social` `gen:splash`       | manual      | `assets/cube.svg`                         | Icon, favicon, social card, and iOS splash images.          |
+| `gen:cube-pdf`                                              | manual      | data layer                                | Printable Cube of Space PDF (writes to `local/`).           |
+| `gen:recordings` `gen:recordings:timings` `fix:transcripts` | maintainer  | `local/` + Whisper pipeline               | Transcript and timing data for recordings. Off-repo inputs. |
+| `optimize:tarot` `zip:tarot`                                | maintainer  | original card scans                       | Card image derivatives and the downloadable zip.            |
+| `scripts/stage-r2-audio.ts`                                 | maintainer  | R2 credentials                            | Uploads recording audio to object storage. Run directly.    |
+| `scripts/gen-paul-case.ts`                                  | frozen      | private OCR                               | Produced `scripts/vendor/paul-case.json` once.              |
 
 "Maintainer" scripts need files that are not in the repository; they are
 documented so their outputs are understood, not so contributors run them.

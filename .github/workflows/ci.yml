@@ -22,13 +22,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx tsc --noEmit
-      # The search engine is hand-rolled and duplicated into agelesswisdom, so
-      # its invariants are pinned by tests rather than by review.
       - run: npm test
-      # Fails if a file that must stay byte-identical with agelesswisdom has
-      # drifted. Skips cleanly here, where the sibling isn't checked out —
-      # it's a local guard, run before you push.
-      - run: npm run check:shared
       # The JSON Schema sidecars and VS Code wiring are generated from
       # schemas.ts; fail if someone edited the Zod schemas without rerunning
       # `npm run gen:schemas`.

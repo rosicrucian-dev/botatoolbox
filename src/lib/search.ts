@@ -63,7 +63,7 @@ export const getSearchEntries = defineLocalized(
 // Case-insensitive substring match; earlier matches (prefixes) rank
 // first, shorter titles break ties.
 //
-// DELIBERATELY NOT the shared search-engine, though it would unify this with
+// DELIBERATELY NOT @rosicrucian/search, though it would unify this with
 // the collection dialog. For ~250 short names a prebuilt index buys nothing,
 // and substring matching is the right matcher for them: typing "2 of" should
 // narrow to "2 of Cups" … "2 of Wands" as it is typed, which a word-based

@@ -19,11 +19,11 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { test } from 'node:test'
 
+import { loadIndex, search } from '@rosicrucian/search'
 import type {
   RecordingsIndex,
   SearchTrackMeta,
 } from '../src/lib/collectionSearch.ts'
-import { loadIndex, search } from '../src/lib/search-engine/index.ts'
 
 const ROOT = join(import.meta.dirname, '..')
 const INDEX = join(ROOT, 'public/data/recordings-search.json')

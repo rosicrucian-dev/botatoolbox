@@ -1,4 +1,4 @@
-// botatoolbox's adapter over the shared search engine (src/lib/search-engine).
+// botatoolbox's adapter over the search engine (@rosicrucian/search).
 // The engine knows documents, sections, an index and results; this file is the
 // project-local part: what a recording carries as `meta`, where its section
 // texts live, and what an arrived-at page needs to mark the words.
@@ -6,8 +6,11 @@
 // Scripts import this by relative path under --experimental-strip-types, so it
 // uses no `@` aliases.
 
-import type { SearchIndex, SearchResult } from './search-engine/index.ts'
-import type { TokenizerConfig } from './search-engine/tokenizer.ts'
+import type {
+  SearchIndex,
+  SearchResult,
+  TokenizerConfig,
+} from '@rosicrucian/search'
 
 /** What a recording result carries back from the index. */
 export interface SearchTrackMeta {

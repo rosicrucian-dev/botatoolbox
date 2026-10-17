@@ -2,24 +2,20 @@
 //
 //   npm test
 //
-// The engine itself is covered by test/search-engine/, which is shared with
-// agelesswisdom. This file covers what is NOT shared: what a recording carries
+// The engine itself is covered by @rosicrucian/search's own tests. This file
+// covers what is project-local: what a recording carries
 // as meta, the URL of its section texts, and that a result's best section is
 // the paragraph number the transcript page answers to.
 
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
+import { buildIndex, search, type SearchDocument } from '@rosicrucian/search'
 import {
   RECORDINGS_TOKENIZER,
   snippetUrl,
   type SearchTrackMeta,
 } from '../src/lib/collectionSearch.ts'
-import {
-  buildIndex,
-  search,
-  type SearchDocument,
-} from '../src/lib/search-engine/index.ts'
 
 const TRACK: SearchDocument<SearchTrackMeta> = {
   id: 'the-life-power',
