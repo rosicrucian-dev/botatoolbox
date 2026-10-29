@@ -46,7 +46,7 @@
     "@heroicons/react": "^2.2.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
-    "@rosicrucian/search": "file:vendor/rosicrucian-search-0.1.0.tgz",
+    "@rosicrucian/search": "https://github.com/rosicrucian-dev/packages/releases/download/search@0.1.0/rosicrucian-search-0.1.0.tgz",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.19",
     "astronomy-engine": "^2.1.19",
