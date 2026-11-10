@@ -77,7 +77,7 @@ locale-independent consumers (generateStaticParams, integrity.ts, the
 sitemap, geometry/layout helpers) call `getTarot(DEFAULT_LOCALE)` — so
 "this reads English on purpose" is always explicit at the call site.
 
-Prose markdown translations live at `content/{texts,rituals}/de/<slug>.md`
+Prose markdown translations live at `content/texts/de/<slug>.md`
 (same filename as the English source; `readLocalizedMarkdown()` in
 `src/content/markdown.ts` falls back to English when absent). The
 `gen:translations` script creates any missing skeletons and never
@@ -138,18 +138,6 @@ field — insert the entry where it should appear).
 The slug must exactly match the `.md` filename — integrity checks fail the
 build in both directions (manifest entry without a file, or an orphan
 `.md` without a manifest entry).
-
-## Rituals
-
-Rituals work the same way: `content/rituals/en/<slug>.md` + one entry in
-`content/data/en/rituals.json`, rendered by the generic `/rituals/[slug]`
-route. The markdown is structured: `## Heading` starts a section, a line
-like `i. Do the thing` becomes a numbered step (label kept verbatim), and
-`[Display](/words-of-power/<id>)` links a word of power (refs are
-integrity-checked). Optional manifest fields: `description` (home TOC
-card), `musicFileSlug` (reference link to a /files entry), and
-`hasPlayer` — set only when a bespoke guided-player route exists at
-`/rituals/<slug>/play` (building one is a code task).
 
 ## When something is code, not data
 

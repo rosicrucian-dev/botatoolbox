@@ -56,7 +56,7 @@ CI runs all of these plus a full build on every pull request.
 - **Page titles:** a page named after its nav entry exports
   `generateMetadata = localizedMetadata('Title')` from `@/lib/nav` rather
   than hand-writing the params boilerplate.
-- **Content changes** (new data file, text, ritual, translation) follow the
+- **Content changes** (new data file, text, translation) follow the
   steps in `src/content/data/README.md`. Consumers import only from the
   `@/content/data` barrel.
 - **Comments:** file headers explain _why_, especially for anything

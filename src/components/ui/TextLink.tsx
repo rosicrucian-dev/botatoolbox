@@ -3,10 +3,8 @@ import clsx from 'clsx'
 
 // The standard inline text link for tables, definition rows, and running
 // text: inherits the surrounding size, underlines on hover. This is THE
-// answer to "how do I style an inline link" — the two exceptions are
-// prose bodies (the typography plugin styles those via <Prose>) and the
-// ritual step links, which stay always-underlined on purpose so the
-// words of power read as marked terms (see rituals/[slug]/page.tsx).
+// answer to "how do I style an inline link" — the one exception is
+// prose bodies (the typography plugin styles those via <Prose>).
 export function TextLink({
   href,
   className,

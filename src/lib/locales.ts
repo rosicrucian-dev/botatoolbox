@@ -8,7 +8,7 @@
 // ADDING A LOCALE is a two-step affair, compiler-guided:
 //   1. Add the code to LOCALES and its native name to LOCALE_LABELS.
 //   2. Run `npm run gen:translations` (creates the content/data/<xx>/,
-//      content/{texts,rituals}/<xx>/ and content/messages/<xx>.json
+//      content/texts/<xx>/ and content/messages/<xx>.json
 //      skeletons), then follow the type errors: every per-locale
 //      registry is typed Record<TranslationLocale, …>, so tsc points at
 //      each spot needing the new locale's entry (the overlay registry

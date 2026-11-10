@@ -122,12 +122,6 @@
     },
     {
       "fileMatch": [
-        "content/data/*/rituals.json"
-      ],
-      "url": "./content/data/.schemas/rituals.schema.json"
-    },
-    {
-      "fileMatch": [
         "content/data/cube-of-space.json"
       ],
       "url": "./content/data/.schemas/cube-of-space.schema.json"

@@ -15,7 +15,7 @@ import { join } from 'node:path'
 import { DEFAULT_LOCALE, type Locale } from '@/lib/locales'
 
 export function readLocalizedMarkdown(
-  kind: 'texts' | 'rituals' | 'recordings',
+  kind: 'texts' | 'recordings',
   locale: Locale,
   slug: string,
 ): string {

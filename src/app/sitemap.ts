@@ -4,7 +4,6 @@ import {
   getAstrology,
   getMinorArcana,
   getRecordings,
-  getRituals,
   getSephiroth,
   getTarot,
   getTexts,
@@ -19,7 +18,6 @@ const { cards } = getTarot(DEFAULT_LOCALE)
 const { minorCards } = getMinorArcana(DEFAULT_LOCALE)
 const { words } = getWords(DEFAULT_LOCALE)
 const { visibleTexts } = getTexts(DEFAULT_LOCALE)
-const { visibleRituals } = getRituals(DEFAULT_LOCALE)
 const { sephiroth } = getSephiroth(DEFAULT_LOCALE)
 const { astrologySigns, astrologyPlanets } = getAstrology(DEFAULT_LOCALE)
 const { recordings, groupingsInOrder } = getRecordings(DEFAULT_LOCALE)
@@ -93,7 +91,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...minorCards.map((c) => `/tarot/${c.slug}`),
     ...words.map((w) => `/practice/words-of-power/${w.slug}`),
     ...visibleTexts.map((t) => `/texts/${t.slug}`),
-    ...visibleRituals.map((r) => `/rituals/${r.slug}`),
     // '/recordings' itself arrives through staticRoutes once its nav link
     // is un-hidden; only the per-grouping and per-recording pages go here.
     ...(recordingsPublic

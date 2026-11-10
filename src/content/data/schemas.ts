@@ -61,39 +61,6 @@ export const TextSchema = z.object({
     ),
 })
 
-// ---------- rituals.json ----------
-//
-// Manifest for the rituals under content/rituals/*.md. Adding a ritual is
-// a .md file + one entry here — no code. The generic /rituals/[slug] route
-// parses the markdown (## → section, `label. text` → step, word-of-power
-// links) and renders the walkthrough.
-export const RitualSchema = z.object({
-  slug: z.string(),
-  title: z.string(),
-  description: z
-    .string()
-    .optional()
-    .describe('Shown on the home-page TOC card for this ritual.'),
-  musicFileSlug: z
-    .string()
-    .optional()
-    .describe(
-      "Slug of the /files entry holding this ritual's music sheet; renders a reference link when set.",
-    ),
-  hasPlayer: z
-    .boolean()
-    .optional()
-    .describe(
-      'The ritual has a bespoke guided player at /rituals/<slug>/play. Building a player is a code task — only set this once that route exists.',
-    ),
-  hidden: z
-    .boolean()
-    .optional()
-    .describe(
-      'Hidden from nav, home TOC, and sitemap; still reachable by direct URL.',
-    ),
-})
-
 // ---------- files.json ----------
 //
 // Downloadable files shown under /files, grouped by section. Section

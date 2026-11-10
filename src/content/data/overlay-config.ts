@@ -131,7 +131,6 @@ export const overlayTargets: readonly OverlayTarget[] = [
   { file: 'ten-palaces', keying: num, fields: ['sphere'] },
   { file: 'alchemy', keying: slug, fields: ['term', 'definition'] },
   { file: 'texts', keying: slug, fields: ['title', 'description'] },
-  { file: 'rituals', keying: slug, fields: ['title', 'description'] },
   { file: 'files', keying: slug, fields: ['name', 'description', 'section'] },
   // Deliberately absent (nothing translatable): cube-of-space,
   // tree-paths, tarot-styles, gematria data.

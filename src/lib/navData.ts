@@ -30,11 +30,10 @@ export interface RawNavGroup {
   // collisions between the many nested items. content/integrity.ts
   // enforces the href shape and that every href has a page.
   flat?: true
-  // Links are generated from a content manifest (rituals.json /
-  // texts.json) — titles/descriptions localize through the data files,
-  // not the message catalog. `links` stays empty here; nav.ts fills it
-  // per locale.
-  generated?: 'rituals' | 'texts'
+  // Links are generated from a content manifest (texts.json) —
+  // titles/descriptions localize through the data files, not the message
+  // catalog. `links` stays empty here; nav.ts fills it per locale.
+  generated?: 'texts'
 }
 
 // Groups are kept in alphabetical order by slug to match how they
@@ -91,12 +90,6 @@ export const navGroups: Array<RawNavGroup> = [
     ],
   },
   {
-    // Generated from content/data/en/rituals.json (order + titles live there).
-    slug: 'rituals',
-    generated: 'rituals',
-    links: [],
-  },
-  {
     slug: 'tarot',
     links: [
       { href: '/tarot/correspondences' },
@@ -122,10 +115,6 @@ export const navGroups: Array<RawNavGroup> = [
   {
     slug: 'website',
     flat: true,
-    links: [
-      { href: '/about' },
-      { href: '/community' },
-      { href: '/settings' },
-    ],
+    links: [{ href: '/about' }, { href: '/community' }, { href: '/settings' }],
   },
 ]

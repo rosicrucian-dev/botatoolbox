@@ -156,8 +156,7 @@ full guide. In brief:
   derives the JSON Schema sidecars in `content/data/.schemas/` and the
   VS Code wiring from it; `npm run check:schemas` fails if they drift.
 - Consumers import only from the `@/content/data` barrel.
-- Prose (`content/texts`, `content/rituals`) is markdown plus one manifest
-  line; recordings are markdown transcripts plus committed timing data.
+- Prose (`content/texts`) is markdown plus one manifest line; recordings are markdown transcripts plus committed timing data.
 
 ## Search
 

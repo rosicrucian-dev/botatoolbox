@@ -41,6 +41,12 @@
     "nav./astrology/hora.title": {
       "type": "string"
     },
+    "nav./community.description": {
+      "type": "string"
+    },
+    "nav./community.title": {
+      "type": "string"
+    },
     "nav./cube-of-space.description": {
       "type": "string"
     },
@@ -245,9 +251,6 @@
     "nav.group.resources.title": {
       "type": "string"
     },
-    "nav.group.rituals.title": {
-      "type": "string"
-    },
     "nav.group.tarot.title": {
       "type": "string"
     },
@@ -297,27 +300,6 @@
       "type": "string"
     },
     "player.healing.signsTitle": {
-      "type": "string"
-    },
-    "player.lrp.inhaleClick": {
-      "type": "string"
-    },
-    "player.lrp.inhaleTap": {
-      "type": "string"
-    },
-    "player.lrp.title": {
-      "type": "string"
-    },
-    "player.lrp.vision.avrial": {
-      "type": "string"
-    },
-    "player.lrp.vision.gbrial": {
-      "type": "string"
-    },
-    "player.lrp.vision.mikal": {
-      "type": "string"
-    },
-    "player.lrp.vision.rpal": {
       "type": "string"
     },
     "player.majorArcana.title": {

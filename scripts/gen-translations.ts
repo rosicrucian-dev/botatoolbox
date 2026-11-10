@@ -10,7 +10,7 @@
 //     translation are overwritten here and ignored by the runtime merge
 //     — translators cannot break the site.
 //
-//   content/texts/<locale>/<slug>.md, content/rituals/<locale>/<slug>.md
+//   content/texts/<locale>/<slug>.md
 //     — full markdown copies of the English texts (translate prose IN
 //     PLACE, keep the heading/step structure). Created only when
 //     missing; existing files are never touched.
@@ -294,10 +294,10 @@ for (const locale of locales) {
   )
 }
 
-// ---------- markdown copies (texts + rituals) ----------
+// ---------- markdown copies (texts) ----------
 
 for (const locale of locales) {
-  for (const kind of ['texts', 'rituals'] as const) {
+  for (const kind of ['texts'] as const) {
     const manifest = readJson(join(dataDir, DEFAULT_LOCALE, `${kind}.json`))
     if (!Array.isArray(manifest)) continue
     const enDir = join(root, 'content', kind, DEFAULT_LOCALE)

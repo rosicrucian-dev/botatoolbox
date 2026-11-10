@@ -25,7 +25,6 @@ import deMinorArcana from '@content/data/de/minor-arcana.json'
 import deNumerology from '@content/data/de/numerology.json'
 import dePillars from '@content/data/de/pillars.json'
 import dePlanets from '@content/data/de/planets.json'
-import deRituals from '@content/data/de/rituals.json'
 import deSephiroth from '@content/data/de/sephiroth.json'
 import deSigns from '@content/data/de/signs.json'
 import deSuitCorrespondences from '@content/data/de/suit-correspondences.json'
@@ -48,7 +47,6 @@ export const overlays: Record<string, Record<TranslationLocale, unknown>> = {
   numerology: { de: deNumerology },
   pillars: { de: dePillars },
   planets: { de: dePlanets },
-  rituals: { de: deRituals },
   sephiroth: { de: deSephiroth },
   signs: { de: deSigns },
   'suit-correspondences': { de: deSuitCorrespondences },

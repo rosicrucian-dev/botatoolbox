@@ -4,8 +4,8 @@ import { SPLASH_DEVICES, splashMedia, splashPath } from '@/lib/splash'
 
 import '@/styles/tailwind.css'
 
-// Cross-file integrity checks (mantraSlug → words.slug, ritual refs →
-// words.slug, tree-paths → tarot, etc.). Throws at build/boot if
+// Cross-file integrity checks (mantraSlug → words.slug, tree-paths →
+// tarot, etc.). Throws at build/boot if
 // anything is dangling. Each file's own Zod schema covers shape. The same
 // function runs under `npm test` (test/integrity.test.ts).
 import { runIntegrityChecks } from '@/content/integrity'

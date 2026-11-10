@@ -10,7 +10,7 @@
 // Add a new check here whenever you add a field that names a record in
 // another data file.
 
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { romanToLetters } from '@/lib/hebrew'
@@ -25,7 +25,6 @@ import {
   getMinorArcana,
   getPlanets,
   getRecordings,
-  getRituals,
   getSephiroth,
   getSigns,
   getTarot,
@@ -33,9 +32,7 @@ import {
   getWords,
   MAJOR_STYLES,
   MINOR_STYLES,
-  parseRitual,
   paths,
-  SEPHIROTH_DESCENT_SLUGS,
 } from './data'
 
 /**
@@ -55,7 +52,6 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
   const { planets } = getPlanets(DEFAULT_LOCALE)
   const { signs } = getSigns(DEFAULT_LOCALE)
   const { sephiroth } = getSephiroth(DEFAULT_LOCALE)
-  const { rituals } = getRituals(DEFAULT_LOCALE)
   const { texts } = getTexts(DEFAULT_LOCALE)
   const { recordings } = getRecordings(DEFAULT_LOCALE)
   const { wordBySlug } = getWords(DEFAULT_LOCALE)
@@ -81,7 +77,7 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
   // no .md fails the page render anyway, but an orphan .md would otherwise
   // be a silent no-op — the most likely contributor mistake.
   function expectManifestMatchesDir(
-    kind: 'texts' | 'rituals' | 'recordings',
+    kind: 'texts' | 'recordings',
     slugs: ReadonlyArray<string>,
   ) {
     const dir = join(root, 'content', kind, DEFAULT_LOCALE)
@@ -105,10 +101,6 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
     texts.map((t) => t.slug),
   )
   expectManifestMatchesDir(
-    'rituals',
-    rituals.map((r) => r.slug),
-  )
-  expectManifestMatchesDir(
     'recordings',
     recordings.map((r) => r.slug),
   )
@@ -118,10 +110,7 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
   // (a de/ file whose English source was renamed/removed) means finished
   // work that silently stopped rendering — surface it, but never fail
   // the build over a translation file.
-  for (const [kind, slugs] of [
-    ['texts', texts.map((t) => t.slug)],
-    ['rituals', rituals.map((r) => r.slug)],
-  ] as const) {
+  for (const [kind, slugs] of [['texts', texts.map((t) => t.slug)]] as const) {
     for (const locale of LOCALES) {
       if (locale === DEFAULT_LOCALE) continue
       const dir = join(root, 'content', kind, locale)
@@ -131,34 +120,6 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
         if (!known.has(f.replace(/\.md$/, ''))) {
           console.warn(
             `[i18n] content/${kind}/${locale}/${f} has no matching English file — was the English source renamed? This translation no longer renders.`,
-          )
-        }
-      }
-    }
-  }
-
-  // --- ritual musicFileSlug → files.slug
-  for (const ritual of rituals) {
-    if (ritual.musicFileSlug) {
-      expect(
-        fileBySlug[ritual.musicFileSlug] !== undefined,
-        `ritual "${ritual.slug}".musicFileSlug = "${ritual.musicFileSlug}" has no matching entry in files.json`,
-      )
-    }
-  }
-
-  // --- ritual word refs → words.slug
-  for (const ritual of rituals) {
-    const md = readFileSync(
-      join(root, 'content/rituals', DEFAULT_LOCALE, `${ritual.slug}.md`),
-      'utf8',
-    )
-    for (const section of parseRitual(md)) {
-      for (const line of section.lines) {
-        for (const ref of line.wordIds) {
-          expect(
-            wordBySlug[ref] !== undefined,
-            `ritual "${ritual.slug}" line "${line.text}" references word "${ref}" but it isn't in words.json`,
           )
         }
       }
@@ -397,9 +358,9 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
 
   // --- nav ↔ route tree. Every group landing and every hand-authored link
   // must have a page.tsx, so neither the sidebar nor the sitemap (derived
-  // from the same nav data) can point at a 404. Generated groups (texts,
-  // rituals) are served by [slug] routes and are covered by the manifest
-  // checks above. Also enforce the URL scheme (see NavGroup.flat in
+  // from the same nav data) can point at a 404. The generated Texts group
+  // is served by a [slug] route and is covered by the manifest checks
+  // above. Also enforce the URL scheme (see NavGroup.flat in
   // lib/navData.ts): members of a `flat` group live at a top-level URL
   // (/cube-of-space); every other group's members nest under the group
   // (/practice/quiz).

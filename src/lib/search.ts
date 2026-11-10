@@ -1,9 +1,9 @@
 // Static search index: every nav-listed page plus the detail
 // pages — tarot cards, words of power, sephiroth, signs, planets. Titles
 // only; matching is a case-insensitive substring, which is all ~250 short
-// strings need. Because the nav itself derives from the content manifests
-// (texts, rituals) and the detail entries come straight from the data
-// layer, newly contributed content is searchable with no code change.
+// strings need. Because the nav itself derives from the content manifest
+// (texts) and the detail entries come straight from the data layer, newly
+// contributed content is searchable with no code change.
 // Built per locale so translated titles are searchable on /de.
 
 import {
