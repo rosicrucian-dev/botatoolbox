@@ -11,6 +11,7 @@ import {
 } from '@/content/data'
 import { DEFAULT_LOCALE, RELEASED_LOCALES, type Locale } from '@/lib/locales'
 import { navGroups } from '@/lib/navData'
+import { TOOL_TABS } from '@/lib/tools'
 
 // Slugs are locale-independent — the sitemap enumerates from the
 // English source on purpose (both locales' URLs are emitted below).
@@ -42,9 +43,11 @@ const SITE = 'https://botatoolbox.org'
 // meditation tools, not content Google should land users on directly.
 const publicGroups = navGroups
 
-// Docs pages with no nav entry of their own — sibling tabs under a nav-listed
-// page. The only place a new non-nav docs page has to be added.
-const extraRoutes = ['/keyboard/tableau']
+// Docs pages with no nav entry of their own — sibling tabs under a
+// nav-listed page. A Tools view comes from the tool itself; anything
+// else is listed here, and this is the only place a new non-nav docs
+// page has to be added.
+const extraRoutes = [...TOOL_TABS.map((t) => t.href), '/keyboard/tableau']
 
 const staticRoutes = [
   '/',

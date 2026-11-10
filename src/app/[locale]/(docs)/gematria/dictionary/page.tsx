@@ -13,7 +13,12 @@ export const generateMetadata = localizedMetadata('Dictionary')
 export default function GematriaWordsPage() {
   return (
     <Suspense>
-      <SetBreadcrumbs items={[{ label: 'Dictionary' }]} />
+      <SetBreadcrumbs
+        items={[
+          { label: 'Gematria', href: '/gematria' },
+          { label: 'Dictionary' },
+        ]}
+      />
       <NumberDictionaryClient />
     </Suspense>
   )

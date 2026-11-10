@@ -16,6 +16,7 @@ import { join } from 'node:path'
 import { romanToLetters } from '@/lib/hebrew'
 import { DEFAULT_LOCALE, LOCALES } from '@/lib/locales'
 import { getNavigation } from '@/lib/nav'
+import { TOOLS } from '@/lib/tools'
 import {
   cubeEdges,
   cubeFaces,
@@ -354,6 +355,37 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
       planetSlugs.has(c.planet),
       `chakra row angel="${c.angel}" planet="${c.planet}" has no matching planet`,
     )
+  }
+
+  // --- tools ↔ nav ↔ route tree. Every tool is a nav link (its first
+  // view), and every view of it is a real page nested under it. The tabs
+  // are the only navigation to the views, so a typo here is a dead end.
+  for (const tool of TOOLS) {
+    expect(
+      navigation.some((g) => g.links.some((l) => l.href === tool.href)),
+      `tool ${tool.href} is not a nav link — it would have no sidebar row`,
+    )
+    expect(
+      tool.tabs[0]?.href === tool.href,
+      `tool ${tool.href}: its first tab must be the tool itself`,
+    )
+    for (const tab of tool.tabs) {
+      expect(
+        tab.href === tool.href || tab.href.startsWith(`${tool.href}/`),
+        `tool ${tool.href}: view ${tab.href} is not nested under it`,
+      )
+      expect(
+        existsSync(
+          join(
+            root,
+            'src/app/[locale]/(docs)',
+            ...tab.href.split('/').filter(Boolean),
+            'page.tsx',
+          ),
+        ),
+        `tool ${tool.href}: view ${tab.href} has no page.tsx`,
+      )
+    }
   }
 
   // --- nav ↔ route tree. Every group landing and every hand-authored link

@@ -10,7 +10,7 @@ import {
 import { GematriaNoteSection } from '@/components/gematria/GematriaNoteSection'
 import { GematriaSources } from '@/components/gematria/GematriaSources'
 import { GematriaWordSection } from '@/components/gematria/GematriaWordSection'
-import { PageHeading } from '@/components/layout/PageHeading'
+import { ToolLayout } from '@/components/layout/ToolLayout'
 import { GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
 import {
   wordsForNumber,
@@ -20,6 +20,9 @@ import {
 import { theosophicExtension, theosophicReduction } from '@/lib/gematria'
 import { useGematriaDict } from '@/lib/hooks/useGematriaDict'
 import { useQueryParamState } from '@/lib/hooks/useQueryParamState'
+import { toolFor } from '@/lib/tools'
+
+const tool = toolFor('/gematria')
 
 const MAX_DIGITS = 4
 // A derived value is clickable only up to this ceiling — the same as what
@@ -59,9 +62,11 @@ export function NumberDictionaryClient() {
   }
 
   return (
-    <article className="space-y-6">
-      <PageHeading>Dictionary</PageHeading>
-
+    <ToolLayout
+      title={tool.title}
+      tabs={tool.tabs}
+      active="/gematria/dictionary"
+    >
       {/* Number display. */}
       <div
         // Announce the typed number to screen readers as keys are pressed —
@@ -126,7 +131,7 @@ export function NumberDictionaryClient() {
       />
 
       {entry && entryHasContent(entry) && <GematriaSources />}
-    </article>
+    </ToolLayout>
   )
 }
 

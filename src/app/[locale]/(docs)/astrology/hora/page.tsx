@@ -26,7 +26,9 @@ export default async function Hora({
   const { planetBySlug } = getAstrology(toLocale((await params).locale))
   return (
     <>
-      <SetBreadcrumbs items={[{ label: 'Hora' }]} />
+      <SetBreadcrumbs
+        items={[{ label: 'Astrology', href: '/astrology' }, { label: 'Hora' }]}
+      />
       <HoraClient planetBySlug={planetBySlug} />
     </>
   )

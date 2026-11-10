@@ -1,5 +1,6 @@
-// Static search index: every nav-listed page plus the detail
-// pages — tarot cards, words of power, sephiroth, signs, planets. Titles
+// Static search index: every nav-listed page, every tool view behind a
+// tab, plus the detail pages — tarot cards, words of power, sephiroth,
+// signs, planets. Titles
 // only; matching is a case-insensitive substring, which is all ~250 short
 // strings need. Because the nav itself derives from the content manifest
 // (texts) and the detail entries come straight from the data layer, newly
@@ -14,7 +15,8 @@ import {
   getWords,
 } from '@/content/data'
 import { defineLocalized } from '@/content/data/localized'
-import { getNavigation } from '@/lib/nav'
+import { getNavigation, localizedTitle } from '@/lib/nav'
+import { TOOL_TABS } from '@/lib/tools'
 
 export interface SearchEntry {
   url: string
@@ -35,6 +37,13 @@ export const getSearchEntries = defineLocalized(
           .filter((l) => !l.hidden)
           .map((l) => ({ url: l.href, title: l.title })),
       ),
+      // A tool's other views have no nav row of their own (the tool
+      // has one row), so they are added here — a page a reader can
+      // reach by tab and not by search would be a page they can't find.
+      ...TOOL_TABS.map((tab) => ({
+        url: tab.href,
+        title: localizedTitle(locale, tab.label),
+      })),
       ...cards.map((c) => ({ url: `/tarot/${c.slug}`, title: c.name })),
       ...minorCards.map((c) => ({
         url: `/tarot/${c.slug}`,

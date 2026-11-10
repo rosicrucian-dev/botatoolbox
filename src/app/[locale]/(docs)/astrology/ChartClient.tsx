@@ -10,12 +10,15 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AspectsTable } from '@/components/astrology/AspectsTable'
 import { AstrologyTable } from '@/components/astrology/AstrologyTable'
 import { AstrologyWheel } from '@/components/astrology/AstrologyWheel'
-import { PageHeading } from '@/components/layout/PageHeading'
+import { ToolLayout } from '@/components/layout/ToolLayout'
 import type { Planet, Sign } from '@/content/data'
 import { computeAspects } from '@/lib/astro/aspects'
 import { getEngine } from '@/lib/astro/engine'
 import { DESKTOP_RINGS, MOBILE_RINGS } from '@/lib/astro/layout'
 import type { Chart } from '@/lib/astro/types'
+import { toolFor } from '@/lib/tools'
+
+const tool = toolFor('/astrology')
 
 // Flat field styling for the date/time inputs, matching the StepButton border.
 // Bespoke (not Catalyst's `Input`) so they have no shadow/depth and read
@@ -154,56 +157,53 @@ export function ChartClient({
       : 'Current planetary positions on the zodiac wheel'
 
   return (
-    <article className="space-y-6">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-        <PageHeading truncate>Chart</PageHeading>
-        {/* Mobile: the title takes its own line and the stepper takes the
-            full width below it — chevrons/Now stay fixed, the date/time
-            fields flex to share the rest (and squish when Now appears).
-            Desktop: title left, fixed-width stepper right. */}
-        <div className="flex w-full items-center gap-2 sm:w-auto">
-          {/* On mobile, Now sits between the time field and the › chevron
-              (order-1, with the chevron bumped to order-2) so the ‹ and ›
-              stay pinned to the screen edges. Desktop keeps DOM order. */}
-          {pinned && (
-            <StepButton
-              label="Return to now"
-              onClick={() => setPinned(false)}
-              className="order-1 sm:order-none"
-            >
-              <ArrowUturnLeftIcon className="size-5" />
-            </StepButton>
-          )}
-          <StepButton label="Previous day" onClick={() => stepDay(-1)}>
-            <ChevronLeftIcon className="size-5" />
-          </StepButton>
-          <input
-            type="date"
-            aria-label="Chart date"
-            // astronomy-engine stays accurate roughly within 1900–2100
-            // (Pluto's tables and the analytic series degrade outside it);
-            // bound the picker to the honest envelope.
-            min="1900-01-01"
-            max="2100-12-31"
-            value={instant ? toDateInputValue(instant) : ''}
-            onChange={(e) => handleDateChange(e.target.value)}
-            className={`min-w-0 flex-1 sm:w-36 sm:flex-none ${fieldClasses}`}
-          />
-          <input
-            type="time"
-            aria-label="Chart time"
-            value={instant ? toTimeInputValue(instant) : ''}
-            onChange={(e) => handleTimeChange(e.target.value)}
-            className={`min-w-0 flex-1 sm:w-28 sm:flex-none ${fieldClasses}`}
-          />
+    <ToolLayout title={tool.title} tabs={tool.tabs} active="/astrology">
+      {/* The stepper is a row of its own under the title, full width at
+          every size now that the title row carries the tool's tabs:
+          chevrons/Now stay fixed and the date/time fields flex to share
+          the rest (and squish when Now appears). */}
+      <div className="flex w-full items-center gap-2">
+        {/* On mobile, Now sits between the time field and the › chevron
+            (order-1, with the chevron bumped to order-2) so the ‹ and ›
+            stay pinned to the screen edges. Desktop keeps DOM order. */}
+        {pinned && (
           <StepButton
-            label="Next day"
-            onClick={() => stepDay(1)}
-            className="order-2 sm:order-none"
+            label="Return to now"
+            onClick={() => setPinned(false)}
+            className="order-1 sm:order-none"
           >
-            <ChevronRightIcon className="size-5" />
+            <ArrowUturnLeftIcon className="size-5" />
           </StepButton>
-        </div>
+        )}
+        <StepButton label="Previous day" onClick={() => stepDay(-1)}>
+          <ChevronLeftIcon className="size-5" />
+        </StepButton>
+        <input
+          type="date"
+          aria-label="Chart date"
+          // astronomy-engine stays accurate roughly within 1900–2100
+          // (Pluto's tables and the analytic series degrade outside it);
+          // bound the picker to the honest envelope.
+          min="1900-01-01"
+          max="2100-12-31"
+          value={instant ? toDateInputValue(instant) : ''}
+          onChange={(e) => handleDateChange(e.target.value)}
+          className={`min-w-0 flex-1 sm:w-36 sm:flex-none ${fieldClasses}`}
+        />
+        <input
+          type="time"
+          aria-label="Chart time"
+          value={instant ? toTimeInputValue(instant) : ''}
+          onChange={(e) => handleTimeChange(e.target.value)}
+          className={`min-w-0 flex-1 sm:w-28 sm:flex-none ${fieldClasses}`}
+        />
+        <StepButton
+          label="Next day"
+          onClick={() => stepDay(1)}
+          className="order-2 sm:order-none"
+        >
+          <ChevronRightIcon className="size-5" />
+        </StepButton>
       </div>
       {/* Gray rounded frame (matching the Freeform table's inline board) so
           the circular wheel reads as sitting inside a contained square. The
@@ -244,6 +244,6 @@ export function ChartClient({
       {/* Gated on chart (not aspects) so the pre-hydration state stays
           blank but a computed chart with nothing in orb says so. */}
       {chart && <AspectsTable aspects={aspects} planetBySlug={planetBySlug} />}
-    </article>
+    </ToolLayout>
   )
 }

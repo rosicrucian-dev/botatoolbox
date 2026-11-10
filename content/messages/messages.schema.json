@@ -29,10 +29,10 @@
     "nav./about.title": {
       "type": "string"
     },
-    "nav./astrology/chart.description": {
+    "nav./astrology.description": {
       "type": "string"
     },
-    "nav./astrology/chart.title": {
+    "nav./astrology.title": {
       "type": "string"
     },
     "nav./astrology/hora.description": {
@@ -59,10 +59,10 @@
     "nav./files.title": {
       "type": "string"
     },
-    "nav./gematria/calculator.description": {
+    "nav./gematria.description": {
       "type": "string"
     },
-    "nav./gematria/calculator.title": {
+    "nav./gematria.title": {
       "type": "string"
     },
     "nav./gematria/dictionary.description": {
@@ -227,13 +227,7 @@
     "nav./tree-of-life.title": {
       "type": "string"
     },
-    "nav.group.astrology.title": {
-      "type": "string"
-    },
     "nav.group.devices.title": {
-      "type": "string"
-    },
-    "nav.group.gematria.title": {
       "type": "string"
     },
     "nav.group.healing.title": {
@@ -255,6 +249,9 @@
       "type": "string"
     },
     "nav.group.texts.title": {
+      "type": "string"
+    },
+    "nav.group.tools.title": {
       "type": "string"
     },
     "nav.group.utilities.title": {

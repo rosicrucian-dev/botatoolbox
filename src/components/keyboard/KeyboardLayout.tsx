@@ -1,10 +1,11 @@
-import { PageHeading } from '@/components/layout/PageHeading'
-import { Link } from '@/components/locale/LocaleLink'
-import { Children, Fragment, type ReactNode } from 'react'
+import { ToolLayout } from '@/components/layout/ToolLayout'
+import { type ReactNode } from 'react'
 
 // Title row + tab links shared by /keyboard, /keyboard/piano, and
-// /keyboard/tableau. Tabs are real navigation (next/link), so the active
-// tab is determined by route, not state.
+// /keyboard/tableau — the same shape the Tools group's two tools use
+// (src/lib/tools.ts), through the same component. Not in TOOLS itself
+// because this one tool has two hrefs for one view: /keyboard and
+// /keyboard/piano both render the piano.
 export function KeyboardLayout({
   tab,
   children,
@@ -13,61 +14,15 @@ export function KeyboardLayout({
   children: ReactNode
 }) {
   return (
-    <article className="space-y-6">
-      <div className="flex items-start justify-between gap-3">
-        <PageHeading truncate>Keyboard</PageHeading>
-        <Tabs>
-          <Tab href="/keyboard/tableau" active={tab === 'tableau'}>
-            Tableau
-          </Tab>
-          <Tab href="/keyboard/piano" active={tab === 'piano'}>
-            Piano
-          </Tab>
-        </Tabs>
-      </div>
-      {children}
-    </article>
-  )
-}
-
-// Segmented-control container. Dividers are explicit sibling elements
-// (not `divide-x` border-left) so they sit on the page background rather
-// than on top of the active tab's tinted fill — keeps the inner divider
-// at the same visual weight as the outer ring regardless of which tab
-// is active.
-function Tabs({ children }: { children: ReactNode }) {
-  const tabs = Children.toArray(children)
-  return (
-    <div className="inline-flex h-9 overflow-hidden rounded-md ring-1 ring-current/20">
-      {tabs.map((tab, i) => (
-        <Fragment key={i}>
-          {i > 0 && <span aria-hidden="true" className="w-px bg-current/20" />}
-          {tab}
-        </Fragment>
-      ))}
-    </div>
-  )
-}
-
-function Tab({
-  href,
-  active,
-  children,
-}: {
-  href: string
-  active: boolean
-  children: ReactNode
-}) {
-  return (
-    <Link
-      href={href}
-      aria-current={active ? 'page' : undefined}
-      className={
-        'inline-flex h-full items-center justify-center px-3 text-sm font-medium whitespace-nowrap transition ' +
-        (active ? 'bg-current/15' : 'hover:bg-current/10')
-      }
+    <ToolLayout
+      title="Keyboard"
+      tabs={[
+        { href: '/keyboard/tableau', label: 'Tableau' },
+        { href: '/keyboard/piano', label: 'Piano' },
+      ]}
+      active={tab === 'tableau' ? '/keyboard/tableau' : '/keyboard/piano'}
     >
       {children}
-    </Link>
+    </ToolLayout>
   )
 }

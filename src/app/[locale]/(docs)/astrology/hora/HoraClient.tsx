@@ -10,9 +10,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/catalyst/table'
-import { PageHeading } from '@/components/layout/PageHeading'
+import { ToolLayout } from '@/components/layout/ToolLayout'
 import type { Planet } from '@/content/data'
 import { planetaryHours } from '@/lib/astro/hora'
+import { toolFor } from '@/lib/tools'
+
+const tool = toolFor('/astrology')
 
 // Planetary hours for the user's location — prototype. Geolocation is
 // requested on mount (the page is useless without a location, so the
@@ -143,11 +146,7 @@ export function HoraClient({
   }, [location, now])
 
   return (
-    <article className="space-y-8">
-      <header>
-        <PageHeading>Hora</PageHeading>
-      </header>
-
+    <ToolLayout title={tool.title} tabs={tool.tabs} active="/astrology/hora">
       {location.status === 'locating' && (
         <p className="text-sm text-zinc-600 dark:text-zinc-400">
           Finding your location…
@@ -245,6 +244,6 @@ export function HoraClient({
           </p>
         </>
       )}
-    </article>
+    </ToolLayout>
   )
 }

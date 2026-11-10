@@ -12,7 +12,7 @@ import {
 import { GematriaNoteSection } from '@/components/gematria/GematriaNoteSection'
 import { GematriaSources } from '@/components/gematria/GematriaSources'
 import { GematriaWordSection } from '@/components/gematria/GematriaWordSection'
-import { PageHeading } from '@/components/layout/PageHeading'
+import { ToolLayout } from '@/components/layout/ToolLayout'
 import { MajorImage } from '@/components/tarot/CardImage'
 import { GEMATRIA_SOURCES } from '@/content/data/gematria-sources'
 import {
@@ -26,6 +26,9 @@ import { letters } from '@/lib/hebrew'
 import { useGematriaDict } from '@/lib/hooks/useGematriaDict'
 import { useQueryParamState } from '@/lib/hooks/useQueryParamState'
 import { toolbarButtonSize } from '@/lib/toolbarButton'
+import { toolFor } from '@/lib/tools'
+
+const tool = toolFor('/gematria')
 
 // Keyboard layout — visual order matches the BOTA gematria calculator.
 // Aleph alone on top; three rows of seven; the five sofit (final) forms
@@ -103,10 +106,12 @@ export function GematriaClient({ cardByGlyph }: { cardByGlyph: CardByGlyph }) {
   }
 
   return (
-    <article className="space-y-6">
-      <div className="flex items-start justify-between gap-4">
-        <PageHeading truncate>Calculator</PageHeading>
-        {playableCount > 0 && (
+    <ToolLayout
+      title={tool.title}
+      tabs={tool.tabs}
+      active="/gematria"
+      action={
+        playableCount > 0 && (
           <Button
             href={`/gematria/play?seq=${encodeURIComponent(word)}`}
             color="emerald"
@@ -115,9 +120,9 @@ export function GematriaClient({ cardByGlyph }: { cardByGlyph: CardByGlyph }) {
           >
             Play ▶
           </Button>
-        )}
-      </div>
-
+        )
+      }
+    >
       {/* Number + Hebrew word display. 3-track grid puts the divider on
           the auto-sized middle track so it sits at the visual center;
           the two 1fr tracks give number and word equal halves. */}
@@ -262,7 +267,7 @@ export function GematriaClient({ cardByGlyph }: { cardByGlyph: CardByGlyph }) {
           <GematriaSources />
         </>
       )}
-    </article>
+    </ToolLayout>
   )
 }
 

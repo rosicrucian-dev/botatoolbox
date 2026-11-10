@@ -42,17 +42,9 @@ export interface RawNavGroup {
 // group keep their authored order.
 export const navGroups: Array<RawNavGroup> = [
   {
-    slug: 'astrology',
-    links: [{ href: '/astrology/chart' }, { href: '/astrology/hora' }],
-  },
-  {
     slug: 'devices',
     flat: true,
     links: [{ href: '/cube-of-space' }, { href: '/tree-of-life' }],
-  },
-  {
-    slug: 'gematria',
-    links: [{ href: '/gematria/calculator' }, { href: '/gematria/dictionary' }],
   },
   {
     slug: 'healing',
@@ -106,6 +98,17 @@ export const navGroups: Array<RawNavGroup> = [
     slug: 'texts',
     generated: 'texts',
     links: [],
+  },
+  {
+    // TOOLS. One row per tool, each row landing on the tool's first
+    // view; its other views are tabs of that page, off the sidebar but
+    // in the sitemap and the search index (src/lib/tools.ts). Flat,
+    // because a tool keeps its own top-level namespace — /gematria is
+    // the calculator and /gematria/dictionary is a tab of it — rather
+    // than nesting under /tools/.
+    slug: 'tools',
+    flat: true,
+    links: [{ href: '/astrology' }, { href: '/gematria' }],
   },
   {
     slug: 'utilities',
