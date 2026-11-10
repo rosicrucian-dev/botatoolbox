@@ -9,7 +9,8 @@ import { create, type StateCreator } from 'zustand'
 // default the export can bake in, and only after mount read the saved
 // value and switch to it. `hydrated` flips to true once that read has
 // happened, so a consumer can tell "still the default" from "definitely
-// the saved value" (the timer player waits on it before bouncing back).
+// the saved value" — the difference between rendering a default and
+// knowing it is the reader's.
 //
 // Usage:
 //

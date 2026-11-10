@@ -1,18 +1,33 @@
-import { Keyboard } from '@/components/keyboard/Keyboard'
-import { KeyboardLayout } from '@/components/keyboard/KeyboardLayout'
-import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
-import { keys } from '@/lib/keyboard'
-import { localizedMetadata } from '@/lib/nav'
+'use client'
 
-export const generateMetadata = localizedMetadata('Keyboard')
+import { useEffect } from 'react'
 
-export default function KeyboardPianoPage() {
+import {
+  PlainLink as Link,
+  useLocaleRouter,
+} from '@/components/locale/LocaleLink'
+
+// /keyboard IS the piano — it always rendered it, and /keyboard/piano
+// was a second address for the same view, left over from when the tab
+// links pointed at two nested routes. The keyboard is a tool like the
+// other two now (src/lib/tools.ts), and a tool's views are one address
+// each. The static export can't emit real 301s, so this stub keeps old
+// bookmarks working with a client-side redirect.
+export default function KeyboardPianoRedirect() {
+  const router = useLocaleRouter()
+  useEffect(() => {
+    router.replace('/keyboard')
+  }, [router])
   return (
-    <KeyboardLayout tab="piano">
-      <SetBreadcrumbs
-        items={[{ label: 'Keyboard', href: '/keyboard' }, { label: 'Piano' }]}
-      />
-      <Keyboard keys={keys} />
-    </KeyboardLayout>
+    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+      The piano has moved to{' '}
+      <Link
+        href="/keyboard"
+        className="text-emerald-500 underline hover:text-emerald-600"
+      >
+        /keyboard
+      </Link>
+      .
+    </p>
   )
 }

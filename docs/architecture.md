@@ -109,7 +109,7 @@ A page is a server component that awaits `params`, narrows the locale with
 exports `generateStaticParams` enumerated from `DEFAULT_LOCALE`.
 Interactive parts are handed to a colocated client component. A page whose
 title mirrors its nav entry exports
-`generateMetadata = localizedMetadata('Timer')` from `@/lib/nav`; pages
+`generateMetadata = localizedMetadata('Keyboard')` from `@/lib/nav`; pages
 whose title comes from data write their own `generateMetadata`.
 
 **Colocation rule:** a component used by exactly one route lives next to
@@ -119,7 +119,7 @@ A component used by two or more routes lives in `src/components/`.
 ### URL scheme and the nav as source of truth
 
 `src/lib/navData.ts` is the hand-authored list of groups and links. Members
-of a `flat` group (devices, resources, tools, website, utilities) live at a
+of a `flat` group (devices, resources, tools, website) live at a
 top-level URL (`/cube-of-space`); every other group's members nest under
 it (`/practice/quiz`). The sitemap is derived from that list, and the
 integrity checks assert that every listed href and group landing has a
@@ -127,20 +127,19 @@ integrity checks assert that every listed href and group landing has a
 apart.
 
 **Tools** (`src/lib/tools.ts`) is one sidebar row per tool, and a tool's
-href IS its first view: `/gematria` is the calculator, `/astrology` is
-the chart. Its other views are routes nested under it
-(`/gematria/dictionary`, `/astrology/hora`), reached by the tab links
-`ToolLayout` draws — real navigation, so a bookmark and a search result
-still name the view, each view keeps its own bundle, and Hora asks for
-the reader's location only when someone opens Hora. Those views have no
-nav row of their own, so `TOOL_TABS` is what puts them in the sitemap and
-the search index. `/keyboard` has the same shape through the same
-component without being in `TOOLS`, since `/keyboard` and
-`/keyboard/piano` are two hrefs for one view.
+href IS one of its views: `/gematria` is the calculator, `/astrology` is
+the chart, `/keyboard` is the piano. Its other views are routes nested
+under it (`/gematria/dictionary`, `/astrology/hora`,
+`/keyboard/tableau`), reached by the tab links `ToolLayout` draws — real
+navigation, so a bookmark and a search result still name the view, each
+view keeps its own bundle, and Hora asks for the reader's location only
+when someone opens Hora. Those views have no nav row of their own, so
+`TOOL_TABS` is what puts them in the sitemap and the search index.
 
 Legacy redirects, all client-side stubs (a static export can't emit a
 301): `/astrology-chart` and `/astrology/chart` → `/astrology`,
-`/gematria/calculator` → `/gematria` (carrying `?seq=`).
+`/gematria/calculator` → `/gematria` (carrying `?seq=`),
+`/keyboard/piano` → `/keyboard`.
 
 ### Local private pages
 

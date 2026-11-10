@@ -96,17 +96,11 @@ test('adding, editing, and removing a file changes the index immediately', () =>
   withPages((root) => {
     const file = join(root, 'entry.md')
     const first = scanPrivatePages(root)
-    writeFileSync(
-      file,
-      '---\ngroup: utilities\n---\n# Entry\n\nFirst version.\n',
-    )
+    writeFileSync(file, '---\ngroup: tools\n---\n# Entry\n\nFirst version.\n')
     const added = scanPrivatePages(root)
     assert.equal(added.pages.length, 1)
     assert.notEqual(added.revision, first.revision)
-    writeFileSync(
-      file,
-      '---\ngroup: utilities\n---\n# Entry\n\nSecond version.\n',
-    )
+    writeFileSync(file, '---\ngroup: tools\n---\n# Entry\n\nSecond version.\n')
     const edited = scanPrivatePages(root)
     assert.match(edited.pages[0].body, /Second version/)
     assert.notEqual(edited.revision, added.revision)

@@ -43,11 +43,10 @@ const SITE = 'https://botatoolbox.org'
 // meditation tools, not content Google should land users on directly.
 const publicGroups = navGroups
 
-// Docs pages with no nav entry of their own — sibling tabs under a
-// nav-listed page. A Tools view comes from the tool itself; anything
-// else is listed here, and this is the only place a new non-nav docs
-// page has to be added.
-const extraRoutes = [...TOOL_TABS.map((t) => t.href), '/keyboard/tableau']
+// Docs pages with no nav entry of their own: a tool's other views,
+// which are tabs of its page (src/lib/tools.ts). Everything else in the
+// route tree has a nav entry.
+const extraRoutes = TOOL_TABS.map((t) => t.href)
 
 const staticRoutes = [
   '/',

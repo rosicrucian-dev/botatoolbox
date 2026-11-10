@@ -1,7 +1,7 @@
 'use client'
 
 // A page toolbar's Search action: an emerald button (matching the site's
-// primaryAction convention, e.g. the Timer page) that opens a section-scoped
+// primaryAction convention) that opens a section-scoped
 // full-text search dialog. The dialog (and its index fetch) is lazy-loaded and
 // only mounted on first open, so visiting the page doesn't download the index
 // until the user actually searches. Parameterized by index URL + copy so

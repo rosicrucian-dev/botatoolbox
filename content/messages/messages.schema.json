@@ -215,12 +215,6 @@
     "nav./tarot/tableau.title": {
       "type": "string"
     },
-    "nav./timer.description": {
-      "type": "string"
-    },
-    "nav./timer.title": {
-      "type": "string"
-    },
     "nav./tree-of-life.description": {
       "type": "string"
     },
@@ -252,9 +246,6 @@
       "type": "string"
     },
     "nav.group.tools.title": {
-      "type": "string"
-    },
-    "nav.group.utilities.title": {
       "type": "string"
     },
     "nav.group.website.title": {
@@ -330,24 +321,6 @@
       "type": "string"
     },
     "player.tattva.title": {
-      "type": "string"
-    },
-    "player.timer.done": {
-      "type": "string"
-    },
-    "player.timer.minuteLeft": {
-      "type": "string"
-    },
-    "player.timer.minutesLeft": {
-      "type": "string"
-    },
-    "player.timer.pause": {
-      "type": "string"
-    },
-    "player.timer.resume": {
-      "type": "string"
-    },
-    "player.timer.title": {
       "type": "string"
     },
     "player.tree.ascend": {

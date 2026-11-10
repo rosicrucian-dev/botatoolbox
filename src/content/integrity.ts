@@ -366,8 +366,8 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
       `tool ${tool.href} is not a nav link — it would have no sidebar row`,
     )
     expect(
-      tool.tabs[0]?.href === tool.href,
-      `tool ${tool.href}: its first tab must be the tool itself`,
+      tool.tabs.some((tab) => tab.href === tool.href),
+      `tool ${tool.href}: one of its views must be the tool's own href`,
     )
     for (const tab of tool.tabs) {
       expect(

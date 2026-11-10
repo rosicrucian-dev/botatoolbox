@@ -126,7 +126,7 @@ export function localizedTitle(locale: Locale, english: string): string {
  * which is nearly every non-detail page. Replaces the ten-line
  * params → toLocale → localizedTitle boilerplate:
  *
- *   export const generateMetadata = localizedMetadata('Timer')
+ *   export const generateMetadata = localizedMetadata('Keyboard')
  *
  * Pages whose title comes from data (a card, a text) still write their own.
  */

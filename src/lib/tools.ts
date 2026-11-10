@@ -10,10 +10,12 @@
 // must happen when they ask for planetary hours and not when they open
 // a chart.
 //
-// The tool's own href IS its first view — /gematria is the calculator —
-// so the sidebar row lands on the common case in one click instead of
-// on an index of two cards. The other views are `/<tool>/<view>`, off
-// the sidebar but in the sitemap and the search index (see TOOL_TABS).
+// The tool's own href IS one of its views — /gematria is the calculator,
+// /keyboard is the piano — so the sidebar row lands on the common case
+// in one click instead of on an index of cards. It need not be the
+// FIRST tab: the keyboard's tableau is drawn left of its piano and was
+// before this. The other views are `/<tool>/<view>`, off the sidebar but
+// in the sitemap and the search index (see TOOL_TABS).
 //
 // Display strings: the ROW's title is the message catalog's
 // `nav.<href>.title`, as every nav link's is. The tab LABELS are here,
@@ -37,6 +39,14 @@ export const TOOLS: ReadonlyArray<Tool> = [
     ],
   },
   {
+    href: '/keyboard',
+    title: 'Keyboard',
+    tabs: [
+      { href: '/keyboard/tableau', label: 'Tableau' },
+      { href: '/keyboard', label: 'Piano' },
+    ],
+  },
+  {
     href: '/gematria',
     title: 'Gematria',
     tabs: [
@@ -53,6 +63,11 @@ export const TOOLS: ReadonlyArray<Tool> = [
  */
 export const TOOL_TABS: ReadonlyArray<{ href: string; label: string }> =
   TOOLS.flatMap((tool) => tool.tabs.filter((tab) => tab.href !== tool.href))
+
+/** Which view of a tool a path is, for `ToolLayout`'s `active`. */
+export function viewOf(tool: Tool, path: string): string {
+  return tool.tabs.find((tab) => tab.href === path)?.href ?? tool.href
+}
 
 export function toolFor(href: string): Tool {
   const tool = TOOLS.find((t) => t.href === href)

@@ -21,8 +21,8 @@ export interface RawNavGroup {
   // segment (/<slug>) and the catalog key segment.
   slug: string
   links: Array<RawNavLink>
-  // URL scheme. Members of a `flat` group (devices, resources, website,
-  // utilities) live at a short top-level URL — the `href`, e.g.
+  // URL scheme. Members of a `flat` group (devices, resources, tools,
+  // website) live at a short top-level URL — the `href`, e.g.
   // `/cube-of-space` — with the group page at `/<group>` above them only
   // in the nav, not the URL. Every other group nests: `href` is the
   // `/<group>/<item>` form (e.g. `/practice/quiz`). This keeps the
@@ -108,12 +108,11 @@ export const navGroups: Array<RawNavGroup> = [
     // than nesting under /tools/.
     slug: 'tools',
     flat: true,
-    links: [{ href: '/astrology' }, { href: '/gematria' }],
-  },
-  {
-    slug: 'utilities',
-    flat: true,
-    links: [{ href: '/keyboard' }, { href: '/timer' }],
+    links: [
+      { href: '/astrology' },
+      { href: '/gematria' },
+      { href: '/keyboard' },
+    ],
   },
   {
     slug: 'website',

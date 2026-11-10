@@ -1,11 +1,14 @@
 import { ToolLayout } from '@/components/layout/ToolLayout'
+import { toolFor } from '@/lib/tools'
 import { type ReactNode } from 'react'
 
-// Title row + tab links shared by /keyboard, /keyboard/piano, and
-// /keyboard/tableau — the same shape the Tools group's two tools use
-// (src/lib/tools.ts), through the same component. Not in TOOLS itself
-// because this one tool has two hrefs for one view: /keyboard and
-// /keyboard/piano both render the piano.
+const tool = toolFor('/keyboard')
+
+// Title row + tab links shared by /keyboard (the piano) and
+// /keyboard/tableau — the Tools group's shape, from the Tools group's
+// own data (src/lib/tools.ts) through the same ToolLayout the other
+// tools use. A thin wrapper rather than a call at each page, because
+// the keyboard's two pages are two different components.
 export function KeyboardLayout({
   tab,
   children,
@@ -15,12 +18,9 @@ export function KeyboardLayout({
 }) {
   return (
     <ToolLayout
-      title="Keyboard"
-      tabs={[
-        { href: '/keyboard/tableau', label: 'Tableau' },
-        { href: '/keyboard/piano', label: 'Piano' },
-      ]}
-      active={tab === 'tableau' ? '/keyboard/tableau' : '/keyboard/piano'}
+      title={tool.title}
+      tabs={tool.tabs}
+      active={tab === 'tableau' ? '/keyboard/tableau' : '/keyboard'}
     >
       {children}
     </ToolLayout>
