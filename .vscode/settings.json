@@ -140,6 +140,24 @@
     },
     {
       "fileMatch": [
+        "content/data/*/forces.json"
+      ],
+      "url": "./content/data/.schemas/forces.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/stages.json"
+      ],
+      "url": "./content/data/.schemas/stages.schema.json"
+    },
+    {
+      "fileMatch": [
+        "content/data/*/tattvas.json"
+      ],
+      "url": "./content/data/.schemas/tattvas.schema.json"
+    },
+    {
+      "fileMatch": [
         "content/messages/*.json",
         "!content/messages/*.schema.json"
       ],

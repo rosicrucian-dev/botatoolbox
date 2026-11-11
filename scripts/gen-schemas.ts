@@ -16,13 +16,14 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { z } from 'zod'
 
-import { overlayTargets } from '../src/content/data/overlay-config.ts'
 import {
+  AlchemyStageSchema,
   AlchemyTermSchema,
   ChakraSchema,
   CubeOfSpaceSchema,
   ElementSchema,
   FileEntrySchema,
+  ForceSchema,
   FourWorldSchema,
   GradeSchema,
   GunaSchema,
@@ -36,6 +37,7 @@ import {
   SignSchema,
   SuitCorrespondenceSchema,
   TarotCardSchema,
+  TattvaSchema,
   TenPalaceSchema,
   TextSchema,
   ThreeVeilSchema,
@@ -87,6 +89,12 @@ const targets = [
   { file: 'cube-of-space', schema: CubeOfSpaceSchema },
   { file: 'files', schema: z.array(FileEntrySchema) },
   { file: 'recordings', schema: z.array(RecordingSchema) },
+  // The School of Ageless Wisdom's three, which the Hermetic Order of
+  // Aquarius reads and this site does not yet draw: they are in the
+  // shared data all the same, and the contract is one contract.
+  { file: 'forces', schema: z.array(ForceSchema) },
+  { file: 'stages', schema: z.array(AlchemyStageSchema) },
+  { file: 'tattvas', schema: z.array(TattvaSchema) },
 ]
 
 // One schema per data file, shared by every locale: en/ and translated
@@ -126,7 +134,15 @@ const messageKeys = Object.keys(
   emit(out, JSON.stringify(json, null, 2) + '\n')
 }
 
-const localizedFiles = new Set(overlayTargets.map((t) => t.file))
+// WHERE a file sits is a fact about the directory, not about the
+// overlay registry (10 November 2026). This used to ask
+// `overlayTargets`, which answers a different question -- whether a
+// file is TRANSLATABLE -- and the two agreed only by luck: the data
+// repository's forces, stages and tattvas live in en/ and are nobody's
+// overlay target yet, so the wiring sent the editor to
+// content/data/forces.json and validated nothing.
+const inLocaleDir = (file: string) =>
+  existsSync(join(dataDir, DEFAULT_LOCALE, `${file}.json`))
 
 // Editor wiring, derived from the same lists so they can't drift.
 const settingsPath = join(here, '..', '.vscode', 'settings.json')
@@ -137,7 +153,7 @@ const settings = {
     // language-free files (cube-of-space, tree-paths) sit top level.
     ...targets.map(({ file }) => ({
       fileMatch: [
-        localizedFiles.has(file)
+        inLocaleDir(file)
           ? `content/data/*/${file}.json`
           : `content/data/${file}.json`,
       ],
