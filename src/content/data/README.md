@@ -126,11 +126,14 @@ parallel copies in sibling locale dirs, e.g. `content/texts/de/`) are listed in
 `content/data/texts.json`. Each entry is `{ slug, title }` plus two
 opt-in flags. The generic `/texts/[slug]` route renders any entry by
 reading its `.md` at build. **Adding a text = a `.md` file + one manifest
-line — no code.** Nav and sitemap both derive from this manifest, and
-**nav order = array position** in the manifest (there is no `order`
-field — insert the entry where it should appear).
+line — no code.** The `/texts` index, the sitemap and the search index all
+derive from this manifest, and **order = array position** in it (there is
+no `order` field — insert the entry where it should appear). The texts
+have no sidebar rows of their own: the Library lists `/texts` and the
+index lists the texts.
 
-- `hidden: true` — out of nav/sitemap, still reachable by direct URL.
+- `hidden: true` — out of the index, the sitemap and search, still
+  reachable by direct URL.
 - `custom: true` — the text has its own bespoke route folder (a **code**
   task; the generic route deliberately 404s it). Content contributors
   should never set this; it exists for pages like the Trestleboard player.

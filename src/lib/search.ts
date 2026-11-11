@@ -1,10 +1,9 @@
 // Static search index: every nav-listed page, every tool view behind a
-// tab, plus the detail pages — tarot cards, words of power, sephiroth,
-// signs, planets. Titles
+// tab, every text, plus the detail pages — tarot cards, words of power,
+// sephiroth, signs, planets. Titles
 // only; matching is a case-insensitive substring, which is all ~250 short
-// strings need. Because the nav itself derives from the content manifest
-// (texts) and the detail entries come straight from the data layer, newly
-// contributed content is searchable with no code change.
+// strings need. Because the entries come straight from the data layer,
+// newly contributed content is searchable with no code change.
 // Built per locale so translated titles are searchable on /de.
 
 import {
@@ -12,6 +11,7 @@ import {
   getMinorArcana,
   getSephiroth,
   getTarot,
+  getTexts,
   getWords,
 } from '@/content/data'
 import { defineLocalized } from '@/content/data/localized'
@@ -30,6 +30,7 @@ export const getSearchEntries = defineLocalized(
     const { words } = getWords(locale)
     const { sephiroth } = getSephiroth(locale)
     const { astrologySigns, astrologyPlanets } = getAstrology(locale)
+    const { visibleTexts } = getTexts(locale)
     return [
       { url: '/', title: 'BOTA Toolbox' },
       ...getNavigation(locale).flatMap((group) =>
@@ -37,6 +38,9 @@ export const getSearchEntries = defineLocalized(
           .filter((l) => !l.hidden)
           .map((l) => ({ url: l.href, title: l.title })),
       ),
+      // The texts have no nav row of their own either: the Library
+      // lists /texts and the index lists them (src/lib/navData.ts).
+      ...visibleTexts.map((t) => ({ url: `/texts/${t.slug}`, title: t.title })),
       // A tool's other views have no nav row of their own (the tool
       // has one row), so they are added here — a page a reader can
       // reach by tab and not by search would be a page they can't find.

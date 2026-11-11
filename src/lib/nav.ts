@@ -1,14 +1,12 @@
 // Navigation assembly. Structure (hrefs, grouping, flags) is
 // hand-authored in ./nav-data.ts; display strings come from the message
 // catalog (content/messages/en.json + translated siblings) under keys
-// derived from the slugs/hrefs; the generated Texts group pulls
-// their links from the localized content manifests. A module-load
+// derived from the slugs/hrefs. A module-load
 // assertion guarantees every hand-authored entry has its catalog keys —
 // a missing nav title is a loud build failure, not silent fallback.
 // Structural consumers (integrity checks, breadcrumb segment mapping)
 // call `getNavigation(DEFAULT_LOCALE)` explicitly.
 
-import { getTexts } from '@/content/data'
 import { defineLocalized } from '@/content/data/localized'
 import { en as messages, tKey } from '@/content/messages'
 import { DEFAULT_LOCALE, toLocale, type Locale } from '@/lib/locales'
@@ -29,7 +27,6 @@ export interface NavGroup {
   slug: string
   links: Array<NavLink>
   flat?: true
-  generated?: 'texts'
 }
 
 // Every hand-authored group/link must have its English catalog entry —
@@ -51,20 +48,11 @@ for (const group of navGroups) {
 
 export const getNavigation = defineLocalized((locale) => {
   const groups: Array<NavGroup> = navGroups.map((group) => {
-    // Generated groups: links come from the content manifests, whose
-    // titles/descriptions localize through the data files.
-    const links: Array<NavLink> =
-      group.generated === 'texts'
-        ? getTexts(locale).visibleTexts.map((t) => ({
-            title: t.title,
-            href: `/texts/${t.slug}`,
-            description: t.description,
-          }))
-        : group.links.map((link) => ({
-            ...link,
-            title: tKey(locale, `nav.${link.href}.title`)!,
-            description: tKey(locale, `nav.${link.href}.description`),
-          }))
+    const links: Array<NavLink> = group.links.map((link) => ({
+      ...link,
+      title: tKey(locale, `nav.${link.href}.title`)!,
+      description: tKey(locale, `nav.${link.href}.description`),
+    }))
     return {
       ...group,
       title: tKey(locale, `nav.group.${group.slug}.title`)!,
@@ -87,8 +75,7 @@ export const getVisibleNavigation = defineLocalized((locale) =>
 )
 
 // English display string → localized, across group titles and every
-// link title (hidden included; the generated Texts titles come from
-// the localized data manifests). Drives the CENTRALIZED localization of
+// link title (hidden included). Drives the CENTRALIZED localization of
 // static page titles, breadcrumb labels, and page headings whose text
 // mirrors the nav — which is nearly every non-detail page — so those
 // ~50 pages don't each need their own message key.

@@ -30,10 +30,6 @@ export interface RawNavGroup {
   // collisions between the many nested items. content/integrity.ts
   // enforces the href shape and that every href has a page.
   flat?: true
-  // Links are generated from a content manifest (texts.json) —
-  // titles/descriptions localize through the data files, not the message
-  // catalog. `links` stays empty here; nav.ts fills it per locale.
-  generated?: 'texts'
 }
 
 // Groups are kept in alphabetical order by slug to match how they
@@ -49,6 +45,18 @@ export const navGroups: Array<RawNavGroup> = [
   {
     slug: 'healing',
     links: [{ href: '/healing/planets' }, { href: '/healing/signs' }],
+  },
+  {
+    // LIBRARY: what is READ and LISTENED TO, a row per shelf and the
+    // shelf's own index behind it. The texts were a group with a row
+    // per text, generated from content/data/en/texts.json — a list that
+    // can only grow, and in time longer than the rest of the sidebar —
+    // so /texts is the index now, as /recordings already was. The
+    // individual texts stay in the sitemap and the search index, which
+    // read the manifest rather than the nav.
+    slug: 'library',
+    flat: true,
+    links: [{ href: '/texts' }, { href: '/recordings' }],
   },
   {
     slug: 'meditations',
@@ -74,12 +82,7 @@ export const navGroups: Array<RawNavGroup> = [
   {
     slug: 'resources',
     flat: true,
-    links: [
-      { href: '/files' },
-      { href: '/links' },
-      { href: '/radio' },
-      { href: '/recordings' },
-    ],
+    links: [{ href: '/files' }, { href: '/links' }, { href: '/radio' }],
   },
   {
     slug: 'tarot',
@@ -90,14 +93,6 @@ export const navGroups: Array<RawNavGroup> = [
       { href: '/tarot/minor-arcana' },
       { href: '/tarot/tableau' },
     ],
-  },
-  {
-    // Generated from content/data/en/texts.json (order + titles live there).
-    // Hidden texts — e.g. Chaldean Oracles — are excluded via visibleTexts
-    // but stay reachable by direct URL.
-    slug: 'texts',
-    generated: 'texts',
-    links: [],
   },
   {
     // TOOLS. One row per tool, each row landing on the tool's first

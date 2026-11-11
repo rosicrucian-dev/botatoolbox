@@ -390,9 +390,9 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
 
   // --- nav ↔ route tree. Every group landing and every hand-authored link
   // must have a page.tsx, so neither the sidebar nor the sitemap (derived
-  // from the same nav data) can point at a 404. The generated Texts group
-  // is served by a [slug] route and is covered by the manifest checks
-  // above. Also enforce the URL scheme (see NavGroup.flat in
+  // from the same nav data) can point at a 404. A collection's own items
+  // (a text, a recording) are served by [slug] routes and are covered by
+  // the manifest checks above. Also enforce the URL scheme (see NavGroup.flat in
   // lib/navData.ts): members of a `flat` group live at a top-level URL
   // (/cube-of-space); every other group's members nest under the group
   // (/practice/quiz).
@@ -406,12 +406,10 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
       )
       for (const link of group.links) {
         const segs = link.href.split('/').filter(Boolean)
-        if (!group.generated) {
-          expect(
-            existsSync(join(docsDir, ...segs, 'page.tsx')),
-            `nav link ${link.href} has no page at (docs)/${segs.join('/')}/page.tsx`,
-          )
-        }
+        expect(
+          existsSync(join(docsDir, ...segs, 'page.tsx')),
+          `nav link ${link.href} has no page at (docs)/${segs.join('/')}/page.tsx`,
+        )
         if (group.flat) {
           expect(
             segs.length === 1,

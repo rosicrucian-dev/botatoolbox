@@ -215,6 +215,12 @@
     "nav./tarot/tableau.title": {
       "type": "string"
     },
+    "nav./texts.description": {
+      "type": "string"
+    },
+    "nav./texts.title": {
+      "type": "string"
+    },
     "nav./tree-of-life.description": {
       "type": "string"
     },
@@ -225,6 +231,9 @@
       "type": "string"
     },
     "nav.group.healing.title": {
+      "type": "string"
+    },
+    "nav.group.library.title": {
       "type": "string"
     },
     "nav.group.meditations.title": {
@@ -240,9 +249,6 @@
       "type": "string"
     },
     "nav.group.tarot.title": {
-      "type": "string"
-    },
-    "nav.group.texts.title": {
       "type": "string"
     },
     "nav.group.tools.title": {

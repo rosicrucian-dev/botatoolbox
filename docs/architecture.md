@@ -118,7 +118,11 @@ A component used by two or more routes lives in `src/components/`.
 
 ### URL scheme and the nav as source of truth
 
-`src/lib/navData.ts` is the hand-authored list of groups and links. Members
+`src/lib/navData.ts` is the hand-authored list of groups and links — every
+one of them hand-authored now; the Texts group used to generate its rows
+from `texts.json` and is a single Library row to the `/texts` index
+instead, so a collection's items are listed on its own index page and
+reach the sitemap and search from the manifest, never from the nav. Members
 of a `flat` group (devices, resources, tools, website) live at a
 top-level URL (`/cube-of-space`); every other group's members nest under
 it (`/practice/quiz`). The sitemap is derived from that list, and the
