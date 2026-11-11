@@ -188,18 +188,6 @@
     "nav./minor-arcana.title": {
       "type": "string"
     },
-    "nav./practice/quiz.description": {
-      "type": "string"
-    },
-    "nav./practice/quiz.title": {
-      "type": "string"
-    },
-    "nav./practice/words-of-power.description": {
-      "type": "string"
-    },
-    "nav./practice/words-of-power.title": {
-      "type": "string"
-    },
     "nav./recordings.description": {
       "type": "string"
     },
@@ -224,13 +212,16 @@
     "nav./tree-of-life.title": {
       "type": "string"
     },
+    "nav./words-of-power.description": {
+      "type": "string"
+    },
+    "nav./words-of-power.title": {
+      "type": "string"
+    },
     "nav.group.library.title": {
       "type": "string"
     },
     "nav.group.meditations.title": {
-      "type": "string"
-    },
-    "nav.group.practice.title": {
       "type": "string"
     },
     "nav.group.reference.title": {
@@ -327,126 +318,6 @@
       "type": "string"
     },
     "prevNext.label": {
-      "type": "string"
-    },
-    "quiz.category.hebrew": {
-      "type": "string"
-    },
-    "quiz.category.major-arcana": {
-      "type": "string"
-    },
-    "quiz.category.minor-arcana": {
-      "type": "string"
-    },
-    "quiz.category.miscellaneous": {
-      "type": "string"
-    },
-    "quiz.category.signs": {
-      "type": "string"
-    },
-    "quiz.hebrew.gematria.title": {
-      "type": "string"
-    },
-    "quiz.hebrew.letter.title": {
-      "type": "string"
-    },
-    "quiz.hebrew.transliteration.title": {
-      "type": "string"
-    },
-    "quiz.hebrew.type.title": {
-      "type": "string"
-    },
-    "quiz.major-arcana.alchemy.title": {
-      "type": "string"
-    },
-    "quiz.major-arcana.astrology.title": {
-      "type": "string"
-    },
-    "quiz.major-arcana.human-faculty.title": {
-      "type": "string"
-    },
-    "quiz.major-arcana.intelligence.title": {
-      "type": "string"
-    },
-    "quiz.major-arcana.letter-significance.title": {
-      "type": "string"
-    },
-    "quiz.major-arcana.letter.title": {
-      "type": "string"
-    },
-    "quiz.major-arcana.power.title": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.all-keywords.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.all-keywords.title": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.cup-keywords.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.cup-keywords.title": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.pentacle-keywords.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.pentacle-keywords.title": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.sword-keywords.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.sword-keywords.title": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.wand-keywords.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.minor-arcana.wand-keywords.title": {
-      "type": "string"
-    },
-    "quiz.miscellaneous.numerology.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.miscellaneous.numerology.title": {
-      "type": "string"
-    },
-    "quiz.signs.alchemy-element.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.signs.alchemy-element.title": {
-      "type": "string"
-    },
-    "quiz.signs.alchemy-stage.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.signs.alchemy-stage.title": {
-      "type": "string"
-    },
-    "quiz.signs.body.title": {
-      "type": "string"
-    },
-    "quiz.signs.exaltation.title": {
-      "type": "string"
-    },
-    "quiz.signs.opposites.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.signs.opposites.title": {
-      "type": "string"
-    },
-    "quiz.signs.quality.title": {
-      "type": "string"
-    },
-    "quiz.signs.ruler.title": {
-      "type": "string"
-    },
-    "quiz.signs.symbol.fieldLabel": {
-      "type": "string"
-    },
-    "quiz.signs.symbol.title": {
       "type": "string"
     },
     "search.find": {

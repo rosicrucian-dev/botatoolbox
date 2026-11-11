@@ -15,7 +15,7 @@ export type HealingSign = z.infer<typeof SignSchema>
 // Zodiac glyphs (U+2648–U+2653) default to full-color emoji presentation
 // on Apple platforms. Appending U+FE0E (variation selector-15) forces the
 // monochrome text symbol. Doing it once here means EVERY consumer — the
-// astrology tables, the focus player, the quiz, and the chart wheel — gets
+// astrology tables, the focus player, and the chart wheel — gets
 // the plain text glyph instead of an emoji. Kept out of signs.json so the
 // raw data stays a clean codepoint per sign.
 const TEXT_VS = '\uFE0E'

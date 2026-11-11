@@ -31,6 +31,7 @@ export function MovedTo({
   to,
   what,
   label,
+  verb = 'has moved to',
   keepQuery,
 }: {
   /** Where it lives now. */
@@ -39,6 +40,13 @@ export function MovedTo({
   what: string
   /** What to call the destination; the address itself by default. */
   label?: string
+  /**
+   * What happened to it. The default says it moved, which is the usual
+   * case; a page that was RETIRED rather than moved says so instead,
+   * because sending a reader to a page that does not hold the thing
+   * and calling it the move is worse than a 404.
+   */
+  verb?: string
   /** Carry the query string across (a shared or saved state). */
   keepQuery?: boolean
 }) {
@@ -48,7 +56,7 @@ export function MovedTo({
         <Redirect to={to} keepQuery={keepQuery} />
       </Suspense>
       <p className="text-sm text-zinc-600 dark:text-zinc-400">
-        {what} has moved to{' '}
+        {what} {verb}{' '}
         <Link
           href={to}
           className="text-emerald-500 underline hover:text-emerald-600"

@@ -44,15 +44,11 @@ export interface RawNavGroup {
 // Locale-independent either way — the order is in this structure, never
 // in the translated titles.
 //
-// What it says, read down: Practice and Meditations are what the reader
-// DOES, Tools what they work WITH, Reference what they LOOK UP, the
-// Library what they READ, and the Website is the site talking about
-// itself. Doing first and reading last.
+// What it says, read down: Meditations is what the reader DOES, Tools
+// what they work WITH, Reference what they LOOK UP, the Library what
+// they READ, and the Website is the site talking about itself. Doing
+// first and reading last.
 export const navGroups: Array<RawNavGroup> = [
-  {
-    slug: 'practice',
-    links: [{ href: '/practice/quiz' }, { href: '/practice/words-of-power' }],
-  },
   {
     // MEDITATIONS: the guided sittings. The planets and the signs were a
     // Healing group of their own and are two more of these — but they
@@ -100,6 +96,13 @@ export const navGroups: Array<RawNavGroup> = [
     // Flat, because each of these keeps its own top-level namespace:
     // /major-arcana is the tableau and /correspondences/major-arcana is
     // the Keys' table, which is a table and is filed with the tables.
+    //
+    // THE WORDS OF POWER ARE REFERENCE (10 November 2026): the page is a
+    // table of the names — each with its English, its Hebrew and its
+    // pronunciation — and the intoning is a PLAYER behind each row, the
+    // way a table has a quiz behind it. Last, being the one row here
+    // that is not Tarot or a diagram. It was the Practice group's other
+    // half, and with the Quiz gone that group had nothing in it.
     slug: 'reference',
     flat: true,
     links: [
@@ -108,6 +111,7 @@ export const navGroups: Array<RawNavGroup> = [
       { href: '/minor-arcana' },
       { href: '/cube-of-space' },
       { href: '/tree-of-life' },
+      { href: '/words-of-power' },
     ],
   },
   {

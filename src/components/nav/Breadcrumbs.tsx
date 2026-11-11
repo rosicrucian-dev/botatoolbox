@@ -86,7 +86,8 @@ export function useBreadcrumbs(): Array<Crumb> {
 //   - a member's first segment (`/correspondences/hebrew` →
 //     correspondences → Reference; for a flat group this is the short
 //     canonical URL, `/cube-of-space` → Reference; for a nested group it
-//     equals the group slug, `/practice/quiz` → practice → Practice), and
+//     equals the group slug, `/meditations/pattern-trestleboard` →
+//     meditations → Meditations), and
 //   - the group's own slug (`/reference` → Reference).
 //
 // A segment belonging to no group simply has no derived crumb, which is

@@ -66,8 +66,8 @@ export const getNavigation = defineLocalized((locale) => {
   // locales (sorting translated titles would shuffle the groups between
   // languages) — and so does this, the order being in the structure and
   // not in the strings. What it also does is let the order MEAN
-  // something: Practice stands above Meditations because the quiz and
-  // the words are the daily work and a sitting is the longer one.
+  // something: the sidebar descends from what the reader DOES to what
+  // they READ (see navGroups).
   return groups
 })
 

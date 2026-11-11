@@ -419,7 +419,7 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
   // the manifest checks above. Also enforce the URL scheme (see NavGroup.flat in
   // lib/navData.ts): members of a `flat` group live at a top-level URL
   // (/cube-of-space); every other group's members nest under the group
-  // (/practice/quiz).
+  // (/meditations/pattern-trestleboard).
   {
     const docsDir = join(root, 'src/app/[locale]/(docs)')
     for (const group of navigation) {

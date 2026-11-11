@@ -99,7 +99,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...groupRoutes,
     ...cards.map((c) => `/tarot/${c.slug}`),
     ...minorCards.map((c) => `/tarot/${c.slug}`),
-    ...words.map((w) => `/practice/words-of-power/${w.slug}`),
+    ...words.map((w) => `/words-of-power/${w.slug}`),
     ...visibleTexts.map((t) => `/texts/${t.slug}`),
     // '/recordings' itself arrives through staticRoutes once its nav link
     // is un-hidden; only the per-grouping and per-recording pages go here.

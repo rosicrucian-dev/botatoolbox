@@ -61,7 +61,7 @@ export const getSearchEntries = defineLocalized(
         title: `${c.num} of ${c.suit}`,
       })),
       ...words.map((w) => ({
-        url: `/practice/words-of-power/${w.slug}`,
+        url: `/words-of-power/${w.slug}`,
         title: w.name,
       })),
       ...sephiroth.map((s) => ({

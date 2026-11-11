@@ -51,7 +51,7 @@ export function WordOfPowerPlayer({ word }: { word: ExpandedWord }) {
       if (idx < slides.length - 1) {
         setIdx(idx + 1)
       } else {
-        router.push(`/practice/words-of-power/${word.slug}`)
+        router.push(`/words-of-power/${word.slug}`)
       }
     },
   })
@@ -62,7 +62,7 @@ export function WordOfPowerPlayer({ word }: { word: ExpandedWord }) {
       slides={slides}
       idx={idx}
       onIdxChange={handleIdxChange}
-      onClose={() => router.push(`/practice/words-of-power/${word.slug}`)}
+      onClose={() => router.push(`/words-of-power/${word.slug}`)}
       extraHeaderItem={
         current?.note && !autoplay ? (
           <SoundButton onClick={playCurrent} />

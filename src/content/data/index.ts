@@ -35,7 +35,6 @@
 //   - pillars.ts       — the two pillars (Qabalah page)
 //   - ten-palaces.ts   — the Ten Palaces of Assiah (Qabalah page)
 //   - texts.ts         — prose-text manifest (bodies in content/texts/*.md)
-//   - quizzes.ts       — quiz definitions (code, not JSON — see README)
 //   - gematria-words.ts / gematria-sources.ts — gematria dictionary
 //   - helpers.ts       — byKey<T>() and other shared utilities
 //
@@ -59,7 +58,6 @@ export * from './minor-arcana'
 export * from './numerology'
 export * from './pillars'
 export * from './planets'
-export * from './quizzes'
 export * from './recordings'
 export * from './sephiroth'
 export * from './signs'

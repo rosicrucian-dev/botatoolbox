@@ -144,9 +144,6 @@ build in both directions (manifest entry without a file, or an orphan
 
 ## When something is code, not data
 
-- **Quizzes** (`quizzes.ts`) are intentionally code, not JSON: each quiz
-  carries per-quiz display transforms that can't cross the RSC
-  server→client boundary as plain data. New quizzes are added there.
 - **`src/lib` vs here:** data + lookup maps + cross-file refs belong in
   `src/content/data`. Framework/UI/audio utilities (hooks, audio, color
   theming, the gematria _math_ in `lib/gematria.ts`) belong in `src/lib`.
