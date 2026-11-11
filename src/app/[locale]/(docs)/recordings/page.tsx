@@ -1,3 +1,4 @@
+import { Button } from '@/components/catalyst/button'
 import { PageToolbar } from '@/components/layout/PageToolbar'
 import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
 import { RecordingsSearch } from '@/components/search/RecordingsSearch'
@@ -29,7 +30,24 @@ export default async function Recordings({
   return (
     <article className="space-y-6">
       <SetBreadcrumbs items={[{ label: 'Recordings' }]} />
-      <PageToolbar title="Recordings" primaryAction={<RecordingsSearch />} />
+      <PageToolbar
+        title="Recordings"
+        // THE RADIO IS AN ACTION, NOT A ROW (November 2026). It was a
+        // sidebar row of its own under Resources, and it belongs here:
+        // the stream is BOTA NZ's broadcast of these very lectures, and
+        // the archive below was captured from it. Not a row of the list,
+        // because every row there is a series with a count and a page of
+        // transcripts — a live stream has neither, and it would have sat
+        // among them as a series with an empty count. A quiet button
+        // beside Search says what it is: another way to hear this, now
+        // rather than by the page.
+        secondaryActions={
+          <Button href="/radio" outline>
+            Radio
+          </Button>
+        }
+        primaryAction={<RecordingsSearch />}
+      />
       <div
         role="note"
         className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-800 dark:border-blue-400/20 dark:bg-blue-400/10 dark:text-blue-200"

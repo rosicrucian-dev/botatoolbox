@@ -41,6 +41,9 @@ export const getSearchEntries = defineLocalized(
       // The texts have no nav row of their own either: the Library
       // lists /texts and the index lists them (src/lib/navData.ts).
       ...visibleTexts.map((t) => ({ url: `/texts/${t.slug}`, title: t.title })),
+      // The Radio has no nav row either: it is a link at the top of the
+      // Recordings page (src/lib/navData.ts).
+      { url: '/radio', title: localizedTitle(locale, 'Radio') },
       // A tool's other views have no nav row of their own (the tool
       // has one row), so they are added here — a page a reader can
       // reach by tab and not by search would be a page they can't find.

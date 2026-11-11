@@ -140,12 +140,6 @@
     "nav./practice/words-of-power.title": {
       "type": "string"
     },
-    "nav./radio.description": {
-      "type": "string"
-    },
-    "nav./radio.title": {
-      "type": "string"
-    },
     "nav./recordings.description": {
       "type": "string"
     },
@@ -243,9 +237,6 @@
       "type": "string"
     },
     "nav.group.reference.title": {
-      "type": "string"
-    },
-    "nav.group.resources.title": {
       "type": "string"
     },
     "nav.group.tarot.title": {
@@ -561,6 +552,9 @@
       "type": "string"
     },
     "title.Astrology Chart": {
+      "type": "string"
+    },
+    "title.Radio": {
       "type": "string"
     }
   },

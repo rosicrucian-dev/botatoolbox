@@ -123,7 +123,7 @@ one of them hand-authored now; the Texts group used to generate its rows
 from `texts.json` and is a single Library row to the `/texts` index
 instead, so a collection's items are listed on its own index page and
 reach the sitemap and search from the manifest, never from the nav. Members
-of a `flat` group (devices, resources, tools, website) live at a
+of a `flat` group (devices, library, tools, website) live at a
 top-level URL (`/cube-of-space`); every other group's members nest under
 it (`/practice/quiz`). The sitemap is derived from that list, and the
 integrity checks assert that every listed href and group landing has a

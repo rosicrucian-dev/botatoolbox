@@ -45,8 +45,6 @@
   "nav./practice/quiz.title": "Quiz",
   "nav./practice/words-of-power.description": "Practice intoning words of power with the associated sound and color.",
   "nav./practice/words-of-power.title": "Words of Power",
-  "nav./radio.description": "Streaming radio of Ann Davies lectures, from BOTA NZ.",
-  "nav./radio.title": "Radio",
   "nav./recordings.description": "Searchable transcripts of Rev. Ann Davies' lectures.",
   "nav./recordings.title": "Recordings",
   "nav./reference/alchemy.title": "Alchemy",
@@ -80,7 +78,6 @@
   "nav.group.meditations.title": "Meditations",
   "nav.group.practice.title": "Practice",
   "nav.group.reference.title": "Reference",
-  "nav.group.resources.title": "Resources",
   "nav.group.tarot.title": "Tarot",
   "nav.group.tools.title": "Tools",
   "nav.group.website.title": "Website",
@@ -185,5 +182,6 @@
   "sound.dismiss": "Dismiss",
   "sound.iosHint": "Don't hear anything? Check that Silent Mode and Do Not Disturb are both off.",
   "sound.play": "Play tone",
-  "title.Astrology Chart": "Astrology Chart"
+  "title.Astrology Chart": "Astrology Chart",
+  "title.Radio": "Radio"
 }

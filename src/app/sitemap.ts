@@ -44,9 +44,10 @@ const SITE = 'https://botatoolbox.org'
 const publicGroups = navGroups
 
 // Docs pages with no nav entry of their own: a tool's other views,
-// which are tabs of its page (src/lib/tools.ts). Everything else in the
-// route tree has a nav entry.
-const extraRoutes = TOOL_TABS.map((t) => t.href)
+// which are tabs of its page (src/lib/tools.ts), and the Radio, which
+// is reached from the Recordings page — its stream and their source are
+// the same broadcast. Everything else in the route tree has a nav entry.
+const extraRoutes = [...TOOL_TABS.map((t) => t.href), '/radio']
 
 const staticRoutes = [
   '/',

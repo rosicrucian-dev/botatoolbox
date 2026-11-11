@@ -21,7 +21,7 @@ export interface RawNavGroup {
   // segment (/<slug>) and the catalog key segment.
   slug: string
   links: Array<RawNavLink>
-  // URL scheme. Members of a `flat` group (devices, resources, tools,
+  // URL scheme. Members of a `flat` group (devices, library, tools,
   // website) live at a short top-level URL — the `href`, e.g.
   // `/cube-of-space` — with the group page at `/<group>` above them only
   // in the nav, not the URL. Every other group nests: `href` is the
@@ -80,11 +80,6 @@ export const navGroups: Array<RawNavGroup> = [
     ],
   },
   {
-    slug: 'resources',
-    flat: true,
-    links: [{ href: '/files' }, { href: '/links' }, { href: '/radio' }],
-  },
-  {
     slug: 'tarot',
     links: [
       { href: '/tarot/correspondences' },
@@ -110,8 +105,20 @@ export const navGroups: Array<RawNavGroup> = [
     ],
   },
   {
+    // The site itself, and what it hands out: the Files and the Links
+    // came from a Resources group that held them beside the Radio, and
+    // the Radio has gone to the Recordings page, whose stream it is.
+    // They are not read or looked up — they are a download and a list of
+    // other people's sites, which is as much "about this site" as the
+    // About page is.
     slug: 'website',
     flat: true,
-    links: [{ href: '/about' }, { href: '/community' }, { href: '/settings' }],
+    links: [
+      { href: '/about' },
+      { href: '/community' },
+      { href: '/files' },
+      { href: '/links' },
+      { href: '/settings' },
+    ],
   },
 ]
