@@ -121,7 +121,8 @@ export function TattvaSymbol({
   className,
 }: {
   main: TattvaKind
-  sub: TattvaKind
+  /** Omitted draws the main symbol alone, as a reference table does. */
+  sub?: TattvaKind
   className?: string
 }) {
   const slot = SLOTS[main]
@@ -132,7 +133,7 @@ export function TattvaSymbol({
       className={className ?? 'block h-full w-full'}
     >
       <Macro kind={main} />
-      <SubSymbol kind={sub} cx={slot.cx} cy={slot.cy} r={slot.r} />
+      {sub && <SubSymbol kind={sub} cx={slot.cx} cy={slot.cy} r={slot.r} />}
     </svg>
   )
 }

@@ -1,130 +1,22 @@
-import { type Metadata } from 'next'
-import { notFound } from 'next/navigation'
-
-import { PageHeading } from '@/components/layout/PageHeading'
-import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
-import { PlayLink } from '@/components/nav/PlayLink'
-import { PrevNextGestures } from '@/components/nav/PrevNextGestures'
-import { PrevNextNav } from '@/components/nav/PrevNextNav'
-import { DefinitionList } from '@/components/ui/DefinitionList'
-import { TextLink } from '@/components/ui/TextLink'
+import { MovedTo } from '@/components/nav/MovedTo'
 import { getAstrology } from '@/content/data'
-import { DEFAULT_LOCALE, toLocale } from '@/lib/locales'
+import { DEFAULT_LOCALE } from '@/lib/locales'
 
-// Structural (slug) enumeration — English source on purpose.
-const { astrologySigns } = getAstrology(DEFAULT_LOCALE)
+// The Astrology page became Signs, Planets and Houses (10 November
+// 2026), and a detail page is the likeliest thing to be bookmarked, so
+// each keeps its stub.
 
 export function generateStaticParams() {
-  return astrologySigns.map((s) => ({ slug: s.slug }))
+  return getAstrology(DEFAULT_LOCALE).astrologySigns.map((s) => ({
+    slug: s.slug,
+  }))
 }
 
-export async function generateMetadata({
+export default async function SignRedirect({
   params,
 }: {
-  params: Promise<{ locale: string; slug: string }>
-}): Promise<Metadata> {
-  const { locale, slug } = await params
-  const sign = getAstrology(toLocale(locale)).signBySlug[slug]
-  return { title: sign?.name ?? 'Sign' }
-}
-
-export default async function SignPage({
-  params,
-}: {
-  params: Promise<{ locale: string; slug: string }>
+  params: Promise<{ slug: string }>
 }) {
-  const { locale: rawLocale, slug } = await params
-  const {
-    astrologySigns: signs,
-    planetBySlug,
-    signBySlug,
-  } = getAstrology(toLocale(rawLocale))
-  const sign = signBySlug[slug]
-  if (!sign) notFound()
-
-  const rulers = sign.rulers
-    .map((p) => planetBySlug[p])
-    .filter((p): p is NonNullable<typeof p> => Boolean(p))
-  const exalts = sign.exaltedBy ? planetBySlug[sign.exaltedBy] : null
-
-  // Cyclic prev/next through the zodiac order in signs.json
-  // (Aries → Pisces, then wraps).
-  const i = signs.findIndex((s) => s.slug === sign.slug)
-  const prev = signs[(i - 1 + signs.length) % signs.length]
-  const next = signs[(i + 1) % signs.length]
-
-  return (
-    <article className="space-y-6">
-      <SetBreadcrumbs
-        items={[
-          { label: 'Astrology', href: '/correspondences/astrology' },
-          { label: sign.name },
-        ]}
-      />
-      <PrevNextGestures
-        prevHref={`/correspondences/astrology/signs/${prev.slug}`}
-        nextHref={`/correspondences/astrology/signs/${next.slug}`}
-      />
-      <div className="flex items-start justify-between gap-4">
-        <PageHeading truncate>{sign.name}</PageHeading>
-        <PlayLink href={`/correspondences/astrology/signs/${sign.slug}/focus`}>
-          Focus ▶
-        </PlayLink>
-      </div>
-
-      <DefinitionList
-        rows={[
-          {
-            label: 'Ruler',
-            value:
-              rulers.length === 0 ? (
-                <Empty />
-              ) : (
-                rulers.map((p, i) => (
-                  <span key={p.slug}>
-                    <PlanetLink planet={p} />
-                    {i < rulers.length - 1 ? ', ' : null}
-                  </span>
-                ))
-              ),
-          },
-          {
-            label: 'Exaltation',
-            value: exalts ? <PlanetLink planet={exalts} /> : <Empty />,
-          },
-          { label: 'Symbol', value: sign.symbol },
-          { label: 'Body', value: sign.bodyPart },
-          { label: 'Quality', value: sign.quality },
-          {
-            label: 'Alchemy',
-            value: `${sign.alchemy} — ${sign.alchemicalStage}`,
-          },
-          { label: 'Color', value: sign.color },
-        ]}
-      />
-
-      <PrevNextNav
-        prev={{
-          href: `/correspondences/astrology/signs/${prev.slug}`,
-          label: prev.name,
-        }}
-        next={{
-          href: `/correspondences/astrology/signs/${next.slug}`,
-          label: next.name,
-        }}
-      />
-    </article>
-  )
-}
-
-function Empty() {
-  return <span className="text-zinc-400 dark:text-zinc-600">—</span>
-}
-
-function PlanetLink({ planet }: { planet: { slug: string; name: string } }) {
-  return (
-    <TextLink href={`/correspondences/astrology/planets/${planet.slug}`}>
-      {planet.name}
-    </TextLink>
-  )
+  const { slug } = await params
+  return <MovedTo to={`/correspondences/signs/${slug}`} what="This sign" />
 }

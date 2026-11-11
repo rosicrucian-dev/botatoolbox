@@ -132,9 +132,9 @@ export function MajorCard({
               if (key === 'astrology') {
                 const astroSlug = card.astrology.toLowerCase()
                 const href = planetBySlug[astroSlug]
-                  ? `/correspondences/astrology/planets/${astroSlug}`
+                  ? `/correspondences/planets/${astroSlug}`
                   : signBySlug[astroSlug]
-                    ? `/correspondences/astrology/signs/${astroSlug}`
+                    ? `/correspondences/signs/${astroSlug}`
                     : null
                 if (href) {
                   return {

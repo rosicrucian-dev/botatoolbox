@@ -38,19 +38,22 @@
     "nav./correspondences.title": {
       "type": "string"
     },
-    "nav./correspondences/astrology.title": {
+    "nav./correspondences/channels.title": {
       "type": "string"
     },
-    "nav./correspondences/chakras.title": {
+    "nav./correspondences/forces.title": {
       "type": "string"
     },
-    "nav./correspondences/elements.title": {
+    "nav./correspondences/four-worlds.title": {
       "type": "string"
     },
     "nav./correspondences/grades.title": {
       "type": "string"
     },
     "nav./correspondences/hebrew.title": {
+      "type": "string"
+    },
+    "nav./correspondences/houses.title": {
       "type": "string"
     },
     "nav./correspondences/major-arcana.title": {
@@ -62,10 +65,22 @@
     "nav./correspondences/numerology.title": {
       "type": "string"
     },
-    "nav./correspondences/qabalah.title": {
+    "nav./correspondences/phases.title": {
       "type": "string"
     },
-    "nav./correspondences/tattvas.title": {
+    "nav./correspondences/planets.title": {
+      "type": "string"
+    },
+    "nav./correspondences/principles.title": {
+      "type": "string"
+    },
+    "nav./correspondences/sephiroth.title": {
+      "type": "string"
+    },
+    "nav./correspondences/signs.title": {
+      "type": "string"
+    },
+    "nav./correspondences/three-veils.title": {
       "type": "string"
     },
     "nav./cube-of-space.title": {

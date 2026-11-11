@@ -1,74 +1,39 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/catalyst/table'
 import { PageHeading } from '@/components/layout/PageHeading'
 import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
+import { DataTable } from '@/components/ui/DataTable'
 import { TextLink } from '@/components/ui/TextLink'
-import { getTarot, type TarotCard } from '@/content/data'
+import { getSuitCorrespondences, getTarot } from '@/content/data'
+import { letters } from '@/lib/hebrew'
 import { toLocale } from '@/lib/locales'
 import { localizedMetadata } from '@/lib/nav'
 
 export const generateMetadata = localizedMetadata('Major Arcana')
 
-// Column definition: how to label it in the header and how to pull the
-// value from a card. Headers are kept short to save horizontal space.
-// First abbreviation per user direction: "Letter Significance" → "Significance".
-const COLUMNS: Array<{
-  label: string
-  value: (c: TarotCard) => string | number
-}> = [
-  { label: 'Color', value: (c) => c.color },
-  { label: 'Note', value: (c) => c.note },
-  { label: 'Letter', value: (c) => c.letter },
-  { label: 'English', value: (c) => c.english },
-  {
-    label: 'Significance',
-    // "Front of Head (Face)" is shortened to just "Front of Head" in
-    // this table only; the underlying value used by the detail page
-    // and quiz is unchanged.
-    value: (c) =>
-      c.significance === 'Front of Head (Face)'
-        ? 'Front of Head'
-        : c.significance,
-  },
-  { label: 'Gematria', value: (c) => c.gematria },
-  { label: 'Path', value: (c) => c.path },
-  { label: 'Astrology', value: (c) => c.astrology },
-  { label: 'Alchemy', value: (c) => c.alchemy },
-  // "Intelligence" inside every value collapses to "I" to save column
-  // width. Header still reads "Intelligence" for clarity.
-  {
-    label: 'Intelligence',
-    value: (c) => c.intelligence.replace(/Intelligence/g, 'I'),
-  },
-  { label: 'Power', value: (c) => c.power },
-  { label: 'Human / Opposite', value: (c) => c.human },
-]
-
-// Pins the Key column to the left edge so the card name stays visible while
-// scrolling through attributes — same trick spreadsheets use. text-xs keeps
-// the 13-column table dense (overrides Catalyst's default text-sm).
-const STICKY = 'sticky left-0 z-10 bg-white text-xs dark:bg-zinc-900'
-
-// THE KEYS' TABLE — every Major Arcanum's colour, note, letter and
-// significance. It was /tarot/correspondences, the Tarot group's own
-// correspondence page; it is one of the correspondence TABLES now
-// (src/lib/tables.ts), which is what it always was. The tableau of
-// the cards themselves is /major-arcana.
+// THE KEYS' TABLE — every Major Arcanum's letter, path, astrology,
+// colour, note and Intelligence, and the four suits under it.
+//
+// SEVEN COLUMNS, which is the Hermetic Order of Aquarius's cut and is
+// now this one (10 November 2026). This page carried thirteen, and the
+// six it has given up are each at home elsewhere on both sites rather
+// than lost: English, Letter significance and Gematria are three
+// columns of /correspondences/hebrew, which reads these same 22 rows;
+// Alchemy, Power and Human / Opposite are on each Key's own page,
+// /tarot/<slug>. A fact has one home, and a thirteen-column table that
+// had to be scrolled sideways under a pinned first column was the
+// thing that made the rule worth keeping.
+//
+// The tableau of the cards themselves is /major-arcana.
 export default async function MajorArcanaTable({
   params,
 }: {
   params: Promise<{ locale: string }>
 }) {
   const { locale: rawLocale } = await params
-  const { cards } = getTarot(toLocale(rawLocale))
+  const locale = toLocale(rawLocale)
+  const { cards } = getTarot(locale)
+  const { suitCorrespondences } = getSuitCorrespondences(locale)
   return (
-    <article className="space-y-6">
+    <article className="space-y-8">
       <SetBreadcrumbs
         items={[
           { label: 'Correspondences', href: '/correspondences' },
@@ -77,34 +42,45 @@ export default async function MajorArcanaTable({
       />
       <PageHeading>Major Arcana</PageHeading>
 
-      <Table className="[--gutter:1rem] sm:[--gutter:1.5rem] lg:[--gutter:2rem]">
-        <TableHead>
-          <TableRow>
-            <TableHeader className={STICKY}>Key</TableHeader>
-            {COLUMNS.map((col) => (
-              <TableHeader key={col.label} className="text-xs">
-                {col.label}
-              </TableHeader>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {cards.map((card) => (
-            <TableRow key={card.slug}>
-              <TableCell className={`${STICKY} align-top`}>
-                <TextLink href={`/tarot/${card.slug}`} className="font-medium">
-                  {card.name}
-                </TextLink>
-              </TableCell>
-              {COLUMNS.map((col) => (
-                <TableCell key={col.label} className="align-top text-xs">
-                  {col.value(card)}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <DataTable
+        nowrap
+        head={[
+          'Key',
+          'Letter',
+          'Path',
+          'Astrology',
+          'Color',
+          'Note',
+          'Intelligence',
+        ]}
+        rows={cards.map((c) => [
+          <TextLink key={c.slug} href={`/tarot/${c.slug}`}>
+            {c.num}. {c.name}
+          </TextLink>,
+          `${letters[c.letter]?.glyph ?? ''} ${c.letter}`,
+          c.path,
+          c.astrology,
+          c.color,
+          c.note,
+          c.intelligence,
+        ])}
+      />
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+          Suits
+        </h2>
+        <DataTable
+          head={['Tarot', 'Playing card', 'World', 'Element', 'Letter']}
+          rows={suitCorrespondences.map((s) => [
+            s.tarot,
+            s.playingCard,
+            s.world,
+            s.element,
+            s.letter,
+          ])}
+        />
+      </section>
     </article>
   )
 }

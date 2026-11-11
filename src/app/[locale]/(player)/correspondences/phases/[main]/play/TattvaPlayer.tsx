@@ -35,7 +35,7 @@ export function TattvaPlayer({ main }: { main: TattvaKind }) {
       slides={slides}
       idx={idx}
       onIdxChange={handleIdxChange}
-      onClose={() => router.push('/correspondences/tattvas')}
+      onClose={() => router.push('/correspondences/phases')}
       renderLeft={(slide) => (
         // SlidePlayer's left half is h-[35svh] overflow-hidden on mobile,
         // so the SVG must size by svh (smallest stable viewport height,

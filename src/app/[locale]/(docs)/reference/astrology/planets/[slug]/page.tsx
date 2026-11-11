@@ -19,5 +19,5 @@ export default async function PlanetRedirect({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  return <MovedTo to={`/correspondences/astrology/planets/${slug}`} what="This planet" />
+  return <MovedTo to={`/correspondences/planets/${slug}`} what="This planet" />
 }

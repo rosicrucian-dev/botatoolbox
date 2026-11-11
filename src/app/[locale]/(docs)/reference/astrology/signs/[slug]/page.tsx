@@ -19,5 +19,5 @@ export default async function SignRedirect({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  return <MovedTo to={`/correspondences/astrology/signs/${slug}`} what="This sign" />
+  return <MovedTo to={`/correspondences/signs/${slug}`} what="This sign" />
 }

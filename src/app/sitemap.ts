@@ -112,9 +112,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]
       : []),
     ...sephiroth.map((s) => `/tree-of-life/${s.slug}`),
-    ...astrologySigns.map((s) => `/correspondences/astrology/signs/${s.slug}`),
+    ...astrologySigns.map((s) => `/correspondences/signs/${s.slug}`),
     ...astrologyPlanets.map(
-      (p) => `/correspondences/astrology/planets/${p.slug}`,
+      (p) => `/correspondences/planets/${p.slug}`,
     ),
   ].flatMap(entries)
 }

@@ -11,6 +11,13 @@
 // `nav.<href>.title` keys they always had, so the
 // German catalog keeps working and nothing was retyped into code.
 //
+// THE SET IS THE HERMETIC ORDER OF AQUARIUS'S (10 November 2026). The
+// two sites carry the same reference, so the tables, their columns and
+// their groups match, and that site adds a quiz to each on top. What
+// does NOT match is the chrome and the tools: these tables are built
+// from Catalyst, and the twenty-five tattva compounds are playable here
+// and printed there.
+//
 // Read by the index (/correspondences) and by the search index. The
 // module-load assertion below is the nav's own, for the same reason:
 // a missing title should be a loud build failure, not a blank card.
@@ -42,12 +49,25 @@ export const tables: ReadonlyArray<RawTable> = [
   { href: '/correspondences/major-arcana', group: 'Tarot' },
   { href: '/correspondences/minor-arcana', group: 'Tarot' },
   { href: '/correspondences/hebrew', group: 'Languages' },
-  { href: '/correspondences/elements', group: 'Alchemy' },
-  { href: '/correspondences/tattvas', group: 'Alchemy' },
-  { href: '/correspondences/qabalah', group: 'Qabalah' },
+  // THE ALCHEMY GROUP IS A LADDER, and the four are the titles of
+  // School of Ageless Wisdom Section A lessons 2, 3, 4 and 5: 3, 5, 7
+  // and 12, which is the Sepher Yetzirah's own count once the five
+  // phases are set beside the three, the seven and the twelve.
+  { href: '/correspondences/principles', group: 'Alchemy' },
+  { href: '/correspondences/phases', group: 'Alchemy' },
+  { href: '/correspondences/forces', group: 'Alchemy' },
+  { href: '/correspondences/channels', group: 'Alchemy' },
+  // GRADES IS A QABALAH TABLE and stands next to the Sephiroth: the
+  // ladder from 1=10 to 10=1 IS the Sephiroth counted from the bottom,
+  // and each grade's Intelligence is the Sepher Yetzirah's name for its
+  // Sephirah, so three of its four columns are the Tree's.
+  { href: '/correspondences/sephiroth', group: 'Qabalah' },
   { href: '/correspondences/grades', group: 'Qabalah' },
-  { href: '/correspondences/astrology', group: 'Astrology' },
-  { href: '/correspondences/chakras', group: 'Tables' },
+  { href: '/correspondences/three-veils', group: 'Qabalah' },
+  { href: '/correspondences/four-worlds', group: 'Qabalah' },
+  { href: '/correspondences/signs', group: 'Astrology' },
+  { href: '/correspondences/planets', group: 'Astrology' },
+  { href: '/correspondences/houses', group: 'Astrology' },
   { href: '/correspondences/numerology', group: 'Tables' },
 ]
 

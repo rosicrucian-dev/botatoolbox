@@ -151,7 +151,21 @@ the 22 Keys as the tableau, the 56 minors a column to a suit — where
 the same cards' attributions as tables.
 The correspondence TABLES are behind `/correspondences`, which is their
 index — `src/lib/tables.ts` holds the list and the headings it groups
-them under, with the strings staying in the message catalog under the
+them under. **THE SET AND THE CUT ARE THE HERMETIC ORDER OF AQUARIUS'S**
+(10 November 2026): the same fifteen tables under the same six headings
+(Tarot, Languages, Alchemy, Qabalah, Astrology, and Tables as the
+catch-all), each with that site's columns in that site's order, so a
+reader who looks a thing up on one site finds the same table on the
+other and a column added to one is a line to add to the other. It cost
+five splits here — Astrology became Signs, Planets and Houses; Qabalah
+became Sephiroth, Three Veils and Four Worlds; Chakras folded into the
+Seven Forces, Tattvas and Elements into the Five Phases — each leaving a
+`MovedTo` stub. What does NOT match is the chrome and the tools: these
+tables are built from Catalyst and that site's from its own, the
+players and the focus views are this site's, and the quizzes are that
+site's. `src/components/ui/DataTable.tsx` is the one table component,
+and takes the `head`/`rows` shape that site's does for exactly that
+reason. `src/lib/tables.ts` with the strings staying in the message catalog under the
 `nav.<href>.title` keys they always had. A table has no nav row, so that
 file is also what puts the tables in the sitemap and the search index,
 and an integrity check asserts each one is a real page under the index
@@ -177,6 +191,10 @@ Legacy redirects, all client-side stubs (a static export can't emit a
 | `/tarot/correspondences`                                              | `/correspondences/major-arcana` |
 | `/tarot/minor-arcana`                                                 | `/correspondences/minor-arcana` |
 | `/tarot/freeform`                                                     | `/freeform`                     |
+| `/correspondences/astrology` and the sign and planet pages under it   | `/correspondences/signs`        |
+| `/correspondences/qabalah`                                            | `/correspondences/sephiroth`    |
+| `/correspondences/chakras`                                            | `/correspondences/forces`       |
+| `/correspondences/tattvas`, `/correspondences/elements`               | `/correspondences/phases`       |
 
 `/tarot/major-arcana` listed the 22 Keys as text beside a
 `/tarot/tableau` that drew them; one of the two had to be the index, and
@@ -203,6 +221,13 @@ Markdown page convention that works in any navigation group.
 See [`src/content/data/README.md`](../src/content/data/README.md) for the
 full guide. In brief:
 
+- **`content/data/` IS A GIT SUBMODULE**, `rosicrucian-dev/data`, mounted
+  by both this site and the Hermetic Order of Aquarius (10 November
+  2026). The tables are facts, and a fact has one home: a row fixed
+  there is a fix on both sites, and `npm run check:data` warns when the
+  checkout is behind, dirty or missing. `src/content/data/*.ts` is this
+  site's reader over it — the Zod parse, the locale overlay and the
+  joins — and stays here.
 - `content/data/en/*.json` is the master copy of every language-carrying
   file. Translated siblings (`de/`) are the same shape with display values
   translated in place. The runtime reads **structure only from English**

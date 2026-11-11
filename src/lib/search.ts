@@ -69,11 +69,11 @@ export const getSearchEntries = defineLocalized(
         title: `${s.hebrewName} — ${s.name}`,
       })),
       ...astrologySigns.map((s) => ({
-        url: `/correspondences/astrology/signs/${s.slug}`,
+        url: `/correspondences/signs/${s.slug}`,
         title: s.name,
       })),
       ...astrologyPlanets.map((p) => ({
-        url: `/correspondences/astrology/planets/${p.slug}`,
+        url: `/correspondences/planets/${p.slug}`,
         title: p.name,
       })),
     ]

@@ -60,7 +60,7 @@ export default async function GradesPage({
                 <TableCell className="text-zinc-500 tabular-nums dark:text-zinc-400">
                   {g.gradeNumber}
                 </TableCell>
-                <TableCell>{sephirah ? sephirah.name : <Dash />}</TableCell>
+                <TableCell>{sephirah ? sephirah.hebrewName : <Dash />}</TableCell>
                 <TableCell>{g.intelligenceName ?? <Dash />}</TableCell>
               </TableRow>
             )
