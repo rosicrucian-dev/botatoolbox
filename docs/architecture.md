@@ -144,7 +144,11 @@ when someone opens Hora. Those views have no nav row of their own, so
 `TOOL_TABS` is what puts them in the sitemap and the search index.
 
 **Reference** is what is LOOKED UP, a row per thing: the
-Correspondences, the Major Arcana, the Cube of Space, the Tree of Life.
+Correspondences, the Major Arcana, the Minor Arcana, the Cube of Space,
+the Tree of Life. The two Arcana are the cards as they are looked at —
+the 22 Keys as the tableau, the 56 minors a column to a suit — where
+`/correspondences/major-arcana` and `/correspondences/minor-arcana` are
+the same cards' attributions as tables.
 The correspondence TABLES are behind `/correspondences`, which is their
 index — `src/lib/tables.ts` holds the list and the headings it groups
 them under, with the strings staying in the message catalog under the

@@ -78,9 +78,8 @@ export const navGroups: Array<RawNavGroup> = [
   {
     // REFERENCE: what is LOOKED UP. A row per thing rather than per
     // shelf of things — Correspondences (the tables' own index,
-    // src/lib/tables.ts), the Major Arcana, the Cube of Space and the
-    // Tree of Life, with the Minor Arcana to join them once it has a
-    // page of the cards. It was eight table rows, and beside it stood
+    // src/lib/tables.ts), the two Arcana, the Cube of Space and the
+    // Tree of Life. It was eight table rows, and beside it stood
     // a Devices group (the Cube and the Tree) and a Tarot group (four
     // pages, two of them tables), so the same material was spread over
     // three headings by HOW it is drawn instead of by what it is.
@@ -93,6 +92,7 @@ export const navGroups: Array<RawNavGroup> = [
     links: [
       { href: '/correspondences' },
       { href: '/major-arcana' },
+      { href: '/minor-arcana' },
       { href: '/cube-of-space' },
       { href: '/tree-of-life' },
     ],

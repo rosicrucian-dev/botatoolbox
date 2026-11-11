@@ -182,6 +182,12 @@
     "nav./meditations/tree-of-life.title": {
       "type": "string"
     },
+    "nav./minor-arcana.description": {
+      "type": "string"
+    },
+    "nav./minor-arcana.title": {
+      "type": "string"
+    },
     "nav./practice/quiz.description": {
       "type": "string"
     },
