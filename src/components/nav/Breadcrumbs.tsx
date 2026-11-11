@@ -79,15 +79,20 @@ export function useBreadcrumbs(): Array<Crumb> {
   )
 }
 
-// Every page sits under a sidebar group (Tarot, Reference, Devices, …),
+// Every page sits under a sidebar group (Reference, Library, Tools, …),
 // and every group now has a landing page at `/<group>` (lowercased title).
 // Map each top-level route segment to its group so the trail can link the
 // group crumb to that page. Two kinds of segment map to a group:
-//   - a member's first segment (`/tarot/the-fool` → tarot → Tarot; for a
-//     flat group this is the short canonical URL, `/cube-of-space` →
-//     Devices; for a nested group it equals the group slug, `/practice/quiz`
-//     → practice → Practice), and
-//   - the group's own slug (`/devices` → Devices).
+//   - a member's first segment (`/correspondences/hebrew` →
+//     correspondences → Reference; for a flat group this is the short
+//     canonical URL, `/cube-of-space` → Reference; for a nested group it
+//     equals the group slug, `/practice/quiz` → practice → Practice), and
+//   - the group's own slug (`/reference` → Reference).
+//
+// A segment belonging to no group simply has no derived crumb, which is
+// what the tarot cards rely on: `/tarot/the-fool` is under no group
+// since the Tarot group was dissolved (November 2026), and the card page
+// names its own parent, `Major Arcana`.
 // Mapping is built from the nav's slugs/hrefs, which are
 // locale-independent; values are group SLUGS — displayed labels come
 // from the localized nav at render time.

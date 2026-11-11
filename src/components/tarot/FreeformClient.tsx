@@ -222,7 +222,7 @@ export function FreeformClient({
       )
         return
       if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return
-      if (e.key === 'Escape') router.push('/tarot/freeform')
+      if (e.key === 'Escape') router.push('/freeform')
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -235,8 +235,8 @@ export function FreeformClient({
   // Expand/Close are plain, constant URLs — the spread crosses the route
   // boundary via localStorage, so the only history entries are these two fixed
   // paths (the browser dedupes them).
-  const expandHref = '/tarot/freeform/expand'
-  const closeHref = '/tarot/freeform'
+  const expandHref = '/freeform/expand'
+  const closeHref = '/freeform'
 
   // Zoom + Shuffle — shared between the inline header row and the expand header.
   // Shuffle sits to the LEFT of the zoom buttons: since the control group is

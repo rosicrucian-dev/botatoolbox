@@ -47,6 +47,48 @@
     "nav./community.title": {
       "type": "string"
     },
+    "nav./correspondences.description": {
+      "type": "string"
+    },
+    "nav./correspondences.title": {
+      "type": "string"
+    },
+    "nav./correspondences/astrology.title": {
+      "type": "string"
+    },
+    "nav./correspondences/chakras.title": {
+      "type": "string"
+    },
+    "nav./correspondences/elements.title": {
+      "type": "string"
+    },
+    "nav./correspondences/grades.title": {
+      "type": "string"
+    },
+    "nav./correspondences/hebrew.title": {
+      "type": "string"
+    },
+    "nav./correspondences/major-arcana.description": {
+      "type": "string"
+    },
+    "nav./correspondences/major-arcana.title": {
+      "type": "string"
+    },
+    "nav./correspondences/minor-arcana.description": {
+      "type": "string"
+    },
+    "nav./correspondences/minor-arcana.title": {
+      "type": "string"
+    },
+    "nav./correspondences/numerology.title": {
+      "type": "string"
+    },
+    "nav./correspondences/qabalah.title": {
+      "type": "string"
+    },
+    "nav./correspondences/tattvas.title": {
+      "type": "string"
+    },
     "nav./cube-of-space.description": {
       "type": "string"
     },
@@ -57,6 +99,12 @@
       "type": "string"
     },
     "nav./files.title": {
+      "type": "string"
+    },
+    "nav./freeform.description": {
+      "type": "string"
+    },
+    "nav./freeform.title": {
       "type": "string"
     },
     "nav./gematria.description": {
@@ -93,6 +141,12 @@
       "type": "string"
     },
     "nav./links.title": {
+      "type": "string"
+    },
+    "nav./major-arcana.description": {
+      "type": "string"
+    },
+    "nav./major-arcana.title": {
       "type": "string"
     },
     "nav./meditations/concentration.title": {
@@ -146,67 +200,10 @@
     "nav./recordings.title": {
       "type": "string"
     },
-    "nav./reference/alchemy.title": {
-      "type": "string"
-    },
-    "nav./reference/astrology.title": {
-      "type": "string"
-    },
-    "nav./reference/chakras.title": {
-      "type": "string"
-    },
-    "nav./reference/elements.title": {
-      "type": "string"
-    },
-    "nav./reference/grades.title": {
-      "type": "string"
-    },
-    "nav./reference/hebrew.title": {
-      "type": "string"
-    },
-    "nav./reference/numerology.title": {
-      "type": "string"
-    },
-    "nav./reference/qabalah.title": {
-      "type": "string"
-    },
-    "nav./reference/tattvas.title": {
-      "type": "string"
-    },
     "nav./settings.description": {
       "type": "string"
     },
     "nav./settings.title": {
-      "type": "string"
-    },
-    "nav./tarot/correspondences.description": {
-      "type": "string"
-    },
-    "nav./tarot/correspondences.title": {
-      "type": "string"
-    },
-    "nav./tarot/freeform.description": {
-      "type": "string"
-    },
-    "nav./tarot/freeform.title": {
-      "type": "string"
-    },
-    "nav./tarot/major-arcana.description": {
-      "type": "string"
-    },
-    "nav./tarot/major-arcana.title": {
-      "type": "string"
-    },
-    "nav./tarot/minor-arcana.description": {
-      "type": "string"
-    },
-    "nav./tarot/minor-arcana.title": {
-      "type": "string"
-    },
-    "nav./tarot/tableau.description": {
-      "type": "string"
-    },
-    "nav./tarot/tableau.title": {
       "type": "string"
     },
     "nav./texts.description": {
@@ -221,9 +218,6 @@
     "nav./tree-of-life.title": {
       "type": "string"
     },
-    "nav.group.devices.title": {
-      "type": "string"
-    },
     "nav.group.library.title": {
       "type": "string"
     },
@@ -234,9 +228,6 @@
       "type": "string"
     },
     "nav.group.reference.title": {
-      "type": "string"
-    },
-    "nav.group.tarot.title": {
       "type": "string"
     },
     "nav.group.tools.title": {

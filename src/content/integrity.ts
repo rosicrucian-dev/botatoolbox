@@ -16,6 +16,7 @@ import { join } from 'node:path'
 import { romanToLetters } from '@/lib/hebrew'
 import { DEFAULT_LOCALE, LOCALES } from '@/lib/locales'
 import { getNavigation } from '@/lib/nav'
+import { tables } from '@/lib/tables'
 import { TOOLS } from '@/lib/tools'
 import {
   cubeEdges,
@@ -386,6 +387,29 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
         `tool ${tool.href}: view ${tab.href} has no page.tsx`,
       )
     }
+  }
+
+  // --- tables ↔ route tree. A correspondence table has no nav row of
+  // its own: /correspondences is the index and the tables are under it
+  // (src/lib/tables.ts). So the nav check below cannot see them, and
+  // this one does — every table is a real page, nested under the index
+  // that is the only navigation to it.
+  for (const table of tables) {
+    expect(
+      table.href.startsWith('/correspondences/'),
+      `table ${table.href} is not under /correspondences — its index would not reach it`,
+    )
+    expect(
+      existsSync(
+        join(
+          root,
+          'src/app/[locale]/(docs)',
+          ...table.href.split('/').filter(Boolean),
+          'page.tsx',
+        ),
+      ),
+      `table ${table.href} has no page.tsx`,
+    )
   }
 
   // --- nav ↔ route tree. Every group landing and every hand-authored link

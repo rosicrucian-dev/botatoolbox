@@ -65,7 +65,7 @@ export function MajorArcanaPlayClient({
       // or from a different card's detail.
       onClose={() => {
         if (current) router.push(`/tarot/${current.slug}`)
-        else router.push('/tarot/major-arcana')
+        else router.push('/major-arcana')
       }}
       extraHeaderItem={
         current?.note ? <SoundButton onClick={playCurrent} /> : null

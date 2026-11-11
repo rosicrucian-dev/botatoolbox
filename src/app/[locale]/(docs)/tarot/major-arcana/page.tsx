@@ -1,44 +1,15 @@
-import { PageHeading } from '@/components/layout/PageHeading'
-import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
-import { DataList } from '@/components/ui/DataList'
-import { IndexLabel } from '@/components/ui/IndexLabel'
-import { getTarot } from '@/content/data'
-import { toLocale } from '@/lib/locales'
-import { localizedMetadata } from '@/lib/nav'
+import { MovedTo } from '@/components/nav/MovedTo'
 
-export const generateMetadata = localizedMetadata('Major Arcana')
+// THE TAROT GROUP IS GONE (November 2026). It held four pages of two
+// kinds — two tables and two ways of drawing the cards — and they are
+// filed by what they are now: the tables under /correspondences, the
+// tableau as the Reference's Major Arcana, the draw as a Tool.
+//
+// This address listed the 22 Keys as text beside a /tarot/tableau that
+// drew them. One of the two had to be the index, and the tableau is the
+// one a reader recognises a Key from, so this list is retired rather
+// than moved.
 
-export default async function MajorArcana({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}) {
-  const { locale: rawLocale } = await params
-  const { cards } = getTarot(toLocale(rawLocale))
-  return (
-    <article className="space-y-6">
-      <SetBreadcrumbs items={[{ label: 'Major Arcana' }]} />
-      <PageHeading>Major Arcana</PageHeading>
-      <DataList
-        items={cards}
-        getKey={(c) => c.slug}
-        getHref={(c) => `/tarot/${c.slug}`}
-        renderRow={(c) => (
-          <>
-            <span className="flex items-baseline gap-3">
-              {/* Match the Minor Arcana page's wider first column for
-                  consistency across the two list pages. */}
-              <IndexLabel widthClassName="w-16 md:w-20">{c.num}</IndexLabel>
-              <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                {c.name}
-              </span>
-            </span>
-            <span className="text-zinc-400" aria-hidden>
-              →
-            </span>
-          </>
-        )}
-      />
-    </article>
-  )
+export default function TarotMajorArcanaRedirect() {
+  return <MovedTo to="/major-arcana" what="The Major Arcana" />
 }

@@ -109,7 +109,7 @@ export default async function SephirahPage({
     rows.push({
       label: 'Grade',
       value: (
-        <TextLink href={`/reference/grades/${grade.slug}`}>
+        <TextLink href={`/correspondences/grades/${grade.slug}`}>
           {grade.name} {grade.gradeNumber}
         </TextLink>
       ),

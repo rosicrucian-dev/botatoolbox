@@ -8,7 +8,7 @@ import { majorThumbHeight } from '@/content/data/tarot-styles'
 import { useTarotStyle } from '@/lib/stores/tarotStyle'
 
 // The 22 majors laid out as a tableau: the Fool centered on its own top row,
-// then keys 1–21 filling a 7-wide grid. Used by /tarot/tableau (cards link to
+// then keys 1–21 filling a 7-wide grid. Used by /major-arcana (cards link to
 // their detail pages, in the user's chosen Major style) and as the preview on
 // the Traditional / Modern download pages (which pin an explicit `style` so
 // the preview always matches the file being downloaded).

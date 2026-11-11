@@ -1,23 +1,10 @@
-import { PageHeading } from '@/components/layout/PageHeading'
-import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
-import { TarotTableau } from '@/components/tarot/TarotTableau'
-import { getTarot } from '@/content/data'
-import { toLocale } from '@/lib/locales'
-import { localizedMetadata } from '@/lib/nav'
+import { MovedTo } from '@/components/nav/MovedTo'
 
-export const generateMetadata = localizedMetadata('Tableau')
+// THE TAROT GROUP IS GONE (November 2026). It held four pages of two
+// kinds — two tables and two ways of drawing the cards — and they are
+// filed by what they are now: the tables under /correspondences, the
+// tableau as the Reference's Major Arcana, the draw as a Tool.
 
-export default async function Tableau({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}) {
-  const { cards } = getTarot(toLocale((await params).locale))
-  return (
-    <article className="space-y-6">
-      <SetBreadcrumbs items={[{ label: 'Tableau' }]} />
-      <PageHeading>Tableau</PageHeading>
-      <TarotTableau cards={cards} link="card" rounded={false} />
-    </article>
-  )
+export default function TarotTableauRedirect() {
+  return <MovedTo to="/major-arcana" what="The tableau" label="Major Arcana" />
 }

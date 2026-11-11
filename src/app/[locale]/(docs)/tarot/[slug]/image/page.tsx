@@ -101,12 +101,12 @@ export default async function TarotCardImagePage({
 
   const crumbs: Array<Crumb> = major
     ? [
-        { label: 'Major Arcana', href: '/tarot/major-arcana' },
+        { label: 'Major Arcana', href: '/major-arcana' },
         { label: title, href: backHref },
         { label: 'Image' },
       ]
     : [
-        { label: 'Minor Arcana', href: '/tarot/minor-arcana' },
+        { label: 'Minor Arcana', href: '/correspondences/minor-arcana' },
         { label: title, href: backHref },
         { label: 'Image' },
       ]

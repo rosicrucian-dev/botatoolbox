@@ -44,11 +44,6 @@ export interface RawNavGroup {
 // group keep their authored order.
 export const navGroups: Array<RawNavGroup> = [
   {
-    slug: 'devices',
-    flat: true,
-    links: [{ href: '/cube-of-space' }, { href: '/tree-of-life' }],
-  },
-  {
     // LIBRARY: what is READ and LISTENED TO, a row per shelf and the
     // shelf's own index behind it. The texts were a group with a row
     // per text, generated from content/data/en/texts.json — a list that
@@ -81,26 +76,25 @@ export const navGroups: Array<RawNavGroup> = [
     links: [{ href: '/practice/quiz' }, { href: '/practice/words-of-power' }],
   },
   {
+    // REFERENCE: what is LOOKED UP. A row per thing rather than per
+    // shelf of things — Correspondences (the tables' own index,
+    // src/lib/tables.ts), the Major Arcana, the Cube of Space and the
+    // Tree of Life, with the Minor Arcana to join them once it has a
+    // page of the cards. It was eight table rows, and beside it stood
+    // a Devices group (the Cube and the Tree) and a Tarot group (four
+    // pages, two of them tables), so the same material was spread over
+    // three headings by HOW it is drawn instead of by what it is.
+    //
+    // Flat, because each of these keeps its own top-level namespace:
+    // /major-arcana is the tableau and /correspondences/major-arcana is
+    // the Keys' table, which is a table and is filed with the tables.
     slug: 'reference',
+    flat: true,
     links: [
-      { href: '/reference/astrology' },
-      { href: '/reference/chakras' },
-      { href: '/reference/elements' },
-      { href: '/reference/grades' },
-      { href: '/reference/hebrew' },
-      { href: '/reference/numerology' },
-      { href: '/reference/qabalah' },
-      { href: '/reference/tattvas' },
-    ],
-  },
-  {
-    slug: 'tarot',
-    links: [
-      { href: '/tarot/correspondences' },
-      { href: '/tarot/freeform' },
-      { href: '/tarot/major-arcana' },
-      { href: '/tarot/minor-arcana' },
-      { href: '/tarot/tableau' },
+      { href: '/correspondences' },
+      { href: '/major-arcana' },
+      { href: '/cube-of-space' },
+      { href: '/tree-of-life' },
     ],
   },
   {
@@ -114,6 +108,7 @@ export const navGroups: Array<RawNavGroup> = [
     flat: true,
     links: [
       { href: '/astrology' },
+      { href: '/freeform' },
       { href: '/gematria' },
       { href: '/keyboard' },
     ],

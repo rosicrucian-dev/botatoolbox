@@ -16,6 +16,7 @@ import {
 } from '@/content/data'
 import { defineLocalized } from '@/content/data/localized'
 import { getNavigation, localizedTitle } from '@/lib/nav'
+import { getTables } from '@/lib/tables'
 import { TOOL_TABS } from '@/lib/tools'
 
 export interface SearchEntry {
@@ -41,6 +42,9 @@ export const getSearchEntries = defineLocalized(
       // The texts have no nav row of their own either: the Library
       // lists /texts and the index lists them (src/lib/navData.ts).
       ...visibleTexts.map((t) => ({ url: `/texts/${t.slug}`, title: t.title })),
+      // Nor do the correspondence tables: the Reference lists
+      // /correspondences and that index lists them (src/lib/tables.ts).
+      ...getTables(locale).map((t) => ({ url: t.href, title: t.title })),
       // The Radio has no nav row either: it is a link at the top of the
       // Recordings page (src/lib/navData.ts).
       { url: '/radio', title: localizedTitle(locale, 'Radio') },
@@ -65,11 +69,11 @@ export const getSearchEntries = defineLocalized(
         title: `${s.hebrewName} — ${s.name}`,
       })),
       ...astrologySigns.map((s) => ({
-        url: `/reference/astrology/signs/${s.slug}`,
+        url: `/correspondences/astrology/signs/${s.slug}`,
         title: s.name,
       })),
       ...astrologyPlanets.map((p) => ({
-        url: `/reference/astrology/planets/${p.slug}`,
+        url: `/correspondences/astrology/planets/${p.slug}`,
         title: p.name,
       })),
     ]

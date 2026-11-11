@@ -1,21 +1,10 @@
-import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
-import { FreeformClient } from '@/components/tarot/FreeformClient'
-import { freeformDeck } from '@/lib/freeformDeck'
-import { toLocale } from '@/lib/locales'
-import { localizedMetadata } from '@/lib/nav'
+import { MovedTo } from '@/components/nav/MovedTo'
 
-export const generateMetadata = localizedMetadata('Freeform')
+// THE TAROT GROUP IS GONE (November 2026). It held four pages of two
+// kinds — two tables and two ways of drawing the cards — and they are
+// filed by what they are now: the tables under /correspondences, the
+// tableau as the Reference's Major Arcana, the draw as a Tool.
 
-export default async function FreeformPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}) {
-  const deck = freeformDeck(toLocale((await params).locale))
-  return (
-    <>
-      <SetBreadcrumbs items={[{ label: 'Freeform' }]} />
-      <FreeformClient deck={deck} />
-    </>
-  )
+export default function TarotFreeformRedirect() {
+  return <MovedTo to="/freeform" what="The freeform draw" />
 }

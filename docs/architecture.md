@@ -123,7 +123,7 @@ one of them hand-authored now; the Texts group used to generate its rows
 from `texts.json` and is a single Library row to the `/texts` index
 instead, so a collection's items are listed on its own index page and
 reach the sitemap and search from the manifest, never from the nav. Members
-of a `flat` group (devices, library, tools, website) live at a
+of a `flat` group (library, reference, tools, website) live at a
 top-level URL (`/cube-of-space`); every other group's members nest under
 it (`/practice/quiz`) — unless the link declares `outside`, which says
 the member keeps its own namespace because that namespace names the
@@ -143,10 +143,41 @@ view keeps its own bundle, and Hora asks for the reader's location only
 when someone opens Hora. Those views have no nav row of their own, so
 `TOOL_TABS` is what puts them in the sitemap and the search index.
 
+**Reference** is what is LOOKED UP, a row per thing: the
+Correspondences, the Major Arcana, the Cube of Space, the Tree of Life.
+The correspondence TABLES are behind `/correspondences`, which is their
+index — `src/lib/tables.ts` holds the list and the headings it groups
+them under, with the strings staying in the message catalog under the
+`nav.<href>.title` keys they always had. A table has no nav row, so that
+file is also what puts the tables in the sitemap and the search index,
+and an integrity check asserts each one is a real page under the index
+that is the only navigation to it. This replaced three groups that
+divided the same material by how it is drawn rather than by what it is:
+eight table rows under Reference, a Devices group (the Cube and the
+Tree) and a Tarot group (two tables and two ways of drawing the cards).
+The cards keep `/tarot/<slug>`; `/tarot` itself is a stub now, so a card
+page has no derived group crumb and names its own parent.
+
 Legacy redirects, all client-side stubs (a static export can't emit a
-301): `/astrology-chart` and `/astrology/chart` → `/astrology`,
-`/gematria/calculator` → `/gematria` (carrying `?seq=`),
-`/keyboard/piano` → `/keyboard`.
+301; `MovedTo` is the one component they all use):
+
+| From                                                                  | To                              |
+| --------------------------------------------------------------------- | ------------------------------- |
+| `/astrology-chart`, `/astrology/chart`                                | `/astrology`                    |
+| `/gematria/calculator` (carrying `?seq=`)                             | `/gematria`                     |
+| `/keyboard/piano`                                                     | `/keyboard`                     |
+| `/healing`                                                            | `/meditations`                  |
+| `/reference/<table>`, and the grade, sign and planet pages under them | `/correspondences/<table>`      |
+| `/devices`                                                            | `/reference`                    |
+| `/tarot`, `/tarot/tableau`, `/tarot/major-arcana`                     | `/major-arcana`                 |
+| `/tarot/correspondences`                                              | `/correspondences/major-arcana` |
+| `/tarot/minor-arcana`                                                 | `/correspondences/minor-arcana` |
+| `/tarot/freeform`                                                     | `/freeform`                     |
+
+`/tarot/major-arcana` listed the 22 Keys as text beside a
+`/tarot/tableau` that drew them; one of the two had to be the index, and
+the tableau is the one a reader recognises a Key from, so the list is
+retired rather than moved.
 
 ### Local private pages
 

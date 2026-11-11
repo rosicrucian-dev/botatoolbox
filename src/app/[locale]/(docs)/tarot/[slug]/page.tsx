@@ -51,7 +51,7 @@ export default async function TarotCardPage({
       <>
         <SetBreadcrumbs
           items={[
-            { label: 'Major Arcana', href: '/tarot/major-arcana' },
+            { label: 'Major Arcana', href: '/major-arcana' },
             { label: major.name },
           ]}
         />
@@ -64,7 +64,7 @@ export default async function TarotCardPage({
       <>
         <SetBreadcrumbs
           items={[
-            { label: 'Minor Arcana', href: '/tarot/minor-arcana' },
+            { label: 'Minor Arcana', href: '/correspondences/minor-arcana' },
             { label: `${minor.num} of ${minor.suit}` },
           ]}
         />

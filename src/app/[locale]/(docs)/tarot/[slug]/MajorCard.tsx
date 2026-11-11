@@ -62,7 +62,7 @@ export function MajorCard({
       <CardStack
         header={<PageHeading truncate>{card.name}</PageHeading>}
         actions={
-          <PlayLink href={`/tarot/major-arcana/play?idx=${card.num}`}>
+          <PlayLink href={`/major-arcana/play?idx=${card.num}`}>
             Focus ▶
           </PlayLink>
         }
@@ -132,9 +132,9 @@ export function MajorCard({
               if (key === 'astrology') {
                 const astroSlug = card.astrology.toLowerCase()
                 const href = planetBySlug[astroSlug]
-                  ? `/reference/astrology/planets/${astroSlug}`
+                  ? `/correspondences/astrology/planets/${astroSlug}`
                   : signBySlug[astroSlug]
-                    ? `/reference/astrology/signs/${astroSlug}`
+                    ? `/correspondences/astrology/signs/${astroSlug}`
                     : null
                 if (href) {
                   return {

@@ -11,6 +11,7 @@ import {
 } from '@/content/data'
 import { DEFAULT_LOCALE, RELEASED_LOCALES, type Locale } from '@/lib/locales'
 import { navGroups } from '@/lib/navData'
+import { tables } from '@/lib/tables'
 import { TOOL_TABS } from '@/lib/tools'
 
 // Slugs are locale-independent — the sitemap enumerates from the
@@ -43,11 +44,17 @@ const SITE = 'https://botatoolbox.org'
 // meditation tools, not content Google should land users on directly.
 const publicGroups = navGroups
 
-// Docs pages with no nav entry of their own: a tool's other views,
-// which are tabs of its page (src/lib/tools.ts), and the Radio, which
-// is reached from the Recordings page — its stream and their source are
-// the same broadcast. Everything else in the route tree has a nav entry.
-const extraRoutes = [...TOOL_TABS.map((t) => t.href), '/radio']
+// Docs pages with no nav entry of their own: the correspondence
+// tables, which stand behind their own index (src/lib/tables.ts); a
+// tool's other views, which are tabs of its page (src/lib/tools.ts);
+// and the Radio, which is reached from the Recordings page — its stream
+// and their source are the same broadcast. Everything else in the route
+// tree has a nav entry.
+const extraRoutes = [
+  ...tables.map((t) => t.href),
+  ...TOOL_TABS.map((t) => t.href),
+  '/radio',
+]
 
 const staticRoutes = [
   '/',
@@ -105,7 +112,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]
       : []),
     ...sephiroth.map((s) => `/tree-of-life/${s.slug}`),
-    ...astrologySigns.map((s) => `/reference/astrology/signs/${s.slug}`),
-    ...astrologyPlanets.map((p) => `/reference/astrology/planets/${p.slug}`),
+    ...astrologySigns.map((s) => `/correspondences/astrology/signs/${s.slug}`),
+    ...astrologyPlanets.map(
+      (p) => `/correspondences/astrology/planets/${p.slug}`,
+    ),
   ].flatMap(entries)
 }

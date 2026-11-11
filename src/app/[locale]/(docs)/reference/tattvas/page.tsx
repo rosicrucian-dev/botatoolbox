@@ -1,81 +1,11 @@
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/catalyst/table'
-import { PageHeading } from '@/components/layout/PageHeading'
-import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
-import { PlayLink } from '@/components/nav/PlayLink'
-import { localizedMetadata } from '@/lib/nav'
-import {
-  SUB_ORDER,
-  tattvaByKind,
-  tattvas,
-  type TattvaKind,
-} from '@/lib/tattvas'
+import { MovedTo } from '@/components/nav/MovedTo'
 
-export const generateMetadata = localizedMetadata('Tattvas')
+// A REGROUPING, NOT A RENAME (November 2026). The tables were eight
+// rows of the Reference group at /reference/<table>; the Reference is
+// now the five things a reader looks up — the Correspondences, the two
+// Arcana, the Cube and the Tree — and the tables stand behind
+// /correspondences, which is their index (src/lib/tables.ts).
 
-// Sub-tattvas are addressed by index inside each main's player deck —
-// shape the list as { sub, idx } pairs so each row keys off sub.
-type Row = { sub: TattvaKind; idx: number }
-const SUB_ROWS: Array<Row> = SUB_ORDER.map((sub, idx) => ({ sub, idx }))
-
-export default function Tattvas() {
-  return (
-    <article className="space-y-8">
-      <SetBreadcrumbs items={[{ label: 'Tattvas' }]} />
-      <PageHeading>Tattvas</PageHeading>
-
-      {/* A column per main tattva, a row per sub. Each cell links to that main's
-          player at the sub's index (e.g. Water column, Fire row → Fire of
-          Water). Built on Catalyst's <Table> for consistent styling, but the
-          body cells are raw <td> + a full-cell PlayLink (Catalyst's TableCell
-          can't host a padding-filling link, and these cells double as the
-          audio-priming nav targets). */}
-      <Table className="[--gutter:1rem] sm:[--gutter:1.5rem] lg:[--gutter:2rem]">
-        <TableHead>
-          <TableRow>
-            {tattvas.map((main) => (
-              <TableHeader key={main.kind}>{main.english}</TableHeader>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {SUB_ROWS.map((r) => (
-            <TableRow key={r.sub}>
-              {tattvas.map((main, colIdx) => {
-                // Match Catalyst's <TableHeader> edge padding so the body
-                // cells line up under their headers. Catalyst hugs the
-                // first/last cells to the table's padded edge
-                // (first:pl-(--gutter), then sm:first:pl-1); middle cells are
-                // plain px-4. Mirror that on the full-cell PlayLink.
-                const edge =
-                  colIdx === 0
-                    ? 'pl-(--gutter) pr-4 sm:pl-1'
-                    : colIdx === tattvas.length - 1
-                      ? 'pl-4 pr-(--gutter) sm:pr-1'
-                      : 'px-4'
-                return (
-                  <td
-                    key={main.kind}
-                    className="border-b border-zinc-950/5 dark:border-white/5"
-                  >
-                    <PlayLink
-                      href={`/reference/tattvas/${main.kind}/play?idx=${r.idx}`}
-                      className={`block ${edge} py-4 font-medium whitespace-nowrap text-zinc-950 transition hover:bg-zinc-950/2.5 dark:text-white dark:hover:bg-white/2.5`}
-                    >
-                      {tattvaByKind[r.sub].english}
-                    </PlayLink>
-                  </td>
-                )
-              })}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </article>
-  )
+export default function ReferenceTattvasRedirect() {
+  return <MovedTo to="/correspondences/tattvas" what="The Tattvas table" />
 }

@@ -40,7 +40,7 @@ export function AstrologyFocusPlayer({
   title: string
   kind: 'signs' | 'planets'
 }) {
-  // Detail URL for any slug, e.g. `/reference/astrology/signs/aries`. The Focus
+  // Detail URL for any slug, e.g. `/correspondences/astrology/signs/aries`. The Focus
   // URL is the same shape with `/focus` appended; both the close button
   // and the in-player Next/Prev URL sync use this.
   const detailHrefForSlug = useCallback(
