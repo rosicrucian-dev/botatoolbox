@@ -4,7 +4,7 @@
 import { z } from 'zod'
 
 import treePathsData from '@content/data/tree-paths.json'
-import { TreePathSchema } from './schemas'
+import { TreePathSchema } from '@content/data/schemas'
 
 export type TreePath = z.infer<typeof TreePathSchema>
 

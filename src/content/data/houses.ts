@@ -9,7 +9,7 @@ import data from '@content/data/en/houses.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { HouseSchema } from './schemas'
+import { HouseSchema } from '@content/data/schemas'
 
 export type House = z.infer<typeof HouseSchema>
 

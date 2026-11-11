@@ -8,7 +8,7 @@ import data from '@content/data/en/numerology.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { NumerologySchema } from './schemas'
+import { NumerologySchema } from '@content/data/schemas'
 
 export type NumerologyEntry = z.infer<typeof NumerologySchema>
 

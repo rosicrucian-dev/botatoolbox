@@ -10,7 +10,7 @@ import data from '@content/data/en/suit-correspondences.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { SuitCorrespondenceSchema } from './schemas'
+import { SuitCorrespondenceSchema } from '@content/data/schemas'
 
 export type SuitCorrespondence = z.infer<typeof SuitCorrespondenceSchema>
 

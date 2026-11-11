@@ -8,7 +8,7 @@ import wordsData from '@content/data/en/words.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { WordLetterSchema, WordSchema } from './schemas'
+import { WordLetterSchema, WordSchema } from '@content/data/schemas'
 
 export type Word = z.infer<typeof WordSchema>
 export type WordLetter = z.infer<typeof WordLetterSchema>

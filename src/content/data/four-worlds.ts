@@ -10,7 +10,7 @@ import data from '@content/data/en/four-worlds.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { FourWorldSchema } from './schemas'
+import { FourWorldSchema } from '@content/data/schemas'
 
 export type FourWorld = z.infer<typeof FourWorldSchema>
 

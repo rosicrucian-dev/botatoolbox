@@ -18,7 +18,7 @@ import type { z } from 'zod'
 
 import { skeleton } from '@/lib/hebrewLetters'
 import { type GematriaSourceId } from './gematria-sources'
-import type { GematriaNumberEntrySchema, GematriaWordSchema } from './schemas'
+import type { GematriaNumberEntrySchema, GematriaWordSchema } from '@content/data/schemas'
 
 export type GematriaWord = z.infer<typeof GematriaWordSchema>
 export type GematriaNumberEntry = z.infer<typeof GematriaNumberEntrySchema>

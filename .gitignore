@@ -41,15 +41,6 @@ certificates
 /src/lib/meditationFacts.ts
 /src/lib/stores/coursePositions.ts
 /src/content/data/meditations.ts
-/content/data/en/meditations-*.json
-/content/data/de/meditations-*.json
-/content/data/en/paths-of-wisdom.json
-/content/data/de/paths-of-wisdom.json
-/content/data/en/tarot-interpretation-tableaux.json
-/content/data/de/tarot-interpretation-tableaux.json
-/content/data/.schemas/meditations-*.schema.json
-/content/data/.schemas/paths-of-wisdom.schema.json
-/content/data/.schemas/tarot-interpretation-tableaux.schema.json
 /test/courses.test.ts
 /test/rotation.test.ts
 /test/fixtures/meditations-oracle.json

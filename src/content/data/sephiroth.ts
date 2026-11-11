@@ -8,7 +8,7 @@ import sephirothData from '@content/data/en/sephiroth.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { SephirahSchema } from './schemas'
+import { SephirahSchema } from '@content/data/schemas'
 
 export type Sephirah = z.infer<typeof SephirahSchema>
 

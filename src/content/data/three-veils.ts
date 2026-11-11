@@ -9,7 +9,7 @@ import data from '@content/data/en/three-veils.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { ThreeVeilSchema } from './schemas'
+import { ThreeVeilSchema } from '@content/data/schemas'
 
 export type ThreeVeil = z.infer<typeof ThreeVeilSchema>
 

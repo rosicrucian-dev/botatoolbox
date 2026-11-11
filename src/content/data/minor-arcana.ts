@@ -11,7 +11,7 @@ import data from '@content/data/en/minor-arcana.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { MinorSuitSchema } from './schemas'
+import { MinorSuitSchema } from '@content/data/schemas'
 
 export interface MinorEntry {
   slug: string

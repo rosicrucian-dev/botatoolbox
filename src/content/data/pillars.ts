@@ -10,7 +10,7 @@ import data from '@content/data/en/pillars.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { PillarPairSchema } from './schemas'
+import { PillarPairSchema } from '@content/data/schemas'
 
 export type PillarPair = z.infer<typeof PillarPairSchema>
 

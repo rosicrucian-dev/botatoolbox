@@ -8,7 +8,7 @@ import { z } from 'zod'
 import signsData from '@content/data/en/signs.json'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { SignSchema } from './schemas'
+import { SignSchema } from '@content/data/schemas'
 
 export type HealingSign = z.infer<typeof SignSchema>
 

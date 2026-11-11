@@ -1,14 +1,23 @@
 # Data layer
 
-Two halves, split between the project root and `src/`:
+Three parts now: the **shared data repository**, mounted at
+`content/data/` as a git submodule
+([rosicrucian-dev/data](https://github.com/rosicrucian-dev/data), 10
+November 2026); the typed wrappers in `src/`; and the generated files
+in `public/`.
+
+**Fix a table in the submodule, commit there, then commit the pointer
+here.** The Hermetic Order of Aquarius reads the same files, so a
+change made here reaches both sites and a change made only here
+reaches neither.
 
 | Path                           | What lives here                                                                                                                                                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `content/data/<locale>/*.json` | One FULL copy of each language-carrying data file per locale — `en/` is the master (structure is only ever read from it), translated siblings are the same file with display values translated in place.       |
 | `content/data/*.json`          | Language-free files only (cube-of-space, tree-paths, recordings, recordings-timings) — no display text, so no locale dirs. `recordings-timings.json` comes from an off-repo Whisper pipeline and is committed. |
-| `content/data/.schemas/`       | JSON Schema sidecars for VS Code autocomplete — one per file, shared by every locale. **Generated.**                                                                                                           |
+| `content/data/.schemas/`       | JSON Schema sidecars for VS Code autocomplete — one per file, shared by every locale. **Generated**, into the submodule.                                                                                       |
 | `public/data/*.json`           | **Generated** data — built by `npm run gen:*`, fetched on demand. Do **not** edit.                                                                                                                             |
-| `src/content/data/schemas.ts`  | Zod schemas — single source of truth for shape + TS types.                                                                                                                                                     |
+| `content/data/schemas.ts`      | Zod schemas — single source of truth for shape + TS types. **In the submodule**, with the data it describes; import it as `@content/data/schemas`.                                                             |
 | `src/content/data/<domain>.ts` | Typed view of one or more JSON files + lookup maps + helpers.                                                                                                                                                  |
 | `src/content/data/index.ts`    | Pure barrel — consumers import **only** from `@/content/data`.                                                                                                                                                 |
 | `src/content/data/helpers.ts`  | `byKey<T>()` and other shared utilities.                                                                                                                                                                       |
@@ -18,7 +27,7 @@ Two halves, split between the project root and `src/`:
 
 1. Add `content/data/en/<name>.json` (or `content/data/<name>.json` only
    if it carries no display text at all — see step 6).
-2. Add `<Name>Schema` to `schemas.ts`.
+2. Add `<Name>Schema` to the submodule's `schemas.ts`.
 3. Add a `(file, schema)` entry to `scripts/gen-schemas.ts` and run
    `npm run gen:schemas` (it also regenerates the `.vscode/settings.json`
    editor wiring from that list).

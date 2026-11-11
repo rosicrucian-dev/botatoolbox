@@ -9,7 +9,7 @@ import data from '@content/data/en/ten-palaces.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { TenPalaceSchema } from './schemas'
+import { TenPalaceSchema } from '@content/data/schemas'
 
 export type TenPalace = z.infer<typeof TenPalaceSchema>
 

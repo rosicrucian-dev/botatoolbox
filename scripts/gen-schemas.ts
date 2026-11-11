@@ -41,7 +41,7 @@ import {
   ThreeVeilSchema,
   TreePathSchema,
   WordSchema,
-} from '../src/content/data/schemas.ts'
+} from '../content/data/schemas.ts'
 import { DEFAULT_LOCALE } from '../src/lib/locales.ts'
 
 const here = import.meta.dirname

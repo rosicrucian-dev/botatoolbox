@@ -13,7 +13,7 @@ import {
   CubeFaceSchema,
   CubeFlowDirectionSchema,
   CubeOfSpaceSchema,
-} from './schemas'
+} from '@content/data/schemas'
 import { getTarot } from './tarot'
 
 // Structural join only (astrology attribution, never displayed from

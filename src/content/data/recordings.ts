@@ -11,7 +11,7 @@ import recordingsData from '@content/data/recordings.json'
 
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
-import { RecordingSchema } from './schemas'
+import { RecordingSchema } from '@content/data/schemas'
 
 export type Recording = z.infer<typeof RecordingSchema>
 

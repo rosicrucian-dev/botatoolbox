@@ -17,7 +17,7 @@ import filesData from '@content/data/en/files.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { FileDownloadSchema, FileEntrySchema } from './schemas'
+import { FileDownloadSchema, FileEntrySchema } from '@content/data/schemas'
 
 export type FileEntry = z.infer<typeof FileEntrySchema>
 export type FileDownload = z.infer<typeof FileDownloadSchema>

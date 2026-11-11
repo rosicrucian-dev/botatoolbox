@@ -23,7 +23,7 @@ import {
   GEMATRIA_SOURCES,
   type GematriaSourceId,
 } from '../src/content/data/gematria-sources.ts'
-import { GematriaWordsSchema } from '../src/content/data/schemas.ts'
+import { GematriaWordsSchema } from '../content/data/schemas.ts'
 import {
   LETTER_VALUE,
   ROMAN_TO_BASE_GLYPH,

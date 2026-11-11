@@ -11,7 +11,7 @@ import data from '@content/data/en/grades.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { GradeSchema } from './schemas'
+import { GradeSchema } from '@content/data/schemas'
 
 export type Grade = z.infer<typeof GradeSchema>
 

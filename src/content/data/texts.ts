@@ -11,7 +11,7 @@ import textsData from '@content/data/en/texts.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { TextSchema } from './schemas'
+import { TextSchema } from '@content/data/schemas'
 
 export type Text = z.infer<typeof TextSchema>
 

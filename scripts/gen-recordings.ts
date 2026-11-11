@@ -27,7 +27,7 @@ import {
 import { basename, dirname, join, resolve } from 'node:path'
 import { z } from 'zod'
 
-import { RecordingSchema } from '../src/content/data/schemas.ts'
+import { RecordingSchema } from '../content/data/schemas.ts'
 import { slugify } from './lib/recordings-slug.ts'
 
 const ROOT = resolve(import.meta.dirname, '..')

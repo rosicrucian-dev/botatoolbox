@@ -9,7 +9,7 @@ import data from '@content/data/en/chakras.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { ChakraSchema } from './schemas'
+import { ChakraSchema } from '@content/data/schemas'
 
 export type Chakra = z.infer<typeof ChakraSchema>
 

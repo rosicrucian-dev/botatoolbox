@@ -10,7 +10,7 @@ import { z } from 'zod'
 import planetsData from '@content/data/en/planets.json'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { PlanetSchema } from './schemas'
+import { PlanetSchema } from '@content/data/schemas'
 
 export type HealingPlanet = z.infer<typeof PlanetSchema>
 

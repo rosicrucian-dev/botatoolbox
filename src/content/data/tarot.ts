@@ -10,7 +10,7 @@ import data from '@content/data/en/tarot.json'
 import { byKey } from './helpers'
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { TarotCardSchema } from './schemas'
+import { TarotCardSchema } from '@content/data/schemas'
 
 export type TarotCard = z.infer<typeof TarotCardSchema>
 

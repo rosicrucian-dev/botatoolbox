@@ -11,7 +11,7 @@ import data from '@content/data/en/elements.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { ElementSchema } from './schemas'
+import { ElementSchema } from '@content/data/schemas'
 
 export type Element = z.infer<typeof ElementSchema>
 

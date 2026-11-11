@@ -10,7 +10,7 @@ import data from '@content/data/en/gunas.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { GunaSchema } from './schemas'
+import { GunaSchema } from '@content/data/schemas'
 
 export type Guna = z.infer<typeof GunaSchema>
 

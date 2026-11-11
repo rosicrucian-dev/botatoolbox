@@ -9,7 +9,7 @@ import data from '@content/data/en/alchemy.json'
 
 import { defineLocalized } from './localized'
 import { localizedRaw } from './overlay'
-import { AlchemyTermSchema } from './schemas'
+import { AlchemyTermSchema } from '@content/data/schemas'
 
 export type AlchemyTerm = z.infer<typeof AlchemyTermSchema>
 
