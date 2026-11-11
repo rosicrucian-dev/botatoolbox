@@ -123,7 +123,7 @@ export const overlayTargets: readonly OverlayTarget[] = [
     fields: ['principle', 'element', 'beings'],
   },
   {
-    file: 'suit-correspondences',
+    file: 'suits',
     keying: { kind: 'index' },
     fields: ['tarot', 'playingCard', 'element'],
   },

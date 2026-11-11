@@ -27,7 +27,7 @@ import dePillars from '@content/data/de/pillars.json'
 import dePlanets from '@content/data/de/planets.json'
 import deSephiroth from '@content/data/de/sephiroth.json'
 import deSigns from '@content/data/de/signs.json'
-import deSuitCorrespondences from '@content/data/de/suit-correspondences.json'
+import deSuits from '@content/data/de/suits.json'
 import deTarot from '@content/data/de/tarot.json'
 import deTenPalaces from '@content/data/de/ten-palaces.json'
 import deTexts from '@content/data/de/texts.json'
@@ -49,7 +49,7 @@ export const overlays: Record<string, Record<TranslationLocale, unknown>> = {
   planets: { de: dePlanets },
   sephiroth: { de: deSephiroth },
   signs: { de: deSigns },
-  'suit-correspondences': { de: deSuitCorrespondences },
+  suits: { de: deSuits },
   tarot: { de: deTarot },
   'ten-palaces': { de: deTenPalaces },
   texts: { de: deTexts },

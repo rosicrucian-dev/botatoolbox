@@ -104,9 +104,9 @@
     },
     {
       "fileMatch": [
-        "content/data/*/suit-correspondences.json"
+        "content/data/*/suits.json"
       ],
-      "url": "./content/data/.schemas/suit-correspondences.schema.json"
+      "url": "./content/data/.schemas/suits.schema.json"
     },
     {
       "fileMatch": [

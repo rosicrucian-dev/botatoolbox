@@ -14,7 +14,7 @@
 //
 //   - tarot.ts         — major arcana + cardImage()/thumbImage()
 //   - minor-arcana.ts  — minor arcana flat list + minorImage variants
-//   - suit-correspondences.ts — tarot suit ↔ playing-card (Minor page)
+//   - suits.ts — the four suits: playing card, World, element, letter
 //   - tarot-styles.ts  — art-style registry (drives Settings + downloads)
 //   - sephiroth.ts     — the ten sephiroth + descent order
 //   - tree-paths.ts    — connecting paths (11–32)
@@ -63,7 +63,7 @@ export * from './recordings'
 export * from './sephiroth'
 export * from './signs'
 export * from './stages'
-export * from './suit-correspondences'
+export * from './suits'
 export * from './tarot'
 export * from './tarot-styles'
 export * from './tattvas'

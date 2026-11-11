@@ -2,7 +2,7 @@ import { PageHeading } from '@/components/layout/PageHeading'
 import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
 import { DataTable } from '@/components/ui/DataTable'
 import { TextLink } from '@/components/ui/TextLink'
-import { getSuitCorrespondences, getTarot } from '@/content/data'
+import { getSuits, getTarot } from '@/content/data'
 import { letters } from '@/lib/hebrew'
 import { toLocale } from '@/lib/locales'
 import { localizedMetadata } from '@/lib/nav'
@@ -31,7 +31,7 @@ export default async function MajorArcanaTable({
   const { locale: rawLocale } = await params
   const locale = toLocale(rawLocale)
   const { cards } = getTarot(locale)
-  const { suitCorrespondences } = getSuitCorrespondences(locale)
+  const { suits } = getSuits(locale)
   return (
     <article className="space-y-8">
       <SetBreadcrumbs
@@ -72,7 +72,7 @@ export default async function MajorArcanaTable({
         </h2>
         <DataTable
           head={['Tarot', 'Playing card', 'World', 'Element', 'Letter']}
-          rows={suitCorrespondences.map((s) => [
+          rows={suits.map((s) => [
             s.tarot,
             s.playingCard,
             s.world,
