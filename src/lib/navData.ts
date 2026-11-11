@@ -40,22 +40,15 @@ export interface RawNavGroup {
 
 // THE ORDER HERE IS THE ORDER ON SCREEN, groups and links alike
 // (nav.ts no longer sorts). It was alphabetical by slug while nothing
-// depended on it; it is authored now, so Practice can stand above
-// Meditations. Locale-independent either way — the order is in this
-// structure, never in the translated titles.
+// depended on it, which is to say while it could not mean anything.
+// Locale-independent either way — the order is in this structure, never
+// in the translated titles.
+//
+// What it says, read down: Practice and Meditations are what the reader
+// DOES, Tools what they work WITH, Reference what they LOOK UP, the
+// Library what they READ, and the Website is the site talking about
+// itself. Doing first and reading last.
 export const navGroups: Array<RawNavGroup> = [
-  {
-    // LIBRARY: what is READ and LISTENED TO, a row per shelf and the
-    // shelf's own index behind it. The texts were a group with a row
-    // per text, generated from content/data/en/texts.json — a list that
-    // can only grow, and in time longer than the rest of the sidebar —
-    // so /texts is the index now, as /recordings already was. The
-    // individual texts stay in the sitemap and the search index, which
-    // read the manifest rather than the nav.
-    slug: 'library',
-    flat: true,
-    links: [{ href: '/texts' }, { href: '/recordings' }],
-  },
   {
     slug: 'practice',
     links: [{ href: '/practice/quiz' }, { href: '/practice/words-of-power' }],
@@ -74,6 +67,25 @@ export const navGroups: Array<RawNavGroup> = [
       { href: '/meditations/pattern-trestleboard' },
       { href: '/healing/planets', outside: true },
       { href: '/healing/signs', outside: true },
+    ],
+  },
+  {
+    // TOOLS. One row per tool, each row landing on the tool's first
+    // view; its other views are tabs of that page, off the sidebar but
+    // in the sitemap and the search index (src/lib/tools.ts). Flat,
+    // because a tool keeps its own top-level namespace — /gematria is
+    // the calculator and /gematria/dictionary is a tab of it — rather
+    // than nesting under /tools/.
+    slug: 'tools',
+    flat: true,
+    // Ordered by use, not by name: the chart and the calculator are
+    // what this group is opened for, and the draw and the piano stand
+    // after them.
+    links: [
+      { href: '/astrology' },
+      { href: '/gematria' },
+      { href: '/freeform' },
+      { href: '/keyboard' },
     ],
   },
   {
@@ -99,23 +111,16 @@ export const navGroups: Array<RawNavGroup> = [
     ],
   },
   {
-    // TOOLS. One row per tool, each row landing on the tool's first
-    // view; its other views are tabs of that page, off the sidebar but
-    // in the sitemap and the search index (src/lib/tools.ts). Flat,
-    // because a tool keeps its own top-level namespace — /gematria is
-    // the calculator and /gematria/dictionary is a tab of it — rather
-    // than nesting under /tools/.
-    slug: 'tools',
+    // LIBRARY: what is READ and LISTENED TO, a row per shelf and the
+    // shelf's own index behind it. The texts were a group with a row
+    // per text, generated from content/data/en/texts.json — a list that
+    // can only grow, and in time longer than the rest of the sidebar —
+    // so /texts is the index now, as /recordings already was. The
+    // individual texts stay in the sitemap and the search index, which
+    // read the manifest rather than the nav.
+    slug: 'library',
     flat: true,
-    // Ordered by use, not by name: the chart and the calculator are
-    // what this group is opened for, and the draw and the piano stand
-    // after them.
-    links: [
-      { href: '/astrology' },
-      { href: '/gematria' },
-      { href: '/freeform' },
-      { href: '/keyboard' },
-    ],
+    links: [{ href: '/texts' }, { href: '/recordings' }],
   },
   {
     // The site itself, and what it hands out: the Files and the Links
