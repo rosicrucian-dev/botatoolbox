@@ -1,13 +1,18 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
-import { cpSync, existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
 
-const appRoot = 'src/app/[locale]/(docs)/meditations'
+// The private-pages route is mounted for `npm run dev` and must be gone
+// before Next scans the route tree, which is what `check` asserts and
+// what every build runs. It tested the legacy meditation courses' own
+// dispatcher until 10 November 2026, when those courses were deleted.
+const route = 'src/app/[locale]/(docs)/private'
+const source = 'src/private-dev/app'
 
-test('local course routes and navigation come from the same private folders', () => {
+test('the private-pages route mounts for dev and is gone for a build', () => {
   const root = mkdtempSync(join(tmpdir(), 'bota-private-mount-'))
   try {
     mkdirSync(join(root, 'scripts'))
@@ -15,36 +20,26 @@ test('local course routes and navigation come from the same private folders', ()
       join(process.cwd(), 'scripts/private-mount.mjs'),
       join(root, 'scripts/private-mount.mjs'),
     )
-    const privateRoot = join(root, 'private/legacy', appRoot)
-    mkdirSync(join(privateRoot, 'first-course', '[week]'), { recursive: true })
-    writeFileSync(join(privateRoot, 'first-course/page.tsx'), 'export default function Page() {}')
-    writeFileSync(join(privateRoot, 'first-course/[week]/page.tsx'), 'export default function Page() {}')
-    mkdirSync(join(privateRoot, 'second-course'), { recursive: true })
-    writeFileSync(join(privateRoot, 'second-course/page.tsx'), 'export default function Page() {}')
+    mkdirSync(join(root, source, '[group]', '[slug]'), { recursive: true })
+    writeFileSync(
+      join(root, source, '[group]/[slug]/page.tsx'),
+      'export default function Page() {}',
+    )
 
     const script = join(root, 'scripts/private-mount.mjs')
     const run = (action: string) =>
-      spawnSync(process.execPath, [script, action], {
-        cwd: root,
-        encoding: 'utf8',
-      })
-    assert.equal(run('mount').status, 0)
+      spawnSync(process.execPath, [script, action], { cwd: root, encoding: 'utf8' })
 
-    const route = join(root, appRoot, '[...course]')
-    const code = readFileSync(join(route, 'page.tsx'), 'utf8')
-    assert.match(code, /@private\/app\/\[locale\]\/\(docs\)\/meditations\/first-course\/page/)
-    assert.match(code, /@private\/app\/\[locale\]\/\(docs\)\/meditations\/first-course\/\[week\]\/page/)
-    assert.match(code, /detailParam: "week"/)
-    assert.match(code, /@private\/app\/\[locale\]\/\(docs\)\/meditations\/second-course\/page/)
-    assert.deepEqual(JSON.parse(readFileSync(join(route, 'courses.json'), 'utf8')), [
-      'first-course',
-      'second-course',
-    ])
+    assert.equal(run('mount').status, 0)
+    assert.equal(existsSync(join(root, route, '[group]/[slug]/page.tsx')), true)
+    // A mounted route fails the assertion a direct production build makes.
     assert.equal(run('check').status, 1)
+
     assert.equal(run('unmount').status, 0)
+    assert.equal(existsSync(join(root, route)), false)
     assert.equal(run('check').status, 0)
-    assert.equal(existsSync(route), false)
-    assert.equal(existsSync(join(root, 'src/private-courses')), false)
+    // The source it was copied from is untouched.
+    assert.equal(existsSync(join(root, source, '[group]/[slug]/page.tsx')), true)
   } finally {
     rmSync(root, { recursive: true, force: true })
   }

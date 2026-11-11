@@ -203,16 +203,21 @@ retired rather than moved.
 
 ### Local private pages
 
-The public `meditations` group contains the Pattern on the Trestleboard
-and the two healing meditations (at `/healing/…`, see above).
-The other course pages and their data are held in the ignored `private/legacy`
-tree. `npm run dev` generates one catch-all course dispatcher from the
-private course folders at their former URLs. Its imports use `@private/`.
-Navigation reads the generated course manifest, so listed courses have a
-matching local route. `npm run build` removes those mounts
-before Next scans the route tree.
-Direct production builds check the mount script's full path list and stop if
-any private route, module, or data mount remains.
+The `meditations` group is the Pattern on the Trestleboard and the two
+healing meditations (at `/healing/…`, see above), and that is the whole
+of it. **The ten legacy React courses were deleted on 10 November
+2026**: they lived in the ignored `private/legacy` tree, mounted at
+their former URLs by a generated dispatcher, and they were temporary --
+standing in until the Hermetic Order of Aquarius could carry them,
+which it does.
+
+What is left is ONE development-only mount: `npm run dev` copies
+`src/private-dev/app` to `/private/<group>/<slug>`, which renders
+Markdown from the ignored `private/pages/`; `npm run build` unmounts it
+before Next scans the route tree, and a direct production build runs
+`private-mount.mjs check`, which stops if the route is still there. The
+ignored `private/minor-meanings/` is read the same way, by the minor
+card pages, with no mount of its own.
 See [`private-pages.md`](private-pages.md) for the local workflow and the
 Markdown page convention that works in any navigation group.
 

@@ -113,37 +113,7 @@
     "nav./major-arcana.title": {
       "type": "string"
     },
-    "nav./meditations/concentration.title": {
-      "type": "string"
-    },
-    "nav./meditations/daily-meditation.title": {
-      "type": "string"
-    },
-    "nav./meditations/introduction-to-tarot.title": {
-      "type": "string"
-    },
-    "nav./meditations/master-pattern.title": {
-      "type": "string"
-    },
-    "nav./meditations/paths-of-wisdom.title": {
-      "type": "string"
-    },
     "nav./meditations/pattern-trestleboard.title": {
-      "type": "string"
-    },
-    "nav./meditations/sound-and-colour.title": {
-      "type": "string"
-    },
-    "nav./meditations/supersensory-powers.title": {
-      "type": "string"
-    },
-    "nav./meditations/tarot-fundamentals.title": {
-      "type": "string"
-    },
-    "nav./meditations/tarot-interpretation.title": {
-      "type": "string"
-    },
-    "nav./meditations/tree-of-life.title": {
       "type": "string"
     },
     "nav./minor-arcana.title": {

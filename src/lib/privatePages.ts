@@ -6,16 +6,6 @@ import { isLocale, type Locale } from '@/lib/locales'
 import { navGroups } from '@/lib/navData'
 
 const pagesRoot = join(process.cwd(), 'private', 'pages')
-const courseManifest = join(
-  process.cwd(),
-  'src',
-  'app',
-  '[locale]',
-  '(docs)',
-  'meditations',
-  '[...course]',
-  'courses.json',
-)
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const metadataKeys = new Set(['title', 'group', 'slug', 'locale', 'order'])
 
@@ -164,13 +154,9 @@ export function scanPrivatePages(root = pagesRoot): PrivatePageIndex {
 }
 
 export function privatePageIndex(): PrivatePageIndex {
-  if (!privateModeEnabled()) return { pages: [], revision: '' }
-  const index = scanPrivatePages()
-  const { raw } = mountedCourses()
-  return {
-    ...index,
-    revision: createHash('sha256').update(index.revision).update(raw).digest('hex'),
-  }
+  return privateModeEnabled()
+    ? scanPrivatePages()
+    : { pages: [], revision: '' }
 }
 
 export function privatePage(
@@ -193,24 +179,6 @@ export function privatePage(
   return page ? { title: page.title, body: page.body } : null
 }
 
-function mountedCourses(): { slugs: string[]; raw: string } {
-  try {
-    const raw = readFileSync(courseManifest, 'utf8')
-    const parsed: unknown = JSON.parse(raw)
-    if (
-      !Array.isArray(parsed) ||
-      !parsed.every((slug) => typeof slug === 'string' && slugPattern.test(slug))
-    ) return { slugs: [], raw: '' }
-    return { slugs: parsed, raw }
-  } catch {
-    // A mount can be regenerated while the local navigation is polling.
-    return { slugs: [], raw: '' }
-  }
-}
-
-export function privateLegacySlugs(): string[] {
-  return privateModeEnabled() ? mountedCourses().slugs : []
-}
 
 export interface PrivateMinorMeaning {
   intro: string

@@ -20,30 +20,8 @@ certificates
 /local
 /private/
 
-# Development-only mounts from private/legacy. Never stage these paths.
-/src/app/*/(docs)/meditations/\[...course\]/
-/src/private-courses
-/src/app/*/(docs)/meditations/daily-meditation/
-/src/app/*/(docs)/meditations/introduction-to-tarot/
-/src/app/*/(docs)/meditations/tarot-fundamentals/
-/src/app/*/(docs)/meditations/supersensory-powers/
-/src/app/*/(docs)/meditations/tarot-interpretation/
-/src/app/*/(docs)/meditations/master-pattern/
-/src/app/*/(docs)/meditations/tree-of-life/
-/src/app/*/(docs)/meditations/paths-of-wisdom/
-/src/app/*/(docs)/meditations/sound-and-colour/
-/src/app/*/(docs)/meditations/concentration/
-/src/app/*/(docs)/meditations/layout.tsx
+# The development-only private-pages mount. Never stage this path.
 /src/app/*/(docs)/private/
-/src/components/meditations
-/src/lib/courses
-/src/lib/rotation.ts
-/src/lib/meditationFacts.ts
-/src/lib/stores/coursePositions.ts
-/src/content/data/meditations.ts
-/test/courses.test.ts
-/test/rotation.test.ts
-/test/fixtures/meditations-oracle.json
 
 # Claude Code (local only)
 CLAUDE.md

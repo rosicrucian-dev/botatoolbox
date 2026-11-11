@@ -28,9 +28,6 @@
       "@/*": [
         "./src/*"
       ],
-      "@private/*": [
-        "./private/legacy/src/*"
-      ],
       "@content/*": [
         "./content/*"
       ]

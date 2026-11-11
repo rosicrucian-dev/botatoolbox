@@ -1,5 +1,5 @@
 // Module-resolution hook for `npm test` (see loader.ts). Three jobs:
-//   1. Map the tsconfig aliases `@/`, `@private/`, and `@content/`.
+//   1. Map the tsconfig aliases `@/` and `@content/`.
 //   2. Resolve extensionless relative/aliased imports to `.ts` (or
 //      `/index.ts`), which the app's bundler does and Node's ESM loader
 //      does not.
@@ -11,7 +11,6 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = new URL('../', import.meta.url)
 const ALIASES: ReadonlyArray<readonly [string, string]> = [
-  ['@private/', 'private/legacy/src/'],
   ['@content/', 'content/'],
   ['@/', 'src/'],
 ]

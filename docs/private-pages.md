@@ -40,30 +40,36 @@ can use the same local-only mount pattern as the existing courses, but
 they need a route and imports; arbitrary JavaScript files should not be
 executed merely because they were dropped in a folder.
 
-## Existing meditation courses
+## The meditation courses are gone (10 November 2026)
 
-The former member-only courses, supporting components, and data are in
-`private/legacy/`. `npm run dev` generates one local course dispatcher from
-the private course folders. Its imports use the `@private/` source alias.
-The old course URLs and their links in the Meditations group still work.
-The public Pattern on the Trestleboard remains in the committed site. A
-new private React course needs a `page.tsx` in its own folder under
-`private/legacy/src/app/[locale]/(docs)/meditations/`; rerun `npm run dev`
-to register it. A single `[name]/page.tsx` detail route is supported.
+Ten React courses used to live in `private/legacy/` and mount at their
+old `/meditations/<slug>` URLs through a generated dispatcher, an
+`@private/` import alias and a stylesheet of their own. They were
+TEMPORARY, standing in until the Hermetic Order of Aquarius could
+carry them, and they were deleted once it could: all ten are courses
+there now, with `concentration` under Section C and `daily-meditation`
+under the Schedule. The public Meditations group is what it always
+showed -- the Pattern on the Trestleboard and the two healing
+meditations.
 
-The legacy course utilities are generated into a local-only stylesheet.
-The public stylesheet does not scan `private/legacy/`, so adding a CSS class
-to a private component cannot put it into a public build. React courses
-still use the mount step; ordinary Markdown pages refresh without it.
+What went with them: the dispatcher and the course layout
+(`src/private-dev/course-dispatcher.tsx`,
+`src/private-dev/meditations-layout.tsx`), the local-only stylesheet
+(`src/styles/private-legacy.css`), the `@private/*` tsconfig path and
+its test-loader alias, `privateLegacySlugs()` and the course manifest
+it read, the Meditations group's local nav rows, their ten `nav.*`
+message keys, the eight schemas in the data repository that described
+their JSON, and about 140 lines of `scripts/private-mount.mjs`. What
+is left is one mount, which is the Markdown route above.
 
-Daily Meditation reads the join date from `private/config.json`:
+Daily Meditation read the join date from `private/config.json`:
 
 ```json
 { "joinDate": "2024-08-23" }
 ```
 
-Use your actual join date in `YYYY-MM-DD` format. This file is ignored by
-Git and stays on your machine. No password or Settings form is involved.
+That file is ignored by Git and nothing reads it now; it is harmless
+to leave and safe to delete.
 
 The former gated minor-arcana meanings are also kept locally in
 `private/minor-meanings/`. They appear on minor-card pages during local
