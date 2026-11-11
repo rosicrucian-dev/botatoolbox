@@ -6,9 +6,7 @@ import { getPatternTrestleboard } from '@/content/texts/pattern-trestleboard'
 import { toLocale } from '@/lib/locales'
 import { localizedMetadata } from '@/lib/nav'
 
-export const generateMetadata = localizedMetadata(
-  'The Pattern on the Trestleboard',
-)
+export const generateMetadata = localizedMetadata('Pattern on the Trestleboard')
 
 export default async function Trestleboard({
   params,
@@ -19,9 +17,9 @@ export default async function Trestleboard({
   const { statements } = getPatternTrestleboard(toLocale(rawLocale))
   return (
     <article className="space-y-6">
-      <SetBreadcrumbs items={[{ label: 'The Pattern on the Trestleboard' }]} />
+      <SetBreadcrumbs items={[{ label: 'Pattern on the Trestleboard' }]} />
       <div className="flex items-start justify-between gap-4">
-        <PageHeading truncate>The Pattern on the Trestleboard</PageHeading>
+        <PageHeading truncate>Pattern on the Trestleboard</PageHeading>
         <PlayLink href="/meditations/pattern-trestleboard/play">
           Start Pattern ▶
         </PlayLink>

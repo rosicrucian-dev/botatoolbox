@@ -38,10 +38,11 @@ export interface RawNavGroup {
   flat?: true
 }
 
-// Groups are kept in alphabetical order by slug to match how they
-// render (nav.ts sorts by slug, so ordering is never load-bearing —
-// this is just to keep source and sidebar in sync). Links within a
-// group keep their authored order.
+// THE ORDER HERE IS THE ORDER ON SCREEN, groups and links alike
+// (nav.ts no longer sorts). It was alphabetical by slug while nothing
+// depended on it; it is authored now, so Practice can stand above
+// Meditations. Locale-independent either way — the order is in this
+// structure, never in the translated titles.
 export const navGroups: Array<RawNavGroup> = [
   {
     // LIBRARY: what is READ and LISTENED TO, a row per shelf and the
@@ -54,6 +55,10 @@ export const navGroups: Array<RawNavGroup> = [
     slug: 'library',
     flat: true,
     links: [{ href: '/texts' }, { href: '/recordings' }],
+  },
+  {
+    slug: 'practice',
+    links: [{ href: '/practice/quiz' }, { href: '/practice/words-of-power' }],
   },
   {
     // MEDITATIONS: the guided sittings. The planets and the signs were a
@@ -70,10 +75,6 @@ export const navGroups: Array<RawNavGroup> = [
       { href: '/healing/planets', outside: true },
       { href: '/healing/signs', outside: true },
     ],
-  },
-  {
-    slug: 'practice',
-    links: [{ href: '/practice/quiz' }, { href: '/practice/words-of-power' }],
   },
   {
     // REFERENCE: what is LOOKED UP. A row per thing rather than per
@@ -106,10 +107,13 @@ export const navGroups: Array<RawNavGroup> = [
     // than nesting under /tools/.
     slug: 'tools',
     flat: true,
+    // Ordered by use, not by name: the chart and the calculator are
+    // what this group is opened for, and the draw and the piano stand
+    // after them.
     links: [
       { href: '/astrology' },
-      { href: '/freeform' },
       { href: '/gematria' },
+      { href: '/freeform' },
       { href: '/keyboard' },
     ],
   },

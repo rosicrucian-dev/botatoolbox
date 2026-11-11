@@ -61,10 +61,14 @@ export const getNavigation = defineLocalized((locale) => {
       links,
     }
   })
-  // Sort by slug so group order is identical across locales
-  // (localeCompare on translated titles would shuffle groups between
-  // languages).
-  return groups.sort((a, b) => a.slug.localeCompare(b.slug))
+  // No sort: the groups render in the order navData.ts authors them.
+  // It used to sort by slug, which kept the order identical across
+  // locales (sorting translated titles would shuffle the groups between
+  // languages) — and so does this, the order being in the structure and
+  // not in the strings. What it also does is let the order MEAN
+  // something: Practice stands above Meditations because the quiz and
+  // the words are the daily work and a sitting is the longer one.
+  return groups
 })
 
 export const getVisibleNavigation = defineLocalized((locale) =>
