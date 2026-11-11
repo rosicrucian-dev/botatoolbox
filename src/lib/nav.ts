@@ -19,6 +19,8 @@ export interface NavLink {
   description?: string
   // See RawNavLink.hidden in navData.ts.
   hidden?: boolean
+  // See RawNavLink.outside in navData.ts.
+  outside?: true
 }
 
 export interface NavGroup {

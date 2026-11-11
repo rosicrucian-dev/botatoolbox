@@ -11,6 +11,12 @@
 
 export interface RawNavLink {
   href: string
+  // This member keeps its OWN namespace instead of nesting under the
+  // group's slug — because the namespace names the thing and the group
+  // does not (/healing/planets is a healing meditation, filed under
+  // Meditations). The integrity check asks for this explicitly rather
+  // than letting any href into any group.
+  outside?: true
   // Unlisted: hidden from the sidebar, home TOC, and search, but still
   // reachable by direct URL.
   hidden?: boolean
@@ -43,10 +49,6 @@ export const navGroups: Array<RawNavGroup> = [
     links: [{ href: '/cube-of-space' }, { href: '/tree-of-life' }],
   },
   {
-    slug: 'healing',
-    links: [{ href: '/healing/planets' }, { href: '/healing/signs' }],
-  },
-  {
     // LIBRARY: what is READ and LISTENED TO, a row per shelf and the
     // shelf's own index behind it. The texts were a group with a row
     // per text, generated from content/data/en/texts.json — a list that
@@ -59,8 +61,20 @@ export const navGroups: Array<RawNavGroup> = [
     links: [{ href: '/texts' }, { href: '/recordings' }],
   },
   {
+    // MEDITATIONS: the guided sittings. The planets and the signs were a
+    // Healing group of their own and are two more of these — but they
+    // keep /healing/, because that is what the practice is called and
+    // the pages say so in their own copy ("Healing meditation only
+    // covers the 7 classical planets"). Hence `outside`: a member of
+    // this group that is not under its slug. /meditations/ cannot take
+    // them in any case — it is the private courses' namespace, a course
+    // per slug (docs/architecture.md, "Local private pages").
     slug: 'meditations',
-    links: [{ href: '/meditations/pattern-trestleboard' }],
+    links: [
+      { href: '/meditations/pattern-trestleboard' },
+      { href: '/healing/planets', outside: true },
+      { href: '/healing/signs', outside: true },
+    ],
   },
   {
     slug: 'practice',

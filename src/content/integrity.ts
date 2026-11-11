@@ -415,10 +415,10 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
             segs.length === 1,
             `flat group "${group.title}" member ${link.href} must be a single top-level segment (e.g. /${segs[0] ?? ''})`,
           )
-        } else {
+        } else if (!link.outside) {
           expect(
             segs.length >= 2 && segs[0] === slug,
-            `nested group "${group.title}" member ${link.href} must be nested as /${slug}/<item>`,
+            `nested group "${group.title}" member ${link.href} must be nested as /${slug}/<item> (or declare \`outside\`)`,
           )
         }
       }

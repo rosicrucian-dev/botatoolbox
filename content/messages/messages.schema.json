@@ -224,9 +224,6 @@
     "nav.group.devices.title": {
       "type": "string"
     },
-    "nav.group.healing.title": {
-      "type": "string"
-    },
     "nav.group.library.title": {
       "type": "string"
     },

@@ -125,7 +125,10 @@ instead, so a collection's items are listed on its own index page and
 reach the sitemap and search from the manifest, never from the nav. Members
 of a `flat` group (devices, library, tools, website) live at a
 top-level URL (`/cube-of-space`); every other group's members nest under
-it (`/practice/quiz`). The sitemap is derived from that list, and the
+it (`/practice/quiz`) — unless the link declares `outside`, which says
+the member keeps its own namespace because that namespace names the
+thing: the healing meditations are filed under Meditations and stay at
+`/healing/planets` and `/healing/signs`. The sitemap is derived from that list, and the
 integrity checks assert that every listed href and group landing has a
 `page.tsx`, so the sidebar, the sitemap, and the route tree cannot drift
 apart.
@@ -147,7 +150,8 @@ Legacy redirects, all client-side stubs (a static export can't emit a
 
 ### Local private pages
 
-The public `meditations` group contains the Pattern on the Trestleboard.
+The public `meditations` group contains the Pattern on the Trestleboard
+and the two healing meditations (at `/healing/…`, see above).
 The other course pages and their data are held in the ignored `private/legacy`
 tree. `npm run dev` generates one catch-all course dispatcher from the
 private course folders at their former URLs. Its imports use `@private/`.
