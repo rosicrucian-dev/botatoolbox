@@ -20,7 +20,13 @@ jobs:
     steps:
       # Binary assets live directly in git (no LFS) — a plain checkout
       # gets everything, and clone bandwidth is unmetered.
+      # `content/data` is a submodule (the shared reference tables, the
+      # public rosicrucian-dev/data). Without this the directory is
+      # empty and `check:data`, the first step of prebuild, stops the
+      # build.
       - uses: actions/checkout@v6
+        with:
+          submodules: true
       - uses: actions/setup-node@v6
         with:
           node-version: 24
