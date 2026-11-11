@@ -6,11 +6,11 @@
     "node": ">=24"
   },
   "scripts": {
-    "predev": "node scripts/private-mount.mjs mount",
+    "predev": "npm run check:data && node scripts/private-mount.mjs mount",
     "dev": "BOTA_PRIVATE_MODE=1 next dev --webpack --hostname 127.0.0.1",
     "dev:public": "npm run private:unmount && BOTA_PRIVATE_MODE=0 next dev --webpack --hostname 0.0.0.0",
     "build": "next build --webpack",
-    "prebuild": "npm run private:unmount && npm run gen:search",
+    "prebuild": "npm run check:data && npm run private:unmount && npm run gen:search",
     "postbuild": "npm run hoist:en && npm run gen:sw",
     "hoist:en": "node --experimental-strip-types scripts/hoist-en.ts",
     "gen:sw": "node --experimental-strip-types scripts/gen-sw.ts",
@@ -22,6 +22,7 @@
     "lint": "eslint",
     "pretest": "node scripts/private-mount.mjs test",
     "test": "node --import ./test/loader.ts --test \"test/**/*.test.ts\"",
+    "check:data": "node content/data/check.mjs",
     "gen:schemas": "node --experimental-strip-types scripts/gen-schemas.ts",
     "check:schemas": "node --experimental-strip-types scripts/gen-schemas.ts --check",
     "gen:translations": "node --experimental-strip-types scripts/gen-translations.ts",
