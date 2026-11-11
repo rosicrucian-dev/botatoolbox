@@ -23,31 +23,16 @@
     "mobileNav.toggle": {
       "type": "string"
     },
-    "nav./about.description": {
-      "type": "string"
-    },
     "nav./about.title": {
-      "type": "string"
-    },
-    "nav./astrology.description": {
       "type": "string"
     },
     "nav./astrology.title": {
       "type": "string"
     },
-    "nav./astrology/hora.description": {
-      "type": "string"
-    },
     "nav./astrology/hora.title": {
       "type": "string"
     },
-    "nav./community.description": {
-      "type": "string"
-    },
     "nav./community.title": {
-      "type": "string"
-    },
-    "nav./correspondences.description": {
       "type": "string"
     },
     "nav./correspondences.title": {
@@ -68,13 +53,7 @@
     "nav./correspondences/hebrew.title": {
       "type": "string"
     },
-    "nav./correspondences/major-arcana.description": {
-      "type": "string"
-    },
     "nav./correspondences/major-arcana.title": {
-      "type": "string"
-    },
-    "nav./correspondences/minor-arcana.description": {
       "type": "string"
     },
     "nav./correspondences/minor-arcana.title": {
@@ -89,61 +68,31 @@
     "nav./correspondences/tattvas.title": {
       "type": "string"
     },
-    "nav./cube-of-space.description": {
-      "type": "string"
-    },
     "nav./cube-of-space.title": {
-      "type": "string"
-    },
-    "nav./files.description": {
       "type": "string"
     },
     "nav./files.title": {
       "type": "string"
     },
-    "nav./freeform.description": {
-      "type": "string"
-    },
     "nav./freeform.title": {
-      "type": "string"
-    },
-    "nav./gematria.description": {
       "type": "string"
     },
     "nav./gematria.title": {
       "type": "string"
     },
-    "nav./gematria/dictionary.description": {
-      "type": "string"
-    },
     "nav./gematria/dictionary.title": {
-      "type": "string"
-    },
-    "nav./healing/planets.description": {
       "type": "string"
     },
     "nav./healing/planets.title": {
       "type": "string"
     },
-    "nav./healing/signs.description": {
-      "type": "string"
-    },
     "nav./healing/signs.title": {
-      "type": "string"
-    },
-    "nav./keyboard.description": {
       "type": "string"
     },
     "nav./keyboard.title": {
       "type": "string"
     },
-    "nav./links.description": {
-      "type": "string"
-    },
     "nav./links.title": {
-      "type": "string"
-    },
-    "nav./major-arcana.description": {
       "type": "string"
     },
     "nav./major-arcana.title": {
@@ -182,37 +131,19 @@
     "nav./meditations/tree-of-life.title": {
       "type": "string"
     },
-    "nav./minor-arcana.description": {
-      "type": "string"
-    },
     "nav./minor-arcana.title": {
-      "type": "string"
-    },
-    "nav./recordings.description": {
       "type": "string"
     },
     "nav./recordings.title": {
       "type": "string"
     },
-    "nav./settings.description": {
-      "type": "string"
-    },
     "nav./settings.title": {
-      "type": "string"
-    },
-    "nav./texts.description": {
       "type": "string"
     },
     "nav./texts.title": {
       "type": "string"
     },
-    "nav./tree-of-life.description": {
-      "type": "string"
-    },
     "nav./tree-of-life.title": {
-      "type": "string"
-    },
-    "nav./words-of-power.description": {
       "type": "string"
     },
     "nav./words-of-power.title": {

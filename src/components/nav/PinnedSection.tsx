@@ -32,7 +32,6 @@ function usePinnedLinks(pins: Array<string>): Array<NavLink> {
     () =>
       pins
         .filter((href) => titleByHref.has(href))
-        // Title-only: no description carried through to the card.
         .map((href) => ({ title: titleByHref.get(href)!, href })),
     [pins, titleByHref],
   )

@@ -16,7 +16,6 @@ export interface NavLink {
   title: string
   href: string
   // Used by the home page TOC cards. Sidebar nav ignores this.
-  description?: string
   // See RawNavLink.hidden in navData.ts.
   hidden?: boolean
   // See RawNavLink.outside in navData.ts.
@@ -53,7 +52,6 @@ export const getNavigation = defineLocalized((locale) => {
     const links: Array<NavLink> = group.links.map((link) => ({
       ...link,
       title: tKey(locale, `nav.${link.href}.title`)!,
-      description: tKey(locale, `nav.${link.href}.description`),
     }))
     return {
       ...group,

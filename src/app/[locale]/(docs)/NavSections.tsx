@@ -11,15 +11,7 @@ import type { NavGroup } from '@/lib/nav'
 // hover reveal (see CardGrid). Lives as a client component so it can drop
 // members-only links while secret mode is locked (useUnlockedNav, which
 // has also dropped `hidden` unlisted links).
-//
-// TITLE ONLY (10 November 2026). Home draws every group, which is every
-// link on the site — twenty-odd cards, and with a description on each
-// the page was a wall of sentences a reader scrolled rather than an
-// index they scanned. The descriptions still stand on the group pages
-// (/reference, /tools, …), where there are a handful of cards and the
-// line earns its room. It is also what the PINNED grid above has always
-// done, so the two blocks on this page no longer draw two kinds of
-// card.
+
 export function NavSections() {
   const visible = useUnlockedNav()
   return (
@@ -47,10 +39,7 @@ function Section({ group }: { group: NavGroup }) {
         {group.title}
       </h2>
       <div className="mt-4 border-t border-zinc-900/5 pt-8 dark:border-white/5">
-        <CardGrid
-          links={group.links.map(({ href, title }) => ({ href, title }))}
-          pinnable
-        />
+        <CardGrid links={group.links} pinnable />
       </div>
     </section>
   )

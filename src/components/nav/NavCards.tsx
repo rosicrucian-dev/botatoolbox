@@ -17,6 +17,15 @@ import { useIsPinned, useTogglePin } from '@/lib/stores/pinnedCards'
 // here so both the home-page TOC (NavSections) and the per-group landing
 // pages (GroupPage) render an identical card grid. Client component so the
 // hover effect's pointer tracking works.
+//
+// A CARD IS A TITLE (10 November 2026). Protocol's card carries a line of
+// explanation under its name, and every page that draws these draws a
+// column of them — home draws every link on the site. A grid of cards is
+// scanned, not read, and a sentence under each name turns the scan into
+// reading; the name is what the reader is looking for, and the pages
+// these open say the rest. So there is no second line anywhere, and the
+// `description` the nav and the tables used to carry with each link is
+// gone with it — nothing else ever drew it.
 
 // A grid of link cards, two columns from `sm` up. `hidden` links should
 // already be filtered out by the caller (visibleNavigation). When
@@ -76,9 +85,8 @@ export function Card({
       <CardPattern mouseX={mouseX} mouseY={mouseY} />
       <div className="absolute inset-0 rounded-2xl ring-1 ring-zinc-900/7.5 ring-inset group-hover:ring-zinc-900/10 dark:ring-white/10 dark:group-hover:ring-white/20" />
       {/* w-full so this (the positioning context for the hit target
-          below) fills the card even when there's no description — without
-          it a flex item shrinks to the title's width and only that strip
-          is clickable. */}
+          below) fills the card: without it a flex item shrinks to the
+          title's width and only that strip is clickable. */}
       <div className="relative w-full rounded-2xl px-4 py-4">
         <h3
           className={clsx(
@@ -94,11 +102,6 @@ export function Card({
             {link.title}
           </Link>
         </h3>
-        {link.description && (
-          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-            {link.description}
-          </p>
-        )}
       </div>
       {pinnable && <PinButton href={link.href} title={link.title} />}
     </div>

@@ -8,7 +8,7 @@
 // and its place from somewhere, and for the tables that somewhere is
 // here: the STRUCTURE (which table, under which heading, in what order)
 // is below, and the STRINGS stay in the message catalog under the same
-// `nav.<href>.title` / `.description` keys they always had, so the
+// `nav.<href>.title` keys they always had, so the
 // German catalog keeps working and nothing was retyped into code.
 //
 // Read by the index (/correspondences) and by the search index. The
@@ -62,7 +62,6 @@ for (const table of tables) {
 export interface Table {
   href: string
   title: string
-  description?: string
   group: TableGroup
 }
 
@@ -71,7 +70,6 @@ export const getTables = defineLocalized(
     tables.map((table) => ({
       ...table,
       title: tKey(locale, `nav.${table.href}.title`)!,
-      description: tKey(locale, `nav.${table.href}.description`),
     })),
 )
 

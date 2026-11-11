@@ -28,7 +28,9 @@ export default async function Correspondences({
             {group}
           </h2>
           <div className="mt-4 border-t border-zinc-900/5 pt-8 dark:border-white/5">
-            <CardGrid links={tables.map(({ href, title, description }) => ({ href, title, description }))} />
+            <CardGrid
+              links={tables.map(({ href, title }) => ({ href, title }))}
+            />
           </div>
         </section>
       ))}
