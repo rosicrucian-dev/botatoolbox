@@ -46,8 +46,8 @@ export function PinnedSection() {
 
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      {links.map((link, index) => (
-        <Card key={link.href} link={link} index={index} pinnable />
+      {links.map((link) => (
+        <Card key={link.href} link={link} pinnable />
       ))}
     </div>
   )
