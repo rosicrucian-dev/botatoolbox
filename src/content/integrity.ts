@@ -1,0 +1,469 @@
+// Cross-file integrity checks. Each data file's own Zod schema validates
+// shape; this file catches *references* that span files — a mantraSlug
+// pointing at a non-existent word, a tarot card whose astrology field
+// has no matching sign or planet, etc. Exposed as runIntegrityChecks():
+// src/app/layout.tsx calls it once at build/boot (throws with an
+// actionable message if anything is dangling), and test/integrity.test.ts
+// calls it under `npm test`, so a content mistake fails fast without a
+// Next build.
+//
+// Add a new check here whenever you add a field that names a record in
+// another data file.
+
+import { existsSync, readdirSync } from 'node:fs'
+import { join } from 'node:path'
+
+import { romanToLetters } from '@/lib/hebrew'
+import { DEFAULT_LOCALE, LOCALES } from '@/lib/locales'
+import { getNavigation } from '@/lib/nav'
+import { tables } from '@/lib/tables'
+import { TOOLS } from '@/lib/tools'
+import {
+  ARCHIVE_SECTION,
+  cubeEdges,
+  cubeFaces,
+  getChakras,
+  getFiles,
+  getGrades,
+  getMinorArcana,
+  getPlanets,
+  getRecordings,
+  getSephiroth,
+  getSigns,
+  getTarot,
+  getTexts,
+  getWords,
+  MAJOR_STYLES,
+  MINOR_STYLES,
+  paths,
+} from './data'
+
+/**
+ * Run every cross-file check. `root` is the repository root (content/,
+ * public/ and src/ resolve from it); it defaults to the working directory,
+ * which is the repo root under both `next build` and `npm test`.
+ */
+export function runIntegrityChecks(root: string = process.cwd()): void {
+  // Integrity checks validate the ENGLISH source of truth on purpose —
+  // slugs, foreign keys, and manifest↔file bijections are structural and
+  // identical across locales (overlays can't touch them; see overlay.ts).
+  const { cards, cardByLetter } = getTarot(DEFAULT_LOCALE)
+  const { minorCards } = getMinorArcana(DEFAULT_LOCALE)
+  const { chakras } = getChakras(DEFAULT_LOCALE)
+  const { archive } = getFiles(DEFAULT_LOCALE)
+  const { grades } = getGrades(DEFAULT_LOCALE)
+  const { planets } = getPlanets(DEFAULT_LOCALE)
+  const { signs } = getSigns(DEFAULT_LOCALE)
+  const { sephiroth } = getSephiroth(DEFAULT_LOCALE)
+  const { texts } = getTexts(DEFAULT_LOCALE)
+  const { recordings } = getRecordings(DEFAULT_LOCALE)
+  const { wordBySlug } = getWords(DEFAULT_LOCALE)
+  const navigation = getNavigation(DEFAULT_LOCALE)
+
+  function fail(msg: string): never {
+    throw new Error(`Data integrity error: ${msg}`)
+  }
+
+  function expect(condition: boolean, msg: string) {
+    if (!condition) fail(msg)
+  }
+
+  // --- files.json's archive section → /archive. The page lists that one
+  // section by name (ARCHIVE_SECTION in data/files.ts); renamed in the
+  // data, the page would be empty and its rows would turn up on /files.
+  expect(
+    archive.length > 0,
+    `files.json has no "${ARCHIVE_SECTION}" section, so /archive would be empty — if the section was renamed, rename ARCHIVE_SECTION in src/content/data/files.ts to match`,
+  )
+  // The Archive links every row straight to its file and has no viewer
+  // route, so a row that is not `direct` would link to a page of /files
+  // that is not built for it.
+  for (const f of archive) {
+    expect(
+      f.direct === true,
+      `files.json: "${f.slug}" is in the "${ARCHIVE_SECTION}" section but is not \`direct\` — the Archive has no viewer page, so set "direct": true`,
+    )
+  }
+
+  // --- sephiroth.mantraSlug → words.slug
+  for (const s of sephiroth) {
+    expect(
+      wordBySlug[s.mantraSlug] !== undefined,
+      `sephirah ${s.slug}.mantraSlug = "${s.mantraSlug}" has no matching word in words.json`,
+    )
+  }
+
+  // --- manifest ↔ markdown files, both directions. A manifest entry with
+  // no .md fails the page render anyway, but an orphan .md would otherwise
+  // be a silent no-op — the most likely contributor mistake.
+  function expectManifestMatchesDir(
+    kind: 'texts' | 'recordings',
+    slugs: ReadonlyArray<string>,
+  ) {
+    const dir = join(root, 'content', kind, DEFAULT_LOCALE)
+    const files = readdirSync(dir).filter((f) => f.endsWith('.md'))
+    for (const slug of slugs) {
+      expect(
+        files.includes(`${slug}.md`),
+        `${kind}.json lists "${slug}" but content/${kind}/${DEFAULT_LOCALE}/${slug}.md is missing`,
+      )
+    }
+    const known = new Set(slugs)
+    for (const f of files) {
+      expect(
+        known.has(f.replace(/\.md$/, '')),
+        `content/${kind}/${DEFAULT_LOCALE}/${f} has no entry in content/data/${kind}.json — it won't render anywhere. Add a manifest entry (or delete the file).`,
+      )
+    }
+  }
+  expectManifestMatchesDir(
+    'texts',
+    texts.map((t) => t.slug),
+  )
+  expectManifestMatchesDir(
+    'recordings',
+    recordings.map((r) => r.slug),
+  )
+
+  // --- translation markdown (content/<kind>/<locale>/), warnings only.
+  // A missing translation is normal (falls back to English); an orphan
+  // (a de/ file whose English source was renamed/removed) means finished
+  // work that silently stopped rendering — surface it, but never fail
+  // the build over a translation file.
+  for (const [kind, slugs] of [['texts', texts.map((t) => t.slug)]] as const) {
+    for (const locale of LOCALES) {
+      if (locale === DEFAULT_LOCALE) continue
+      const dir = join(root, 'content', kind, locale)
+      if (!existsSync(dir)) continue
+      const known = new Set(slugs)
+      for (const f of readdirSync(dir).filter((n) => n.endsWith('.md'))) {
+        if (!known.has(f.replace(/\.md$/, ''))) {
+          console.warn(
+            `[i18n] content/${kind}/${locale}/${f} has no matching English file — was the English source renamed? This translation no longer renders.`,
+          )
+        }
+      }
+    }
+  }
+
+  // --- tree-paths.slug → tarot.slug
+  const cardSlugs = new Set(cards.map((c) => c.slug))
+  for (const p of paths) {
+    expect(
+      cardSlugs.has(p.slug),
+      `tree-path "${p.slug}" doesn't match any tarot card slug`,
+    )
+  }
+
+  // --- cube-of-space: edge cards must be zodiac (simple letter) cards
+  // covering all 12 signs; face cards must be the six classical double-letter
+  // planets, each used once (Saturn belongs at the center, and the modern
+  // octaves — Uranus/Neptune/Pluto — never sit on the cube). Structure:
+  // every edge borders exactly two faces, and each flow direction must lie
+  // along its edge's geometric axis.
+  {
+    const signNamesLower = new Set(signs.map((s) => s.name.toLowerCase()))
+    const seenSigns = new Set<string>()
+    for (const e of cubeEdges) {
+      const card = cards.find((c) => c.slug === e.cardSlug)
+      expect(
+        card !== undefined,
+        `cube edge ${e.id} references card "${e.cardSlug}" but no tarot card has that slug`,
+      )
+      const sign = card!.astrology.toLowerCase()
+      expect(
+        signNamesLower.has(sign),
+        `cube edge ${e.id} card "${e.cardSlug}" is attributed to "${card!.astrology}" — edges must carry zodiac cards`,
+      )
+      expect(
+        !seenSigns.has(sign),
+        `cube edges assign "${card!.astrology}" twice`,
+      )
+      seenSigns.add(sign)
+    }
+
+    const FACE_PLANETS = new Set([
+      'mercury',
+      'moon',
+      'venus',
+      'jupiter',
+      'mars',
+      'sun',
+    ])
+    const seenFaceCards = new Set<string>()
+    for (const f of cubeFaces) {
+      const card = cards.find((c) => c.slug === f.cardSlug)
+      expect(
+        card !== undefined,
+        `cube face ${f.id} references card "${f.cardSlug}" but no tarot card has that slug`,
+      )
+      expect(
+        FACE_PLANETS.has(card!.astrology.toLowerCase()),
+        `cube face ${f.id} card "${f.cardSlug}" is attributed to "${card!.astrology}" — faces carry the six classical double-letter planets`,
+      )
+      expect(
+        !seenFaceCards.has(f.cardSlug),
+        `cube faces assign "${f.cardSlug}" twice`,
+      )
+      seenFaceCards.add(f.cardSlug)
+    }
+
+    // Every edge must border exactly two faces.
+    const borderCounts = new Map<string, number>()
+    for (const f of cubeFaces) {
+      for (const edgeId of Object.values(f.borders)) {
+        borderCounts.set(edgeId, (borderCounts.get(edgeId) ?? 0) + 1)
+      }
+    }
+    for (const e of cubeEdges) {
+      expect(
+        borderCounts.get(e.id) === 2,
+        `cube edge ${e.id} appears ${borderCounts.get(e.id) ?? 0}× across face borders — every edge borders exactly two faces`,
+      )
+    }
+
+    // Flow must run along the edge's own axis: T-E/B-E/T-W/B-W run
+    // north–south, T-N/T-S/B-N/B-S run east–west, corner edges run
+    // vertically.
+    const axisFor = (id: string): ReadonlyArray<string> =>
+      id.length === 2
+        ? ['up', 'down']
+        : id.endsWith('E') || id.endsWith('W')
+          ? ['north', 'south']
+          : ['east', 'west']
+    for (const e of cubeEdges) {
+      expect(
+        axisFor(e.id).includes(e.flow),
+        `cube edge ${e.id} flow "${e.flow}" doesn't lie along the edge's axis (expected ${axisFor(e.id).join('/')})`,
+      )
+    }
+  }
+
+  // --- tarot.astrology → either a sign name or a planet name
+  const planetNames = new Set(planets.map((p) => p.name))
+  const signNames = new Set(signs.map((s) => s.name))
+  for (const c of cards) {
+    expect(
+      planetNames.has(c.astrology) || signNames.has(c.astrology),
+      `tarot card "${c.name}".astrology = "${c.astrology}" is neither a planet nor a sign`,
+    )
+  }
+
+  // --- sign rulers / exaltedBy → planet slugs
+  const planetSlugs = new Set(planets.map((p) => p.slug))
+  for (const s of signs) {
+    for (const ruler of s.rulers) {
+      expect(
+        planetSlugs.has(ruler),
+        `sign "${s.slug}".rulers includes "${ruler}" but no planet has that slug`,
+      )
+    }
+    if (s.exaltedBy !== null) {
+      expect(
+        planetSlugs.has(s.exaltedBy),
+        `sign "${s.slug}".exaltedBy = "${s.exaltedBy}" but no planet has that slug`,
+      )
+    }
+  }
+
+  // --- planet rules / exaltedIn → sign slugs
+  const signSlugs = new Set(signs.map((s) => s.slug))
+  for (const p of planets) {
+    for (const ruled of p.rules) {
+      expect(
+        signSlugs.has(ruled),
+        `planet "${p.slug}".rules includes "${ruled}" but no sign has that slug`,
+      )
+    }
+    if (p.exaltedIn !== null) {
+      expect(
+        signSlugs.has(p.exaltedIn),
+        `planet "${p.slug}".exaltedIn = "${p.exaltedIn}" but no sign has that slug`,
+      )
+    }
+  }
+
+  // --- grades.sephirah → sephirah slug
+  const sephirahSlugs = new Set(sephiroth.map((s) => s.slug))
+  for (const g of grades) {
+    if (g.sephirah !== null) {
+      expect(
+        sephirahSlugs.has(g.sephirah),
+        `grade "${g.slug}".sephirah = "${g.sephirah}" has no matching sephirah`,
+      )
+    }
+  }
+
+  // --- grade.intelligenceRoman + sephirah.hebrewRoman → must parse to
+  // letters that exist in tarot.json. Catches a typo'd capitalization
+  // (e.g. "ShPo" instead of "ShPO") that would silently drop a letter
+  // from the rendered key strip.
+  function expectLettersParse(label: string, roman: string) {
+    const parsed = romanToLetters(roman)
+    // Stripped chars: every alpha char in roman should be consumed.
+    const expected = roman.replace(/[^A-Za-z]/g, '').length
+    const consumed = parsed.reduce((n, name) => {
+      if (
+        name === 'Cheth' ||
+        name === 'Shin' ||
+        name === 'Tav' ||
+        name === 'Tzaddi'
+      ) {
+        // Two-char codes: Ch, Sh, Th, Tz
+        return n + 2
+      }
+      return n + 1
+    }, 0)
+    expect(
+      consumed === expected,
+      `${label}: romanization "${roman}" has unknown letter(s) — parsed ${consumed}/${expected} chars`,
+    )
+    for (const letter of parsed) {
+      expect(
+        cardByLetter[letter] !== undefined,
+        `${label}: letter "${letter}" (from "${roman}") has no matching tarot card`,
+      )
+    }
+  }
+  for (const g of grades) {
+    if (g.intelligenceRoman) {
+      expectLettersParse(
+        `grade "${g.slug}".intelligenceRoman`,
+        g.intelligenceRoman,
+      )
+    }
+  }
+  for (const s of sephiroth) {
+    if (s.hebrewRoman) {
+      expectLettersParse(`sephirah "${s.slug}".hebrewRoman`, s.hebrewRoman)
+    }
+  }
+
+  // --- card images exist for every registered art style. Image paths are
+  // derived from slugs (never stored), so a renamed slug or misnamed file
+  // would otherwise ship as a silently broken <img>.
+  {
+    const pub = join(root, 'public')
+    for (const style of MAJOR_STYLES) {
+      for (const c of cards) {
+        for (const rel of [
+          `tarot/major/${style.id}/${c.num}-${c.slug}.jpg`,
+          `tarot/major/${style.id}/thumbs/${c.num}-${c.slug}.jpg`,
+        ]) {
+          expect(
+            existsSync(join(pub, rel)),
+            `missing image public/${rel} for card "${c.slug}" (style "${style.id}")`,
+          )
+        }
+      }
+    }
+    for (const style of MINOR_STYLES) {
+      for (const m of minorCards) {
+        const rel = `tarot/minor/${style.id}/${m.slug}.jpg`
+        expect(
+          existsSync(join(pub, rel)),
+          `missing image public/${rel} for minor card "${m.slug}" (style "${style.id}")`,
+        )
+      }
+    }
+  }
+
+  // --- chakra.planet → planet slug
+  for (const c of chakras) {
+    expect(
+      planetSlugs.has(c.planet),
+      `chakra row angel="${c.angel}" planet="${c.planet}" has no matching planet`,
+    )
+  }
+
+  // --- tools ↔ nav ↔ route tree. Every tool is a nav link (its first
+  // view), and every view of it is a real page nested under it. The tabs
+  // are the only navigation to the views, so a typo here is a dead end.
+  for (const tool of TOOLS) {
+    expect(
+      navigation.some((g) => g.links.some((l) => l.href === tool.href)),
+      `tool ${tool.href} is not a nav link — it would have no sidebar row`,
+    )
+    expect(
+      tool.tabs.some((tab) => tab.href === tool.href),
+      `tool ${tool.href}: one of its views must be the tool's own href`,
+    )
+    for (const tab of tool.tabs) {
+      expect(
+        tab.href === tool.href || tab.href.startsWith(`${tool.href}/`),
+        `tool ${tool.href}: view ${tab.href} is not nested under it`,
+      )
+      expect(
+        existsSync(
+          join(
+            root,
+            'src/app/[locale]/(docs)',
+            ...tab.href.split('/').filter(Boolean),
+            'page.tsx',
+          ),
+        ),
+        `tool ${tool.href}: view ${tab.href} has no page.tsx`,
+      )
+    }
+  }
+
+  // --- tables ↔ route tree. A correspondence table has no nav row of
+  // its own: /correspondences is the index and the tables are under it
+  // (src/lib/tables.ts). So the nav check below cannot see them, and
+  // this one does — every table is a real page, nested under the index
+  // that is the only navigation to it.
+  for (const table of tables) {
+    expect(
+      table.href.startsWith('/correspondences/'),
+      `table ${table.href} is not under /correspondences — its index would not reach it`,
+    )
+    expect(
+      existsSync(
+        join(
+          root,
+          'src/app/[locale]/(docs)',
+          ...table.href.split('/').filter(Boolean),
+          'page.tsx',
+        ),
+      ),
+      `table ${table.href} has no page.tsx`,
+    )
+  }
+
+  // --- nav ↔ route tree. Every group landing and every hand-authored link
+  // must have a page.tsx, so neither the sidebar nor the sitemap (derived
+  // from the same nav data) can point at a 404. A collection's own items
+  // (a text, a recording) are served by [slug] routes and are covered by
+  // the manifest checks above. Also enforce the URL scheme (see NavGroup.flat in
+  // lib/navData.ts): members of a `flat` group live at a top-level URL
+  // (/cube-of-space); every other group's members nest under the group
+  // (/meditations/pattern-trestleboard).
+  {
+    const docsDir = join(root, 'src/app/[locale]/(docs)')
+    for (const group of navigation) {
+      const slug = group.slug
+      expect(
+        existsSync(join(docsDir, slug, 'page.tsx')),
+        `nav group "${group.title}" has no landing page at (docs)/${slug}/page.tsx`,
+      )
+      for (const link of group.links) {
+        const segs = link.href.split('/').filter(Boolean)
+        expect(
+          existsSync(join(docsDir, ...segs, 'page.tsx')),
+          `nav link ${link.href} has no page at (docs)/${segs.join('/')}/page.tsx`,
+        )
+        if (group.flat) {
+          expect(
+            segs.length === 1,
+            `flat group "${group.title}" member ${link.href} must be a single top-level segment (e.g. /${segs[0] ?? ''})`,
+          )
+        } else if (!link.outside) {
+          expect(
+            segs.length >= 2 && segs[0] === slug,
+            `nested group "${group.title}" member ${link.href} must be nested as /${slug}/<item> (or declare \`outside\`)`,
+          )
+        }
+      }
+    }
+  }
+}

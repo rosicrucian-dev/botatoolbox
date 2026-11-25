@@ -1,0 +1,343 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "breadcrumbs.home": {
+      "type": "string"
+    },
+    "common.next": {
+      "type": "string"
+    },
+    "common.previous": {
+      "type": "string"
+    },
+    "footer.viewSource": {
+      "type": "string"
+    },
+    "header.language": {
+      "type": "string"
+    },
+    "lastVisited.continue": {
+      "type": "string"
+    },
+    "mobileNav.toggle": {
+      "type": "string"
+    },
+    "nav./about.title": {
+      "type": "string"
+    },
+    "nav./archive.title": {
+      "type": "string"
+    },
+    "nav./astrology.title": {
+      "type": "string"
+    },
+    "nav./astrology/hora.title": {
+      "type": "string"
+    },
+    "nav./community.title": {
+      "type": "string"
+    },
+    "nav./correspondences.title": {
+      "type": "string"
+    },
+    "nav./correspondences/channels.title": {
+      "type": "string"
+    },
+    "nav./correspondences/forces.title": {
+      "type": "string"
+    },
+    "nav./correspondences/four-worlds.title": {
+      "type": "string"
+    },
+    "nav./correspondences/grades.title": {
+      "type": "string"
+    },
+    "nav./correspondences/hebrew.title": {
+      "type": "string"
+    },
+    "nav./correspondences/houses.title": {
+      "type": "string"
+    },
+    "nav./correspondences/major-arcana.title": {
+      "type": "string"
+    },
+    "nav./correspondences/minor-arcana.title": {
+      "type": "string"
+    },
+    "nav./correspondences/numerology.title": {
+      "type": "string"
+    },
+    "nav./correspondences/phases.title": {
+      "type": "string"
+    },
+    "nav./correspondences/planets.title": {
+      "type": "string"
+    },
+    "nav./correspondences/principles.title": {
+      "type": "string"
+    },
+    "nav./correspondences/sephiroth.title": {
+      "type": "string"
+    },
+    "nav./correspondences/signs.title": {
+      "type": "string"
+    },
+    "nav./correspondences/three-veils.title": {
+      "type": "string"
+    },
+    "nav./cube-of-space.title": {
+      "type": "string"
+    },
+    "nav./files.title": {
+      "type": "string"
+    },
+    "nav./freeform.title": {
+      "type": "string"
+    },
+    "nav./gematria.title": {
+      "type": "string"
+    },
+    "nav./gematria/dictionary.title": {
+      "type": "string"
+    },
+    "nav./healing/planets.title": {
+      "type": "string"
+    },
+    "nav./healing/signs.title": {
+      "type": "string"
+    },
+    "nav./keyboard.title": {
+      "type": "string"
+    },
+    "nav./major-arcana.title": {
+      "type": "string"
+    },
+    "nav./meditations/pattern-trestleboard.title": {
+      "type": "string"
+    },
+    "nav./minor-arcana.title": {
+      "type": "string"
+    },
+    "nav./recordings.title": {
+      "type": "string"
+    },
+    "nav./settings.title": {
+      "type": "string"
+    },
+    "nav./texts.title": {
+      "type": "string"
+    },
+    "nav./tree-of-life.title": {
+      "type": "string"
+    },
+    "nav./words-of-power.title": {
+      "type": "string"
+    },
+    "nav.group.library.title": {
+      "type": "string"
+    },
+    "nav.group.meditations.title": {
+      "type": "string"
+    },
+    "nav.group.reference.title": {
+      "type": "string"
+    },
+    "nav.group.tools.title": {
+      "type": "string"
+    },
+    "nav.group.website.title": {
+      "type": "string"
+    },
+    "player.astrology.planetsTitle": {
+      "type": "string"
+    },
+    "player.astrology.signsTitle": {
+      "type": "string"
+    },
+    "player.common.clickToContinue": {
+      "type": "string"
+    },
+    "player.common.tapToContinue": {
+      "type": "string"
+    },
+    "player.cube.title": {
+      "type": "string"
+    },
+    "player.gematria.title": {
+      "type": "string"
+    },
+    "player.healing.intone": {
+      "type": "string"
+    },
+    "player.healing.intoneThenClick": {
+      "type": "string"
+    },
+    "player.healing.intoneThenTap": {
+      "type": "string"
+    },
+    "player.healing.meditate": {
+      "type": "string"
+    },
+    "player.healing.planetsTitle": {
+      "type": "string"
+    },
+    "player.healing.setup": {
+      "type": "string"
+    },
+    "player.healing.signsTitle": {
+      "type": "string"
+    },
+    "player.majorArcana.title": {
+      "type": "string"
+    },
+    "player.quiz.correct": {
+      "type": "string"
+    },
+    "player.quiz.finish": {
+      "type": "string"
+    },
+    "player.quiz.finished": {
+      "type": "string"
+    },
+    "player.quiz.imageProvidedBy": {
+      "type": "string"
+    },
+    "player.quiz.incorrect": {
+      "type": "string"
+    },
+    "player.quiz.score": {
+      "type": "string"
+    },
+    "player.quiz.show": {
+      "type": "string"
+    },
+    "player.quiz.title": {
+      "type": "string"
+    },
+    "player.quiz.typeToSearch": {
+      "type": "string"
+    },
+    "player.tattva.title": {
+      "type": "string"
+    },
+    "player.tree.ascend": {
+      "type": "string"
+    },
+    "player.tree.descend": {
+      "type": "string"
+    },
+    "player.tree.title": {
+      "type": "string"
+    },
+    "player.trestleboard.title": {
+      "type": "string"
+    },
+    "prevNext.label": {
+      "type": "string"
+    },
+    "search.find": {
+      "type": "string"
+    },
+    "search.label": {
+      "type": "string"
+    },
+    "search.nothingFoundAfter": {
+      "type": "string"
+    },
+    "search.nothingFoundBefore": {
+      "type": "string"
+    },
+    "settings.colors": {
+      "type": "string"
+    },
+    "settings.copied": {
+      "type": "string"
+    },
+    "settings.copy": {
+      "type": "string"
+    },
+    "settings.copyFailed": {
+      "type": "string"
+    },
+    "settings.general": {
+      "type": "string"
+    },
+    "settings.incorrectPassword": {
+      "type": "string"
+    },
+    "settings.invalidJoinDate": {
+      "type": "string"
+    },
+    "settings.joinDate": {
+      "type": "string"
+    },
+    "settings.joinDateHelp": {
+      "type": "string"
+    },
+    "settings.language": {
+      "type": "string"
+    },
+    "settings.lock": {
+      "type": "string"
+    },
+    "settings.majorArcana": {
+      "type": "string"
+    },
+    "settings.memberSince": {
+      "type": "string"
+    },
+    "settings.membersHelp": {
+      "type": "string"
+    },
+    "settings.membersOnly": {
+      "type": "string"
+    },
+    "settings.membersUnlocked": {
+      "type": "string"
+    },
+    "settings.minorArcana": {
+      "type": "string"
+    },
+    "settings.permalink": {
+      "type": "string"
+    },
+    "settings.permalinkHelp": {
+      "type": "string"
+    },
+    "settings.save": {
+      "type": "string"
+    },
+    "settings.saved": {
+      "type": "string"
+    },
+    "settings.style": {
+      "type": "string"
+    },
+    "settings.unlock": {
+      "type": "string"
+    },
+    "site.description": {
+      "type": "string"
+    },
+    "slidePlayer.navLabel": {
+      "type": "string"
+    },
+    "sound.dismiss": {
+      "type": "string"
+    },
+    "sound.iosHint": {
+      "type": "string"
+    },
+    "sound.play": {
+      "type": "string"
+    },
+    "title.Astrology Chart": {
+      "type": "string"
+    },
+    "title.Radio": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

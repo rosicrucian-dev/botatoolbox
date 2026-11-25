@@ -1,0 +1,29 @@
+'use client'
+
+import { PageHeading } from '@/components/layout/PageHeading'
+import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
+import { CardGrid } from '@/components/nav/NavCards'
+import { useUnlockedNav } from '@/components/nav/NavProvider'
+
+// A landing page for a sidebar group (Astrology, Reference, Devices, …).
+// Renders the group's title and the same card grid the home page uses.
+//
+// `slug` is the group's stable id from nav-data.ts; the rendered
+// heading/crumb is the translated title. Client component purely so it
+// can read the locale.
+//
+// The breadcrumb here is just the group leaf — BreadcrumbTrail prepends
+// "BOTA" and knows this page IS the group page, so it renders "BOTA /
+// <Group>" without linking the group crumb back to itself.
+export function GroupPage({ slug }: { slug: string }) {
+  const group = useUnlockedNav().find((g) => g.slug === slug)
+  const links = group?.links ?? []
+  const label = group?.title ?? slug
+  return (
+    <article className="space-y-6">
+      <SetBreadcrumbs items={[{ label }]} />
+      <PageHeading>{label}</PageHeading>
+      <CardGrid links={links} />
+    </article>
+  )
+}
