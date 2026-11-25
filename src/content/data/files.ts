@@ -1,15 +1,6 @@
-// Downloadable files, grouped by section. Most entries have a viewer
-// route at /files/<slug>; entries marked `direct` link straight to `src`
-// and have no viewer page.
-//
-// ONE FILE, TWO SHELVES (25 November 2026). files.json's "Historical"
-// section is the ARCHIVE: it is listed at /archive, a row of the Library,
-// and no longer on /files, which keeps the site's own downloads. The rows
-// stay in files.json, because which page shows a row is this site's
-// arrangement and not a fact about the file. `getFiles` hands them out as
-// two lists: `files` (/files) and `archive` (/archive). Every archive
-// row is `direct`: the Archive has no viewer route, and lists its rows
-// by what the file is, PDFs and then images (`isPdf`).
+// Downloadable files shown under /files, grouped by section. Most entries
+// have a viewer route at /files/<slug>; entries marked `direct` link
+// straight to `src` as a download and have no viewer page.
 //
 // The assets themselves are NOT in the repo: they live on Cloudflare R2,
 // served via cdn.botatoolbox.org (free egress, real CDN; the repo stays
@@ -47,29 +38,8 @@ export function downloadUrl(src: string): string {
 
 const rawFor = localizedRaw('files', filesData)
 
-// The section of files.json that is shown at /archive instead of /files.
-export const ARCHIVE_SECTION = 'Historical'
-
-// WHICH rows those are is structure, so it is read from the English
-// master and kept by slug: `section` is a display field, which a
-// translation replaces (overlay-config.ts), and a German "Historisch"
-// compared with the name above would empty /de/archive.
-const archiveSlugs: ReadonlySet<string> = new Set(
-  filesData.filter((f) => f.section === ARCHIVE_SECTION).map((f) => f.slug),
-)
-
-function inArchive(file: FileEntry): boolean {
-  return archiveSlugs.has(file.slug)
-}
-
-// What a `direct` entry links to, by its extension. Derived, not a
-// column: the file name already says it.
-export function isPdf(file: FileEntry): boolean {
-  return /\.pdf$/i.test(file.src)
-}
-
 export const getFiles = defineLocalized((locale) => {
-  const all: ReadonlyArray<FileEntry> = z
+  const files: ReadonlyArray<FileEntry> = z
     .array(FileEntrySchema)
     .parse(rawFor(locale))
     .map((f) => ({
@@ -78,15 +48,10 @@ export const getFiles = defineLocalized((locale) => {
       downloads: f.downloads?.map((d) => ({ ...d, src: downloadUrl(d.src) })),
     }))
 
-  // Keyed across BOTH shelves: they share one file, so a slug is unique
-  // over the two.
-  const fileBySlug = byKey(all, 'slug', 'file.slug')
+  const fileBySlug = byKey(files, 'slug', 'file.slug')
 
-  const archive = all.filter(inArchive)
-  const files = all.filter((f) => !inArchive(f))
-
-  // Stable section ordering for the /files index (insertion order of
-  // first occurrence in `files`).
+  // Stable section ordering for the index page (insertion order of first
+  // occurrence in `files`).
   const sectionsInOrder: ReadonlyArray<string> = (() => {
     const seen = new Set<string>()
     const out: Array<string> = []
@@ -99,5 +64,5 @@ export const getFiles = defineLocalized((locale) => {
     return out
   })()
 
-  return { files, archive, fileBySlug, sectionsInOrder }
+  return { files, fileBySlug, sectionsInOrder }
 })

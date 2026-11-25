@@ -122,21 +122,16 @@ export const navGroups: Array<RawNavGroup> = [
     // so /texts is the index now, as /recordings already was. The
     // individual texts stay in the sitemap and the search index, which
     // read the manifest rather than the nav.
-    //
-    // THE ARCHIVE IS THE FIRST SHELF (25 November 2026): the historical
-    // documents, which were the "Historical" section of /files. Its rows
-    // are still files.json's (src/content/data/files.ts).
     slug: 'library',
     flat: true,
-    links: [{ href: '/archive' }, { href: '/texts' }, { href: '/recordings' }],
+    links: [{ href: '/texts' }, { href: '/recordings' }],
   },
   {
     // The site itself, and what it hands out: the Files came from a
     // Resources group that held them beside the Links and the Radio.
     // The Radio has gone to the Recordings page, whose stream it is, and
     // the Files are not read or looked up — they are a download, which
-    // is as much "about this site" as the About page is. (Their
-    // historical documents went to the Library, as the Archive.)
+    // is as much "about this site" as the About page is.
     //
     // THE LINKS PAGE IS GONE (25 November 2026): a short list of other
     // people's sites, removed as not useful. No stub at /links, because

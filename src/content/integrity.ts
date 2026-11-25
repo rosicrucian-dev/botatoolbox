@@ -19,7 +19,6 @@ import { getNavigation } from '@/lib/nav'
 import { tables } from '@/lib/tables'
 import { TOOLS } from '@/lib/tools'
 import {
-  ARCHIVE_SECTION,
   cubeEdges,
   cubeFaces,
   getChakras,
@@ -50,7 +49,7 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
   const { cards, cardByLetter } = getTarot(DEFAULT_LOCALE)
   const { minorCards } = getMinorArcana(DEFAULT_LOCALE)
   const { chakras } = getChakras(DEFAULT_LOCALE)
-  const { archive } = getFiles(DEFAULT_LOCALE)
+  const { fileBySlug } = getFiles(DEFAULT_LOCALE)
   const { grades } = getGrades(DEFAULT_LOCALE)
   const { planets } = getPlanets(DEFAULT_LOCALE)
   const { signs } = getSigns(DEFAULT_LOCALE)
@@ -66,23 +65,6 @@ export function runIntegrityChecks(root: string = process.cwd()): void {
 
   function expect(condition: boolean, msg: string) {
     if (!condition) fail(msg)
-  }
-
-  // --- files.json's archive section → /archive. The page lists that one
-  // section by name (ARCHIVE_SECTION in data/files.ts); renamed in the
-  // data, the page would be empty and its rows would turn up on /files.
-  expect(
-    archive.length > 0,
-    `files.json has no "${ARCHIVE_SECTION}" section, so /archive would be empty — if the section was renamed, rename ARCHIVE_SECTION in src/content/data/files.ts to match`,
-  )
-  // The Archive links every row straight to its file and has no viewer
-  // route, so a row that is not `direct` would link to a page of /files
-  // that is not built for it.
-  for (const f of archive) {
-    expect(
-      f.direct === true,
-      `files.json: "${f.slug}" is in the "${ARCHIVE_SECTION}" section but is not \`direct\` — the Archive has no viewer page, so set "direct": true`,
-    )
   }
 
   // --- sephiroth.mantraSlug → words.slug

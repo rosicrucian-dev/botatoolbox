@@ -1,15 +1,16 @@
+import { Link } from '@/components/locale/LocaleLink'
+
 import { PageHeading } from '@/components/layout/PageHeading'
 import { SetBreadcrumbs } from '@/components/nav/Breadcrumbs'
-import { FileList } from '@/components/ui/FileList'
 import { getFiles } from '@/content/data'
 import { toLocale } from '@/lib/locales'
 import { localizedMetadata } from '@/lib/nav'
 
 export const generateMetadata = localizedMetadata('Files', '/files')
 
-// The site's own downloads, a list per section of files.json. The
-// "Historical" section is not one of them: it is the Archive, at /archive
-// (src/content/data/files.ts).
+const itemClass =
+  '-mx-2 block rounded-sm px-2 py-4 text-zinc-900 transition hover:bg-zinc-50 dark:text-zinc-100 dark:hover:bg-zinc-800/50'
+
 export default async function Files({
   params,
 }: {
@@ -26,7 +27,26 @@ export default async function Files({
           <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
             {section}
           </h2>
-          <FileList files={files.filter((f) => f.section === section)} />
+          <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
+            {files
+              .filter((f) => f.section === section)
+              .map((f) => (
+                <li key={f.slug}>
+                  {f.direct ? (
+                    // No `download` attr: navigate to the PDF so the browser
+                    // renders it inline for viewing. The user can still save
+                    // it from the browser's PDF viewer if they want.
+                    <a href={encodeURI(f.src)} className={itemClass}>
+                      {f.name}
+                    </a>
+                  ) : (
+                    <Link href={`/files/${f.slug}`} className={itemClass}>
+                      {f.name}
+                    </Link>
+                  )}
+                </li>
+              ))}
+          </ul>
         </section>
       ))}
     </article>

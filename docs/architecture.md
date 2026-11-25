@@ -32,7 +32,7 @@ any file:
 | Folder                                                                  | Holds                                                                                                                    |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `layout/`                                                               | The app shell: `Layout`, `Header`, `Footer`, `Logo`, page headings and toolbars, gates, the service-worker registration. |
-| `ui/`                                                                   | Generic primitives: `Prose`, `Tabs`, `TextLink`, lists, file views, patterns, `ErrorFallback`, `InlineCombobox`.         |
+| `ui/`                                                                   | Generic primitives: `Prose`, `Tabs`, `TextLink`, lists, patterns, `ErrorFallback`, `InlineCombobox`.                     |
 | `nav/`                                                                  | Sidebar and mobile navigation, `NavProvider`, breadcrumbs, prev/next links and gestures, home-page cards and pins.       |
 | `locale/`                                                               | `LocaleLink` (every internal link), `LocaleProvider`, the language switcher.                                             |
 | `search/`                                                               | The two search dialogs and their shared `SearchDialogShell`.                                                             |
@@ -146,18 +146,6 @@ view keeps its own bundle, and Hora asks for the reader's location only
 when someone opens Hora. Those views have no nav row of their own, so
 `TOOL_TABS` is what puts them in the sitemap and the search index.
 
-**Library** is a row per shelf, each row the shelf's own index: the
-Archive, the Texts, the Recordings. The Archive (25 November 2026) is the
-historical documents that were the "Historical" section of `/files`. Its
-rows are still `files.json`'s: `getFiles` in `src/content/data/files.ts`
-splits that one file into `files` (listed at `/files`, viewers at
-`/files/<slug>`) and `archive` (listed at `/archive`). The Archive has no
-viewer route: every row is `direct` and opens the file itself, and the
-page lists them by what the file is, PDFs and then images (`isPdf`).
-Integrity checks fail the build if the section the split is made on is
-missing, or if an archive row is not `direct`. `FileList` in
-`src/components/ui/` draws the rows of both indexes.
-
 **Reference** is what is LOOKED UP, a row per thing: the
 Correspondences, the Major Arcana, the Minor Arcana, the Cube of Space,
 the Tree of Life. The two Arcana are the cards as they are looked at —
@@ -214,7 +202,7 @@ to `/correspondences/phases` and not through `/correspondences/tattvas`:
 | `/correspondences/qabalah`                                            | `/correspondences/sephiroth`    |
 | `/correspondences/chakras`                                            | `/correspondences/forces`       |
 | `/correspondences/tattvas`, `/correspondences/elements`               | `/correspondences/phases`       |
-| `/files/lesser-ritual-of-the-pentagram`, `/files/tarot-back`          | `/archive`                      |
+| `/files/lesser-ritual-of-the-pentagram`, `/files/tarot-back`          | `/files`                        |
 
 `/tarot/major-arcana` listed the 22 Keys as text beside a
 `/tarot/tableau` that drew them; one of the two had to be the index, and

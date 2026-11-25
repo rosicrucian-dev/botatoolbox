@@ -26,9 +26,6 @@
     "nav./about.title": {
       "type": "string"
     },
-    "nav./archive.title": {
-      "type": "string"
-    },
     "nav./astrology.title": {
       "type": "string"
     },
