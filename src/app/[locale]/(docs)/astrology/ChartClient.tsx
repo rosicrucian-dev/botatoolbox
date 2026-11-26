@@ -161,8 +161,10 @@ export function ChartClient({
       {/* The stepper is a row of its own under the title, full width at
           every size now that the title row carries the tool's tabs:
           chevrons/Now stay fixed and the date/time fields flex to share
-          the rest (and squish when Now appears). */}
-      <div className="flex w-full items-center gap-2">
+          the rest (and squish when Now appears). From `sm` up the fields
+          have fixed widths, so the row is narrower than the page and is
+          centred over the wheel it steers. */}
+      <div className="flex w-full items-center justify-center gap-2">
         {/* On mobile, Now sits between the time field and the › chevron
             (order-1, with the chevron bumped to order-2) so the ‹ and ›
             stay pinned to the screen edges. Desktop keeps DOM order. */}
